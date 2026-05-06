@@ -6,6 +6,7 @@
 | catalog-api | EXISTE/PARCIAL | Productos internos. | ALTA |
 | supplier-api | EXISTE | Proveedores y sync. | ALTA |
 | pricing-api | EXISTE/PARCIAL | Precios, margenes, impuestos. | ALTA |
+| cost-api | FUTURO | Costos reales/estimados, asignacion de gastos y rentabilidad base. | MEDIA |
 | quote-api | FALTA | Cotizaciones y snapshots. | ALTA |
 | sales-api | EXISTE/PARCIAL | Ordenes, pagos, ventas. | ALTA |
 | logistics-api | FALTA | Envios, costos, tracking. | MEDIA |
@@ -28,6 +29,7 @@ POS API       = venta fisica rapida
 Projects API  = solucion consultiva
 Sales API     = cotizacion, venta, pagos y estado comercial
 Pricing API   = listas de precios, margenes e impuestos
+Cost API      = costos reales/estimados y base de rentabilidad
 Rules API     = decisiones configurables
 Billing API   = datos y documentos fiscales
 Documents API = anexos, evidencias y archivos por contexto

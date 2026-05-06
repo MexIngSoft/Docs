@@ -4,6 +4,10 @@
 
 Administrar listas de precios, margenes, impuestos, moneda y precio final.
 
+Pricing tambien debe soportar reglas comerciales como precio fijo, aumento fijo sobre costo, descuentos por volumen, redondeo comercial y colchones preventivos de riesgo operativo cuando formen parte de la estrategia de precio.
+
+Cuando el costo proveedor venga en USD o dependa de tipo de cambio, Pricing debe usar un snapshot vigente de `CurrencyRate` antes de aplicar reglas comerciales.
+
 ## Endpoints minimos
 
 - `POST /pricing/calculate`
@@ -14,12 +18,33 @@ Administrar listas de precios, margenes, impuestos, moneda y precio final.
 - `POST /pricing/rebuild-product-price`
 - `POST /pricing/rebuild-price-list`
 - `POST /discount-rules`
+- `POST /rounding-rules`
+- `POST /volume-discount-rules`
+- `POST /operational-risk-rules`
 
 ## Regla
 
 La lista de precios vive aqui, no en Supplier, Catalog ni Inventory.
 
 El Gateway puede solicitar calculos y adaptar respuestas para frontend, pero no debe contener reglas permanentes de precio.
+
+Las perdidas reales por devoluciones, reenvios, errores operativos o producto danado deben registrarse en Sales/Returns/Profitability. Pricing solo puede usar un colchon estimado si la politica comercial lo define.
+
+Para SYSCOM, el tipo de cambio se obtiene desde `supplier-api` y debe conservarse como historico. Pricing no debe consultar SYSCOM directamente en cada calculo.
+
+## Frontera con Costing
+
+Pricing decide cuanto cobrar.
+
+Costing calcula cuanto cuesta.
+
+Profitability mide si la venta, cotizacion o proyecto realmente dejo utilidad.
+
+Documento de vision futura:
+
+```txt
+docs/01_core_erp/erp/22_pricing_costing_future_map.md
+```
 
 ## Listas iniciales
 

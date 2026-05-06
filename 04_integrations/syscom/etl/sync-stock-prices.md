@@ -21,6 +21,7 @@ ProductPrice = precio final calculado para cliente
 ```bash
 docker compose exec api-multiproyecto sh /usr/src/api/start.sh manage supplier sync_syscom_stock
 docker compose exec api-multiproyecto sh /usr/src/api/start.sh manage supplier sync_syscom_prices
+docker compose exec api-multiproyecto sh /usr/src/api/start.sh manage supplier sync_syscom_exchange_rate
 docker compose exec api-multiproyecto sh /usr/src/api/start.sh manage supplier publish_syscom_prices
 ```
 
@@ -30,6 +31,7 @@ docker compose exec api-multiproyecto sh /usr/src/api/start.sh manage supplier p
 |---|---|
 | `sync_syscom_stock` | `Supplier.SupplierStock` |
 | `sync_syscom_prices` | `Supplier.SupplierPrices` |
+| `sync_syscom_exchange_rate` | `Supplier.SupplierExchangeRates` |
 | `publish_syscom_prices` | `Pricing.ProductPrices` |
 
 ## Flujo stock-only
@@ -50,7 +52,8 @@ docker compose exec api-multiproyecto sh /usr/src/api/start.sh manage supplier p
 2. Consumir detalle o endpoint que devuelva precios actualizados.
 3. Extraer precios.
 4. Insertar Supplier.SupplierPrices como historico.
-5. Ejecutar publish_syscom_prices para recalcular Pricing.ProductPrices.
+5. Si los precios dependen de USD, validar snapshot vigente de tipo de cambio SYSCOM.
+6. Ejecutar publish_syscom_prices para recalcular Pricing.ProductPrices.
 ```
 
 ## Campos de stock
@@ -79,6 +82,7 @@ docker compose exec api-multiproyecto sh /usr/src/api/start.sh manage supplier p
 |---|---:|
 | Stock proveedor | Cada 1 a 2 horas |
 | Precios proveedor | Cada 2 a 4 horas |
+| Tipo de cambio SYSCOM | Diario o 2 veces al dia |
 | Producto puntual antes de venta | En tiempo real si la ultima captura es vieja |
 
 ## Vigencia de disponibilidad

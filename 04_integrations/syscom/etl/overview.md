@@ -18,6 +18,8 @@ flowchart TD
     P --> PP[Publish productos]
     P --> S[Sync stock proveedor]
     P --> PR[Sync precios proveedor]
+    T --> FX[Sync tipo de cambio]
+    FX --> PPR[Publish precios finales]
     PR --> PPR[Publish precios finales]
     PP --> R[Sync relacionados y accesorios]
     R --> RP[Publish relacionados y accesorios]
@@ -45,9 +47,10 @@ flowchart TD
 7. publish_syscom_products
 8. sync_syscom_stock
 9. sync_syscom_prices
-10. publish_syscom_prices
-11. sync_syscom_related
-12. publish_syscom_related
+10. sync_syscom_exchange_rate si los costos dependen de USD
+11. publish_syscom_prices
+12. sync_syscom_related
+13. publish_syscom_related
 ```
 
 `sync_syscom_all` orquesta el flujo principal. Los comandos individuales existen para actualizar solo una parte, por ejemplo precios, stock, categorias o productos.
@@ -62,6 +65,7 @@ flowchart TD
 | Productos | `Supplier.SupplierProducts`, `Supplier.SupplierStock`, `Supplier.SupplierPrices` | `Catalog.Products`, imagenes y recursos |
 | Stock | `Supplier.SupplierStock` | Futuro puente hacia `Inventory` si aplica |
 | Precios | `Supplier.SupplierPrices` | `Pricing.ProductPrices` |
+| Tipo de cambio | `Supplier.SupplierExchangeRates` | `Pricing.CurrencyRate` o snapshot usado por Pricing |
 | Relacionados | `Supplier.SupplierProductRelations` | `Catalog.ProductRelations` |
 
 ## Principios de carga
@@ -73,6 +77,7 @@ flowchart TD
 - Los datos crudos deben preservarse en `RawData`.
 - `Supplier` no representa el producto final; representa lo que dijo el proveedor.
 - `Catalog` no descarga del proveedor; recibe informacion publicada desde `Supplier`.
+- Si los costos proveedor vienen en USD o dependen de dolar, se debe sincronizar tipo de cambio antes de publicar precios finales.
 
 ## Idempotencia
 
@@ -84,6 +89,7 @@ flowchart TD
 | SupplierProduct | `Supplier + ExternalProductId` |
 | SupplierStock | Historico por `SupplierProduct + CapturedAt` |
 | SupplierPrice | Historico por `SupplierProduct + PriceType + CapturedAt` |
+| SupplierExchangeRate | Historico por `Supplier + RateType + CapturedAt` |
 | Catalog.Category | `Provider + ExternalId`, si existe campo externo |
 | Catalog.Brand | `Provider + ExternalId`, si existe campo externo |
 | Catalog.Product | `Provider + ExternalProductId`, si existe campo externo |
@@ -95,6 +101,7 @@ Se recomienda conservar historico para:
 
 - Stock reportado por proveedor.
 - Costo/precio de proveedor.
+- Tipo de cambio proveedor.
 - Precio final calculado.
 - Logs de sincronizacion.
 

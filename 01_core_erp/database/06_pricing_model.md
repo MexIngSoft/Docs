@@ -10,6 +10,9 @@ Documentar las entidades base para listas de precios, margenes, impuestos, moned
 - PriceListAssignment.
 - ProductPrice.
 - PriceRule.
+- PriceRoundingRule.
+- VolumeDiscountRule.
+- OperationalRiskRule.
 - TaxRule.
 - CurrencyRate.
 - PriceCalculationLog.
@@ -32,9 +35,31 @@ El primer desarrollo debe soportar:
 - Lista `SPECIAL_BUYER`.
 - Costo base desde proveedor o costo manual.
 - Margen minimo.
+- Precio fijo manual cuando aplique.
+- Aumento fijo sobre costo.
+- Descuento por volumen.
+- Redondeo comercial.
+- Colchon preventivo de riesgo operativo.
 - IVA incluido o separado.
 - Vigencia de precio.
 - Calculo auditable.
+- Snapshot de tipo de cambio usado cuando el costo origen no este en MXN.
+
+## Frontera con costos reales
+
+Pricing define cuanto cobrar y por que regla.
+
+Las perdidas reales por devoluciones, reenvios, errores de envio, mermas o tiempo operativo deben registrarse en Sales/Returns/Profitability.
+
+Pricing puede incluir un colchon preventivo estimado solo cuando sea parte de la politica de lista de precios.
+
+## Tipo de cambio
+
+`CurrencyRate` debe guardar el tipo de cambio usado por Pricing.
+
+Para proveedores como SYSCOM, `supplier-api` sincroniza el dato externo y Pricing conserva o referencia el snapshot aplicado al calculo.
+
+La cotizacion o venta debe guardar el tipo de cambio usado para no depender de recalculos futuros.
 
 ## Snapshot
 

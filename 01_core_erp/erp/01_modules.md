@@ -6,6 +6,7 @@
 | Supplier | Proveedores, sync, datos externos, RawData. | Vender o calcular precio final. |
 | Catalog | Productos internos, categorias, marcas, atributos. | Descargar proveedores. |
 | Pricing | Listas, margenes, impuestos, precios finales. | Administrar stock. |
+| Costing | Costos reales/estimados, gastos asignados, costos financieros y rentabilidad base. | Decidir precio comercial final. |
 | Inventory | Almacenes, stock propio, movimientos, reservas. | Confundir stock proveedor con stock propio. |
 | Quote | Cotizaciones y snapshots comerciales. | Mover inventario directo. |
 | Sales | Ordenes, pagos, estados comerciales. | Disenar soluciones tecnicas. |
@@ -38,3 +39,4 @@
 - `19_supplier_catalog_strategy.md`
 - `20_channel_assortment.md`
 - `21_product_compatibility.md`
+- `22_pricing_costing_future_map.md`

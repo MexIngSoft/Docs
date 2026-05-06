@@ -35,6 +35,8 @@ WARRANTY_RETURN
 - Si el producto vuelve a inventario, `Inventory` debe registrar movimiento de reingreso.
 - Si hay reembolso, `Sales` debe registrar el movimiento financiero.
 - Si hubo factura, `Billing` debe contemplar cancelacion o nota de credito segun aplique.
+- Toda devolucion debe registrar costos reales cuando existan: guia de retorno, reenvio, merma, reembolso, penalizacion o tiempo operativo.
+- Los costos reales de devolucion alimentan utilidad y reportes; no deben modificar el precio historico de la venta.
 
 ## Pendientes
 
@@ -43,5 +45,5 @@ PENDIENTE_DE_DEFINIR:
 - Proveedor PAC/facturacion.
 - Politica de devoluciones por empresa.
 - Tiempos maximos de devolucion.
+- Politica para absorber o cobrar costos de retorno y reenvio.
 ```
-

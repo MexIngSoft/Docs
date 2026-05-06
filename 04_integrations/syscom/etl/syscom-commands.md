@@ -59,7 +59,7 @@ La frecuencia oficial vive en `docs/03_standards/operations/scheduling.md`. Resu
 | Stock | Cada 1-2 horas | `sync_syscom_stock` |
 | Precios proveedor | Cada 2-4 horas | `sync_syscom_prices`, `publish_syscom_prices` |
 | Refresh rapido | Cada 2-4 horas | `sync_syscom_fast` |
-| Tipo de cambio | Diario o 2 veces al dia | Pendiente `sync_exchange_rate` |
+| Tipo de cambio | Diario o 2 veces al dia | Pendiente `sync_syscom_exchange_rate` |
 
 ## Flujo diario recomendado
 
@@ -249,7 +249,13 @@ GET  /api/v1/tipocambio
 Pendiente de implementar si el proyecto lo requiere:
 
 ```txt
-GET /api/v1/tipocambio
+sync_syscom_exchange_rate
 ```
 
 Ese endpoint conviene usarlo antes de recalcular `Pricing.ProductPrices` cuando los costos vengan en USD o dependan de tipo de cambio.
+
+Documento especifico:
+
+```txt
+docs/04_integrations/syscom/api_reference/syscom-exchange-rate.md
+```
