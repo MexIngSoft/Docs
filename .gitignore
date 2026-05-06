@@ -1,0 +1,6 @@
+# APIs externas montadas para Docker. Cada una tiene su propio repositorio Git.
+Docker.API.PY/
+Docker.DB.PG/
+Docker.API.PY/
+Docker.SW.Nginx/
+Docker.WEB.NJ/

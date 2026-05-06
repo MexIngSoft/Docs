@@ -1,0 +1,47 @@
+# Entidades oficiales
+
+| Entidad | Modulo | Estado |
+|---|---|---|
+| Product | Catalog | REQUERIDA |
+| Category | Catalog | REQUERIDA |
+| Brand | Catalog | REQUERIDA |
+| Supplier | Supplier | REQUERIDA |
+| SupplierProduct | Supplier | REQUERIDA |
+| SupplierStock | Supplier | REQUERIDA |
+| SupplierPrice | Supplier | REQUERIDA |
+| Warehouse | Inventory | REQUERIDA |
+| ProductInventory | Inventory | REQUERIDA |
+| StockMovement | Inventory | REQUERIDA |
+| Quote | Quote/Sales | FALTA |
+| QuoteItem | Quote/Sales | FALTA |
+| Order | Sales | FALTA |
+| OrderItem | Sales | FALTA |
+| Customer | Sales/Auth | FALTA |
+| Address | Sales/Customer | FALTA |
+| Shipment | Logistics | FALTA |
+| Rule | Rules | FALTA |
+| RuleCondition | Rules | FALTA |
+| RuleAction | Rules | FALTA |
+| Cart | Cart | FALTA |
+| CartItem | Cart | FALTA |
+| CashRegister | POS | FALTA |
+| POSSession | POS | FALTA |
+| POSTicket | POS | FALTA |
+| TaxProfile | Billing | FALTA |
+| Invoice | Billing | FALTA |
+| CreditNote | Billing | FALTA |
+| NotificationEvent | Notifications | FALTA |
+| Bundle | Catalog/Projects | FALTA |
+| BundleComponent | Catalog/Projects | FALTA |
+| TenderOpportunity | GovernmentTender | FALTA |
+| TenderRequirement | GovernmentTender | FALTA |
+| TenderProposal | GovernmentTender | FALTA |
+| TenderDocument | GovernmentTender | FALTA |
+| Document | Documents | FALTA |
+| DocumentVersion | Documents | FALTA |
+| DocumentLink | Documents | FALTA |
+| ChannelAssortment | Catalog | FALTA |
+| ProjectCategoryPolicy | Catalog | FALTA |
+| ProductCompatibilityRule | Catalog | FALTA |
+| ProductCompatibilityCheck | Catalog | FALTA |
+| ProductAttributeDefinition | Catalog | FALTA |
