@@ -97,7 +97,7 @@ API.PY.DJANGO.NombreProyecto
 Para gateway/BFF:
 
 ```text
-API.PY.DJANGO.NombreProyectoGateway
+API.PY.DJANGO.NombreProyecto.Gateway
 ```
 
 Para API propia del proyecto:
@@ -109,9 +109,17 @@ API.PY.DJANGO.NombreProyecto
 Ejemplo:
 
 ```text
-API.PY.DJANGO.TecnoTelecGateway
+API.PY.DJANGO.TecnoTelec.Gateway
 API.PY.DJANGO.TecnoTelec
 ```
+
+Regla de creacion:
+
+- Si un proyecto necesita Gateway/BFF, crear `API.PY.DJANGO.NombreProyecto.Gateway`.
+- Si el proyecto tiene tablas, procesos, formularios, configuracion o reglas propias, crear tambien `API.PY.DJANGO.NombreProyecto`.
+- Si el proyecto solo consume APIs core sin datos propios, la API de dominio puede omitirse, pero la decision debe quedar documentada.
+- Ambas carpetas deben ser repositorios Git independientes y subirse a GitHub al momento de crearlas.
+- El repositorio orquestador Docker debe ignorar `API.PY.DJANGO.*/` para no versionar APIs externas dentro del compose.
 
 El nombre operativo puede documentarse en kebab-case:
 
@@ -138,4 +146,3 @@ Si una regla sirve para varios proyectos, vive en core.
 Si una regla solo existe por una empresa, marca, canal o vertical, vive en la API propia del proyecto.
 
 Si una respuesta solo acomoda datos para una pantalla, vive en gateway/BFF.
-

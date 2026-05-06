@@ -28,6 +28,7 @@ Esta carpeta contiene la documentacion reutilizable del ERP modular. No debe dep
 - `GovernmentTender` aplica a cualquier empresa que pueda participar en licitaciones.
 - `Documents` administra anexos, evidencias y documentos legales reutilizables.
 - `07_project_api_pattern.md` define como cada proyecto usa gateway, API propia y APIs core.
+- `08_data_isolation_and_reference_tables.md` define como separar APIs, bases propias y tablas referenciadas.
 - `ChannelAssortment` define que muestra cada proyecto aunque el catalogo sea compartido.
 - `ProductCompatibility` permite configuradores y validacion tecnica entre componentes.
 

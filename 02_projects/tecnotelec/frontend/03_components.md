@@ -21,8 +21,13 @@
 - DiagnosticStepCard.
 - ContactPanel.
 - WhatsAppCTA.
+- LeadCaptureForm.
+- ConversionTracker.
+- ChatWidget.
 - TenderOpportunityBadge.
 
 ## Regla
 
 Los componentes deben apoyar venta consultiva y cotizacion, no solo catalogo tipo tienda.
+
+`WhatsAppCTA` entra en el MVP. `ChatWidget` queda contemplado como fase futura.

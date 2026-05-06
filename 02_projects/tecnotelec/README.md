@@ -14,6 +14,19 @@ Tecno Telec es una plataforma empresarial de soluciones tecnologicas, telecomuni
 | `frontend` | Rutas, layout, componentes, sistema visual y flujos web. |
 | `tasks` | Tareas, APIs requeridas, tablas faltantes y orden de desarrollo. |
 | `decisions` | ADRs especificos de Tecno Telec. |
+| `AGENTE.md` | Guia operativa de desarrollo segun instrucciones de `Docs/AGENTS.md`. |
+
+Documento MVP:
+
+```txt
+tasks/05_mvp_scope.md
+```
+
+Plan inicial de precios:
+
+```txt
+tasks/06_pricing_first_plan.md
+```
 
 ## Regla
 

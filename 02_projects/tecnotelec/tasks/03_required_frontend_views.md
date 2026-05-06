@@ -15,3 +15,12 @@
 | Dashboard | `/dashboard` | MEDIA | FALTA |
 | Contacto | `/contacto` | ALTA | FALTA |
 | Licitaciones | `/licitaciones` | BAJA | FUTURO |
+
+## Elementos transversales
+
+| Elemento | Ubicacion | Prioridad | Estado |
+|---|---|---|---|
+| Boton WhatsApp directo | Home, soluciones, detalle, cotizador y contacto | ALTA | MVP |
+| Captura de lead | Cotizador y contacto | ALTA | MVP |
+| Tracking de conversion | WhatsApp, formularios y cotizador | ALTA | MVP |
+| Chat en sitio | Global | MEDIA | FUTURO |

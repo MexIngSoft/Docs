@@ -1,10 +1,12 @@
 # Instrucciones generales de analisis, arquitectura y planeacion del ecosistema
 
+## Objetivo
+
+Analizar y mantener la documentacion del repositorio `Docs` para que el ecosistema quede organizado, auditable y listo para desarrollo.
+
 ## Instruccion 1: Auditoria completa de documentacion, APIs y proyectos
 
 Realiza un analisis completo de toda la documentacion existente dentro del repositorio `Docs`.
-
-El objetivo es identificar, organizar y documentar correctamente todo el ecosistema actual del proyecto.
 
 Debes analizar:
 
@@ -17,8 +19,6 @@ Debes analizar:
 - Reglas de negocio documentadas.
 - Flujos documentados.
 - Roadmaps o pendientes existentes.
-
-## Objetivos principales
 
 Debes determinar:
 
@@ -33,58 +33,52 @@ Debes determinar:
 9. Que documentacion esta desactualizada.
 10. Que documentacion se contradice.
 
-## Para cada API encontrada documentar
+## Instruccion 2: Separacion futura de APIs y bases de datos
 
-- Nombre de la API.
-- Nombre del repositorio.
-- Dominio funcional.
-- Objetivo.
-- Base de datos relacionada.
-- Schema relacionado.
-- Modelos principales.
-- Entidades principales.
-- Endpoints existentes.
-- Dependencias con otras APIs.
-- Dependencias con frontends.
-- Dependencias con integraciones externas.
-- Estado actual:
-  - Existente.
-  - Incompleta.
-  - Pendiente.
-  - Propuesta.
-  - Desactualizada.
+Las APIs deben estar preparadas para trabajar por separado.
 
-## Para cada frontend encontrado documentar
+Si una API debe separarse por carga, seguridad o crecimiento, debe poder moverse a:
 
-- Nombre del proyecto.
-- Objetivo.
-- Framework utilizado.
-- APIs que consume.
-- Modulos existentes.
-- Modulos faltantes.
-- Estado actual.
+- Proyecto/repositorio propio.
+- Base de datos propia.
+- Contratos de comunicacion explicitos.
+- Integracion con otras APIs sin depender de tablas internas ajenas.
 
-## Para cada integracion encontrada documentar
+Tambien debe evaluarse el uso de tablas referenciadas entre bases de datos PostgreSQL, por ejemplo con `postgres_fdw`, cuando sea util para lectura controlada de datos maestros.
 
-- Nombre de la integracion.
-- Tipo:
-  - proveedor.
-  - pagos.
-  - logistica.
-  - notificaciones.
-  - autenticacion.
-  - terceros.
-- APIs relacionadas.
-- Estado actual.
-- Documentacion existente.
-- Riesgos detectados.
+Documento canonico:
+
+```txt
+01_core_erp/architecture/08_data_isolation_and_reference_tables.md
+```
+
+## Instruccion 3: Plan detallado Tecno Telec
+
+Con base en toda la documentacion existente, definir los pasos para desarrollar Tecno Telec, indicando:
+
+- Procesos ya realizados.
+- Puntos pendientes.
+- Orden recomendado de desarrollo.
+- APIs requeridas.
+- Tablas requeridas.
+- Frontend requerido.
+- Decisiones ya tomadas.
+
+Documento canonico:
+
+```txt
+02_projects/tecnotelec/AGENTE.md
+```
 
 ## Reglas importantes
 
-No inventar informacion.
-
-Si algo no existe en la documentacion, marcarlo como:
+- No inventar informacion.
+- Si algo no existe en la documentacion, marcarlo como:
 
 ```txt
 No encontrado en la documentacion actual.
 ```
+
+- Si una regla sirve para varios proyectos, pertenece al nucleo ERP.
+- Si una regla solo aplica a una empresa, marca, canal o vertical, pertenece al proyecto correspondiente.
+- Si una integracion depende de un proveedor externo, pertenece a `04_integrations`.

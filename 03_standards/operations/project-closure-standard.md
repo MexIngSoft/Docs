@@ -16,6 +16,12 @@ La nomenclatura oficial para proyectos Django API es:
 API.PY.DJANGO.NombreProyecto
 ```
 
+Para gateways/BFF de proyecto, la nomenclatura oficial es:
+
+```text
+API.PY.DJANGO.NombreProyecto.Gateway
+```
+
 Las carpetas existentes con `API.PY.DJANGO` se consideran nomenclatura anterior. Para proyectos nuevos se debe usar `API.PY.DJANGO.NombreProyecto`.
 
 Ejemplos de nomenclatura:
@@ -28,12 +34,15 @@ API.PY.DJANGO.Pricing
 API.PY.DJANGO.Procurement
 API.PY.DJANGO.Sales
 API.PY.DJANGO.Supplier
+API.PY.DJANGO.TecnoTelec
+API.PY.DJANGO.TecnoTelec.Gateway
 ```
 
 Reglas:
 
 - El prefijo debe ser siempre `API.PY.DJANGO`.
 - `NombreProyecto` debe escribirse en PascalCase.
+- Para Gateway/BFF se debe agregar el sufijo `.Gateway`, separado por punto.
 - El nombre debe representar el dominio principal, no una tecnologia, proveedor o tarea temporal.
 - El paquete de configuracion debe llamarse `config`.
 - `settings.py` debe vivir en `config/settings.py`.
@@ -61,8 +70,12 @@ API.PY.DJANGO.Supplier/
 Un proyecto Django API se considera cerrado cuando cumple estos puntos:
 
 - La carpeta raiz respeta `API.PY.DJANGO.NombreProyecto`.
+- Si es Gateway/BFF, la carpeta raiz respeta `API.PY.DJANGO.NombreProyecto.Gateway`.
 - La carpeta raiz es un repositorio Git independiente.
 - La carpeta tiene remoto `origin` configurado.
+- Al crear un Gateway de proyecto, tambien debe evaluarse y crear la API de dominio `API.PY.DJANGO.NombreProyecto` cuando existan datos, formularios, configuraciones o reglas propias.
+- Si la API de dominio no se crea, la decision debe documentarse con motivo y responsable.
+- El repo Docker orquestador debe mantener `API.PY.DJANGO.*/` en `.gitignore` para que las APIs montadas no se versionen ahi.
 - No existe otra copia viva de la misma API dentro del entorno Docker.
 - El paquete de settings se llama `config`.
 - El dominio y responsabilidades estan documentados.
@@ -126,7 +139,7 @@ El cierre debe validarse contra este mismo estandar vigente y contra la document
 
 En especial deben revisarse:
 
-- Nombre externo `API.PY.DJANGO.NombreProyecto`.
+- Nombre externo `API.PY.DJANGO.NombreProyecto` o `API.PY.DJANGO.NombreProyecto.Gateway`.
 - Repositorio Git propio por API.
 - Remoto `origin` configurado.
 - Sin carpetas duplicadas de la misma API.
@@ -211,7 +224,7 @@ Definicion:
 
 Antes de marcar un proyecto como `closed`, validar:
 
-- [ ] Nombre raiz: `API.PY.DJANGO.NombreProyecto`.
+- [ ] Nombre raiz: `API.PY.DJANGO.NombreProyecto` o `API.PY.DJANGO.NombreProyecto.Gateway`.
 - [ ] Repositorio Git propio.
 - [ ] Remoto `origin` configurado.
 - [ ] Sin carpeta duplicada de la misma API.

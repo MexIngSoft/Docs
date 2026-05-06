@@ -26,6 +26,8 @@
 | `01_core_erp/erp/16_addresses_customers.md` | Clientes y direcciones reutilizables. | CREADO |
 | `01_core_erp/erp/17_government_tender.md` | Licitaciones como inteligencia y seguimiento. | CREADO |
 | `01_core_erp/architecture/06_general_system_diagram.md` | Diagrama logico del ERP. | CREADO |
+| `01_core_erp/architecture/08_data_isolation_and_reference_tables.md` | Requerido para separar APIs, bases propias y evaluar tablas referenciadas PostgreSQL. | CREADO |
+| `02_projects/tecnotelec/AGENTE.md` | Requerido por `Docs/AGENTS.md` para guiar desarrollo pendiente y realizado. | CREADO |
 | `01_core_erp/apis/10_cart_api.md` | API de carrito web. | CREADO |
 | `01_core_erp/apis/11_pos_api.md` | API de punto de venta. | CREADO |
 | `01_core_erp/apis/12_government_tender_api.md` | API de licitaciones. | CREADO |

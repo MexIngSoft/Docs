@@ -91,13 +91,21 @@ PostgreSQL crea:
 | `lexnova` | `lexnova_user` |
 | `comercial` | `comercial_user` |
 
-Scripts fuente:
+Scripts fuente, ejecutados automaticamente cuando el volumen `postgres` esta vacio:
 
 ```txt
 Docker.DB.PG/docker/postgres/01-users.sh
 Docker.DB.PG/docker/postgres/02-databases.sh
 Docker.DB.PG/docker/postgres/03_schemas.sql
 ```
+
+Para reaplicar cambios sin borrar datos:
+
+```powershell
+docker compose -f Docker.DB.PG\docker-compose.yml --profile tools run --rm db-postgresql-apply
+```
+
+Ese comando no debe dejar un segundo contenedor PostgreSQL permanente.
 
 ## Rutas Nginx
 
@@ -153,5 +161,4 @@ Despues levanta API, Web y Nginx en el orden recomendado.
 | `host not found in upstream` | Cambio el nombre del contenedor destino. | Alinea `container_name` con `nginx.conf`. |
 | Frontend llama directo a `:8000` | `NEXT_PUBLIC_HOST` esta mal configurado. | Debe ser `http://localhost` cuando se usa Nginx. |
 | PostgreSQL pide variables | Falta `Docker.DB.PG/.env`. | Copia `.env.example` y cambia los secretos. |
-| Cambios de schemas no aparecen | El volumen ya existia antes del cambio. | Corre `docker compose -f Docker.DB.PG\docker-compose.yml up -d` para ejecutar `db-postgresql-apply`. |
-
+| Cambios de schemas no aparecen | El volumen ya existia antes del cambio. | Ejecuta `docker compose -f Docker.DB.PG\docker-compose.yml --profile tools run --rm db-postgresql-apply`. |

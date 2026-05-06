@@ -10,7 +10,8 @@
 | sales-api | EXISTE/PARCIAL | Ordenes, pagos, ventas. | ALTA |
 | logistics-api | FALTA | Envios, costos, tracking. | MEDIA |
 | rules-engine-api | FALTA | Decisiones de negocio. | ALTA |
-| tecnotelec-gateway-api | FALTA | Gateway/BFF web. | ALTA |
+| tecnotelec-gateway-api | DRAFT | Gateway/BFF web. | ALTA |
+| tecnotelec-api | DRAFT | Procesos, formularios y configuracion propia de Tecno Telec. | ALTA |
 | projects-api | FALTA | Soluciones y proyectos. | ALTA |
 | cart-api | FALTA | Carrito web. | MEDIA |
 | pos-api | FALTA | Punto de venta fisico. | BAJA |

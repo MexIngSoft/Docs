@@ -24,12 +24,16 @@
 
 Para consultoria en linea:
 
-1. Supplier + Catalog estable.
-2. Pricing API.
-3. Projects API.
-4. Quote/Sales API.
-5. Rules Engine basico.
-6. Logistics API.
-7. Gateway API.
-8. Frontend cotizador.
-9. Frontend soluciones/contacto.
+1. Cerrar alcance MVP documentado en `05_mvp_scope.md`.
+2. Supplier + Catalog estable.
+3. Pricing API con `PUBLIC` y `SPECIAL_BUYER`, segun `06_pricing_first_plan.md`.
+4. TecnoTelec API.
+5. Gateway API consumiendo Pricing sin calcular precios.
+6. Projects API.
+7. Quote/Sales API con snapshot de precio.
+8. Rules Engine basico.
+9. Frontend home/soluciones/contacto.
+10. Frontend cotizador.
+11. WhatsApp directo con medicion.
+12. Logistics API.
+13. Carrito y checkout si entran en fase posterior.
