@@ -1,0 +1,157 @@
+# Runbook Docker local
+
+Este documento permite reconstruir el entorno Docker local `crejo` si se pierde configuracion o se cambia de equipo.
+
+## Servicios
+
+| Carpeta | Servicio | Contenedor | Puerto host | Red |
+| --- | --- | --- | --- | --- |
+| `Docker.DB.PG` | PostgreSQL | `db-postgresql` | `127.0.0.1:5432` | `crejo` |
+| `Docker.API.PY` | APIs Django | `api-backend-python` | `8000-8007` | `crejo` |
+| `Docker.WEB.NJ` | Next.js | `web-frontend-node` | `3000` | `crejo` |
+| `Docker.SW.Nginx` | Proxy Nginx | `nginx` | `80` | `crejo` |
+
+## Orden recomendado de arranque
+
+Ejecuta desde la raiz del workspace:
+
+```powershell
+docker compose -f Docker.DB.PG\docker-compose.yml up -d
+docker compose -f Docker.API.PY\docker-compose.yml up -d --build
+docker compose -f Docker.WEB.NJ\docker-compose.yml up -d --build
+docker compose -f Docker.SW.Nginx\docker-compose.yml up -d --build
+```
+
+Entrada principal:
+
+```txt
+http://localhost
+```
+
+Entradas directas de diagnostico:
+
+```txt
+http://localhost:3000
+http://localhost:8000
+```
+
+## Red Docker
+
+Todos los compose deben declarar:
+
+```yaml
+networks:
+  default:
+    name: crejo
+```
+
+Esto permite que Nginx resuelva:
+
+```txt
+web-frontend-node
+api-backend-python
+```
+
+## Variables de PostgreSQL
+
+La plantilla vive en:
+
+```txt
+Docker.DB.PG/.env.example
+```
+
+Para restaurar:
+
+```powershell
+Copy-Item Docker.DB.PG\.env.example Docker.DB.PG\.env
+```
+
+Despues edita `Docker.DB.PG/.env` y cambia todos los valores `change-me-*`.
+
+Variables requeridas:
+
+| Variable | Uso |
+| --- | --- |
+| `POSTGRES_VERSION` | Version de imagen PostgreSQL. |
+| `POSTGRES_PORT` | Puerto publicado en host. |
+| `POSTGRES_USER` | Usuario administrador inicial. |
+| `POSTGRES_DB` | Base administrativa inicial. |
+| `POSTGRES_PASSWORD` | Password del usuario administrador. |
+| `AUTH_DB_PASSWORD` | Password de `auth_user`. |
+| `LEXNOVA_DB_PASSWORD` | Password de `lexnova_user`. |
+| `COMERCIAL_DB_PASSWORD` | Password de `comercial_user`. |
+
+## Bases y schemas esperados
+
+PostgreSQL crea:
+
+| Database | Owner |
+| --- | --- |
+| `auth` | `auth_user` |
+| `lexnova` | `lexnova_user` |
+| `comercial` | `comercial_user` |
+
+Scripts fuente:
+
+```txt
+Docker.DB.PG/docker/postgres/01-users.sh
+Docker.DB.PG/docker/postgres/02-databases.sh
+Docker.DB.PG/docker/postgres/03_schemas.sql
+```
+
+## Rutas Nginx
+
+| Ruta publica | Destino |
+| --- | --- |
+| `/` | `web-frontend-node:3000` |
+| `/api/mock/` | `web-frontend-node:3000` |
+| `/api` | `api-backend-python:8000` |
+| `/static/` | `/app/web/static/` dentro de Nginx |
+
+Si una API distinta a `auth` debe exponerse por Nginx, agrega una ruta dedicada en `Docker.SW.Nginx/nginx.conf`.
+
+## Validacion rapida
+
+```powershell
+docker compose -f Docker.DB.PG\docker-compose.yml config
+docker compose -f Docker.API.PY\docker-compose.yml config
+docker compose -f Docker.WEB.NJ\docker-compose.yml config
+docker compose -f Docker.SW.Nginx\docker-compose.yml config
+```
+
+Ver estado:
+
+```powershell
+docker ps --filter "network=crejo"
+```
+
+Logs:
+
+```powershell
+docker compose -f Docker.DB.PG\docker-compose.yml logs -f
+docker compose -f Docker.API.PY\docker-compose.yml logs -f api-multiproyecto
+docker compose -f Docker.WEB.NJ\docker-compose.yml logs -f web-frontend-node
+docker compose -f Docker.SW.Nginx\docker-compose.yml logs -f nginx
+```
+
+## Recuperacion desde cero
+
+Advertencia: el siguiente comando borra datos locales de PostgreSQL.
+
+```powershell
+docker compose -f Docker.DB.PG\docker-compose.yml down -v
+docker compose -f Docker.DB.PG\docker-compose.yml up -d
+```
+
+Despues levanta API, Web y Nginx en el orden recomendado.
+
+## Problemas comunes
+
+| Sintoma | Causa probable | Accion |
+| --- | --- | --- |
+| Nginx responde 502 | API o Web no estan arriba, o no estan en red `crejo`. | Revisa `docker ps --filter "network=crejo"` y logs de Nginx. |
+| `host not found in upstream` | Cambio el nombre del contenedor destino. | Alinea `container_name` con `nginx.conf`. |
+| Frontend llama directo a `:8000` | `NEXT_PUBLIC_HOST` esta mal configurado. | Debe ser `http://localhost` cuando se usa Nginx. |
+| PostgreSQL pide variables | Falta `Docker.DB.PG/.env`. | Copia `.env.example` y cambia los secretos. |
+| Cambios de schemas no aparecen | El volumen ya existia antes del cambio. | Corre `docker compose -f Docker.DB.PG\docker-compose.yml up -d` para ejecutar `db-postgresql-apply`. |
+

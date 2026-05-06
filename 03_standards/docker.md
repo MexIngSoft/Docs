@@ -1,44 +1,70 @@
 # Docker local
 
-Este proyecto mantiene un solo contenedor para levantar las APIs Django durante la etapa inicial.
+El entorno local usa varios compose separados bajo el proyecto Docker `crejo`:
+
+- `Docker.DB.PG`: PostgreSQL local.
+- `Docker.API.PY`: APIs Django multiproyecto.
+- `Docker.WEB.NJ`: frontend Next.js.
+- `Docker.SW.Nginx`: proxy local de entrada.
+
+Runbook completo de recuperacion:
+
+```txt
+Docs/03_standards/operations/docker-recovery-runbook.md
+```
 
 ## Levantar servicios
 
-```bash
-docker compose up -d --build
+Desde la raiz del workspace:
+
+```powershell
+docker compose -f Docker.DB.PG\docker-compose.yml up -d
+docker compose -f Docker.API.PY\docker-compose.yml up -d --build
+docker compose -f Docker.WEB.NJ\docker-compose.yml up -d --build
+docker compose -f Docker.SW.Nginx\docker-compose.yml up -d --build
 ```
 
 ## Ver logs
 
-```bash
-docker compose logs -f api-multiproyecto
+```powershell
+docker compose -f Docker.API.PY\docker-compose.yml logs -f api-multiproyecto
+docker compose -f Docker.WEB.NJ\docker-compose.yml logs -f web-frontend-node
+docker compose -f Docker.SW.Nginx\docker-compose.yml logs -f nginx
 ```
 
 ## Ejecutar migraciones sin bajar el contenedor
 
 Aplicar migraciones de un proyecto:
 
-```bash
-docker compose exec api-multiproyecto sh /usr/src/api/start.sh manage catalog migrate
+```powershell
+docker compose -f Docker.API.PY\docker-compose.yml exec api-multiproyecto sh /usr/src/api/start.sh manage catalog migrate
 ```
 
 Crear y aplicar migraciones de un proyecto:
 
-```bash
-docker compose exec api-multiproyecto sh /usr/src/api/start.sh manage catalog makemigrations
-docker compose exec api-multiproyecto sh /usr/src/api/start.sh manage catalog migrate
+```powershell
+docker compose -f Docker.API.PY\docker-compose.yml exec api-multiproyecto sh /usr/src/api/start.sh manage catalog makemigrations
+docker compose -f Docker.API.PY\docker-compose.yml exec api-multiproyecto sh /usr/src/api/start.sh manage catalog migrate
 ```
 
 Aplicar migraciones de todos los proyectos:
 
-```bash
-docker compose exec api-multiproyecto sh /usr/src/api/start.sh migrate-all
+```powershell
+docker compose -f Docker.API.PY\docker-compose.yml exec api-multiproyecto sh /usr/src/api/start.sh migrate-all
 ```
 
 Crear migraciones en todos los proyectos:
 
-```bash
-docker compose exec api-multiproyecto sh /usr/src/api/start.sh makemigrations-all
+```powershell
+docker compose -f Docker.API.PY\docker-compose.yml exec api-multiproyecto sh /usr/src/api/start.sh makemigrations-all
+```
+
+## Entrada principal
+
+Con todos los servicios arriba:
+
+```txt
+http://localhost
 ```
 
 ## Proyectos disponibles
