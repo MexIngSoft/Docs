@@ -24,6 +24,7 @@ Documentos principales:
 - `_ecosystem/01_company_portfolio.md`
 - `_ecosystem/02_jobcron_shared_modules.md`
 - `_ecosystem/03_development_strategy.md`
+- `_ecosystem/04_process_convergence_and_conflicts.md`
 
 ## Proyectos por categoria
 

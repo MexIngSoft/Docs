@@ -11,7 +11,7 @@ Tecno Telec es una plataforma empresarial de soluciones tecnologicas, telecomuni
 | Carpeta | Contenido |
 |---|---|
 | `business` | Identidad, objetivos, FODA, servicios y propuesta de valor. |
-| `frontend` | Rutas, layout, componentes, sistema visual y flujos web. |
+| `frontend` | Rutas, layout, componentes, sistema visual, flujos web y preparacion de desarrollo. |
 | `tasks` | Tareas, APIs requeridas, tablas faltantes y orden de desarrollo. |
 | `decisions` | ADRs especificos de Tecno Telec. |
 | `AGENTE.md` | Guia operativa de desarrollo segun instrucciones de `Docs/AGENTS.md`. |
@@ -35,3 +35,11 @@ Tecno Telec no debe documentarse como marketplace generico. El foco es vender so
 ## Interfaz
 
 La propuesta de interfaz esta en `frontend/09_interface_proposal.md`.
+
+Preparacion antes de desarrollo:
+
+```txt
+frontend/10_pre_development_analysis.md
+frontend/11_web_platform_structure.md
+frontend/12_initial_web_blueprint.md
+```

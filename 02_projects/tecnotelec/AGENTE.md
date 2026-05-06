@@ -27,6 +27,9 @@ El foco es vender soluciones tecnologicas, proyectos consultivos, cotizaciones, 
 | Layout y componentes | Realizado como especificacion | `frontend/02_layout.md`, `frontend/03_components.md` |
 | Sistema visual | Propuesto | `frontend/05_design_system.md` |
 | Propuesta de interfaz | Propuesta | `frontend/09_interface_proposal.md` |
+| Analisis previo frontend | Realizado como especificacion | `frontend/10_pre_development_analysis.md` |
+| Estructura plataforma web | Realizado como especificacion | `frontend/11_web_platform_structure.md` |
+| Blueprint inicial web | Realizado como especificacion | `frontend/12_initial_web_blueprint.md` |
 | APIs requeridas | Realizado como inventario | `tasks/01_required_apis.md` |
 | Tablas requeridas | Realizado como inventario | `tasks/02_required_tables.md` |
 | Vistas requeridas | Realizado como inventario | `tasks/03_required_frontend_views.md` |
@@ -70,14 +73,15 @@ El foco es vender soluciones tecnologicas, proyectos consultivos, cotizaciones, 
 7. Conectar `tecnotelec-gateway-api` con `tecnotelec-api`.
 8. Definir `quote-api` o integrar cotizacion inicial en `sales-api`.
 9. Crear `rules-engine-api` basico.
-10. Implementar frontend de inicio, soluciones, contacto y cotizador.
-11. Agregar WhatsApp directo con medicion de conversion.
-12. Agregar captura de leads.
-13. Agregar carrito y checkout si entran en fase posterior.
-14. Agregar Logistics.
-15. Agregar Billing/CFDI.
-16. Agregar chat en sitio como fase futura.
-17. Agregar POS y GovernmentTender como fases posteriores si se confirma alcance.
+10. Crear `WEB.NJ.NEXT.TecnoTelec` bajo el estandar frontend.
+11. Implementar frontend de inicio, soluciones, contacto y cotizador.
+12. Agregar WhatsApp directo con medicion de conversion.
+13. Agregar captura de leads.
+14. Agregar carrito y checkout si entran en fase posterior.
+15. Agregar Logistics.
+16. Agregar Billing/CFDI.
+17. Agregar chat en sitio como fase futura.
+18. Agregar POS y GovernmentTender como fases posteriores si se confirma alcance.
 
 ## APIs existentes o parciales
 
@@ -141,6 +145,7 @@ Transversal MVP:
 
 - El frontend no debe consumir APIs core directamente.
 - El frontend debe pasar por `tecnotelec-gateway-api`.
+- El frontend debe crearse como `WEB.NJ.NEXT.TecnoTelec`.
 - El Gateway orquesta precios, pero no calcula ni guarda reglas permanentes de precio.
 - La logica de precio vive en `pricing-api`.
 - Las reglas propias de Tecno Telec deben vivir en `tecnotelec-api`.

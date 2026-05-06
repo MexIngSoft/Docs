@@ -25,3 +25,25 @@ La propuesta oficial queda documentada en `09_interface_proposal.md` y toma como
 El frontend debe consumir solo `tecnotelec-gateway-api`.
 
 `tecnotelec-gateway-api` puede consumir `tecnotelec-api` y las APIs core del ERP.
+
+## Proyecto recomendado
+
+El proyecto web debe crearse como:
+
+```text
+WEB.NJ.NEXT.TecnoTelec
+```
+
+Puede vivir inicialmente dentro de `Docker.WEB.NJ`, pero debe poder separarse como repositorio independiente.
+
+## Documentos de preparacion
+
+- `10_pre_development_analysis.md`
+- `11_web_platform_structure.md`
+- `12_initial_web_blueprint.md`
+
+Estandares generales:
+
+- `../../../03_standards/frontend/nextjs-project-standard.md`
+- `../../../03_standards/frontend/shared-docker-frontend-architecture.md`
+- `../../../03_standards/frontend/pre-development-checklist.md`

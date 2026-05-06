@@ -38,6 +38,12 @@
 | `01_core_erp/flows/09_returns_flow.md` | Flujo devoluciones. | CREADO |
 | `01_core_erp/flows/10_error_consistency_flow.md` | Flujo de errores y consistencia. | CREADO |
 | `01_core_erp/flows/11_government_tender_flow.md` | Flujo licitaciones. | CREADO |
+| `03_standards/frontend/nextjs-project-standard.md` | Requerido por `Docs/AGENTS.md` para estandarizar proyectos web. | CREADO |
+| `03_standards/frontend/shared-docker-frontend-architecture.md` | Requerido por `Docs/AGENTS.md` para convivencia de varios Next.js en Docker. | CREADO |
+| `03_standards/frontend/pre-development-checklist.md` | Requerido por `Docs/AGENTS.md` para validar antes de programar frontend. | CREADO |
+| `02_projects/tecnotelec/frontend/10_pre_development_analysis.md` | Requerido por `Docs/AGENTS.md` antes del desarrollo web. | CREADO |
+| `02_projects/tecnotelec/frontend/11_web_platform_structure.md` | Requerido por `Docs/AGENTS.md` para estructura funcional. | CREADO |
+| `02_projects/tecnotelec/frontend/12_initial_web_blueprint.md` | Requerido por `Docs/AGENTS.md` para propuesta inicial implementable. | CREADO |
 
 ## Pendientes reales
 
@@ -47,3 +53,5 @@
 - Confirmar proveedor de secretos y estrategia CI/CD.
 - Confirmar proveedor fiscal y alcance CFDI.
 - Confirmar proveedor de notificaciones.
+- Confirmar datos reales de contacto de Tecno Telec antes de implementar la web.
+- Confirmar contrato final de `tecnotelec-gateway-api` para MVP frontend.

@@ -8,7 +8,7 @@ La regla principal es separar:
 
 - **Nucleo ERP**: reglas reutilizables para cualquier negocio o proyecto.
 - **Proyectos**: identidad, negocio, frontend, tareas y decisiones especificas por empresa o producto.
-- **Estandares**: normas de Django, operacion, seguridad, pruebas y Docker.
+- **Estandares**: normas de Django, frontend, operacion, seguridad, pruebas y Docker.
 - **Integraciones**: proveedores externos como Syscom.
 - **Archivo**: solo fuentes utiles que explican decisiones documentales, como referencias visuales.
 
@@ -19,7 +19,7 @@ La regla principal es separar:
 | Auditoria | `00_audit` | Inventario, inconsistencias, diccionario, estado documental. |
 | Nucleo ERP | `01_core_erp` | Modulos, arquitectura, base de datos, APIs y flujos reutilizables. |
 | Proyectos | `02_projects` | Documentacion especifica por proyecto/empresa. |
-| Estandares | `03_standards` | Django, operacion, seguridad, testing, Docker. |
+| Estandares | `03_standards` | Django, frontend, operacion, seguridad, testing, Docker. |
 | Integraciones | `04_integrations` | Proveedores externos y ETL. |
 | Archivo | `_archive` | Fuentes utiles conservadas para trazabilidad. |
 
@@ -77,6 +77,8 @@ Mapa del ecosistema:
 Va en `03_standards` todo lo que define como se trabaja:
 
 - Estandar de proyectos Django API.
+- Estandar de proyectos Next.js.
+- Arquitectura Docker frontend compartida.
 - Estandar de cierre.
 - Runbook.
 - Observabilidad.
@@ -117,9 +119,15 @@ Proveedor actual:
 12. `02_projects/tecnotelec/business/00_tecnotelec_identity.md`
 13. `02_projects/tecnotelec/frontend/00_frontend_overview.md`
 14. `02_projects/tecnotelec/frontend/09_interface_proposal.md`
-15. `02_projects/tecnotelec/tasks/04_development_order.md`
-16. `02_projects/_ecosystem/00_ecosystem_overview.md`
-17. `02_projects/_ecosystem/01_company_portfolio.md`
+15. `02_projects/tecnotelec/frontend/10_pre_development_analysis.md`
+16. `02_projects/tecnotelec/frontend/11_web_platform_structure.md`
+17. `02_projects/tecnotelec/frontend/12_initial_web_blueprint.md`
+18. `03_standards/frontend/nextjs-project-standard.md`
+19. `03_standards/frontend/shared-docker-frontend-architecture.md`
+20. `02_projects/tecnotelec/tasks/04_development_order.md`
+21. `02_projects/_ecosystem/00_ecosystem_overview.md`
+22. `02_projects/_ecosystem/01_company_portfolio.md`
+23. `02_projects/_ecosystem/04_process_convergence_and_conflicts.md`
 
 ## Reglas
 

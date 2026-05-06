@@ -1,30 +1,32 @@
-# Frontend Rules
+# Reglas de visibilidad en frontend
 
-> Ruta actual: `/docs/03_standards/operations/frontend-rules.md`
+## Objetivo
 
-## 1. Qué mostrar
+Definir que datos comerciales pueden mostrarse al usuario final y que datos deben permanecer internos.
+
+## 1. Que mostrar
 
 | Dato | Mostrar |
 |---|---:|
-| Nombre producto | Sí |
-| Modelo | Sí |
-| Marca | Sí |
-| Imagen portada | Sí |
-| Categoría | Sí |
-| Precio final | Sí |
-| Disponibilidad comercial | Sí |
+| Nombre producto | Si |
+| Modelo | Si |
+| Marca | Si |
+| Imagen portada | Si |
+| Categoria | Si |
+| Precio final | Si |
+| Disponibilidad comercial | Si |
 | Stock separado por origen | Opcional |
-| Garantía | Sí |
-| Ficha técnica | Sí |
+| Garantia | Si |
+| Ficha tecnica | Si |
 
-## 2. Qué NO mostrar
+## 2. Que no mostrar
 
 | Dato | Motivo |
 |---|---|
-| Costo proveedor | Información interna. |
+| Costo proveedor | Informacion interna. |
 | Precio SYSCOM bruto | No es precio cliente. |
 | Link privado | Puede exponer proveedor/cuenta. |
-| RawData | Técnico/interno. |
+| RawData | Tecnico/interno. |
 | Token | Seguridad. |
 
 ## 3. Disponibilidad sugerida
@@ -39,13 +41,13 @@ Mostrar textos comerciales:
 | Sin stock | `No disponible` |
 | Stock viejo | `Consultar disponibilidad` |
 
-## 4. Cotización
+## 4. Cotizacion
 
-Toda cotización debe mostrar:
+Toda cotizacion debe mostrar:
 
 ```txt
-Precio válido por X horas.
-Disponibilidad sujeta a confirmación al momento de compra.
+Precio valido por X horas.
+Disponibilidad sujeta a confirmacion al momento de compra.
 ```
 
 ## 5. Productos de proyecto

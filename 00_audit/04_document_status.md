@@ -12,9 +12,9 @@
 | `02_projects/tecnotelec` | COMPLETO_BASE | Proyecto Tecno Telec separado del nucleo, con agente de desarrollo. |
 | `02_projects/_ecosystem` | COMPLETO_BASE | Mapa del portafolio empresarial y estrategia gradual. |
 | `02_projects/tecnotelec/business` | COMPLETO_BASE | Identidad y negocio. |
-| `02_projects/tecnotelec/frontend` | COMPLETO_BASE | Web, rutas, sistema visual propuesto e interfaz documentada desde PDF. |
+| `02_projects/tecnotelec/frontend` | COMPLETO_BASE | Web, rutas, sistema visual, analisis previo, estructura funcional y blueprint inicial. |
 | `02_projects/tecnotelec/tasks` | COMPLETO_BASE | Tareas, APIs, tablas y orden de desarrollo. |
 | `02_projects/tecnotelec/decisions` | COMPLETO_BASE | ADRs del proyecto. |
-| `03_standards` | COMPLETO_BASE | Operacion, seguridad, testing y Docker. |
+| `03_standards` | COMPLETO_BASE | Frontend, operacion, seguridad, testing y Docker. |
 | `04_integrations/syscom` | COMPLETO_BASE | Referencias API y ETL Syscom. |
 | `_archive` | LIMPIO | Solo conserva fuente visual util de Tecno Telec. |

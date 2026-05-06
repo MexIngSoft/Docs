@@ -63,3 +63,9 @@
 ## Criterio
 
 Los proyectos independientes pueden vivir fuera del ERP, pero deben documentarse aqui si comparten usuarios, pagos, clientes, analitica o infraestructura.
+
+Antes de desarrollar un proceso compartido o que toque mas de una empresa, revisar:
+
+```text
+04_process_convergence_and_conflicts.md
+```
