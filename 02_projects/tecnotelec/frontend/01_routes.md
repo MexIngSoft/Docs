@@ -5,6 +5,8 @@
 | `/` | Inicio | Presentar Tecno Telec y soluciones. | Gateway | PROPUESTA |
 | `/soluciones` | Soluciones | Listar servicios/soluciones. | Gateway | PROPUESTA |
 | `/soluciones/[slug]` | Detalle solucion | Explicar solucion y CTA de cotizacion. | Gateway | PROPUESTA |
+| `/catalogo` | Catalogo consultivo | Mostrar productos publicables como apoyo a soluciones. | Gateway/Catalog/Pricing | PROPUESTA |
+| `/catalogo/[slug]` | Detalle producto | Mostrar ficha tecnica, precio disponible y cotizacion. | Gateway/Catalog/Pricing | PROPUESTA |
 | `/cotizador` | Cotizador | Elegir tipo de solucion. | Gateway/Projects | PROPUESTA |
 | `/cotizador/[solution]` | Formulario solucion | Capturar necesidades. | Gateway/Projects/Rules | PROPUESTA |
 | `/carrito` | Carrito | Intencion de compra web. | Gateway/Cart | PROPUESTA |

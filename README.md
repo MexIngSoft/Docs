@@ -122,12 +122,13 @@ Proveedor actual:
 15. `02_projects/tecnotelec/frontend/10_pre_development_analysis.md`
 16. `02_projects/tecnotelec/frontend/11_web_platform_structure.md`
 17. `02_projects/tecnotelec/frontend/12_initial_web_blueprint.md`
-18. `03_standards/frontend/nextjs-project-standard.md`
-19. `03_standards/frontend/shared-docker-frontend-architecture.md`
-20. `02_projects/tecnotelec/tasks/04_development_order.md`
-21. `02_projects/_ecosystem/00_ecosystem_overview.md`
-22. `02_projects/_ecosystem/01_company_portfolio.md`
-23. `02_projects/_ecosystem/04_process_convergence_and_conflicts.md`
+18. `02_projects/tecnotelec/frontend/13_visual_mockup_spec.md`
+19. `03_standards/frontend/nextjs-project-standard.md`
+20. `03_standards/frontend/shared-docker-frontend-architecture.md`
+21. `02_projects/tecnotelec/tasks/04_development_order.md`
+22. `02_projects/_ecosystem/00_ecosystem_overview.md`
+23. `02_projects/_ecosystem/01_company_portfolio.md`
+24. `02_projects/_ecosystem/04_process_convergence_and_conflicts.md`
 
 ## Reglas
 

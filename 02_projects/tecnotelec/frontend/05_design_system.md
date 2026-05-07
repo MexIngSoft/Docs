@@ -20,7 +20,9 @@ Estado: PROPUESTA segun AGENTS.
 
 ## Tipografia
 
-Fuente final: `PENDIENTE_DE_DEFINIR`.
+Fuente recomendada para maqueta: `Inter` o `Roboto`.
+
+Fuente final de marca: `PENDIENTE_DE_DEFINIR`.
 
 Usar escala legible para web empresarial.
 
@@ -32,6 +34,10 @@ Usar escala legible para web empresarial.
 - Formularios claros para cotizador.
 - Tablas compactas para admin.
 - Estados visuales para cotizacion, orden, envio y pago.
+
+## Especificacion ampliada
+
+Ver `13_visual_mockup_spec.md` para reglas de catalogo, tarjetas de producto, detalle, carrusel, estados, formularios, banners y responsive.
 
 ## Direccion desde PDF
 

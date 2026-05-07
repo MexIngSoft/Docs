@@ -21,6 +21,7 @@ Docker.WEB.NJ/
   Dockerfile
   WEB.NJ.NEXT.JobCron/
   WEB.NJ.NEXT.TecnoTelec/
+  WEB.NJ.NEXT.LexNova/
   WEB.NJ.NEXT.PhoneShop/
 ```
 
@@ -32,11 +33,14 @@ Regla:
 
 | Proyecto | Puerto sugerido | Contenedor sugerido |
 |---|---:|---|
-| `WEB.NJ.NEXT.JobCron` | `3000` | `web-jobcron-node` |
-| `WEB.NJ.NEXT.TecnoTelec` | `3001` | `web-tecnotelec-node` |
-| `WEB.NJ.NEXT.PhoneShop` | `3002` | `web-phoneshop-node` |
+| `WEB.NJ.NEXT.JobCron` | `3000` | `web-frontend-node` |
+| `WEB.NJ.NEXT.TecnoTelec` | `3001` | `web-frontend-node` |
+| `WEB.NJ.NEXT.LexNova` | `3002` | `web-frontend-node` |
+| `WEB.NJ.NEXT.PhoneShop` | `3003` | `web-frontend-node` |
 
 El puerto se asigna por proyecto y no debe cambiar sin documentarlo en `Docker.WEB.NJ/README.md` y Nginx.
+
+Por costo inicial, varios frontends pueden correr como procesos separados dentro de un solo contenedor `web-frontend-node`. La separacion por contenedor se reserva para cuando un proyecto crezca en consumo, ciclo de despliegue o criticidad.
 
 ## Red
 
@@ -63,6 +67,16 @@ Estrategias validas:
 | Puerto directo | Diagnostico local, no flujo principal. |
 
 Para proyectos comerciales se prefiere hostname local porque evita mezclar rutas internas de Next.js.
+
+En el entorno actual:
+
+| Host | Proyecto |
+|---|---|
+| `http://localhost` | `WEB.NJ.NEXT.JobCron` |
+| `http://tecnotelec.localhost` | `WEB.NJ.NEXT.TecnoTelec` |
+| `http://lexnova.localhost` | `WEB.NJ.NEXT.LexNova` |
+
+Si el sistema operativo no resuelve subdominios `.localhost`, el puerto directo del proyecto sigue siendo valido para desarrollo local.
 
 ## Variables de entorno
 

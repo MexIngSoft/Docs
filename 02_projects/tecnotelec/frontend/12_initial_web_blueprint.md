@@ -88,6 +88,10 @@ Debe estar protegido por rol.
 | `DashboardShell` | Layout privado. |
 | `AdminSidebar` | Navegacion interna. |
 
+## Documento visual detallado
+
+La maqueta inicial completa, incluyendo catalogo, producto, marcas, precios, imagenes, carrusel, formularios, banners y estados, queda documentada en `13_visual_mockup_spec.md`.
+
 ## Estados visuales
 
 Todo flujo debe contemplar:

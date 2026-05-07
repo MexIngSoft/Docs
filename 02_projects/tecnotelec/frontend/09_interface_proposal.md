@@ -5,10 +5,12 @@
 Se reviso el PDF archivado de interfaz web y se extrajeron 9 imagenes de referencia en:
 
 ```text
-docs/_archive/source_notes/tecnotelec-ui/
+Docs/tecnotelec-ui/
 ```
 
 El boceto confirma una web comercial enfocada en soluciones integradas, proyectos, diagnostico y contacto directo.
+
+La maqueta visual consolidada queda en `13_visual_mockup_spec.md`.
 
 ## Direccion visual confirmada
 
@@ -204,4 +206,3 @@ Licitacion
 ## Regla final
 
 La interfaz de Tecno Telec debe sentirse como consultora tecnologica, no como tienda de productos. El carrito puede existir, pero el camino principal debe ser diagnostico, asesoria y cotizacion.
-

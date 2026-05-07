@@ -5,6 +5,8 @@
 | Inicio | `/` | ALTA | FALTA |
 | Soluciones | `/soluciones` | ALTA | FALTA |
 | Detalle solucion | `/soluciones/[slug]` | ALTA | FALTA |
+| Catalogo consultivo | `/catalogo` | MEDIA | FALTA |
+| Detalle producto | `/catalogo/[slug]` | MEDIA | FALTA |
 | Cotizador | `/cotizador` | ALTA | FALTA |
 | Cotizador por solucion | `/cotizador/[solution]` | ALTA | FALTA |
 | Carrito | `/carrito` | MEDIA | FALTA |

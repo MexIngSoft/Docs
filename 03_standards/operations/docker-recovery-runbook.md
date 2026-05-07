@@ -8,7 +8,7 @@ Este documento permite reconstruir el entorno Docker local `crejo` si se pierde 
 | --- | --- | --- | --- | --- |
 | `Docker.DB.PG` | PostgreSQL | `db-postgresql` | `127.0.0.1:5432` | `crejo` |
 | `Docker.API.PY` | APIs Django | `api-backend-python` | `8000-8007` | `crejo` |
-| `Docker.WEB.NJ` | Next.js | `web-frontend-node` | `3000` | `crejo` |
+| `Docker.WEB.NJ` | Next.js frontends | `web-frontend-node` | `3000-3002` | `crejo` |
 | `Docker.SW.Nginx` | Proxy Nginx | `nginx` | `80` | `crejo` |
 
 ## Orden recomendado de arranque
@@ -111,8 +111,10 @@ Ese comando no debe dejar un segundo contenedor PostgreSQL permanente.
 
 | Ruta publica | Destino |
 | --- | --- |
-| `/` | `web-frontend-node:3000` |
-| `/api/mock/` | `web-frontend-node:3000` |
+| `http://localhost/` | `web-frontend-node:3000` |
+| `http://localhost/api/mock/` | `web-frontend-node:3000` |
+| `http://tecnotelec.localhost/` | `web-frontend-node:3001` |
+| `http://lexnova.localhost/` | `web-frontend-node:3002` |
 | `/api` | `api-backend-python:8000` |
 | `/static/` | `/app/web/static/` dentro de Nginx |
 

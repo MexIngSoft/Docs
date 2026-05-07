@@ -1,8 +1,8 @@
-# Tamaños de imagen
+# Tamanos de imagen
 
-Todos los tamaños son PROPUESTA hasta validacion visual final.
+Todos los tamanos son PROPUESTA hasta validacion visual final.
 
-| Uso | Tamaño recomendado | Estado |
+| Uso | Tamano recomendado | Estado |
 |---|---|---|
 | Hero desktop | 1920x720 | PROPUESTA |
 | Hero mobile | 1080x1350 | PROPUESTA |
@@ -13,3 +13,9 @@ Todos los tamaños son PROPUESTA hasta validacion visual final.
 | Logo | SVG o 512x512 | PROPUESTA |
 | Iconos | 24x24 / 32x32 | PROPUESTA |
 | Blog/contenido | 1200x630 | PROPUESTA |
+
+## Reglas
+
+- Ver `13_visual_mockup_spec.md` para estandares de producto, categoria, marca, banner, miniatura y carrusel.
+- Las imagenes de producto deben mantener fondo blanco o gris claro.
+- Los logos de marca deben conservar proporcion y no deformarse.
