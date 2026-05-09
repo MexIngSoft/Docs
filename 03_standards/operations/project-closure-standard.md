@@ -170,6 +170,7 @@ En especial deben revisarse:
 - Migraciones aplicadas.
 - Campos auditables definidos cuando aplique.
 - Indices y restricciones necesarias agregadas.
+- DDL documental publicado con nombres PascalCase estilo SQL Server cuando el proyecto pase a `ready_for_review` o `closed`.
 
 ### 3. API
 
@@ -235,6 +236,7 @@ Antes de marcar un proyecto como `closed`, validar:
 - [ ] Permisos revisados.
 - [ ] Variables de entorno documentadas.
 - [ ] Schema de base de datos documentado con `DB_SCHEMA` si aplica.
+- [ ] Tablas y campos publicados documentados con nombres PascalCase estilo SQL Server.
 - [ ] `.env.local.example` versionado.
 - [ ] `.env.local` fuera de Git.
 - [ ] `.gitignore` revisado contra el bloque minimo del estandar.

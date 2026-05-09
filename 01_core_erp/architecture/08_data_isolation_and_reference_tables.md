@@ -18,7 +18,9 @@ La separacion puede ocurrir por:
 
 ## Estrategia inicial
 
-Mientras el sistema crece, es valido compartir PostgreSQL usando schemas por dominio.
+Mientras el sistema crece, es valido compartir una base local usando dominios separados.
+
+Cuando una tabla se publique como contrato documental, sus tablas y campos deben expresarse con nombres PascalCase estilo SQL Server.
 
 La condicion es mantener fronteras logicas claras:
 
@@ -51,28 +53,17 @@ Cuando una API se mueva a base propia:
 | Projects | `projects-api` | API de proyecto/cotizador. |
 | Tecno Telec | `tecnotelec-api` | Gateway/BFF y contratos core. |
 
-## Tablas referenciadas en PostgreSQL
+## Tablas referenciadas entre bases
 
-PostgreSQL permite consultar tablas remotas usando extensiones como `postgres_fdw`.
+Las tablas referenciadas entre bases son herramienta de lectura o transicion, no la integracion principal entre dominios.
 
-Esto puede verse como una "tabla referenciada": una base puede consultar una tabla que vive en otra base como si fuera local.
+En SQL Server, una referencia de lectura puede documentarse conceptualmente como linked server, synonym o vista controlada, pero los flujos de negocio deben preferir APIs, eventos, jobs o snapshots.
 
 Ejemplo conceptual:
 
 ```sql
-CREATE EXTENSION IF NOT EXISTS postgres_fdw;
-CREATE SERVER catalog_server
-  FOREIGN DATA WRAPPER postgres_fdw
-  OPTIONS (host 'catalog-db', dbname 'catalog');
-
-CREATE USER MAPPING FOR app_user
-  SERVER catalog_server
-  OPTIONS (user 'catalog_readonly', password 'secret');
-
-IMPORT FOREIGN SCHEMA public
-  LIMIT TO (product, category, brand)
-  FROM SERVER catalog_server
-  INTO catalog_ref;
+CREATE SYNONYM [CatalogRef].[Product]
+FOR [CatalogServer].[CatalogDb].[Catalog].[Product];
 ```
 
 ## Uso permitido de tablas referenciadas
@@ -100,11 +91,12 @@ Evitar tablas referenciadas para:
 
 Para este ERP, la ruta recomendada es:
 
-1. Schemas por dominio en PostgreSQL mientras el sistema es local/modular.
+1. Dominios separados mientras el sistema es local/modular.
 2. Contratos API documentados desde el inicio.
 3. Snapshots en Sales/Quote para precios, impuestos y productos.
 4. Eventos o jobs para sincronizacion futura.
-5. `postgres_fdw` solo como herramienta de lectura o transicion, no como base principal de integracion.
+5. Tablas referenciadas solo como herramienta de lectura o transicion, no como base principal de integracion.
+6. Tablas y campos publicados documentados con nombres PascalCase estilo SQL Server.
 
 ## Decision operativa
 

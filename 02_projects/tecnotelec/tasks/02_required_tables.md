@@ -1,5 +1,13 @@
 # Tablas requeridas
 
+## Regla de publicacion
+
+Cuando estas tablas pasen de requeridas a publicadas, deben documentarse con nombres PascalCase estilo SQL Server segun:
+
+```txt
+Docs/03_standards/database/sql-server-publication-standard.md
+```
+
 | Tabla | Modulo | Existe | Motivo | Prioridad |
 |---|---|---|---|---|
 | Product | Catalog | PENDIENTE_DE_CONFIRMAR | Producto interno. | ALTA |

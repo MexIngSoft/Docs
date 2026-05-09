@@ -7,6 +7,21 @@ El entorno local usa varios compose separados bajo el proyecto Docker `crejo`:
 - `Docker.WEB.NJ`: frontend Next.js.
 - `Docker.SW.Nginx`: proxy local de entrada.
 
+Por estrategia de costos, las APIs y webs pueden agruparse en contenedores multiproyecto. Esa agrupacion no permite compartir configuracion de proyecto. La regla oficial es:
+
+```txt
+contenedores agrupados
+configuracion aislada por proyecto
+secretos separados
+bases/usuarios/schemas separados por dominio
+```
+
+Estandar completo:
+
+```txt
+Docs/03_standards/docker/grouped-containers-isolated-config.md
+```
+
 Runbook completo de recuperacion:
 
 ```txt

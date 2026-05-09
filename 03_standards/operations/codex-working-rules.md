@@ -21,6 +21,7 @@ Las instrucciones amplias deben vivir en documentos especificos dentro de `Docs`
 | Flujo Git, ramas, commits y validacion | `03_standards/operations/git-environments-and-release-flow.md` |
 | Cierre y estructura de APIs Django | `03_standards/operations/project-closure-standard.md` |
 | Separacion futura de APIs y bases | `01_core_erp/architecture/08_data_isolation_and_reference_tables.md` |
+| Tablas publicadas con nombres PascalCase estilo SQL Server | `03_standards/database/sql-server-publication-standard.md` |
 | Patron Gateway/API propia por proyecto | `01_core_erp/architecture/07_project_api_pattern.md` |
 | Plan operativo Tecno Telec | `02_projects/tecnotelec/AGENTE.md` |
 | Runbook operativo | `03_standards/operations/runbook.md` |
@@ -76,7 +77,9 @@ Si una API debe separarse por carga, seguridad o crecimiento, debe poder moverse
 - Contratos de comunicacion explicitos.
 - Integracion con otras APIs sin depender de tablas internas ajenas.
 
-Tambien debe evaluarse el uso de tablas referenciadas entre bases de datos PostgreSQL, por ejemplo con `postgres_fdw`, cuando sea util para lectura controlada de datos maestros.
+Tambien debe evaluarse el uso de tablas referenciadas entre bases, cuando sea util para lectura controlada de datos maestros.
+
+Toda tabla que se publique como contrato documental debe usar nombres PascalCase estilo SQL Server.
 
 Documento canonico:
 

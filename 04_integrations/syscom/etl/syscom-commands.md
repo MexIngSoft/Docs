@@ -36,7 +36,7 @@ docker compose exec api-multiproyecto sh /usr/src/api/start.sh manage supplier s
 10. publish_syscom_related
 ```
 
-`sync_syscom_all` ejecuta el flujo principal en ese orden. Debe tratarse como un comando de bootstrap, recuperacion o mantenimiento completo, no como cron diario.
+`sync_syscom_all` ejecuta el flujo principal en ese orden. En Docker se usa como bootstrap, recuperacion o mantenimiento completo mediante el worker documentado en `docker-worker.md`.
 
 `sync_syscom_stock` y `sync_syscom_prices` existen para refrescos parciales de productos ya descargados; no sustituyen el primer `sync_syscom_products`, porque el producto es la base para relacionar stock y precios.
 
@@ -48,17 +48,17 @@ docker compose exec api-multiproyecto sh /usr/src/api/start.sh manage supplier s
 
 ## Politica de ejecucion
 
-La frecuencia oficial vive en `docs/03_standards/operations/scheduling.md`. Resumen operativo:
+La frecuencia oficial para SYSCOM queda en `docker-worker.md` y reemplaza recomendaciones anteriores menos frecuentes para operacion ecommerce.
 
 | Grupo | Frecuencia | Comandos |
 |---|---:|---|
-| Bootstrap | Manual | `sync_syscom_all` |
-| Catalogos lentos | Mensual | `sync_syscom_categories`, `publish_syscom_categories`, `sync_syscom_brands`, `publish_syscom_brands` |
-| Productos metadata | Semanal o quincenal | `sync_syscom_products`, `publish_syscom_products` |
-| Relacionados/accesorios | Semanal o mensual | `sync_syscom_related`, `publish_syscom_related` |
-| Stock | Cada 1-2 horas | `sync_syscom_stock` |
-| Precios proveedor | Cada 2-4 horas | `sync_syscom_prices`, `publish_syscom_prices` |
-| Refresh rapido | Cada 2-4 horas | `sync_syscom_fast` |
+| Bootstrap | Automatico si no hay full exitoso | `sync_syscom_all` |
+| Catalogos lentos | Diario dentro de full sync | `sync_syscom_categories`, `publish_syscom_categories`, `sync_syscom_brands`, `publish_syscom_brands` |
+| Productos metadata | Diario dentro de full sync | `sync_syscom_products`, `publish_syscom_products` |
+| Relacionados/accesorios | Diario dentro de full sync | `sync_syscom_related`, `publish_syscom_related` |
+| Stock | Cada 15 minutos via refresh rapido | `sync_syscom_fast` o `sync_syscom_stock` manual |
+| Precios proveedor | Cada 15 minutos via refresh rapido | `sync_syscom_fast` o `sync_syscom_prices` manual |
+| Refresh rapido | Cada 15 minutos | `sync_syscom_fast` |
 | Tipo de cambio | Diario o 2 veces al dia | Pendiente `sync_syscom_exchange_rate` |
 
 ## Flujo diario recomendado
@@ -68,6 +68,8 @@ Para operacion normal no correr todo. Ejecutar solo datos volatiles:
 ```bash
 docker compose exec api-multiproyecto sh /usr/src/api/start.sh manage supplier sync_syscom_fast
 ```
+
+En Docker local, el mismo flujo corre automatico si `ENABLE_SYSCOM_ETL_WORKER=true`.
 
 Para prueba limitada:
 

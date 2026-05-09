@@ -66,3 +66,28 @@ La cotizacion o venta debe guardar el tipo de cambio usado para no depender de r
 El precio usado en cotizacion o venta debe congelarse como snapshot en `Quote` o `Sales`.
 
 Pricing puede recalcular precios vigentes, pero no debe modificar precios historicos ya aceptados por cliente.
+
+## Campos minimos para respuesta MVP
+
+- `productId`.
+- `baseCost`.
+- `publicPrice`.
+- `ruleApplied`.
+- `currency`.
+- `validFrom`.
+- `validTo`.
+- `isDemo`.
+- `calculationSnapshot`.
+
+## Reglas iniciales requeridas
+
+| Regla | Entidad sugerida |
+|---|---|
+| Precio fijo manual | `PriceRule` |
+| Costo proveedor + porcentaje | `PriceRule` |
+| Costo proveedor + monto fijo | `PriceRule` |
+| Redondeo comercial | `PriceRoundingRule` |
+| Precio demo | `ProductPrice` / `PriceRule` |
+| Precio por vigencia | `ProductPrice` |
+| Precio por lista | `PriceList` |
+| Precio interno oculto | `PriceList` + permisos |

@@ -55,6 +55,8 @@ flowchart TD
 
 `sync_syscom_all` orquesta el flujo principal. Los comandos individuales existen para actualizar solo una parte, por ejemplo precios, stock, categorias o productos.
 
+La ejecucion automatica en Docker esta documentada en `docker-worker.md`. Ese worker usa `sync_syscom_all` para bootstrap/mantenimiento completo y `sync_syscom_fast` para mantener stock y precios durante el dia.
+
 ## Entidades afectadas
 
 | Proceso | `sync_*` escribe en | `publish_*` escribe en |

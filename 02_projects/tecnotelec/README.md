@@ -10,8 +10,14 @@ Tecno Telec es una plataforma empresarial de soluciones tecnologicas, telecomuni
 
 | Carpeta | Contenido |
 |---|---|
+| `auth` | Proceso documental de usuarios y roles del proyecto. |
+| `backend` | Contratos del Gateway/BFF para Web Tecno Telec. |
 | `business` | Identidad, objetivos, FODA, servicios y propuesta de valor. |
+| `cart` | Proceso futuro de carrito, pedido y compra. |
+| `catalog` | Procesos de catalogo publico y detalle de producto. |
 | `frontend` | Rutas, layout, componentes, sistema visual, flujos web y preparacion de desarrollo. |
+| `pricing` | Publicacion de precios y pricing avanzado futuro. |
+| `quotes` | Proceso de cotizacion. |
 | `tasks` | Tareas, APIs requeridas, tablas faltantes y orden de desarrollo. |
 | `decisions` | ADRs especificos de Tecno Telec. |
 | `AGENTE.md` | Guia operativa de desarrollo segun instrucciones de `Docs/AGENTS.md`. |
@@ -28,9 +34,17 @@ Plan inicial de precios:
 tasks/06_pricing_first_plan.md
 ```
 
+Checklist previo a programar:
+
+```txt
+tasks/07_pre_development_checklist.md
+```
+
 ## Regla
 
 Tecno Telec no debe documentarse como marketplace generico. El foco es vender soluciones y proyectos, no solo productos.
+
+Las tablas y campos publicados de Tecno Telec deben documentarse con nombres PascalCase estilo SQL Server.
 
 ## Interfaz
 
@@ -42,4 +56,14 @@ Preparacion antes de desarrollo:
 frontend/10_pre_development_analysis.md
 frontend/11_web_platform_structure.md
 frontend/12_initial_web_blueprint.md
+```
+
+Arquitectura corregida:
+
+```txt
+../../01_core_erp/architecture/09_tecnotelec_gateway_corrected_pattern.md
+backend/00_gateway_product_endpoints.md
+catalog/00_public_catalog_process.md
+catalog/01_product_detail_process.md
+quotes/00_quote_process.md
 ```

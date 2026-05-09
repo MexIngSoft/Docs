@@ -135,3 +135,13 @@ Ejemplos:
 - Docs.
 
 No mezclar cambios no relacionados en el mismo commit si se pueden separar de forma clara.
+
+## Mapa de repositorios separados
+
+`Workspace.Comercial` es una carpeta local de trabajo, no un repositorio unico.
+
+El inventario vigente de repositorios Git separados, su orden recomendado de publicacion y las reglas para subir cada proyecto estan definidos en:
+
+```text
+03_standards/operations/git-repository-map.md
+```

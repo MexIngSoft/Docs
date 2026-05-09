@@ -85,6 +85,7 @@ Va en `03_standards` todo lo que define como se trabaja:
 - Seguridad.
 - Testing.
 - Docker local.
+- Publicacion de tablas y campos con nombres PascalCase estilo SQL Server.
 
 ## Que pertenece a integraciones
 
@@ -117,6 +118,7 @@ Proveedor actual:
 10. `01_core_erp/erp/09_system_states.md`
 11. `01_core_erp/flows/01_customer_quote_flow.md`
 12. `02_projects/tecnotelec/business/00_tecnotelec_identity.md`
+13. `03_standards/operations/git-repository-map.md`
 13. `02_projects/tecnotelec/frontend/00_frontend_overview.md`
 14. `02_projects/tecnotelec/frontend/09_interface_proposal.md`
 15. `02_projects/tecnotelec/frontend/10_pre_development_analysis.md`
@@ -125,10 +127,12 @@ Proveedor actual:
 18. `02_projects/tecnotelec/frontend/13_visual_mockup_spec.md`
 19. `03_standards/frontend/nextjs-project-standard.md`
 20. `03_standards/frontend/shared-docker-frontend-architecture.md`
-21. `02_projects/tecnotelec/tasks/04_development_order.md`
-22. `02_projects/_ecosystem/00_ecosystem_overview.md`
-23. `02_projects/_ecosystem/01_company_portfolio.md`
-24. `02_projects/_ecosystem/04_process_convergence_and_conflicts.md`
+21. `03_standards/database/sql-server-publication-standard.md`
+22. `00_audit/09_api_routes_inventory.md`
+23. `02_projects/tecnotelec/tasks/04_development_order.md`
+24. `02_projects/_ecosystem/00_ecosystem_overview.md`
+25. `02_projects/_ecosystem/01_company_portfolio.md`
+26. `02_projects/_ecosystem/04_process_convergence_and_conflicts.md`
 
 ## Reglas
 
@@ -137,5 +141,6 @@ Proveedor actual:
 - No mezclar proveedor externo con modelo interno del ERP.
 - No borrar documentos fuente; mover a `_archive`.
 - Usar `PENDIENTE_DE_DEFINIR` cuando falte informacion real.
+- Documentar tablas y campos publicados con nombres PascalCase estilo SQL Server.
 - Registrar decisiones en `02_projects/<proyecto>/decisions` si son del proyecto.
 - Registrar decisiones de nucleo en `01_core_erp/architecture` o en un ADR futuro del nucleo.

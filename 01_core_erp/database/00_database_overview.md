@@ -6,9 +6,17 @@ Documentar entidades, schemas y tablas reutilizables del nucleo ERP.
 
 ## Base actual
 
-El entorno usa PostgreSQL con separacion por schemas de dominio cuando aplica.
+El entorno local actual usa la base disponible por Docker/Django para desarrollo.
 
-Base exacta y ambientes: `PENDIENTE_DE_DEFINIR`.
+Regla de publicacion: toda tabla publicable debe documentarse con nombres PascalCase estilo SQL Server.
+
+Documento canonico:
+
+```txt
+Docs/03_standards/database/sql-server-publication-standard.md
+```
+
+Base exacta por ambiente productivo: `PENDIENTE_DE_DEFINIR`.
 
 ## Schemas principales
 
@@ -48,3 +56,4 @@ Base exacta y ambientes: `PENDIENTE_DE_DEFINIR`.
 - `14_documents_model.md`
 - `15_channel_assortment_model.md`
 - `16_product_compatibility_model.md`
+- `17_sql_server_table_publication.md`

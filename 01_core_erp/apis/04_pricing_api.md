@@ -11,6 +11,7 @@ Cuando el costo proveedor venga en USD o dependa de tipo de cambio, Pricing debe
 ## Endpoints minimos
 
 - `POST /pricing/calculate`
+- `GET /pricing/product/{productId}`
 - `GET /price-lists`
 - `POST /price-lists`
 - `POST /price-lists/{id}/assignments`
@@ -57,3 +58,24 @@ docs/01_core_erp/erp/22_pricing_costing_future_map.md
 ```txt
 docs/02_projects/tecnotelec/tasks/06_pricing_first_plan.md
 ```
+
+## Response minimo de `GET /pricing/product/{productId}`
+
+```json
+{
+  "productId": "uuid",
+  "baseCost": "750.00",
+  "publicPrice": "899.00",
+  "ruleApplied": "FIXED_PRICE",
+  "currency": "MXN",
+  "validFrom": "2026-05-01",
+  "validTo": "2026-06-30",
+  "isDemo": false,
+  "calculationSnapshot": {
+    "source": "supplier-api",
+    "priceList": "PUBLIC"
+  }
+}
+```
+
+Costos, margen y precio interno solo se devuelven a usuarios autorizados.
