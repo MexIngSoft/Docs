@@ -199,9 +199,11 @@ Estados de CTA:
 
 | Tipo producto | CTA principal |
 |---|---|
-| `SELLABLE` | `Agregar a cotizacion` |
+| `SELLABLE` | `Solicitar producto` |
 | `QUOTE_ONLY` | `Cotizar con asesor` |
 | `COMPONENT_ONLY` | `Ver solucion compatible` |
+
+Las etiquetas tecnicas no se muestran al usuario final. La etiqueta visible para `SELLABLE` es `Disponible para compra o cotizacion`, sin prometer checkout automatico hasta que carrito, checkout, inventario y venta esten operativos.
 
 La tarjeta no debe parecer una tienda generica con descuento agresivo. Priorizar utilidad tecnica, compatibilidad y asesoria.
 

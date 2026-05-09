@@ -29,6 +29,8 @@ Los commits y pushes se hacen por repositorio y por responsabilidad. No se debe 
 | Docker PostgreSQL | `Docker.DB.PG` | `https://github.com/MexIngSoft/Docker.DB.PG.git` | Separado |
 | Docker Nginx | `Docker.SW.Nginx` | `https://github.com/1CASH1/Docker.SW.Nginx` | Separado |
 | Docker Web | `Docker.WEB.NJ` | `https://github.com/1CASH1/Docker.WEB.NJ.git` | Separado, requiere validar propiedad local |
+| Web JobCron | `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron` | `https://github.com/1CASH1/WEB.NJ.NEXT.JobCron.git` | Separado |
+| Web TecnoTelec | `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.TecnoTelec.git` | Separado |
 | Documentacion | `Docs` | `https://github.com/MexIngSoft/Docs.git` | Separado |
 
 ## Webs dentro de Docker.WEB.NJ
@@ -37,11 +39,11 @@ Se detectaron estas carpetas web:
 
 | Proyecto web | Ruta local | Estado Git detectado |
 |---|---|---|
-| JobCron | `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron` | Sin `.git` propio detectado |
-| LexNova | `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | Sin `.git` propio detectado |
-| TecnoTelec | `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec` | Sin `.git` propio detectado |
+| JobCron | `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron` | Repo propio detectado: `https://github.com/1CASH1/WEB.NJ.NEXT.JobCron.git` |
+| LexNova | `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | Sin repo Git propio detectado |
+| TecnoTelec | `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec` | Repo propio detectado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.TecnoTelec.git` |
 
-Si estas webs deben publicarse como repositorios independientes, antes de subirlas se debe restaurar o crear su `.git` propio y asignar su remoto. Mientras no exista `.git` por web, los cambios frontend se publican desde `Docker.WEB.NJ`.
+Si una web no tiene repo Git propio, antes de subirla como proyecto separado se debe restaurar o crear su `.git` propio y asignar su remoto. Mientras no exista `.git` por web, sus cambios viven dentro del repo contenedor que la incluya.
 
 ## Orden recomendado de subida
 
@@ -52,6 +54,8 @@ Si estas webs deben publicarse como repositorios independientes, antes de subirl
 5. `Docker.API.PY`: compose, Dockerfile, `start.sh`, workers y variables por proyecto.
 6. `Docker.WEB.NJ`: frontend compartido o webs contenidas en ese repo.
 7. `Docker.SW.Nginx`: rutas de publicacion cuando existan cambios.
+
+Para cambios de una web con repo propio, subir primero el repo de la web y despues, solo si cambio el orquestador, subir `Docker.WEB.NJ`.
 
 Este orden evita publicar infraestructura que dependa de contratos todavia no versionados.
 
@@ -69,6 +73,8 @@ Ejemplos:
 | `API.PY.DJANGO.Supplier` | `Add Syscom catalog sync endpoints` |
 | `API.PY.DJANGO.TecnoTelec.Gateway` | `Expose product catalog through gateway` |
 | `Docker.WEB.NJ` | `Update TecnoTelec catalog mockup` |
+| `WEB.NJ.NEXT.TecnoTelec` | `Improve public user experience` |
+| `WEB.NJ.NEXT.JobCron` | `Update JobCron dashboard experience` |
 
 ## Reglas de seguridad
 
@@ -99,5 +105,6 @@ git config --global --add safe.directory C:/Users/cash1/source/repos/Workspace.C
 ## Pendientes
 
 - Confirmar si `WEB.NJ.NEXT.JobCron`, `WEB.NJ.NEXT.LexNova` y `WEB.NJ.NEXT.TecnoTelec` deben convertirse en repos Git separados.
+- Crear o restaurar repo Git propio para `WEB.NJ.NEXT.LexNova` si debe publicarse separado.
 - Instalar o habilitar GitHub CLI (`gh`) si se quiere crear pull requests desde terminal.
 - Confirmar si los pushes se haran directo a `main` o mediante ramas `feature/*`.

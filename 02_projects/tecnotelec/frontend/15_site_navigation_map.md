@@ -55,6 +55,7 @@ Documentar la navegacion completa de Tecno Telec aunque algunas paginas sigan co
 
 ```txt
 Inicio
+  -> Elegir camino
   -> Soluciones
   -> Detalle solucion
   -> Cotizador
@@ -65,11 +66,23 @@ Flujo alterno:
 
 ```txt
 Inicio
-  -> Catalogo
+  -> Elegir camino
+  -> Productos / Catalogo
   -> Detalle producto
   -> Agregar a cotizacion
   -> Cotizador
 ```
+
+## Decision inicial del usuario
+
+La home debe permitir decidir sin ambiguedad:
+
+| Intencion del usuario | Ruta recomendada | CTA visible |
+|---|---|---|
+| Quiere resolver una necesidad completa. | `/soluciones` o `/cotizador` | `Necesito una solucion` / `Comienza tu diagnostico` |
+| Quiere revisar o comprar productos directamente. | `/catalogo` | `Ver productos` |
+
+La etiqueta visible en navegacion puede ser `Productos` aunque la ruta siga siendo `/catalogo`, porque `Productos` es mas clara para cliente final.
 
 ## Flujo cliente autenticado
 
@@ -148,9 +161,33 @@ Tecno Telec no administra datos maestros directamente. Los datos maestros viven 
 
 No hay contradiccion critica. La estructura minima de los agentes incluye blog y nosotros, pero la documentacion vigente prioriza soluciones, catalogo, cotizacion, contacto, portal y admin. Blog y nosotros quedan fuera del MVP hasta que se documenten como estrategia comercial.
 
+## Correccion de presentacion
+
+La web no debe presentarse como una lista de endpoints o APIs. Los endpoints documentados son contratos tecnicos para desarrollo; la experiencia visible debe ser buscador, filtros, soluciones, productos, precios, disponibilidad, imagenes y cotizacion.
+
+Detalle vigente:
+
+```text
+02_projects/tecnotelec/frontend/16_catalog_user_experience_correction.md
+```
+
+Revision de navegacion para usuario final:
+
+```text
+02_projects/tecnotelec/frontend/17_user_navigation_experience_review.md
+```
+
 ## Pendientes
 
 - Definir subrutas reales de portal cliente.
 - Definir permisos de admin desde Auth/JobCron.
 - Definir si carrito sera carrito de compra o carrito de cotizacion.
 - Crear contrato de busqueda global desde Gateway.
+
+## Cierre etapa 1
+
+La evaluacion de experiencia publica inicial se documenta en:
+
+```text
+02_projects/tecnotelec/frontend/18_stage_one_user_experience_closure.md
+```
