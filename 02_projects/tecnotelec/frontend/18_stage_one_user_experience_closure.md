@@ -22,6 +22,12 @@ La etapa 1 busca que un visitante pueda entender rapidamente que ofrece Tecno Te
 | Navegacion publica | Implementado | Header usa lenguaje de usuario: soluciones, productos, diagnostico, contacto. |
 | Menu mobile | Implementado | Drawer simple con rutas y acciones principales. |
 | Catalogo consultivo | Implementado | Buscador, filtros por categoria, marca, uso y rango de precio. |
+| Catalogo dinamico | Implementado | El listado publico consume Gateway y no usa productos estaticos como fuente de verdad. |
+| Filtros multiples | Implementado | Categorias y marcas soportan seleccion multiple. |
+| Paginacion | Implementado | Usa `page`, `pageSize` y `total` del Gateway. |
+| Navbar dinamica | Implementado | Puede incluir categorias reales desde Gateway y cae a navegacion base si no hay datos. |
+| Contenido dinamico sin datos falsos | Implementado | Se quitaron arreglos locales de productos, soluciones publicadas, proyectos, portal y admin. |
+| Checklist manual | Implementado | Rutas, componentes, botones, banners y puertos quedan documentados. |
 | Etiquetas publicas de producto | Implementado | No muestra `SELLABLE`, `QUOTE_ONLY` ni `COMPONENT_ONLY` al usuario. |
 | Detalle de producto | Implementado | Imagen, datos principales, precio visible, disponibilidad, solucion compatible y breadcrumb. |
 | Detalle de solucion | Implementado | Beneficio, componentes, productos relacionados, CTA y breadcrumb. |
@@ -41,7 +47,6 @@ La etapa 1 busca que un visitante pueda entender rapidamente que ofrece Tecno Te
 
 | Pendiente | Motivo |
 |---|---|
-| Conectar catalogo al TecnoTelec Gateway real. | La maqueta usa datos locales; operacion real debe venir del Gateway. |
 | Hacer envio real de contacto/lead. | Requiere endpoint y persistencia confirmada. |
 | Hacer envio real de diagnostico/cotizacion. | Requiere Sales/Quote y reglas de negocio conectadas. |
 | Definir carrito de cotizacion o carrito de compra. | Compra directa no debe activarse sin checkout y reglas comerciales. |
@@ -54,9 +59,9 @@ La etapa 1 busca que un visitante pueda entender rapidamente que ofrece Tecno Te
 
 La primera etapa queda cubierta como experiencia publica navegable y maqueta funcional.
 
-No queda cerrada como operacion real porque aun falta conectar datos, leads, diagnostico, cotizacion y ventas a las APIs reales.
+No queda cerrada como operacion real porque aun falta conectar leads, diagnostico, cotizacion y ventas a las APIs reales. El catalogo publico ya debe depender del Gateway.
 
 ```text
 Etapa 1 terminada: experiencia publica y navegacion.
-Etapa 2 siguiente: conexion real con Gateway, leads y cotizacion.
+Etapa 2 siguiente: leads reales, diagnostico/cotizacion real y decision de carrito.
 ```

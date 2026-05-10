@@ -1,425 +1,209 @@
-````md id="w8q2ms"
-# Instrucción para Codex: Implementación de tolerancia a fallos y recuperación automática en ETLs SYSCOM
-
-Analiza toda la arquitectura actual de los ETLs de SYSCOM y diseña un sistema completo de tolerancia a fallos, recuperación automática y continuidad operativa para el primer llenado y sincronización continua de la base de datos.
-
-La prioridad principal de esta tarea es garantizar que los ETLs puedan:
-
-- recuperarse automáticamente,
-- continuar después de errores,
-- evitar corrupción de datos,
-- reiniciar tareas pendientes,
-- detectar fallos,
-- registrar errores,
-- reanudar sincronizaciones,
-- y completar el llenado inicial sin intervención manual.
-
-La tarea NO debe enfocarse en frontend ni diseño visual.
+Claro. Te dejo las instrucciones más detalladas para Codex:
 
 ---
 
-# Objetivo principal
+# Corrección visual y funcional de productos Tecno Telect
 
-Garantizar que el sistema ETL pueda operar de manera resiliente incluso si:
+Revisar y corregir la interfaz gráfica de productos de Tecno Telect, especialmente la sección de tarjetas de productos, filtros laterales, descripciones y problemas de codificación de caracteres.
 
-- Docker inicia lentamente,
-- PostgreSQL tarda en levantar,
-- una API externa falla,
-- SYSCOM responde lentamente,
-- hay timeout,
-- hay pérdida de conexión,
-- el contenedor se reinicia,
-- el ETL se interrumpe,
-- o existen errores parciales.
+## 1. Corregir descripción de productos
 
-El sistema debe poder continuar automáticamente hasta completar el llenado inicial y las sincronizaciones posteriores.
+Actualmente el campo de descripción está usando:
 
----
-
-# Primer llenado obligatorio automático
-
-## Requisito
-
-Si el sistema detecta que es la primera ejecución o que la base de datos está vacía, debe iniciar automáticamente el proceso ETL completo unos minutos después de levantar Docker.
-
-## Objetivo
-
-Evitar que el usuario tenga que ejecutar manualmente:
-
-```bash id="d4h7ff"
-sync_syscom_all
-````
-
-## Reglas
-
-El sistema debe:
-
-1. Esperar que:
-
-   * Docker esté estable,
-   * PostgreSQL responda,
-   * APIs internas estén disponibles,
-   * migraciones estén completas.
-
-2. Esperar un tiempo prudente antes de iniciar.
-
-## Tiempo recomendado
-
-```txt id="6p9yq8"
-2 a 5 minutos después del arranque
+```text
+DescriptionHtml
 ```
 
-Codex debe determinar el tiempo más seguro según la arquitectura actual.
+Esto provoca que se muestre contenido HTML demasiado grande, desordenado o con etiquetas visibles, afectando el diseño de la tarjeta del producto.
 
----
+### Regla nueva
 
-# Detección de primer llenado
+Para mostrar la descripción corta del producto en las tarjetas, usar este orden de prioridad:
 
-Codex debe implementar una estrategia confiable para detectar:
-
-* si la BD está vacía,
-* si el catálogo nunca se sincronizó,
-* si existen tablas parcialmente llenas,
-* si el ETL quedó inconcluso,
-* si hubo corrupción,
-* si la sincronización quedó a medias.
-
-## Ejemplos válidos
-
-* Conteo de productos.
-* Conteo de categorías.
-* Tabla de estado ETL.
-* Tabla de metadata.
-* Marca de sincronización inicial.
-
----
-
-# Continuidad automática
-
-## Requisito crítico
-
-Si el ETL falla, NO debe reiniciar desde cero innecesariamente.
-
-Debe:
-
-* identificar qué falló,
-* registrar el error,
-* continuar desde el último punto válido,
-* evitar duplicados,
-* evitar reprocesamiento excesivo.
-
----
-
-# Ejemplos esperados
-
-## Caso 1
-
-Si:
-
-```txt id="ghr4gk"
-sync_syscom_products
+```text
+SatDescription
+DescriptionHtml limpio sin etiquetas HTML
+Name
 ```
 
-procesó:
+Es decir:
 
-```txt id="f9bg3f"
-12,000 productos
+1. Si existe `SatDescription`, usar ese campo.
+2. Si `SatDescription` está vacío, usar `DescriptionHtml`, pero limpiando todo el HTML.
+3. Si ambos están vacíos, usar el nombre del producto como descripción auxiliar.
+4. Nunca mostrar etiquetas HTML dentro de la tarjeta.
+
+---
+
+## 2. Limitar tamaño de la descripción
+
+La descripción visible en la tarjeta debe tener un tamaño controlado.
+
+### Reglas
+
+```text
+La descripción debe mostrarse en máximo 2 o 3 líneas.
+Todas las tarjetas deben conservar la misma altura.
+Si el texto es muy largo, cortar con puntos suspensivos.
+No permitir que la descripción aumente el tamaño de la tarjeta.
 ```
 
-y falla en:
+Ejemplo visual:
 
-```txt id="jz3f9i"
-12,001
+```text
+Cámaras de seguridad para vigilancia...
 ```
 
-el sistema debe continuar desde:
+No debe pasar esto:
 
-```txt id="3mmsb4"
-12,001
-```
-
-y NO volver a empezar desde cero.
-
----
-
-# Caso 2
-
-Si falla:
-
-```txt id="z2yo4o"
-publish_syscom_prices
-```
-
-el sistema debe:
-
-* registrar el lote fallido,
-* reintentarlo,
-* continuar lotes pendientes,
-* evitar republicar innecesariamente.
-
----
-
-# Tolerancia a fallos obligatoria
-
-Codex debe diseñar mecanismos para:
-
-## Retry automático
-
-Con:
-
-* límite de reintentos,
-* backoff progresivo,
-* retry inteligente.
-
----
-
-# Manejo de timeout
-
-Detectar:
-
-* timeout API,
-* timeout DB,
-* timeout publish,
-* timeout red.
-
-Y recuperarse automáticamente.
-
----
-
-# Manejo de desconexión
-
-Si:
-
-* Docker reinicia,
-* PostgreSQL cae,
-* Redis cae,
-* la API externa falla,
-
-el ETL debe:
-
-* esperar recuperación,
-* reconectar,
-* continuar.
-
----
-
-# Manejo de corrupción parcial
-
-Si existen:
-
-* productos incompletos,
-* relaciones corruptas,
-* categorías huérfanas,
-* precios sin producto,
-
-el sistema debe:
-
-* detectarlo,
-* registrarlo,
-* intentar repararlo,
-* marcar inconsistencias.
-
----
-
-# Locks y concurrencia
-
-El sistema debe impedir:
-
-* múltiples full sync simultáneos,
-* doble publicación,
-* duplicados,
-* corrupción por concurrencia.
-
-Codex debe implementar:
-
-* locks,
-* estados de ejecución,
-* validaciones de proceso activo.
-
----
-
-# Estado del ETL
-
-Codex debe proponer una tabla o sistema de estado ETL.
-
-Ejemplo:
-
-```txt id="j3mjlwm"
-ETLStatus
-├── ProcessName
-├── Status
-├── StartedAt
-├── FinishedAt
-├── LastProcessedId
-├── LastProcessedPage
-├── RetryCount
-├── ErrorMessage
-├── IsRunning
-└── Metadata
+```text
+<div><p><strong>Descripción completa del producto...</strong></p></div>
 ```
 
 ---
 
-# Registro obligatorio de errores
+## 3. Corregir caracteres especiales
 
-Todos los errores deben registrar:
+La información descargada desde los proveedores está llegando con errores de codificación.
 
-* fecha,
-* ETL,
-* endpoint,
-* lote,
-* página,
-* producto,
-* excepción,
-* traceback,
-* reintentos,
-* duración.
+Ejemplo actual incorrecto:
 
----
+```text
+C?maras de seguridad
+```
 
-# Recuperación automática
+Debe mostrarse correctamente como:
 
-Codex debe diseñar cómo:
+```text
+Cámaras de seguridad
+```
 
-* reanudar ETLs,
-* continuar páginas,
-* continuar lotes,
-* continuar productos,
-* reintentar publicaciones.
+### Instrucción técnica
 
----
+Revisar el proceso ETL, descarga, transformación y guardado en base de datos para asegurar compatibilidad con caracteres especiales.
 
-# Limpieza controlada de catálogos
+Validar:
 
-## Requisito
+```text
+UTF-8 en la respuesta de la API
+UTF-8 en el cliente HTTP
+UTF-8 en Python/Django
+UTF-8 en PostgreSQL
+UTF-8 en serializers
+UTF-8 en Next.js
+```
 
-Después de implementar el sistema de tolerancia a fallos, limpiar las tablas relacionadas al ETL para validar el llenado automático desde cero.
-
-## Importante
-
-La limpieza debe ser:
-
-* controlada,
-* documentada,
-* reversible si aplica,
-* segura.
+El problema debe corregirse desde el origen del guardado, no solo visualmente en frontend.
 
 ---
 
-# Tablas relacionadas
+## 4. Corregir barra lateral de filtros
 
-Codex debe identificar todas las tablas relacionadas con:
+Según la imagen adjunta, la barra lateral de filtros tiene problemas de diseño.
 
-* categorías,
-* marcas,
-* productos,
-* stock,
-* precios,
-* relacionados,
-* publicación,
-* staging,
-* sincronización.
+### Problemas detectados
 
----
+```text
+Los campos de búsqueda de marca y categoría se salen visualmente.
+Los botones Aplicar filtros y Limpiar filtros no respetan bien el ancho del contenedor.
+El filtro de precio mínimo y precio máximo no está correctamente alineado.
+Los inputs no mantienen una separación uniforme.
+El panel lateral parece invadir el área de productos.
+El diseño no conserva una estructura limpia entre filtros y tarjetas.
+```
 
-# Validación esperada
+### Reglas visuales
 
-Después de limpiar tablas:
-
-1. Docker debe iniciar.
-2. El sistema debe esperar automáticamente.
-3. Debe detectar catálogo vacío.
-4. Debe iniciar ETL automáticamente.
-5. Debe continuar aunque existan fallos.
-6. Debe completar sincronización.
-7. Debe registrar errores y reintentos.
-8. Debe poder verse trabajando en logs.
-
----
-
-# Logs obligatorios
-
-Debe poder visualizarse claramente:
-
-```txt id="dz69r2"
-[WAITING FOR POSTGRES]
-[WAITING FOR API]
-[FIRST SYNC DETECTED]
-[STARTING FULL ETL]
-[PROCESSING CATEGORY]
-[PROCESSING PAGE]
-[RETRYING]
-[RECOVERED]
-[PUBLISHING]
-[SYNC COMPLETED]
+```text
+La barra lateral debe tener ancho fijo en escritorio.
+Ningún input, botón o selector debe salirse del panel.
+Todos los elementos deben usar width: 100% dentro del contenedor.
+Debe existir separación uniforme entre secciones.
+Los filtros deben alinearse verticalmente.
+Precio mínimo y precio máximo pueden ir uno debajo del otro para evitar desbordamiento.
+El panel de filtros no debe invadir el área de productos.
 ```
 
 ---
 
-# Estrategia recomendada
+## 5. Corregir diseño de inputs y botones
 
-Codex debe evaluar:
+Todos los campos deben tener una estructura consistente.
 
-* cron,
-* Celery,
-* workers,
-* colas,
-* locks distribuidos,
-* recovery queue,
-* checkpoints,
-* eventos.
+### Inputs
 
-Y proponer la mejor arquitectura según el estado actual del proyecto.
+```text
+Altura uniforme.
+Bordes redondeados.
+Padding interno suficiente.
+Texto visible sin cortarse.
+Placeholder claro.
+No deben superar el ancho del contenedor padre.
+```
 
----
+### Botones
 
-# Restricciones
-
-No reiniciar ETLs completos innecesariamente.
-
-No eliminar información válida sin documentarlo.
-
-No depender de intervención manual constante.
-
-No asumir que la API externa siempre responderá bien.
-
-No asumir infraestructura perfecta.
+```text
+Aplicar filtros debe ocupar el ancho completo del panel.
+Limpiar filtros debe ocupar el ancho completo del panel.
+Ambos botones deben estar alineados.
+No deben salirse del contenedor.
+Debe existir espacio entre ambos.
+```
 
 ---
 
-# Entregables obligatorios
+## 6. Corregir distribución entre filtros y productos
 
-Codex debe generar:
+La página debe dividirse correctamente en dos zonas:
 
-1. Documento completo de tolerancia a fallos.
-2. Estrategia de recuperación automática.
-3. Estrategia de retry.
-4. Estrategia de checkpoints.
-5. Estrategia de locks.
-6. Estrategia de reanudación.
-7. Estrategia de primer llenado.
-8. Estrategia de limpieza controlada.
-9. Tabla o modelo de estado ETL.
-10. Estrategia de logs.
-11. Riesgos detectados.
-12. Problemas actuales encontrados.
-13. Recomendaciones de producción.
-14. Flujo completo de recuperación.
-15. Validación automática post Docker.
+```text
+Zona izquierda: filtros
+Zona derecha: listado de productos
+```
+
+La zona de productos no debe montarse encima de los filtros.
+
+La tarjeta del producto no debe quedar debajo o detrás del panel lateral.
 
 ---
 
-# Resultado esperado
+## 7. Validación final visual
 
-La tarea estará completa cuando el sistema ETL pueda:
+Codex debe verificar en escritorio que:
 
-* arrancar automáticamente,
-* detectar primer llenado,
-* sincronizar completamente,
-* continuar después de fallos,
-* recuperarse automáticamente,
-* evitar duplicados,
-* evitar corrupción,
-* registrar errores correctamente,
-* y operar de manera resiliente sin intervención manual constante.
+```text
+La barra lateral no se desborde.
+Los inputs no se salen.
+Los botones no se enciman.
+Las tarjetas tienen la misma altura.
+Las descripciones no muestran HTML.
+Las descripciones largas se cortan con puntos suspensivos.
+Los acentos y caracteres especiales se muestran correctamente.
+La zona de productos respeta el espacio de filtros.
+```
 
+---
+
+## 8. Validación final funcional
+
+Codex debe probar con productos que tengan:
+
+```text
+SatDescription válido.
+SatDescription vacío.
+DescriptionHtml con HTML largo.
+DescriptionHtml vacío.
+Caracteres con acentos.
+Texto muy largo.
+Producto sin imagen.
+Producto sin precio.
+```
+
+El resultado esperado es:
+
+```text
+La tarjeta siempre se ve limpia, uniforme y sin romper el diseño.
+```
+
+---

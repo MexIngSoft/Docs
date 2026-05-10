@@ -136,6 +136,25 @@ SYSCOM_CLIENT_SECRET
 
 Si estan vacias, el worker se queda vivo y en espera. Eso es intencional para que Docker no se caiga por falta de credenciales.
 
+## Verificacion de primer llenado
+
+El comando canonico para confirmar si el catalogo SYSCOM esta vacio es:
+
+```bash
+docker compose exec api-multiproyecto sh /usr/src/api/start.sh manage supplier syscom_etl_state --plain
+```
+
+La salida debe incluir:
+
+```txt
+Categories=0
+Brands=0
+Products=0
+IsEmpty=true
+```
+
+Si `SYSCOM_ETL_BOOTSTRAP_ON_EMPTY=true`, el worker considera `IsEmpty=true` como primer llenado y ejecuta `sync_syscom_all` despues de la espera inicial definida por `SYSCOM_ETL_STARTUP_DELAY_SECONDS`.
+
 ## Validacion con credenciales locales
 
 Las credenciales deben cargarse desde un archivo local ignorado por Git:

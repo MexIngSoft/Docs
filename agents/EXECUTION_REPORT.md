@@ -1,156 +1,197 @@
-# Execution Report - Agents 000 a 020
+# Reporte de ejecucion Agents
 
-## Regla validada
+## Fecha
 
-Todas las fases se revisaron contra esta arquitectura:
+2026-05-09
 
-```text
-Web Tecno Telec
-  -> TecnoTelec Gateway API
-  -> Core APIs necesarias
-  -> TecnoTelec API solo para configuracion propia
-  -> JobCron administra todo
-```
+## Alcance ejecutado
 
-No se programo codigo nuevo. Se creo y completo documentacion faltante antes de cualquier implementacion.
+Se ejecutaron:
 
-## Archivos ejecutados en orden
+- `AGENTS-000.md`: interfaz grafica de productos en Tecno Telect.
+- `AGENTS-001.md`: esquema de pruebas de la interfaz de productos.
 
-| Archivo | Objetivo | Resultado |
-|---|---|---|
-| `AGENTS-000.md` | Establecer reglas maestras Tecno Telec + JobCron. | Completado. Regla canonica aplicada en nuevos documentos. |
-| `AGENTS-001.md` | Auditoria documental nueva arquitectura. | Completado en `00_audit/08_new_architecture_review.md`. |
-| `AGENTS-002.md` | Arquitectura Gateway corregida. | Completado en `01_core_erp/architecture/09_tecnotelec_gateway_corrected_pattern.md`. |
-| `AGENTS-003.md` | APIs para mostrar productos. | Completado como documentacion en `backend/00_gateway_product_endpoints.md` y `catalog/00_public_catalog_process.md`. |
-| `AGENTS-004.md` | Endpoints publicos Gateway productos. | Completado en `backend/00_gateway_product_endpoints.md`. |
-| `AGENTS-005.md` | Catalogo publico visible. | Completado en `catalog/00_public_catalog_process.md`. |
-| `AGENTS-006.md` | Detalle de producto. | Completado en `catalog/01_product_detail_process.md`. |
-| `AGENTS-007.md` | Pricing basico. | Completado documentalmente actualizando Pricing API, flujo, modelo y plan existente. |
-| `AGENTS-008.md` | Publicacion de precios Web. | Completado en `pricing/00_price_publication_process.md`. |
-| `AGENTS-009.md` | JobCron administrativo. | Completado en `02_projects/jobcron/01_tecnotelec_admin_process.md`. |
-| `AGENTS-010.md` | Boceto PDF JobCron. | Parcial. No existe ruta solicitada; se documento PDF alterno encontrado. |
-| `AGENTS-011.md` | Placeholders. | Completado en `03_standards/frontend/02_placeholder_strategy.md`. |
-| `AGENTS-012.md` | Cotizador basico. | Completado en `quotes/00_quote_process.md`. |
-| `AGENTS-013.md` | Usuarios. | Completado en `auth/00_user_process.md`. |
-| `AGENTS-014.md` | Carrito, pedido y compra. | Completado como fase futura en `cart/00_cart_future_process.md`. |
-| `AGENTS-015.md` | Reglas avanzadas. | Completado como fase futura en `pricing/01_advanced_pricing_future.md`. |
-| `AGENTS-016.md` | Validacion final antes de programar. | Completado en `tasks/07_pre_development_checklist.md`. |
-| `AGENTS-017.md` | Resultado final esperado. | Completado como verificacion documental en este reporte. |
-| `AGENTS-018.md` | Archivo vacio. | Parcial. Instruccion incompleta; no se invento alcance. |
-| `AGENTS-019.md` | Archivo vacio. | Parcial. Instruccion incompleta; no se invento alcance. |
-| `AGENTS-020.md` | Archivo vacio. | Parcial. Instruccion incompleta; no se invento alcance. |
+El impacto fue limitado a la parte donde se muestran productos en Tecno Telec.
 
-## Archivos creados
+## Resultado
 
-- `00_audit/08_new_architecture_review.md`
-- `01_core_erp/architecture/09_tecnotelec_gateway_corrected_pattern.md`
-- `02_projects/tecnotelec/backend/00_gateway_product_endpoints.md`
-- `02_projects/tecnotelec/catalog/00_public_catalog_process.md`
-- `02_projects/tecnotelec/catalog/01_product_detail_process.md`
-- `02_projects/tecnotelec/pricing/00_price_publication_process.md`
-- `02_projects/tecnotelec/pricing/01_advanced_pricing_future.md`
-- `02_projects/tecnotelec/quotes/00_quote_process.md`
-- `02_projects/tecnotelec/auth/00_user_process.md`
-- `02_projects/tecnotelec/cart/00_cart_future_process.md`
-- `02_projects/tecnotelec/tasks/07_pre_development_checklist.md`
-- `02_projects/jobcron/01_tecnotelec_admin_process.md`
-- `02_projects/jobcron/ui/00_jobcron_mockup_analysis.md`
-- `03_standards/frontend/02_placeholder_strategy.md`
-- `agents/EXECUTION_REPORT.md`
+Completado.
 
-## Carpetas creadas
+La interfaz de productos queda operativa con:
 
-- `02_projects/tecnotelec/backend`
-- `02_projects/tecnotelec/catalog`
-- `02_projects/tecnotelec/pricing`
-- `02_projects/tecnotelec/quotes`
-- `02_projects/tecnotelec/auth`
-- `02_projects/tecnotelec/cart`
-- `02_projects/jobcron/ui`
-- `02_projects/jobcron/ui/source`
-- `02_projects/jobcron/ui/clean`
-
-Las carpetas vacias de UI incluyen `.gitkeep` para quedar listas para Git.
+- busqueda superior sticky,
+- filtros laterales en escritorio,
+- boton `Filtros` para movil,
+- filtros por marca y categoria con buscador interno,
+- seleccion multiple de marcas y categorias,
+- precio minimo y maximo,
+- validacion de rango invalido,
+- ordenamiento por recientes, vendidos, precio, nombre y aleatorio,
+- tarjetas con imagen, nombre, marca, modelo, categoria, precio, existencia, detalle y CTA de cotizacion,
+- mensajes diferenciados para sin resultados, catalogo vacio y error de carga.
 
 ## Archivos modificados
 
-- `01_core_erp/apis/04_pricing_api.md`
-- `01_core_erp/database/06_pricing_model.md`
-- `01_core_erp/flows/04_pricing_flow.md`
-- `02_projects/tecnotelec/README.md`
-- `02_projects/jobcron/README.md`
-- `03_standards/frontend/README.md`
+- `Docker.WEB.NJ/docker-compose.yml`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/app/catalogo/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/components/catalog-browser.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/components/product-card.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/lib/catalog.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/lib/config.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/lib/gateway-catalog.ts`
+- `Docker.API.PY/API.PY.DJANGO.Catalog/catalog/views.py`
+- `Docker.API.PY/API.PY.DJANGO.TecnoTelec.Gateway/gateway/catalog_gateway.py`
+- `Docker.API.PY/API.PY.DJANGO.TecnoTelec.Gateway/gateway/serializers.py`
 
-## Documentacion faltante creada
+## Documentacion creada
 
-- Patron corregido Gateway.
-- Endpoints publicos de productos.
-- Proceso de catalogo publico.
-- Proceso de detalle de producto.
-- Publicacion de precios.
-- Proceso administrativo JobCron para Tecno Telec.
-- Estrategia de placeholders.
-- Proceso de cotizacion.
-- Proceso de usuarios.
-- Proceso futuro de carrito.
-- Pricing avanzado futuro.
-- Checklist previo a programar.
+- `Docs/02_projects/tecnotelec/frontend/21_product_catalog_interface_execution.md`
+- `Docs/agents/EXECUTION_REPORT.md`
 
-## Documentacion faltante pendiente
+## Pruebas ejecutadas
 
-- Contratos reales implementados de `tecnotelec-gateway-api`.
-- Endpoint real de `inventory-api`.
-- Decision final `quote-api` separado vs cotizacion inicial en `sales-api`.
-- Permisos por rol para JobCron, asesor, admin y comprador especial.
-- Assets placeholder reales.
-- Politica final de impuestos, margen, redondeo y comprador especial.
-- Extraccion real del PDF JobCron a imagenes.
-- Pantallas reales JobCron derivadas del boceto.
-
-## Contradicciones encontradas
-
-| Contradiccion | Resolucion |
+| Prueba | Resultado |
 |---|---|
-| La instruccion busca PDF en `archivo/images/jobcron/`, pero el repo tiene `_archive/image/jobcron/especificaciones cron.pdf`. | Se documento que la ruta solicitada no existe y se registro la fuente alterna. |
-| Algunos documentos de frontend mencionan Gateway/Core en columna de API. | Se interpreto como referencia de dominio. La regla final queda: Web solo consume Gateway. |
+| `npm run build` en Tecno Telec | Correcto |
+| `python -m py_compile` en Gateway/Catalog | Correcto |
+| Docker web rebuild | Correcto |
+| `/catalogo` | `200`, interfaz y tarjetas visibles |
+| `/catalogo?search=camera` | `200`, busqueda funcional |
+| `/catalogo?minPrice=500&maxPrice=3000&sortBy=price_asc` | `200`, rango y orden funcionales |
+| `/catalogo?minPrice=5000&maxPrice=1000` | `200`, validacion visible |
+| `/catalogo?sortBy=random` | `200`, orden aleatorio funcional |
+| Gateway productos recientes | `200` |
+| Gateway busqueda | `200` |
+| Gateway rango de precio | `200` |
+| Gateway aleatorio | `200` |
 
-## Decisiones tomadas
+## Confirmacion funcional
 
-- No programar codigo nuevo durante esta ejecucion.
-- Crear documentacion antes de implementacion.
-- Mantener Gateway como BFF, no base maestra.
-- Mantener Pricing como owner de precios.
-- Mantener Catalog/Supplier/Inventory como owners de datos base.
-- Mantener TecnoTelec API solo para configuracion propia del proyecto.
-- Documentar carrito, usuarios y pricing avanzado como fases posteriores.
-- No extraer PDF JobCron sin confirmar ruta canonica y herramienta/proceso.
-- No inventar alcance para `AGENTS-018.md`, `AGENTS-019.md` y `AGENTS-020.md` porque estan vacios.
+La interfaz de productos funciona correctamente en Docker para la etapa actual.
 
-## Riesgos detectados
+Se confirmo que:
 
-- Si Gateway empieza a guardar catalogo/precios/stock, rompe la arquitectura.
-- Si Web consume Core APIs directo, se acopla y duplica reglas.
-- Si Pricing no guarda snapshot, cotizaciones historicas pueden cambiar.
-- Si JobCron no administra visibilidad, Web puede publicar productos incompletos.
-- Si no existen placeholders locales, el layout puede romper por imagenes faltantes.
-- Si no se resuelve Quote vs Sales, el flujo de cotizacion queda ambiguo.
+- la pagina carga,
+- la busqueda aparece,
+- los filtros aparecen,
+- el ordenamiento aparece,
+- hay tarjetas de producto,
+- existen botones de detalle y cotizacion,
+- el rango invalido muestra error,
+- Gateway responde correctamente para las pruebas principales.
 
-## Preguntas pendientes
+## Observaciones
 
-1. La ruta canonica del PDF JobCron debe ser `_archive/image/jobcron/` o se debe crear `archivo/images/jobcron/`?
-2. Cotizacion MVP vivira en `quote-api` separado o temporalmente en `sales-api`?
-3. Que campos SAT se mostraran publicamente y cuales seran internos?
-4. Se debe mostrar proveedor al cliente o solo internamente?
-5. Cual sera la politica inicial de margen, IVA, redondeo y comprador especial?
-6. Quienes pueden ver costo, margen y precio interno en JobCron?
-7. Cual sera el TTL de cache para catalogo, precio y disponibilidad?
+- El contenedor web esta en modo desarrollo con `next dev`; la primera carga despues de recrear Docker puede tardar por compilacion inicial.
+- Quedan warnings de Next por uso de `<img>` en imagenes externas. No bloquean funcionamiento.
+- Para produccion se recomienda crear modo `next build` + `next start`.
 
-## Proximos pasos recomendados
+## Estado final
 
-1. Resolver decision `quote-api` vs `sales-api`.
-2. Definir contrato JSON final de `GET /products` y `GET /products/{slug}`.
-3. Definir endpoint real de Inventory API para stock visible.
-4. Crear placeholders locales.
-5. Extraer y analizar PDF JobCron desde la ruta confirmada.
-6. Convertir procesos documentados en tickets tecnicos.
-7. Solo despues conectar el frontend Tecno Telec al Gateway real.
+Agents 000 y 001 concluidos.
+
+---
+
+# Ejecucion adicional AGENTS-000
+
+## Fecha
+
+2026-05-09
+
+## Alcance ejecutado
+
+Se ejecuto el nuevo contenido de `AGENTS-000.md` enfocado en correccion visual y funcional de productos Tecno Telect.
+
+## Resultado
+
+Completado.
+
+Se agrego:
+
+- descripcion corta con prioridad `SatDescription`, `DescriptionHtml` limpio y `Name`,
+- limpieza de etiquetas HTML para tarjetas,
+- reparacion basica de caracteres con mojibake comun,
+- tarjetas con nombre y descripcion limitados por lineas,
+- filtros laterales con ancho fijo y campos al 100%,
+- panel de filtros movil,
+- efectos visuales y transiciones suaves,
+- selector de productos por pagina `20`, `50`, `100`,
+- endpoints bulk de Pricing e Inventory para mejorar velocidad del listado.
+
+## Documentacion creada
+
+- `Docs/02_projects/tecnotelec/frontend/22_product_catalog_visual_responsive_execution.md`
+
+## Archivos modificados
+
+- `Docker.API.PY/API.PY.DJANGO.Catalog/catalog/serializers.py`
+- `Docker.API.PY/API.PY.DJANGO.Inventory/inventory/urls.py`
+- `Docker.API.PY/API.PY.DJANGO.Inventory/inventory/views.py`
+- `Docker.API.PY/API.PY.DJANGO.Pricing/pricing/urls.py`
+- `Docker.API.PY/API.PY.DJANGO.Pricing/pricing/views.py`
+- `Docker.API.PY/API.PY.DJANGO.TecnoTelec.Gateway/gateway/catalog_gateway.py`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/app/catalogo/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/components/catalog-browser.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/lib/gateway-catalog.ts`
+
+## Pruebas ejecutadas
+
+| Prueba | Resultado |
+|---|---|
+| `python -m py_compile` en APIs modificadas | Correcto |
+| `npm run build` en Tecno Telec | Correcto |
+| Docker API rebuild | Correcto |
+| Docker Web rebuild | Correcto |
+| Gateway `pageSize=20` | `20` productos, descripcion sin HTML |
+| Gateway `pageSize=50` | `50` productos |
+| Gateway `pageSize=100` | `100` productos |
+| Web `/catalogo?pageSize=20` | `200`, buscador, filtros, selector y productos visibles |
+
+## Pendientes
+
+- Reemplazar `<img>` por `next/image` en una etapa posterior para eliminar warnings de rendimiento de Next.
+- Revisar ETL de Syscom si existen caracteres ya guardados como `?`, porque esos no siempre pueden recuperarse desde API o frontend.
+
+---
+
+# Verificacion de caracteres especiales SYSCOM
+
+## Fecha
+
+2026-05-09
+
+## Resultado
+
+Completado.
+
+Se confirmo y corrigio el flujo para que los caracteres especiales se normalicen desde la descarga/publicacion de SYSCOM y no solo en la interfaz.
+
+## Cambios realizados
+
+- Se agrego `supplier.syscom.text` como utilidad central de normalizacion.
+- El cliente HTTP de SYSCOM normaliza el JSON recibido.
+- Mappers, writers y publishers normalizan texto antes de guardar.
+- Catalog API busca tambien por `SatDescription`.
+- Catalog API expande terminos comunes sin acento, por ejemplo `camara` hacia `cámara` y `cámaras`.
+- Se agrego comando `repair_syscom_text_encoding` para reparar datos existentes.
+
+## Pruebas ejecutadas
+
+| Prueba | Resultado |
+|---|---|
+| `python -m py_compile` en archivos modificados | Correcto |
+| Docker API rebuild | Correcto |
+| `repair_syscom_text_encoding` | Reparo datos existentes |
+| `SatDescription` con `?` | `0` |
+| `SatDescription` con `cámaras` | `623` |
+| `SatDescription` con `baterías` | `79` |
+| `SatDescription` con `energía` | `27` |
+| Catalog API `search=camara` | `1072` resultados |
+| Gateway `search=camara` | `1072` resultados |
+| Web `/catalogo?search=camara&pageSize=20` | `200`, productos visibles |
+
+## Documentacion creada
+
+- `Docs/04_integrations/syscom/etl/text-encoding-and-search.md`

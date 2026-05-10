@@ -56,12 +56,15 @@ El script `syscom_etl_worker.sh`:
 - No inicia descargas si faltan `SYSCOM_CLIENT_ID` o `SYSCOM_CLIENT_SECRET`.
 - Registra logs locales por fecha.
 - Usa lock de proceso para evitar dos workers al mismo tiempo.
+- Detecta locks huerfanos y los limpia si el proceso original ya no existe.
 - Reintenta cada tarea con backoff.
 - No marca una tarea como exitosa si falla.
 - Conserva estado en archivos `*.last_success`.
 - Al reiniciar Docker, lee el estado y continua con la tarea que corresponda por frecuencia.
 - Si una tarea falla, continua con las demas ventanas disponibles.
 - Si la base o SYSCOM no estan listos, espera y reintenta.
+- Espera un tiempo inicial antes del bootstrap para permitir que APIs y migraciones terminen de estabilizar.
+- Detecta primer llenado si no existe `full.last_success` o si `syscom_etl_state --plain` reporta catalogo SYSCOM vacio.
 
 ## Estado persistente
 
@@ -79,6 +82,12 @@ Archivos esperados:
 token.last_success
 fast.last_success
 full.last_success
+```
+
+El estado operativo se puede confirmar con:
+
+```bash
+docker compose exec api-multiproyecto sh /usr/src/api/start.sh manage supplier syscom_etl_state --plain
 ```
 
 ## Logs
@@ -107,6 +116,7 @@ Tambien se registran ejecuciones en `SupplierSyncLog` desde los comandos Django.
 | `SYSCOM_BASE_URL` | `https://developers.syscom.mx` | API base SYSCOM. |
 | `SYSCOM_ETL_STATE_DIR` | `/usr/src/api/supplier/.etl_state` | Estado persistente. |
 | `SYSCOM_ETL_LOG_DIR` | `/usr/src/api/supplier/.etl_logs` | Logs locales. |
+| `SYSCOM_ETL_STARTUP_DELAY_SECONDS` | `180` | Espera inicial antes de detectar primer llenado. |
 | `SYSCOM_ETL_TOKEN_INTERVAL_SECONDS` | `21600` | Token cada 6 horas. |
 | `SYSCOM_ETL_FAST_INTERVAL_SECONDS` | `900` | Refresh rapido cada 15 minutos. |
 | `SYSCOM_ETL_FULL_INTERVAL_SECONDS` | `86400` | Full sync cada 24 horas. |
@@ -145,6 +155,16 @@ Logs:
 
 ```bash
 docker compose exec api-multiproyecto sh -c "tail -n 200 /usr/src/api/supplier/.etl_logs/syscom-etl-$(date +%F).log"
+```
+
+Mensajes clave esperados:
+
+```txt
+[WAITING FOR API]
+[FIRST SYNC DETECTED]
+[STARTING FULL ETL]
+Iniciando full intento N/3
+Finalizado full correctamente
 ```
 
 ## Pendientes

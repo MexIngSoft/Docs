@@ -109,3 +109,9 @@ El cierre de experiencia publica inicial queda documentado en:
 ```text
 02_projects/tecnotelec/frontend/18_stage_one_user_experience_closure.md
 ```
+
+La regla de catalogo y navegacion dinamica queda documentada en:
+
+```text
+02_projects/tecnotelec/frontend/19_dynamic_catalog_and_navigation_rule.md
+```
