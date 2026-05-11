@@ -79,7 +79,7 @@ Estas rutas son solo para validacion tecnica. No deben mostrarse como enlaces pr
 | `Comienza tu diagnostico` | `/cotizador` |
 | `Necesito una solucion` | `/soluciones` |
 | `Ver productos` | `/catalogo` |
-| `Hablar por WhatsApp` | `/contacto` hasta configurar numero real. |
+| `Hablar por WhatsApp` | `https://wa.me/527711445514?...` con mensaje contextual. |
 | `Aplicar filtros` | `/catalogo` con querystring. |
 | `Limpiar filtros` | `/catalogo` |
 | `Anterior/Siguiente` | `/catalogo?page=N` conservando filtros. |

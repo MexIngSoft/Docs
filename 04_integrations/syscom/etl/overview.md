@@ -76,6 +76,7 @@ La ejecucion automatica en Docker esta documentada en `docker-worker.md`. Ese wo
 - Stock y precios de proveedor pueden ser historicos.
 - Cada ejecucion debe generar log o, al menos, reporte operativo.
 - Un error en un producto no debe detener todo el lote.
+- El full sync de productos debe poder reanudarse por categoria si Docker se reinicia o si el proceso se corta.
 - Los datos crudos deben preservarse en `RawData`.
 - `Supplier` no representa el producto final; representa lo que dijo el proveedor.
 - `Catalog` no descarga del proveedor; recibe informacion publicada desde `Supplier`.

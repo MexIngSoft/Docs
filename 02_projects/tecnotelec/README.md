@@ -18,6 +18,7 @@ Tecno Telec es una plataforma empresarial de soluciones tecnologicas, telecomuni
 | `frontend` | Rutas, layout, componentes, sistema visual, flujos web y preparacion de desarrollo. |
 | `pricing` | Publicacion de precios y pricing avanzado futuro. |
 | `quotes` | Proceso de cotizacion. |
+| `solutions` | Estrategia de armado, publicacion y presentacion de soluciones. |
 | `tasks` | Tareas, APIs requeridas, tablas faltantes y orden de desarrollo. |
 | `decisions` | ADRs especificos de Tecno Telec. |
 | `AGENTE.md` | Guia operativa de desarrollo segun instrucciones de `Docs/AGENTS.md`. |
@@ -25,6 +26,7 @@ Tecno Telec es una plataforma empresarial de soluciones tecnologicas, telecomuni
 Documento MVP:
 
 ```txt
+00_initial_stage_readiness_review.md
 tasks/05_mvp_scope.md
 ```
 
@@ -32,6 +34,17 @@ Plan inicial de precios:
 
 ```txt
 tasks/06_pricing_first_plan.md
+```
+
+Estrategia de soluciones:
+
+```txt
+solutions/00_solution_presentation_and_assembly_strategy.md
+solutions/01_dynamic_solution_technical_design.md
+solutions/02_solution_operating_architecture_analysis.md
+solutions/03_development_start_recommendation.md
+solutions/05_solution_module_implementation_report.md
+solutions/06_solution_detail_definition.md
 ```
 
 Checklist previo a programar:
@@ -56,6 +69,7 @@ Preparacion antes de desarrollo:
 frontend/10_pre_development_analysis.md
 frontend/11_web_platform_structure.md
 frontend/12_initial_web_blueprint.md
+frontend/18_solution_navigation_map.md
 ```
 
 Arquitectura corregida:
@@ -66,4 +80,5 @@ backend/00_gateway_product_endpoints.md
 catalog/00_public_catalog_process.md
 catalog/01_product_detail_process.md
 quotes/00_quote_process.md
+quotes/02_quote_implementation_scope_analysis.md
 ```

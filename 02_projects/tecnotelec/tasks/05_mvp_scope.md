@@ -44,6 +44,8 @@ Reglas:
 - Debe abrir una conversacion con mensaje precargado segun contexto.
 - Debe poder medirse como evento de conversion.
 - El numero final de WhatsApp queda como variable de configuracion, no hardcodeado.
+- Numero inicial configurado: `771 144 5514`.
+- Sintaxis publica: `https://wa.me/527711445514?text=<mensaje_codificado>`.
 
 Ejemplos de mensajes:
 
@@ -52,6 +54,15 @@ Hola, quiero asesoria para una solucion de redes/WiFi.
 Hola, quiero cotizar una solucion de videovigilancia.
 Hola, necesito ayuda para elegir una solucion tecnologica.
 ```
+
+Mensajes por contexto:
+
+| Contexto | Mensaje sugerido |
+|---|---|
+| General | `Hola Tecno Telec, quiero asesoria para una solucion tecnologica.` |
+| Producto | `Hola Tecno Telec, quiero informacion y cotizacion del producto: <producto> modelo <modelo>.` |
+| Solucion | `Hola Tecno Telec, quiero asesoria sobre la solucion: <solucion>.` |
+| Diagnostico | `Hola Tecno Telec, quiero iniciar un diagnostico para cotizar: <solucion>.` |
 
 ## Chat futuro
 
@@ -102,4 +113,3 @@ Agregar aceptacion de contacto y aviso de privacidad en formularios que capturen
 ### SEO local
 
 Preparar Home, Soluciones y Contacto con informacion local de servicios, cobertura y especialidades para mejorar descubrimiento organico.
-

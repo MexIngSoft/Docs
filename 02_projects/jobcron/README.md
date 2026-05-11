@@ -63,3 +63,21 @@ Boceto funcional:
 ```txt
 ui/00_jobcron_mockup_analysis.md
 ```
+
+Revision y propuesta mejorada:
+
+```txt
+ui/04_web_review_and_better_proposal.md
+```
+
+Extraccion visual del PDF:
+
+```txt
+ui/05_pdf_visual_extraction.md
+```
+
+Investigacion y maqueta publica:
+
+```txt
+ui/06_public_website_structure_research.md
+```

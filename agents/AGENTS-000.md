@@ -1,209 +1,310 @@
-Claro. Te dejo las instrucciones más detalladas para Codex:
+Sí. Yo la separaría así:
 
----
+## 1. API Auth — solo identidad, acceso y seguridad
 
-# Corrección visual y funcional de productos Tecno Telect
+Debe encargarse de:
 
-Revisar y corregir la interfaz gráfica de productos de Tecno Telect, especialmente la sección de tarjetas de productos, filtros laterales, descripciones y problemas de codificación de caracteres.
+* Usuarios.
+* Login / logout.
+* Passwords.
+* Roles.
+* Permisos.
+* Sesiones.
+* Dispositivos conectados.
+* Tokens.
+* Recuperación de cuenta.
+* MFA / doble factor.
+* Auditoría de accesos.
+* Bloqueos por intentos fallidos.
+* Políticas de seguridad por app.
+* Validación de si el usuario está activo, bloqueado o eliminado.
+* Saber si el usuario está en línea o cuándo fue su última actividad.
 
-## 1. Corregir descripción de productos
+Esto coincide con buenas prácticas de OWASP ASVS, que recomienda verificar autenticación, manejo de sesiones y control de acceso como controles separados y comprobables. ([OWASP Foundation][1])
 
-Actualmente el campo de descripción está usando:
+## 2. Lo que NO pondría en Auth
 
-```text
-DescriptionHtml
-```
+No pondría aquí:
 
-Esto provoca que se muestre contenido HTML demasiado grande, desordenado o con etiquetas visibles, afectando el diseño de la tarjeta del producto.
+* Datos fiscales.
+* Datos comerciales del cliente.
+* Dirección.
+* Teléfono de negocio.
+* Razón social.
+* Sucursales.
+* Almacenes.
+* Datos de empresa.
+* Configuración comercial.
+* Preferencias del cliente por proyecto.
 
-### Regla nueva
-
-Para mostrar la descripción corta del producto en las tarjetas, usar este orden de prioridad:
-
-```text
-SatDescription
-DescriptionHtml limpio sin etiquetas HTML
-Name
-```
-
-Es decir:
-
-1. Si existe `SatDescription`, usar ese campo.
-2. Si `SatDescription` está vacío, usar `DescriptionHtml`, pero limpiando todo el HTML.
-3. Si ambos están vacíos, usar el nombre del producto como descripción auxiliar.
-4. Nunca mostrar etiquetas HTML dentro de la tarjeta.
-
----
-
-## 2. Limitar tamaño de la descripción
-
-La descripción visible en la tarjeta debe tener un tamaño controlado.
-
-### Reglas
+Eso debe ir en una API separada, por ejemplo:
 
 ```text
-La descripción debe mostrarse en máximo 2 o 3 líneas.
-Todas las tarjetas deben conservar la misma altura.
-Si el texto es muy largo, cortar con puntos suspensivos.
-No permitir que la descripción aumente el tamaño de la tarjeta.
+Customer API
+Client API
+Tenant API
+Organization API
 ```
 
-Ejemplo visual:
+Mi recomendación: **Customer API** si piensas en clientes comerciales, o **Tenant API** si cada empresa tendrá sus propias apps, usuarios y configuración.
+
+## 3. Esquemas recomendados
 
 ```text
-Cámaras de seguridad para vigilancia...
+Auth
+Customer
+Security
+Audit
 ```
 
-No debe pasar esto:
+O más simple:
 
 ```text
-<div><p><strong>Descripción completa del producto...</strong></p></div>
+Auth
+Customer
+Audit
 ```
 
----
-
-## 3. Corregir caracteres especiales
-
-La información descargada desde los proveedores está llegando con errores de codificación.
-
-Ejemplo actual incorrecto:
+Dentro de `Auth`:
 
 ```text
-C?maras de seguridad
+Auth.Users
+Auth.Roles
+Auth.Permissions
+Auth.UserRoles
+Auth.RolePermissions
+Auth.Applications
+Auth.ApplicationRoles
+Auth.ApplicationPermissions
+Auth.UserSessions
+Auth.UserDevices
+Auth.RefreshTokens
+Auth.PasswordHistory
+Auth.LoginAttempts
+Auth.MfaMethods
+Auth.RecoveryCodes
 ```
 
-Debe mostrarse correctamente como:
+Dentro de `Customer`:
 
 ```text
-Cámaras de seguridad
+Customer.Customers
+Customer.CustomerUsers
+Customer.Organizations
+Customer.Branches
+Customer.Addresses
+Customer.Contacts
+Customer.FiscalProfiles
+Customer.Preferences
 ```
 
-### Instrucción técnica
+## 4. Punto importante: multi-app
 
-Revisar el proceso ETL, descarga, transformación y guardado en base de datos para asegurar compatibilidad con caracteres especiales.
-
-Validar:
+Auth debe saber a qué sistema intenta entrar el usuario:
 
 ```text
-UTF-8 en la respuesta de la API
-UTF-8 en el cliente HTTP
-UTF-8 en Python/Django
-UTF-8 en PostgreSQL
-UTF-8 en serializers
-UTF-8 en Next.js
+ApplicationCode
 ```
 
-El problema debe corregirse desde el origen del guardado, no solo visualmente en frontend.
-
----
-
-## 4. Corregir barra lateral de filtros
-
-Según la imagen adjunta, la barra lateral de filtros tiene problemas de diseño.
-
-### Problemas detectados
+Ejemplos:
 
 ```text
-Los campos de búsqueda de marca y categoría se salen visualmente.
-Los botones Aplicar filtros y Limpiar filtros no respetan bien el ancho del contenedor.
-El filtro de precio mínimo y precio máximo no está correctamente alineado.
-Los inputs no mantienen una separación uniforme.
-El panel lateral parece invadir el área de productos.
-El diseño no conserva una estructura limpia entre filtros y tarjetas.
+TECNOTELEC
+LEXNOVA
+JOBCRON
+IMAGRAFITY
+SAT_PORTAL
+ERP_ADMIN
 ```
 
-### Reglas visuales
+Así un mismo usuario puede existir una sola vez, pero tener permisos diferentes por aplicación.
+
+Ejemplo:
 
 ```text
-La barra lateral debe tener ancho fijo en escritorio.
-Ningún input, botón o selector debe salirse del panel.
-Todos los elementos deben usar width: 100% dentro del contenedor.
-Debe existir separación uniforme entre secciones.
-Los filtros deben alinearse verticalmente.
-Precio mínimo y precio máximo pueden ir uno debajo del otro para evitar desbordamiento.
-El panel de filtros no debe invadir el área de productos.
+Usuario Hugo
+- TECNOTELEC: Administrador
+- LEXNOVA: Analista Jurídico
+- JOBCRON: Operador
 ```
 
----
+## 5. Dispositivos conectados
 
-## 5. Corregir diseño de inputs y botones
-
-Todos los campos deben tener una estructura consistente.
-
-### Inputs
+Tabla sugerida:
 
 ```text
-Altura uniforme.
-Bordes redondeados.
-Padding interno suficiente.
-Texto visible sin cortarse.
-Placeholder claro.
-No deben superar el ancho del contenedor padre.
+Auth.UserDevices
 ```
 
-### Botones
+Campos:
 
 ```text
-Aplicar filtros debe ocupar el ancho completo del panel.
-Limpiar filtros debe ocupar el ancho completo del panel.
-Ambos botones deben estar alineados.
-No deben salirse del contenedor.
-Debe existir espacio entre ambos.
+Id
+IdUser
+DeviceName
+DeviceType
+OperatingSystem
+Browser
+IpAddress
+UserAgent
+FingerprintHash
+IsTrusted
+IsActive
+LastSeenAt
+CreatedAt
+RevokedAt
+RevokedReason
 ```
 
----
-
-## 6. Corregir distribución entre filtros y productos
-
-La página debe dividirse correctamente en dos zonas:
+Con esto puedes mostrar:
 
 ```text
-Zona izquierda: filtros
-Zona derecha: listado de productos
+Samsung S24 Ultra — Chrome — Pachuca — Activo ahora
+Windows PC — Edge — Último acceso hace 2 días
 ```
 
-La zona de productos no debe montarse encima de los filtros.
-
-La tarjeta del producto no debe quedar debajo o detrás del panel lateral.
-
----
-
-## 7. Validación final visual
-
-Codex debe verificar en escritorio que:
+Y permitir:
 
 ```text
-La barra lateral no se desborde.
-Los inputs no se salen.
-Los botones no se enciman.
-Las tarjetas tienen la misma altura.
-Las descripciones no muestran HTML.
-Las descripciones largas se cortan con puntos suspensivos.
-Los acentos y caracteres especiales se muestran correctamente.
-La zona de productos respeta el espacio de filtros.
+Cerrar esta sesión
+Cerrar todas las sesiones
+Cerrar todos menos este dispositivo
 ```
 
----
+## 6. Sesiones y tokens
 
-## 8. Validación final funcional
-
-Codex debe probar con productos que tengan:
+Tabla:
 
 ```text
-SatDescription válido.
-SatDescription vacío.
-DescriptionHtml con HTML largo.
-DescriptionHtml vacío.
-Caracteres con acentos.
-Texto muy largo.
-Producto sin imagen.
-Producto sin precio.
+Auth.UserSessions
 ```
 
-El resultado esperado es:
+Campos:
 
 ```text
-La tarjeta siempre se ve limpia, uniforme y sin romper el diseño.
+Id
+IdUser
+IdDevice
+AccessTokenJti
+RefreshTokenHash
+StartedAt
+LastActivityAt
+ExpiresAt
+RevokedAt
+RevokedReason
+IsOnline
 ```
 
----
+Recomendación fuerte: no guardar refresh tokens en texto plano. Guardarlos como hash. OAuth 2.0 es el estándar base para autorización con tokens, y el manejo seguro de sesiones/tokens debe tratarse como parte crítica del diseño. ([OAuth][2])
+
+## 7. Cuando cambia la contraseña
+
+Cuando el usuario cambia contraseña:
+
+```text
+Revocar todas las sesiones
+Revocar todos los refresh tokens
+Marcar dispositivos como no confiables
+Forzar nuevo login
+Guardar evento en auditoría
+Enviar notificación
+```
+
+## 8. Seguridad adicional que sí agregaría
+
+Agregaría:
+
+```text
+MFA / doble factor
+Códigos de recuperación
+Historial de contraseñas
+Bloqueo por intentos fallidos
+Rate limit por IP y usuario
+Auditoría completa
+Alertas por nuevo dispositivo
+Alertas por ubicación/IP inusual
+Permisos por aplicación
+Permisos por módulo
+Permisos por acción
+Sesiones por dispositivo
+Revocación de sesiones
+Reautenticación para acciones sensibles
+```
+
+NIST SP 800-63B trata la autenticación remota, niveles de seguridad de autenticadores y ciclo de vida de credenciales; para una API reutilizable conviene tomarlo como referencia, sobre todo en MFA, recuperación y revocación. ([NIST Pages][3])
+
+## 9. Estructura ideal de permisos
+
+Yo usaría este modelo:
+
+```text
+Application → Module → Permission → Action
+```
+
+Ejemplo:
+
+```text
+TECNOTELEC
+  Catalog
+    Product.View
+    Product.Create
+    Product.Update
+    Product.Delete
+
+LEXNOVA
+  Cases
+    Case.View
+    Case.Create
+    Case.Assign
+    Case.Close
+```
+
+Así no amarras los permisos a una sola app.
+
+## 10. Mi propuesta final
+
+La arquitectura quedaría así:
+
+```text
+Auth API
+- Identidad
+- Login
+- Tokens
+- Roles
+- Permisos
+- Sesiones
+- Dispositivos
+- MFA
+- Auditoría de acceso
+
+Customer API
+- Cliente
+- Empresa
+- Sucursales
+- Contactos
+- Datos fiscales
+- Relación usuario-cliente
+
+Application Registry
+- Apps disponibles
+- Módulos
+- Permisos base
+- Configuración por sistema
+```
+
+La idea correcta sería:
+
+```text
+Auth no debe saber “quién es comercialmente el cliente”.
+Auth solo debe saber “quién eres, cómo entras y qué puedes hacer”.
+```
+
+Y Customer debe saber:
+
+```text
+A qué empresa perteneces, qué datos tiene esa empresa y cómo se relaciona contigo.
+```
+
+[1]: https://owasp.org/www-project-application-security-verification-standard/?utm_source=chatgpt.com "OWASP Application Security Verification Standard (ASVS)"
+[2]: https://oauth.net/2/?utm_source=chatgpt.com "OAuth 2.0 — OAuth"
+[3]: https://pages.nist.gov/800-63-4/sp800-63b.html?utm_source=chatgpt.com "NIST Special Publication 800-63B"

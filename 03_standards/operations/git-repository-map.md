@@ -30,6 +30,7 @@ Los commits y pushes se hacen por repositorio y por responsabilidad. No se debe 
 | Docker Nginx | `Docker.SW.Nginx` | `https://github.com/1CASH1/Docker.SW.Nginx` | Separado |
 | Docker Web | `Docker.WEB.NJ` | `https://github.com/1CASH1/Docker.WEB.NJ.git` | Separado, requiere validar propiedad local |
 | Web JobCron | `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron` | `https://github.com/1CASH1/WEB.NJ.NEXT.JobCron.git` | Separado |
+| Web LexNova | `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.LexNova.git` | Separado |
 | Web TecnoTelec | `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.TecnoTelec.git` | Separado |
 | Documentacion | `Docs` | `https://github.com/MexIngSoft/Docs.git` | Separado |
 
@@ -40,7 +41,7 @@ Se detectaron estas carpetas web:
 | Proyecto web | Ruta local | Estado Git detectado |
 |---|---|---|
 | JobCron | `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron` | Repo propio detectado: `https://github.com/1CASH1/WEB.NJ.NEXT.JobCron.git` |
-| LexNova | `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | Sin repo Git propio detectado |
+| LexNova | `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | Repo propio detectado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.LexNova.git` |
 | TecnoTelec | `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec` | Repo propio detectado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.TecnoTelec.git` |
 
 Si una web no tiene repo Git propio, antes de subirla como proyecto separado se debe restaurar o crear su `.git` propio y asignar su remoto. Mientras no exista `.git` por web, sus cambios viven dentro del repo contenedor que la incluya.
@@ -104,7 +105,6 @@ git config --global --add safe.directory C:/Users/cash1/source/repos/Workspace.C
 
 ## Pendientes
 
-- Confirmar si `WEB.NJ.NEXT.JobCron`, `WEB.NJ.NEXT.LexNova` y `WEB.NJ.NEXT.TecnoTelec` deben convertirse en repos Git separados.
-- Crear o restaurar repo Git propio para `WEB.NJ.NEXT.LexNova` si debe publicarse separado.
+- Confirmar si `WEB.NJ.NEXT.JobCron`, `WEB.NJ.NEXT.LexNova` y `WEB.NJ.NEXT.TecnoTelec` deben mantenerse como repos Git separados y si tambien deben referenciarse desde el repo contenedor.
 - Instalar o habilitar GitHub CLI (`gh`) si se quiere crear pull requests desde terminal.
 - Confirmar si los pushes se haran directo a `main` o mediante ramas `feature/*`.

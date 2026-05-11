@@ -93,6 +93,64 @@ Agents 000 y 001 concluidos.
 
 ---
 
+# Analisis operativo de soluciones Tecno Telec
+
+## Fecha
+
+2026-05-10
+
+## Alcance ejecutado
+
+Se analizaron los nuevos contenidos de:
+
+- `AGENTS-000.md`
+- `AGENTS-001.md`
+
+El alcance corresponde al requerimiento complejo de soluciones Tecno Telec: reglas, cotizacion, mano de obra, distancia, tamano de proyecto, saldos, anticipos, proyectos, subcontratistas, modulos ERP y decisiones de implementacion por fases.
+
+## Resultado
+
+Completado a nivel documental.
+
+Se determino que:
+
+- No se requiere una base de datos nueva para la primera etapa.
+- Se debe usar la base `comercial` con schemas PascalCase separados.
+- TecnoTelec API solo debe guardar configuracion comercial propia.
+- Los datos reutilizables deben vivir en Core ERP APIs.
+- El primer desarrollo debe ser un cotizador consultivo con revision humana.
+- La automatizacion completa debe quedar por fases.
+
+## Documentacion creada
+
+- `Docs/02_projects/tecnotelec/solutions/02_solution_operating_architecture_analysis.md`
+
+## Archivos modificados
+
+- `Docs/02_projects/tecnotelec/README.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Decisiones tomadas
+
+- `TecnoTelec API` vive como dominio propio para soluciones publicas, preguntas, paquetes y reglas de presentacion.
+- `Sales/Quote` debe manejar cotizaciones, snapshot, anticipos y saldos.
+- `Logistics` debe manejar distancia, cobertura, viaticos y tiempos.
+- `Projects` debe manejar ejecucion, agenda, hitos, evidencia y entrega.
+- `Rules/ProductCompatibility` debe manejar compatibilidad tecnica.
+- `Partners/Operations` debe manejar tecnicos, cuadrillas y subcontratistas.
+
+## Pendientes
+
+- Implementar modelos y endpoints de soluciones.
+- Documentar o ampliar Rules, Quote, Logistics, Projects, Partners, Support y Commissions.
+- Definir primer flujo `SolutionRequest` o `QuoteRequest` para MVP.
+
+## Estado
+
+Agents 000 y 001 concluidos y listos para limpieza.
+
+---
+
 # Ejecucion adicional AGENTS-000
 
 ## Fecha
@@ -195,3 +253,63 @@ Se confirmo y corrigio el flujo para que los caracteres especiales se normalicen
 ## Documentacion creada
 
 - `Docs/04_integrations/syscom/etl/text-encoding-and-search.md`
+
+---
+
+# Cierre de analisis para iniciar desarrollo de soluciones
+
+## Fecha
+
+2026-05-10
+
+## Alcance ejecutado
+
+Se consolidaron los documentos creados para cerrar el analisis de soluciones, cotizacion, mano de obra, ubicacion, tamano de proyecto, saldos y arquitectura modular.
+
+## Elementos creados
+
+| Documento | Fondo del documento |
+|---|---|
+| `Docs/02_projects/tecnotelec/solutions/00_solution_presentation_and_assembly_strategy.md` | Define como presentar soluciones en la web, familias iniciales, paquetes, componentes y reglas de experiencia. |
+| `Docs/02_projects/tecnotelec/solutions/01_dynamic_solution_technical_design.md` | Define base, schema, tablas, fuentes de datos y flujo dinamico de soluciones. |
+| `Docs/02_projects/tecnotelec/solutions/02_solution_operating_architecture_analysis.md` | Define arquitectura operativa completa: modulos ERP, APIs nuevas, mano de obra, distancia, saldos, proyectos y fases. |
+| `Docs/02_projects/tecnotelec/solutions/03_development_start_recommendation.md` | Define la recomendacion final para cerrar analisis e iniciar desarrollo. |
+| `Docs/02_projects/tecnotelec/quotes/02_quote_implementation_scope_analysis.md` | Define que debe contener una cotizacion y como manejar mano de obra como `SERVICE` o `LABOR`, no como producto fisico normal. |
+
+## Decision de fondo
+
+La mejor ruta para comenzar desarrollo es implementar primero un `SolutionRequest / QuoteRequest MVP`.
+
+El MVP debe permitir que el cliente:
+
+- elija una solucion,
+- indique si quiere solo productos o solucion instalada,
+- capture ubicacion aproximada,
+- capture tamano del proyecto,
+- capture presupuesto o saldo disponible,
+- deje datos de contacto,
+- genere una solicitud de cotizacion revisable.
+
+## Que se implementa ahora
+
+- Modelos de soluciones en `TecnoTelec API`.
+- Endpoints publicos de soluciones en `TecnoTelec Gateway`.
+- Web dinamica para `/soluciones` y `/soluciones/[slug]`.
+- Cotizador por solucion.
+- Guardado de solicitud inicial.
+- Linea `LABOR` o `SERVICE` pendiente de revision cuando el cliente pida instalacion.
+
+## Que queda para fases posteriores
+
+- Precio automatico final de mano de obra.
+- Calculo real de distancia y viaticos.
+- Agenda de tecnicos.
+- Subcontratistas.
+- Anticipos y saldos formales.
+- Conversion automatica a proyecto.
+- Compatibilidad tecnica completa.
+- Soporte postventa.
+
+## Estado
+
+Analisis cerrado para iniciar desarrollo del MVP consultivo de soluciones y cotizacion.
