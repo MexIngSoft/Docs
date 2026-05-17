@@ -233,3 +233,271 @@ Fecha: 2026-05-16
 ## Nota
 
 `gh` no esta instalado en esta maquina, por lo que no se crearon pull requests desde CLI. La publicacion se hizo con `git`.
+
+---
+
+# Reporte de ejecucion Fiscora
+
+Fecha: 2026-05-16
+
+## Alcance
+
+Se ejecuto una nueva pasada sobre `Docs/agents/AGENTS-*.md` en orden numerico. En esta corrida los archivos con instrucciones nuevas fueron:
+
+- `AGENTS-000.md`: lineamientos de animaciones web Fiscora.
+- `AGENTS-001.md`: analisis general de plataforma Fiscora.
+- `AGENTS-002.md`: modelo de datos CFDI/SAT recomendado.
+- `AGENTS-003.md`: preview React de animaciones principales.
+
+`AGENTS-004.md` a `AGENTS-020.md` estaban vacios. `AGENTS-021.md` seguia siendo resumen documental. `AGENTS-022.md` a `AGENTS-030.md` estaban vacios.
+
+## Implementacion realizada
+
+### Documentacion Fiscora
+
+Se creo la documentacion canonica del proyecto:
+
+- `Docs/02_projects/fiscora/README.md`
+- `Docs/02_projects/fiscora/platform-overview.md`
+- `Docs/02_projects/fiscora/architecture.md`
+- `Docs/02_projects/fiscora/api-contracts.md`
+- `Docs/02_projects/fiscora/security.md`
+- `Docs/02_projects/fiscora/database/cfdi-data-model.md`
+- `Docs/02_projects/fiscora/animations/animation-guidelines.md`
+- `Docs/02_projects/fiscora/frontend/animation-preview.md`
+
+### Preview web Fiscora
+
+Se creo un MVP funcional en:
+
+```text
+Docker.WEB.NJ/WEB.NJ.NEXT.Fiscora
+```
+
+Archivos principales:
+
+- `package.json`
+- `.env.local.example`
+- `.gitignore`
+- `README.md`
+- `app/layout.tsx`
+- `app/page.tsx`
+- `app/globals.css`
+- `components/FiscoraPreview.tsx`
+- `lib/fiscora-data.ts`
+
+El preview incluye:
+
+- Hero CFDI animado.
+- Flujo SAT -> XML -> PDF.
+- Counters de dashboard.
+- Progreso SAT por estados.
+- Explorador de facturas.
+- Panel CFDI.
+- Personalizador visual.
+- Soporte de `prefers-reduced-motion`.
+
+## Validaciones
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `WEB.NJ.NEXT.Fiscora` | `npm install` | Correcto. NPM reporto 2 vulnerabilidades moderadas en dependencias; no se aplico `npm audit fix --force` para evitar cambios mayores automaticos. |
+| `WEB.NJ.NEXT.Fiscora` | `npm run build` | Correcto. |
+| `WEB.NJ.NEXT.Fiscora` | `http://localhost:3005` | Servidor local iniciado y responde HTTP 200. |
+
+No se ejecutaron checks Django porque esta corrida no creo APIs Fiscora.
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Lineamientos de animaciones convertidos en documentacion y preview. |
+| `AGENTS-001.md` | Completado | Vision de plataforma Fiscora documentada. |
+| `AGENTS-002.md` | Completado | Modelo CFDI/SAT documentado. |
+| `AGENTS-003.md` | Completado | Preview Next.js implementado y validado. |
+| `AGENTS-004.md` - `AGENTS-020.md` | Sin instrucciones | Estaban vacios. |
+| `AGENTS-021.md` | Sin tarea ejecutable | Solo contiene resumen documental. |
+| `AGENTS-022.md` - `AGENTS-030.md` | Sin instrucciones | Estaban vacios. |
+
+## Limpieza
+
+Despues de completar y validar la corrida, se limpiaron los archivos `Docs/agents/AGENTS-*.md` para dejarlos listos para futuras instrucciones.
+
+## Pendientes
+
+- Definir remotos Git para `API.PY.DJANGO.Fiscora`, `API.PY.DJANGO.Fiscora.Gateway` y `WEB.NJ.NEXT.Fiscora`.
+- Crear APIs Fiscora cuando exista agent especifico de backend.
+- Conectar el preview Fiscora con datos reales del gateway.
+- Revisar vulnerabilidades moderadas reportadas por `npm audit` sin aplicar cambios breaking automaticos.
+
+---
+
+# Reporte de ejecucion Fiscora/Fiscal APIs
+
+Fecha: 2026-05-16
+
+## Alcance
+
+Se ejecuto una nueva pasada sobre `Docs/agents/AGENTS-*.md` en orden numerico. En esta corrida los archivos con instrucciones fueron:
+
+- `AGENTS-000.md`: definicion de arquitectura Fiscora/Fiscal y responsabilidades de APIs.
+- `AGENTS-001.md`: consolidacion de arquitectura fiscal, SAT, CFDI, jobs y persistencia.
+
+`AGENTS-002.md` a `AGENTS-030.md` estaban vacios.
+
+## Implementacion realizada
+
+### API Fiscal
+
+Se creo:
+
+```text
+Docker.API.PY/API.PY.DJANGO.Fiscal
+```
+
+Responsabilidad:
+
+- Tenants/empresas fiscales.
+- CFDI documents.
+- XML upload metadata MVP.
+- Solicitudes de descarga SAT.
+- Verificacion de solicitudes SAT.
+- Paquetes SAT.
+- Reportes basicos.
+- Auditoria fiscal.
+
+Endpoints MVP:
+
+- `GET /api/fiscal/health/`
+- `GET|POST /api/fiscal/tenants/`
+- `GET|POST /api/fiscal/cfdi/`
+- `GET /api/fiscal/cfdi/{uuid}/`
+- `POST /api/fiscal/xml/upload/`
+- `GET|POST /api/fiscal/sat/download-requests/`
+- `POST /api/fiscal/sat/download-requests/{request_id}/verify/`
+- `GET /api/fiscal/reports/summary/`
+- `GET|POST /api/fiscal/audit/events/`
+
+### API Fiscora
+
+Se creo:
+
+```text
+Docker.API.PY/API.PY.DJANGO.Fiscora
+```
+
+Responsabilidad:
+
+- Producto comercial Fiscora.
+- Planes.
+- Creditos.
+- Reglas de uso.
+- Preferencias del portal.
+
+Endpoints MVP:
+
+- `GET /api/fiscora/product/health/`
+- `GET /api/fiscora/product/configuration/`
+- `GET|POST /api/fiscora/product/plans/`
+- `GET|POST /api/fiscora/product/credits/`
+- `GET|POST /api/fiscora/product/preferences/`
+
+### Gateway Fiscora
+
+Se creo:
+
+```text
+Docker.API.PY/API.PY.DJANGO.Fiscora.Gateway
+```
+
+Responsabilidad:
+
+- BFF para `WEB.NJ.NEXT.Fiscora`.
+- Normalizacion de respuestas.
+- Proxy hacia `API.PY.DJANGO.Fiscora`.
+- Proxy hacia `API.PY.DJANGO.Fiscal`.
+
+Endpoints MVP:
+
+- `GET /api/fiscora/health/`
+- `GET /api/fiscora/dashboard/summary/`
+- `GET /api/fiscora/configuration/`
+- `GET|POST /api/fiscora/cfdi/`
+- `GET /api/fiscora/cfdi/{uuid}/`
+- `POST /api/fiscora/sat/download-jobs/`
+- `POST /api/fiscora/xml/upload/`
+- `GET /api/fiscora/reports/summary/`
+
+### Docker local
+
+Se actualizo:
+
+- `Docker.API.PY/docker-compose.yml`
+- `Docker.API.PY/Dockerfile`
+- `Docker.API.PY/start.sh`
+- `Docker.WEB.NJ/docker-compose.yml`
+- `Docker.WEB.NJ/start.sh`
+
+Puertos agregados:
+
+- `8014`: `API.PY.DJANGO.Fiscora.Gateway`
+- `8015`: `API.PY.DJANGO.Fiscora`
+- `8016`: `API.PY.DJANGO.Fiscal`
+- `3005`: `WEB.NJ.NEXT.Fiscora`
+
+### Documentacion
+
+Se actualizo:
+
+- `Docs/02_projects/fiscora/README.md`
+- `Docs/02_projects/fiscora/architecture.md`
+- `Docs/02_projects/fiscora/repositories.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docs/03_standards/operations/django-api-project-compliance.md`
+
+## Repositorios asignados
+
+| Proyecto | Origin |
+|---|---|
+| `API.PY.DJANGO.Fiscal` | `https://github.com/MexIngSoft/API.PY.DJANGO.Fiscal.git` |
+| `API.PY.DJANGO.Fiscora` | `https://github.com/MexIngSoft/API.PY.DJANGO.Fiscora.git` |
+| `API.PY.DJANGO.Fiscora.Gateway` | `https://github.com/MexIngSoft/API.PY.DJANGO.Fiscora.Gateway.git` |
+| `WEB.NJ.NEXT.Fiscora` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.Fiscora.git` |
+
+No se hicieron commits ni pushes en esta corrida.
+
+## Validaciones
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `API.PY.DJANGO.Fiscal` | `python manage.py makemigrations fiscal` | Correcto. |
+| `API.PY.DJANGO.Fiscal` | `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.Fiscal` | `python -m compileall .` | Correcto. |
+| `API.PY.DJANGO.Fiscora` | `python manage.py makemigrations portal` | Correcto. |
+| `API.PY.DJANGO.Fiscora` | `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.Fiscora` | `python -m compileall .` | Correcto. |
+| `API.PY.DJANGO.Fiscora.Gateway` | `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.Fiscora.Gateway` | `python -m compileall .` | Correcto. |
+| `WEB.NJ.NEXT.Fiscora` | `npm run build` | Correcto. |
+| `Docker.API.PY` | `docker compose config` | Correcto. |
+| `Docker.WEB.NJ` | `docker compose config` | Correcto. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Arquitectura Fiscora/Fiscal implementada como MVP. |
+| `AGENTS-001.md` | Completado | Persistencia fiscal/SAT/CFDI implementada como API Fiscal MVP y documentada. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Estaban vacios. |
+
+## Limpieza
+
+Despues de completar y validar la corrida, se limpiaron los archivos `Docs/agents/AGENTS-*.md`.
+
+## Pendientes
+
+- Implementar integracion real con Web Services SAT.
+- Implementar parser XML CFDI completo.
+- Conectar `WEB.NJ.NEXT.Fiscora` con `API.PY.DJANGO.Fiscora.Gateway`.
+- Ejecutar migraciones reales contra PostgreSQL cuando el entorno Docker este levantado.
+- Hacer commit y push por repositorio cuando se solicite publicacion.

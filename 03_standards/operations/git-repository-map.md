@@ -29,10 +29,14 @@ Los commits y pushes se hacen por repositorio y por responsabilidad. No se debe 
 | API Document | `Docker.API.PY/API.PY.DJANGO.Document` | `https://github.com/MexIngSoft/API.PY.DJANGO.Document.git` | Separado |
 | API DocuCore | `Docker.API.PY/API.PY.DJANGO.DocuCore` | `https://github.com/MexIngSoft/API.PY.DJANGO.DocuCore.git` | Separado |
 | API DocuCore Gateway | `Docker.API.PY/API.PY.DJANGO.DocuCore.Gateway` | `https://github.com/MexIngSoft/API.PY.DJANGO.DocuCore.Gateway.git` | Separado |
+| API Fiscal | `Docker.API.PY/API.PY.DJANGO.Fiscal` | `https://github.com/MexIngSoft/API.PY.DJANGO.Fiscal.git` | Separado |
+| API Fiscora | `Docker.API.PY/API.PY.DJANGO.Fiscora` | `https://github.com/MexIngSoft/API.PY.DJANGO.Fiscora.git` | Separado |
+| API Fiscora Gateway | `Docker.API.PY/API.PY.DJANGO.Fiscora.Gateway` | `https://github.com/MexIngSoft/API.PY.DJANGO.Fiscora.Gateway.git` | Separado |
 | Docker PostgreSQL | `Docker.DB.PG` | `https://github.com/MexIngSoft/Docker.DB.PG.git` | Separado |
 | Docker Nginx | `Docker.SW.Nginx` | `https://github.com/1CASH1/Docker.SW.Nginx` | Separado |
 | Docker Web | `Docker.WEB.NJ` | `https://github.com/MexIngSoft/Docker.WEB.NJ.git` | Separado, requiere validar propiedad local |
 | Web DocuCore | `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.DocuCore.git` | Separado |
+| Web Fiscora | `Docker.WEB.NJ/WEB.NJ.NEXT.Fiscora` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.Fiscora.git` | Separado |
 | Web JobCron | `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.JobCron.git` | Separado |
 | Web LexNova | `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.LexNova.git` | Separado |
 | Web TecnoTelec | `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.TecnoTelec.git` | Separado |
@@ -45,6 +49,7 @@ Se detectaron estas carpetas web:
 | Proyecto web | Ruta local | Estado Git detectado |
 |---|---|---|
 | DocuCore | `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore` | Repo propio asignado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.DocuCore.git` |
+| Fiscora | `Docker.WEB.NJ/WEB.NJ.NEXT.Fiscora` | Repo propio asignado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.Fiscora.git` |
 | JobCron | `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron` | Repo propio detectado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.JobCron.git` |
 | LexNova | `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | Repo propio detectado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.LexNova.git` |
 | TecnoTelec | `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec` | Repo propio detectado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.TecnoTelec.git` |
@@ -80,9 +85,13 @@ Ejemplos:
 | `API.PY.DJANGO.Document` | `Add document processing MVP` |
 | `API.PY.DJANGO.DocuCore` | `Add DocuCore tool catalog MVP` |
 | `API.PY.DJANGO.DocuCore.Gateway` | `Expose DocuCore gateway endpoints` |
+| `API.PY.DJANGO.Fiscal` | `Add fiscal core MVP` |
+| `API.PY.DJANGO.Fiscora` | `Add Fiscora product API MVP` |
+| `API.PY.DJANGO.Fiscora.Gateway` | `Add Fiscora gateway MVP` |
 | `API.PY.DJANGO.TecnoTelec.Gateway` | `Expose product catalog through gateway` |
 | `Docker.WEB.NJ` | `Update TecnoTelec catalog mockup` |
 | `WEB.NJ.NEXT.DocuCore` | `Add DocuCore dashboard MVP` |
+| `WEB.NJ.NEXT.Fiscora` | `Add Fiscora animation preview` |
 | `WEB.NJ.NEXT.TecnoTelec` | `Improve public user experience` |
 | `WEB.NJ.NEXT.JobCron` | `Update JobCron dashboard experience` |
 
