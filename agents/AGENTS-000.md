@@ -1,310 +1,133 @@
-Sí. Yo la separaría así:
+# Agents para Optimizar la Documentación del Proyecto
 
-## 1. API Auth — solo identidad, acceso y seguridad
+## Objetivo
 
-Debe encargarse de:
+Crear un conjunto de agents especializados para que Codex pueda revisar, ordenar, depurar, fusionar, mover, eliminar y completar la documentación del proyecto sin perder contexto.
 
-* Usuarios.
-* Login / logout.
-* Passwords.
-* Roles.
-* Permisos.
-* Sesiones.
-* Dispositivos conectados.
-* Tokens.
-* Recuperación de cuenta.
-* MFA / doble factor.
-* Auditoría de accesos.
-* Bloqueos por intentos fallidos.
-* Políticas de seguridad por app.
-* Validación de si el usuario está activo, bloqueado o eliminado.
-* Saber si el usuario está en línea o cuándo fue su última actividad.
+La meta no es que Codex lea todo el repositorio cada vez.
 
-Esto coincide con buenas prácticas de OWASP ASVS, que recomienda verificar autenticación, manejo de sesiones y control de acceso como controles separados y comprobables. ([OWASP Foundation][1])
+La meta es que trabaje con:
 
-## 2. Lo que NO pondría en Auth
+* índice maestro,
+* clasificación documental,
+* documentos canónicos,
+* estructura por dominio,
+* separación entre Core, Shared, Business, Future y Archive,
+* reglas claras de edición,
+* validaciones antes de modificar.
 
-No pondría aquí:
+---
 
-* Datos fiscales.
-* Datos comerciales del cliente.
-* Dirección.
-* Teléfono de negocio.
-* Razón social.
-* Sucursales.
-* Almacenes.
-* Datos de empresa.
-* Configuración comercial.
-* Preferencias del cliente por proyecto.
-
-Eso debe ir en una API separada, por ejemplo:
+# Estructura recomendada de carpeta
 
 ```text
-Customer API
-Client API
-Tenant API
-Organization API
+/docs
+  /agents
+    00_master_router_agent.md
+    01_zip_inventory_agent.md
+    02_document_classifier_agent.md
+    03_structure_architect_agent.md
+    04_duplicate_detector_agent.md
+    05_canonical_document_agent.md
+    06_core_vs_business_agent.md
+    07_business_documentation_agent.md
+    08_api_documentation_agent.md
+    09_database_documentation_agent.md
+    10_frontend_documentation_agent.md
+    11_etl_jobs_documentation_agent.md
+    12_events_scheduler_agent.md
+    13_security_auth_permissions_agent.md
+    14_navigation_index_agent.md
+    15_cleanup_archive_agent.md
+    16_template_standardizer_agent.md
+    17_quality_gate_agent.md
+    18_codex_execution_plan_agent.md
+    19_final_review_agent.md
+    20_documentation_maintenance_agent.md
 ```
 
-Mi recomendación: **Customer API** si piensas en clientes comerciales, o **Tenant API** si cada empresa tendrá sus propias apps, usuarios y configuración.
+---
 
-## 3. Esquemas recomendados
+# Orden correcto de ejecución
 
 ```text
-Auth
-Customer
-Security
-Audit
+00 → 01 → 02 → 03 → 04 → 05 → 06 → 07 → 08 → 09 → 10 → 11 → 12 → 13 → 14 → 15 → 16 → 17 → 18 → 19 → 20
 ```
 
-O más simple:
+Codex debe ejecutar los agents en orden ascendente.
+
+Ningún agent debe modificar documentación si antes no existe:
+
+* inventario,
+* clasificación,
+* índice maestro,
+* propuesta de estructura,
+* reglas de canonicidad.
+
+---
+
+# 00_master_router_agent.md
+
+## Propósito
+
+Coordinar todos los agents de documentación.
+
+Este agent decide qué agent debe trabajar, en qué orden y sobre qué carpetas.
+
+## Responsabilidad
+
+* Leer la estructura general.
+* Detectar si existen índices.
+* Verificar si hay clasificación documental previa.
+* Definir qué agents deben ejecutarse.
+* Evitar que Codex edite archivos sin contexto.
+* Controlar el flujo completo de optimización.
+
+## Entrada
+
+* Carpeta `/docs`.
+* Archivo ZIP descomprimido.
+* Documentación existente.
+* Comentarios previos del usuario.
+
+## Salida esperada
+
+* Plan de ejecución.
+* Lista de agents requeridos.
+* Orden de ejecución.
+* Rutas que sí se deben analizar.
+* Rutas que se deben ignorar temporalmente.
+
+## Reglas
+
+* No modificar documentos directamente.
+* Solo coordinar.
+* Si falta inventario, ejecutar primero `01_zip_inventory_agent.md`.
+* Si falta índice, ejecutar `14_navigation_index_agent.md` después de clasificar.
+* Si encuentra documentos de empresas mezclados con Core, delegar a `06_core_vs_business_agent.md`.
+
+## Prompt para Codex
 
 ```text
-Auth
-Customer
-Audit
+Actúa como router principal de documentación.
+
+Tu tarea es coordinar la optimización documental del proyecto.
+
+Antes de editar cualquier archivo:
+1. Revisa si existe /docs/_meta/master-index.md o master-index.yaml.
+2. Revisa si existe clasificación documental previa.
+3. Revisa si existe estructura separada entre core, shared, business, future y archive.
+4. Define qué agents deben ejecutarse y en qué orden.
+5. No modifiques contenido técnico todavía.
+6. Entrega un plan de ejecución con rutas específicas.
+
+Resultado esperado:
+- estado actual de la documentación
+- agents necesarios
+- orden de ejecución
+- carpetas a analizar
+- riesgos detectados
+- siguiente acción recomendada
 ```
 
-Dentro de `Auth`:
-
-```text
-Auth.Users
-Auth.Roles
-Auth.Permissions
-Auth.UserRoles
-Auth.RolePermissions
-Auth.Applications
-Auth.ApplicationRoles
-Auth.ApplicationPermissions
-Auth.UserSessions
-Auth.UserDevices
-Auth.RefreshTokens
-Auth.PasswordHistory
-Auth.LoginAttempts
-Auth.MfaMethods
-Auth.RecoveryCodes
-```
-
-Dentro de `Customer`:
-
-```text
-Customer.Customers
-Customer.CustomerUsers
-Customer.Organizations
-Customer.Branches
-Customer.Addresses
-Customer.Contacts
-Customer.FiscalProfiles
-Customer.Preferences
-```
-
-## 4. Punto importante: multi-app
-
-Auth debe saber a qué sistema intenta entrar el usuario:
-
-```text
-ApplicationCode
-```
-
-Ejemplos:
-
-```text
-TECNOTELEC
-LEXNOVA
-JOBCRON
-IMAGRAFITY
-SAT_PORTAL
-ERP_ADMIN
-```
-
-Así un mismo usuario puede existir una sola vez, pero tener permisos diferentes por aplicación.
-
-Ejemplo:
-
-```text
-Usuario Hugo
-- TECNOTELEC: Administrador
-- LEXNOVA: Analista Jurídico
-- JOBCRON: Operador
-```
-
-## 5. Dispositivos conectados
-
-Tabla sugerida:
-
-```text
-Auth.UserDevices
-```
-
-Campos:
-
-```text
-Id
-IdUser
-DeviceName
-DeviceType
-OperatingSystem
-Browser
-IpAddress
-UserAgent
-FingerprintHash
-IsTrusted
-IsActive
-LastSeenAt
-CreatedAt
-RevokedAt
-RevokedReason
-```
-
-Con esto puedes mostrar:
-
-```text
-Samsung S24 Ultra — Chrome — Pachuca — Activo ahora
-Windows PC — Edge — Último acceso hace 2 días
-```
-
-Y permitir:
-
-```text
-Cerrar esta sesión
-Cerrar todas las sesiones
-Cerrar todos menos este dispositivo
-```
-
-## 6. Sesiones y tokens
-
-Tabla:
-
-```text
-Auth.UserSessions
-```
-
-Campos:
-
-```text
-Id
-IdUser
-IdDevice
-AccessTokenJti
-RefreshTokenHash
-StartedAt
-LastActivityAt
-ExpiresAt
-RevokedAt
-RevokedReason
-IsOnline
-```
-
-Recomendación fuerte: no guardar refresh tokens en texto plano. Guardarlos como hash. OAuth 2.0 es el estándar base para autorización con tokens, y el manejo seguro de sesiones/tokens debe tratarse como parte crítica del diseño. ([OAuth][2])
-
-## 7. Cuando cambia la contraseña
-
-Cuando el usuario cambia contraseña:
-
-```text
-Revocar todas las sesiones
-Revocar todos los refresh tokens
-Marcar dispositivos como no confiables
-Forzar nuevo login
-Guardar evento en auditoría
-Enviar notificación
-```
-
-## 8. Seguridad adicional que sí agregaría
-
-Agregaría:
-
-```text
-MFA / doble factor
-Códigos de recuperación
-Historial de contraseñas
-Bloqueo por intentos fallidos
-Rate limit por IP y usuario
-Auditoría completa
-Alertas por nuevo dispositivo
-Alertas por ubicación/IP inusual
-Permisos por aplicación
-Permisos por módulo
-Permisos por acción
-Sesiones por dispositivo
-Revocación de sesiones
-Reautenticación para acciones sensibles
-```
-
-NIST SP 800-63B trata la autenticación remota, niveles de seguridad de autenticadores y ciclo de vida de credenciales; para una API reutilizable conviene tomarlo como referencia, sobre todo en MFA, recuperación y revocación. ([NIST Pages][3])
-
-## 9. Estructura ideal de permisos
-
-Yo usaría este modelo:
-
-```text
-Application → Module → Permission → Action
-```
-
-Ejemplo:
-
-```text
-TECNOTELEC
-  Catalog
-    Product.View
-    Product.Create
-    Product.Update
-    Product.Delete
-
-LEXNOVA
-  Cases
-    Case.View
-    Case.Create
-    Case.Assign
-    Case.Close
-```
-
-Así no amarras los permisos a una sola app.
-
-## 10. Mi propuesta final
-
-La arquitectura quedaría así:
-
-```text
-Auth API
-- Identidad
-- Login
-- Tokens
-- Roles
-- Permisos
-- Sesiones
-- Dispositivos
-- MFA
-- Auditoría de acceso
-
-Customer API
-- Cliente
-- Empresa
-- Sucursales
-- Contactos
-- Datos fiscales
-- Relación usuario-cliente
-
-Application Registry
-- Apps disponibles
-- Módulos
-- Permisos base
-- Configuración por sistema
-```
-
-La idea correcta sería:
-
-```text
-Auth no debe saber “quién es comercialmente el cliente”.
-Auth solo debe saber “quién eres, cómo entras y qué puedes hacer”.
-```
-
-Y Customer debe saber:
-
-```text
-A qué empresa perteneces, qué datos tiene esa empresa y cómo se relaciona contigo.
-```
-
-[1]: https://owasp.org/www-project-application-security-verification-standard/?utm_source=chatgpt.com "OWASP Application Security Verification Standard (ASVS)"
-[2]: https://oauth.net/2/?utm_source=chatgpt.com "OAuth 2.0 — OAuth"
-[3]: https://pages.nist.gov/800-63-4/sp800-63b.html?utm_source=chatgpt.com "NIST Special Publication 800-63B"
+---

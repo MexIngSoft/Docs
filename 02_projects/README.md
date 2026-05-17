@@ -80,6 +80,7 @@ Documentos principales:
 
 ### Utilidades y automatizacion
 
+- `docucore`
 - `tip-smart`
 - `social-networks`
 - `mockwander`

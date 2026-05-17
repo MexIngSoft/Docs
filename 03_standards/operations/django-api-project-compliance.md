@@ -38,6 +38,9 @@ Los proyectos existentes fueron migrados operativamente a la nomenclatura estand
 | `API.PY.DJANGO.Procurement` | Cumple con excepcion | `origin`: `https://github.com/MexIngSoft/API.PY.DJANGO.Procurement.git`. Usa paquete `config`. |
 | `API.PY.DJANGO.Sales` | Cumple con excepcion | `origin`: `https://github.com/MexIngSoft/API.PY.DJANGO.Sales.git`. Usa paquete `config`. |
 | `API.PY.DJANGO.Supplier` | Cumple con excepcion | `origin`: `https://github.com/MexIngSoft/API.PY.DJANGO.Supplier.git`. Usa paquete `config`. |
+| `API.PY.DJANGO.Document` | Cumple | `origin`: `https://github.com/MexIngSoft/API.PY.DJANGO.Document.git`. Check Django y compilacion Python correctos. |
+| `API.PY.DJANGO.DocuCore` | Cumple | `origin`: `https://github.com/MexIngSoft/API.PY.DJANGO.DocuCore.git`. Check Django y compilacion Python correctos. |
+| `API.PY.DJANGO.DocuCore.Gateway` | Cumple | `origin`: `https://github.com/MexIngSoft/API.PY.DJANGO.DocuCore.Gateway.git`. Check Django y compilacion Python correctos. |
 
 ## Pendientes no aplicados
 

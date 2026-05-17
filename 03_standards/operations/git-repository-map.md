@@ -26,9 +26,13 @@ Los commits y pushes se hacen por repositorio y por responsabilidad. No se debe 
 | API Supplier | `Docker.API.PY/API.PY.DJANGO.Supplier` | `https://github.com/MexIngSoft/API.PY.DJANGO.Supplier.git` | Separado |
 | API TecnoTelec | `Docker.API.PY/API.PY.DJANGO.TecnoTelec` | `https://github.com/MexIngSoft/API.PY.DJANGO.TecnoTelec.git` | Separado |
 | API TecnoTelec Gateway | `Docker.API.PY/API.PY.DJANGO.TecnoTelec.Gateway` | `https://github.com/MexIngSoft/API.PY.DJANGO.TecnoTelec.Gateway.git` | Separado |
+| API Document | `Docker.API.PY/API.PY.DJANGO.Document` | `https://github.com/MexIngSoft/API.PY.DJANGO.Document.git` | Separado |
+| API DocuCore | `Docker.API.PY/API.PY.DJANGO.DocuCore` | `https://github.com/MexIngSoft/API.PY.DJANGO.DocuCore.git` | Separado |
+| API DocuCore Gateway | `Docker.API.PY/API.PY.DJANGO.DocuCore.Gateway` | `https://github.com/MexIngSoft/API.PY.DJANGO.DocuCore.Gateway.git` | Separado |
 | Docker PostgreSQL | `Docker.DB.PG` | `https://github.com/MexIngSoft/Docker.DB.PG.git` | Separado |
 | Docker Nginx | `Docker.SW.Nginx` | `https://github.com/1CASH1/Docker.SW.Nginx` | Separado |
 | Docker Web | `Docker.WEB.NJ` | `https://github.com/MexIngSoft/Docker.WEB.NJ.git` | Separado, requiere validar propiedad local |
+| Web DocuCore | `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.DocuCore.git` | Separado |
 | Web JobCron | `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.JobCron.git` | Separado |
 | Web LexNova | `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.LexNova.git` | Separado |
 | Web TecnoTelec | `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.TecnoTelec.git` | Separado |
@@ -40,6 +44,7 @@ Se detectaron estas carpetas web:
 
 | Proyecto web | Ruta local | Estado Git detectado |
 |---|---|---|
+| DocuCore | `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore` | Repo propio asignado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.DocuCore.git` |
 | JobCron | `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron` | Repo propio detectado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.JobCron.git` |
 | LexNova | `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | Repo propio detectado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.LexNova.git` |
 | TecnoTelec | `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec` | Repo propio detectado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.TecnoTelec.git` |
@@ -72,8 +77,12 @@ Ejemplos:
 | `Docker.API.PY` | `Configure isolated project environments` |
 | `Docker.DB.PG` | `Add PascalCase project schemas` |
 | `API.PY.DJANGO.Supplier` | `Add Syscom catalog sync endpoints` |
+| `API.PY.DJANGO.Document` | `Add document processing MVP` |
+| `API.PY.DJANGO.DocuCore` | `Add DocuCore tool catalog MVP` |
+| `API.PY.DJANGO.DocuCore.Gateway` | `Expose DocuCore gateway endpoints` |
 | `API.PY.DJANGO.TecnoTelec.Gateway` | `Expose product catalog through gateway` |
 | `Docker.WEB.NJ` | `Update TecnoTelec catalog mockup` |
+| `WEB.NJ.NEXT.DocuCore` | `Add DocuCore dashboard MVP` |
 | `WEB.NJ.NEXT.TecnoTelec` | `Improve public user experience` |
 | `WEB.NJ.NEXT.JobCron` | `Update JobCron dashboard experience` |
 

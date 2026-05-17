@@ -2,7 +2,7 @@
 
 | API | Existe | Estado | Responsabilidad | Endpoints faltantes | Prioridad |
 |---|---|---|---|---|---|
-| auth-api | SI | PARCIAL | Usuarios, roles, permisos. | Roles/permisos finales. | ALTA |
+| auth-api | SI | BASE AMPLIADA | Usuarios, roles, permisos por aplicacion, sesiones, dispositivos, tokens hasheados, MFA base y auditoria. | Matriz concreta de permisos Tecno Telec/JobCron y flujos publicos de MFA/recuperacion. | ALTA |
 | catalog-api | SI | PARCIAL | Productos internos. | Productos, categorias, marcas, kits. | ALTA |
 | supplier-api | SI | AVANZADO | Proveedores y sync. | Endpoints internos documentados. | ALTA |
 | pricing-api | SI | PARCIAL | Precios y listas. | calculate, listas, reglas descuento. | ALTA |

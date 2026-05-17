@@ -1,315 +1,205 @@
-# Reporte de ejecucion Agents
+# Reporte de ejecucion de Agents documentales
 
-## Fecha
+Fecha: 2026-05-16
 
-2026-05-09
+## Alcance
 
-## Alcance ejecutado
+Se ejecutaron los archivos `Docs/agents/AGENTS-*.md` en orden numerico, siguiendo:
 
-Se ejecutaron:
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- La estructura canonica actual de `Docs`
 
-- `AGENTS-000.md`: interfaz grafica de productos en Tecno Telect.
-- `AGENTS-001.md`: esquema de pruebas de la interfaz de productos.
+La ejecucion se limito a tareas no completadas y no se revirtieron cambios existentes.
 
-El impacto fue limitado a la parte donde se muestran productos en Tecno Telec.
+## Resultado por agent
 
-## Resultado
+| Agent | Estado | Resultado |
+| --- | --- | --- |
+| `AGENTS-000.md` | Completado | Se uso como agent maestro para inventariar y coordinar la optimizacion documental. |
+| `AGENTS-001.md` | Completado | Se genero inventario documental en Markdown, JSON y CSV. |
+| `AGENTS-002.md` | Completado | Se genero clasificacion por tipo, dominio, estado y prioridad. |
+| `AGENTS-003.md` | Completado | Se documento la estructura canonica propuesta respetando `Docs/README.md`. |
+| `AGENTS-004.md` | Completado | Se genero reporte de duplicados y clusters candidatos. |
+| `AGENTS-005.md` | Completado | Se genero indice maestro y mapa de relaciones documentales. |
+| `AGENTS-006.md` | Completado | Se documento separacion Core vs Business. |
+| `AGENTS-007.md` | Completado | Se genero reporte de documentacion de negocio. |
+| `AGENTS-008.md` | Completado | Se genero reporte de documentacion API. |
+| `AGENTS-009.md` | Completado | Se genero reporte de documentacion de base de datos. |
+| `AGENTS-010.md` | Completado | Se genero reporte de documentacion frontend. |
+| `AGENTS-011.md` | Completado | Se crearon catalogos y reglas base para jobs. |
+| `AGENTS-012.md` | Completado | Se crearon documentos base para eventos y scheduler. |
+| `AGENTS-013.md` | Completado | Se crearon documentos base de auth, permisos, sesiones, tokens y politicas. |
+| `AGENTS-014.md` | Completado | Se genero mapa de navegacion documental. |
+| `AGENTS-015.md` | Completado | Se generaron reportes de limpieza, archivo y candidatos de eliminacion. No se movieron ni borraron archivos. |
+| `AGENTS-016.md` | Completado | Se crearon templates documentales reutilizables. |
+| `AGENTS-017.md` | Completado | Se genero quality gate documental. |
+| `AGENTS-018.md` | Completado | Se genero plan de ejecucion para futuras corridas con Codex. |
+| `AGENTS-019.md` | Completado | Se genero revision final documental. |
+| `AGENTS-020.md` | Completado | Se creo politica de mantenimiento documental y checklist de PR. |
+| `AGENTS-021.md` | Sin tarea ejecutable | El archivo contiene resumen/cierre del set `000-020`; no define nueva implementacion. |
+| `AGENTS-022.md` - `AGENTS-030.md` | Pendiente por falta de instrucciones | Los archivos estan vacios y se mantienen como slots futuros. |
 
-Completado.
+## Artefactos generados
 
-La interfaz de productos queda operativa con:
+### Metadatos
 
-- busqueda superior sticky,
-- filtros laterales en escritorio,
-- boton `Filtros` para movil,
-- filtros por marca y categoria con buscador interno,
-- seleccion multiple de marcas y categorias,
-- precio minimo y maximo,
-- validacion de rango invalido,
-- ordenamiento por recientes, vendidos, precio, nombre y aleatorio,
-- tarjetas con imagen, nombre, marca, modelo, categoria, precio, existencia, detalle y CTA de cotizacion,
-- mensajes diferenciados para sin resultados, catalogo vacio y error de carga.
+- `Docs/_meta/document_inventory.md`
+- `Docs/_meta/document_inventory.json`
+- `Docs/_meta/document_inventory.csv`
+- `Docs/_meta/document_classification.md`
+- `Docs/_meta/document_classification.json`
+- `Docs/_meta/proposed_structure.md`
+- `Docs/_meta/folder_rules.md`
+- `Docs/_meta/duplicate_report.md`
+- `Docs/_meta/duplicate_clusters.json`
+- `Docs/_meta/core_vs_business_report.md`
+- `Docs/_meta/business_documentation_report.md`
+- `Docs/_meta/api_documentation_report.md`
+- `Docs/_meta/database_documentation_report.md`
+- `Docs/_meta/frontend_documentation_report.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/document-relations.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/cleanup_report.md`
+- `Docs/_meta/archive_report.md`
+- `Docs/_meta/delete_candidates.md`
+- `Docs/_meta/quality_gate_report.md`
+- `Docs/_meta/codex_execution_plan.md`
+- `Docs/_meta/final_review_report.md`
+- `Docs/_meta/owners.md`
 
-## Archivos modificados
+### Jobs, eventos, scheduler y seguridad
 
-- `Docker.WEB.NJ/docker-compose.yml`
-- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/app/catalogo/page.tsx`
-- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/app/globals.css`
-- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/components/catalog-browser.tsx`
-- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/components/product-card.tsx`
-- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/lib/catalog.ts`
-- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/lib/config.ts`
-- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/lib/gateway-catalog.ts`
-- `Docker.API.PY/API.PY.DJANGO.Catalog/catalog/views.py`
-- `Docker.API.PY/API.PY.DJANGO.TecnoTelec.Gateway/gateway/catalog_gateway.py`
-- `Docker.API.PY/API.PY.DJANGO.TecnoTelec.Gateway/gateway/serializers.py`
+- `Docs/03_standards/operations/jobs/job-catalog.md`
+- `Docs/03_standards/operations/jobs/job-schedule.md`
+- `Docs/03_standards/operations/jobs/retry-policy.md`
+- `Docs/03_standards/operations/jobs/failure-recovery.md`
+- `Docs/01_core_erp/architecture/events/event-catalog.md`
+- `Docs/01_core_erp/architecture/events/event-driven-architecture.md`
+- `Docs/01_core_erp/architecture/events/event-naming.md`
+- `Docs/01_core_erp/architecture/events/event-payloads.md`
+- `Docs/01_core_erp/architecture/scheduling/scheduler-architecture.md`
+- `Docs/01_core_erp/architecture/scheduling/scheduler-rules.md`
+- `Docs/01_core_erp/architecture/scheduling/job-dependencies.md`
+- `Docs/01_core_erp/auth/README.md`
+- `Docs/01_core_erp/auth/roles.md`
+- `Docs/01_core_erp/auth/permissions.md`
+- `Docs/01_core_erp/auth/sessions.md`
+- `Docs/01_core_erp/auth/devices.md`
+- `Docs/01_core_erp/auth/tokens.md`
+- `Docs/01_core_erp/auth/security-policies.md`
+- `Docs/03_standards/security/audit-policy.md`
+- `Docs/03_standards/security/password-policy.md`
+- `Docs/03_standards/security/mfa-future.md`
 
-## Documentacion creada
+### Templates y mantenimiento
 
-- `Docs/02_projects/tecnotelec/frontend/21_product_catalog_interface_execution.md`
-- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/templates/overview-template.md`
+- `Docs/templates/api-template.md`
+- `Docs/templates/database-template.md`
+- `Docs/templates/business-template.md`
+- `Docs/templates/runbook-template.md`
+- `Docs/templates/adr-template.md`
+- `Docs/templates/etl-template.md`
+- `Docs/templates/frontend-template.md`
+- `Docs/templates/event-template.md`
+- `Docs/03_standards/documentation-maintenance-policy.md`
+- `Docs/03_standards/documentation-pr-checklist.md`
 
-## Pruebas ejecutadas
+## Validacion
 
-| Prueba | Resultado |
-|---|---|
-| `npm run build` en Tecno Telec | Correcto |
-| `python -m py_compile` en Gateway/Catalog | Correcto |
-| Docker web rebuild | Correcto |
-| `/catalogo` | `200`, interfaz y tarjetas visibles |
-| `/catalogo?search=camera` | `200`, busqueda funcional |
-| `/catalogo?minPrice=500&maxPrice=3000&sortBy=price_asc` | `200`, rango y orden funcionales |
-| `/catalogo?minPrice=5000&maxPrice=1000` | `200`, validacion visible |
-| `/catalogo?sortBy=random` | `200`, orden aleatorio funcional |
-| Gateway productos recientes | `200` |
-| Gateway busqueda | `200` |
-| Gateway rango de precio | `200` |
-| Gateway aleatorio | `200` |
+- Inventario regenerado con `371` archivos documentales.
+- Duplicados detectados: `7` clusters candidatos.
+- Validacion de existencia: todos los artifacts esperados existen.
+- Se revisaron advertencias en `Docs/_meta`: no hay blockers; hay warnings por front matter faltante en documentos existentes, documentos futuros/pendientes y slots `AGENTS-022` a `AGENTS-030` vacios.
+- No se ejecutaron builds de aplicacion porque esta corrida solo modifico documentacion y metadatos.
+- La carpeta raiz `Workspace.Comercial` no esta inicializada como repositorio git; no se pudo usar `git status` global. No se revirtieron cambios.
 
-## Confirmacion funcional
+## Decisiones aplicadas
 
-La interfaz de productos funciona correctamente en Docker para la etapa actual.
-
-Se confirmo que:
-
-- la pagina carga,
-- la busqueda aparece,
-- los filtros aparecen,
-- el ordenamiento aparece,
-- hay tarjetas de producto,
-- existen botones de detalle y cotizacion,
-- el rango invalido muestra error,
-- Gateway responde correctamente para las pruebas principales.
-
-## Observaciones
-
-- El contenedor web esta en modo desarrollo con `next dev`; la primera carga despues de recrear Docker puede tardar por compilacion inicial.
-- Quedan warnings de Next por uso de `<img>` en imagenes externas. No bloquean funcionamiento.
-- Para produccion se recomienda crear modo `next build` + `next start`.
-
-## Estado final
-
-Agents 000 y 001 concluidos.
-
----
-
-# Analisis operativo de soluciones Tecno Telec
-
-## Fecha
-
-2026-05-10
-
-## Alcance ejecutado
-
-Se analizaron los nuevos contenidos de:
-
-- `AGENTS-000.md`
-- `AGENTS-001.md`
-
-El alcance corresponde al requerimiento complejo de soluciones Tecno Telec: reglas, cotizacion, mano de obra, distancia, tamano de proyecto, saldos, anticipos, proyectos, subcontratistas, modulos ERP y decisiones de implementacion por fases.
-
-## Resultado
-
-Completado a nivel documental.
-
-Se determino que:
-
-- No se requiere una base de datos nueva para la primera etapa.
-- Se debe usar la base `comercial` con schemas PascalCase separados.
-- TecnoTelec API solo debe guardar configuracion comercial propia.
-- Los datos reutilizables deben vivir en Core ERP APIs.
-- El primer desarrollo debe ser un cotizador consultivo con revision humana.
-- La automatizacion completa debe quedar por fases.
-
-## Documentacion creada
-
-- `Docs/02_projects/tecnotelec/solutions/02_solution_operating_architecture_analysis.md`
-
-## Archivos modificados
-
-- `Docs/02_projects/tecnotelec/README.md`
-- `Docs/agents/EXECUTION_REPORT.md`
-
-## Decisiones tomadas
-
-- `TecnoTelec API` vive como dominio propio para soluciones publicas, preguntas, paquetes y reglas de presentacion.
-- `Sales/Quote` debe manejar cotizaciones, snapshot, anticipos y saldos.
-- `Logistics` debe manejar distancia, cobertura, viaticos y tiempos.
-- `Projects` debe manejar ejecucion, agenda, hitos, evidencia y entrega.
-- `Rules/ProductCompatibility` debe manejar compatibilidad tecnica.
-- `Partners/Operations` debe manejar tecnicos, cuadrillas y subcontratistas.
+- Se respeto la estructura oficial de `Docs/README.md`.
+- No se crearon rutas paralelas como `/docs/core`, `/docs/business` o `/docs/standards`.
+- No se movieron, archivaron ni eliminaron documentos existentes sin aprobacion humana.
+- Los duplicados se reportaron como candidatos para revision, no como cambios automaticos.
+- Los documentos futuros se mantienen fuera del indice principal de implementacion.
 
 ## Pendientes
 
-- Implementar modelos y endpoints de soluciones.
-- Documentar o ampliar Rules, Quote, Logistics, Projects, Partners, Support y Commissions.
-- Definir primer flujo `SolutionRequest` o `QuoteRequest` para MVP.
-
-## Estado
-
-Agents 000 y 001 concluidos y listos para limpieza.
+- Revisar manualmente los `7` clusters de duplicados antes de fusionar, archivar o eliminar contenido.
+- Confirmar owners reales por dominio en `Docs/_meta/owners.md`.
+- Completar front matter gradualmente cuando se editen documentos existentes.
+- `AGENTS-022.md` a `AGENTS-030.md` quedan pendientes porque no contienen instrucciones ejecutables.
 
 ---
 
-# Ejecucion adicional AGENTS-000
+# Reporte de ejecucion adicional: asignacion de repositorios DocuCore
 
-## Fecha
+Fecha: 2026-05-16
 
-2026-05-09
+## Alcance
 
-## Alcance ejecutado
+Se ejecuto una nueva pasada sobre `Docs/agents/AGENTS-*.md` en orden numerico y se agrego la solicitud especifica de asignar los proyectos DocuCore a sus repositorios remotos:
 
-Se ejecuto el nuevo contenido de `AGENTS-000.md` enfocado en correccion visual y funcional de productos Tecno Telect.
+- `https://github.com/MexIngSoft/API.PY.DJANGO.Document`
+- `https://github.com/MexIngSoft/API.PY.DJANGO.DocuCore.Gateway.git`
+- `https://github.com/MexIngSoft/API.PY.DJANGO.DocuCore.git`
+- `https://github.com/MexIngSoft/WEB.NJ.NEXT.DocuCore.git`
 
-## Resultado
+## Resultado por agent
 
-Completado.
+| Agent | Estado | Resultado |
+| --- | --- | --- |
+| `AGENTS-000.md` - `AGENTS-020.md` | Ya completados | No se repitieron cambios documentales cerrados; se aplico solo el pendiente nuevo de repositorios DocuCore. |
+| `AGENTS-021.md` | Sin tarea ejecutable | Sigue siendo resumen/cierre del set `000-020`. |
+| `AGENTS-022.md` - `AGENTS-030.md` | Pendiente por falta de instrucciones | Los archivos siguen vacios. |
 
-Se agrego:
+## Repositorios asignados
 
-- descripcion corta con prioridad `SatDescription`, `DescriptionHtml` limpio y `Name`,
-- limpieza de etiquetas HTML para tarjetas,
-- reparacion basica de caracteres con mojibake comun,
-- tarjetas con nombre y descripcion limitados por lineas,
-- filtros laterales con ancho fijo y campos al 100%,
-- panel de filtros movil,
-- efectos visuales y transiciones suaves,
-- selector de productos por pagina `20`, `50`, `100`,
-- endpoints bulk de Pricing e Inventory para mejorar velocidad del listado.
+| Proyecto | Ruta local | Origin configurado | Estado |
+|---|---|---|---|
+| `API.PY.DJANGO.Document` | `Docker.API.PY/API.PY.DJANGO.Document` | `https://github.com/MexIngSoft/API.PY.DJANGO.Document.git` | Git local inicializado, origin asignado. |
+| `API.PY.DJANGO.DocuCore` | `Docker.API.PY/API.PY.DJANGO.DocuCore` | `https://github.com/MexIngSoft/API.PY.DJANGO.DocuCore.git` | Git local inicializado, origin asignado. |
+| `API.PY.DJANGO.DocuCore.Gateway` | `Docker.API.PY/API.PY.DJANGO.DocuCore.Gateway` | `https://github.com/MexIngSoft/API.PY.DJANGO.DocuCore.Gateway.git` | Git local inicializado, origin asignado. |
+| `WEB.NJ.NEXT.DocuCore` | `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.DocuCore.git` | Git local inicializado, origin asignado. |
 
-## Documentacion creada
+No se hicieron commits ni pushes.
 
-- `Docs/02_projects/tecnotelec/frontend/22_product_catalog_visual_responsive_execution.md`
+## Documentacion actualizada
 
-## Archivos modificados
+- `Docs/02_projects/docucore/repositories.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docs/03_standards/operations/django-api-project-compliance.md`
+- `Docs/_meta/document_inventory.*`
+- `Docs/_meta/document_classification.*`
+- `Docs/_meta/duplicate_report.md`
+- `Docs/_meta/duplicate_clusters.json`
+- `Docs/_meta/master-index.*`
+- `Docs/_meta/document-relations.md`
+- `Docs/_meta/navigation-map.md`
 
-- `Docker.API.PY/API.PY.DJANGO.Catalog/catalog/serializers.py`
-- `Docker.API.PY/API.PY.DJANGO.Inventory/inventory/urls.py`
-- `Docker.API.PY/API.PY.DJANGO.Inventory/inventory/views.py`
-- `Docker.API.PY/API.PY.DJANGO.Pricing/pricing/urls.py`
-- `Docker.API.PY/API.PY.DJANGO.Pricing/pricing/views.py`
-- `Docker.API.PY/API.PY.DJANGO.TecnoTelec.Gateway/gateway/catalog_gateway.py`
-- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/app/catalogo/page.tsx`
-- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/app/globals.css`
-- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/components/catalog-browser.tsx`
-- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/lib/gateway-catalog.ts`
+## Validaciones ejecutadas
 
-## Pruebas ejecutadas
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `API.PY.DJANGO.Document` | `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.Document` | `python -m compileall .` | Correcto. |
+| `API.PY.DJANGO.DocuCore` | `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.DocuCore` | `python -m compileall .` | Correcto. |
+| `API.PY.DJANGO.DocuCore.Gateway` | `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.DocuCore.Gateway` | `python -m compileall .` | Correcto. |
+| `WEB.NJ.NEXT.DocuCore` | `npm run build` | Correcto. |
 
-| Prueba | Resultado |
-|---|---|
-| `python -m py_compile` en APIs modificadas | Correcto |
-| `npm run build` en Tecno Telec | Correcto |
-| Docker API rebuild | Correcto |
-| Docker Web rebuild | Correcto |
-| Gateway `pageSize=20` | `20` productos, descripcion sin HTML |
-| Gateway `pageSize=50` | `50` productos |
-| Gateway `pageSize=100` | `100` productos |
-| Web `/catalogo?pageSize=20` | `200`, buscador, filtros, selector y productos visibles |
+## Metadatos
+
+- Inventario regenerado con `372` archivos.
+- Duplicados exactos detectados: `1` cluster.
+- Se valido que los documentos esperados existan.
 
 ## Pendientes
 
-- Reemplazar `<img>` por `next/image` en una etapa posterior para eliminar warnings de rendimiento de Next.
-- Revisar ETL de Syscom si existen caracteres ya guardados como `?`, porque esos no siempre pueden recuperarse desde API o frontend.
-
----
-
-# Verificacion de caracteres especiales SYSCOM
-
-## Fecha
-
-2026-05-09
-
-## Resultado
-
-Completado.
-
-Se confirmo y corrigio el flujo para que los caracteres especiales se normalicen desde la descarga/publicacion de SYSCOM y no solo en la interfaz.
-
-## Cambios realizados
-
-- Se agrego `supplier.syscom.text` como utilidad central de normalizacion.
-- El cliente HTTP de SYSCOM normaliza el JSON recibido.
-- Mappers, writers y publishers normalizan texto antes de guardar.
-- Catalog API busca tambien por `SatDescription`.
-- Catalog API expande terminos comunes sin acento, por ejemplo `camara` hacia `cámara` y `cámaras`.
-- Se agrego comando `repair_syscom_text_encoding` para reparar datos existentes.
-
-## Pruebas ejecutadas
-
-| Prueba | Resultado |
-|---|---|
-| `python -m py_compile` en archivos modificados | Correcto |
-| Docker API rebuild | Correcto |
-| `repair_syscom_text_encoding` | Reparo datos existentes |
-| `SatDescription` con `?` | `0` |
-| `SatDescription` con `cámaras` | `623` |
-| `SatDescription` con `baterías` | `79` |
-| `SatDescription` con `energía` | `27` |
-| Catalog API `search=camara` | `1072` resultados |
-| Gateway `search=camara` | `1072` resultados |
-| Web `/catalogo?search=camara&pageSize=20` | `200`, productos visibles |
-
-## Documentacion creada
-
-- `Docs/04_integrations/syscom/etl/text-encoding-and-search.md`
-
----
-
-# Cierre de analisis para iniciar desarrollo de soluciones
-
-## Fecha
-
-2026-05-10
-
-## Alcance ejecutado
-
-Se consolidaron los documentos creados para cerrar el analisis de soluciones, cotizacion, mano de obra, ubicacion, tamano de proyecto, saldos y arquitectura modular.
-
-## Elementos creados
-
-| Documento | Fondo del documento |
-|---|---|
-| `Docs/02_projects/tecnotelec/solutions/00_solution_presentation_and_assembly_strategy.md` | Define como presentar soluciones en la web, familias iniciales, paquetes, componentes y reglas de experiencia. |
-| `Docs/02_projects/tecnotelec/solutions/01_dynamic_solution_technical_design.md` | Define base, schema, tablas, fuentes de datos y flujo dinamico de soluciones. |
-| `Docs/02_projects/tecnotelec/solutions/02_solution_operating_architecture_analysis.md` | Define arquitectura operativa completa: modulos ERP, APIs nuevas, mano de obra, distancia, saldos, proyectos y fases. |
-| `Docs/02_projects/tecnotelec/solutions/03_development_start_recommendation.md` | Define la recomendacion final para cerrar analisis e iniciar desarrollo. |
-| `Docs/02_projects/tecnotelec/quotes/02_quote_implementation_scope_analysis.md` | Define que debe contener una cotizacion y como manejar mano de obra como `SERVICE` o `LABOR`, no como producto fisico normal. |
-
-## Decision de fondo
-
-La mejor ruta para comenzar desarrollo es implementar primero un `SolutionRequest / QuoteRequest MVP`.
-
-El MVP debe permitir que el cliente:
-
-- elija una solucion,
-- indique si quiere solo productos o solucion instalada,
-- capture ubicacion aproximada,
-- capture tamano del proyecto,
-- capture presupuesto o saldo disponible,
-- deje datos de contacto,
-- genere una solicitud de cotizacion revisable.
-
-## Que se implementa ahora
-
-- Modelos de soluciones en `TecnoTelec API`.
-- Endpoints publicos de soluciones en `TecnoTelec Gateway`.
-- Web dinamica para `/soluciones` y `/soluciones/[slug]`.
-- Cotizador por solucion.
-- Guardado de solicitud inicial.
-- Linea `LABOR` o `SERVICE` pendiente de revision cuando el cliente pida instalacion.
-
-## Que queda para fases posteriores
-
-- Precio automatico final de mano de obra.
-- Calculo real de distancia y viaticos.
-- Agenda de tecnicos.
-- Subcontratistas.
-- Anticipos y saldos formales.
-- Conversion automatica a proyecto.
-- Compatibilidad tecnica completa.
-- Soporte postventa.
-
-## Estado
-
-Analisis cerrado para iniciar desarrollo del MVP consultivo de soluciones y cotizacion.
+- Los cuatro repos quedaron con archivos sin commit porque fueron inicializados localmente; falta decidir rama, hacer commit y push por repositorio.
+- `AGENTS-022.md` a `AGENTS-030.md` siguen pendientes porque estan vacios.
+- No se ejecuto build Docker porque no se modificaron Dockerfile ni compose en esta pasada.

@@ -17,7 +17,7 @@ Si falta documentacion de proceso, API, endpoint, modelo o estado: no programar.
 | Estado | Si | Documentado para catalogo, precio y cotizacion. |
 | Manejo de errores | Si | Parcial. |
 | Relacion con JobCron | Si | Documentada. |
-| Regla de permisos | Si | Pendiente detalle por rol. |
+| Regla de permisos | Si | Modelo Auth implementado; pendiente matriz Tecno Telec/JobCron por rol. |
 | Placeholder | Si | Estrategia creada. |
 | Criterio de prueba | Si | Basico en endpoints. |
 | Paginacion | Si aplica | Documentada para productos. |
@@ -32,6 +32,6 @@ Si falta documentacion de proceso, API, endpoint, modelo o estado: no programar.
 - Decision `quote-api` vs `sales-api` para cotizacion inicial.
 - Contratos finales del Gateway.
 - Endpoint real de Inventory API.
-- Permisos por rol.
+- Matriz concreta de permisos por rol y aplicacion.
 - Assets placeholder reales.
 - Politica final de precios publicos/especiales.

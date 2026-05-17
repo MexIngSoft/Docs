@@ -1,0 +1,3350 @@
+[
+  {
+    "path": ".gitignore",
+    "domain": "Other",
+    "status": "active",
+    "priority": "P3",
+    "title": "APIs externas montadas para Docker. Cada una tiene su propio repositorio Git.",
+    "reason": "Documento activo canonico.",
+    "suggested_path": ".gitignore"
+  },
+  {
+    "path": "00_audit/00_full_repository_map.md",
+    "domain": "Audit",
+    "status": "active",
+    "priority": "P3",
+    "title": "Mapa documental",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "00_audit/00_full_repository_map.md"
+  },
+  {
+    "path": "00_audit/00_inventory.md",
+    "domain": "Audit",
+    "status": "active",
+    "priority": "P3",
+    "title": "Inventario documental",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "00_audit/00_inventory.md"
+  },
+  {
+    "path": "00_audit/01_consistency_matrix.md",
+    "domain": "Audit",
+    "status": "active",
+    "priority": "P3",
+    "title": "Matriz de consistencia documental",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "00_audit/01_consistency_matrix.md"
+  },
+  {
+    "path": "00_audit/02_missing_documents.md",
+    "domain": "Audit",
+    "status": "active",
+    "priority": "P3",
+    "title": "Documentos faltantes detectados",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "00_audit/02_missing_documents.md"
+  },
+  {
+    "path": "00_audit/03_inconsistencies.md",
+    "domain": "Audit",
+    "status": "active",
+    "priority": "P3",
+    "title": "Inconsistencias",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "00_audit/03_inconsistencies.md"
+  },
+  {
+    "path": "00_audit/04_document_status.md",
+    "domain": "Audit",
+    "status": "active",
+    "priority": "P3",
+    "title": "Estado documental",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "00_audit/04_document_status.md"
+  },
+  {
+    "path": "00_audit/05_global_dictionary.md",
+    "domain": "Audit",
+    "status": "active",
+    "priority": "P3",
+    "title": "Diccionario global",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "00_audit/05_global_dictionary.md"
+  },
+  {
+    "path": "00_audit/07_recommended_documentation_strategy.md",
+    "domain": "Audit",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Estrategia recomendada de documentacion",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "00_audit/07_recommended_documentation_strategy.md"
+  },
+  {
+    "path": "00_audit/08_new_architecture_review.md",
+    "domain": "Audit",
+    "status": "active",
+    "priority": "P3",
+    "title": "Revision nueva arquitectura Tecno Telec + JobCron",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "00_audit/08_new_architecture_review.md"
+  },
+  {
+    "path": "00_audit/09_api_routes_inventory.md",
+    "domain": "Audit",
+    "status": "active",
+    "priority": "P3",
+    "title": "Inventario actual de rutas API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "00_audit/09_api_routes_inventory.md"
+  },
+  {
+    "path": "00_audit/99_final_review.md",
+    "domain": "Audit",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Revision final documental",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "00_audit/99_final_review.md"
+  },
+  {
+    "path": "01_core_erp/apis/00_api_index.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Indice de APIs",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/apis/00_api_index.md"
+  },
+  {
+    "path": "01_core_erp/apis/01_auth_api.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Auth API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/apis/01_auth_api.md"
+  },
+  {
+    "path": "01_core_erp/apis/02_catalog_api.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Catalog API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/apis/02_catalog_api.md"
+  },
+  {
+    "path": "01_core_erp/apis/03_supplier_api.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Supplier API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/apis/03_supplier_api.md"
+  },
+  {
+    "path": "01_core_erp/apis/04_pricing_api.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Pricing API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/apis/04_pricing_api.md"
+  },
+  {
+    "path": "01_core_erp/apis/05_quote_api.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Quote API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/apis/05_quote_api.md"
+  },
+  {
+    "path": "01_core_erp/apis/06_sales_api.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Sales API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/apis/06_sales_api.md"
+  },
+  {
+    "path": "01_core_erp/apis/07_logistics_api.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Logistics API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/apis/07_logistics_api.md"
+  },
+  {
+    "path": "01_core_erp/apis/08_rules_engine_api.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Rules Engine API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/apis/08_rules_engine_api.md"
+  },
+  {
+    "path": "01_core_erp/apis/09_gateway_api.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Tecno Telec Gateway API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/apis/09_gateway_api.md"
+  },
+  {
+    "path": "01_core_erp/apis/10_cart_api.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Cart API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/apis/10_cart_api.md"
+  },
+  {
+    "path": "01_core_erp/apis/10_tecnotelec_api.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Tecno Telec API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/apis/10_tecnotelec_api.md"
+  },
+  {
+    "path": "01_core_erp/apis/11_pos_api.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "POS API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/apis/11_pos_api.md"
+  },
+  {
+    "path": "01_core_erp/apis/12_government_tender_api.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "GovernmentTender API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/apis/12_government_tender_api.md"
+  },
+  {
+    "path": "01_core_erp/apis/13_billing_api.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Billing API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/apis/13_billing_api.md"
+  },
+  {
+    "path": "01_core_erp/apis/14_notifications_api.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Notifications API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/apis/14_notifications_api.md"
+  },
+  {
+    "path": "01_core_erp/apis/15_documents_api.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Documents API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/apis/15_documents_api.md"
+  },
+  {
+    "path": "01_core_erp/architecture/00_general_architecture.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Arquitectura general",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/architecture/00_general_architecture.md"
+  },
+  {
+    "path": "01_core_erp/architecture/01_project_communication.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Comunicacion entre proyectos",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/architecture/01_project_communication.md"
+  },
+  {
+    "path": "01_core_erp/architecture/02_api_gateway.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "API Gateway",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/architecture/02_api_gateway.md"
+  },
+  {
+    "path": "01_core_erp/architecture/03_bff_strategy.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Estrategia BFF",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/architecture/03_bff_strategy.md"
+  },
+  {
+    "path": "01_core_erp/architecture/04_security.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Seguridad",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/architecture/04_security.md"
+  },
+  {
+    "path": "01_core_erp/architecture/05_future_microservices_split.md",
+    "domain": "Core",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Separacion futura de microservicios",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "01_core_erp/architecture/05_future_microservices_split.md"
+  },
+  {
+    "path": "01_core_erp/architecture/06_general_system_diagram.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Diagrama general del sistema ERP",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/architecture/06_general_system_diagram.md"
+  },
+  {
+    "path": "01_core_erp/architecture/07_project_api_pattern.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Patron de API por proyecto",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/architecture/07_project_api_pattern.md"
+  },
+  {
+    "path": "01_core_erp/architecture/08_data_isolation_and_reference_tables.md",
+    "domain": "Core",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Aislamiento de datos y tablas referenciadas",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "01_core_erp/architecture/08_data_isolation_and_reference_tables.md"
+  },
+  {
+    "path": "01_core_erp/architecture/09_tecnotelec_gateway_corrected_pattern.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Patron corregido TecnoTelec Gateway",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/architecture/09_tecnotelec_gateway_corrected_pattern.md"
+  },
+  {
+    "path": "01_core_erp/architecture/events/event-catalog.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Catalogo de eventos",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/architecture/events/event-catalog.md"
+  },
+  {
+    "path": "01_core_erp/architecture/events/event-driven-architecture.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Arquitectura de eventos",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/architecture/events/event-driven-architecture.md"
+  },
+  {
+    "path": "01_core_erp/architecture/events/event-naming.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Naming de eventos",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/architecture/events/event-naming.md"
+  },
+  {
+    "path": "01_core_erp/architecture/events/event-payloads.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Payloads de eventos",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/architecture/events/event-payloads.md"
+  },
+  {
+    "path": "01_core_erp/architecture/scheduling/job-dependencies.md",
+    "domain": "Core",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Dependencias de jobs",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "01_core_erp/architecture/scheduling/job-dependencies.md"
+  },
+  {
+    "path": "01_core_erp/architecture/scheduling/scheduler-architecture.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Arquitectura de scheduler",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/architecture/scheduling/scheduler-architecture.md"
+  },
+  {
+    "path": "01_core_erp/architecture/scheduling/scheduler-rules.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Reglas de scheduler",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/architecture/scheduling/scheduler-rules.md"
+  },
+  {
+    "path": "01_core_erp/auth/devices.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Dispositivos",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/auth/devices.md"
+  },
+  {
+    "path": "01_core_erp/auth/permissions.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Permisos",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/auth/permissions.md"
+  },
+  {
+    "path": "01_core_erp/auth/README.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Auth Core",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/auth/README.md"
+  },
+  {
+    "path": "01_core_erp/auth/roles.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Roles",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/auth/roles.md"
+  },
+  {
+    "path": "01_core_erp/auth/security-policies.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Politicas de seguridad Auth",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/auth/security-policies.md"
+  },
+  {
+    "path": "01_core_erp/auth/sessions.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Sesiones",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/auth/sessions.md"
+  },
+  {
+    "path": "01_core_erp/auth/tokens.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Tokens",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/auth/tokens.md"
+  },
+  {
+    "path": "01_core_erp/database/00_database_overview.md",
+    "domain": "Core",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Panorama de base de datos",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "01_core_erp/database/00_database_overview.md"
+  },
+  {
+    "path": "01_core_erp/database/01_schemas.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Schemas",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/database/01_schemas.md"
+  },
+  {
+    "path": "01_core_erp/database/02_entities.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Entidades oficiales",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/database/02_entities.md"
+  },
+  {
+    "path": "01_core_erp/database/03_relationships.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Relaciones",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/database/03_relationships.md"
+  },
+  {
+    "path": "01_core_erp/database/04_catalog_model.md",
+    "domain": "Core",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Modelo Catalog",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "01_core_erp/database/04_catalog_model.md"
+  },
+  {
+    "path": "01_core_erp/database/05_supplier_model.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modelo Supplier",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/database/05_supplier_model.md"
+  },
+  {
+    "path": "01_core_erp/database/06_pricing_model.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modelo Pricing",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/database/06_pricing_model.md"
+  },
+  {
+    "path": "01_core_erp/database/07_sales_model.md",
+    "domain": "Core",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Modelo Sales",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "01_core_erp/database/07_sales_model.md"
+  },
+  {
+    "path": "01_core_erp/database/08_quotes_model.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modelo Quote",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/database/08_quotes_model.md"
+  },
+  {
+    "path": "01_core_erp/database/09_cart_model.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modelo de datos: Cart",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/database/09_cart_model.md"
+  },
+  {
+    "path": "01_core_erp/database/10_pos_model.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modelo de datos: POS",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/database/10_pos_model.md"
+  },
+  {
+    "path": "01_core_erp/database/11_rules_model.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modelo de datos: Rules",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/database/11_rules_model.md"
+  },
+  {
+    "path": "01_core_erp/database/12_billing_model.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modelo de datos: Billing",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/database/12_billing_model.md"
+  },
+  {
+    "path": "01_core_erp/database/13_government_tender_model.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modelo de datos: GovernmentTender",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/database/13_government_tender_model.md"
+  },
+  {
+    "path": "01_core_erp/database/14_documents_model.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modelo de datos: Documents",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/database/14_documents_model.md"
+  },
+  {
+    "path": "01_core_erp/database/15_channel_assortment_model.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modelo de datos: ChannelAssortment",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/database/15_channel_assortment_model.md"
+  },
+  {
+    "path": "01_core_erp/database/16_product_compatibility_model.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modelo de datos: ProductCompatibility",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/database/16_product_compatibility_model.md"
+  },
+  {
+    "path": "01_core_erp/database/17_sql_server_table_publication.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Publicacion de nombres de tablas estilo SQL Server",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/database/17_sql_server_table_publication.md"
+  },
+  {
+    "path": "01_core_erp/erp/00_erp_vision.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Vision ERP",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/00_erp_vision.md"
+  },
+  {
+    "path": "01_core_erp/erp/01_modules.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modulos ERP",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/01_modules.md"
+  },
+  {
+    "path": "01_core_erp/erp/02_rules_engine.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Rules Engine",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/02_rules_engine.md"
+  },
+  {
+    "path": "01_core_erp/erp/03_quote_engine.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Motor de cotizacion",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/03_quote_engine.md"
+  },
+  {
+    "path": "01_core_erp/erp/04_sales_model.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modelo de ventas",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/04_sales_model.md"
+  },
+  {
+    "path": "01_core_erp/erp/05_purchase_model.md",
+    "domain": "Core",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Modelo de compras",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "01_core_erp/erp/05_purchase_model.md"
+  },
+  {
+    "path": "01_core_erp/erp/06_logistics_model.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modelo logistico",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/06_logistics_model.md"
+  },
+  {
+    "path": "01_core_erp/erp/07_cart_model.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modelo de carrito web",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/07_cart_model.md"
+  },
+  {
+    "path": "01_core_erp/erp/08_pos_model.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modelo de punto de venta",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/08_pos_model.md"
+  },
+  {
+    "path": "01_core_erp/erp/09_system_states.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Estados del sistema",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/09_system_states.md"
+  },
+  {
+    "path": "01_core_erp/erp/10_roles_permissions.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Roles y permisos",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/10_roles_permissions.md"
+  },
+  {
+    "path": "01_core_erp/erp/11_costs_profitability.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Costos, precios y utilidad",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/11_costs_profitability.md"
+  },
+  {
+    "path": "01_core_erp/erp/12_billing_returns.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Facturacion y devoluciones",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/12_billing_returns.md"
+  },
+  {
+    "path": "01_core_erp/erp/13_error_consistency.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Errores y consistencia",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/13_error_consistency.md"
+  },
+  {
+    "path": "01_core_erp/erp/14_async_jobs_notifications.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Jobs asincronos y notificaciones",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/14_async_jobs_notifications.md"
+  },
+  {
+    "path": "01_core_erp/erp/15_bundles_kits.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Bundles y kits",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/15_bundles_kits.md"
+  },
+  {
+    "path": "01_core_erp/erp/16_addresses_customers.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Clientes y direcciones",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/16_addresses_customers.md"
+  },
+  {
+    "path": "01_core_erp/erp/17_government_tender.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modelo de licitaciones publicas",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/17_government_tender.md"
+  },
+  {
+    "path": "01_core_erp/erp/18_government_tender_adoption.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Uso de licitaciones por empresa",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/18_government_tender_adoption.md"
+  },
+  {
+    "path": "01_core_erp/erp/19_supplier_catalog_strategy.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Estrategia de catalogo multi-proveedor",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/19_supplier_catalog_strategy.md"
+  },
+  {
+    "path": "01_core_erp/erp/20_channel_assortment.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Surtido por proyecto y canal",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/20_channel_assortment.md"
+  },
+  {
+    "path": "01_core_erp/erp/21_product_compatibility.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Compatibilidad entre productos",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/erp/21_product_compatibility.md"
+  },
+  {
+    "path": "01_core_erp/erp/22_pricing_costing_future_map.md",
+    "domain": "Core",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Mapa futuro de Pricing, Costing y Rentabilidad",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "01_core_erp/erp/22_pricing_costing_future_map.md"
+  },
+  {
+    "path": "01_core_erp/flows/00_flow_index.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Indice de flujos",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/flows/00_flow_index.md"
+  },
+  {
+    "path": "01_core_erp/flows/01_customer_quote_flow.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Flujo de cotizacion del cliente",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/flows/01_customer_quote_flow.md"
+  },
+  {
+    "path": "01_core_erp/flows/02_customer_purchase_flow.md",
+    "domain": "Core",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Flujo de compra del cliente",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "01_core_erp/flows/02_customer_purchase_flow.md"
+  },
+  {
+    "path": "01_core_erp/flows/03_supplier_sync_flow.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Flujo de sincronizacion de proveedor",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/flows/03_supplier_sync_flow.md"
+  },
+  {
+    "path": "01_core_erp/flows/04_pricing_flow.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Flujo de pricing",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/flows/04_pricing_flow.md"
+  },
+  {
+    "path": "01_core_erp/flows/05_logistics_flow.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Flujo logistico",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/flows/05_logistics_flow.md"
+  },
+  {
+    "path": "01_core_erp/flows/06_order_flow.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Flujo de orden",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/flows/06_order_flow.md"
+  },
+  {
+    "path": "01_core_erp/flows/07_cart_flow.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Flujo de carrito web",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/flows/07_cart_flow.md"
+  },
+  {
+    "path": "01_core_erp/flows/08_pos_flow.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Flujo de punto de venta",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/flows/08_pos_flow.md"
+  },
+  {
+    "path": "01_core_erp/flows/09_returns_flow.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Flujo de devoluciones",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/flows/09_returns_flow.md"
+  },
+  {
+    "path": "01_core_erp/flows/10_error_consistency_flow.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Flujo de errores y consistencia",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/flows/10_error_consistency_flow.md"
+  },
+  {
+    "path": "01_core_erp/flows/11_government_tender_flow.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Flujo de licitaciones publicas",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/flows/11_government_tender_flow.md"
+  },
+  {
+    "path": "01_core_erp/README.md",
+    "domain": "Core",
+    "status": "active",
+    "priority": "P1",
+    "title": "Nucleo ERP",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "01_core_erp/README.md"
+  },
+  {
+    "path": "02_projects/_ecosystem/00_ecosystem_overview.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Ecosistema empresarial",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/_ecosystem/00_ecosystem_overview.md"
+  },
+  {
+    "path": "02_projects/_ecosystem/01_company_portfolio.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Portafolio de empresas y proyectos",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/_ecosystem/01_company_portfolio.md"
+  },
+  {
+    "path": "02_projects/_ecosystem/02_jobcron_shared_modules.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modulos compartidos JobCron",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/_ecosystem/02_jobcron_shared_modules.md"
+  },
+  {
+    "path": "02_projects/_ecosystem/03_development_strategy.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Estrategia de desarrollo gradual",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/_ecosystem/03_development_strategy.md"
+  },
+  {
+    "path": "02_projects/_ecosystem/04_process_convergence_and_conflicts.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Procesos compartidos y contradicciones entre empresas",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/_ecosystem/04_process_convergence_and_conflicts.md"
+  },
+  {
+    "path": "02_projects/buildora/README.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Buildora",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/buildora/README.md"
+  },
+  {
+    "path": "02_projects/clientix/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Clientix",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/clientix/README.md"
+  },
+  {
+    "path": "02_projects/cloudra/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Cloudra",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/cloudra/README.md"
+  },
+  {
+    "path": "02_projects/datara/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Datara",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/datara/README.md"
+  },
+  {
+    "path": "02_projects/docucore/api-contracts.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Contratos API DocuCore",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/docucore/api-contracts.md"
+  },
+  {
+    "path": "02_projects/docucore/architecture.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Arquitectura DocuCore",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/docucore/architecture.md"
+  },
+  {
+    "path": "02_projects/docucore/database.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Base de datos DocuCore Document",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/docucore/database.md"
+  },
+  {
+    "path": "02_projects/docucore/docker.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Docker DocuCore",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/docucore/docker.md"
+  },
+  {
+    "path": "02_projects/docucore/error-handling.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Manejo de errores DocuCore",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/docucore/error-handling.md"
+  },
+  {
+    "path": "02_projects/docucore/qa-checklist.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "QA checklist DocuCore",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/docucore/qa-checklist.md"
+  },
+  {
+    "path": "02_projects/docucore/README.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "DocuCore",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/docucore/README.md"
+  },
+  {
+    "path": "02_projects/docucore/repositories.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Repositorios DocuCore",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/docucore/repositories.md"
+  },
+  {
+    "path": "02_projects/docucore/security.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Seguridad DocuCore",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/docucore/security.md"
+  },
+  {
+    "path": "02_projects/docucore/tools-catalog.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Catalogo de herramientas DocuCore",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/docucore/tools-catalog.md"
+  },
+  {
+    "path": "02_projects/festora/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Festora",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/festora/README.md"
+  },
+  {
+    "path": "02_projects/imagiland/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Imagiland",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/imagiland/README.md"
+  },
+  {
+    "path": "02_projects/imagrafity/analitics-pendiente.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Analitics Pendiente",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/imagrafity/analitics-pendiente.md"
+  },
+  {
+    "path": "02_projects/imagrafity/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Imagrafity",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/imagrafity/README.md"
+  },
+  {
+    "path": "02_projects/innovation-engines-repair/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Innovation Engines Repair",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/innovation-engines-repair/README.md"
+  },
+  {
+    "path": "02_projects/jobcron/01_tecnotelec_admin_process.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Proceso administrativo Tecno Telec en JobCron",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/jobcron/01_tecnotelec_admin_process.md"
+  },
+  {
+    "path": "02_projects/jobcron/README.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "JobCron",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/jobcron/README.md"
+  },
+  {
+    "path": "02_projects/jobcron/ui/00_jobcron_mockup_analysis.md",
+    "domain": "Business",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Analisis de fuente visual JobCron",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "02_projects/jobcron/ui/00_jobcron_mockup_analysis.md"
+  },
+  {
+    "path": "02_projects/jobcron/ui/01_navigation_map.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Mapa de navegacion JobCron",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/jobcron/ui/01_navigation_map.md"
+  },
+  {
+    "path": "02_projects/jobcron/ui/02_layout_and_design_system.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Maquetacion y sistema visual JobCron",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/jobcron/ui/02_layout_and_design_system.md"
+  },
+  {
+    "path": "02_projects/jobcron/ui/03_dynamic_content_model.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modelo de contenido dinamico JobCron",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/jobcron/ui/03_dynamic_content_model.md"
+  },
+  {
+    "path": "02_projects/jobcron/ui/04_web_review_and_better_proposal.md",
+    "domain": "Business",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Revision de web JobCron y propuesta mejorada",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "02_projects/jobcron/ui/04_web_review_and_better_proposal.md"
+  },
+  {
+    "path": "02_projects/jobcron/ui/05_pdf_visual_extraction.md",
+    "domain": "Business",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Extraccion visual del PDF JobCron",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "02_projects/jobcron/ui/05_pdf_visual_extraction.md"
+  },
+  {
+    "path": "02_projects/jobcron/ui/06_public_website_structure_research.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Investigacion y propuesta de web publica JobCron",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/jobcron/ui/06_public_website_structure_research.md"
+  },
+  {
+    "path": "02_projects/jobcron/ui/clean/.gitkeep",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": ".Gitkeep",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/jobcron/ui/clean/.gitkeep"
+  },
+  {
+    "path": "02_projects/jobcron/ui/source/.gitkeep",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": ".Gitkeep",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/jobcron/ui/source/.gitkeep"
+  },
+  {
+    "path": "02_projects/lavanderia-3p/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Lavanderia 3P",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/lavanderia-3p/README.md"
+  },
+  {
+    "path": "02_projects/lexnova/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "LexNova",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/lexnova/README.md"
+  },
+  {
+    "path": "02_projects/mexingsof/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Mexingsof",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/mexingsof/README.md"
+  },
+  {
+    "path": "02_projects/mockwander/README.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "MockWander",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/mockwander/README.md"
+  },
+  {
+    "path": "02_projects/modulix/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Modulix",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/modulix/README.md"
+  },
+  {
+    "path": "02_projects/nexora/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Nexora",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/nexora/README.md"
+  },
+  {
+    "path": "02_projects/nutriva/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Nutriva",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/nutriva/README.md"
+  },
+  {
+    "path": "02_projects/pagora/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Pagora",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/pagora/README.md"
+  },
+  {
+    "path": "02_projects/pensavart/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Pensavart",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/pensavart/README.md"
+  },
+  {
+    "path": "02_projects/phone-shop/README.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Proyecto Phone Shop",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/phone-shop/README.md"
+  },
+  {
+    "path": "02_projects/README.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Proyectos",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/README.md"
+  },
+  {
+    "path": "02_projects/refakto/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Refakto",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/refakto/README.md"
+  },
+  {
+    "path": "02_projects/rutexa/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Rutexa",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/rutexa/README.md"
+  },
+  {
+    "path": "02_projects/sekura-tech/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Sekura Tech",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/sekura-tech/README.md"
+  },
+  {
+    "path": "02_projects/social-networks/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Social Networks",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/social-networks/README.md"
+  },
+  {
+    "path": "02_projects/stockara/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Stockara",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/stockara/README.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/00_initial_stage_readiness_review.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Revision de cierre de etapa inicial Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/00_initial_stage_readiness_review.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/AGENTE.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Agente de desarrollo Tecno Telec",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/tecnotelec/AGENTE.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/auth/00_user_process.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Proceso de usuarios Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/auth/00_user_process.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/backend/00_gateway_product_endpoints.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Endpoints publicos Gateway para productos",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/backend/00_gateway_product_endpoints.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/business/00_tecnotelec_identity.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Identidad de Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/business/00_tecnotelec_identity.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/business/01_objectives.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Objetivos",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/business/01_objectives.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/business/02_foda.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "FODA",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/business/02_foda.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/business/03_business_model.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Modelo de negocio",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/business/03_business_model.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/business/04_services.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Servicios",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/business/04_services.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/business/05_customer_segments.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Segmentos de cliente",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/tecnotelec/business/05_customer_segments.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/business/06_value_proposition.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Propuesta de valor",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/business/06_value_proposition.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/cart/00_cart_future_process.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Proceso futuro de carrito, pedido y compra",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/tecnotelec/cart/00_cart_future_process.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/catalog/00_public_catalog_process.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Proceso de catalogo publico Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/catalog/00_public_catalog_process.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/catalog/01_product_detail_process.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Proceso de detalle de producto",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/catalog/01_product_detail_process.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/decisions/adr_0001_api_gateway_name.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "ADR 0001 - Nombre del API Gateway",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/decisions/adr_0001_api_gateway_name.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/decisions/adr_0002_modular_erp_strategy.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "ADR 0002 - Estrategia ERP modular",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/decisions/adr_0002_modular_erp_strategy.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/decisions/adr_0003_supplier_catalog_strategy.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "ADR 0003 - Estrategia Supplier y Catalog",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/decisions/adr_0003_supplier_catalog_strategy.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/decisions/adr_0004_quote_to_order_flow.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "ADR 0004 - Flujo Quote a Order",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/decisions/adr_0004_quote_to_order_flow.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/decisions/adr_0005_rules_engine_strategy.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "ADR 0005 - Estrategia Rules Engine",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/decisions/adr_0005_rules_engine_strategy.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/decisions/adr_0006_project_api_boundary.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "ADR 0006 - API propia del proyecto Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/decisions/adr_0006_project_api_boundary.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/00_frontend_overview.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Frontend overview",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/frontend/00_frontend_overview.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/01_routes.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Rutas frontend",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/frontend/01_routes.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/02_layout.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Layout",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/frontend/02_layout.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/03_components.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Componentes",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/frontend/03_components.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/04_web_references.md",
+    "domain": "Business",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Referencias web y visuales",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "02_projects/tecnotelec/frontend/04_web_references.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/05_design_system.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Sistema de diseno",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/tecnotelec/frontend/05_design_system.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/06_image_sizes.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Tamanos de imagen",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/frontend/06_image_sizes.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/07_purchase_flow.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Flujo frontend de compra",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/tecnotelec/frontend/07_purchase_flow.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/08_quote_flow.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Flujo frontend de cotizacion",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/frontend/08_quote_flow.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/09_interface_proposal.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Propuesta de interfaz Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/frontend/09_interface_proposal.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/10_pre_development_analysis.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Analisis previo al desarrollo web",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/tecnotelec/frontend/10_pre_development_analysis.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/11_web_platform_structure.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Estructura funcional de la plataforma web",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/frontend/11_web_platform_structure.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/12_initial_web_blueprint.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Blueprint inicial web Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/frontend/12_initial_web_blueprint.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/13_visual_mockup_spec.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Especificacion visual de maqueta Tecno Telec",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/tecnotelec/frontend/13_visual_mockup_spec.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/14_navbar_standard.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Estandar de Navbar Tecno Telec",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/tecnotelec/frontend/14_navbar_standard.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/15_site_navigation_map.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Mapa de navegacion Tecno Telec",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/tecnotelec/frontend/15_site_navigation_map.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/16_catalog_user_experience_correction.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Correccion de experiencia: catalogo visible Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/frontend/16_catalog_user_experience_correction.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/17_user_navigation_experience_review.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Revision de navegacion para usuario final",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/frontend/17_user_navigation_experience_review.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/18_solution_navigation_map.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Mapa de navegacion de soluciones Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/frontend/18_solution_navigation_map.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/18_stage_one_user_experience_closure.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Cierre etapa 1: experiencia publica Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/frontend/18_stage_one_user_experience_closure.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/19_dynamic_catalog_and_navigation_rule.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Regla de catalogo y navegacion dinamica",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/frontend/19_dynamic_catalog_and_navigation_rule.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/20_manual_review_checklist_and_ports.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Checklist manual y puertos Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/frontend/20_manual_review_checklist_and_ports.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/21_product_catalog_interface_execution.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Ejecucion interfaz de productos Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/frontend/21_product_catalog_interface_execution.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/22_product_catalog_visual_responsive_execution.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Ejecucion visual responsiva del catalogo Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/frontend/22_product_catalog_visual_responsive_execution.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/pricing/00_price_publication_process.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Proceso de publicacion de precios en Web",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/pricing/00_price_publication_process.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/pricing/01_advanced_pricing_future.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Pricing avanzado futuro",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/tecnotelec/pricing/01_advanced_pricing_future.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/quotes/00_quote_process.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Proceso de cotizacion Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/quotes/00_quote_process.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/quotes/01_quote_mvp_sales_decision.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Decision MVP: cotizacion en Sales API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/quotes/01_quote_mvp_sales_decision.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/quotes/02_quote_implementation_scope_analysis.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Analisis de implementacion para cotizaciones Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/quotes/02_quote_implementation_scope_analysis.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/README.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Proyecto Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/README.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/solutions/00_solution_presentation_and_assembly_strategy.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Estrategia de armado y presentacion de soluciones Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/solutions/00_solution_presentation_and_assembly_strategy.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/solutions/01_dynamic_solution_technical_design.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Diseno tecnico dinamico de soluciones Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/solutions/01_dynamic_solution_technical_design.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/solutions/02_solution_operating_architecture_analysis.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Analisis operativo y arquitectura para soluciones cotizables Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/solutions/02_solution_operating_architecture_analysis.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/solutions/03_development_start_recommendation.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Recomendacion para cerrar analisis e iniciar desarrollo",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/solutions/03_development_start_recommendation.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/solutions/05_solution_module_implementation_report.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Tecno Telec Solution Module Implementation Report",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/solutions/05_solution_module_implementation_report.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/solutions/06_solution_detail_definition.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Definicion del detalle de soluciones",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/solutions/06_solution_detail_definition.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/00_pending_tasks.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Tareas pendientes",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/tecnotelec/tasks/00_pending_tasks.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/01_required_apis.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "APIs requeridas",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/tasks/01_required_apis.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/02_required_tables.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Tablas requeridas",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/tecnotelec/tasks/02_required_tables.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/03_required_frontend_views.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Vistas frontend requeridas",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/tasks/03_required_frontend_views.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/04_development_order.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Orden de desarrollo",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/tasks/04_development_order.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/05_mvp_scope.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Alcance MVP Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/tasks/05_mvp_scope.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/06_pricing_first_plan.md",
+    "domain": "Business",
+    "status": "active",
+    "priority": "P1",
+    "title": "Plan Pricing First",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "02_projects/tecnotelec/tasks/06_pricing_first_plan.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/07_pre_development_checklist.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Checklist previo a programar Tecno Telec",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/tecnotelec/tasks/07_pre_development_checklist.md"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/roadmap.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Roadmap del proyecto",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/tecnotelec/tasks/roadmap.md"
+  },
+  {
+    "path": "02_projects/tip-smart/README.md",
+    "domain": "Business",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Tip Smart",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "02_projects/tip-smart/README.md"
+  },
+  {
+    "path": "03_standards/database/sql-server-publication-standard.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Estandar de nombres SQL Server para tablas publicadas",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/database/sql-server-publication-standard.md"
+  },
+  {
+    "path": "03_standards/docker.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Docker local",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/docker.md"
+  },
+  {
+    "path": "03_standards/docker/grouped-containers-isolated-config.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Contenedores agrupados con configuracion aislada",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/docker/grouped-containers-isolated-config.md"
+  },
+  {
+    "path": "03_standards/documentation-maintenance-policy.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Politica de mantenimiento documental",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/documentation-maintenance-policy.md"
+  },
+  {
+    "path": "03_standards/documentation-pr-checklist.md",
+    "domain": "Standards",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Checklist PR documental",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "03_standards/documentation-pr-checklist.md"
+  },
+  {
+    "path": "03_standards/frontend/02_placeholder_strategy.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Estrategia de placeholders frontend",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/frontend/02_placeholder_strategy.md"
+  },
+  {
+    "path": "03_standards/frontend/catalog-visibility-rules.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Reglas de visibilidad en frontend",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/frontend/catalog-visibility-rules.md"
+  },
+  {
+    "path": "03_standards/frontend/nextjs-project-standard.md",
+    "domain": "Standards",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Estandar de proyecto Next.js",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "03_standards/frontend/nextjs-project-standard.md"
+  },
+  {
+    "path": "03_standards/frontend/pre-development-checklist.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Checklist previo a desarrollo frontend",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/frontend/pre-development-checklist.md"
+  },
+  {
+    "path": "03_standards/frontend/README.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Estandares frontend",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/frontend/README.md"
+  },
+  {
+    "path": "03_standards/frontend/shared-docker-frontend-architecture.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Arquitectura Docker frontend compartida",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/frontend/shared-docker-frontend-architecture.md"
+  },
+  {
+    "path": "03_standards/operations/codex-working-rules.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Reglas de trabajo para Codex",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/operations/codex-working-rules.md"
+  },
+  {
+    "path": "03_standards/operations/data-quality.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Data Quality — Limpieza y normalización",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/operations/data-quality.md"
+  },
+  {
+    "path": "03_standards/operations/django-api-project-compliance.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Validacion de cumplimiento de proyectos Django API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/operations/django-api-project-compliance.md"
+  },
+  {
+    "path": "03_standards/operations/docker-recovery-runbook.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Runbook Docker local",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/operations/docker-recovery-runbook.md"
+  },
+  {
+    "path": "03_standards/operations/error-handling.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Error Handling",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/operations/error-handling.md"
+  },
+  {
+    "path": "03_standards/operations/git-environments-and-release-flow.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Flujo Git, entornos y validacion",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/operations/git-environments-and-release-flow.md"
+  },
+  {
+    "path": "03_standards/operations/git-repository-map.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Mapa de repositorios Git",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/operations/git-repository-map.md"
+  },
+  {
+    "path": "03_standards/operations/jobs/failure-recovery.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Recuperacion ante fallos de jobs",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/operations/jobs/failure-recovery.md"
+  },
+  {
+    "path": "03_standards/operations/jobs/job-catalog.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Catalogo de jobs",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/operations/jobs/job-catalog.md"
+  },
+  {
+    "path": "03_standards/operations/jobs/job-schedule.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Calendario de jobs",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/operations/jobs/job-schedule.md"
+  },
+  {
+    "path": "03_standards/operations/jobs/retry-policy.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Politica de reintentos",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/operations/jobs/retry-policy.md"
+  },
+  {
+    "path": "03_standards/operations/multi-provider.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Estrategia multi-proveedor",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/operations/multi-provider.md"
+  },
+  {
+    "path": "03_standards/operations/observability.md",
+    "domain": "Standards",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Observabilidad",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "03_standards/operations/observability.md"
+  },
+  {
+    "path": "03_standards/operations/project-closure-standard.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Estandar de cierre para proyectos Django API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/operations/project-closure-standard.md"
+  },
+  {
+    "path": "03_standards/operations/provider-integration-standard.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Estandar para integrar proveedores",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/operations/provider-integration-standard.md"
+  },
+  {
+    "path": "03_standards/operations/reporting.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Reporting",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/operations/reporting.md"
+  },
+  {
+    "path": "03_standards/operations/runbook.md",
+    "domain": "Standards",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Runbook operativo",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "03_standards/operations/runbook.md"
+  },
+  {
+    "path": "03_standards/operations/scheduling.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Scheduling - Procesos programados",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/operations/scheduling.md"
+  },
+  {
+    "path": "03_standards/operations/security.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Security",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/operations/security.md"
+  },
+  {
+    "path": "03_standards/README.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Estandares",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/README.md"
+  },
+  {
+    "path": "03_standards/security/audit-policy.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Politica de auditoria",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/security/audit-policy.md"
+  },
+  {
+    "path": "03_standards/security/mfa-future.md",
+    "domain": "Standards",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "MFA futuro",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "03_standards/security/mfa-future.md"
+  },
+  {
+    "path": "03_standards/security/password-policy.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Politica de password",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/security/password-policy.md"
+  },
+  {
+    "path": "03_standards/security/secrets-management.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Manejo de secretos",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/security/secrets-management.md"
+  },
+  {
+    "path": "03_standards/testing/testing-strategy.md",
+    "domain": "Standards",
+    "status": "active",
+    "priority": "P1",
+    "title": "Estrategia de pruebas",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "03_standards/testing/testing-strategy.md"
+  },
+  {
+    "path": "04_integrations/ct-internacional/README.md",
+    "domain": "Integration",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Integracion CT Internacional",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "04_integrations/ct-internacional/README.md"
+  },
+  {
+    "path": "04_integrations/dc-mayorista/README.md",
+    "domain": "Integration",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Integracion DC Mayorista",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "04_integrations/dc-mayorista/README.md"
+  },
+  {
+    "path": "04_integrations/README.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "Integraciones",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/README.md"
+  },
+  {
+    "path": "04_integrations/syscom/api_reference/syscom-api-app.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "Syscom Api App",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/api_reference/syscom-api-app.md"
+  },
+  {
+    "path": "04_integrations/syscom/api_reference/syscom-auth.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "SYSCOM Auth API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/api_reference/syscom-auth.md"
+  },
+  {
+    "path": "04_integrations/syscom/api_reference/syscom-brands.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "SYSCOM Brands API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/api_reference/syscom-brands.md"
+  },
+  {
+    "path": "04_integrations/syscom/api_reference/syscom-categories.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "SYSCOM Categories API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/api_reference/syscom-categories.md"
+  },
+  {
+    "path": "04_integrations/syscom/api_reference/syscom-exchange-rate.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "SYSCOM Exchange Rate API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/api_reference/syscom-exchange-rate.md"
+  },
+  {
+    "path": "04_integrations/syscom/api_reference/syscom-product-detail.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "SYSCOM Product Detail API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/api_reference/syscom-product-detail.md"
+  },
+  {
+    "path": "04_integrations/syscom/api_reference/syscom-products.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "SYSCOM Products API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/api_reference/syscom-products.md"
+  },
+  {
+    "path": "04_integrations/syscom/api_reference/syscom-related-accessories.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "SYSCOM Related Products and Accessories APIs",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/api_reference/syscom-related-accessories.md"
+  },
+  {
+    "path": "04_integrations/syscom/etl/docker-worker.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "Worker Docker para ETLs SYSCOM",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/etl/docker-worker.md"
+  },
+  {
+    "path": "04_integrations/syscom/etl/overview.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "ETL overview",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/etl/overview.md"
+  },
+  {
+    "path": "04_integrations/syscom/etl/reset-and-auto-sync.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "Reset limpio y sincronizacion automatica SYSCOM",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/etl/reset-and-auto-sync.md"
+  },
+  {
+    "path": "04_integrations/syscom/etl/sync-brands.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "ETL marcas",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/etl/sync-brands.md"
+  },
+  {
+    "path": "04_integrations/syscom/etl/sync-categories.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "ETL categorias",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/etl/sync-categories.md"
+  },
+  {
+    "path": "04_integrations/syscom/etl/sync-products.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "ETL productos",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/etl/sync-products.md"
+  },
+  {
+    "path": "04_integrations/syscom/etl/sync-related-accessories.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "ETL relacionados y accesorios",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/etl/sync-related-accessories.md"
+  },
+  {
+    "path": "04_integrations/syscom/etl/sync-stock-prices.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "ETL stock y precios",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/etl/sync-stock-prices.md"
+  },
+  {
+    "path": "04_integrations/syscom/etl/sync-token.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "ETL token SYSCOM",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/etl/sync-token.md"
+  },
+  {
+    "path": "04_integrations/syscom/etl/syscom-commands.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "Ejecutables SYSCOM",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/etl/syscom-commands.md"
+  },
+  {
+    "path": "04_integrations/syscom/etl/text-encoding-and-search.md",
+    "domain": "Integration",
+    "status": "active",
+    "priority": "P1",
+    "title": "SYSCOM text encoding and searchable catalog data",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "04_integrations/syscom/etl/text-encoding-and-search.md"
+  },
+  {
+    "path": "_archive/image/jobcron/converted/jobcron_pdf_page_01.png",
+    "domain": "Archive",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "\u0006\u00132Q\\2ה馼\u0007m$|7d<iPne'\u0013۬oӦ2%]6dWNy\trλG3\u0019j\u0013G%IN\u001d.\\U/Vޛ$VZxR\u0006\u001bb.\u0007>\u0017S\u0006\u0006!\\o\bÀ0G<g\u000b\u001fn-\\d\u000eظN0\bM;}v}\u0018u_9~S|\u001c%^\\ｍ&XL@\u0013=\u0013 [,}bA;j\u0003З\u0019\b\fdEb0'",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_archive/image/jobcron/converted/jobcron_pdf_page_01.png"
+  },
+  {
+    "path": "_archive/image/jobcron/especificaciones cron.pdf",
+    "domain": "Archive",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "<\u001a @ah\f($\u0006J\u001808,\u0016@\u0013 \u0011p\u0010x\u001c\b\t\u0004\u0002PS\u0003N$\u00014H\u0007\t$\u0006\u0010$\u0002P5u\u0002\bա\u001b\t$\u0012\u0011\u000e I\u0003OZƔMbw\u0007)JfH\u0014z\u0015HQH\u0014\\\u0015F\u0012\u0018sc\u001b|01)\u001dU\f\t%ҞAQ[W+\t\u0002YP/vv\u0015d/\u0014$\u0006YCH-_FR['o<IMz9OKjD\u0015JAa@NvgJ\u0002N`1\fKG{ږ`<\u0019m\u001bãa\u001a\u001cBF9\u000f8aU038Mల)ayk'x|0Jh gI|?+>\\\u001f'Sl\u001fKN\u000eDrj{&xuMIC\t\u0011uL\u0002;Yf^4Q#_+7h\u0001v4_+ӫL\u001d76jmgCn􆃕ǑCgMΛ\u0019S/\u0019xQhX\u001a]?n\u0016xXUuIIB0\u0010\u0012NL^M'gįů\u0017omL.}|akzӻO3ks\u001b_\u0001\u001b_\u00176w\u0001 \\2efu\u001b\u0014yv:\u0001fzMlzAjzh`lrP\u0018M\u0001\u00129gX\u000e6`KHxS$U\u0002Hp\u0017\u000eHP!iېM ՖAqˀ6^^%=C t\u000b\u0007_\u000e;x\u001d=m]\u0015/ZKE5Ǖy\u00159܂'켂,f",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_archive/image/jobcron/especificaciones cron.pdf"
+  },
+  {
+    "path": "_archive/image/teno-telec/file_00000000132c722f8a268e9d7a9c7489.png",
+    "domain": "Archive",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "\b\u001aM\u00050\u0006\t,d^\u0019jQӬ\u001d\u0007߽C\u0017ҹ\u0014\"\u0019&\u000e\u001a\u0011\u0004\u001cNw\"88\\) l߹\u000b_UW\\})\\\u0005Jh? N΀$Z5@f\u0004P\u001dD\"\u0015\u0001ufgk\u0004vR\u0014^JbR;\u0004dD\u0002$I$H\u001e\u000e`K\u0004Ă136v%\u0019ӣ;",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_archive/image/teno-telec/file_00000000132c722f8a268e9d7a9c7489.png"
+  },
+  {
+    "path": "_archive/image/teno-telec/file_00000000333071f5a3aadfa4b061ff17.png",
+    "domain": "Archive",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "ͨ]J鳃\u0016{jʋל×Քy$\u001av8N\u0007\u0015p[f\u0017\u0011`X\u0017dYAEA~% \t1pr\u0019'2 \u0015v/\u0005N+O&} b.Mo4-d0jP\u00016\u0005\u0002\u0016KhC\u001afBE:ތjT\u001d(\u0006\u0018j*3#\u001dD^$&\u0015\b-A\u0019J!|XrF\tfC>Xv:\u0016\b )>6n0۠@e\u0002mKfJZD\u0002=G1\u0002L]ؔ\u001c_' `Lk\"\u001dك\b\u001e;\u0012!wpÚ哄gDtNfl\u0014\u0013DזSql&\u000f\u0002\u0017⍦M:`$:",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_archive/image/teno-telec/file_00000000333071f5a3aadfa4b061ff17.png"
+  },
+  {
+    "path": "_archive/image/teno-telec/file_00000000511871f58d80d5b054267240.png",
+    "domain": "Archive",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "([\u0018j\u0013^sjQ-\u0012Q\u0013\\(O\"q\u0017\u001cR\u0011CP\u0011\u0011͵-\u0018)d@.6-LRbJ|\u0013\u001fm/ǦK0\u0014j\u0006-TaE5b\u0004t#T\u0013Rp) \u0012_u7]77݅Р\u001c(5tdp\u0005",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_archive/image/teno-telec/file_00000000511871f58d80d5b054267240.png"
+  },
+  {
+    "path": "_archive/image/teno-telec/file_0000000071347230b7aa1832c9edd39c.png",
+    "domain": "Archive",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "ƪ\u001f@[>/^eP\u0002~+\f\u001fߨL\f}\u0002\u0019llB6pѥ\u001e\\$\u0007\f[y~\f,?\u001dHG?}\u0005'G\u0016 rb|K\u0015ryDFcZBh\u0011\u0017w=[n\u0015(\u000372P1:7~\bbSaY%V\u0013h˝~V\t\u000fz\"J3\t\u00034\u000e/\f\u0002\u0019*zm[t,tu\u001eHB\bwdT\"Wӛ}ʳ\u00141k\u001e\u0005*|,{\u0005ZwK\u001b#A>\u001dh\u00072{ȼKn]9C[\u001aj\u00109g\u0015C?:(\b x\u001aD m\u000bt5J혔M2\u0015u3sL\u001e6SDSA\u0003nI\u0011}jTƏY#vQWPp\u001e@ѭQ-jkLԆҙL\u0010>\b*\u0017\u0011$gy_~!ݪ$^\b\u0013=?\u0015\u0018䅀ɏR7Z%\u0018$(\bT^Z\b\u0001:g>W\u001dv(@9$bf<ɇ\u0018A\u0014\u0003PrS=x7q9~yjd\b:I\u001e\u0011{UH l_\u000b\u000fў\u0013HZ/F.\"bG\u001bV\u0004Mm\\jS4\u0010\u0007\u0003}bb\u0016?h*\u0010\f]\u000f9CE\u0019XN^1XNq}\t],P:tㄗ\u0010\u0001trq\u00133;[\u0014F\u0006AlGr\u0003K5- \u0007C{GO\u0010#pU1cyZ6ճ\u001d3a",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_archive/image/teno-telec/file_0000000071347230b7aa1832c9edd39c.png"
+  },
+  {
+    "path": "_archive/image/teno-telec/file_000000009ccc71fdaf1fb1e7df41f5d6 (1).png",
+    "domain": "Archive",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "\u001al9$\u0019\u0019;d\u001dcy]\u00156J3c9/\u001e6&_:t=\"H\u0005S0. =?#̥_\\:shol{僋e`PJd\u00181\u0011U\u0012]\u0003\u0004rOyx``5tѠ\u0019é1@R<Qi5X=g>-⥮\u0007\u001d~k֭`Pe\u0012\tT\u0001U5˭r\u001dG~񈿞u;Ӏ\u0004\u0007D$\u000f[Tc+\\$P?Ɂ\\>w6\u0003TY\\hd*IvYW\b١\u0019\u0016*w~j7%\" y^ѱAvyO9\u0006Ĕ\u001e\u00064v2J֬)`%a\u001a\u001bz紛x6n树\u0018dB@|87sdtl\u0004u\u001b?>?O/*\u0007",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_archive/image/teno-telec/file_000000009ccc71fdaf1fb1e7df41f5d6 (1).png"
+  },
+  {
+    "path": "_archive/image/teno-telec/file_000000009ccc71fdaf1fb1e7df41f5d6.png",
+    "domain": "Archive",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "\u001al9$\u0019\u0019;d\u001dcy]\u00156J3c9/\u001e6&_:t=\"H\u0005S0. =?#̥_\\:shol{僋e`PJd\u00181\u0011U\u0012]\u0003\u0004rOyx``5tѠ\u0019é1@R<Qi5X=g>-⥮\u0007\u001d~k֭`Pe\u0012\tT\u0001U5˭r\u001dG~񈿞u;Ӏ\u0004\u0007D$\u000f[Tc+\\$P?Ɂ\\>w6\u0003TY\\hd*IvYW\b١\u0019\u0016*w~j7%\" y^ѱAvyO9\u0006Ĕ\u001e\u00064v2J֬)`%a\u001a\u001bz紛x6n树\u0018dB@|87sdtl\u0004u\u001b?>?O/*\u0007",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_archive/image/teno-telec/file_000000009ccc71fdaf1fb1e7df41f5d6.png"
+  },
+  {
+    "path": "_archive/image/teno-telec/file_00000000c24071f59b68da00a7774721.png",
+    "domain": "Archive",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "wŻ\u00058\u00112J#!aȼT@\u0004Qa\u0007\u0010XQx\u0012|\u0005=212?0ф+YgB\u0003\u0015rp<\u0004\u0011'\u0003Z+\u0017!\u0004kb\u0014>\u0003 3x;8qaEZ3D^w\u001f\u000ebڗ\u001e\u0001,?ҏKTK\u0013\u001b\u0004,Uh׀`|H\u0019\u0004\u0018-1m⊆kηY{\u001aj:\u0015\u0014\u0018\u0001\u0006\u001dU+4PHem{i`U-J\u0013`q*;WF\u0005_a|@d2K\u001aU\u001fƷ߹b-MA\u000b\u000eA\u0007\u000b,\tnwʙ\u0001\u001b[\u0019ڗ\u001aܰoY\u000eѫ.\u0003\u0018\u000exϸ\u0015Z\u0016ϻ\u0010~p4^x\u00114\u0011J9-'noyG!Ǯ>4|R\u0011\tK>Now_\u001ce\u0002K|/u&q\u0012֊JTX.^|\u0011>o];O|[\u0015_?\f\u001eu\u0005*\u001eE&ʂ!mվ\t#\u0016^\f8:B+\\uY\u0010\u0011 \u0006 8h\u0011L.",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_archive/image/teno-telec/file_00000000c24071f59b68da00a7774721.png"
+  },
+  {
+    "path": "_archive/image/teno-telec/file_00000000d38c722fb071b1a45e736729.png",
+    "domain": "Archive",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "%B\u0006D};Ķ&DgT.0~kj'N\u001b\u0016֘\u001d\tt0'/?ᗿ?Ǿ??\u000f,Gs?\u0010<˗<gmYPO*^\u0010H\u0016!lgg{|.YB\u0010(\u0011UB]\u001b8l匲\u00055\u0007r\u0010tFX\u00035U֒\u0016\u0005x\f`#W:a$%\"*>]$dZ4Nx\u0017m\u00134Kl;@ks8Թ&-ݷ\u0019Y۟9QF'\u0017p]\u001eW3\u001a|ǟ}ocˏ?|Y?]r\u0001.͋\u001d8ds$h(0 [^!iȅ&*vcڍ\u0012h\u001dEvU\u001bU6Z._2T)_\fa\u0012Jn\u0019)y`- \u001aڳ2)eڹ&UKBM{8\u001agQKD\b\u0014o\u0018IҸ\u0002O[t\u001e\u001d\u0011Y|\u0003\u0007$\f(\u0017ZƮ\u0016>ui5)A:b}խ\u0019lх\u001f\u0006P\u0002ܟ\u0007SƨO\u001a\"ʡ|[ b<<.\u0010⠚W>\u0007\u0018È\u0007vr\t\f\u0015`\u000e\"\u001avN\u00125d\u00074lJc%ƙE\u000f2Ĉ3+$=\u0019s\"[JMڠQ_\u0012\u0011׺;t/~\u0010a#k\u001c6n>?\u00158\u0019\u0006ms4.lGzדD$w\u0001M3]n+\u0002\u0013J'\u0001uL(\u001c̞{X\u001bQ\u0014q\u0007\bY\\F9\u001eH\u0018/L\u001f$5\u0018怗G;\u001c\u0002}\u0013]\u001fRKؘFKV\u0018㕨-\u001dq6'\\L\u0004\u00157\"i|]v'%U2٥\"\u0001\u0007ʘy>\t\u0018AN\u001e uP2\u001d} _Y\u0002BWN{\u0011D\u0002qLan[\u001a壣F;i`_\u001a\u001fW}4 uQ(w+^zt{^kd1\u0002\u0005\fnINJ̋Y5\u000b\u001bZOXK\u001a9\u0014\u0010 n \u0017 v˙6I\u0017r'\\\u0015TΠHO\u0003.\u001c\u001cq Uu\u0010嬭\u0012\u0007&VsC,`_TP(\\VES$\u0012n\u001eʈ y@\u001b;UYI~<bl19ܛ\u0011ʺG8z|\u0018ޡº\"\u0003\u00030PHx\tBje7\u0010^$OHa;h\u0006%\u001a8r\u000f\u001cyiBM\u0013\u0017?/w\u0015\u001e\u0014oai*,Ff\u0015;~{8WsߟE\u0003L@",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_archive/image/teno-telec/file_00000000d38c722fb071b1a45e736729.png"
+  },
+  {
+    "path": "_archive/image/teno-telec/file_00000000d7e471f59205922c11f75c11.png",
+    "domain": "Archive",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "\u001aU38\fw:\b\u0001",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_archive/image/teno-telec/file_00000000d7e471f59205922c11f75c11.png"
+  },
+  {
+    "path": "_meta/api_documentation_report.md",
+    "domain": "Meta",
+    "status": "active",
+    "priority": "P3",
+    "title": "Reporte de documentacion API",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "_meta/api_documentation_report.md"
+  },
+  {
+    "path": "_meta/archive_report.md",
+    "domain": "Meta",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Reporte de archivo",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_meta/archive_report.md"
+  },
+  {
+    "path": "_meta/business_documentation_report.md",
+    "domain": "Meta",
+    "status": "active",
+    "priority": "P3",
+    "title": "Reporte de documentacion por proyecto",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "_meta/business_documentation_report.md"
+  },
+  {
+    "path": "_meta/cleanup_report.md",
+    "domain": "Meta",
+    "status": "active",
+    "priority": "P3",
+    "title": "Reporte de limpieza documental",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "_meta/cleanup_report.md"
+  },
+  {
+    "path": "_meta/codex_execution_plan.md",
+    "domain": "Meta",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Plan de ejecucion documental para Codex",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "_meta/codex_execution_plan.md"
+  },
+  {
+    "path": "_meta/core_vs_business_report.md",
+    "domain": "Meta",
+    "status": "active",
+    "priority": "P3",
+    "title": "Reporte Core vs Business",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "_meta/core_vs_business_report.md"
+  },
+  {
+    "path": "_meta/database_documentation_report.md",
+    "domain": "Meta",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Reporte de documentacion de base de datos",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "_meta/database_documentation_report.md"
+  },
+  {
+    "path": "_meta/delete_candidates.md",
+    "domain": "Meta",
+    "status": "active",
+    "priority": "P3",
+    "title": "Candidatos de eliminacion",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "_meta/delete_candidates.md"
+  },
+  {
+    "path": "_meta/document-relations.md",
+    "domain": "Meta",
+    "status": "active",
+    "priority": "P3",
+    "title": "Relaciones documentales",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "_meta/document-relations.md"
+  },
+  {
+    "path": "_meta/document_classification.json",
+    "domain": "Meta",
+    "status": "active",
+    "priority": "P3",
+    "title": "Document Classification",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "_meta/document_classification.json"
+  },
+  {
+    "path": "_meta/document_classification.md",
+    "domain": "Meta",
+    "status": "active",
+    "priority": "P3",
+    "title": "Clasificacion documental",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "_meta/document_classification.md"
+  },
+  {
+    "path": "_meta/document_inventory.csv",
+    "domain": "Meta",
+    "status": "active",
+    "priority": "P3",
+    "title": "Document Inventory",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "_meta/document_inventory.csv"
+  },
+  {
+    "path": "_meta/document_inventory.json",
+    "domain": "Meta",
+    "status": "active",
+    "priority": "P3",
+    "title": "Document Inventory",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "_meta/document_inventory.json"
+  },
+  {
+    "path": "_meta/document_inventory.md",
+    "domain": "Meta",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Inventario documental",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_meta/document_inventory.md"
+  },
+  {
+    "path": "_meta/duplicate_clusters.json",
+    "domain": "Meta",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Duplicate Clusters",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_meta/duplicate_clusters.json"
+  },
+  {
+    "path": "_meta/duplicate_report.md",
+    "domain": "Meta",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Reporte de duplicados",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_meta/duplicate_report.md"
+  },
+  {
+    "path": "_meta/final_review_report.md",
+    "domain": "Meta",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Revision final documental",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "_meta/final_review_report.md"
+  },
+  {
+    "path": "_meta/folder_rules.md",
+    "domain": "Meta",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Reglas de carpetas",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_meta/folder_rules.md"
+  },
+  {
+    "path": "_meta/frontend_documentation_report.md",
+    "domain": "Meta",
+    "status": "active",
+    "priority": "P3",
+    "title": "Reporte de documentacion frontend",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "_meta/frontend_documentation_report.md"
+  },
+  {
+    "path": "_meta/master-index.md",
+    "domain": "Meta",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Indice maestro documental",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_meta/master-index.md"
+  },
+  {
+    "path": "_meta/master-index.yaml",
+    "domain": "Meta",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Master Index",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_meta/master-index.yaml"
+  },
+  {
+    "path": "_meta/navigation-map.md",
+    "domain": "Meta",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Mapa de navegacion documental",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_meta/navigation-map.md"
+  },
+  {
+    "path": "_meta/owners.md",
+    "domain": "Meta",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Owners documentales",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_meta/owners.md"
+  },
+  {
+    "path": "_meta/proposed_structure.md",
+    "domain": "Meta",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Estructura documental propuesta",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "_meta/proposed_structure.md"
+  },
+  {
+    "path": "_meta/quality_gate_report.md",
+    "domain": "Meta",
+    "status": "active",
+    "priority": "P3",
+    "title": "Quality gate documental",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "_meta/quality_gate_report.md"
+  },
+  {
+    "path": "agents/AGENTS-000.md",
+    "domain": "Agents",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Agents para Optimizar la Documentación del Proyecto",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "agents/AGENTS-000.md"
+  },
+  {
+    "path": "agents/AGENTS-001.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "01_zip_inventory_agent.md",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-001.md"
+  },
+  {
+    "path": "agents/AGENTS-002.md",
+    "domain": "Agents",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "02_document_classifier_agent.md",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "agents/AGENTS-002.md"
+  },
+  {
+    "path": "agents/AGENTS-003.md",
+    "domain": "Agents",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "03_structure_architect_agent.md",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "agents/AGENTS-003.md"
+  },
+  {
+    "path": "agents/AGENTS-004.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "04_duplicate_detector_agent.md",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-004.md"
+  },
+  {
+    "path": "agents/AGENTS-005.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "05_canonical_document_agent.md",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-005.md"
+  },
+  {
+    "path": "agents/AGENTS-006.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "06_core_vs_business_agent.md",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-006.md"
+  },
+  {
+    "path": "agents/AGENTS-007.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "07_business_documentation_agent.md",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-007.md"
+  },
+  {
+    "path": "agents/AGENTS-008.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "08_api_documentation_agent.md",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-008.md"
+  },
+  {
+    "path": "agents/AGENTS-009.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "09_database_documentation_agent.md",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-009.md"
+  },
+  {
+    "path": "agents/AGENTS-010.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "10_frontend_documentation_agent.md",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-010.md"
+  },
+  {
+    "path": "agents/AGENTS-011.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "11_etl_jobs_documentation_agent.md",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-011.md"
+  },
+  {
+    "path": "agents/AGENTS-012.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "12_events_scheduler_agent.md",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-012.md"
+  },
+  {
+    "path": "agents/AGENTS-013.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "13_security_auth_permissions_agent.md",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-013.md"
+  },
+  {
+    "path": "agents/AGENTS-014.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "14_navigation_index_agent.md",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-014.md"
+  },
+  {
+    "path": "agents/AGENTS-015.md",
+    "domain": "Agents",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "15_cleanup_archive_agent.md",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "agents/AGENTS-015.md"
+  },
+  {
+    "path": "agents/AGENTS-016.md",
+    "domain": "Agents",
+    "status": "template",
+    "priority": "P3",
+    "title": "16_template_standardizer_agent.md",
+    "reason": "Documento template.",
+    "suggested_path": "agents/AGENTS-016.md"
+  },
+  {
+    "path": "agents/AGENTS-017.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "17_quality_gate_agent.md",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-017.md"
+  },
+  {
+    "path": "agents/AGENTS-018.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "18_codex_execution_plan_agent.md",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-018.md"
+  },
+  {
+    "path": "agents/AGENTS-019.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "19_final_review_agent.md",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-019.md"
+  },
+  {
+    "path": "agents/AGENTS-020.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "20_documentation_maintenance_agent.md",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-020.md"
+  },
+  {
+    "path": "agents/AGENTS-021.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "Agents 021",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-021.md"
+  },
+  {
+    "path": "agents/AGENTS-022.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "Agents 022",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-022.md"
+  },
+  {
+    "path": "agents/AGENTS-023.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "Agents 023",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-023.md"
+  },
+  {
+    "path": "agents/AGENTS-024.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "Agents 024",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-024.md"
+  },
+  {
+    "path": "agents/AGENTS-025.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "Agents 025",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-025.md"
+  },
+  {
+    "path": "agents/AGENTS-026.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "Agents 026",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-026.md"
+  },
+  {
+    "path": "agents/AGENTS-027.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "Agents 027",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-027.md"
+  },
+  {
+    "path": "agents/AGENTS-028.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "Agents 028",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-028.md"
+  },
+  {
+    "path": "agents/AGENTS-029.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "Agents 029",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-029.md"
+  },
+  {
+    "path": "agents/AGENTS-030.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "Agents 030",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/AGENTS-030.md"
+  },
+  {
+    "path": "agents/EXECUTION_REPORT.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "Reporte de ejecucion de Agents documentales",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/EXECUTION_REPORT.md"
+  },
+  {
+    "path": "agents/RUN_AGENTS_INSTRUCTIONS.md",
+    "domain": "Agents",
+    "status": "active",
+    "priority": "P3",
+    "title": "Instrucciones para correr agents",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "agents/RUN_AGENTS_INSTRUCTIONS.md"
+  },
+  {
+    "path": "pendientes/pendientes.md",
+    "domain": "Future",
+    "status": "future_or_pending",
+    "priority": "P2",
+    "title": "Lo que actualmente YA tienes parcialmente cubierto",
+    "reason": "Documento pendiente o de vision futura.",
+    "suggested_path": "pendientes/pendientes.md"
+  },
+  {
+    "path": "README.md",
+    "domain": "Other",
+    "status": "active",
+    "priority": "P3",
+    "title": "Documentacion del proyecto",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "README.md"
+  },
+  {
+    "path": "tecnotelec-ui/pdf_image_01.jpg",
+    "domain": "Other",
+    "status": "active",
+    "priority": "P3",
+    "title": "Pdf Image 01",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "tecnotelec-ui/pdf_image_01.jpg"
+  },
+  {
+    "path": "tecnotelec-ui/pdf_image_02.jpg",
+    "domain": "Other",
+    "status": "active",
+    "priority": "P3",
+    "title": "Pdf Image 02",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "tecnotelec-ui/pdf_image_02.jpg"
+  },
+  {
+    "path": "tecnotelec-ui/pdf_image_03.jpg",
+    "domain": "Other",
+    "status": "active",
+    "priority": "P3",
+    "title": "Pdf Image 03",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "tecnotelec-ui/pdf_image_03.jpg"
+  },
+  {
+    "path": "tecnotelec-ui/pdf_image_04.jpg",
+    "domain": "Other",
+    "status": "active",
+    "priority": "P3",
+    "title": "Pdf Image 04",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "tecnotelec-ui/pdf_image_04.jpg"
+  },
+  {
+    "path": "tecnotelec-ui/pdf_image_05.jpg",
+    "domain": "Other",
+    "status": "active",
+    "priority": "P3",
+    "title": "Pdf Image 05",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "tecnotelec-ui/pdf_image_05.jpg"
+  },
+  {
+    "path": "tecnotelec-ui/pdf_image_06.jpg",
+    "domain": "Other",
+    "status": "active",
+    "priority": "P3",
+    "title": "Pdf Image 06",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "tecnotelec-ui/pdf_image_06.jpg"
+  },
+  {
+    "path": "tecnotelec-ui/pdf_image_07.jpg",
+    "domain": "Other",
+    "status": "active",
+    "priority": "P3",
+    "title": "Gp?k7-w\b",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "tecnotelec-ui/pdf_image_07.jpg"
+  },
+  {
+    "path": "tecnotelec-ui/pdf_image_08.jpg",
+    "domain": "Other",
+    "status": "active",
+    "priority": "P3",
+    "title": "Pdf Image 08",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "tecnotelec-ui/pdf_image_08.jpg"
+  },
+  {
+    "path": "tecnotelec-ui/pdf_image_09.jpg",
+    "domain": "Other",
+    "status": "active",
+    "priority": "P3",
+    "title": "e۽\"",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "tecnotelec-ui/pdf_image_09.jpg"
+  },
+  {
+    "path": "tecnotelec-ui/README.md",
+    "domain": "Other",
+    "status": "active",
+    "priority": "P3",
+    "title": "Fuente visual Tecno Telec",
+    "reason": "Documento activo canonico.",
+    "suggested_path": "tecnotelec-ui/README.md"
+  },
+  {
+    "path": "templates/adr-template.md",
+    "domain": "Templates",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Titulo",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "templates/adr-template.md"
+  },
+  {
+    "path": "templates/api-template.md",
+    "domain": "Templates",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Titulo",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "templates/api-template.md"
+  },
+  {
+    "path": "templates/business-template.md",
+    "domain": "Templates",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Titulo",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "templates/business-template.md"
+  },
+  {
+    "path": "templates/database-template.md",
+    "domain": "Templates",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Titulo",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "templates/database-template.md"
+  },
+  {
+    "path": "templates/etl-template.md",
+    "domain": "Templates",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Titulo",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "templates/etl-template.md"
+  },
+  {
+    "path": "templates/event-template.md",
+    "domain": "Templates",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Titulo",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "templates/event-template.md"
+  },
+  {
+    "path": "templates/frontend-template.md",
+    "domain": "Templates",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Titulo",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "templates/frontend-template.md"
+  },
+  {
+    "path": "templates/overview-template.md",
+    "domain": "Templates",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Titulo",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "templates/overview-template.md"
+  },
+  {
+    "path": "templates/runbook-template.md",
+    "domain": "Templates",
+    "status": "archive_reference",
+    "priority": "P3",
+    "title": "Titulo",
+    "reason": "Documento archive_reference.",
+    "suggested_path": "templates/runbook-template.md"
+  }
+]

@@ -20,7 +20,7 @@ La Web no debe consumir directamente las Core APIs. El Gateway expone el contrat
 
 | API | Estado de rutas | Observacion |
 |---|---|---|
-| Auth | Parcial disponible | Tiene Djoser, JWT, logout y `api/access/me/permissions/`. |
+| Auth | Base ampliada disponible | Tiene Djoser, JWT, logout, permisos efectivos por aplicacion, endpoints admin de roles/permisos/aplicaciones y tablas de sesiones, dispositivos, refresh tokens hasheados, MFA, recuperacion y auditoria. |
 | Catalog | MVP implementado | Expone health, productos, detalle, categorias y marcas para Gateway/JobCron. |
 | Customization | Minimo disponible | Tiene `api/customization/health/`. |
 | Inventory | MVP implementado | Expone health y disponibilidad por producto. |
@@ -64,7 +64,7 @@ La Web no debe consumir directamente las Core APIs. El Gateway expone el contrat
 
 Las rutas MVP necesarias para una primera operacion real Tecno Telec ya estan implementadas.
 
-El Gateway de Tecno Telec consulta Catalog, Pricing, Inventory, Supplier y Sales. Procurement queda fuera del flujo publico MVP. Las rutas avanzadas de administracion, reglas de permisos y Quote API separada siguen pendientes.
+El Gateway de Tecno Telec consulta Catalog, Pricing, Inventory, Supplier, Sales y Auth. Procurement queda fuera del flujo publico MVP. Quote API separada sigue pendiente cuando el flujo de cotizacion crezca fuera de Sales.
 
 ## Rutas Core MVP agregadas
 
@@ -104,7 +104,7 @@ Sales API:
 ## Pendientes recomendados
 
 1. Sembrar datos reales suficientes en Catalog, Pricing, Inventory y Supplier.
-2. Definir permisos internos de JobCron para costos, margenes, precio interno y seguimiento.
+2. Configurar matriz concreta de permisos internos de JobCron para costos, margenes, precio interno y seguimiento usando Auth.
 3. Crear vistas reales de JobCron para administrar estos endpoints.
 4. Separar Quote API cuando el flujo de cotizacion crezca fuera del MVP.
 5. Mantener TecnoTelec API limitada a configuracion propia, leads, servicios y contenido propio.

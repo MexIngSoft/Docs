@@ -1,0 +1,47 @@
+# Mapa de navegacion
+
+- Core: `01_core_erp`
+- Proyectos: `02_projects`
+- Estandares: `03_standards`
+- Integraciones: `04_integrations`
+- Archivo: `_archive`
+- Future: `pendientes`
+
+## Entradas principales
+- `01_core_erp/auth/README.md`
+- `01_core_erp/README.md`
+- `02_projects/buildora/README.md`
+- `02_projects/clientix/README.md`
+- `02_projects/cloudra/README.md`
+- `02_projects/datara/README.md`
+- `02_projects/docucore/README.md`
+- `02_projects/festora/README.md`
+- `02_projects/imagiland/README.md`
+- `02_projects/imagrafity/README.md`
+- `02_projects/innovation-engines-repair/README.md`
+- `02_projects/jobcron/README.md`
+- `02_projects/lavanderia-3p/README.md`
+- `02_projects/lexnova/README.md`
+- `02_projects/mexingsof/README.md`
+- `02_projects/mockwander/README.md`
+- `02_projects/modulix/README.md`
+- `02_projects/nexora/README.md`
+- `02_projects/nutriva/README.md`
+- `02_projects/pagora/README.md`
+- `02_projects/pensavart/README.md`
+- `02_projects/phone-shop/README.md`
+- `02_projects/README.md`
+- `02_projects/refakto/README.md`
+- `02_projects/rutexa/README.md`
+- `02_projects/sekura-tech/README.md`
+- `02_projects/social-networks/README.md`
+- `02_projects/stockara/README.md`
+- `02_projects/tecnotelec/README.md`
+- `02_projects/tip-smart/README.md`
+- `03_standards/frontend/README.md`
+- `03_standards/README.md`
+- `04_integrations/ct-internacional/README.md`
+- `04_integrations/dc-mayorista/README.md`
+- `04_integrations/README.md`
+- `README.md`
+- `tecnotelec-ui/README.md`
