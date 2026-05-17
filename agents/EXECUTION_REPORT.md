@@ -501,3 +501,37 @@ Despues de completar y validar la corrida, se limpiaron los archivos `Docs/agent
 - Conectar `WEB.NJ.NEXT.Fiscora` con `API.PY.DJANGO.Fiscora.Gateway`.
 - Ejecutar migraciones reales contra PostgreSQL cuando el entorno Docker este levantado.
 - Hacer commit y push por repositorio cuando se solicite publicacion.
+
+---
+
+# Reporte de publicacion Git Fiscora/Fiscal
+
+Fecha: 2026-05-16
+
+## Commits publicados
+
+| Repositorio | Commit | Mensaje |
+|---|---|---|
+| `MexIngSoft/Docs` | `21a779d` | `Document Fiscora fiscal architecture` |
+| `MexIngSoft/Docker.API.PY` | `7839bfc` | `Configure Fiscora API services` |
+| `MexIngSoft/Docker.WEB.NJ` | `aafe69c` | `Configure Fiscora web service` |
+| `MexIngSoft/API.PY.DJANGO.Fiscal` | `8422c5e` | `Add fiscal core MVP` |
+| `MexIngSoft/API.PY.DJANGO.Fiscora` | `f019624` | `Add Fiscora product API MVP` |
+| `MexIngSoft/API.PY.DJANGO.Fiscora.Gateway` | `bee77a2` | `Add Fiscora gateway MVP` |
+| `MexIngSoft/WEB.NJ.NEXT.Fiscora` | `a385f54` | `Add Fiscora animation preview` |
+
+## Push
+
+| Repositorio | Rama | Resultado |
+|---|---|---|
+| `https://github.com/MexIngSoft/Docs.git` | `main` | Publicado correctamente. |
+| `https://github.com/MexIngSoft/Docker.API.PY.git` | `main` | Publicado correctamente. |
+| `https://github.com/MexIngSoft/Docker.WEB.NJ.git` | `main` | Publicado correctamente. |
+| `https://github.com/MexIngSoft/API.PY.DJANGO.Fiscal.git` | `main` | Publicado correctamente. |
+| `https://github.com/MexIngSoft/API.PY.DJANGO.Fiscora.git` | `main` | Publicado correctamente. |
+| `https://github.com/MexIngSoft/API.PY.DJANGO.Fiscora.Gateway.git` | `main` | Publicado correctamente. |
+| `https://github.com/MexIngSoft/WEB.NJ.NEXT.Fiscora.git` | `main` | Publicado correctamente. |
+
+## Nota
+
+`gh` no esta instalado en esta maquina, por lo que no se crearon pull requests desde CLI. La publicacion se hizo con `git`.
