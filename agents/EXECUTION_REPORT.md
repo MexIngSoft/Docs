@@ -228,7 +228,7 @@ Fecha: 2026-05-16
 | `https://github.com/MexIngSoft/API.PY.DJANGO.Document.git` | `main` | Publicado correctamente. |
 | `https://github.com/MexIngSoft/API.PY.DJANGO.DocuCore.git` | `main` | Publicado correctamente. |
 | `https://github.com/MexIngSoft/API.PY.DJANGO.DocuCore.Gateway.git` | `main` | Publicado correctamente. |
-| `https://github.com/MexIngSoft/WEB.NJ.NEXT.DocuCore.git` | `main` | Pendiente: GitHub respondio `Repository not found`. El commit local existe, pero no se pudo subir. |
+| `https://github.com/MexIngSoft/WEB.NJ.NEXT.DocuCore.git` | `main` | Publicado correctamente tras reintento. |
 
 ## Nota
 
