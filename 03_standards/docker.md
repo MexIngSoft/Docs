@@ -87,6 +87,7 @@ http://localhost
 - `auth`
 - `catalog`
 - `inventory`
+- `lexnova_gateway`
 - `lexnova`
 - `pricing`
 - `procurement`
@@ -98,6 +99,7 @@ http://localhost
 - `auth`: `8000`
 - `catalog`: `8001`
 - `inventory`: `8002`
+- `lexnova_gateway`: `8017`
 - `lexnova`: `8003`
 - `pricing`: `8004`
 - `procurement`: `8005`

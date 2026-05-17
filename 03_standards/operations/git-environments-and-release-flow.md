@@ -60,10 +60,10 @@ Para el equipo actual, el flujo recomendado es ligero:
 |---|---|---|
 | `feature/<descripcion>` | Trabajo puntual antes de integrar. | Activa cuando el cambio lo amerite. |
 | `dev` | Integracion de desarrollo. | Recomendada para trabajo diario. |
-| `main` | Version estable/producible. | Protegida; solo cambios validados. |
+| `pro` | Produccion. | Activa para despliegues productivos. |
+| `main` | Copia estable de produccion. | Protegida; recibe cambios desde `pro` cuando ya son estables. |
 | `qa` | Pruebas formales de calidad. | Futuro, cuando exista flujo QA. |
 | `uat` | Validacion con datos reales o muy cercanos a reales. | Futuro, cuando existan usuarios validadores. |
-| `pro` | Produccion. | Futuro si se decide separar de `main`. |
 
 ## Decision para el estado actual
 
@@ -73,18 +73,21 @@ Se recomienda:
 
 - Usar `feature/*` para cambios medianos o grandes.
 - Crear `dev` como rama de integracion cuando empecemos a hacer desarrollo continuo.
-- Mantener `main` como rama estable.
-- Documentar `qa`, `uat` y `pro` como etapas futuras.
+- Usar `pro` como rama de despliegue productivo.
+- Mantener `main` como copia estable de `pro` despues de validar produccion.
+- Documentar `qa` y `uat` como etapas futuras.
 
-Cuando existan despliegues separados, QA formal o usuarios validando, se podran crear `qa`, `uat` y `pro` con reglas de promocion.
+Cuando existan QA formal o usuarios validando, se podran crear `qa` y `uat`
+con reglas de promocion.
 
 ## Reglas de promocion
 
 | Origen | Destino | Requisito |
 |---|---|---|
 | `feature/*` | `dev` | Pruebas locales minimas y revision del owner si aplica. |
-| `dev` | `main` | Validacion local completa y aprobacion del owner. |
-| `main` | `qa` | Solo cuando exista entorno QA. |
+| `dev` | `pro` | Validacion local completa y aprobacion del owner. |
+| `pro` | `main` | Produccion estable y aprobacion del owner. |
+| `dev` | `qa` | Solo cuando exista entorno QA. |
 | `qa` | `uat` | QA aprobado. |
 | `uat` | `pro` | UAT aprobado por usuario/owner. |
 
@@ -97,7 +100,7 @@ La base de datos debe seguir el mismo principio, pero sin crear ambientes innece
 | `dev` | Desarrollo local y pruebas tecnicas. | Recomendado ahora. |
 | `qa` | Calidad con datos controlados. | Futuro. |
 | `uat` | Pruebas con datos reales o muy cercanos a reales. | Futuro. |
-| `pro` | Produccion. | Futuro. |
+| `pro` | Produccion. | Activo cuando exista despliegue productivo del proyecto. |
 
 Reglas:
 

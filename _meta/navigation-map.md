@@ -22,6 +22,11 @@
 - `02_projects/jobcron/README.md`
 - `02_projects/lavanderia-3p/README.md`
 - `02_projects/lexnova/README.md`
+- `02_projects/lexnova/access-control.md`
+- `02_projects/lexnova/architecture.md`
+- `02_projects/lexnova/auth-seed.md`
+- `02_projects/lexnova/frontend/identity-interface.md`
+- `02_projects/lexnova/repositories.md`
 - `02_projects/mexingsof/README.md`
 - `02_projects/mockwander/README.md`
 - `02_projects/modulix/README.md`

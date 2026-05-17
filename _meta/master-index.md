@@ -142,7 +142,12 @@
 | Business | `02_projects/jobcron/ui/05_pdf_visual_extraction.md` | Extraccion visual del PDF JobCron | ARCHIVE_REFERENCE | P3 | Equipo documental |
 | Business | `02_projects/jobcron/ui/06_public_website_structure_research.md` | Investigacion y propuesta de web publica JobCron | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/lavanderia-3p/README.md` | Lavanderia 3P | FUTURE_OR_PENDING | P2 | Equipo documental |
-| Business | `02_projects/lexnova/README.md` | LexNova | FUTURE_OR_PENDING | P2 | Equipo documental |
+| Business | `02_projects/lexnova/README.md` | LexNova | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/lexnova/access-control.md` | Control de acceso LexNova | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/lexnova/architecture.md` | Arquitectura LexNova | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/lexnova/auth-seed.md` | Semilla Auth LexNova | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/lexnova/frontend/identity-interface.md` | Interfaz e identidad Lex Nova Tech | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/lexnova/repositories.md` | Repositorios LexNova | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/mexingsof/README.md` | Mexingsof | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/mockwander/README.md` | MockWander | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/modulix/README.md` | Modulix | FUTURE_OR_PENDING | P2 | Equipo documental |

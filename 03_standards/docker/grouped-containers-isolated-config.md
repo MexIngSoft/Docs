@@ -38,6 +38,7 @@ credenciales externas propias
 | Proyecto | Base | Usuario | Schema principal | Secret key |
 |---|---|---|---|---|
 | Auth | `auth` | `auth_user` | `Auth` | `AUTH_DJANGO_SECRET_KEY` |
+| LexNova Gateway | `comercial` | `comercial_user` | `LexNovaGateway` | `LEXNOVA_GATEWAY_DJANGO_SECRET_KEY` |
 | LexNova | `lexnova` | `lexnova_user` | `Person` como schema inicial | `LEXNOVA_DJANGO_SECRET_KEY` |
 | Catalog | `comercial` | `comercial_user` | `Catalog` | `CATALOG_DJANGO_SECRET_KEY` |
 | Inventory | `comercial` | `comercial_user` | `Inventory` | `INVENTORY_DJANGO_SECRET_KEY` |
@@ -55,8 +56,8 @@ Las bases se agrupan por dominio mayor:
 
 ```txt
 auth
-lexnova
 comercial
+lexnova
 ```
 
 Las tablas y schemas deben seguir el patron tipo SQL Server:

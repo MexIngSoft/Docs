@@ -19,6 +19,7 @@ Los commits y pushes se hacen por repositorio y por responsabilidad. No se debe 
 | API Catalog | `Docker.API.PY/API.PY.DJANGO.Catalog` | `https://github.com/MexIngSoft/API.PY.DJANGO.Catalog.git` | Separado |
 | API Customization | `Docker.API.PY/API.PY.DJANGO.Customization` | `https://github.com/MexIngSoft/API.PY.DJANGO.Customization.git` | Separado |
 | API Inventory | `Docker.API.PY/API.PY.DJANGO.Inventory` | `https://github.com/MexIngSoft/API.PY.DJANGO.Inventory.git` | Separado |
+| API LexNova Gateway | `Docker.API.PY/API.PY.DJANGO.LexNova.Gateway` | `https://github.com/MexIngSoft/API.PY.DJANGO.LexNova.Gateway.git` | Separado |
 | API LexNova | `Docker.API.PY/API.PY.DJANGO.LexNova` | `https://github.com/MexIngSoft/API.PY.DJANGO.LexNova.git` | Separado |
 | API Pricing | `Docker.API.PY/API.PY.DJANGO.Pricing` | `https://github.com/MexIngSoft/API.PY.DJANGO.Pricing.git` | Separado |
 | API Procurement | `Docker.API.PY/API.PY.DJANGO.Procurement` | `https://github.com/MexIngSoft/API.PY.DJANGO.Procurement.git` | Separado |
@@ -88,6 +89,7 @@ Ejemplos:
 | `API.PY.DJANGO.Fiscal` | `Add fiscal core MVP` |
 | `API.PY.DJANGO.Fiscora` | `Add Fiscora product API MVP` |
 | `API.PY.DJANGO.Fiscora.Gateway` | `Add Fiscora gateway MVP` |
+| `API.PY.DJANGO.LexNova.Gateway` | `Add LexNova gateway MVP` |
 | `API.PY.DJANGO.TecnoTelec.Gateway` | `Expose product catalog through gateway` |
 | `Docker.WEB.NJ` | `Update TecnoTelec catalog mockup` |
 | `WEB.NJ.NEXT.DocuCore` | `Add DocuCore dashboard MVP` |

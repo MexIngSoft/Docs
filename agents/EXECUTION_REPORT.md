@@ -236,6 +236,760 @@ Fecha: 2026-05-16
 
 ---
 
+# Reporte de verificacion Auth/LexNova Gateway
+
+Fecha: 2026-05-17
+
+## Alcance
+
+Se verifico el estandar de integracion de Auth y LexNova pasando primero por el indice documental, y despues se contrasto la implementacion en los proyectos locales.
+
+## Documentos revisados
+
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/02_projects/lexnova/access-control.md`
+- `Docs/02_projects/lexnova/frontend/identity-interface.md`
+- `Docs/02_projects/lexnova/repositories.md`
+- `Docs/01_core_erp/apis/01_auth_api.md`
+- `Docs/01_core_erp/architecture/07_project_api_pattern.md`
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docs/03_standards/operations/git-environments-and-release-flow.md`
+
+## Resultado de arquitectura
+
+Cumple con ajustes aplicados.
+
+- `WEB.NJ.NEXT.LexNova` usa `NEXT_PUBLIC_GATEWAY_BASE_URL` y, como fallback local, `/api/lexnova`.
+- `WEB.NJ.NEXT.LexNova` ya no llama directamente a `/api/auth` ni a OAuth local para logout/social auth; ahora usa `gatewayUrl(...)`.
+- `API.PY.DJANGO.LexNova.Gateway` expone rutas para `auth`, `users`, `access`, `cases` y `documents`.
+- `API.PY.DJANGO.LexNova.Gateway` enruta `auth`, `users` y `access` hacia `API.PY.DJANGO.Auth`.
+- `API.PY.DJANGO.LexNova.Gateway` enruta `cases` y `documents` hacia `API.PY.DJANGO.LexNova`.
+- El proxy de `access` inyecta `application_code=LEXNOVA`, manteniendo el aislamiento del producto.
+
+## Ajustes realizados
+
+- Se agrego `WEB.NJ.NEXT.LexNova/lib/gateway.ts` para centralizar la URL del Gateway.
+- Se actualizo `WEB.NJ.NEXT.LexNova/redux/services/apiSlice.ts` para reutilizar la resolucion oficial del Gateway.
+- Se actualizo logout en `WEB.NJ.NEXT.LexNova/components/common/Navbar.tsx`.
+- Se actualizo logout en `WEB.NJ.NEXT.LexNova/app/dashboard/Sidebar.tsx`.
+- Se actualizo OAuth social en `WEB.NJ.NEXT.LexNova/utils/continue-with-social-auth.ts`.
+
+## Ramas verificadas
+
+| Proyecto | Rama activa |
+|---|---|
+| `Docs` | `feature/lex-nova-tech-identification` |
+| `Docker.API.PY` | `feature/lex-nova-tech-identification` |
+| `API.PY.DJANGO.LexNova` | `feature/lex-nova-tech-identification` |
+| `API.PY.DJANGO.LexNova.Gateway` | `feature/lex-nova-tech-identification` |
+| `WEB.NJ.NEXT.LexNova` | `feature/lex-nova-tech-identification` |
+
+## Validaciones
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `WEB.NJ.NEXT.LexNova` | `npm run build` | Correcto. Quedan warnings preexistentes de `<img>` y datos de browserslist/baseline desactualizados. |
+| `API.PY.DJANGO.LexNova.Gateway` | `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.LexNova.Gateway` | `python -m compileall .` | Correcto. |
+| `Docker.API.PY` | `docker compose config` | Correcto. No se documentan valores sensibles emitidos por el comando. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` - `AGENTS-030.md` | Sin instrucciones ejecutables pendientes | La verificacion se completo desde documentacion canonica e implementacion local. |
+
+## Fuera de alcance
+
+- No se hizo busqueda completa en `Docs`; se usaron el indice documental y los documentos canonicos relacionados.
+- No se levanto el entorno con `docker compose up`.
+- No se ejecutaron migraciones contra PostgreSQL.
+- No se hicieron commits, push ni pull requests en esta corrida.
+
+## Pendientes
+
+- Reemplazar `WEB.NJ.NEXT.LexNova/app/api/mock/cases` por consumo real de `/api/lexnova/cases` antes de produccion.
+- Revisar hardening final de cookies, CSRF y expiracion de tokens cuando se active el despliegue real.
+
+---
+
+# Reporte de ejecucion Agents - Semilla Auth LexNova
+
+Fecha: 2026-05-17
+
+## Agents ejecutados
+
+Se ejecuto `Docs/agents/AGENTS-000.md` en orden numerico. Los archivos
+`AGENTS-001.md` a `AGENTS-030.md` estaban vacios.
+
+## Documentos revisados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/access-control.md`
+- `Docs/02_projects/lexnova/architecture.md`
+
+## Implementacion
+
+Se implemento la semilla inicial de autenticacion LexNova en `API.PY.DJANGO.Auth`.
+
+Archivos modificados o creados:
+
+- `Docker.API.PY/API.PY.DJANGO.Auth/user/models.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/user/serializers.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/user/migrations/0004_useraccount_must_change_password.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/access/migrations/0014_seed_lexnova_auth.py`
+- `Docs/02_projects/lexnova/auth-seed.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+
+## Resultado
+
+Se insertaron en PostgreSQL:
+
+- 15 usuarios LexNova.
+- 15 perfiles LexNova.
+- 9 modulos LexNova.
+- 44 permisos LexNova.
+- Asignaciones de permisos por perfil.
+- Asignacion de rol por usuario.
+- `MustChangePassword = true` para todos los usuarios semilla.
+
+Password temporal de desarrollo:
+
+```text
+LexNova.Temp#2026
+```
+
+Esta password no debe usarse como password permanente ni en produccion.
+
+## Correos semilla
+
+```text
+cliente.restricted@lexnova.local
+cliente.base@lexnova.local
+cliente.plus@lexnova.local
+analyst.restricted@lexnova.local
+analyst.base@lexnova.local
+analyst.plus@lexnova.local
+reviewer.restricted@lexnova.local
+reviewer.base@lexnova.local
+reviewer.plus@lexnova.local
+manager.restricted@lexnova.local
+manager.base@lexnova.local
+manager.plus@lexnova.local
+admin.restricted@lexnova.local
+admin.base@lexnova.local
+admin.root@lexnova.local
+```
+
+## Rama
+
+`API.PY.DJANGO.Auth` se coloco en:
+
+```text
+feature/lex-nova-tech-identification
+```
+
+## Validaciones
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `API.PY.DJANGO.Auth` | `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.Auth` | `python -m compileall .` | Correcto. |
+| `API.PY.DJANGO.Auth` | `python manage.py migrate` | Correcto. Aplico `user.0004` y `access.0014`. |
+| PostgreSQL `auth` | Conteo de usuarios LexNova | Correcto: 15 usuarios. |
+| PostgreSQL `auth` | Conteo de modulos/permisos LexNova | Correcto: 9 modulos y 44 permisos. |
+
+## Informacion faltante documentada
+
+Se documento en `Docs/02_projects/lexnova/auth-seed.md` que las siguientes
+tablas solicitadas por el agent aun no existen como modelos separados:
+
+- `Auth.RoleLevels`
+- `Auth.UserPermissionOverrides`
+- `Auth.ApplicationUserProfiles`
+- `Auth.AuditLogs`
+- `Auth.EmailTemplates`
+
+El documento tambien registra el mapeo actual disponible:
+
+- `Auth.UserPermissions` cubre overrides con `Allow`.
+- `Auth.AccessAuditEvents` cubre auditoria de acceso.
+- `Auth.TransactionalEmailTemplates` cubre plantillas de correo.
+- `Auth.UserRoles` + `Auth.ApplicationRoles` cubren perfil por aplicacion.
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Semilla Auth LexNova implementada, migrada, validada y documentada. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+## Limpieza
+
+Despues de completar y validar la corrida, se limpiaron los archivos
+`Docs/agents/AGENTS-*.md`.
+
+---
+
+# Reporte de validacion y commits LexNova Auth
+
+Fecha: 2026-05-17
+
+## Documentos revisados
+
+Se siguio el indice documental antes de validar:
+
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/access-control.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/02_projects/lexnova/auth-seed.md`
+- `Docs/02_projects/lexnova/repositories.md`
+- `Docs/01_core_erp/apis/01_auth_api.md`
+- `Docs/01_core_erp/auth/README.md`
+
+## Ajustes finales
+
+- Se alineo `CLIENT_BASIC` a `CLIENT_BASE` en la documentacion canonica de LexNova.
+- Se agrego `API.PY.DJANGO.Auth` al mapa de repositorios LexNova.
+- Se dejo `Docker.API.PY/docker-compose.yml` con `UVICORN_RELOAD` configurable y apagado por defecto para evitar reinicios por memoria en el contenedor multiproyecto.
+- Se normalizo `Docker.API.PY/start.sh` a finales de linea LF para ejecucion correcta dentro del contenedor Linux.
+
+## Entornos ejecutados
+
+| Entorno | Resultado |
+|---|---|
+| `db-postgresql` | Activo y healthy. |
+| `api-backend-python` | Activo y healthy, puertos `8000-8017` publicados. |
+| `web-frontend-node` | Activo, LexNova disponible en `3002`. |
+| `nginx` | Activo y healthy. |
+
+Para la validacion se ejecuto `api-backend-python` con:
+
+```text
+UVICORN_RELOAD=false
+ENABLE_SYSCOM_ETL_WORKER=false
+```
+
+## Validacion Auth LexNova por Gateway
+
+Gateway validado:
+
+```text
+GET http://localhost:8017/api/lexnova/health/
+```
+
+Resultado:
+
+```text
+service=LexNovaGateway
+status=ok
+```
+
+Login y permisos validados por Gateway:
+
+```text
+POST http://localhost:8017/api/lexnova/auth/jwt/create/
+GET  http://localhost:8017/api/lexnova/access/me/permissions/
+```
+
+Usuarios probados:
+
+| Usuario | Rol | Modulos | Permisos | Resultado |
+|---|---:|---:|---:|---|
+| `cliente.base@lexnova.local` | `CLIENT_BASE` | 4 | 6 | Login correcto. |
+| `analyst.base@lexnova.local` | `ANALYST_BASE` | 5 | 10 | Login correcto. |
+| `reviewer.plus@lexnova.local` | `REVIEWER_PLUS` | 5 | 15 | Login correcto. |
+| `manager.plus@lexnova.local` | `MANAGER_PLUS` | 7 | 18 | Login correcto. |
+| `admin.root@lexnova.local` | `ADMIN_ROOT` | 9 | 44 | Login correcto. |
+
+Password temporal de desarrollo:
+
+```text
+LexNova.Temp#2026
+```
+
+## Checks ejecutados
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `API.PY.DJANGO.Auth` | `python manage.py check` | Correcto. |
+| `API.PY.DJANGO.Auth` | `python -m compileall .` | Correcto. |
+| `API.PY.DJANGO.LexNova.Gateway` | `python manage.py check` | Correcto. |
+| `API.PY.DJANGO.LexNova.Gateway` | `python -m compileall .` | Correcto. |
+| `WEB.NJ.NEXT.LexNova` | `npm run build` | Correcto, con warnings preexistentes de `<img>` y browserslist. |
+| `Docker.API.PY` | `docker compose config --quiet` | Correcto. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Semilla Auth LexNova validada por Gateway y documentacion alineada. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+## Fuera de alcance
+
+- No se hizo busqueda completa en `Docs`; se usaron indices y documentos canonicos relacionados.
+- No se publicaron commits con `git push`.
+- No se reemplazo aun el mock de casos por `/api/lexnova/cases`.
+
+---
+
+# Reporte de ejecucion LexNova identity/access
+
+Fecha: 2026-05-17
+
+## Alcance
+
+Se ejecuto una nueva pasada sobre `Docs/agents/AGENTS-*.md` en orden numerico.
+Los archivos con instrucciones fueron:
+
+- `AGENTS-000.md`: separacion entre rol del sistema y relacion con caso.
+- `AGENTS-001.md`: un usuario con multiples roles, perfiles y participaciones.
+- `AGENTS-002.md`: registro publico como `CLIENT_BASIC`, niveles de rol,
+  reglas de cambio de perfil y dashboard contextual.
+
+`AGENTS-003.md` a `AGENTS-030.md` estaban vacios.
+
+## Documentacion revisada
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/01_core_erp/auth/README.md`
+- `Docs/01_core_erp/auth/roles.md`
+- `Docs/01_core_erp/auth/permissions.md`
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+
+## Implementacion realizada
+
+### Documentacion LexNova
+
+Se creo:
+
+```text
+Docs/02_projects/lexnova/access-control.md
+Docs/02_projects/lexnova/frontend/identity-interface.md
+```
+
+Se actualizo:
+
+```text
+Docs/02_projects/lexnova/README.md
+Docs/_meta/master-index.md
+Docs/_meta/master-index.yaml
+Docs/_meta/navigation-map.md
+```
+
+Contenido documentado:
+
+- Regla de una sola identidad por usuario.
+- Separacion entre rol del sistema y participacion por caso.
+- Registro publico inicial como `CLIENT_BASIC`.
+- Roles LexNova: `CLIENT`, `ANALYST`, `REVIEWER`, `MANAGER`, `ADMIN`.
+- Niveles por rol: `BASIC`, `PREMIUM`, `SENIOR`, `MASTER`, `GLOBAL`, `ROOT`.
+- Permisos recomendados con patron `recurso:accion:ambito`.
+- Filtros de dashboard: mis casos, asignados, equipo y todos.
+- Modulo recomendado `/dashboard/modules/admin/access-control`.
+- Indexacion en master index y navigation map.
+
+### Web LexNova
+
+Se actualizo:
+
+```text
+Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/app/page.tsx
+Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/app/layout.tsx
+Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/components/common/Navbar.tsx
+Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/styles/components.css
+Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/styles/globals.css
+Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/styles/themes.css
+Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/README.md
+```
+
+Se creo:
+
+```text
+Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/app/dashboard/modules/admin/access-control/page.tsx
+```
+
+Resultado:
+
+- Portada publica orientada a `Lex Nova Tech`.
+- Hero con propuesta de inteligencia juridica, permisos e identidad unica.
+- Panel visual de expediente sin depender del asset inexistente
+  `hero-ai-justice.svg`.
+- Navbar con marca `Lex Nova Tech` y textos visibles corregidos.
+- Ruta MVP de control de acceso administrativo.
+
+## Validaciones
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `WEB.NJ.NEXT.LexNova` | `npm run build` | Correcto. |
+| `API.PY.DJANGO.LexNova` | No aplica | No hubo cambios backend. |
+
+El build reporto warnings preexistentes por uso de `<img>` en pantallas de
+auth/password y avisos de datos browserslist/baseline desactualizados. No
+bloquean compilacion.
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Regla rol vs participacion documentada y reflejada en interfaz. |
+| `AGENTS-001.md` | Completado | Modelo de una identidad con multiples roles/participaciones documentado. |
+| `AGENTS-002.md` | Completado | Registro `CLIENT_BASIC`, niveles, autorizaciones y dashboard contextual documentados; ruta MVP creada. |
+| `AGENTS-003.md` - `AGENTS-030.md` | Sin instrucciones | Estaban vacios. |
+
+## Limpieza
+
+Despues de completar y validar la corrida, se limpiaron los archivos
+`Docs/agents/AGENTS-*.md`.
+
+## Pendientes
+
+- Conectar `WEB.NJ.NEXT.LexNova` con permisos reales de Auth/Gateway.
+- Implementar CRUD real de control de acceso en API/Gateway.
+- Reemplazar warnings preexistentes de `<img>` por `next/image` en pantallas de
+  auth/password.
+- Actualizar browserslist/baseline cuando se haga mantenimiento de dependencias.
+
+---
+
+# Reporte de correccion arquitectonica LexNova Gateway
+
+Fecha: 2026-05-17
+
+## Alcance
+
+Se atendio la observacion arquitectonica: LexNova debia tener
+`API.PY.DJANGO.LexNova` y `API.PY.DJANGO.LexNova.Gateway`. La web no debe
+interactuar directamente con Auth ni con APIs core.
+
+Los archivos `Docs/agents/AGENTS-000.md` a `Docs/agents/AGENTS-030.md` estaban
+vacios al iniciar esta pasada. La ejecucion se hizo por instruccion directa del
+usuario y se mantuvieron los agents limpios.
+
+## Documentos revisados
+
+Primero se paso por el indice documental:
+
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+
+Documentos canonicos relacionados revisados:
+
+- `Docs/01_core_erp/architecture/02_api_gateway.md`
+- `Docs/01_core_erp/architecture/03_bff_strategy.md`
+- `Docs/01_core_erp/architecture/07_project_api_pattern.md`
+- `Docs/01_core_erp/apis/01_auth_api.md`
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/access-control.md`
+- `Docs/02_projects/lexnova/frontend/identity-interface.md`
+
+Quedo fuera:
+
+- No se busco en todo `Docs` fuera de los indices y documentos canonicos
+  relacionados.
+- No se modificaron APIs core distintas de LexNova Gateway.
+- No se publico en GitHub ni se creo PR.
+
+## Correccion implementada
+
+### Gateway LexNova
+
+Se creo:
+
+```text
+Docker.API.PY/API.PY.DJANGO.LexNova.Gateway
+```
+
+Archivos principales:
+
+- `.env.local.example`
+- `.gitignore`
+- `README.md`
+- `manage.py`
+- `requirements.txt`
+- `config/settings.py`
+- `config/urls.py`
+- `gateway/views.py`
+- `gateway/urls.py`
+
+Endpoints MVP:
+
+- `GET /api/lexnova/health/`
+- `GET /api/lexnova/dashboard/summary/`
+- `/api/lexnova/auth/*`
+- `/api/lexnova/users/*`
+- `/api/lexnova/o/{provider}/`
+- `/api/lexnova/access/*`
+- `/api/lexnova/cases/*`
+- `/api/lexnova/documents/*`
+
+El gateway agrega `application_code=LEXNOVA` al proxy de permisos hacia Auth.
+
+### Web LexNova
+
+Se actualizo:
+
+```text
+Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/redux/services/apiSlice.ts
+Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/.env.local.example
+Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/README.md
+```
+
+La web ahora usa:
+
+```text
+NEXT_PUBLIC_GATEWAY_BASE_URL
+```
+
+con fallback a:
+
+```text
+NEXT_PUBLIC_HOST/api/lexnova
+```
+
+Esto evita configurar consumo directo de Auth desde el frontend.
+
+### Docker local
+
+Se actualizo:
+
+```text
+Docker.API.PY/docker-compose.yml
+Docker.API.PY/start.sh
+```
+
+Puerto agregado:
+
+```text
+8017 -> API.PY.DJANGO.LexNova.Gateway
+```
+
+### Documentacion e indexacion
+
+Se creo:
+
+```text
+Docs/02_projects/lexnova/architecture.md
+Docs/02_projects/lexnova/repositories.md
+```
+
+Se actualizo:
+
+```text
+Docs/02_projects/lexnova/README.md
+Docs/02_projects/lexnova/access-control.md
+Docs/02_projects/lexnova/frontend/identity-interface.md
+Docs/03_standards/docker.md
+Docs/03_standards/docker/grouped-containers-isolated-config.md
+Docs/03_standards/operations/git-repository-map.md
+Docs/_meta/master-index.md
+Docs/_meta/master-index.yaml
+Docs/_meta/navigation-map.md
+```
+
+## Repositorios/rama
+
+| Repositorio | Rama |
+|---|---|
+| `Docs` | `feature/lex-nova-tech-identification` |
+| `Docker.API.PY` | `feature/lex-nova-tech-identification` |
+| `API.PY.DJANGO.LexNova.Gateway` | `feature/lex-nova-tech-identification` |
+| `WEB.NJ.NEXT.LexNova` | `feature/lex-nova-tech-identification` |
+| `API.PY.DJANGO.LexNova` | `feature/lex-nova-tech-identification` |
+
+`API.PY.DJANGO.LexNova.Gateway` quedo inicializado como repo local nuevo con
+remoto esperado:
+
+```text
+https://github.com/MexIngSoft/API.PY.DJANGO.LexNova.Gateway.git
+```
+
+## Validaciones
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `API.PY.DJANGO.LexNova.Gateway` | `python manage.py check` | Correcto. |
+| `API.PY.DJANGO.LexNova.Gateway` | `python -m compileall .` | Correcto. |
+| `WEB.NJ.NEXT.LexNova` | `npm run build` | Correcto. |
+| `Docker.API.PY` | `docker compose config` | Correcto. |
+
+El build web conserva warnings preexistentes por uso de `<img>` en pantallas de
+auth/password. No bloquean compilacion.
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` - `AGENTS-030.md` | Sin instrucciones | Estaban vacios; se mantuvieron limpios. |
+
+## Pendientes
+
+- Confirmar/crear el repositorio remoto
+  `MexIngSoft/API.PY.DJANGO.LexNova.Gateway` en GitHub antes del primer push si
+  todavia no existe.
+- Endurecer manejo de cookies/tokens del gateway contra el contrato final de
+  Auth.
+- Agregar endpoints de participantes y analisis cuando
+  `API.PY.DJANGO.LexNova` exponga rutas estables.
+- Crear commits y publicar por repositorio cuando se solicite.
+
+---
+
+# Reporte de publicacion inicial LexNova Gateway y ramas
+
+Fecha: 2026-05-17
+
+## Alcance
+
+Se recibio el repositorio oficial:
+
+```text
+https://github.com/MexIngSoft/API.PY.DJANGO.LexNova.Gateway.git
+```
+
+Se verifico el remoto y se crearon las ramas necesarias para trabajar con el
+flujo actual de LexNova.
+
+## Documentos revisados
+
+Primero se paso por el indice documental:
+
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+
+Documentos canonicos relacionados:
+
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/02_projects/lexnova/repositories.md`
+- `Docs/01_core_erp/architecture/07_project_api_pattern.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docs/03_standards/operations/git-environments-and-release-flow.md`
+- `Docs/03_standards/operations/django-api-project-compliance.md`
+
+Quedo fuera:
+
+- No se busco en todo `Docs`.
+- No se crearon ramas `qa` ni `uat` porque siguen como etapas pendientes.
+- No se abrieron pull requests porque `gh` no esta instalado en esta maquina.
+
+## Ramas creadas/publicadas
+
+Repositorio:
+
+```text
+Docker.API.PY/API.PY.DJANGO.LexNova.Gateway
+```
+
+Commit inicial:
+
+```text
+7c884b2 Add LexNova gateway MVP
+```
+
+Ramas publicadas en GitHub:
+
+| Rama | Estado |
+|---|---|
+| `main` | Publicada. |
+| `dev` | Publicada. |
+| `pro` | Publicada. |
+| `feature/lex-nova-tech-identification` | Publicada y activa localmente. |
+
+## Verificacion de repositorios LexNova
+
+| Repositorio | Ramas verificadas |
+|---|---|
+| `API.PY.DJANGO.LexNova.Gateway` | `main`, `dev`, `pro`, `feature/lex-nova-tech-identification` |
+| `API.PY.DJANGO.LexNova` | `main`, `dev`, `pro`, `feature/lex-nova-tech-identification` |
+| `WEB.NJ.NEXT.LexNova` | `main`, `dev`, `pro`, `feature/lex-nova-tech-identification` |
+| `Docker.API.PY` | `main`, `dev`, `pro`, `feature/lex-nova-tech-identification` |
+| `Docs` | `main`, `dev`, `pro`, `feature/lex-nova-tech-identification` |
+
+## Ajustes documentales
+
+Se actualizo:
+
+```text
+Docs/03_standards/operations/git-environments-and-release-flow.md
+```
+
+para dejar consistente que:
+
+- `pro` es rama de despliegue productivo.
+- `main` es copia estable de `pro`.
+- `qa` y `uat` siguen pendientes hasta que existan procesos formales.
+
+## Validaciones
+
+Se conservan las validaciones de la pasada anterior:
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `API.PY.DJANGO.LexNova.Gateway` | `python manage.py check` | Correcto. |
+| `API.PY.DJANGO.LexNova.Gateway` | `python -m compileall .` | Correcto. |
+| `WEB.NJ.NEXT.LexNova` | `npm run build` | Correcto. |
+| `Docker.API.PY` | `docker compose config` | Correcto. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` - `AGENTS-030.md` | Sin instrucciones | Estaban vacios y quedaron limpios. |
+
+## Repositorios faltantes
+
+No falta repositorio para el alcance LexNova actual. Quedan cubiertos:
+
+- `API.PY.DJANGO.LexNova.Gateway`
+- `API.PY.DJANGO.LexNova`
+- `WEB.NJ.NEXT.LexNova`
+- `Docker.API.PY`
+- `Docs`
+
+Pendiente futuro solo si se decide separar nuevas capacidades:
+
+- `API.PY.DJANGO.LexNova.Analysis` si el analisis juridico/IA se separa de la
+  API de dominio.
+- `API.PY.DJANGO.LexNova.Documents` si documentos legales dejan de vivir en la
+  API de dominio o en Document API.
+
+---
+
 # Reporte de ejecucion Fiscora
 
 Fecha: 2026-05-16
