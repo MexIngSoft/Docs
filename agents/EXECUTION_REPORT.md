@@ -203,3 +203,33 @@ No se hicieron commits ni pushes.
 - Los cuatro repos quedaron con archivos sin commit porque fueron inicializados localmente; falta decidir rama, hacer commit y push por repositorio.
 - `AGENTS-022.md` a `AGENTS-030.md` siguen pendientes porque estan vacios.
 - No se ejecuto build Docker porque no se modificaron Dockerfile ni compose en esta pasada.
+
+---
+
+# Reporte de publicacion Git
+
+Fecha: 2026-05-16
+
+## Commits creados
+
+| Repositorio | Commit | Mensaje |
+|---|---|---|
+| `MexIngSoft/Docs` | `b287b0d` | `Document DocuCore agents and repository standards` |
+| `MexIngSoft/API.PY.DJANGO.Document` | `5e38324` | `Add document processing MVP` |
+| `MexIngSoft/API.PY.DJANGO.DocuCore` | `b378d1c` | `Add DocuCore tool catalog MVP` |
+| `MexIngSoft/API.PY.DJANGO.DocuCore.Gateway` | `b50b324` | `Add DocuCore gateway MVP` |
+| `MexIngSoft/WEB.NJ.NEXT.DocuCore` | `d393365` | `Add DocuCore dashboard MVP` |
+
+## Push
+
+| Repositorio | Rama | Resultado |
+|---|---|---|
+| `https://github.com/MexIngSoft/Docs.git` | `main` | Publicado correctamente. |
+| `https://github.com/MexIngSoft/API.PY.DJANGO.Document.git` | `main` | Publicado correctamente. |
+| `https://github.com/MexIngSoft/API.PY.DJANGO.DocuCore.git` | `main` | Publicado correctamente. |
+| `https://github.com/MexIngSoft/API.PY.DJANGO.DocuCore.Gateway.git` | `main` | Publicado correctamente. |
+| `https://github.com/MexIngSoft/WEB.NJ.NEXT.DocuCore.git` | `main` | Pendiente: GitHub respondio `Repository not found`. El commit local existe, pero no se pudo subir. |
+
+## Nota
+
+`gh` no esta instalado en esta maquina, por lo que no se crearon pull requests desde CLI. La publicacion se hizo con `git`.
