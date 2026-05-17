@@ -515,6 +515,7 @@ Fecha: 2026-05-16
 | `MexIngSoft/Docs` | `21a779d` | `Document Fiscora fiscal architecture` |
 | `MexIngSoft/Docker.API.PY` | `7839bfc` | `Configure Fiscora API services` |
 | `MexIngSoft/Docker.WEB.NJ` | `aafe69c` | `Configure Fiscora web service` |
+| `MexIngSoft/Docker.WEB.NJ` | `86a72fc` | `Ignore separated web repositories` |
 | `MexIngSoft/API.PY.DJANGO.Fiscal` | `8422c5e` | `Add fiscal core MVP` |
 | `MexIngSoft/API.PY.DJANGO.Fiscora` | `f019624` | `Add Fiscora product API MVP` |
 | `MexIngSoft/API.PY.DJANGO.Fiscora.Gateway` | `bee77a2` | `Add Fiscora gateway MVP` |
