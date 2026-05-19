@@ -118,6 +118,7 @@ La carpeta `packages` solo debe agregarse si se adopta workspace o paquete compa
 | Puertos duplicados | Tabla de puertos documentada. |
 | Componentes copiados sin control | Crear paquete compartido solo cuando haya contrato estable. |
 | Frontend llamando APIs core | Forzar `NEXT_PUBLIC_GATEWAY_BASE_URL`. |
+| HTML sin estilos | Validar y reparar CSS con `Docs/03_standards/operations/scripts/Repair-NextCss.ps1`. |
 
 ## Separacion futura
 

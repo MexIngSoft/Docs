@@ -72,6 +72,55 @@ Filtros base:
 - Casos del equipo.
 - Todos los casos.
 
+## Login y errores de sesion
+
+El login debe explicar por que no se pudo iniciar sesion. No se permite mostrar
+solo un mensaje generico cuando el gateway o Auth entregan detalle.
+
+Mensajes esperados:
+
+- Gateway no disponible.
+- Ruta de login no configurada.
+- Credenciales incorrectas.
+- Cuenta inactiva o pendiente de activacion.
+- Error interno de Gateway/Auth.
+
+La pantalla de login no debe redirigir automaticamente al dashboard por estado
+persistido local. Solo puede redirigir cuando la sesion fue verificada por el
+gateway.
+
+## Centro de Carga Documental
+
+Ruta recomendada:
+
+```text
+/dashboard/modules/cases/upload
+```
+
+Uso:
+
+- Subir PDF, Word, texto manual, video, audio, fotografias e imagenes.
+- Marcar documentos como `Desconozco` cuando el cliente no sepa clasificarlos.
+- Dejar el asset en estado `PENDING_CLASSIFICATION`.
+- Permitir que perfiles autorizados clasifiquen, reclasifiquen y vinculen el
+  contenido a un proceso juridico.
+
+Opciones de proceso visibles:
+
+```text
+Desconozco
+Carpeta de investigacion
+Causa penal
+Juicio oral
+Apelacion
+Amparo directo
+Revision de amparo directo
+Amparo indirecto
+Revision de amparo indirecto
+Queja de derechos humanos estatal
+Queja de derechos humanos nacional
+```
+
 ## Modulo de control de acceso
 
 Ruta MVP:
@@ -98,10 +147,25 @@ Se inicio la identidad en `WEB.NJ.NEXT.LexNova` con:
 - Panel visual de expediente juridico.
 - Correccion de textos visibles con codificacion rota en portada y navbar.
 - Pantalla MVP de control de acceso para dashboard administrativo.
+- Imagen hero generada para Lex Nova Tech en
+  `public/images/lexnova-legal-os-hero.png`.
+- Dashboard operativo con cola priorizada, timeline, permisos efectivos y
+  acciones por contexto.
+- Centro de carga documental MVP en `/dashboard/modules/cases/upload` con
+  captura de procedimiento, tipos de evidencia, documento desconocido,
+  relacion procesal y validacion automatica.
+- Pantalla de analisis MVP con arbol documental, visor, agravios,
+  contradicciones, jurisprudencia y alertas IA.
+- Pantalla de resultado de caso MVP con resumen ejecutivo, version tecnica,
+  timeline, agravios, pruebas, criterios vinculados y plan de fortalecimiento.
+- Motor jurisprudencial MVP con busqueda, filtros y criterios vinculados.
 
 ## Pendientes
 
 - Conectar el dashboard con permisos reales del gateway/Auth.
 - Completar CRUD administrativo de usuarios, roles, niveles y permisos.
+- Conectar carga documental a endpoints reales de escritura, storage,
+  OCR/clasificacion y cadena de custodia.
+- Implementar pruebas visuales automatizadas por rol y viewport.
 - Definir copy legal final con el equipo de negocio.
 - Agregar pruebas visuales/manuales por rol cuando existan datos reales.

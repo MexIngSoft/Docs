@@ -147,6 +147,9 @@
 | Business | `02_projects/lexnova/architecture.md` | Arquitectura LexNova | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/lexnova/auth-seed.md` | Semilla Auth LexNova | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/lexnova/frontend/identity-interface.md` | Interfaz e identidad Lex Nova Tech | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/lexnova/legal-domain-research.md` | Investigacion juridica LexNova | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/lexnova/legal-process-data-model.md` | Modelo procesal LexNova | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/lexnova/local-dependency-runbook.md` | Runbook local de dependencias LexNova | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/lexnova/repositories.md` | Repositorios LexNova | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/mexingsof/README.md` | Mexingsof | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/mockwander/README.md` | MockWander | ACTIVE | P1 | Equipo documental |
@@ -250,6 +253,7 @@
 | Standards | `03_standards/operations/jobs/job-catalog.md` | Catalogo de jobs | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/jobs/job-schedule.md` | Calendario de jobs | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/jobs/retry-policy.md` | Politica de reintentos | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/operations/local-port-registry.md` | Registro local de puertos | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/multi-provider.md` | Estrategia multi-proveedor | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/observability.md` | Observabilidad | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Standards | `03_standards/operations/project-closure-standard.md` | Estandar de cierre para proyectos Django API | ACTIVE | P1 | Equipo documental |

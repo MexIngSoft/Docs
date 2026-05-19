@@ -120,6 +120,41 @@ AUDIT_VIEW_ALL
 ALL_PERMISSIONS
 ```
 
+## Permisos documentales sembrados
+
+Para el Centro de Carga Documental se agregan permisos en:
+
+```text
+Docker.API.PY/API.PY.DJANGO.Auth/access/migrations/0015_seed_lexnova_document_permissions.py
+```
+
+Permisos:
+
+```text
+DOCUMENT_UPLOAD_OWN
+DOCUMENT_UPLOAD_FOR_CLIENT
+DOCUMENT_CLASSIFY
+DOCUMENT_RECLASSIFY
+DOCUMENT_LINK_TO_PROCEEDING
+DOCUMENT_VIEW_OWN
+DOCUMENT_VIEW_CLIENT
+DOCUMENT_DELETE_PENDING
+DOCUMENT_APPROVE
+CLIENT_INVITE
+CLIENT_VIEW_PROGRESS
+CLIENT_UPLOAD_DOCUMENTS
+```
+
+Modulos nuevos:
+
+```text
+DOCUMENTS -> /dashboard/modules/cases/upload
+CLIENTS -> /dashboard/modules/clients
+```
+
+Estos permisos habilitan carga propia, carga por cliente, clasificacion,
+reclasificacion, vinculacion a procesos juridicos e invitacion de clientes.
+
 ## Informacion faltante
 
 El agent pidio tablas canonicas que todavia no existen como modelos separados:

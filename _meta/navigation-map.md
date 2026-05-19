@@ -26,6 +26,9 @@
 - `02_projects/lexnova/architecture.md`
 - `02_projects/lexnova/auth-seed.md`
 - `02_projects/lexnova/frontend/identity-interface.md`
+- `02_projects/lexnova/legal-domain-research.md`
+- `02_projects/lexnova/legal-process-data-model.md`
+- `02_projects/lexnova/local-dependency-runbook.md`
 - `02_projects/lexnova/repositories.md`
 - `02_projects/mexingsof/README.md`
 - `02_projects/mockwander/README.md`
@@ -44,6 +47,7 @@
 - `02_projects/tecnotelec/README.md`
 - `02_projects/tip-smart/README.md`
 - `03_standards/frontend/README.md`
+- `03_standards/operations/local-port-registry.md`
 - `03_standards/README.md`
 - `04_integrations/ct-internacional/README.md`
 - `04_integrations/dc-mayorista/README.md`

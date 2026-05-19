@@ -7,19 +7,51 @@ Este documento permite reconstruir el entorno Docker local `crejo` si se pierde 
 | Carpeta | Servicio | Contenedor | Puerto host | Red |
 | --- | --- | --- | --- | --- |
 | `Docker.DB.PG` | PostgreSQL | `db-postgresql` | `127.0.0.1:5432` | `crejo` |
-| `Docker.API.PY` | APIs Django | `api-backend-python` | `8000-8007` | `crejo` |
-| `Docker.WEB.NJ` | Next.js frontends | `web-frontend-node` | `3000-3002` | `crejo` |
+| `Docker.API.PY` | APIs Django | `api-backend-python` | `8000-8050` reservado, `8000-8017` publicado hoy | `crejo` |
+| `Docker.WEB.NJ` | Next.js frontends | `web-frontend-node` | `3000-3050` reservado, `3000-3005` asignado hoy | `crejo` |
 | `Docker.SW.Nginx` | Proxy Nginx | `nginx` | `80` | `crejo` |
+
+Registro canonico de puertos:
+
+```txt
+Docs/03_standards/operations/local-port-registry.md
+```
 
 ## Orden recomendado de arranque
 
 Ejecuta desde la raiz del workspace:
 
 ```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-WorkspaceDocker.ps1
+```
+
+Si necesitas liberar puertos reservados antes de arrancar:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-WorkspaceDocker.ps1 -ReleasePorts
+```
+
+Si LexNova u otra web Next.js carga sin estilos:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-WorkspaceDocker.ps1 -RepairCss
+```
+
+Comandos manuales equivalentes:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Reserve-WorkspacePorts.ps1 -DryRun
 docker compose -f Docker.DB.PG\docker-compose.yml up -d
 docker compose -f Docker.API.PY\docker-compose.yml up -d --build
 docker compose -f Docker.WEB.NJ\docker-compose.yml up -d --build
 docker compose -f Docker.SW.Nginx\docker-compose.yml up -d --build
+```
+
+Si el diagnostico de puertos muestra procesos ajenos a Docker usando puertos
+reservados, ejecutar:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Reserve-WorkspacePorts.ps1 -KillConflicts
 ```
 
 Entrada principal:
@@ -34,6 +66,10 @@ Entradas directas de diagnostico:
 http://localhost:3000
 http://localhost:8000
 ```
+
+Nota: `http://localhost:8000/` puede responder `404` aunque el contenedor API
+este sano. Para APIs multiproyecto se valida puerto, proceso Uvicorn y endpoint
+propio cuando exista.
 
 ## Red Docker
 

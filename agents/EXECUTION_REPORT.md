@@ -236,6 +236,1285 @@ Fecha: 2026-05-16
 
 ---
 
+# Reporte de ejecucion Agents - Investigacion juridica LexNova
+
+Fecha: 2026-05-18
+
+## Alcance
+
+Se ejecuto `Docs/agents/AGENTS-000.md` en orden numerico. Los archivos
+`AGENTS-001.md` a `AGENTS-030.md` estaban vacios y no tenian tareas
+ejecutables.
+
+Antes de documentar se reviso:
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/02_projects/lexnova/access-control.md`
+- `Docs/02_projects/lexnova/legal-process-data-model.md`
+
+## Resultado
+
+Se agrego `Docs/02_projects/lexnova/legal-domain-research.md` como documento
+canonico complementario para materias, procedimientos, documentos, actores,
+matrices, normas versionables, plazos, evidencia, IA, revision humana, riesgos,
+roadmap y fuentes oficiales.
+
+Tambien se actualizaron:
+
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `rg` de `legal-domain-research` en README, indices, mapa y reporte | Correcto. |
+| `python manage.py check` en `Docker.API.PY/API.PY.DJANGO.LexNova` | Correcto, sin issues. |
+| Limpieza de `Docs/agents/AGENTS-*.md` | Correcto, todos quedaron en 0 bytes. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Investigacion juridica LexNova documentada y enlazada a indices canonicos. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Pendientes
+
+- Levantar legislacion estatal y organismos de derechos humanos por entidad.
+- Validar plazos por supuesto, norma, excepcion y calendario de autoridad.
+- Implementar catalogos versionables en base de datos.
+- Definir ingestion oficial de jurisprudencia/tesis del SJF.
+- Cerrar OCR, storage, cifrado, retencion, hash y cadena de custodia final.
+
+---
+
+# Reporte de ejecucion - Lex Nova Gateway Failed to fetch
+
+Fecha: 2026-05-18
+
+## Alcance
+
+Se atendio el error de login de Lex Nova:
+
+`No se pudo conectar con el Gateway de Lex Nova. Revisa que API.PY.DJANGO.LexNova.Gateway este corriendo en el puerto configurado. Detalle tecnico: TypeError: Failed to fetch`
+
+Antes de implementar se reviso el indice documental y la documentacion canonica relacionada:
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/02_projects/lexnova/local-dependency-runbook.md`
+- `Docs/02_projects/lexnova/frontend/identity-interface.md`
+- `Docs/01_core_erp/architecture/07_project_api_pattern.md`
+
+## Diagnostico
+
+La web de Lex Nova heredaba la variable generica:
+
+`NEXT_PUBLIC_GATEWAY_BASE_URL=http://api-backend-python:8008`
+
+Ese valor apunta a otro gateway y usa un hostname interno de Docker que el navegador no puede resolver. Por eso el login del navegador terminaba en `TypeError: Failed to fetch`, aunque el stack Docker estuviera levantado.
+
+## Cambios aplicados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/lib/gateway.ts`: ahora Lex Nova prioriza `NEXT_PUBLIC_LEXNOVA_GATEWAY_BASE_URL`, ignora el gateway generico si apunta a `api-backend-python` o al puerto `8008`, y cae a `http://localhost:8017/api/lexnova` en entorno local.
+- `Docker.WEB.NJ/docker-compose.yml`: se agrego `NEXT_PUBLIC_LEXNOVA_GATEWAY_BASE_URL=http://localhost:8017/api/lexnova` para el contenedor web.
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/.env.local` y `.env.local.example`: se alinearon con la variable especifica de Lex Nova.
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/README.md`: se documento el uso correcto de variables Gateway.
+- `Docs/02_projects/lexnova/architecture.md`: se documento la variable canonica de Gateway para la web.
+- `Docs/02_projects/lexnova/local-dependency-runbook.md`: se documento la relacion correcta web-gateway y la excepcion de la variable generica compartida.
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run build` en `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | Correcto. Solo quedaron advertencias no bloqueantes de `<img>` en pantallas auth/reset. |
+| `docker compose -f Docker.WEB.NJ/docker-compose.yml config` | Correcto. Incluye `NEXT_PUBLIC_LEXNOVA_GATEWAY_BASE_URL=http://localhost:8017/api/lexnova`. |
+| `GET http://localhost:8017/api/lexnova/health/` | Correcto, `200`, `{"service":"LexNovaGateway","status":"ok"}`. |
+| Preflight CORS desde `http://localhost:3002` a `/auth/jwt/create/` | Correcto, `200` y `access-control-allow-origin: http://localhost:3002`. |
+| Login POST contra Gateway con usuario de prueba | Correcto, `200` y respuesta JWT. |
+| `GET http://localhost:3002/auth/login` | Correcto, `200` con CSS cargado. |
+| `Docs/03_standards/operations/scripts/Start-WorkspaceDocker.ps1 -WaitSeconds 0 -RunDjangoChecks` | Correcto. Webs, APIs, Gateway Lex Nova, base de datos y checks Django saludables. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` - `AGENTS-030.md` | Limpios / sin tarea pendiente | Todos los archivos `AGENTS-*.md` estan en 0 bytes; no habia tareas ejecutables adicionales. |
+
+## Pendientes y fuera de alcance
+
+- No se hizo busqueda completa en todo `Docs`; se siguio el indice documental y documentos canonicos relacionados.
+- No se elimino `NEXT_PUBLIC_GATEWAY_BASE_URL` del compose compartido porque otros proyectos pueden depender de esa variable generica.
+- No se cambiaron contratos de Auth ni credenciales; solo se corrigio el enrutamiento web-gateway de Lex Nova.
+- Docker Compose reporto advertencias de contenedores orfanos del proyecto compartido; no bloquean el arranque ni las validaciones.
+
+---
+
+# Reporte de ejecucion Agents - Orquestador Docker local
+
+Fecha: 2026-05-18
+
+## Alcance
+
+Se reviso la queja de que el script operativo no cargaba todas las APIs/webs.
+La verificacion mostro que el contenedor API si tenia cargados todos los
+servicios esperados, pero la validacion anterior podia interpretarse mal porque
+varias APIs no exponen pagina raiz en `/` y devuelven `404` aun estando sanas.
+
+Los archivos `Docs/agents/AGENTS-000.md` a `Docs/agents/AGENTS-030.md` estaban
+vacios y no tenian tareas ejecutables nuevas.
+
+## Documentos revisados
+
+Primero se paso por el indice documental:
+
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+
+Documentos canonicos relacionados:
+
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/operations/docker-recovery-runbook.md`
+- `Docs/03_standards/operations/local-port-registry.md`
+- `Docs/03_standards/operations/runbook.md`
+- `Docs/03_standards/frontend/shared-docker-frontend-architecture.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+
+Quedo fuera:
+
+- No se busco en todo `Docs`.
+- No se ejecuto el nuevo script de arranque porque la instruccion previa fue
+  entregar codigo para ejecutarlo.
+- No se depuro Fiscora web a fondo; solo se registro el timeout observado en
+  `3005`.
+
+## Resultado
+
+Se creo:
+
+- `Docs/03_standards/operations/scripts/Start-WorkspaceDocker.ps1`
+
+El script:
+
+- Levanta `Docker.DB.PG`, `Docker.API.PY`, `Docker.WEB.NJ` y
+  `Docker.SW.Nginx` en orden.
+- Puede liberar conflictos de puertos con `-ReleasePorts`.
+- Puede reparar CSS Next.js con `-RepairCss`.
+- Puede correr checks Django criticos con `-RunDjangoChecks`.
+- Valida procesos Uvicorn, puertos TCP y rutas HTTP propias cuando existen.
+- Evita marcar una API como caida solo porque `GET /` responde `404`.
+
+Se actualizo:
+
+- `Docs/03_standards/operations/local-port-registry.md`
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/operations/docker-recovery-runbook.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `docker ps` | Correcto; `db-postgresql`, `api-backend-python`, `web-frontend-node` y `nginx` arriba. |
+| Procesos dentro de `api-backend-python` | Correcto; Uvicorn activo en `8000-8017`. |
+| Directorios bajo `/usr/src/api` | Correcto; existen `auth`, `catalog`, `inventory`, `lexnova`, `lexnova_gateway`, `docucore`, `fiscora`, `fiscal`, `tecnotelec` y demas proyectos esperados. |
+| `GET http://localhost:8017/api/lexnova/health/` | Correcto, `200`. |
+| `GET http://localhost:8003/api/cases/` sin sesion | Correcto, `403`; la API LexNova esta viva y protegida. |
+| `POST http://localhost:8000/api/auth/jwt/verify/` sin token | Correcto, `400`; Auth responde y valida entrada. |
+| `GET /` en APIs | Varias responden `404` por diseno; no es indicador de API caida. |
+| Web `3000`, `3001`, `3002`, `3004` | Respondieron `200` con assets CSS disponibles durante la comprobacion. |
+| Web `3005` | Timeout observado; queda como pendiente separado de LexNova. |
+| Sintaxis PowerShell de `Start-WorkspaceDocker.ps1` | Correcto, sin errores de parser. |
+| Limpieza de `Docs/agents/AGENTS-*.md` | Correcto; todos siguen en 0 bytes. |
+| Revalidacion final `docker ps` | Bloqueada; Docker Desktop devolvio `500 Internal Server Error` aunque WSL reporta `docker-desktop` en ejecucion. |
+| Revalidacion de puertos web | `3000`, `3001`, `3002`, `3004` y `3005` aparecen escuchando por Docker/WSL. |
+| Revalidacion HTTP de webs | `3000`, `3001`, `3002`, `3004` y `3005` devolvieron timeout; puertos publicados no equivalen a webs sanas. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` - `AGENTS-030.md` | Sin instrucciones nuevas | Archivos vacios; no habia tareas ejecutables. |
+
+## Pendientes
+
+- Investigar `WEB.NJ.NEXT.Fiscora` en `3005`, porque el puerto publicado quedo
+  con timeout en una prueba directa.
+- Reiniciar Docker Desktop si vuelve a responder `500 Internal Server Error` al
+  consultar `docker ps` o `docker version`.
+- Despues de reiniciar Docker Desktop, ejecutar
+  `Start-WorkspaceDocker.ps1 -RepairCss -RunDjangoChecks` para confirmar que las
+  webs Next.js respondan por HTTP y no solo tengan puertos publicados.
+- Ejecutar `Start-WorkspaceDocker.ps1` manualmente cuando se quiera validar el
+  flujo completo desde cero.
+
+## Revalidacion y reparacion posterior
+
+Se reinicio Docker Desktop y WSL por `500 Internal Server Error` en el daemon de
+Docker. Despues se reconstruyo `Docker.WEB.NJ` y se corrigio Fiscora:
+
+- `Docker.WEB.NJ/.dockerignore` ahora excluye `.git`, `node_modules`, `.next` y
+  `.env.local` de DocuCore y Fiscora.
+- `Docker.WEB.NJ/Dockerfile` ejecuta `npm run build` para
+  `WEB.NJ.NEXT.Fiscora`.
+- `Docker.WEB.NJ/start.sh` levanta Fiscora con `next build` + `next start` en
+  `3005`, evitando la compilacion en caliente que dejaba timeouts.
+- `Start-WorkspaceDocker.ps1` espera `150` segundos por defecto y valida HTTP
+  con `curl.exe`.
+
+Validacion final:
+
+| Validacion | Resultado |
+|---|---|
+| `docker ps` | Correcto; `db-postgresql`, `api-backend-python`, `web-frontend-node` y `nginx` arriba. |
+| Web `3000` JobCron | `200`, CSS disponible. |
+| Web `3001` TecnoTelec | `200`, CSS disponible. |
+| Web `3002` LexNova login | `200`, CSS disponible. |
+| Web `3004` DocuCore | `200`, CSS disponible. |
+| Web `3005` Fiscora | `200`, CSS disponible. |
+| API Auth `8000` | `400` esperado al verificar token vacio. |
+| API LexNova `8003` | `403` esperado sin sesion. |
+| LexNova Gateway `8017` | `200` en `/api/lexnova/health/`. |
+| `Start-WorkspaceDocker.ps1 -WaitSeconds 0` | Correcto; procesos, TCP y HTTP en verde. |
+| `python manage.py check` en `auth`, `lexnova`, `lexnova_gateway` | Correcto, sin issues. |
+
+Pendiente anterior resuelto: `WEB.NJ.NEXT.Fiscora` ya responde en `3005`.
+
+---
+
+# Reporte de ejecucion Agents - Estabilidad web Docker
+
+Fecha: 2026-05-18
+
+## Alcance
+
+Se atendio la caida/intermitencia del contenedor `web-frontend-node`, donde los
+frontends podian dejar de responder aunque el contenedor siguiera publicado en
+puertos `3000`, `3001`, `3002`, `3004` y `3005`.
+
+Los archivos `Docs/agents/AGENTS-000.md` a `Docs/agents/AGENTS-030.md` estaban
+vacios y no tenian tareas ejecutables nuevas.
+
+## Causa encontrada
+
+- Fiscora en modo Next.js runtime dentro del contenedor compartido provocaba
+  timeouts y, durante builds largos, Docker Desktop llegaba a devolver
+  `500 Internal Server Error` o `EOF` desde BuildKit.
+- El contenedor web no tenia healthcheck para marcar cuando una web interna
+  dejaba de responder.
+- `start.sh` levantaba procesos en background sin supervisor explicito por
+  proyecto.
+
+## Reparacion
+
+Se actualizo:
+
+- `Docker.WEB.NJ/start.sh`
+- `Docker.WEB.NJ/docker-compose.yml`
+- `Docker.WEB.NJ/Dockerfile`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Fiscora/next.config.ts`
+- `Docker.WEB.NJ/README.md`
+- `Docs/03_standards/operations/local-port-registry.md`
+- `Docs/03_standards/operations/scripts/Start-WorkspaceDocker.ps1`
+
+Cambios principales:
+
+- JobCron, TecnoTelec, LexNova y DocuCore corren con loop de autoreinicio.
+- Fiscora se exporta como sitio estatico (`output: "export"`) y se sirve en
+  `3005` con un servidor Node ligero.
+- `Dockerfile` copia `WEB.NJ.NEXT.Fiscora/out` a
+  `/usr/src/web/fiscora-static`, evitando compilar Fiscora dentro de Docker.
+- `docker-compose.yml` agrega healthcheck para las cinco webs.
+- `Start-WorkspaceDocker.ps1` reconoce Fiscora como servicio estatico y valida
+  proceso/TCP/HTTP correctamente.
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run build` en `WEB.NJ.NEXT.Fiscora` | Correcto; genero export estatico. |
+| `docker compose -f Docker.WEB.NJ/docker-compose.yml up -d --build web-frontend-node` | Correcto; imagen construida y contenedor iniciado. |
+| `docker ps` | Correcto; `web-frontend-node` quedo `healthy`. |
+| `http://localhost:3000/` | `200`, CSS disponible. |
+| `http://localhost:3001/` | `200`, CSS disponible. |
+| `http://localhost:3002/auth/login` | `200`, CSS disponible. |
+| `http://localhost:3004/` | `200`, CSS disponible. |
+| `http://localhost:3005/` | `200`, CSS disponible. |
+| `Start-WorkspaceDocker.ps1 -WaitSeconds 0` | Correcto; 18 APIs y 5 webs en verde. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` - `AGENTS-030.md` | Sin instrucciones nuevas | Archivos vacios; no habia tareas ejecutables. |
+
+---
+
+# Reporte de ejecucion Agents - Lex Nova runtime y CSS
+
+Fecha: 2026-05-18
+
+## Alcance
+
+Se confirmaron puertos reservados, asignaciones de APIs/webs, arranque local de
+Lex Nova y diagnostico del problema recurrente de CSS en Next.js.
+
+Los archivos `Docs/agents/AGENTS-000.md` a `AGENTS-030.md` estaban vacios y no
+tenian tareas ejecutables nuevas.
+
+Antes de implementar se reviso:
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/03_standards/operations/local-port-registry.md`
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/operations/docker-recovery-runbook.md`
+- `Docs/03_standards/frontend/shared-docker-frontend-architecture.md`
+- `Docs/02_projects/lexnova/local-dependency-runbook.md`
+- `Docs/02_projects/lexnova/architecture.md`
+
+## Resultado
+
+Se levanto la cadena local requerida por Lex Nova:
+
+```text
+PostgreSQL -> Auth -> LexNova API -> LexNova Gateway -> LexNova Web
+```
+
+Se confirmo que los puertos reservados estan en uso por Docker/WSL:
+
+- `80`: Nginx.
+- `5432`: PostgreSQL.
+- `3000-3002`, `3004-3005`: frontends Next.js publicados por `web-frontend-node`.
+- `8000-8017`: APIs Django publicadas por `api-backend-python`.
+
+Se agrego y documento el script:
+
+- `Docs/03_standards/operations/scripts/Repair-NextCss.ps1`
+
+El script diagnostica CSS de Next.js y, con `-Repair`, limpia el contenido del
+volumen `.next` y reinicia el contenedor web. Se ajusto para Turbopack, que
+sirve CSS desde `/_next/static/chunks/*.css`.
+
+Tambien se corrigio `Docker.WEB.NJ/Dockerfile` para incluir `WEB.NJ.NEXT.Fiscora`
+y exponer `3005`, alineandolo con `Docker.WEB.NJ/start.sh` y `docker-compose.yml`.
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `Reserve-WorkspacePorts.ps1 -DryRun` | Correcto; detecto puertos reservados usados por Docker/WSL. |
+| `docker ps` | Correcto; `db-postgresql`, `api-backend-python`, `web-frontend-node` y `nginx` arriba. |
+| `GET http://localhost:8017/api/lexnova/health/` | Correcto, 200. |
+| `POST http://localhost:8017/api/lexnova/auth/jwt/create/` con usuario semilla | Correcto, 200 y respuesta con token. |
+| `OPTIONS http://localhost:8017/api/lexnova/auth/jwt/create/` con `Origin: http://localhost:3002` | Correcto, CORS permite `http://localhost:3002`. |
+| `Repair-NextCss.ps1 -Project lexnova -Url http://localhost:3002/auth/login` | Correcto; CSS disponible. |
+| `GET http://localhost:3002/auth/login` | Correcto, 200, incluye CSS de Next. |
+| `GET http://localhost` con `Host: lexnova.localhost` | Correcto, 200, incluye CSS de Next. |
+| `python manage.py check` en `API.PY.DJANGO.LexNova.Gateway` | Correcto, sin issues. |
+| `docker compose exec ... manage auth check` | Correcto, sin issues. |
+| `docker compose exec ... manage lexnova check` | Correcto, sin issues. |
+| `docker compose exec ... manage lexnova_gateway check` | Correcto, sin issues. |
+| `npm run build` en `WEB.NJ.NEXT.LexNova` | Correcto; quedan warnings existentes por `<img>` en auth/reset/activation. |
+| Limpieza de `Docs/agents/AGENTS-*.md` | Correcto, todos quedaron en 0 bytes. |
+
+## Incidencias y limites
+
+- `lexnova.localhost` no resuelve directamente desde `Invoke-WebRequest` en
+  Windows; se valido Nginx usando header `Host: lexnova.localhost`.
+- Docker Desktop entro en estado inestable despues de un build largo del
+  orquestador web y devolvio `500 Internal Server Error`; se recupero reiniciando
+  procesos de Docker Desktop desde Windows.
+- `docker buildx build` de `Docker.WEB.NJ` quedo en timeout despues de mas de 15
+  minutos. Se levanto el runtime con `docker compose ... up -d --no-build`.
+- `3004` y `3005` quedaron publicados; sus respuestas directas tuvieron errores
+  de recepcion durante la inestabilidad de Docker. Lex Nova no depende de esos
+  puertos para funcionar.
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` - `AGENTS-030.md` | Sin instrucciones nuevas | Archivos vacios; no habia tareas ejecutables. |
+
+## Pendientes
+
+- Revisar por separado el build completo de `Docker.WEB.NJ` para reducir el
+  tiempo de construccion y confirmar DocuCore/Fiscora con imagen nueva.
+- Registrar `lexnova.localhost` en hosts de Windows si se quiere validar por
+  nombre sin usar header `Host`.
+
+---
+
+# Reporte de ejecucion Agents - Registro local de puertos
+
+Fecha: 2026-05-18
+
+## Alcance
+
+Se atendio la necesidad de estandarizar y liberar puertos locales en Windows
+antes de levantar Docker, webs Next.js, APIs Django, Nginx y PostgreSQL.
+
+Los archivos `Docs/agents/AGENTS-000.md` a `AGENTS-030.md` estaban vacios y no
+tenian tareas ejecutables nuevas.
+
+Antes de implementar se reviso:
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/operations/runbook.md`
+- `Docs/03_standards/operations/docker-recovery-runbook.md`
+- `Docs/03_standards/frontend/shared-docker-frontend-architecture.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+
+## Resultado
+
+Se creo:
+
+- `Docs/03_standards/operations/local-port-registry.md`
+- `Docs/03_standards/operations/scripts/Reserve-WorkspacePorts.ps1`
+
+Se actualizo:
+
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/operations/docker-recovery-runbook.md`
+- `Docs/03_standards/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docker.API.PY/README.md`
+- `Docker.WEB.NJ/README.md`
+- `Docker.DB.PG/README.md`
+- `Docker.SW.Nginx/README.md`
+
+Decision: no se crea un repositorio nuevo todavia. El script queda versionado
+en `Docs` junto al estandar operativo hasta que exista un conjunto mayor de
+herramientas que justifique un repositorio transversal de operaciones.
+
+## Puertos reservados
+
+| Rango/Puerto | Uso |
+|---:|---|
+| `80` | Nginx local |
+| `443` | HTTPS local futuro |
+| `5432` | PostgreSQL local |
+| `3000-3050` | Webs Next.js |
+| `8000-8050` | APIs Django/Gateway/BFF |
+
+El script trabaja en modo diagnostico por defecto y solo detiene procesos si se
+ejecuta con `-KillConflicts`. No detiene procesos Docker salvo que se indique
+explicitamente `-IncludeDockerProcesses`.
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `Reserve-WorkspacePorts.ps1 -DryRun` | Correcto, exit code 0; detecto puertos usados por Docker/WSL y un proceso `node` en `3003` sin detener nada. |
+| `docker compose -f Docker.DB.PG\docker-compose.yml config --quiet` | Correcto. |
+| `docker compose -f Docker.API.PY\docker-compose.yml config --quiet` | Correcto. |
+| `docker compose -f Docker.WEB.NJ\docker-compose.yml config --quiet` | Correcto. |
+| `docker compose -f Docker.SW.Nginx\docker-compose.yml config --quiet` | Correcto. |
+| `rg` de `local-port-registry`, `Reserve-WorkspacePorts`, `3000-3050` y `8000-8050` | Correcto, referencias localizadas en indices y documentos operativos. |
+| Limpieza de `Docs/agents/AGENTS-*.md` | Correcto, todos quedaron en 0 bytes. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` - `AGENTS-030.md` | Sin instrucciones nuevas | Archivos vacios; no habia tareas ejecutables. |
+
+## Pendientes
+
+- Activar la tarea programada manualmente en PowerShell como Administrador si se desea ejecucion automatica al iniciar sesion.
+- Crear un repositorio `Workspace.Operations` solo si aparecen mas scripts compartidos o herramientas operativas transversales.
+
+---
+
+# Reporte de ejecucion Agents - Dependencias locales Lex Nova
+
+Fecha: 2026-05-18
+
+## Alcance
+
+Se reviso el problema de conexion de `WEB.NJ.NEXT.LexNova` hacia
+`API.PY.DJANGO.LexNova.Gateway` reportado como `TypeError: Failed to fetch`.
+Los archivos `Docs/agents/AGENTS-000.md` a `AGENTS-030.md` estaban vacios y no
+tenian tareas ejecutables nuevas.
+
+Antes de implementar se reviso:
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/02_projects/lexnova/repositories.md`
+- `Docs/02_projects/lexnova/auth-seed.md`
+- `Docs/01_core_erp/auth/README.md`
+- `Docs/01_core_erp/architecture/07_project_api_pattern.md`
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/operations/runbook.md`
+- `Docs/03_standards/operations/docker-recovery-runbook.md`
+
+## Resultado
+
+Se documento el estandar de dependencias locales para Lex Nova y proyectos con
+Gateway/BFF:
+
+`WEB.NJ.NEXT.LexNova -> API.PY.DJANGO.LexNova.Gateway -> API.PY.DJANGO.Auth -> API.PY.DJANGO.LexNova -> PostgreSQL`
+
+Se agrego `Docs/02_projects/lexnova/local-dependency-runbook.md` y se enlazo en:
+
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+
+Tambien se actualizo `Docs/03_standards/docker.md` para exigir que los proyectos
+con dependencias cruzadas documenten puertos, orden de arranque, variables y
+validaciones de cadena completa.
+
+En codigo se corrigio la configuracion local de CORS del Gateway para permitir
+los puertos reales de desarrollo de la web, incluido `localhost:3003`, y se
+agrego un respaldo limitado a origenes configurados/locales para evitar que el
+navegador bloquee el login aunque el Gateway este levantado.
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `docker compose -f Docker.API.PY\docker-compose.yml config --quiet` | Correcto. |
+| `python manage.py check` en `Docker.API.PY/API.PY.DJANGO.LexNova.Gateway` | Correcto, sin issues. |
+| Reinicio de `api-multiproyecto` | Correcto, contenedor `api-backend-python` quedo healthy. |
+| `GET http://localhost:8017/api/lexnova/health/` | Correcto, 200. |
+| `OPTIONS http://localhost:8017/api/lexnova/auth/jwt/create/` con `Origin: http://localhost:3003` | Correcto, devuelve `Access-Control-Allow-Origin: http://localhost:3003`. |
+| `POST http://localhost:8017/api/lexnova/auth/jwt/create/` con usuario semilla | Correcto, 200 y respuesta con token. |
+| `npm run build` en `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | Correcto en validacion previa; quedan advertencias existentes de uso de `<img>`. |
+| Limpieza de `Docs/agents/AGENTS-*.md` | Correcto, todos quedaron en 0 bytes. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` - `AGENTS-030.md` | Sin instrucciones nuevas | Archivos vacios; no habia tareas ejecutables. |
+
+## Pendientes
+
+- Mantener sincronizados los puertos de la web y los origenes permitidos por el Gateway cuando se agreguen nuevos proyectos o puertos locales.
+- Revisar las advertencias existentes de Next.js sobre `<img>` en pantallas de autenticacion cuando se quiera optimizar imagenes.
+
+---
+
+# Reporte de ejecucion Agents - Lex Nova login y sesion
+
+Fecha: 2026-05-18
+
+## Alcance
+
+Se revisaron `Docs/agents/AGENTS-000.md` a `AGENTS-030.md` en orden numerico.
+Todos estaban vacios, por lo que no habia tareas ejecutables nuevas. La tarea
+real se derivo del reporte del usuario: el login no explicaba el error y una
+sesion previa podia mandar al dashboard.
+
+Antes de implementar se reviso:
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/02_projects/lexnova/auth-seed.md`
+- `Docs/02_projects/lexnova/access-control.md`
+- `Docs/02_projects/lexnova/frontend/identity-interface.md`
+- `Docs/01_core_erp/auth/README.md`
+
+## Resultado
+
+- Se corrigio `useVerify` para verificar sesion real con
+  `/auth/jwt/verify/` via Gateway y usar `/auth/jwt/refresh/` solo si aplica.
+- Se dejo de persistir `Auth` en Redux Persist para evitar sesiones locales
+  viejas.
+- Se ajusto middleware para permitir abrir `/auth/login` aunque exista cookie
+  `access`; la redireccion al dashboard queda en manos de la verificacion real.
+- Se mejoro el login para mostrar detalle accionable: gateway caido, ruta
+  inexistente, credenciales invalidas, cuenta inactiva o error interno.
+- Se agrego mensaje inline accesible en `LoginForm` ademas del toast.
+- Se documento el contrato faltante de sesion en `architecture.md` e
+  `identity-interface.md`.
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run build` en `WEB.NJ.NEXT.LexNova` | Correcto. Persisten warnings existentes por `<img>` en auth/reset/activation. |
+| `python manage.py check` en `API.PY.DJANGO.LexNova.Gateway` | Correcto, sin issues. |
+| `python manage.py check` en `API.PY.DJANGO.LexNova` con entorno local minimo | Correcto, sin issues. |
+| `GET /auth/login` en `http://localhost:3003` con cookie `access` falsa | Correcto: responde 200 y ya no redirige automaticamente al dashboard. |
+| `GET /` en `http://localhost:3003` | Correcto: responde 200 y carga referencia CSS. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Pendientes
+
+- Probar login end-to-end contra Auth/Gateway/PostgreSQL levantados con usuarios
+  semilla reales.
+- Revisar los warnings de `<img>` en pantallas de autenticacion cuando se haga
+  la limpieza visual final.
+
+## Limpieza
+
+`Docs/agents/AGENTS-*.md` ya estaban limpios y permanecen en 0 bytes.
+
+---
+
+# Reporte de ejecucion Agents - Lex Nova web y flujo documental
+
+Fecha: 2026-05-18
+
+## Alcance
+
+Se ejecutaron en orden numerico todos los archivos `Docs/agents/AGENTS-*.md`.
+Los archivos con instrucciones ejecutables fueron `AGENTS-000.md` y
+`AGENTS-001.md`; `AGENTS-002.md` a `AGENTS-030.md` estaban vacios.
+
+Antes de implementar se reviso:
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/02_projects/lexnova/frontend/identity-interface.md`
+
+## Resultado
+
+- Se genero y agrego la imagen hero
+  `WEB.NJ.NEXT.LexNova/public/images/lexnova-legal-os-hero.png`.
+- Se modernizo la portada publica de Lex Nova Tech con asset visual real,
+  propuesta de valor, permisos por contexto y panel de expediente.
+- Se actualizo el dashboard operativo con cola priorizada, timeline,
+  vencimientos, permisos efectivos y acciones principales.
+- Se expuso el Centro de Carga Documental en
+  `/dashboard/modules/cases/upload`.
+- Se completo la pantalla de analisis con expediente, arbol documental, visor,
+  agravios, contradicciones, jurisprudencias, alertas IA y referencias
+  cruzadas.
+- Se completo la pantalla de resultado por caso con resumen ejecutivo, timeline,
+  pruebas, agravios, criterios vinculados y plan de fortalecimiento.
+- Se completo el motor jurisprudencial MVP con busqueda, filtros y criterios
+  relacionados.
+- Se actualizo la documentacion canonica de interfaz y pendientes LexNova.
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run build` en `WEB.NJ.NEXT.LexNova` | Correcto. Solo quedan warnings existentes por `<img>` en auth/reset/activation. |
+| `python manage.py check` en `API.PY.DJANGO.LexNova.Gateway` | Correcto, sin issues. |
+| `python manage.py check` en `API.PY.DJANGO.LexNova` con entorno minimo local | Correcto, sin issues. |
+| `python manage.py makemigrations --check --dry-run` en `API.PY.DJANGO.LexNova` | Correcto: no hay cambios de migracion. PostgreSQL local no estaba disponible para validar historial real. |
+| `python -m compileall config apps/legal_workspace` en `API.PY.DJANGO.LexNova` | Correcto. |
+| Web local en `http://localhost:3003` | Correcto: portada, carga documental, analisis y jurisprudencias respondieron HTTP 200. |
+| Recarga de estilos en dev server | Correcto: se limpio cache `.next`, se reinicio `next dev` en puerto 3003 y `/_next/static/css/app/layout.css` respondio 200. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Arquitectura UX de Lex Nova ejecutada en web: dashboards por contexto, flujo operativo, analisis y resultados. |
+| `AGENTS-001.md` | Completado | Centro de carga documental/evidencia y pantallas de analisis/resultados implementadas como MVP. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Pendientes
+
+- Conectar el Centro de Carga Documental con endpoints reales de escritura,
+  storage, OCR, clasificacion, revision humana y cadena de custodia.
+- Ejecutar migraciones reales contra PostgreSQL cuando el servicio local este
+  levantado.
+- Sustituir datos demostrativos de dashboard, analisis, resultado y
+  jurisprudencias por datos reales del Gateway conforme avancen los endpoints.
+
+## Limpieza
+
+Despues de completar la corrida, se limpiaron los archivos
+`Docs/agents/AGENTS-*.md`; todos quedaron en 0 bytes.
+
+---
+
+# Reporte de ejecucion Agents - Implementacion LexNova catalogos juridicos
+
+Fecha: 2026-05-18
+
+## Alcance
+
+Los archivos `Docs/agents/AGENTS-000.md` a `Docs/agents/AGENTS-030.md` estaban
+vacios. La ejecucion se hizo desde los pendientes canonicos de LexNova, pasando
+primero por el indice documental.
+
+## Documentos revisados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/02_projects/lexnova/access-control.md`
+- `Docs/02_projects/lexnova/auth-seed.md`
+- `Docs/02_projects/lexnova/legal-process-data-model.md`
+- `Docs/02_projects/lexnova/legal-domain-research.md`
+
+## Implementacion
+
+### `API.PY.DJANGO.LexNova`
+
+Se extendio `apps/legal_workspace` con el MVP de estructura juridica
+versionable:
+
+- Catalogos: `LegalMatter`, `LegalProcedureType`, `LegalProcedureStage`,
+  `LegalDocumentType`, `LegalActorType`, `LegalAuthority`, `LegalCourt`.
+- Documentos: `LegalDocumentVersion`, `LegalDocumentRelation`,
+  `DocumentClassificationHistory`.
+- Conocimiento legal: `LegalNorm`, `LegalNormVersion`, `LegalArticle`,
+  `LegalArticleVersion`, `LegalReform`, `Jurisprudence`, `Thesis`,
+  `LegalCriterion`, `LegalDeadline`.
+- Operacion juridica: `LegalResolution`, `LegalRemedy`, `CaseRisk`.
+- IA/revision: `AIAnalysisResult`, `HumanReview`.
+- Evidencia: `EvidenceChainOfCustody`.
+
+Se agregaron migraciones:
+
+- `apps/legal_workspace/migrations/0002_aianalysisresult_caserisk_and_more.py`
+- `apps/legal_workspace/migrations/0003_seed_legal_catalogs.py`
+
+La semilla inicial crea materias, procedimientos, etapas, tipos documentales,
+actores y normas base segun `legal-domain-research.md`.
+
+Se agregaron endpoints de lectura:
+
+- `GET /api/cases/`
+- `GET /api/documents/`
+- `GET /api/legal-workspace/catalogs/`
+
+### `API.PY.DJANGO.LexNova.Gateway`
+
+Se agrego proxy para contratos juridicos flexibles:
+
+- `/api/lexnova/legal-workspace/*`
+
+El proxy existente `/api/lexnova/cases/*` ya queda conectado al endpoint real
+de casos de la API de dominio.
+
+### `WEB.NJ.NEXT.LexNova`
+
+Se reemplazo el mock de casos por consumo real del Gateway en:
+
+- `app/dashboard/modules/cases/page.tsx`
+
+La vista ahora llama a `gatewayUrl("/cases/")` con credenciales y muestra error
+controlado si el Gateway no esta disponible.
+
+### Documentacion
+
+Se actualizaron:
+
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/legal-process-data-model.md`
+- `Docs/02_projects/lexnova/legal-domain-research.md`
+
+## Validaciones
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `API.PY.DJANGO.LexNova` | `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.LexNova` | `python -m compileall .` | Correcto. |
+| `API.PY.DJANGO.LexNova` | `python manage.py makemigrations --check --dry-run` | Correcto, sin cambios pendientes. |
+| `API.PY.DJANGO.LexNova.Gateway` | `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.LexNova.Gateway` | `python -m compileall .` | Correcto. |
+| `WEB.NJ.NEXT.LexNova` | `npm run build` | Correcto; solo warnings preexistentes de `<img>` en auth/reset. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` - `AGENTS-030.md` | Sin instrucciones | Estaban vacios. La ejecucion se hizo desde pendientes canonicos de LexNova. |
+
+## Pendientes
+
+- Ejecutar migraciones reales contra PostgreSQL.
+- Completar endpoints de escritura para carga, clasificacion, reclasificacion,
+  revision humana y cadena de custodia.
+- Completar semilla estatal de autoridades, tribunales, comisiones de derechos
+  humanos y calendarios.
+- Validar plazos exactos por supuesto legal antes de cargar valores
+  productivos en `LegalDeadlines`.
+- Definir ingestion oficial del SJF para tesis y jurisprudencia.
+- Cerrar OCR, storage, cifrado, retencion, hash y politica de conservacion.
+
+## Limpieza
+
+Se mantienen limpios los archivos `Docs/agents/AGENTS-*.md`.
+
+---
+
+# Reporte de verificacion LexNova runtime
+
+Fecha: 2026-05-18
+
+## Objetivo
+
+Ejecutar el codigo implementado y confirmar que los modelos, rutas y web de
+LexNova no presentan errores locales detectables.
+
+## Resultado
+
+Se corrigio un error en `API.PY.DJANGO.LexNova/config/settings.py`: el archivo
+asumia que `sys.argv[1]` siempre existia. Esto rompia imports de Django desde
+scripts Python directos y validaciones embebidas.
+
+## Validaciones ejecutadas
+
+| Proyecto | Validacion | Resultado |
+|---|---|---|
+| `API.PY.DJANGO.LexNova` | `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.LexNova` | `python manage.py makemigrations --check --dry-run` | Correcto, sin cambios pendientes. |
+| `API.PY.DJANGO.LexNova` | `python -m compileall config apps/legal_workspace` | Correcto. |
+| `API.PY.DJANGO.LexNova` | Import directo de Django y listado de modelos `legal_workspace` | Correcto; 36 modelos registrados. |
+| `API.PY.DJANGO.LexNova` | Resolucion de `/api/cases/`, `/api/documents/`, `/api/legal-workspace/catalogs/` | Correcto. |
+| `API.PY.DJANGO.LexNova` | `python manage.py migrate --plan` | Correcto; incluye migraciones `0002` y `0003`. |
+| `API.PY.DJANGO.LexNova.Gateway` | `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.LexNova.Gateway` | Resolucion de `/api/lexnova/health/`, `/cases/`, `/documents/`, `/legal-workspace/catalogs/` | Correcto. |
+| `WEB.NJ.NEXT.LexNova` | `npm run build` | Correcto; sin errores de compilacion ni tipos. |
+
+## Limitacion de entorno
+
+No se pudo ejecutar migracion real contra PostgreSQL porque:
+
+- Docker Desktop no esta activo.
+- No hay PostgreSQL escuchando en `localhost:5432`.
+
+Se valido el plan de migraciones y la generacion SQL local, pero la aplicacion
+real de migraciones debe ejecutarse cuando PostgreSQL este disponible.
+
+## Web
+
+`npm run build` genero correctamente las 72 rutas. Persisten warnings
+preexistentes de Next.js por uso de `<img>` en paginas de auth/reset; no son
+errores ni provienen de la vista de casos modificada.
+
+---
+
+# Reporte de ejecucion Agents - Investigacion juridica LexNova
+
+Fecha: 2026-05-18
+
+## Alcance
+
+Se ejecuto `Docs/agents/AGENTS-000.md` en orden numerico despues de leer:
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/02_projects/lexnova/access-control.md`
+- `Docs/02_projects/lexnova/legal-process-data-model.md`
+
+Los agents `AGENTS-001.md` a `AGENTS-030.md` estaban vacios y no tenian tareas
+ejecutables.
+
+## Resultado
+
+Se documento la investigacion juridica inicial de LexNova para alinear el
+desarrollo de base de datos, catalogos, procedimientos, documentos, actores,
+normas versionadas, plazos, evidencia, analisis de IA y revision humana.
+
+Se agrego:
+
+- `Docs/02_projects/lexnova/legal-domain-research.md`
+
+Se actualizo:
+
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+
+## Fuentes externas consultadas
+
+Se consultaron fuentes oficiales para no inventar estructura juridica:
+
+- Camara de Diputados: CNPP, Ley Nacional de MASC penal, Codigo Nacional de
+  Procedimientos Civiles y Familiares, Ley General de MASC, Ley de Amparo,
+  Ley Federal del Trabajo, Ley Agraria, LFPCA, CFF, LGRA y Ley CNDH.
+- CNDH: portal institucional, quejas e inconformidades.
+- SCJN/SJF: fuente oficial prevista para jurisprudencia y tesis.
+- Tribunales Agrarios: fuente oficial prevista para autoridades y organos
+  agrarios.
+
+## Pendientes documentados
+
+- Levantar legislacion estatal y organismos de derechos humanos por entidad.
+- Validar plazos por supuesto, norma, excepcion y calendario de autoridad.
+- Completar catalogos mercantiles, agrarios, fiscales y administrativos.
+- Definir ingestion oficial de jurisprudencia/tesis del SJF.
+- Implementar catalogos versionables en base de datos: materia, procedimiento,
+  etapa, documento, actor, autoridad, norma, articulo, plazo y criterio.
+- Definir OCR, storage, cifrado, retencion, hash y cadena de custodia final.
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| Documento nuevo enlazado desde `Docs/02_projects/lexnova/README.md` | Correcto. |
+| Documento nuevo registrado en `Docs/_meta/master-index.md` | Correcto. |
+| Documento nuevo registrado en `Docs/_meta/master-index.yaml` | Correcto. |
+| Documento nuevo registrado en `Docs/_meta/navigation-map.md` | Correcto. |
+| No se modifico codigo de aplicacion en esta corrida | Correcto. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Investigacion juridica LexNova documentada y enlazada a indices canonicos. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Limpieza
+
+Al terminar validaciones se limpiaron los archivos `Docs/agents/AGENTS-*.md`
+para dejarlos listos para la siguiente corrida.
+
+---
+
+# Reporte de verificacion documental LexNova - Modelo procesal
+
+Fecha: 2026-05-18
+
+## Alcance
+
+Se reviso si LexNova ya cuenta con modelo de base de datos para carpetas de
+investigacion, juicio oral, amparos, revisiones de amparo y quejas de derechos
+humanos. La revision paso primero por el indice documental y despues por la
+implementacion local de `API.PY.DJANGO.LexNova`.
+
+## Agents
+
+Los archivos `Docs/agents/AGENTS-000.md` a `Docs/agents/AGENTS-030.md` estaban
+vacios al inicio de esta pasada. No habia instrucciones ejecutables pendientes.
+
+## Documentos revisados
+
+Documentos de control:
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+
+Documentos canonicos LexNova:
+
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/02_projects/lexnova/access-control.md`
+- `Docs/02_projects/lexnova/auth-seed.md`
+- `Docs/02_projects/lexnova/repositories.md`
+- `Docs/02_projects/lexnova/frontend/identity-interface.md`
+- `Docs/01_core_erp/architecture/07_project_api_pattern.md`
+
+## Resultado de revision de modelos
+
+Existe modelo implementado para:
+
+- Carpetas de investigacion: `apps.investigation_folder`.
+- Causa penal: `apps.cause_penal`.
+- Juicio oral: `apps.oral_trial`.
+- Apelaciones: `apps.appeal`.
+- Amparo indirecto: `apps.amparo.IndirectAmparo`.
+- Amparo directo: `apps.amparo.DirectAmparo`.
+- Documentos y analisis documental: `apps.documents`.
+- Evidencia, transcripciones y analisis de evidencia: `apps.evidence`.
+- Caso contenedor y vinculos a entidades: `apps.case`.
+- Personas, roles legales, representaciones y autoridades: `apps.person`.
+
+Brechas encontradas:
+
+- No existe modelo separado para revision de amparo directo.
+- No existe modelo separado para revision de amparo indirecto.
+- No existe modelo separado para quejas de derechos humanos estatales.
+- No existe modelo separado para quejas de derechos humanos nacionales.
+- La documentacion canonica de LexNova no tenia aun un documento especifico de
+  modelo procesal/base de datos.
+
+## Documentacion creada
+
+Se creo:
+
+- `Docs/02_projects/lexnova/legal-process-data-model.md`
+
+El documento registra:
+
+- Cobertura actual por necesidad.
+- Tablas existentes por schema.
+- Flujo procesal base.
+- Flujo de amparo indirecto.
+- Uso de `CaseLink`, `DocumentLink` y `EvidenceLink`.
+- Modelos futuros recomendados para revision de amparo directo, revision de
+  amparo indirecto y quejas de derechos humanos.
+
+## Indices actualizados
+
+Se actualizo:
+
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+
+## Validaciones
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `API.PY.DJANGO.LexNova` | `python manage.py check` | Correcto con variables minimas locales (`DJANGO_SECRET_KEY`, `AUTH_API_VERIFY_URL`, `DATABASE_URL`). Sin issues. |
+| `API.PY.DJANGO.LexNova` | `python -m compileall .` | Correcto. |
+
+No se ejecutaron migraciones porque esta pasada solo documento el estado actual
+y brechas, sin modificar modelos Django.
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` - `AGENTS-030.md` | Sin instrucciones | Estaban vacios; se mantuvieron limpios. |
+
+## Fuera de alcance
+
+- No se busco en todo `Docs`; se usaron indices y documentos canonicos
+  relacionados.
+- No se implementaron modelos nuevos para revisiones de amparo o derechos
+  humanos.
+- No se modificaron endpoints del gateway ni de la API de dominio.
+- No se hicieron commits, push ni pull requests.
+
+## Pendientes
+
+- Implementar modelos Django separados para revision de amparo directo,
+  revision de amparo indirecto y quejas de derechos humanos cuando el alcance
+  de desarrollo lo requiera.
+- Definir si las quejas de derechos humanos viven en schema nuevo
+  `HumanRights` o dentro de un modulo procesal mas amplio.
+
+---
+
+# Reporte de ejecucion Agents - Centro de Carga Documental LexNova
+
+Fecha: 2026-05-18
+
+## Alcance
+
+Se ejecuto `Docs/agents/AGENTS-000.md`, que contenia instrucciones para
+consolidar el flujo documental/procesal de LexNova y optimizar la estructura de
+base de datos para evitar duplicar archivos, documentos internos y procesos.
+
+`AGENTS-001.md` a `AGENTS-030.md` estaban vacios.
+
+## Documentos revisados
+
+Documentos de control:
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/navigation-map.md`
+
+Documentos canonicos relacionados:
+
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/02_projects/lexnova/legal-process-data-model.md`
+- `Docs/03_standards/database/sql-server-publication-standard.md`
+
+## Implementacion realizada
+
+### API LexNova
+
+Se agrego el modulo:
+
+```text
+Docker.API.PY/API.PY.DJANGO.LexNova/apps/legal_workspace
+```
+
+Objetivo:
+
+- Guardar cada archivo una sola vez.
+- Relacionar archivos con uno o varios procesos juridicos.
+- Permitir clasificacion posterior cuando el cliente seleccione `Desconozco`.
+- Evitar una tabla por cada formato documental o tipo de proceso.
+
+Tablas nuevas:
+
+- `Cases.LegalCases`
+- `Cases.LegalProceedings`
+- `Cases.LegalProceedingContents`
+- `Cases.TimelineEvents`
+- `Documents.DigitalAssets`
+- `Documents.ExtractedFields`
+- `Media.MediaConversions`
+- `Media.Transcripts`
+- `Media.TranscriptSegments`
+- `Media.MediaProcessingLogs`
+- `Clients.ClientInvitations`
+
+La migracion inicial crea schemas si no existen:
+
+- `Cases`
+- `Clients`
+- `Documents`
+- `Media`
+
+Tipos de proceso incluidos:
+
+- `UNKNOWN`
+- `INVESTIGATION_FOLDER`
+- `CRIMINAL_CASE`
+- `ORAL_TRIAL`
+- `APPEAL`
+- `DIRECT_AMPARO`
+- `DIRECT_AMPARO_REVIEW`
+- `INDIRECT_AMPARO`
+- `INDIRECT_AMPARO_REVIEW`
+- `STATE_HUMAN_RIGHTS_COMPLAINT`
+- `NATIONAL_HUMAN_RIGHTS_COMPLAINT`
+
+### Auth Core
+
+Se agrego:
+
+```text
+Docker.API.PY/API.PY.DJANGO.Auth/access/migrations/0015_seed_lexnova_document_permissions.py
+```
+
+Permisos nuevos:
+
+- `DOCUMENT_UPLOAD_OWN`
+- `DOCUMENT_UPLOAD_FOR_CLIENT`
+- `DOCUMENT_CLASSIFY`
+- `DOCUMENT_RECLASSIFY`
+- `DOCUMENT_LINK_TO_PROCEEDING`
+- `DOCUMENT_VIEW_OWN`
+- `DOCUMENT_VIEW_CLIENT`
+- `DOCUMENT_DELETE_PENDING`
+- `DOCUMENT_APPROVE`
+- `CLIENT_INVITE`
+- `CLIENT_VIEW_PROGRESS`
+- `CLIENT_UPLOAD_DOCUMENTS`
+
+Modulos nuevos:
+
+- `DOCUMENTS`: `/dashboard/modules/cases/upload`
+- `CLIENTS`: `/dashboard/modules/clients`
+
+### Documentacion
+
+Se actualizo:
+
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/auth-seed.md`
+- `Docs/02_projects/lexnova/frontend/identity-interface.md`
+- `Docs/02_projects/lexnova/legal-process-data-model.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+
+## Informacion faltante documentada
+
+Quedo documentado como `PENDIENTE_DE_DEFINIR`:
+
+- Cliente canonico para `ClientId`.
+- Catalogo final de tipos documentales.
+- Motor OCR.
+- Motor de transcripcion.
+- Politica definitiva de storage.
+- Reglas de publicacion al cliente.
+- Metricas y trazabilidad de IA.
+- Criterio para crear tablas especializadas de revision de amparo y derechos
+  humanos.
+
+## Validaciones
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `API.PY.DJANGO.LexNova` | `python manage.py check` con variables minimas locales | Correcto, sin issues. |
+| `API.PY.DJANGO.LexNova` | `python -m compileall .` | Correcto. |
+| `API.PY.DJANGO.LexNova` | `python manage.py makemigrations --check --dry-run` | Correcto, no hay cambios pendientes. |
+| `API.PY.DJANGO.Auth` | `python manage.py check` con variables minimas locales | Correcto, sin issues. |
+| `API.PY.DJANGO.Auth` | `python -m compileall .` | Correcto. |
+| `API.PY.DJANGO.Auth` | `python manage.py makemigrations --check --dry-run` | Correcto, no hay cambios pendientes. |
+
+No se ejecutaron migraciones reales contra PostgreSQL en esta pasada.
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Modelo documental/procesal optimizado implementado, permisos sembrados y documentacion actualizada. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Estaban vacios. |
+
+## Limpieza
+
+Despues de completar y validar la corrida, se limpiaron los archivos
+`Docs/agents/AGENTS-*.md`.
+
+## Pendientes
+
+- Exponer endpoints del Centro de Carga Documental en `API.PY.DJANGO.LexNova`
+  y `API.PY.DJANGO.LexNova.Gateway`.
+- Construir la vista `/dashboard/modules/cases/upload` en `WEB.NJ.NEXT.LexNova`.
+- Ejecutar migraciones reales contra PostgreSQL cuando se programe la
+  actualizacion de base.
+- Definir catalogos finales de tipos documentales y reglas de publicacion al
+  cliente.
+
+---
+
 # Reporte de verificacion Auth/LexNova Gateway
 
 Fecha: 2026-05-17
@@ -1290,3 +2569,64 @@ Fecha: 2026-05-16
 ## Nota
 
 `gh` no esta instalado en esta maquina, por lo que no se crearon pull requests desde CLI. La publicacion se hizo con `git`.
+
+---
+
+# Reporte de ejecucion Agents - Investigacion juridica LexNova
+
+Fecha: 2026-05-18
+
+## Alcance
+
+Se ejecuto `Docs/agents/AGENTS-000.md` en orden numerico. Los archivos
+`AGENTS-001.md` a `AGENTS-030.md` estaban vacios y no tenian tareas
+ejecutables.
+
+Antes de documentar se reviso:
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/02_projects/lexnova/access-control.md`
+- `Docs/02_projects/lexnova/legal-process-data-model.md`
+
+## Resultado
+
+Se agrego `Docs/02_projects/lexnova/legal-domain-research.md` como documento
+canonico complementario para materias, procedimientos, documentos, actores,
+matrices, normas versionables, plazos, evidencia, IA, revision humana, riesgos,
+roadmap y fuentes oficiales.
+
+Tambien se actualizaron:
+
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `rg` de `legal-domain-research` en README, indices, mapa y reporte | Correcto. |
+| `python manage.py check` en `Docker.API.PY/API.PY.DJANGO.LexNova` | Correcto, sin issues. |
+| Limpieza de `Docs/agents/AGENTS-*.md` | Correcto, todos quedaron en 0 bytes. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Investigacion juridica LexNova documentada y enlazada a indices canonicos. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Pendientes
+
+- Levantar legislacion estatal y organismos de derechos humanos por entidad.
+- Validar plazos por supuesto, norma, excepcion y calendario de autoridad.
+- Implementar catalogos versionables en base de datos.
+- Definir ingestion oficial de jurisprudencia/tesis del SJF.
+- Cerrar OCR, storage, cifrado, retencion, hash y cadena de custodia final.
