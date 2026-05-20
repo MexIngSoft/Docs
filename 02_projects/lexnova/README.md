@@ -37,6 +37,8 @@ Gestiona y analiza casos legales.
 - `access-control.md`: identidad, roles, niveles, permisos y participacion por caso.
 - `architecture.md`: gateway/BFF obligatorio y limites entre web, Auth y APIs.
 - `auth-seed.md`: usuarios, perfiles, modulos y permisos iniciales en Auth.
+- `case-participants-access.md`: separacion User/Person/CaseParticipant,
+  autorizaciones familiares, privacidad documental y auditoria de accesos.
 - `legal-domain-research.md`: investigacion juridica inicial, catalogos,
   matrices, fuentes oficiales y roadmap de datos legales versionables.
 - `legal-process-data-model.md`: modelo de datos para casos, carpetas de
@@ -90,6 +92,8 @@ Lex Nova Tech.
 - Completar CRUD de casos, documentos, participantes y analisis.
 - Completar endpoints de escritura para casos, documentos, participantes,
   clasificacion y revision humana.
+- Cerrar flujos productivos de invitacion, consentimiento y revocacion de
+  participantes autorizados.
 - Conectar el Centro de Carga Documental web con storage, OCR, clasificacion,
   revision humana y cadena de custodia.
 - Reemplazar datos visuales de demostracion por consumo real del Gateway donde

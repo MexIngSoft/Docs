@@ -146,6 +146,7 @@
 | Business | `02_projects/lexnova/access-control.md` | Control de acceso LexNova | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/lexnova/architecture.md` | Arquitectura LexNova | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/lexnova/auth-seed.md` | Semilla Auth LexNova | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/lexnova/case-participants-access.md` | Participantes y acceso LexNova | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/lexnova/frontend/identity-interface.md` | Interfaz e identidad Lex Nova Tech | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/lexnova/legal-domain-research.md` | Investigacion juridica LexNova | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/lexnova/legal-process-data-model.md` | Modelo procesal LexNova | ACTIVE | P1 | Equipo documental |

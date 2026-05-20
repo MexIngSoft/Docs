@@ -81,10 +81,14 @@ Tablas agregadas:
 | Schema | Tabla | Uso |
 |---|---|---|
 | `Cases` | `LegalCases` | Asunto general del cliente. |
+| `Cases` | `CaseParticipants` | Personas/usuarios vinculados al expediente con rol, estado y alcances de acceso. |
+| `Cases` | `CaseParticipantAuthorizations` | Autorizaciones explicitas entre participantes. |
 | `Cases` | `LegalProceedings` | Proceso juridico flexible dentro del caso. |
 | `Cases` | `LegalProceedingContents` | Segmento o contenido de un archivo vinculado a un proceso. |
 | `Cases` | `TimelineEvents` | Linea de tiempo del caso o proceso. |
+| `Cases` | `CaseAccessAuditEvents` | Historial de acceso a expediente, documentos y acciones sensibles. |
 | `Documents` | `DigitalAssets` | Archivo unico: PDF, Word, texto, imagen, video o audio. |
+| `Documents` | `CaseDocumentAccessPolicies` | Politicas de visibilidad por documento y participante. |
 | `Documents` | `ExtractedFields` | Campos extraidos de contenido documental. |
 | `Media` | `MediaConversions` | Conversiones como video a audio o PDF a texto. |
 | `Media` | `Transcripts` | Transcripcion completa de un asset. |
@@ -149,6 +153,77 @@ Regla central:
 DigitalAssets guarda el archivo una sola vez.
 LegalProceedingContents vincula todo o parte del archivo a uno o varios procesos.
 ExtractedFields y TimelineEvents guardan informacion estructurada sin crear una tabla por cada formato documental.
+CaseParticipants separa usuario autenticado, persona real y rol procesal dentro
+del expediente.
+CaseDocumentAccessPolicies evita que todos los participantes vean todos los
+documentos por defecto.
+```
+
+## Participantes y acceso granular
+
+LexNova no debe asumir que el cliente es siempre la victima o titular procesal.
+Un expediente puede incluir cliente, victima, imputado, familiar autorizado,
+representante legal, abogado, analista, perito y otros actores con accesos
+distintos.
+
+Contrato MVP:
+
+```text
+Auth.UserAccount  -> referencia logica por UserId
+Person.Person     -> persona real del expediente
+Cases.LegalCases  -> expediente
+Cases.CaseParticipants -> rol y estado dentro del expediente
+Cases.CaseParticipantAuthorizations -> autorizacion formal de acceso
+Documents.CaseDocumentAccessPolicies -> privacidad por documento
+Cases.CaseAccessAuditEvents -> historial de acceso
+```
+
+Categorias:
+
+```text
+LEGAL
+FAMILY_AUTHORIZED
+PROCEDURAL
+INTERNAL
+OTHER
+```
+
+Estados:
+
+```text
+PENDING
+INVITED
+ACTIVE
+SUSPENDED
+REVOKED
+```
+
+Alcances de acceso:
+
+```text
+TRACKING
+DOCUMENT_UPLOAD
+DOCUMENT_VIEW
+LEGAL_REVIEW
+REPRESENTATION
+SIGNATURE
+ADMINISTRATION
+```
+
+Privacidad documental:
+
+```text
+PUBLIC_TO_CASE
+PARTICIPANTS_ONLY
+LEGAL_TEAM_ONLY
+VICTIM_ONLY
+CUSTOM
+```
+
+Documento canonico complementario:
+
+```text
+Docs/02_projects/lexnova/case-participants-access.md
 ```
 
 ## Modelo actual por schema
@@ -519,6 +594,9 @@ CRUD productivo:
 | Motor de transcripcion | Proveedor, diarizacion, idioma, confianza minima y costo por procesamiento. |
 | Politica de storage | S3/local definitivo, cifrado, retencion, borrado logico y versionado de archivos. |
 | Publicacion al cliente | Que campos y avances puede ver el cliente y bajo que permiso. |
+| Consentimiento de participantes | Documento, firma o evidencia necesaria para autorizar familiares y representantes. |
+| Revocacion de acceso | Reglas para suspender o revocar participantes, invitaciones y accesos temporales. |
+| Auditoria sensible | Retencion, exportacion y alertas de accesos a expedientes con victimas, menores o datos sensibles. |
 | Metricas de IA | `AIAnalysisResults` y `HumanReviews` ya guardan trazabilidad base; falta definir rangos oficiales de confianza y severidad. |
 | Modelos especializados | Cuando separar tablas dedicadas para revisiones de amparo y quejas de derechos humanos. |
 

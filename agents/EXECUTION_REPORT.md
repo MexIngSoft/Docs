@@ -297,6 +297,273 @@ Tambien se actualizaron:
 
 ---
 
+# Reporte de ejecucion Agents - Verificacion sin instrucciones nuevas
+
+Fecha: 2026-05-20
+
+## Alcance
+
+Se ejecuto la revision de `Docs/agents/AGENTS-*.md` en orden numerico,
+siguiendo la instruccion de ejecutar solo tareas no completadas y no modificar
+funcionalidad fuera del alcance del agent.
+
+Todos los archivos `AGENTS-000.md` a `AGENTS-030.md` estan vacios con longitud
+`0` bytes, por lo que no habia instrucciones ejecutables nuevas.
+
+## Documentos revisados
+
+Documentos obligatorios:
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+Documentacion canonica relacionada:
+
+- No se leyo documentacion adicional de proyecto porque ningun agent activo
+  definio proyecto, modulo, API, frontend, integracion o tarea concreta.
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` - `AGENTS-030.md` | Sin instrucciones nuevas | Todos los archivos estan vacios; no habia tareas ejecutables pendientes. |
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| Revision de longitudes de `Docs/agents/AGENTS-*.md` | Correcto; todos reportan `0` bytes. |
+| Existencia de documentos obligatorios | Correcto. |
+| `rg` en `Docs/agents/EXECUTION_REPORT.md` | Correcto; se verifico historial previo y estado recurrente de agents vacios. |
+
+No se ejecutaron builds, lint ni tests de aplicacion porque no se modifico
+codigo ni documentacion de producto; el unico cambio fue este registro de
+ejecucion.
+
+## Documentos fuera
+
+- No se busco en todo `Docs`.
+- No se leyeron documentos canonicos de proyectos como LexNova, Fiscora,
+  Tecno Telec, DocuCore u otros, porque no hubo agent con alcance activo.
+- No se modificaron ni archivaron los archivos `AGENTS-*.md`.
+
+## Informacion faltante o ambigua
+
+- Los indices documentales siguen listando agents con titulos historicos, pero
+  los archivos fisicos actuales estan vacios. Para ejecutar nuevas tareas se
+  requiere volver a escribir instrucciones dentro de uno o mas `AGENTS-*.md`.
+
+## Decisiones tomadas
+
+- No se implemento ningun cambio funcional.
+- No se revirtio ni limpio trabajo existente.
+- Se mantuvieron los agents vacios como slots futuros.
+- Se documento esta corrida en este reporte para dejar trazabilidad.
+
+---
+
+# Reporte de ejecucion - LexNova UI publica y autenticacion
+
+Fecha: 2026-05-19
+
+## Alcance
+
+Se modernizaron las pantallas publicas y de autenticacion de
+`WEB.NJ.NEXT.LexNova` para alinearlas con la identidad visual del inicio y del
+dashboard: login, registro, activacion, recuperacion de contrasena,
+confirmacion de contrasena, reenvio de activacion, callbacks sociales y enlaces
+publicos principales.
+
+Los archivos `Docs/agents/AGENTS-000.md` a `Docs/agents/AGENTS-030.md`
+estaban vacios, por lo que no habia tareas numeradas pendientes que ejecutar.
+
+## Documentos revisados
+
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/frontend/identity-interface.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/02_projects/lexnova/process-tracking.md`
+- `Docs/03_standards/frontend/README.md`
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+
+## Resultado
+
+- Se agrego `components/auth/AuthFrame.tsx` como marco comun para flujos de
+  identidad, con narrativa de Gateway, evidencia, permisos y seguimiento.
+- Se modernizaron `app/auth/login`, `app/auth/register`,
+  `app/activation/[uid]/[token]`, `app/password-reset`,
+  `app/password-reset/[uid]/[token]`, `app/auth/resend`,
+  `app/auth/forgot-password`, `app/auth/reset/[uid]/[token]`,
+  `app/auth/google` y `app/auth/facebook`.
+- Se modernizaron los enlaces publicos `servicios`, `planes`,
+  `como-funciona` y `contacto` para que usen el mismo lenguaje visual sobrio de
+  Lex Nova Tech.
+- Se limpiaron textos mojibake visibles en las pantallas tocadas.
+- Se mantuvo la logica existente de hooks, Redux y Gateway para no cambiar el
+  contrato de autenticacion.
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run build` en `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | Correcto, build completo. |
+| `rg` de caracteres mojibake en pantallas tocadas | Correcto, sin coincidencias. |
+| Revision de `Docs/agents/AGENTS-*.md` | Correcto, todos en 0 bytes. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Fuera de alcance
+
+- No se recorrieron documentos no canonicos fuera de los indices solicitados.
+- No se implemento backend nuevo ni cambios de contratos de Auth/Gateway.
+- No se levantaron pruebas visuales con navegador porque la validacion
+  disponible y suficiente para esta pasada fue `npm run build`.
+
+---
+
+# Reporte de ejecucion Agents - LexNova expediente, participantes y acceso
+
+Fecha: 2026-05-19
+
+## Alcance
+
+Se ejecutaron `Docs/agents/AGENTS-*.md` en orden numerico despues de revisar:
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/auth-seed.md`
+- `Docs/02_projects/lexnova/process-tracking.md`
+- `Docs/02_projects/lexnova/legal-process-data-model.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | La optimizacion de dashboard/casos ya estaba implementada en la web: resultados absorbidos como detalle del caso, `/dashboard/modules/home` redirige a `/dashboard`, carga de evidencia simplificada, perfil minimo, usuarios con nombre/apellidos y seguimiento dentro del detalle del caso. Se valido nuevamente. |
+| `AGENTS-001.md` | Completado | Se implemento y documento el MVP de participantes del expediente: separacion `User`/`Person`/`CaseParticipant`, autorizaciones, privacidad por documento y auditoria de accesos. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Implementacion realizada
+
+### API LexNova
+
+Se actualizo:
+
+```text
+Docker.API.PY/API.PY.DJANGO.LexNova/apps/legal_workspace/models.py
+Docker.API.PY/API.PY.DJANGO.LexNova/apps/legal_workspace/admin.py
+Docker.API.PY/API.PY.DJANGO.LexNova/apps/legal_workspace/views.py
+Docker.API.PY/API.PY.DJANGO.LexNova/apps/legal_workspace/urls.py
+```
+
+Se creo:
+
+```text
+Docker.API.PY/API.PY.DJANGO.LexNova/apps/legal_workspace/migrations/0004_caseparticipant_casedocumentaccesspolicy_and_more.py
+```
+
+Tablas MVP agregadas:
+
+- `Cases.CaseParticipants`
+- `Cases.CaseParticipantAuthorizations`
+- `Documents.CaseDocumentAccessPolicies`
+- `Cases.CaseAccessAuditEvents`
+
+Endpoint MVP:
+
+```text
+GET /api/participants/
+GET /api/participants/?case_id={id}
+```
+
+### Gateway LexNova
+
+Se actualizo:
+
+```text
+Docker.API.PY/API.PY.DJANGO.LexNova.Gateway/gateway/views.py
+Docker.API.PY/API.PY.DJANGO.LexNova.Gateway/gateway/urls.py
+```
+
+Ruta expuesta:
+
+```text
+GET /api/lexnova/participants/
+GET /api/lexnova/participants/?case_id={id}
+```
+
+### Documentacion
+
+Se creo:
+
+```text
+Docs/02_projects/lexnova/case-participants-access.md
+```
+
+Se actualizo:
+
+```text
+Docs/02_projects/lexnova/README.md
+Docs/02_projects/lexnova/legal-process-data-model.md
+Docs/_meta/master-index.md
+Docs/_meta/master-index.yaml
+Docs/_meta/navigation-map.md
+```
+
+## Informacion faltante documentada
+
+Quedaron documentados como pendientes productivos:
+
+- Validacion juridica de identidad para autorizar participantes.
+- Flujo final de invitaciones, revocaciones y accesos temporales.
+- Evidencia/consentimiento para acceso familiar o representacion.
+- Matriz final de campos visibles por perfil.
+- Retencion, exportacion y alertas de auditoria sensible.
+- Catalogo final de documentos sensibles por materia y rol procesal.
+
+## Validaciones
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `API.PY.DJANGO.LexNova` | `python manage.py makemigrations legal_workspace` | Correcto; genero `0004_caseparticipant_casedocumentaccesspolicy_and_more.py`. Aviso no bloqueante: PostgreSQL local no estaba levantado para verificar historial. |
+| `API.PY.DJANGO.LexNova` | `python manage.py check` con `DJANGO_SECRET_KEY`, `DEVELOPMENT_MODE=True` y `AUTH_API_VERIFY_URL` locales | Correcto, sin issues. |
+| `API.PY.DJANGO.LexNova` | `python -m compileall .` | Correcto. |
+| `API.PY.DJANGO.LexNova.Gateway` | `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.LexNova.Gateway` | `python -m compileall .` | Correcto. |
+| `WEB.NJ.NEXT.LexNova` | `npm run build` | Correcto. Mantiene warnings preexistentes por uso de `<img>` en pantallas auth/reset. |
+
+## Limpieza
+
+Despues de completar la ejecucion, se limpiaron los archivos `AGENTS-000.md` y
+`AGENTS-001.md`. Los archivos `AGENTS-002.md` a `AGENTS-030.md` ya estaban
+vacios.
+
+## Pendientes
+
+- Ejecutar migraciones contra PostgreSQL cuando el servicio local este
+  levantado.
+- Implementar escrituras productivas para participantes, autorizaciones,
+  politicas de documento y auditoria.
+- Conectar la vista web de detalle del caso con el endpoint real de
+  participantes cuando se cierre el contrato visual.
+
+---
+
 # Reporte de ejecucion - Lex Nova Gateway Failed to fetch
 
 Fecha: 2026-05-18
