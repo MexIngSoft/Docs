@@ -16,6 +16,21 @@ Fiscora no debe percibirse como un descargador de XML. Debe sentirse como una pl
 | `API.PY.DJANGO.Document` | XML, PDF, render visual, plantillas y transformaciones documentales. | Existente |
 | `WEB.NJ.NEXT.Fiscora` | Portal publico, dashboard, explorador CFDI, animaciones y UX fiscal. | MVP preview creado |
 
+## Estado documental
+
+Fiscora queda clasificado como producto SaaS fiscal independiente dentro del
+ecosistema, apoyado por modulos reutilizables de JobCron cuando aplique.
+
+La fase actual es cierre de definicion MVP:
+
+- Usar `API.PY.DJANGO.Fiscal` como nucleo reutilizable de CFDI/SAT.
+- Usar `API.PY.DJANGO.Fiscora` para producto comercial, planes, creditos y
+  preferencias.
+- Usar `API.PY.DJANGO.Fiscora.Gateway` como unica entrada del frontend.
+- Usar `API.PY.DJANGO.Document` para render visual, XML, PDF y plantillas.
+- Mantener `WEB.NJ.NEXT.Fiscora` como preview visual hasta conectar datos reales
+  del gateway.
+
 ## Modulos
 
 - Portal publico.
@@ -41,3 +56,6 @@ Fiscora no debe percibirse como un descargador de XML. Debe sentirse como una pl
 - `database/cfdi-data-model.md`
 - `animations/animation-guidelines.md`
 - `frontend/animation-preview.md`
+- `tasks/00_mvp_scope.md`
+- `tasks/01_pending_tasks.md`
+- `decisions/adr_0001_api_boundaries.md`

@@ -366,6 +366,119 @@ ejecucion.
 
 ---
 
+# Reporte de ejecucion Fiscora - Cierre documental MVP
+
+Fecha: 2026-05-20
+
+## Alcance
+
+Se realizo primero el commit y push de cambios locales pendientes en los
+repositorios relacionados. Despues se completo el cierre documental disponible
+para Fiscora, ya que los archivos `Docs/agents/AGENTS-000.md` a
+`AGENTS-030.md` siguen vacios y no contienen instrucciones ejecutables nuevas.
+
+## Documentos revisados
+
+Indice documental obligatorio:
+
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/README.md`
+
+Documentacion canonica relacionada:
+
+- `Docs/02_projects/fiscora/README.md`
+- `Docs/02_projects/fiscora/platform-overview.md`
+- `Docs/02_projects/fiscora/architecture.md`
+- `Docs/02_projects/fiscora/api-contracts.md`
+- `Docs/02_projects/fiscora/repositories.md`
+- `Docs/02_projects/fiscora/security.md`
+- `Docs/02_projects/fiscora/database/cfdi-data-model.md`
+- `Docs/02_projects/fiscora/animations/animation-guidelines.md`
+- `Docs/02_projects/fiscora/frontend/animation-preview.md`
+- `Docs/02_projects/README.md`
+- `Docs/02_projects/_ecosystem/00_ecosystem_overview.md`
+- `Docs/02_projects/_ecosystem/01_company_portfolio.md`
+
+## Documentos actualizados o creados
+
+Se crearon:
+
+- `Docs/02_projects/fiscora/tasks/00_mvp_scope.md`
+- `Docs/02_projects/fiscora/tasks/01_pending_tasks.md`
+- `Docs/02_projects/fiscora/decisions/adr_0001_api_boundaries.md`
+
+Se actualizaron:
+
+- `Docs/02_projects/fiscora/README.md`
+- `Docs/02_projects/fiscora/platform-overview.md`
+- `Docs/02_projects/fiscora/architecture.md`
+- `Docs/02_projects/fiscora/api-contracts.md`
+- `Docs/02_projects/fiscora/security.md`
+- `Docs/02_projects/fiscora/frontend/animation-preview.md`
+- `Docs/02_projects/README.md`
+- `Docs/02_projects/_ecosystem/00_ecosystem_overview.md`
+- `Docs/02_projects/_ecosystem/01_company_portfolio.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+
+## Decisiones tomadas
+
+- Fiscora queda registrado como producto SaaS fiscal independiente dentro del
+  ecosistema.
+- El frontend consume solo `API.PY.DJANGO.Fiscora.Gateway`.
+- `API.PY.DJANGO.Fiscal` queda como nucleo reutilizable para CFDI, SAT, XML,
+  jobs, paquetes, reportes y auditoria fiscal.
+- `API.PY.DJANGO.Fiscora` queda limitado a producto comercial, planes, creditos
+  y preferencias.
+- `API.PY.DJANGO.Document` queda como responsable de render visual, PDF,
+  plantillas y transformaciones documentales.
+- La primera version puede iniciar con carga manual XML para reducir riesgo si
+  la conexion SAT real no esta lista.
+
+## Informacion faltante o ambigua
+
+- Cliente prioritario del MVP: contador, PyME, persona fisica o empresa
+  multiempresa.
+- Limites exactos del plan gratis.
+- Uso final de creditos por operacion.
+- Estrategia definitiva para credenciales SAT.
+- Politica final de retencion y eliminacion de XML/PDF.
+- Integracion real SAT y parser CFDI completo.
+
+## Documentos fuera
+
+- No se reviso todo `Docs`.
+- No se tocaron proyectos no relacionados con Fiscora salvo el portafolio y
+  ecosistema canonico.
+- No se modificaron APIs Fiscora/Fiscal/Gateway en esta pasada; solo se
+  validaron.
+
+## Validaciones
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `API.PY.DJANGO.Fiscal` | `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.Fiscora` | `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.Fiscora.Gateway` | `python manage.py check` | Correcto, sin issues. |
+| `WEB.NJ.NEXT.Fiscora` | `npm run build` | Correcto. |
+| `Docker.API.PY` | `docker compose config` | Correcto. |
+| `Docker.WEB.NJ` | `docker compose config` | Correcto. |
+| Documentacion | `rg` de `fiscora/Fiscora` en indices y canones actualizados | Correcto. |
+
+## Publicacion previa realizada
+
+| Repositorio | Rama | Commit | Resultado |
+|---|---|---|---|
+| `MexIngSoft/Docs` | `feature/lex-nova-tech-identification` | `0e46a39` | Push correcto. |
+| `MexIngSoft/Docker.API.PY` | `feature/lex-nova-tech-identification` | `d2489e8` | Push correcto. |
+| `MexIngSoft/Docker.WEB.NJ` | `main` | `bca3ddf` | Push correcto. |
+| `MexIngSoft/WEB.NJ.NEXT.Fiscora` | `main` | `3266cb5` | Push correcto. |
+
+---
+
 # Reporte de ejecucion - LexNova UI publica y autenticacion
 
 Fecha: 2026-05-19

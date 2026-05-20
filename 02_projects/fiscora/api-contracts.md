@@ -80,3 +80,33 @@ GET /api/fiscora/cfdi/{uuid}/
 POST /api/fiscora/cfdi/{uuid}/visual-pdf/
 ```
 
+## Carga manual XML
+
+```http
+POST /api/fiscora/xml/upload/
+```
+
+Body esperado:
+
+```json
+{
+  "tenant_id": "tenant_demo",
+  "source": "manual_upload",
+  "files": ["cfdi.xml"]
+}
+```
+
+Reglas:
+
+- El gateway recibe la intencion del frontend.
+- Fiscal registra metadatos, XML original y trazabilidad.
+- Document puede generar vista visual/PDF despues del procesamiento.
+
+## Configuracion comercial
+
+```http
+GET /api/fiscora/configuration/
+```
+
+Debe exponer plan actual, limites, creditos disponibles y banderas visibles del
+producto sin revelar reglas internas sensibles.

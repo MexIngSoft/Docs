@@ -23,6 +23,7 @@ Ordenar las empresas, marcas y productos que pueden crecer alrededor del ERP Job
 | Plataforma | Clientix | Apps para clientes, tecnicos y administracion. |
 | Plataforma | Cloudra | Hosting, nube, VPN y monitoreo. |
 | Plataforma | Datara | Analitica, BI, reportes y metricas. |
+| Plataforma fiscal | Fiscora | SaaS para descargar, organizar, visualizar y automatizar CFDI del SAT. |
 | Comercio | Imagrafity | Personalizacion de productos. |
 | Comercio | Buildora | Configurador y venta de PCs/equipos a medida. |
 | Comercio | Refakto | Marketplace de refacciones usadas. |
@@ -51,6 +52,7 @@ Cliente
   -> Producto o servicio
   -> Clientix
   -> Datara
+  -> Fiscora cuando el flujo requiere CFDI, XML, PDF fiscal o reportes
 ```
 
 ## Criterio para crecer

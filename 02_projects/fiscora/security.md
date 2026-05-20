@@ -27,11 +27,24 @@ No usar animaciones llamativas en:
 - Los permisos se validan en backend.
 - El frontend solo refleja permisos para experiencia de usuario.
 
+## MVP de seguridad
+
+- El MVP puede iniciar con carga manual XML para reducir exposicion de
+  credenciales SAT.
+- Si se habilita conexion SAT, las credenciales deben cifrarse antes de
+  persistirse.
+- Toda descarga SAT, visualizacion XML completa, generacion de PDF y descarga de
+  archivos debe registrar evento de auditoria.
+- Las cuentas multiempresa deben aislar CFDI, credenciales, creditos y reportes
+  por tenant.
+- Los mensajes del producto no deben prometer cumplimiento fiscal automatico ni
+  sustituir asesoria contable.
+
 ## Mensajes permitidos
 
 ```text
 Tus accesos se usaran unicamente para consultar tus CFDI.
 Tus datos se almacenan cifrados.
 Puedes eliminar esta conexion cuando quieras.
+Fiscora organiza tu informacion fiscal; no sustituye asesoria contable.
 ```
-

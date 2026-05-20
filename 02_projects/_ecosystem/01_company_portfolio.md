@@ -10,6 +10,7 @@
 | Clientix | `clientix` | clientix.app / clientix.com | BASE | Definir apps cliente/tecnico/admin. |
 | Cloudra | `cloudra` | cloudra.io / cloudra.com | BASE | Definir hosting, monitoreo y VPN. |
 | Datara | `datara` | datara.io / datara.com | BASE | Definir BI y reportes. |
+| Fiscora | `fiscora` | fiscora.com / fiscora.mx | MVP | Cerrar conexion real SAT, carga XML, PDF visual y monetizacion. |
 | Imagrafity | `imagrafity` | imagrafity.com / imagrafity.mx | BASE | Definir editor de personalizacion. |
 | Buildora | `buildora` | buildora.com / buildora.mx | BASE | Definir configurador de PCs. Antes: Escoge tu PC. |
 | Refakto | `refakto` | refakto.com / refakto.mx | BASE | Definir marketplace de refacciones. |

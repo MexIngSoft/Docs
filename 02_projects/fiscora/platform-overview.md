@@ -75,3 +75,22 @@ Modelo inicial:
 - Recompensas por publicidad no invasiva.
 - Suscripciones futuras.
 
+## MVP aprobado
+
+La primera version funcional debe enfocarse en demostrar valor con bajo riesgo:
+
+- Dashboard con resumen de CFDI, creditos y estado SAT.
+- Carga manual de XML como alternativa inicial si la conexion SAT real no esta
+  lista.
+- Descarga SAT modelada por jobs, aunque el conector real quede por fase.
+- Explorador CFDI con busqueda por UUID, RFC, monto, fecha y estado.
+- Vista visual y PDF generado desde capa documental sin modificar XML original.
+- Plan gratis con limites documentados y creditos para operaciones premium.
+
+Queda fuera del MVP:
+
+- Cancelacion fiscal.
+- Declaraciones o cumplimiento fiscal automatizado.
+- IA fiscal con recomendaciones normativas.
+- Conexion bancaria o contable.
+- Progreso falso en procesos SAT productivos.

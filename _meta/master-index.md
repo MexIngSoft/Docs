@@ -128,6 +128,17 @@
 | Business | `02_projects/docucore/security.md` | Seguridad DocuCore | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/docucore/tools-catalog.md` | Catalogo de herramientas DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/festora/README.md` | Festora | FUTURE_OR_PENDING | P2 | Equipo documental |
+| Business | `02_projects/fiscora/README.md` | Fiscora | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/fiscora/platform-overview.md` | Vision general Fiscora | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/fiscora/architecture.md` | Arquitectura Fiscora | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/fiscora/api-contracts.md` | Contratos API Fiscora | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/fiscora/security.md` | Seguridad Fiscora | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/fiscora/database/cfdi-data-model.md` | Modelo de datos CFDI | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/fiscora/animations/animation-guidelines.md` | Animaciones web Fiscora | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/fiscora/frontend/animation-preview.md` | Preview frontend Fiscora | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/fiscora/tasks/00_mvp_scope.md` | Alcance MVP Fiscora | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/fiscora/tasks/01_pending_tasks.md` | Pendientes Fiscora | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/fiscora/decisions/adr_0001_api_boundaries.md` | ADR 0001 - Limites APIs Fiscora | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/imagiland/README.md` | Imagiland | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/imagrafity/analitics-pendiente.md` | Analitics Pendiente | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/imagrafity/README.md` | Imagrafity | FUTURE_OR_PENDING | P2 | Equipo documental |

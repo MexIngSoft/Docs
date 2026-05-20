@@ -27,3 +27,15 @@ npm run build
 
 MVP creado para validar direccion visual y estructura de animaciones. No consume backend real todavia.
 
+El preview se exporta como sitio estatico para Docker local:
+
+```text
+next.config.ts -> output: "export"
+Docker.WEB.NJ/start.sh -> servidor estatico en puerto 3005
+```
+
+Antes de reconstruir Docker, validar:
+
+```bash
+npm run build
+```

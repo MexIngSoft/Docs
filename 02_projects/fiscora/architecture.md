@@ -46,3 +46,19 @@ API.PY.DJANGO.Fiscora.Gateway
 | 1 | Fiscal API MVP, Fiscora API MVP, gateway y preview visual. |
 | 2 | SAT jobs reales, explorador CFDI, reportes y personalizador visual. |
 | 3 | Automatizaciones, creditos, alertas inteligentes e IA fiscal. |
+
+## Limites de responsabilidad
+
+| Capa | Responsable | No debe hacer |
+|---|---|---|
+| `WEB.NJ.NEXT.Fiscora` | Experiencia publica, dashboard y preview visual. | Consumir APIs internas directamente o guardar secretos SAT. |
+| `API.PY.DJANGO.Fiscora.Gateway` | BFF, permisos, sesiones, errores, rate limiting y contrato frontend. | Persistir CFDI como fuente oficial o ejecutar logica fuerte SAT. |
+| `API.PY.DJANGO.Fiscora` | Producto comercial, planes, creditos, preferencias y reglas de uso. | Parsear XML, descargar SAT o transformar documentos. |
+| `API.PY.DJANGO.Fiscal` | CFDI, SAT, XML fiscal, paquetes, jobs, reportes y auditoria. | Definir experiencia comercial o planes SaaS. |
+| `API.PY.DJANGO.Document` | Render visual, PDF, plantillas y transformaciones documentales. | Cambiar el XML original o decidir reglas fiscales. |
+
+Decision canonica:
+
+```text
+Docs/02_projects/fiscora/decisions/adr_0001_api_boundaries.md
+```

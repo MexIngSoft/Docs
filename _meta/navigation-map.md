@@ -16,6 +16,17 @@
 - `02_projects/datara/README.md`
 - `02_projects/docucore/README.md`
 - `02_projects/festora/README.md`
+- `02_projects/fiscora/README.md`
+- `02_projects/fiscora/platform-overview.md`
+- `02_projects/fiscora/architecture.md`
+- `02_projects/fiscora/api-contracts.md`
+- `02_projects/fiscora/security.md`
+- `02_projects/fiscora/database/cfdi-data-model.md`
+- `02_projects/fiscora/animations/animation-guidelines.md`
+- `02_projects/fiscora/frontend/animation-preview.md`
+- `02_projects/fiscora/tasks/00_mvp_scope.md`
+- `02_projects/fiscora/tasks/01_pending_tasks.md`
+- `02_projects/fiscora/decisions/adr_0001_api_boundaries.md`
 - `02_projects/imagiland/README.md`
 - `02_projects/imagrafity/README.md`
 - `02_projects/innovation-engines-repair/README.md`
