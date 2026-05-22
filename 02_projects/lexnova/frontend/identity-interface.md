@@ -100,7 +100,10 @@ Ruta recomendada:
 Uso:
 
 - Subir PDF, Word, texto manual, video, audio, fotografias e imagenes.
-- Marcar documentos como `Desconozco` cuando el cliente no sepa clasificarlos.
+- Pedir al usuario final solo el origen del archivo; la clasificacion la
+  propone Document Intelligence y la valida un perfil autorizado.
+- Marcar documentos como `UNKNOWN` cuando la IA o el usuario no puedan
+  identificar el tipo.
 - Dejar el asset en estado `PENDING_CLASSIFICATION`.
 - Permitir que perfiles autorizados clasifiquen, reclasifiquen y vinculen el
   contenido a un proceso juridico.
@@ -152,7 +155,7 @@ Se inicio la identidad en `WEB.NJ.NEXT.LexNova` con:
 - Dashboard operativo con cola priorizada, timeline, permisos efectivos y
   acciones por contexto.
 - Centro de carga documental MVP en `/dashboard/modules/cases/upload` con
-  captura de procedimiento, tipos de evidencia, documento desconocido,
+  origen de archivo, conexion con proveedores externos, cola posterior,
   relacion procesal y validacion automatica.
 - Pantalla de analisis MVP con arbol documental, visor, agravios,
   contradicciones, jurisprudencia y alertas IA.
@@ -165,7 +168,7 @@ Se inicio la identidad en `WEB.NJ.NEXT.LexNova` con:
 - Conectar el dashboard con permisos reales del gateway/Auth.
 - Completar CRUD administrativo de usuarios, roles, niveles y permisos.
 - Conectar carga documental a endpoints reales de escritura, storage,
-  OCR/clasificacion y cadena de custodia.
+  OCR/clasificacion, indice documental y cadena de custodia.
 - Implementar pruebas visuales automatizadas por rol y viewport.
 - Definir copy legal final con el equipo de negocio.
 - Agregar pruebas visuales/manuales por rol cuando existan datos reales.

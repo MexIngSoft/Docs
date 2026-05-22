@@ -57,6 +57,12 @@ puerto alterno no falle con `TypeError: Failed to fetch`.
 
 ## Orden estandar de arranque
 
+Arranque focalizado con solo LexNova + Fiscora:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-LexNovaFiscora.ps1 -Build
+```
+
 Desde la raiz del workspace:
 
 ```powershell

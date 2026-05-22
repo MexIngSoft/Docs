@@ -273,6 +273,9 @@ interrupciones, suspensiones y dias inhabiles.
 3. Toda conclusion juridica debe guardar fuente normativa o criterio usado.
 4. Las contradicciones deben quedar como hallazgos revisables.
 5. La IA debe marcar documentos desconocidos como `UNKNOWN`, no forzar un tipo.
+6. La IA documental para OCR, clasificacion, segmentacion e indice pertenece a
+   la API documental reusable; LexNova la consume por Gateway y conserva la
+   relacion con caso, expediente, seguimiento y revision humana.
 
 ## Riesgos
 
@@ -307,6 +310,7 @@ interrupciones, suspensiones y dias inhabiles.
 | Criterios SCJN | Definir ingestion oficial del SJF y versionado de tesis/jurisprudencia. |
 | Dias inhabiles | Integrar calendario por autoridad, entidad y organo jurisdiccional. |
 | OCR/storage | Definir proveedor, cifrado, retencion, hash y conservacion. |
+| Document Intelligence | Cerrar contrato con `API.PY.DJANGO.Document` para OCR, segmentacion, indice JSON y PDF indexado opcional. |
 
 ## Fuentes oficiales consultadas
 
@@ -338,6 +342,9 @@ La documentacion queda en dos niveles:
   flexible usa LexNova.
 - `legal-domain-research.md`: que debe existir para convertir investigacion
   juridica en catalogos, versionado normativo, plazos y reglas futuras.
+- `document-intelligence.md`: que define la frontera entre LexNova y la API
+  documental reusable para OCR, clasificacion, segmentacion, indice y revision
+  humana.
 
 Todo desarrollo posterior debe revisar ambos documentos antes de modificar
 modelos, migraciones, endpoints o interfaz legal.

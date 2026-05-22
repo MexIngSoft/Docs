@@ -297,6 +297,238 @@ Tambien se actualizaron:
 
 ---
 
+# Reporte de ejecucion Agents - Document Intelligence MVP
+
+Fecha: 2026-05-22
+
+## Alcance
+
+Se ejecuto `Docs/agents/AGENTS-000.md`. El agent solicitaba iniciar una API
+documental inteligente reusable, no exclusiva de LexNova, capaz de guardar
+originales, extraer texto, clasificar por perfiles, segmentar documentos,
+generar indice y permitir revision humana.
+
+`AGENTS-001.md` a `AGENTS-030.md` estaban vacios.
+
+## Documentos revisados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/02_projects/lexnova/legal-process-data-model.md`
+- `Docs/02_projects/lexnova/document-intelligence.md`
+- `Docs/02_projects/lexnova/process-tracking.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/database.md`
+
+## Resultado
+
+- `API.PY.DJANGO.Document` ahora tiene modelos MVP para:
+  - `DocumentSections`
+  - `DocumentIndexes`
+  - `HumanReviewCorrections`
+- Se agrego migracion `jobs/migrations/0002_documentsection_documentindex_humanreviewcorrection_and_more.py`.
+- Se implementaron herramientas MVP:
+  - `text-extraction`
+  - `document-classification`
+  - `document-segmentation`
+  - `document-index`
+  - `indexed-pdf-export`
+- Se agregaron endpoints:
+  - `GET /api/files/{file_id}/index/`
+  - `POST /api/process/reviews/`
+- Se ampliaron extensiones permitidas para texto, audio y video.
+- `API.PY.DJANGO.LexNova.Gateway` ahora expone proxy
+  `document-intelligence/*` hacia `API.PY.DJANGO.Document`, incluyendo soporte
+  multipart basico para upload.
+- Se documento `Docs/02_projects/docucore/document-intelligence.md` como
+  canonico generico de la capacidad reusable.
+
+## Validaciones
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `API.PY.DJANGO.Document` | `python manage.py makemigrations jobs` | Correcto. |
+| `API.PY.DJANGO.Document` | `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.Document` | `python -m compileall .` | Correcto. |
+| `API.PY.DJANGO.LexNova.Gateway` | `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.LexNova.Gateway` | `python -m compileall .` | Correcto. |
+| `WEB.NJ.NEXT.LexNova` | `npm run build` | Correcto. |
+| Docs/API/Gateway | `git diff --check` | Correcto. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Document Intelligence MVP implementado en Document API, expuesto por LexNova Gateway y documentado. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Pendientes
+
+- Implementar OCR real con Tesseract/Azure/Google/AWS.
+- Implementar transcripcion real para audio/video.
+- Detectar paginas y secciones reales dentro de PDFs grandes.
+- Generar PDF indexado real.
+- Conectar el flujo desde la UI LexNova al endpoint de upload/proceso cuando se
+  cierre el contrato de caso y permisos.
+- Persistir aprendizaje supervisado a partir de correcciones humanas.
+
+## Limpieza
+
+Despues de implementar, documentar y validar, se limpio `AGENTS-000.md`.
+
+---
+
+# Reporte de ejecucion - LexNova carga PDF e indice documental
+
+Fecha: 2026-05-22
+
+## Alcance
+
+Se reviso la documentacion canonica solicitada y se conecto el Centro de Carga
+Documental de LexNova a la capacidad MVP de Document Intelligence. La pantalla
+ya no se limita a un input de archivo: ahora presenta un boton explicito para
+elegir PDF/archivo, un boton de subida y procesamiento, estado de carga y el
+indice documental generado.
+
+## Documentos revisados
+
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/README.md`
+- `Docs/02_projects/lexnova/document-intelligence.md`
+- `Docs/02_projects/docucore/document-intelligence.md`
+- `Docs/02_projects/lexnova/frontend/identity-interface.md`
+- `Docs/02_projects/lexnova/architecture.md`
+
+## Resultado
+
+- Se actualizo `WEB.NJ.NEXT.LexNova/app/dashboard/modules/cases/upload/page.tsx`.
+- Se agrego boton visible `Elegir PDF o archivo`.
+- Se agrego boton `Subir y generar indice`.
+- La pantalla sube el archivo por
+  `/document-intelligence/files/upload/` usando el Gateway LexNova.
+- Despues dispara `/document-intelligence/process/document-index/`.
+- La respuesta muestra archivo guardado, estado y un indice navegable con tipo,
+  paginas, confianza y aviso de revision humana.
+- Los proveedores externos quedan indicados como preparados, pero todavia no
+  conectados.
+
+## Validaciones
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `WEB.NJ.NEXT.LexNova` | `npm run build` | Correcto. |
+
+## Informacion faltante
+
+- Contrato final para asociar el upload a un `case_id` real.
+- Flujo de autenticacion/permisos definitivo para permitir o bloquear cargas
+  por perfil.
+- Integracion real con Drive, Dropbox, Mega y OneDrive.
+- Motor OCR/transcripcion productivo; el MVP actual genera estructura por
+  reglas y deja pendiente el procesamiento real pesado.
+
+## Decisiones
+
+- Mantener el frontend simple: el usuario solo selecciona origen y archivo.
+- Mantener la clasificacion, OCR, segmentacion e indice en Document
+  Intelligence, consumido por LexNova via Gateway.
+- Mostrar indice web primero; PDF indexado queda como exportable futuro.
+
+---
+
+# Reporte de ejecucion Agents - LexNova Document Intelligence
+
+Fecha: 2026-05-22
+
+## Alcance
+
+Se ejecutaron `Docs/agents/AGENTS-000.md`, `AGENTS-001.md` y
+`AGENTS-002.md` en orden numerico. Los tres agents trataban el mismo tema:
+OCR, clasificacion documental, segmentacion, indice automatico, API documental
+separada y revision humana para LexNova.
+
+Los archivos `AGENTS-003.md` a `AGENTS-030.md` estaban vacios y no tenian
+tareas ejecutables.
+
+## Documentos revisados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/02_projects/lexnova/process-tracking.md`
+- `Docs/02_projects/lexnova/legal-process-data-model.md`
+- `Docs/02_projects/lexnova/frontend/identity-interface.md`
+- `Docs/02_projects/lexnova/legal-domain-research.md`
+- `Docs/01_core_erp/apis/15_documents_api.md`
+- `Docs/01_core_erp/database/14_documents_model.md`
+- `Docs/01_core_erp/architecture/07_project_api_pattern.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/architecture.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/database.md`
+- `Docs/02_projects/docucore/tools-catalog.md`
+
+## Resultado
+
+- Se creo `Docs/02_projects/lexnova/document-intelligence.md` como documento
+  canonico de OCR, clasificacion, segmentacion, indice web, PDF indexado
+  opcional, revision humana y frontera con `API.PY.DJANGO.Document`.
+- Se actualizo LexNova para establecer que el usuario final solo selecciona el
+  origen del archivo; el tipo documental lo propone Document Intelligence y lo
+  valida un perfil autorizado.
+- Se actualizo DocuCore/Documents para reconocer las capacidades reutilizables
+  `document-classification`, `document-segmentation`, `document-index` e
+  `indexed-pdf-export`.
+- Se actualizo el Centro de Carga Documental web para eliminar la seleccion de
+  tipo de evidencia del usuario final y dejar solo origen/proveedor.
+- Se enlazo el nuevo documento en `README.md`, `master-index.md`,
+  `master-index.yaml` y `navigation-map.md`.
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `rg "document-intelligence" Docs/02_projects/lexnova Docs/_meta` | Correcto. |
+| `rg "Tipo de evidencia|selectedType|evidenceTypes" app/dashboard/modules/cases/upload/page.tsx` | Correcto, sin coincidencias. |
+| `rg "Document Intelligence|document-classification|document-index" ...` | Correcto. |
+| `npm run build` en `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | Correcto, build completo. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Regla oficial de IA documental, OCR, clasificacion, segmentacion, indice y revision humana documentada. |
+| `AGENTS-001.md` | Completado | Ubicacion backend/API documental separada documentada y enlazada con LexNova/DocuCore. |
+| `AGENTS-002.md` | Completado | Decision de API Documentos reutilizable, indice web primero y PDF indexado opcional documentada. |
+| `AGENTS-003.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Pendientes
+
+- Implementar contrato real entre `API.PY.DJANGO.LexNova` y
+  `API.PY.DJANGO.Document`.
+- Definir proveedor OCR inicial y dependencias productivas.
+- Implementar colas asincronas, reintentos, retencion, cifrado y cadena de
+  custodia final.
+- Crear pantallas internas de pendientes de clasificacion y revision
+  documental cuando existan endpoints reales.
+
+## Limpieza
+
+Despues de documentar y validar la corrida, se limpiaron los agents ejecutados
+`AGENTS-000.md`, `AGENTS-001.md` y `AGENTS-002.md`.
+
+---
+
 # Reporte de ejecucion Agents - Verificacion sin instrucciones nuevas
 
 Fecha: 2026-05-20
@@ -1743,6 +1975,7 @@ Documentos de control:
 - `Docs/agents/EXECUTION_REPORT.md`
 - `Docs/README.md`
 - `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
 - `Docs/_meta/navigation-map.md`
 
 Documentos canonicos relacionados:
@@ -3010,3 +3243,118 @@ Tambien se actualizaron:
 - Implementar catalogos versionables en base de datos.
 - Definir ingestion oficial de jurisprudencia/tesis del SJF.
 - Cerrar OCR, storage, cifrado, retencion, hash y cadena de custodia final.
+## 2026-05-22 - AGENTS-000/001 - Modelo relacional documental LexNova
+
+### Resultado
+
+- Ejecutado `AGENTS-000.md`: se adapto el modelo para que el documento/evidencia exista primero como entidad independiente y despues pueda vincularse directa o indirectamente con expedientes, procedimientos, documentos u otras entidades juridicas.
+- Ejecutado `AGENTS-001.md`: se implemento el patron `EvidenceUsage` para reutilizar una misma evidencia como prueba, anexo, antecedente, referencia, soporte de riesgo, argumento de derechos humanos u otro uso procesal.
+- En `API.PY.DJANGO.Document` se agrego persistencia para origen/proveedor/contexto de archivos, texto por pagina, clasificacion documental, artefactos derivados y revision humana ampliada.
+- En `API.PY.DJANGO.LexNova` se agrego `InternalCaseNumber`, numeros externos del expediente, origen y referencias a Document API en `DigitalAsset`, relaciones documento-documento con naturaleza/confianza/revision, `EvidenceUsage` y `LegalGraphRelation` para preparar el mapa relacional juridico.
+- Se actualizaron documentos canonicos de DocuCore y LexNova con las decisiones tomadas.
+
+### Validacion
+
+- `Docker.API.PY/API.PY.DJANGO.Document`: `python manage.py makemigrations files jobs`
+- `Docker.API.PY/API.PY.DJANGO.Document`: `python manage.py check`
+- `Docker.API.PY/API.PY.DJANGO.Document`: `python -m compileall .`
+- `Docker.API.PY/API.PY.DJANGO.LexNova`: `python manage.py makemigrations legal_workspace`
+- `Docker.API.PY/API.PY.DJANGO.LexNova`: `python manage.py check`
+- `Docker.API.PY/API.PY.DJANGO.LexNova`: `python -m compileall .`
+- `Docker.API.PY/API.PY.DJANGO.LexNova.Gateway`: `python manage.py check`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova`: `npm run build`
+
+### Documentos revisados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/legal-process-data-model.md`
+- `Docs/02_projects/lexnova/document-intelligence.md`
+- `Docs/02_projects/docucore/document-intelligence.md`
+- `Docs/02_projects/docucore/database.md`
+- `Docs/01_core_erp/database/14_documents_model.md`
+
+### Informacion faltante o ambigua
+
+- Falta definir el formato operativo final para generar automaticamente `InternalCaseNumber` tipo `LEX-2026-000001`.
+- Falta definir proveedor OCR/transcripcion productivo, retencion, cifrado y storage definitivo.
+- Falta cerrar el contrato final de sincronizacion automatica entre LexNova API y Document API para guardar `DocumentApiFileId` y `DocumentApiIndexId` sin pasos manuales.
+- Falta definir catalogos finales de `RelationType`, `UsageType` y severidades por materia juridica.
+
+### Estado de agents
+
+- `AGENTS-000.md`: completado.
+- `AGENTS-001.md`: completado.
+- `AGENTS-002.md` a `AGENTS-030.md`: sin contenido ejecutable; quedan sin cambios funcionales.
+
+## 2026-05-22 - Validacion, migraciones y cuestionario LexNova
+
+### Resultado
+
+- Se creo `Docs/02_projects/lexnova/tasks/definition-questionnaire.md` para
+  capturar las decisiones que faltan antes de cerrar flujos productivos:
+  expedientes, procedimientos, evidencia, OCR, storage, perfiles, seguimiento,
+  resultados, integraciones y catalogos legales.
+- Se registro el cuestionario en `Docs/_meta/master-index.md`,
+  `Docs/_meta/master-index.yaml` y `Docs/_meta/navigation-map.md`.
+- Se agrego `files/migrations/0000_create_document_schema.py` en Document API
+  para crear el schema PostgreSQL `Document` antes de crear tablas publicadas
+  con nombres `"Document"."..."`.
+- Se aplicaron migraciones locales dentro del contenedor Docker contra
+  PostgreSQL para LexNova API y Document API.
+- Se reiniciaron `api-backend-python` y `web-frontend-node` para que los
+  procesos cargaran los modelos y rutas actualizados.
+
+### Validacion ejecutada
+
+- `docker exec api-backend-python sh -lc "/usr/src/api/start.sh manage lexnova migrate --noinput"`: OK.
+- `docker exec api-backend-python sh -lc "/usr/src/api/start.sh manage document migrate --noinput"`: OK despues de agregar migracion de schema.
+- `docker exec api-backend-python sh -lc "/usr/src/api/start.sh manage document check"`: OK.
+- `docker exec api-backend-python sh -lc "/usr/src/api/start.sh manage lexnova check"`: OK.
+- `docker exec api-backend-python sh -lc "/usr/src/api/start.sh manage lexnova_gateway check"`: OK.
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova`: `npm run build`: OK.
+- `GET http://localhost:8011/api/document/health/`: 200.
+- `GET http://localhost:8017/api/lexnova/health/`: 200.
+- `GET http://localhost:3002`: 200.
+- `GET http://localhost:8003/api/ping/`: 403 esperado por permisos de API de dominio; el servicio responde y la ruta publica se valida por gateway.
+
+### Documentos revisados
+
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/README.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/02_projects/lexnova/legal-process-data-model.md`
+- `Docs/02_projects/lexnova/document-intelligence.md`
+- `Docs/02_projects/lexnova/process-tracking.md`
+- `Docs/02_projects/docucore/database.md`
+- `Docs/02_projects/docucore/document-intelligence.md`
+- `Docs/01_core_erp/database/14_documents_model.md`
+
+### Documentos fuera de alcance
+
+- Documentacion de otros proyectos como Tecno Telec, Fiscora, Buildora,
+  JobCron, integraciones Syscom y modulos ERP no relacionados con LexNova o
+  DocuCore.
+
+### Informacion faltante
+
+- Respuestas de negocio al cuestionario creado.
+- Fuente de verdad productiva para aplicar migraciones fuera del PostgreSQL
+  local de Docker.
+- Politica final de OCR/transcripcion, storage, retencion, cifrado, cadena de
+  custodia y visibilidad al cliente.
+
+### Decisiones tomadas
+
+- Mantener el documento/evidencia como entidad independiente y reutilizable.
+- Validar funcionamiento por Gateway/Web para respetar la arquitectura canonica.
+- Preparar el schema `Document` desde migracion para evitar fallos en ambientes
+  limpios de PostgreSQL.

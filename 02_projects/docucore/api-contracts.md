@@ -84,3 +84,34 @@ FAILED
 CANCELLED
 PARTIAL_COMPLETED
 ```
+
+## Document Intelligence
+
+Herramientas reutilizables esperadas para proyectos como LexNova:
+
+```http
+POST /api/gateway/process/ocr/
+POST /api/gateway/process/document-classification/
+POST /api/gateway/process/document-segmentation/
+POST /api/gateway/process/document-index/
+GET /api/gateway/files/{file_id}/index/
+```
+
+Respuesta base:
+
+```json
+{
+  "file_id": "uuid",
+  "status": "COMPLETED",
+  "text_extracted": true,
+  "classification": {
+    "document_type": "UNKNOWN",
+    "confidence": 0.42
+  },
+  "sections": [],
+  "index": []
+}
+```
+
+La respuesta es propuesta tecnica. La aprobacion final y la relacion con un
+caso, expediente o procedimiento pertenecen al proyecto consumidor.

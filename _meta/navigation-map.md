@@ -15,6 +15,7 @@
 - `02_projects/cloudra/README.md`
 - `02_projects/datara/README.md`
 - `02_projects/docucore/README.md`
+- `02_projects/docucore/document-intelligence.md`
 - `02_projects/festora/README.md`
 - `02_projects/fiscora/README.md`
 - `02_projects/fiscora/platform-overview.md`
@@ -37,11 +38,13 @@
 - `02_projects/lexnova/architecture.md`
 - `02_projects/lexnova/auth-seed.md`
 - `02_projects/lexnova/case-participants-access.md`
+- `02_projects/lexnova/document-intelligence.md`
 - `02_projects/lexnova/frontend/identity-interface.md`
 - `02_projects/lexnova/legal-domain-research.md`
 - `02_projects/lexnova/legal-process-data-model.md`
 - `02_projects/lexnova/local-dependency-runbook.md`
 - `02_projects/lexnova/repositories.md`
+- `02_projects/lexnova/tasks/definition-questionnaire.md`
 - `02_projects/mexingsof/README.md`
 - `02_projects/mockwander/README.md`
 - `02_projects/modulix/README.md`

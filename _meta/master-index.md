@@ -120,6 +120,7 @@
 | Business | `02_projects/docucore/api-contracts.md` | Contratos API DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/architecture.md` | Arquitectura DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/database.md` | Base de datos DocuCore Document | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/docucore/document-intelligence.md` | Document Intelligence generico de DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/docker.md` | Docker DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/error-handling.md` | Manejo de errores DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/qa-checklist.md` | QA checklist DocuCore | FUTURE_OR_PENDING | P2 | Equipo documental |
@@ -158,11 +159,13 @@
 | Business | `02_projects/lexnova/architecture.md` | Arquitectura LexNova | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/lexnova/auth-seed.md` | Semilla Auth LexNova | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/lexnova/case-participants-access.md` | Participantes y acceso LexNova | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/lexnova/document-intelligence.md` | IA documental, OCR, clasificacion, segmentacion e indice LexNova | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/lexnova/frontend/identity-interface.md` | Interfaz e identidad Lex Nova Tech | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/lexnova/legal-domain-research.md` | Investigacion juridica LexNova | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/lexnova/legal-process-data-model.md` | Modelo procesal LexNova | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/lexnova/local-dependency-runbook.md` | Runbook local de dependencias LexNova | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/lexnova/repositories.md` | Repositorios LexNova | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/lexnova/tasks/definition-questionnaire.md` | Cuestionario de definicion LexNova | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/mexingsof/README.md` | Mexingsof | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/mockwander/README.md` | MockWander | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/modulix/README.md` | Modulix | FUTURE_OR_PENDING | P2 | Equipo documental |

@@ -39,6 +39,8 @@ Gestiona y analiza casos legales.
 - `auth-seed.md`: usuarios, perfiles, modulos y permisos iniciales en Auth.
 - `case-participants-access.md`: separacion User/Person/CaseParticipant,
   autorizaciones familiares, privacidad documental y auditoria de accesos.
+- `document-intelligence.md`: regla oficial para OCR, clasificacion,
+  segmentacion, indice documental, API documental reusable y revision humana.
 - `legal-domain-research.md`: investigacion juridica inicial, catalogos,
   matrices, fuentes oficiales y roadmap de datos legales versionables.
 - `legal-process-data-model.md`: modelo de datos para casos, carpetas de
@@ -95,7 +97,7 @@ Lex Nova Tech.
 - Cerrar flujos productivos de invitacion, consentimiento y revocacion de
   participantes autorizados.
 - Conectar el Centro de Carga Documental web con storage, OCR, clasificacion,
-  revision humana y cadena de custodia.
+  segmentacion, indice web, revision humana y cadena de custodia.
 - Reemplazar datos visuales de demostracion por consumo real del Gateway donde
   aplique.
 - Completar semilla estatal y validacion final de plazos para los catalogos

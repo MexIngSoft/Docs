@@ -81,6 +81,7 @@ Tablas agregadas:
 | Schema | Tabla | Uso |
 |---|---|---|
 | `Cases` | `LegalCases` | Asunto general del cliente. |
+| `Cases` | `LegalCaseExternalIdentifiers` | NUC, toca, amparo, apelacion u otros numeros externos vinculados al expediente interno. |
 | `Cases` | `CaseParticipants` | Personas/usuarios vinculados al expediente con rol, estado y alcances de acceso. |
 | `Cases` | `CaseParticipantAuthorizations` | Autorizaciones explicitas entre participantes. |
 | `Cases` | `LegalProceedings` | Proceso juridico flexible dentro del caso. |
@@ -113,6 +114,8 @@ Tablas agregadas:
 | `LegalKnowledge` | `LegalDeadlines` | Plazos configurables por procedimiento, supuesto y norma. |
 | `Documents` | `LegalDocumentVersions` | Versiones de documentos, OCR, hash y metadata. |
 | `Documents` | `LegalDocumentRelations` | Relaciones documento-documento. |
+| `Evidence` | `EvidenceUsages` | Uso reutilizable de una evidencia en casos, procedimientos o entidades relacionadas. |
+| `Cases` | `LegalGraphRelations` | Relaciones juridicas directas, indirectas, probatorias, contextuales, derivadas o administrativas entre entidades. |
 | `Documents` | `DocumentClassificationHistory` | Historial de clasificacion y reclasificacion. |
 | `Cases` | `LegalResolutions` | Resoluciones normalizadas. |
 | `Cases` | `LegalRemedies` | Medios de impugnacion vinculables. |
@@ -151,6 +154,15 @@ Regla central:
 
 ```text
 DigitalAssets guarda el archivo una sola vez.
+LegalCases usa `InternalCaseNumber` como identificador principal interno
+preparado para valores tipo `LEX-2026-000001`.
+LegalCaseExternalIdentifiers permite registrar NUC, toca, amparo, apelacion y
+otros numeros oficiales sin convertirlos en la llave principal.
+EvidenceUsages permite que una misma evidencia sirva como prueba, anexo,
+antecedente, referencia o soporte en multiples casos/procedimientos.
+LegalGraphRelations prepara el mapa relacional juridico para relaciones
+documento-documento, caso-procedimiento, procedimiento-procedimiento y
+documento-procedimiento, siempre con revision humana cuando venga de IA.
 LegalProceedingContents vincula todo o parte del archivo a uno o varios procesos.
 ExtractedFields y TimelineEvents guardan informacion estructurada sin crear una tabla por cada formato documental.
 CaseParticipants separa usuario autenticado, persona real y rol procesal dentro

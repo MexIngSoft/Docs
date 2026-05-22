@@ -35,3 +35,13 @@ primera experiencia usable de Fiscora.
 - `python manage.py check` en `API.PY.DJANGO.Fiscora.Gateway`.
 - `docker compose config` en `Docker.API.PY` y `Docker.WEB.NJ`.
 
+## Arranque local focalizado
+
+Para ejecutar Fiscora junto con LexNova sin levantar todo el ecosistema:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-LexNovaFiscora.ps1 -Build
+```
+
+Este modo levanta solo Auth, LexNova, LexNova Gateway, Document, Fiscora
+Gateway, Fiscora, Fiscal, LexNova Web y Fiscora Web.

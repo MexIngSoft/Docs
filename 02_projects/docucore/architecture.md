@@ -23,6 +23,10 @@ API.PY.DJANGO.DocuCore.Gateway
                 - validacion
                 - storage privado
                 - procesadores
+                - OCR
+                - clasificacion documental
+                - segmentacion
+                - indice JSON
                 - jobs
 ```
 
@@ -33,3 +37,5 @@ API.PY.DJANGO.DocuCore.Gateway
 - DocuCore API no guarda archivos.
 - Gateway normaliza errores y respuestas.
 - Procesamiento pesado debe pasar a Celery/Redis cuando salga del MVP.
+- La clasificacion automatica propone resultados; el proyecto consumidor define
+  quien revisa, corrige y aprueba.

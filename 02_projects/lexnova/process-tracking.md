@@ -27,23 +27,31 @@ must not force users to choose technical database concepts.
 
 ## Evidence Upload Experience
 
-The upload screen must ask only:
+The upload screen must ask the final user only:
 
-- Evidence type.
 - Evidence source.
-- File or external provider.
+- File, camera, scanner or external provider.
 
 Supported source families:
 
 - Local device.
+- Camera.
+- Scanner.
 - Google Drive.
 - Dropbox.
 - Mega.
 - OneDrive.
 - External link.
 
-Technical choices such as OCR, transcription, storage, hashing, custody,
-section insertion and classification queue belong to operational profiles.
+Technical choices such as evidence type, document type, OCR, transcription,
+storage, hashing, custody, section insertion and classification queue belong to
+operational profiles.
+
+The canonical Document Intelligence decision lives in:
+
+```text
+Docs/02_projects/lexnova/document-intelligence.md
+```
 
 ## Post Upload Queue
 
@@ -52,9 +60,11 @@ After upload, every file enters an operational queue:
 1. `PENDING_CLASSIFICATION`: assigned profile classifies the file.
 2. `TEXT_EXTRACTION`: unreadable text is sent to Document API for OCR or text
    extraction.
-3. `SECTION_INSERT`: extracted content is inserted into case sections when the
+3. `SEGMENTATION`: the Document API detects documents and internal sections.
+4. `INDEX_GENERATED`: the index JSON is available for web navigation.
+5. `SECTION_INSERT`: extracted content is inserted into case sections when the
    file structure allows it.
-4. `READY_FOR_REVIEW`: the evidence is ready for legal reading and case result.
+6. `READY_FOR_REVIEW`: the evidence is ready for legal reading and case result.
 
 ## User Process Tracking
 

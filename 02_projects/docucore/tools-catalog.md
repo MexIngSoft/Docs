@@ -13,6 +13,10 @@
 | XML Read | `xml-read` | XML |
 | ZIP Extract | `zip-extract` | Compression |
 | OCR | `ocr-image` | OCR |
+| Document Classification | `document-classification` | Document Intelligence |
+| Document Segmentation | `document-segmentation` | Document Intelligence |
+| Document Index | `document-index` | Document Intelligence |
+| Indexed PDF Export | `indexed-pdf-export` | Document Intelligence |
 
 ## Fuente
 

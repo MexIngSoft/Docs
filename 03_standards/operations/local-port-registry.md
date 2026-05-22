@@ -220,3 +220,39 @@ docker compose -f Docker.API.PY\docker-compose.yml up -d --build
 docker compose -f Docker.WEB.NJ\docker-compose.yml up -d --build
 docker compose -f Docker.SW.Nginx\docker-compose.yml up -d --build
 ```
+
+## Script focalizado LexNova + Fiscora
+
+Script:
+
+```text
+Docs/03_standards/operations/scripts/Start-LexNovaFiscora.ps1
+```
+
+Este script levanta solo lo necesario para ejecutar LexNova y Fiscora en local:
+
+- `Docker.DB.PG`
+- APIs: Auth, LexNova, LexNova Gateway, Document, Fiscora Gateway, Fiscora y
+  Fiscal.
+- Webs: LexNova y Fiscora.
+
+No levanta JobCron, TecnoTelec, DocuCore, Catalog, Supplier, Pricing, Inventory,
+Sales, Procurement, Customization ni el worker SYSCOM.
+
+Arranque sin rebuild:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-LexNovaFiscora.ps1
+```
+
+Arranque reconstruyendo imagenes:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-LexNovaFiscora.ps1 -Build
+```
+
+Arranque con checks:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-LexNovaFiscora.ps1 -Build -RunChecks
+```
