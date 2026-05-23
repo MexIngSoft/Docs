@@ -145,6 +145,7 @@
 | `02_projects/jobcron/ui/06_public_website_structure_research.md` | `02_projects` | Agrupacion por carpeta canonica |
 | `02_projects/lavanderia-3p/README.md` | `02_projects` | Agrupacion por carpeta canonica |
 | `02_projects/lexnova/README.md` | `02_projects` | Agrupacion por carpeta canonica |
+| `02_projects/lexnova/document-api-integration-review.md` | `02_projects` | Verifica integracion LexNova, Gateway, Document API, OCR, secciones y pendientes |
 | `02_projects/mexingsof/README.md` | `02_projects` | Agrupacion por carpeta canonica |
 | `02_projects/mockwander/README.md` | `02_projects` | Agrupacion por carpeta canonica |
 | `02_projects/modulix/README.md` | `02_projects` | Agrupacion por carpeta canonica |

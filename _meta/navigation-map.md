@@ -40,6 +40,7 @@
 - `02_projects/lexnova/architecture.md`
 - `02_projects/lexnova/auth-seed.md`
 - `02_projects/lexnova/case-participants-access.md`
+- `02_projects/lexnova/document-api-integration-review.md`
 - `02_projects/lexnova/document-intelligence.md`
 - `02_projects/lexnova/frontend/identity-interface.md`
 - `02_projects/lexnova/legal-domain-research.md`

@@ -39,6 +39,9 @@ Gestiona y analiza casos legales.
 - `auth-seed.md`: usuarios, perfiles, modulos y permisos iniciales en Auth.
 - `case-participants-access.md`: separacion User/Person/CaseParticipant,
   autorizaciones familiares, privacidad documental y auditoria de accesos.
+- `document-api-integration-review.md`: verificacion de la integracion real
+  entre LexNova, Gateway, Document API, OCR, indices, secciones y pendientes de
+  cierre productivo.
 - `document-intelligence.md`: regla oficial para OCR, clasificacion,
   segmentacion, indice documental, API documental reusable y revision humana.
 - `legal-domain-research.md`: investigacion juridica inicial, catalogos,
