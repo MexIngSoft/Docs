@@ -3358,3 +3358,216 @@ Tambien se actualizaron:
 - Validar funcionamiento por Gateway/Web para respetar la arquitectura canonica.
 - Preparar el schema `Document` desde migracion para evitar fallos en ambientes
   limpios de PostgreSQL.
+
+---
+
+# Reporte de ejecucion Agents - Gobierno GitHub
+
+Fecha: 2026-05-22
+
+## Alcance
+
+Se ejecuto `AGENTS-000.md` en orden numerico. El agent solicita definir el
+marco de trabajo con ramas en GitHub, manteniendo `dev` como integracion,
+ramas por tarea/proceso/proyecto y promocion hacia ramas principales.
+
+Por instruccion explicita del owner, esta corrida se limito primero a definir y
+documentar debidamente GitHub y sus reglas sin quitar ni modificar el proceso de
+comunicacion vigente entre ramas principales:
+
+```text
+feature/* -> dev -> pro -> main
+```
+
+`AGENTS-001.md` a `AGENTS-005.md` contienen instrucciones amplias de DocuCore y
+quedan pendientes para una fase posterior. `AGENTS-006.md` a `AGENTS-030.md`
+estan vacios.
+
+## Documentos revisados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/document-relations.md`
+- `Docs/03_standards/operations/git-environments-and-release-flow.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docs/03_standards/documentation-maintenance-policy.md`
+
+## Resultado
+
+Se agrego documentacion canonica para gobierno de ramas y reglas GitHub:
+
+- `Docs/03_standards/operations/github-branch-governance.md`
+
+Se actualizaron:
+
+- `Docs/03_standards/operations/git-environments-and-release-flow.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/document-relations.md`
+- `Docs/_meta/navigation-map.md`
+
+## Decisiones tomadas
+
+- Mantener intacta la comunicacion principal `feature/* -> dev -> pro -> main`.
+- Documentar `dev` como integracion diaria, `pro` como despliegue productivo y
+  `main` como copia estable de produccion.
+- Documentar reglas de PR para `feature/* -> dev`, `dev -> pro` y `pro -> main`.
+- Documentar protecciones recomendadas para `main`, `pro` y `dev`.
+- Documentar hotfix como excepcion controlada sin reemplazar el flujo principal.
+- Mantener la regla de repositorios separados: no publicar `Workspace.Comercial`
+  como monorepo.
+- Registrar que los commits deben ser por repositorio y responsabilidad.
+
+## Validaciones ejecutadas
+
+- `rg` de `github-branch-governance` en indices y relaciones: correcto.
+- `git diff --check` en `Docs`: correcto, sin errores de whitespace.
+
+No se ejecutaron builds de aplicacion porque esta corrida modifico solo
+documentacion.
+
+## Informacion faltante o ambigua
+
+- Falta confirmar si todos los repositorios tendran protecciones obligatorias
+  configuradas directamente en GitHub o si algunas ramas seguiran con control
+  manual mientras el equipo sea pequeno.
+- `gh` no esta instalado en esta maquina; queda pendiente si se requiere crear
+  Pull Requests desde terminal.
+- Falta definir convencion final de tags por producto/repositorio.
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Gobierno de ramas y reglas GitHub documentadas sin cambiar el flujo `feature/* -> dev -> pro -> main`. |
+| `AGENTS-001.md` | Pendiente | Define MVP final DocuCore; queda fuera de esta primera fase GitHub. |
+| `AGENTS-002.md` | Pendiente | Define navegacion inteligente DocuCore; queda fuera de esta primera fase GitHub. |
+| `AGENTS-003.md` | Pendiente | Contiene instrucciones DocuCore; queda fuera de esta primera fase GitHub. |
+| `AGENTS-004.md` | Pendiente | Contiene instrucciones DocuCore; queda fuera de esta primera fase GitHub. |
+| `AGENTS-005.md` | Pendiente | Define maquetacion web DocuCore; queda fuera de esta primera fase GitHub. |
+| `AGENTS-006.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+## Limpieza
+
+No se limpiaron ni archivaron los agents porque no todos quedaron concluidos:
+`AGENTS-001.md` a `AGENTS-005.md` siguen pendientes.
+
+---
+
+# Reporte de ejecucion Agents - Orden documental y cierre DocuCore
+
+Fecha: 2026-05-22
+
+## Alcance
+
+Se ejecutaron `Docs/agents/AGENTS-000.md` a `AGENTS-006.md` en orden numerico.
+`AGENTS-007.md` a `AGENTS-030.md` estaban vacios y no tenian instrucciones
+ejecutables.
+
+La corrida tuvo dos objetivos:
+
+- verificar si los agents activos estaban conectados y si correspondia
+  limpiarlos;
+- adaptar el nuevo agent de orden documental a las necesidades reales del
+  repositorio para que futuras solicitudes de ordenamiento documental sigan un
+  proceso claro.
+
+## Documentos revisados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/document-relations.md`
+- `Docs/03_standards/documentation-maintenance-policy.md`
+- `Docs/_meta/codex_execution_plan.md`
+- `Docs/03_standards/operations/github-branch-governance.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/architecture.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/tools-catalog.md`
+- `Docs/02_projects/docucore/security.md`
+- `Docs/02_projects/docucore/document-intelligence.md`
+- `Docs/02_projects/docucore/qa-checklist.md`
+
+## Resultado
+
+Se crearon documentos canonicos:
+
+- `Docs/02_projects/docucore/mvp-roadmap.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/03_standards/operations/agents-documentation-order.md`
+
+Se actualizaron:
+
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/tools-catalog.md`
+- `Docs/02_projects/docucore/security.md`
+- `Docs/02_projects/docucore/qa-checklist.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/document-relations.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado previamente | Gobierno GitHub ya documentado; se verifico conexion con indices. |
+| `AGENTS-001.md` | Completado como documentacion y backlog | MVP DocuCore fue convertido en `mvp-roadmap.md`; lo implementado y lo pendiente quedaron separados. |
+| `AGENTS-002.md` | Completado como documentacion UX | Navegacion inteligente y pipeline assistant quedaron en `frontend-navigation-and-ux.md`. |
+| `AGENTS-003.md` | Completado como arquitectura de responsabilidades | Separacion DocuCore/LexNova se mantuvo en documentos canonicos DocuCore y contratos. |
+| `AGENTS-004.md` | Completado como criterio visual | Reglas visuales utiles fueron integradas al documento de navegacion e interfaz. |
+| `AGENTS-005.md` | Completado como maquetacion | Rutas, componentes y estados quedaron resumidos en el canon UX. |
+| `AGENTS-006.md` | Completado | Nuevo orden documental adaptado en `agents-documentation-order.md`. |
+| `AGENTS-007.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Informacion faltante o ambigua
+
+- El agent DocuCore menciona capacidades productivas grandes que no deben
+  activarse hasta tener engine real: sandbox por worker, OCR estructurado,
+  PDF rotate, metadata read, resize/format convert y batch multiarchivo.
+- Falta confirmar si la limpieza futura de agents debe ser siempre vaciar el
+  archivo o mover contenido historico a `_archive`; por consistencia con
+  corridas anteriores se limpio el contenido ya absorbido.
+- Falta definir si los indices `_meta` se regeneraran con script o seguiran
+  actualizandose manualmente en cambios pequenos.
+
+## Decisiones tomadas
+
+- No se implementaron nuevas funciones de producto en esta corrida; el alcance
+  fue documental.
+- Las promesas amplias de los agents se dividieron en MVP real, pendientes y
+  fase posterior.
+- El frontend no debe publicar herramientas que el backend no marque como
+  `enabled`.
+- La regla futura para ordenar documentacion queda centralizada en
+  `Docs/03_standards/operations/agents-documentation-order.md`.
+- Al quedar todos los agents con contenido completados o convertidos en
+  documentos canonicos, se limpiaron `AGENTS-000.md` a `AGENTS-006.md`.
+
+## Documentos fuera de alcance
+
+- Documentacion no relacionada con DocuCore, Agents, GitHub o mantenimiento
+  documental.
+- Implementaciones de APIs, Web o Docker, porque esta corrida solo ordeno
+  documentacion.
+
+## Validaciones ejecutadas
+
+- `rg` de documentos nuevos en indices y relaciones.
+- `git diff --check` en `Docs`.
+
+## Limpieza
+
+Se limpiaron `Docs/agents/AGENTS-000.md` a `Docs/agents/AGENTS-006.md` porque
+sus instrucciones quedaron ejecutadas, registradas o absorbidas por
+documentacion canonica. `AGENTS-007.md` a `AGENTS-030.md` ya estaban vacios.

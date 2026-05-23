@@ -9,6 +9,7 @@
 - Storage privado por zonas.
 - Borrado logico.
 - Gateway como unica entrada frontend.
+- Descarga de artefactos por Gateway, manteniendo storage privado en Document API.
 
 ## Controles pendientes para produccion
 

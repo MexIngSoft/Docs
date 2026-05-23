@@ -10,6 +10,9 @@
 | PDF to Word | `pdf-word` | Conversion |
 | Word to PDF | `word-pdf` | Conversion |
 | Image to PDF | `image-pdf` | Images |
+| Clean Image | `image-clean` | Images |
+| Excel to CSV | `excel-csv` | Spreadsheet |
+| CSV to Excel | `csv-excel` | Spreadsheet |
 | XML Read | `xml-read` | XML |
 | ZIP Extract | `zip-extract` | Compression |
 | OCR | `ocr-image` | OCR |
@@ -24,5 +27,23 @@ La lista vive en:
 
 ```text
 Docker.API.PY/API.PY.DJANGO.DocuCore/core/catalog.py
-Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/tools.ts
 ```
+
+El frontend consume el catalogo desde:
+
+```http
+GET /api/gateway/tools/
+```
+
+`WEB.NJ.NEXT.DocuCore/lib/tools.ts` solo conserva el mapa visual de iconos.
+No debe definir disponibilidad funcional.
+
+## Pendientes no publicables como enabled
+
+- PDF Rotate.
+- PDF Metadata Read.
+- Image Resize.
+- Image Compress avanzado.
+- Image Format Convert.
+- OCR estructurado por coordenadas/bloques.
+- Batch merge multiarchivo.

@@ -123,6 +123,8 @@
 | Business | `02_projects/docucore/document-intelligence.md` | Document Intelligence generico de DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/docker.md` | Docker DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/error-handling.md` | Manejo de errores DocuCore | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/docucore/frontend-navigation-and-ux.md` | Navegacion e interfaz DocuCore | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/docucore/mvp-roadmap.md` | Roadmap MVP DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/qa-checklist.md` | QA checklist DocuCore | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/docucore/README.md` | DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/repositories.md` | Repositorios DocuCore | FUTURE_OR_PENDING | P2 | Equipo documental |
@@ -262,7 +264,9 @@
 | Standards | `03_standards/operations/django-api-project-compliance.md` | Validacion de cumplimiento de proyectos Django API | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/docker-recovery-runbook.md` | Runbook Docker local | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/error-handling.md` | Error Handling | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/operations/agents-documentation-order.md` | Orden de ejecucion documental por Agents | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/git-environments-and-release-flow.md` | Flujo Git, entornos y validacion | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/operations/github-branch-governance.md` | Gobierno de ramas y GitHub | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/git-repository-map.md` | Mapa de repositorios Git | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/jobs/failure-recovery.md` | Recuperacion ante fallos de jobs | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/jobs/job-catalog.md` | Catalogo de jobs | ACTIVE | P1 | Equipo documental |

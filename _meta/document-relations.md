@@ -122,6 +122,8 @@
 | `02_projects/docucore/database.md` | `02_projects` | Agrupacion por carpeta canonica |
 | `02_projects/docucore/docker.md` | `02_projects` | Agrupacion por carpeta canonica |
 | `02_projects/docucore/error-handling.md` | `02_projects` | Agrupacion por carpeta canonica |
+| `02_projects/docucore/frontend-navigation-and-ux.md` | `02_projects` | Ordena UX, navegacion y pipeline assistant de DocuCore |
+| `02_projects/docucore/mvp-roadmap.md` | `02_projects` | Define alcance funcional MVP y pendientes DocuCore |
 | `02_projects/docucore/qa-checklist.md` | `02_projects` | Agrupacion por carpeta canonica |
 | `02_projects/docucore/README.md` | `02_projects` | Agrupacion por carpeta canonica |
 | `02_projects/docucore/repositories.md` | `02_projects` | Agrupacion por carpeta canonica |
@@ -239,7 +241,9 @@
 | `03_standards/operations/django-api-project-compliance.md` | `03_standards` | Agrupacion por carpeta canonica |
 | `03_standards/operations/docker-recovery-runbook.md` | `03_standards` | Agrupacion por carpeta canonica |
 | `03_standards/operations/error-handling.md` | `03_standards` | Agrupacion por carpeta canonica |
+| `03_standards/operations/agents-documentation-order.md` | `03_standards` | Define orden obligatorio para ejecutar y limpiar agents |
 | `03_standards/operations/git-environments-and-release-flow.md` | `03_standards` | Agrupacion por carpeta canonica |
+| `03_standards/operations/github-branch-governance.md` | `03_standards` | Complementa flujo Git y reglas de publicacion |
 | `03_standards/operations/git-repository-map.md` | `03_standards` | Agrupacion por carpeta canonica |
 | `03_standards/operations/jobs/failure-recovery.md` | `03_standards` | Agrupacion por carpeta canonica |
 | `03_standards/operations/jobs/job-catalog.md` | `03_standards` | Agrupacion por carpeta canonica |

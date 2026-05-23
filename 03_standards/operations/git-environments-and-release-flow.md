@@ -91,6 +91,19 @@ con reglas de promocion.
 | `qa` | `uat` | QA aprobado. |
 | `uat` | `pro` | UAT aprobado por usuario/owner. |
 
+La comunicacion principal de ramas no debe alterarse sin decision explicita:
+
+```text
+feature/* -> dev -> pro -> main
+```
+
+Las reglas detalladas de GitHub, Pull Requests, protecciones de ramas,
+hotfixes, checks minimos, tags y auditoria viven en:
+
+```text
+03_standards/operations/github-branch-governance.md
+```
+
 ## Entornos de base de datos
 
 La base de datos debe seguir el mismo principio, pero sin crear ambientes innecesarios antes de tiempo.

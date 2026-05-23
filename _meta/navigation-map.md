@@ -16,6 +16,8 @@
 - `02_projects/datara/README.md`
 - `02_projects/docucore/README.md`
 - `02_projects/docucore/document-intelligence.md`
+- `02_projects/docucore/frontend-navigation-and-ux.md`
+- `02_projects/docucore/mvp-roadmap.md`
 - `02_projects/festora/README.md`
 - `02_projects/fiscora/README.md`
 - `02_projects/fiscora/platform-overview.md`
@@ -62,6 +64,8 @@
 - `02_projects/tecnotelec/README.md`
 - `02_projects/tip-smart/README.md`
 - `03_standards/frontend/README.md`
+- `03_standards/operations/github-branch-governance.md`
+- `03_standards/operations/agents-documentation-order.md`
 - `03_standards/operations/local-port-registry.md`
 - `03_standards/README.md`
 - `04_integrations/ct-internacional/README.md`

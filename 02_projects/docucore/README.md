@@ -26,7 +26,10 @@ document-intelligence.md
 
 ## Estado
 
-MVP base creado por agents 000-030.
+MVP funcional creado por agents y cerrado en fases documentadas:
+
+- `mvp-roadmap.md`: alcance real, herramientas disponibles y pendientes.
+- `frontend-navigation-and-ux.md`: orden de interfaz y navegacion inteligente.
 
 ## Documentos
 
@@ -35,6 +38,8 @@ architecture.md
 database.md
 api-contracts.md
 document-intelligence.md
+frontend-navigation-and-ux.md
+mvp-roadmap.md
 tools-catalog.md
 security.md
 error-handling.md
