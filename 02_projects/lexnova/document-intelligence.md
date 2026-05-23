@@ -196,6 +196,9 @@ internos:
 
 El cliente puede cargar evidencia y consultar seguimiento visible, pero no debe
 ver complejidad tecnica ni bandejas internas de clasificacion.
+Tampoco debe ver nombres tecnicos como API documental, Gateway, OCR engine,
+endpoint, proxy o repositorios; la UI debe hablar de lectura automatica,
+clasificacion, revision, seguimiento y resultado dentro del caso.
 
 ## Pantallas requeridas
 

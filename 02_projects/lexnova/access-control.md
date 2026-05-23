@@ -171,6 +171,9 @@ No mostrar modulos no autorizados.
 ```
 
 No se deben mostrar modulos deshabilitados si revelan arquitectura interna.
+Tampoco se deben exponer terminos como Gateway, BFF, Auth, API, endpoint,
+proxy, puertos o repositorios en textos visibles para clientes o usuarios
+finales.
 
 ## Modulo recomendado
 

@@ -30,6 +30,12 @@ Uso:
 - No depender de decoracion generica; mostrar estados, casos, documentos,
   permisos y resultados.
 - La identidad debe reforzar seguridad, trazabilidad y evidencia.
+- No exponer terminos de arquitectura interna al cliente. La UI publica,
+  dashboard, mensajes de error y textos comerciales no deben mencionar
+  `Gateway`, `BFF`, `Auth`, `API`, `endpoint`, `proxy`, puertos ni nombres de
+  repositorio. Esos conceptos se traducen a lenguaje de producto como sesion
+  segura, servicio de acceso, cuenta, permisos, proceso interno o motor
+  documental.
 
 ## Paleta inicial
 
@@ -65,6 +71,9 @@ No debe llamar directo a `API.PY.DJANGO.Auth`, `API.PY.DJANGO.LexNova` ni APIs
 core. Los endpoints `/auth`, `/users` y `/access` visibles en frontend son
 rutas proxy del gateway LexNova.
 
+Esta regla es tecnica para implementacion. No debe convertirse en texto visible
+para clientes o usuarios finales.
+
 Filtros base:
 
 - Mis casos.
@@ -74,20 +83,21 @@ Filtros base:
 
 ## Login y errores de sesion
 
-El login debe explicar por que no se pudo iniciar sesion. No se permite mostrar
-solo un mensaje generico cuando el gateway o Auth entregan detalle.
+El login debe explicar por que no se pudo iniciar sesion en lenguaje de usuario.
+No se permite mostrar solo un mensaje generico cuando los servicios internos
+entregan detalle util, pero tampoco se deben exponer nombres tecnicos.
 
 Mensajes esperados:
 
-- Gateway no disponible.
-- Ruta de login no configurada.
+- No se pudo conectar con el servicio de acceso.
+- El inicio de sesion no esta disponible en este momento.
 - Credenciales incorrectas.
 - Cuenta inactiva o pendiente de activacion.
-- Error interno de Gateway/Auth.
+- Error interno del servicio de acceso.
 
 La pantalla de login no debe redirigir automaticamente al dashboard por estado
 persistido local. Solo puede redirigir cuando la sesion fue verificada por el
-gateway.
+servicio interno de acceso.
 
 ## Centro de Carga Documental
 
@@ -165,7 +175,8 @@ Se inicio la identidad en `WEB.NJ.NEXT.LexNova` con:
 
 ## Pendientes
 
-- Conectar el dashboard con permisos reales del gateway/Auth.
+- Conectar el dashboard con permisos reales del servicio interno de identidad y
+  acceso.
 - Completar CRUD administrativo de usuarios, roles, niveles y permisos.
 - Conectar carga documental a endpoints reales de escritura, storage,
   OCR/clasificacion, indice documental y cadena de custodia.

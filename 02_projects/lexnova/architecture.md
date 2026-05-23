@@ -9,6 +9,23 @@ ACTIVE
 Definir la arquitectura canonica de LexNova para que la web no consuma Auth ni
 APIs core directamente.
 
+## Audiencia y lenguaje
+
+`Gateway`, `BFF`, `Auth`, `API`, `proxy`, puertos y nombres de repositorio son
+definiciones tecnicas para desarrollo, operacion y documentacion interna.
+
+No deben aparecer como lenguaje visible para cliente, usuario final, pantallas
+publicas, mensajes comerciales ni errores funcionales comunes. En experiencia
+de usuario deben traducirse a terminos de producto:
+
+| Termino tecnico interno | Lenguaje visible recomendado |
+|---|---|
+| Gateway/BFF | Servicio seguro de Lex Nova Tech |
+| Auth | Cuenta, identidad o sesion |
+| API/endpoint/proxy | Servicio, conexion o proceso interno |
+| Gateway no disponible | No se pudo conectar con el servicio de acceso |
+| Error de Auth/Gateway | No se pudo validar la sesion |
+
 ## Regla principal
 
 LexNova debe usar gateway/BFF propio:
@@ -114,9 +131,10 @@ Reglas:
   una cookie vieja no debe mandar automaticamente al dashboard.
 - La ruta `/auth/login` debe estar disponible aunque exista una cookie `access`;
   la redireccion al dashboard solo ocurre despues de verificar sesion real.
-- Los errores de login deben mostrar el detalle del gateway/Auth:
-  credenciales invalidas, cuenta inactiva, gateway no disponible, ruta no
-  configurada o error interno.
+- Los errores de login deben mostrar una causa accionable para el usuario:
+  credenciales invalidas, cuenta inactiva, servicio de acceso no disponible,
+  inicio de sesion no disponible o error interno. El detalle `gateway/Auth`
+  queda reservado para logs y diagnostico tecnico.
 
 ## Puerto local
 
