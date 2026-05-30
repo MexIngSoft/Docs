@@ -4335,8 +4335,8 @@ DocuCore para consumirla sin perder fallback local.
 
 - Falta integrar Auth real al panel administrativo de JobCron para permisos por
   usuario/rol.
-- Falta decidir si la publicacion final usara SQL Server con schema
-  `[JobCron]` o el fallback local SQLite usado para validacion.
+- Falta decidir si la publicacion final mantendra PostgreSQL como motor unico o
+  publicara equivalencias SQL Server para despliegues especificos.
 - Falta definir fuente real de pais/region del usuario final para aplicar
   reglas geograficas sin depender de parametros manuales.
 - Falta definir responsable operativo de aprobar cambios de visibilidad.
@@ -4349,8 +4349,8 @@ DocuCore para consumirla sin perder fallback local.
 - Crear un API Django propio para JobCron porque no existia backend dedicado y
   era la forma mas directa de cerrar el agent sin mezclar responsabilidades con
   DocuCore.
-- Mantener nombres de tabla locales compatibles con SQLite y documentar la
-  equivalencia SQL Server `[JobCron].[FeatureAvailability]`.
+- Mantener nombres de tabla PascalCase en PostgreSQL y documentar la referencia
+  SQL Server `[JobCron].[FeatureAvailability]` solo como equivalencia publicada.
 - Mantener fallback local en DocuCore para no romper navegacion cuando JobCron
   este apagado.
 - Marcar funciones no productivas con estado/readiness en lugar de ocultarlas o
@@ -4373,3 +4373,74 @@ Como `AGENTS-000.md` a `AGENTS-011.md` quedaron completados y
 `AGENTS-012.md` a `AGENTS-030.md` no contienen instrucciones, el set activo se
 archiva en `Docs/_archive/agents/2026-05-30-docucore-feature-availability/` y
 los archivos `Docs/agents/AGENTS-*.md` quedan limpios para futuras corridas.
+
+---
+
+# Reporte de ejecucion Agents - Correccion PostgreSQL JobCron
+
+Fecha: 2026-05-30
+
+## Alcance
+
+Se detecto un nuevo `Docs/agents/AGENTS-000.md` con correccion obligatoria:
+las migraciones no deben generarse ni ejecutarse sobre SQLite. La ejecucion se
+limito a JobCron y al servidor PostgreSQL Docker relacionado.
+
+## Documentos revisados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/02_projects/jobcron/database.md`
+- `Docs/02_projects/jobcron/api-contracts.md`
+- `Docs/02_projects/jobcron/feature-availability.md`
+- `Docker.DB.PG/README.md`
+- `Docker.DB.PG/docker-compose.yml`
+- `Docker.DB.PG/docker/postgres/01-users.sh`
+- `Docker.DB.PG/docker/postgres/02-databases.sh`
+- `Docker.DB.PG/docker/postgres/03_schemas.sql`
+
+## Implementacion
+
+- `API.PY.DJANGO.JobCron` dejo de tener fallback activo a SQLite.
+- Se agrego `.env.example` para JobCron apuntando a PostgreSQL:
+  `jobcron`, `jobcron_user`, `localhost:5432`, schema `"JobCron"`.
+- Se agrego `JOBCRON_DB_PASSWORD` a `Docker.DB.PG`.
+- Se agrego usuario `jobcron_user`, base `jobcron` y schema `"JobCron"` a los
+  scripts de inicializacion/aplicacion de PostgreSQL.
+- Se documento el servidor PostgreSQL, contenedor, puerto, variables, scripts y
+  comandos de migracion.
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `docker compose config --quiet` en `Docker.DB.PG` | Correcto; solo aviso por `C:\Users\cash1\.docker\config.json` corrupto. |
+| `python manage.py check` en `API.PY.DJANGO.JobCron` | Correcto, sin issues. |
+| `python manage.py makemigrations --check --dry-run` en `API.PY.DJANGO.JobCron` | Correcto, sin cambios pendientes; aviso esperado porque PostgreSQL no esta escuchando. |
+| `python manage.py migrate --noinput` en `API.PY.DJANGO.JobCron` | Bloqueado: no hay PostgreSQL escuchando en `localhost:5432`. |
+| `docker compose up -d` y `docker compose --profile tools run --rm db-postgresql-apply` | Bloqueado: Docker daemon no esta activo (`docker_engine` no existe). |
+| Busqueda de SQLite en JobCron | Correcto: no existe backend SQLite activo en `API.PY.DJANGO.JobCron`. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Pendiente por requisito externo | Configuracion y documentacion PostgreSQL quedaron listas; falta levantar Docker/PostgreSQL y ejecutar migraciones reales. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+## Informacion faltante o ambigua
+
+- Docker Desktop/daemon no esta activo en la maquina actual.
+- `C:\Users\cash1\.docker\config.json` tiene contenido invalido para Docker CLI.
+- No se puede confirmar la migracion real hasta que `db-postgresql` este
+  levantado y escuchando en `127.0.0.1:5432`.
+
+## Decisiones tomadas
+
+- PostgreSQL queda como base oficial activa para JobCron.
+- SQLite no se usa como fallback de desarrollo ni como validacion de
+  migraciones.
+- No se limpia `AGENTS-000.md` porque el criterio de aceptacion exige migracion
+  real contra PostgreSQL y el requisito externo aun no esta disponible.

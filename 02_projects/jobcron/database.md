@@ -2,8 +2,9 @@
 
 ## Regla
 
-Las tablas publicadas de JobCron usan nombres PascalCase estilo SQL Server,
-segun:
+Las tablas publicadas de JobCron usan nombres PascalCase estilo SQL Server y
+deben migrarse sobre PostgreSQL local mediante `Docker.DB.PG`. SQLite no es una
+base activa para desarrollo ni para validacion de migraciones, segun:
 
 ```text
 Docs/03_standards/database/sql-server-publication-standard.md
@@ -11,13 +12,13 @@ Docs/03_standards/database/sql-server-publication-standard.md
 
 ## FeatureAvailability
 
-Tabla Django publicada:
+Tabla Django/PostgreSQL publicada:
 
 ```text
 JobCronFeatureAvailability
 ```
 
-Equivalente publicado:
+Referencia SQL Server publicada equivalente:
 
 ```sql
 [JobCron].[FeatureAvailability]
@@ -51,13 +52,13 @@ Campos principales:
 
 ## FeatureAvailabilityAudit
 
-Tabla Django publicada:
+Tabla Django/PostgreSQL publicada:
 
 ```text
 JobCronFeatureAvailabilityAudit
 ```
 
-Equivalente publicado:
+Referencia SQL Server publicada equivalente:
 
 ```sql
 [JobCron].[FeatureAvailabilityAudit]
@@ -79,3 +80,43 @@ Campos:
 
 La migracion `0002_seed_docucore_features.py` carga el mapa inicial de
 DocuCore para que JobCron tenga reglas desde la primera instalacion.
+
+## Servidor de base de datos PostgreSQL
+
+| Dato | Valor |
+| --- | --- |
+| Servidor | PostgreSQL local Docker |
+| Contenedor | `db-postgresql` |
+| Base de datos | `jobcron` |
+| Usuario | `jobcron_user` |
+| Schema | `"JobCron"` |
+| Puerto externo | `127.0.0.1:5432` |
+| Puerto interno | `5432` |
+| Script de usuarios | `Docker.DB.PG/docker/postgres/01-users.sh` |
+| Script de bases | `Docker.DB.PG/docker/postgres/02-databases.sh` |
+| Script de schemas | `Docker.DB.PG/docker/postgres/03_schemas.sql` |
+
+Variables esperadas por `API.PY.DJANGO.JobCron`:
+
+```txt
+POSTGRES_DB=jobcron
+POSTGRES_USER=jobcron_user
+POSTGRES_PASSWORD=<secret>
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_OPTIONS=-c search_path=JobCron,public
+```
+
+Comando para aplicar estructura PostgreSQL:
+
+```powershell
+Set-Location Docker.DB.PG
+docker compose --profile tools run --rm db-postgresql-apply
+```
+
+Comando para migrar JobCron:
+
+```powershell
+Set-Location ..\Docker.API.PY\API.PY.DJANGO.JobCron
+python manage.py migrate
+```
