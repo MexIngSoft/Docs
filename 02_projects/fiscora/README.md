@@ -58,4 +58,5 @@ La fase actual es cierre de definicion MVP:
 - `frontend/animation-preview.md`
 - `tasks/00_mvp_scope.md`
 - `tasks/01_pending_tasks.md`
+- `tasks/02_cfdi_multiversion_implementation.md`
 - `decisions/adr_0001_api_boundaries.md`

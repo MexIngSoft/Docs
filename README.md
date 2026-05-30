@@ -23,6 +23,25 @@ La regla principal es separar:
 | Integraciones | `04_integrations` | Proveedores externos y ETL. |
 | Archivo | `_archive` | Fuentes utiles conservadas para trazabilidad. |
 
+## Ruta rapida de trabajo
+
+Para trabajar mas rapido sin leer todo `Docs`, usar:
+
+```text
+Docs/_meta/active-work-index.md
+```
+
+Ese indice traduce conceptos operativos como Core, Shared, Meta, Agents y
+Templates a la estructura canonica real del repositorio, y define que leer segun
+la tarea.
+
+Cuando la tarea sea cerrar MVPs, APIs faltantes o brechas de desarrollo, leer
+tambien:
+
+```text
+Docs/00_audit/10_development_gap_analysis.md
+```
+
 ## Que pertenece al nucleo ERP
 
 Va en `01_core_erp` todo lo que pueda reutilizarse para varios negocios:

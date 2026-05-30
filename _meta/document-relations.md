@@ -113,6 +113,7 @@
 | `02_projects/_ecosystem/02_jobcron_shared_modules.md` | `02_projects` | Agrupacion por carpeta canonica |
 | `02_projects/_ecosystem/03_development_strategy.md` | `02_projects` | Agrupacion por carpeta canonica |
 | `02_projects/_ecosystem/04_process_convergence_and_conflicts.md` | `02_projects` | Agrupacion por carpeta canonica |
+| `02_projects/_ecosystem/05_lexnova_docucore_fiscora_mvp_alignment.md` | `02_projects` | Alinea MVP LexNova, DocuCore, Fiscora y capacidades compartidas |
 | `02_projects/buildora/README.md` | `02_projects` | Agrupacion por carpeta canonica |
 | `02_projects/clientix/README.md` | `02_projects` | Agrupacion por carpeta canonica |
 | `02_projects/cloudra/README.md` | `02_projects` | Agrupacion por carpeta canonica |
@@ -130,6 +131,8 @@
 | `02_projects/docucore/security.md` | `02_projects` | Agrupacion por carpeta canonica |
 | `02_projects/docucore/tools-catalog.md` | `02_projects` | Agrupacion por carpeta canonica |
 | `02_projects/festora/README.md` | `02_projects` | Agrupacion por carpeta canonica |
+| `02_projects/fiscora/database/cfdi-data-model.md` | `02_projects` | Define modelo CFDI multiversion y persistencia completa en Fiscal |
+| `02_projects/fiscora/tasks/02_cfdi_multiversion_implementation.md` | `02_projects` | Define implementacion CFDI 2.0 a 4.0 y consumo Fiscora |
 | `02_projects/imagiland/README.md` | `02_projects` | Agrupacion por carpeta canonica |
 | `02_projects/imagrafity/analitics-pendiente.md` | `02_projects` | Agrupacion por carpeta canonica |
 | `02_projects/imagrafity/README.md` | `02_projects` | Agrupacion por carpeta canonica |
@@ -340,6 +343,12 @@
 | `agents/EXECUTION_REPORT.md` | `agents` | Agrupacion por carpeta canonica |
 | `agents/RUN_AGENTS_INSTRUCTIONS.md` | `agents` | Agrupacion por carpeta canonica |
 | `pendientes/pendientes.md` | `pendientes` | Agrupacion por carpeta canonica |
+| `_meta/active-work-index.md` | `_meta` | Entrada rapida para trabajo activo, lectura canonica y priorizacion de proyectos |
+| `00_audit/10_development_gap_analysis.md` | `00_audit` | Consolida brechas de desarrollo, APIs faltantes e informacion necesaria para cerrar MVPs |
+| `00_audit/11_documentation_structure_optimization.md` | `00_audit` | Evalua el agent de estructura documental y adapta su propuesta a la estructura canonica |
+| `01_core_erp/erp/23_business_software_builder.md` | `01_core_erp` | Define vision de ERP modular configurable por giro y relacion con FeatureAvailability |
+| `02_projects/docucore/feature-visibility-map.md` | `02_projects/docucore` | Define visibilidad, estados y pendientes de superficies DocuCore |
+| `02_projects/jobcron/feature-availability.md` | `02_projects/jobcron` | Define modulo central de visibilidad y ciclo de vida de features |
 | `README.md` | `.` | Agrupacion por carpeta canonica |
 | `tecnotelec-ui/README.md` | `tecnotelec-ui` | Agrupacion por carpeta canonica |
 | `templates/adr-template.md` | `templates` | Agrupacion por carpeta canonica |

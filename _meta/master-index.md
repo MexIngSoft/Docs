@@ -12,6 +12,8 @@
 | Audit | `00_audit/07_recommended_documentation_strategy.md` | Estrategia recomendada de documentacion | ARCHIVE_REFERENCE | P3 | Equipo documental |
 | Audit | `00_audit/08_new_architecture_review.md` | Revision nueva arquitectura Tecno Telec + JobCron | ACTIVE | P3 | Equipo documental |
 | Audit | `00_audit/09_api_routes_inventory.md` | Inventario actual de rutas API | ACTIVE | P3 | Equipo documental |
+| Audit | `00_audit/10_development_gap_analysis.md` | Analisis global de pendientes de desarrollo | ACTIVE | P1 | Equipo documental |
+| Audit | `00_audit/11_documentation_structure_optimization.md` | Optimizacion de estructura documental | ACTIVE | P1 | Equipo documental |
 | Audit | `00_audit/99_final_review.md` | Revision final documental | ARCHIVE_REFERENCE | P3 | Equipo documental |
 | Core | `01_core_erp/apis/00_api_index.md` | Indice de APIs | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/apis/01_auth_api.md` | Auth API | ACTIVE | P1 | Equipo documental |
@@ -95,6 +97,7 @@
 | Core | `01_core_erp/erp/20_channel_assortment.md` | Surtido por proyecto y canal | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/erp/21_product_compatibility.md` | Compatibilidad entre productos | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/erp/22_pricing_costing_future_map.md` | Mapa futuro de Pricing, Costing y Rentabilidad | FUTURE_OR_PENDING | P2 | Equipo documental |
+| Core | `01_core_erp/erp/23_business_software_builder.md` | Business Software Builder | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/flows/00_flow_index.md` | Indice de flujos | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/flows/01_customer_quote_flow.md` | Flujo de cotizacion del cliente | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/flows/02_customer_purchase_flow.md` | Flujo de compra del cliente | FUTURE_OR_PENDING | P2 | Equipo documental |
@@ -113,6 +116,7 @@
 | Business | `02_projects/_ecosystem/02_jobcron_shared_modules.md` | Modulos compartidos JobCron | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/_ecosystem/03_development_strategy.md` | Estrategia de desarrollo gradual | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/_ecosystem/04_process_convergence_and_conflicts.md` | Procesos compartidos y contradicciones entre empresas | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/_ecosystem/05_lexnova_docucore_fiscora_mvp_alignment.md` | Alineacion MVP LexNova DocuCore Fiscora | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/buildora/README.md` | Buildora | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/clientix/README.md` | Clientix | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/cloudra/README.md` | Cloudra | FUTURE_OR_PENDING | P2 | Equipo documental |
@@ -124,6 +128,7 @@
 | Business | `02_projects/docucore/docker.md` | Docker DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/error-handling.md` | Manejo de errores DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/frontend-navigation-and-ux.md` | Navegacion e interfaz DocuCore | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/docucore/feature-visibility-map.md` | Mapa de visibilidad DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/mvp-roadmap.md` | Roadmap MVP DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/qa-checklist.md` | QA checklist DocuCore | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/docucore/README.md` | DocuCore | ACTIVE | P1 | Equipo documental |
@@ -141,12 +146,14 @@
 | Business | `02_projects/fiscora/frontend/animation-preview.md` | Preview frontend Fiscora | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/fiscora/tasks/00_mvp_scope.md` | Alcance MVP Fiscora | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/fiscora/tasks/01_pending_tasks.md` | Pendientes Fiscora | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/fiscora/tasks/02_cfdi_multiversion_implementation.md` | Implementacion CFDI multiversion | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/fiscora/decisions/adr_0001_api_boundaries.md` | ADR 0001 - Limites APIs Fiscora | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/imagiland/README.md` | Imagiland | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/imagrafity/analitics-pendiente.md` | Analitics Pendiente | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/imagrafity/README.md` | Imagrafity | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/innovation-engines-repair/README.md` | Innovation Engines Repair | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/jobcron/01_tecnotelec_admin_process.md` | Proceso administrativo Tecno Telec en JobCron | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/jobcron/feature-availability.md` | FeatureAvailability en JobCron | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/jobcron/README.md` | JobCron | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/jobcron/ui/00_jobcron_mockup_analysis.md` | Analisis de fuente visual JobCron | ARCHIVE_REFERENCE | P3 | Equipo documental |
 | Business | `02_projects/jobcron/ui/01_navigation_map.md` | Mapa de navegacion JobCron | ACTIVE | P1 | Equipo documental |
@@ -313,3 +320,4 @@
 | Future | `pendientes/pendientes.md` | Lo que actualmente YA tienes parcialmente cubierto | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Other | `README.md` | Documentacion del proyecto | ACTIVE | P3 | Equipo documental |
 | Other | `tecnotelec-ui/README.md` | Fuente visual Tecno Telec | ACTIVE | P3 | Equipo documental |
+| Meta | `_meta/active-work-index.md` | Indice operativo de trabajo activo | ACTIVE | P1 | Equipo documental |

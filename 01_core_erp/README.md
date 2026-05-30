@@ -22,6 +22,7 @@ Esta carpeta contiene la documentacion reutilizable del ERP modular. No debe dep
 | Notas entrantes de huecos ERP | Estados, roles, costos, facturacion, devoluciones, errores, jobs, kits y notificaciones. |
 | Notas entrantes de reglas y ventas | Rules Engine, ventas/cotizaciones y diagrama general. |
 | Notas entrantes de licitaciones | GovernmentTender como modulo de inteligencia y seguimiento de licitaciones. |
+| Vision ERP modular por giro | `erp/23_business_software_builder.md` define como diagnosticar negocios y activar modulos/features segun necesidad. |
 
 ## Modulos generales agregados
 

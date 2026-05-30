@@ -56,6 +56,21 @@ Estado productivo: incompleto.
 | Revision humana | `POST /api/process/reviews/` crea correcciones y puede aprobar, corregir o rechazar secciones. | Implementado en API documental |
 | LexNova API dominio | `DigitalAsset` tiene campos de integracion, pero `legal_workspace/views.py` solo lista documentos. | Pendiente de cierre |
 
+## Cierre MVP autorizado por agent
+
+El agent transversal deja como implementacion inmediata el cierre minimo del
+enlace documental LexNova:
+
+```http
+POST /api/lexnova/legal-workspace/documents/intake/
+```
+
+Ese endpoint debe recibir los metadatos devueltos por Document API y crear o
+actualizar un `DigitalAsset` con `DocumentApiFileId`, `DocumentApiIndexId`,
+`ProcessingState`, `ProcessingPayload`, hash, nombre, tamano, origen y tipo
+detectado. Si se envia `legal_case_id`, tambien debe preparar una politica de
+acceso del caso.
+
 ## Flujo OCR verificado
 
 El flujo existe en Document API:
@@ -150,4 +165,3 @@ Para marcar este desarrollo como completo se requiere:
 - `Docs/02_projects/docucore/api-contracts.md`
 - `Docs/02_projects/docucore/mvp-roadmap.md`
 - `Docs/01_core_erp/apis/15_documents_api.md`
-

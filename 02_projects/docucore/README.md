@@ -30,6 +30,8 @@ MVP funcional creado por agents y cerrado en fases documentadas:
 
 - `mvp-roadmap.md`: alcance real, herramientas disponibles y pendientes.
 - `frontend-navigation-and-ux.md`: orden de interfaz y navegacion inteligente.
+- `feature-visibility-map.md`: que se muestra, que queda interno y que depende
+  de desarrollo real.
 
 ## Documentos
 
@@ -39,6 +41,7 @@ database.md
 api-contracts.md
 document-intelligence.md
 frontend-navigation-and-ux.md
+feature-visibility-map.md
 mvp-roadmap.md
 tools-catalog.md
 security.md

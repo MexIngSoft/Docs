@@ -8,15 +8,21 @@
 - Future: `pendientes`
 
 ## Entradas principales
+- `_meta/active-work-index.md`
+- `00_audit/10_development_gap_analysis.md`
+- `00_audit/11_documentation_structure_optimization.md`
 - `01_core_erp/auth/README.md`
 - `01_core_erp/README.md`
+- `01_core_erp/erp/23_business_software_builder.md`
 - `02_projects/buildora/README.md`
 - `02_projects/clientix/README.md`
 - `02_projects/cloudra/README.md`
 - `02_projects/datara/README.md`
+- `02_projects/_ecosystem/05_lexnova_docucore_fiscora_mvp_alignment.md`
 - `02_projects/docucore/README.md`
 - `02_projects/docucore/document-intelligence.md`
 - `02_projects/docucore/frontend-navigation-and-ux.md`
+- `02_projects/docucore/feature-visibility-map.md`
 - `02_projects/docucore/mvp-roadmap.md`
 - `02_projects/festora/README.md`
 - `02_projects/fiscora/README.md`
@@ -29,11 +35,13 @@
 - `02_projects/fiscora/frontend/animation-preview.md`
 - `02_projects/fiscora/tasks/00_mvp_scope.md`
 - `02_projects/fiscora/tasks/01_pending_tasks.md`
+- `02_projects/fiscora/tasks/02_cfdi_multiversion_implementation.md`
 - `02_projects/fiscora/decisions/adr_0001_api_boundaries.md`
 - `02_projects/imagiland/README.md`
 - `02_projects/imagrafity/README.md`
 - `02_projects/innovation-engines-repair/README.md`
 - `02_projects/jobcron/README.md`
+- `02_projects/jobcron/feature-availability.md`
 - `02_projects/lavanderia-3p/README.md`
 - `02_projects/lexnova/README.md`
 - `02_projects/lexnova/access-control.md`

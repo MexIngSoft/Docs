@@ -3571,3 +3571,577 @@ Se actualizaron:
 Se limpiaron `Docs/agents/AGENTS-000.md` a `Docs/agents/AGENTS-006.md` porque
 sus instrucciones quedaron ejecutadas, registradas o absorbidas por
 documentacion canonica. `AGENTS-007.md` a `AGENTS-030.md` ya estaban vacios.
+
+---
+
+# Reporte de ejecucion Agents - Alineacion MVP LexNova DocuCore Fiscora
+
+Fecha: 2026-05-23
+
+## Alcance
+
+Se ejecuto `Docs/agents/AGENTS-000.md` en orden numerico. `AGENTS-001.md` a
+`AGENTS-030.md` estaban vacios y no contenian instrucciones ejecutables.
+
+El agent contenia definicion estrategica para:
+
+- LexNova LegalTech;
+- DocuCore como procesamiento documental;
+- Fiscora como plataforma fiscal CFDI;
+- capacidades compartidas entre las tres plataformas.
+
+## Documentos revisados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/_ecosystem/00_ecosystem_overview.md`
+- `Docs/02_projects/_ecosystem/03_development_strategy.md`
+- `Docs/02_projects/_ecosystem/04_process_convergence_and_conflicts.md`
+- `Docs/02_projects/lexnova/document-intelligence.md`
+- `Docs/02_projects/lexnova/document-api-integration-review.md`
+- `Docs/02_projects/lexnova/legal-process-data-model.md`
+- `Docs/02_projects/docucore/document-intelligence.md`
+- `Docs/02_projects/docucore/mvp-roadmap.md`
+- `Docs/02_projects/fiscora/README.md`
+- `Docs/02_projects/fiscora/platform-overview.md`
+- `Docs/02_projects/fiscora/architecture.md`
+- `Docs/02_projects/fiscora/api-contracts.md`
+- `Docs/02_projects/fiscora/tasks/00_mvp_scope.md`
+- `Docs/02_projects/fiscora/tasks/01_pending_tasks.md`
+
+## Resultado documental
+
+Se creo:
+
+- `Docs/02_projects/_ecosystem/05_lexnova_docucore_fiscora_mvp_alignment.md`
+
+Se actualizaron:
+
+- `Docs/02_projects/_ecosystem/00_ecosystem_overview.md`
+- `Docs/02_projects/lexnova/document-api-integration-review.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/document-relations.md`
+
+## Resultado de codigo
+
+Se implemento el cierre minimo del enlace documental LexNova:
+
+- `API.PY.DJANGO.LexNova` ahora expone
+  `POST /api/legal-workspace/documents/intake/`.
+- El endpoint crea o actualiza `DigitalAsset` usando `DocumentApiFileId`,
+  `DocumentApiIndexId`, metadata del archivo, estado, payload de procesamiento,
+  hash, origen y tipo detectado.
+- Si se recibe `legal_case_id`, prepara `CaseDocumentAccessPolicy` con
+  visibilidad `PARTICIPANTS_ONLY` y scopes documentales.
+- `WEB.NJ.NEXT.LexNova` ahora, despues de subir y procesar el archivo con
+  Document API, consulta el indice persistido y registra el asset en LexNova
+  por medio del Gateway.
+
+Archivos modificados:
+
+- `Docker.API.PY/API.PY.DJANGO.LexNova/apps/legal_workspace/views.py`
+- `Docker.API.PY/API.PY.DJANGO.LexNova/apps/legal_workspace/urls.py`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/app/dashboard/modules/cases/upload/page.tsx`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `WEB.NJ.NEXT.LexNova`: `npm run build` | Correcto. |
+| `API.PY.DJANGO.LexNova`: `python -m compileall .` | Correcto. |
+| `API.PY.DJANGO.LexNova`: `python manage.py check` con `DJANGO_SECRET_KEY`, `DATABASE_URL` y `AUTH_API_VERIFY_URL` de desarrollo | Correcto, sin issues. |
+| `Docs`: `rg` de documento transversal en indices y relaciones | Correcto. |
+| `Docs`: `git diff --check` | Correcto. |
+| `API.PY.DJANGO.LexNova`: `git diff --check` | Correcto. |
+| `WEB.NJ.NEXT.LexNova`: `git diff --check` | Correcto. |
+
+## Informacion faltante o ambigua
+
+- Falta definir el catalogo final de visibilidad por materia y tipo documental.
+- Falta definir si el endpoint de intake debe ser invocado solo desde backend
+  orquestador o tambien desde la pantalla web tras procesamiento MVP.
+- Falta cerrar OCR productivo, colas, reintentos, worker aislado, storage
+  cifrado y cadena de custodia completa.
+- Falta definir si Fiscora activara SAT real detras de feature flag o si la
+  primera entrega se limita estrictamente a carga manual XML.
+
+## Decisiones tomadas
+
+- No se reemplazaron documentos canonicos existentes; se agrego un documento
+  transversal que enlaza y ordena lo ya definido.
+- La implementacion de codigo se limito al pendiente mas inmediato: persistir
+  en LexNova la relacion con Document API.
+- No se implemento IA juridica avanzada, SAT real, batch upload, PDF searchable
+  ni worker aislado porque el agent los clasifica como fases posteriores o
+  requiere definicion adicional.
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Alineacion MVP documentada y cierre minimo de relacion documental LexNova implementado. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Limpieza
+
+Al quedar `AGENTS-000.md` documentado y ejecutado, se limpia para dejarlo listo
+para una siguiente corrida. Los demas agents ya estaban vacios.
+
+---
+
+# Reporte de ejecucion Agents - CFDI multiversion Fiscal/Fiscora
+
+Fecha: 2026-05-23
+
+## Alcance
+
+Se ejecuto `Docs/agents/AGENTS-000.md` en orden numerico. El archivo no contenia
+instrucciones narrativas: contenia un dump SQL completo de una base CFDI
+historica. `AGENTS-001.md` a `AGENTS-030.md` estaban vacios y no contenian
+instrucciones ejecutables.
+
+Tambien se revisaron los PDFs colocados en `Docs/agents` como fuentes de
+interpretacion fiscal para CFDI 4.0:
+
+- `Docs/agents/Anexo_20_Guia_de_llenado_CFDI.pdf`
+- `Docs/agents/CFDI-4-0-MAYO-2022.pdf`
+
+## Documentos revisados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/fiscora/README.md`
+- `Docs/02_projects/fiscora/architecture.md`
+- `Docs/02_projects/fiscora/api-contracts.md`
+- `Docs/02_projects/fiscora/database/cfdi-data-model.md`
+- `Docs/02_projects/fiscora/tasks/00_mvp_scope.md`
+- `Docs/02_projects/fiscora/tasks/01_pending_tasks.md`
+- `Docs/02_projects/fiscora/decisions/adr_0001_api_boundaries.md`
+
+## Fuentes tecnicas analizadas
+
+- `AGENTS-000.md`: dump SQL de `u116359781_CFDI` con tablas de comprobante,
+  emisor, receptor, conceptos, impuestos, relaciones, timbre fiscal digital,
+  catalogos SAT y versiones.
+- `Anexo_20_Guia_de_llenado_CFDI.pdf`: guia de llenado SAT para CFDI 4.0,
+  retenciones e informacion de pagos.
+- `CFDI-4-0-MAYO-2022.pdf`: material SAT de transicion y campos relevantes de
+  CFDI 4.0.
+
+## Resultado documental
+
+Se actualizo:
+
+- `Docs/02_projects/fiscora/database/cfdi-data-model.md`
+- `Docs/02_projects/fiscora/README.md`
+- `Docs/02_projects/fiscora/tasks/01_pending_tasks.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/document-relations.md`
+
+Se creo:
+
+- `Docs/02_projects/fiscora/tasks/02_cfdi_multiversion_implementation.md`
+
+## Resultado de codigo
+
+Se agrego el primer cierre funcional del modelo CFDI multiversion en
+`API.PY.DJANGO.Fiscal`:
+
+- `CfdiDocument` ahora guarda campos normalizados comunes de CFDI 2.0, 3.x y
+  4.0, XML original, SHA-256, arbol XML completo y atributos de version.
+- Se agregaron tablas publicadas para partes, conceptos, impuestos, relaciones,
+  complementos, atributos por version y catalogos SAT.
+- `POST /api/fiscal/xml/upload/` ahora recibe XML por multipart o JSON, valida
+  tenant, parsea el comprobante, extrae timbre, emisor, receptor, conceptos,
+  impuestos, relaciones y complementos, y devuelve el detalle persistido.
+- `GET /api/fiscal/cfdi/{uuid}/` devuelve el detalle con estructuras hijas.
+- Se genero la migracion `fiscal/migrations/0002_cfdicomplement_cfdiconcept_cfdiparty_cfdirelation_and_more.py`.
+
+Archivos modificados:
+
+- `Docker.API.PY/API.PY.DJANGO.Fiscal/fiscal/models.py`
+- `Docker.API.PY/API.PY.DJANGO.Fiscal/fiscal/serializers.py`
+- `Docker.API.PY/API.PY.DJANGO.Fiscal/fiscal/views.py`
+- `Docker.API.PY/API.PY.DJANGO.Fiscal/fiscal/migrations/0002_cfdicomplement_cfdiconcept_cfdiparty_cfdirelation_and_more.py`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `API.PY.DJANGO.Fiscal`: `python manage.py makemigrations fiscal` | Correcto. |
+| `API.PY.DJANGO.Fiscal`: `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.Fiscal`: `python -m compileall fiscal` | Correcto. |
+| `API.PY.DJANGO.Fiscal`: `git diff --check` | Correcto, solo advertencias LF/CRLF. |
+| `Docs`: `git diff --check` | Correcto, solo advertencias LF/CRLF. |
+
+## Informacion faltante o ambigua
+
+- Falta definir fuente, periodicidad y responsable de ingestion de catalogos SAT.
+- Falta implementar validacion XSD/cadena original/sello contra reglas SAT.
+- Falta normalizar complementos especializados fuera del almacenamiento JSON
+  general, por ejemplo pagos, nomina y carta porte.
+- Falta conectar el Gateway de Fiscora y la web para consumir el endpoint fiscal
+  normalizado sin exponer XML completo al frontend.
+- Falta definir retencion, cifrado y politica de consulta para XML original y
+  arbol XML completo.
+
+## Decisiones tomadas
+
+- Se mantiene un modelo comun multiversion en lugar de crear tablas separadas
+  por CFDI 2.0, 3.x y 4.0.
+- El XML original se conserva completo; los campos consultables se normalizan y
+  los atributos especificos por version se guardan sin descartarse.
+- El frontend Fiscora no debe consumir `API.PY.DJANGO.Fiscal` directamente:
+  debe pasar por `API.PY.DJANGO.Fiscora.Gateway`.
+- La API Document sigue reservada para PDF/render/plantillas; Fiscal conserva
+  autoridad sobre XML CFDI, SAT, auditoria fiscal y reportes.
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Dump SQL CFDI y PDFs SAT analizados; modelo documental y API Fiscal multiversion implementados en primera fase. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Limpieza
+
+El contenido fuente de `AGENTS-000.md` y los PDFs SAT se archivan como evidencia
+en `Docs/_archive/agents/2026-05-23-cfdi-model/`. `AGENTS-000.md` queda limpio
+para una siguiente corrida y los demas agents permanecen vacios.
+
+---
+
+# Reporte de ejecucion Agents - Optimizacion de estructura documental
+
+Fecha: 2026-05-23
+
+## Alcance
+
+Se ejecuto `Docs/agents/AGENTS-000.md` en orden numerico. El agent proponia
+mejorar la velocidad de trabajo documental consolidando primero Core, Shared,
+Meta, Agents y Templates, y despues priorizar Fiscora, DocuCore, LexNova,
+TecnoTelec y JobCron.
+
+`AGENTS-001.md` a `AGENTS-030.md` estaban vacios y no contenian instrucciones
+ejecutables.
+
+## Documentos revisados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/proposed_structure.md`
+- `Docs/_meta/folder_rules.md`
+- `Docs/03_standards/documentation-maintenance-policy.md`
+- `Docs/03_standards/operations/agents-documentation-order.md`
+- `Docs/00_audit/10_development_gap_analysis.md`
+
+## Evaluacion del agent
+
+La recomendacion del agent es valida como estrategia operativa, pero no como
+cambio fisico de carpetas. No se crean rutas paralelas como `Docs/core` o
+`Docs/shared`, porque la estructura canonica vigente ya esta establecida en
+`Docs/README.md`:
+
+- `Docs/01_core_erp`
+- `Docs/02_projects`
+- `Docs/03_standards`
+- `Docs/04_integrations`
+- `Docs/_meta`
+- `Docs/agents`
+- `Docs/templates`
+- `Docs/_archive`
+
+## Resultado documental
+
+Se creo:
+
+- `Docs/_meta/active-work-index.md`
+- `Docs/00_audit/11_documentation_structure_optimization.md`
+
+Se actualizaron:
+
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/document-relations.md`
+- `Docs/_meta/proposed_structure.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Informacion faltante o ambigua
+
+- Owners reales por dominio y proyecto.
+- Rama objetivo para publicar cambios documentales.
+- Priorizacion humana final cuando Fiscora, DocuCore, LexNova, Tecno Telec y
+  JobCron compitan por recursos.
+- Decision futura sobre si proyectos `FUTURE_OR_PENDING` tendran APIs propias o
+  modulos internos de JobCron.
+
+## Decisiones tomadas
+
+- Mantener la estructura fisica actual.
+- Adoptar el concepto `Shared` como capa operativa compuesta por
+  `03_standards`, `_meta` y `templates`.
+- Crear un indice operativo para lectura rapida y priorizacion:
+  `Docs/_meta/active-work-index.md`.
+- Documentar la evaluacion del agent en auditoria:
+  `Docs/00_audit/11_documentation_structure_optimization.md`.
+- No profundizar POS, GovernmentTender, APS, HRM, EAM, QMS, BI avanzado, CRM
+  empresarial, TMS complejo o event bus empresarial hasta tener owner y MVP.
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `Docs`: busqueda `rg` de rutas nuevas en indices y relaciones | Correcto. |
+| `Docs`: `git diff --check` | Correcto, solo advertencias LF/CRLF. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Propuesta evaluada y adaptada como indice operativo sin mover estructura canonica. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Limpieza
+
+El contenido de `AGENTS-000.md` se archiva en
+`Docs/_archive/agents/2026-05-23-documentation-structure/` y el agent queda
+limpio para una siguiente corrida. Los demas agents permanecen vacios.
+
+## 2026-05-24 - AGENTS-000/001 - LexNova experiencia cliente e IA documental
+
+Se ejecutaron `Docs/agents/AGENTS-000.md` y `Docs/agents/AGENTS-001.md` en
+orden numerico. `AGENTS-002.md` a `AGENTS-030.md` estaban vacios y no tenian
+instrucciones ejecutables.
+
+## Documentos revisados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/00_audit/10_development_gap_analysis.md`
+- `Docs/03_standards/operations/agents-documentation-order.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/lexnova/frontend/identity-interface.md`
+- `Docs/02_projects/lexnova/document-intelligence.md`
+- `Docs/02_projects/lexnova/document-api-integration-review.md`
+- `Docs/02_projects/lexnova/access-control.md`
+- `Docs/02_projects/lexnova/process-tracking.md`
+- `Docs/02_projects/docucore/document-intelligence.md`
+- `Docs/03_standards/frontend/README.md`
+
+## Documentos fuera
+
+- No se hizo busqueda amplia en todo `Docs`; se uso el indice y solo canon
+  relacionado con LexNova, identidad, permisos, IA documental, seguimiento de
+  proceso y frontend.
+- No se revisaron documentos de Fiscora, CFDI/SAT, Tecno Telec, POS, HRM, APS,
+  EAM, QMS, BI o integraciones no relacionadas con esta tarea.
+
+## Implementacion
+
+- Se oculto lenguaje tecnico de la experiencia publica y de dashboard donde no
+  correspondia para cliente final: no se menciona Gateway/BFF/JWT ni codigos de
+  rol en copy visible.
+- Se corrigieron beneficios y copy de servicios, login, contacto, home,
+  "como funciona", dashboard, casos, perfil, acceso administrativo y resultados.
+- Se agregaron enlaces reales de contacto: `mailto:contacto@lexnova.mx` y
+  WhatsApp `https://wa.me/5213220131473`; se retiro ubicacion visible y se
+  cambio horario a "Analizador documental disponible 24/7".
+- Se mejoro contraste del logo en el frame de autenticacion con contenedor
+  claro.
+- Se implemento en la carga documental un flujo con estados visibles adaptados
+  por tipo de archivo: documento/imagen/audio/video/paquete/origen externo.
+- Se reemplazaron estados tecnicos visibles por estados amigables: recibido,
+  lectura, separacion, indice editable, listo para revisar, pendiente/en
+  proceso/completado.
+- Se agrego interfaz de indice documental editable despues de cargar:
+  agregar seccion, editar titulo/tipo/paginas, ajuste automatico de pagina
+  final anterior, unir, dividir, marcar anexo, no relacionado, pendiente y
+  aprobar.
+- Se muestra advertencia cuando existen paginas sin clasificar.
+- Se guardan documentos recien cargados en estado local del navegador y se
+  muestran en dashboard y en casos como pendientes por revisar.
+- Se agregaron busqueda, filtros de relacion y paginacion 10/25/50/100 a la
+  lista de casos.
+- Se agrego mapeo visible de roles a etiquetas humanas en dashboard, navbar y
+  perfil; el perfil muestra cambio de contrasena y cerrar sesion.
+
+## Informacion faltante o ambigua
+
+- No existe todavia un endpoint consolidado para listar en dashboard/casos los
+  documentos recien cargados; se resolvio temporalmente con `localStorage` en
+  cliente.
+- La API documental no expone en esta pantalla operaciones persistentes para
+  guardar cada edicion del indice, union/division o aprobacion; la interfaz ya
+  permite operar el indice en cliente y queda lista para conectar persistencia.
+- No se especifico una taxonomia final de tipos documentales; se uso una lista
+  prudente de tipos juridicos generales.
+- No se definio el comportamiento final de proveedores externos de nube; se
+  dejan estados visibles y copy de preparacion sin simular una conexion real.
+
+## Decisiones tomadas
+
+- Mantener los terminos tecnicos solo en codigo interno y variables, no como
+  texto visible para cliente.
+- Priorizar lenguaje juridico-operativo: evidencia, revision, indice, caso,
+  seguimiento, resultado.
+- No tocar funcionalidad fuera del alcance de LexNova visible/IA documental.
+- No revertir cambios existentes del workspace.
+- Usar persistencia local como puente visible hasta que exista endpoint
+  canonico de documentos recientes.
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | Correcto, sin warnings ni errores. |
+| `npx tsc --noEmit` en `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | Correcto. |
+| `NODE_ENV=production npm run build` en copia aislada `/tmp/lexnova-build` dentro de `web-frontend-node` | Correcto, 73 rutas generadas. |
+| `Invoke-WebRequest http://localhost:3005/auth/login` | `200`. |
+| `Invoke-WebRequest http://localhost:3005/servicios` | `200`. |
+| `Invoke-WebRequest http://localhost:3005/contacto` | `200`. |
+| `Invoke-WebRequest http://localhost:3005/dashboard/modules/cases/upload` | `200`. |
+| `docker ps` | `api-backend-python`, `web-frontend-node`, `db-postgresql` y `nginx` corriendo y healthy. |
+| Busqueda de terminos tecnicos visibles | Solo quedaron codigos internos dentro de funciones de mapeo, no texto renderizado al cliente. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Experiencia LexNova cliente alineada: sin menciones tecnicas visibles, contacto correcto, perfil humanizado, dashboard/casos priorizados y carga documental con indice editable. |
+| `AGENTS-001.md` | Completado | Estados animables/adaptados por tipo de archivo implementados en la carga documental, con etiquetas visibles amigables y proceso posterior a la carga. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Limpieza
+
+Se archivaron `AGENTS-000.md` y `AGENTS-001.md` en
+`Docs/_archive/agents/2026-05-24-lexnova-client-visible-ai-flow/` y se
+limpiaron los archivos activos. `AGENTS-000.md` a `AGENTS-030.md` quedaron en
+`0` bytes para futuras corridas.
+
+---
+
+# Reporte de ejecucion Agents - DocuCore modular y visibilidad
+
+Fecha: 2026-05-29
+
+## Alcance
+
+Se revisaron `Docs/agents/AGENTS-000.md` a `Docs/agents/AGENTS-011.md` en orden numerico. `AGENTS-012.md` a `AGENTS-030.md` estaban vacios.
+
+El bloque activo definia DocuCore como plataforma documental modular, las superficies de home/landing/workspace/documento/resultado/expediente/API, los mockups faltantes de cuenta, creditos, procesos, IA, comparador, extraccion, administracion e integraciones, y el control de visibilidad de features desde JobCron.
+
+## Documentos revisados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/00_audit/10_development_gap_analysis.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/mvp-roadmap.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/tools-catalog.md`
+- `Docs/02_projects/jobcron/README.md`
+- `Docs/01_core_erp/README.md`
+
+## Resultado de codigo
+
+Se amplio `WEB.NJ.NEXT.DocuCore` con rutas de maqueta navegables:
+
+- `/pdf-a-word`
+- `/workspace`
+- `/account`
+- `/credits`
+- `/results`
+- `/workflows`
+- `/ai`
+- `/compare`
+- `/extraction`
+- `/casefile`
+- `/api`
+- `/admin`
+- `/integrations`
+
+Tambien se agrego un mapa local de `FeatureAvailability` para marcar lo disponible, MVP, pendiente o interno, sin simular que ya existe el motor central de JobCron.
+
+## Resultado documental
+
+Se creo:
+
+- `Docs/02_projects/docucore/feature-visibility-map.md`
+- `Docs/02_projects/jobcron/feature-availability.md`
+- `Docs/01_core_erp/erp/23_business_software_builder.md`
+
+Se actualizo:
+
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/jobcron/README.md`
+- `Docs/01_core_erp/README.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/document-relations.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `WEB.NJ.NEXT.DocuCore`: `npm run build` | Correcto, 20 rutas generadas. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado como alcance/documentacion + maqueta | Capacidades DocuCore y modulos MVP quedaron reflejados en web y mapa de visibilidad. |
+| `AGENTS-001.md` | Completado como UX | DocuCore se estructuro por flujos y superficies, no como lista plana de herramientas. |
+| `AGENTS-002.md` | Completado como base visual | Se incorporo maqueta navegable sin depender de framer-motion ni Tailwind. |
+| `AGENTS-003.md` | Completado como direccion visual | Se mantuvo estilo propio de panel documental empresarial. |
+| `AGENTS-004.md` | Completado como workspace | Se agrego documento activo, diagnostico y herramientas recomendadas. |
+| `AGENTS-005.md` | Completado como arquitectura visual | Se agregaron home/dashboard, landing SEO, workspace, cuenta, admin y API. |
+| `AGENTS-006.md` | Completado como superficies | Se maquetaron home, landing, workspace, documento, resultado, expediente y API. |
+| `AGENTS-007.md` | Completado como mockup multipantalla | Las pantallas quedaron como rutas reales de Next.js. |
+| `AGENTS-008.md` | Completado como backlog visual | Se agregaron mockups criticos: cuenta, creditos, resultados, procesos, IA, comparador, extraccion, admin e integraciones. |
+| `AGENTS-009.md` | Documentado, implementacion pendiente | `FeatureAvailability` quedo documentado en JobCron; falta API/panel real. |
+| `AGENTS-010.md` | Documentado | Se amplio la vision a ciclo de vida de features, desarrollo, despliegues, documentacion, operacion y visibilidad. |
+| `AGENTS-011.md` | Documentado | Se creo `Business Software Builder` como vision de ERP modular por giro. |
+| `AGENTS-012.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Pendientes
+
+- Implementar `FeatureAvailability` real en JobCron con API, modelos, panel, auditoria y permisos.
+- Sustituir el mapa local de DocuCore por consulta a JobCron.
+- Conectar Auth, planes, creditos, facturacion y API keys reales.
+- Implementar preview real del documento activo.
+- Implementar workflow engine asincrono, logs operacionales y reintentos.
+- Completar OCR productivo, segmentacion de expedientes, comparador real y extraccion estructurada por plantillas.
+- Definir reglas geograficas por pais/estado y fuente de ubicacion.
+
+## Limpieza
+
+No se limpiaron ni archivaron `AGENTS-000.md` a `AGENTS-011.md` en esta pasada porque `AGENTS-009.md` conserva una implementacion pendiente de JobCron (`FeatureAvailability` real) y conviene mantener trazabilidad visible hasta que se cierre el modulo.

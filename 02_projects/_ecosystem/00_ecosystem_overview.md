@@ -66,3 +66,14 @@ Cada proyecto debe iniciar con:
 - Pendientes.
 
 No se debe programar una API por cada marca hasta que exista necesidad real. Primero se documenta el dominio y se decide si usa modulos comunes de JobCron o requiere modulo propio.
+
+## Alineacion transversal vigente
+
+La relacion MVP entre LexNova, DocuCore y Fiscora queda documentada en:
+
+```text
+Docs/02_projects/_ecosystem/05_lexnova_docucore_fiscora_mvp_alignment.md
+```
+
+Ese documento debe revisarse antes de modificar capacidades compartidas de OCR,
+storage, gateways, permisos, auditoria, colas o contratos API versionados.

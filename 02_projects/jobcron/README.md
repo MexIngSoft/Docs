@@ -39,6 +39,16 @@ Orquesta modulos de ventas, inventario, logistica, pagos, analitica, reglas y op
 
 - Definir marca visual.
 - Definir si JobCron sera producto SaaS publico o ERP interno.
+- Definir e implementar `FeatureAvailability` para controlar visibilidad,
+  estado de desarrollo y disponibilidad por proyecto/web.
+
+## FeatureAvailability
+
+Documento canonico:
+
+```txt
+feature-availability.md
+```
 
 ## Regla de base de datos publicada
 

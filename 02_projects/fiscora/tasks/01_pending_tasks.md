@@ -21,7 +21,8 @@
 ## Pendientes tecnicos
 
 - Conectar `WEB.NJ.NEXT.Fiscora` con `API.PY.DJANGO.Fiscora.Gateway`.
-- Implementar parser XML CFDI completo en `API.PY.DJANGO.Fiscal`.
+- Completar parser XML CFDI con validacion XSD/cadena original y
+  normalizacion especializada de complementos.
 - Implementar generacion real de PDF visual con `API.PY.DJANGO.Document`.
 - Ejecutar migraciones reales en PostgreSQL local.
 - Definir colas/reintentos para jobs SAT.
@@ -33,4 +34,3 @@
 - Definir consentimiento para conexion SAT.
 - Definir politica de eliminacion de cuenta, credenciales, XML y PDFs.
 - Incluir aviso de que Fiscora no sustituye asesoria contable.
-

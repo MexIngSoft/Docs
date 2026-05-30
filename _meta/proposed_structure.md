@@ -32,6 +32,7 @@ Docs/_meta
 ## Acciones propuestas
 
 - Mantener estructura actual.
+- Usar `Docs/_meta/active-work-index.md` como entrada rapida operativa.
 - Usar `Docs/_meta` para inventarios, reportes e indices.
 - Usar `Docs/templates` para plantillas.
 - No mover archivos de negocio a una nueva carpeta `business`.
