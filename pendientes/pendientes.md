@@ -651,3 +651,39 @@ Y honestamente eso es correcto para esta etapa.
 Porque si intentas construir TODO al mismo tiempo, el proyecto se vuelve inmanejable.
 
 La arquitectura que ya tienes sí permite crecer hacia todo eso después.
+
+---
+
+# Cerrado: FeatureAvailability central en JobCron
+
+Fecha: 2026-05-30
+
+## Origen
+
+`Docs/agents/AGENTS-009.md` solicita crear una capa centralizada llamada
+`FeatureAvailability`, administrada desde JobCron, para controlar que
+componentes, modulos, secciones o funcionalidades puede mostrar cada web del
+ecosistema.
+
+## Estado verificado
+
+- DocuCore tiene un mapa local de visibilidad en
+  `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/feature-availability.ts`.
+- La documentacion canonica existe en
+  `Docs/02_projects/jobcron/feature-availability.md`.
+- Existe API Django JobCron en `Docker.API.PY/API.PY.DJANGO.JobCron`.
+- Existen tablas/migraciones:
+  - `JobCronFeatureAvailability`
+  - `JobCronFeatureAvailabilityAudit`
+- Existe endpoint:
+  - `GET /api/features/availability/`
+- Existe panel:
+  - `WEB.NJ.NEXT.JobCron /admin/feature-availability`
+- DocuCore consulta JobCron y conserva fallback local seguro si el API no
+  responde.
+
+## Decision
+
+Pendiente cerrado como MVP funcional. La integracion de Auth real para
+administradores queda como mejora de seguridad de JobCron, no como bloqueo del
+agent.

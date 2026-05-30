@@ -4145,3 +4145,231 @@ Se actualizo:
 ## Limpieza
 
 No se limpiaron ni archivaron `AGENTS-000.md` a `AGENTS-011.md` en esta pasada porque `AGENTS-009.md` conserva una implementacion pendiente de JobCron (`FeatureAvailability` real) y conviene mantener trazabilidad visible hasta que se cierre el modulo.
+
+---
+
+# Reporte de verificacion Agents - DocuCore y FeatureAvailability
+
+Fecha: 2026-05-30
+
+## Alcance
+
+Se revisaron `Docs/agents/AGENTS-000.md` a `Docs/agents/AGENTS-030.md` en
+orden numerico, siguiendo:
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- documentacion canonica relacionada con DocuCore y JobCron
+
+## Documentos revisados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/tools-catalog.md`
+- `Docs/02_projects/docucore/feature-visibility-map.md`
+- `Docs/02_projects/docucore/mvp-roadmap.md`
+- `Docs/02_projects/jobcron/README.md`
+- `Docs/02_projects/jobcron/feature-availability.md`
+- `Docs/01_core_erp/erp/23_business_software_builder.md`
+- `Docs/pendientes/pendientes.md`
+
+## Verificacion de agents
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Ya ejecutado | Vision modular DocuCore reflejada en documentacion, catalogo, API/Web y rutas actuales. |
+| `AGENTS-001.md` | Ya ejecutado | DocuCore ya se presenta por flujos y panel operativo, no solo como lista plana. |
+| `AGENTS-002.md` | Ya ejecutado | La maqueta React original fue convertida en rutas Next.js y componentes reales. |
+| `AGENTS-003.md` | Ya ejecutado | Se mantiene identidad empresarial propia con marca DocuCore. |
+| `AGENTS-004.md` | Ya ejecutado | Workspace/documento activo existe como maqueta navegable; preview real sigue pendiente por roadmap. |
+| `AGENTS-005.md` | Ya ejecutado | Home, landing SEO y experiencia autenticada quedaron separadas como rutas. |
+| `AGENTS-006.md` | Ya ejecutado | Superficies principales existen: dashboard, upload, workspace, resultados, expediente y API. |
+| `AGENTS-007.md` | Ya ejecutado | Mockup multipantalla representado en rutas de `WEB.NJ.NEXT.DocuCore`. |
+| `AGENTS-008.md` | Ya ejecutado | Mockups criticos agregados como rutas; los motores reales se mantienen marcados como pendientes cuando aplica. |
+| `AGENTS-009.md` | Pendiente por requisitos | `FeatureAvailability` real en JobCron no existe todavia; solo hay documentacion y fallback local en DocuCore. |
+| `AGENTS-010.md` | Documentado | Vision de JobCron como centro de gobierno tecnico existe, pero depende del cierre de `FeatureAvailability`. |
+| `AGENTS-011.md` | Documentado | Vision de Business Software Builder existe en Core ERP. |
+| `AGENTS-012.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no hay tareas ejecutables. |
+
+## Resultado
+
+No se limpia ni archiva el set activo de agents porque `AGENTS-009.md` conserva
+un pendiente real que requiere decisiones de arquitectura, permisos y backend.
+
+Se documento el pendiente en:
+
+- `Docs/pendientes/pendientes.md`
+- `Docs/02_projects/jobcron/feature-availability.md`
+
+## Validaciones ejecutadas
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `WEB.NJ.NEXT.DocuCore` | `npm run build` | Correcto. |
+| `WEB.NJ.NEXT.JobCron` | `npm run build` | Correcto. |
+| `API.PY.DJANGO.DocuCore` | `python manage.py check` | Correcto. |
+| `API.PY.DJANGO.DocuCore` | `python -m compileall core` | Correcto. |
+| `API.PY.DJANGO.DocuCore.Gateway` | `python manage.py check` | Correcto. |
+| `API.PY.DJANGO.DocuCore.Gateway` | `python -m compileall gateway` | Correcto. |
+
+## Informacion faltante o ambigua
+
+- Si JobCron tendra API Django propia, backend compartido o solo web
+  administrativa en esta fase.
+- Tablas y campos publicados de `FeatureAvailability`.
+- Permisos Auth para administrar visibilidad.
+- Reglas definitivas por pais, region, proyecto y entorno.
+- Fallback permitido por proyecto cuando JobCron no responda.
+- Rama/repositorio objetivo para implementar y publicar el modulo.
+
+## Decision
+
+Se mantiene el fallback local de DocuCore hasta que JobCron tenga contrato real
+de `FeatureAvailability`. No se implementa el modulo real en esta corrida
+porque el agent requiere requisitos que aun no estan cerrados.
+
+---
+
+# Reporte de ejecucion Agents - DocuCore FeatureAvailability real
+
+Fecha: 2026-05-30
+
+## Alcance
+
+Se ejecutaron `Docs/agents/AGENTS-000.md` a `Docs/agents/AGENTS-030.md` en
+orden numerico, siguiendo:
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- documentacion canonica relacionada con DocuCore, JobCron, Core ERP y base de
+  datos
+
+La ejecucion se limito al pendiente real detectado en corridas anteriores:
+implementar `FeatureAvailability` como capacidad central de JobCron y conectar
+DocuCore para consumirla sin perder fallback local.
+
+## Documentos revisados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/02_projects/jobcron/feature-availability.md`
+- `Docs/02_projects/docucore/feature-visibility-map.md`
+- `Docs/02_projects/jobcron/README.md`
+- `Docs/01_core_erp/erp/23_business_software_builder.md`
+- `Docs/03_standards/database/sql-server-publication-standard.md`
+- `Docs/pendientes/pendientes.md`
+
+## Documentos creados o actualizados
+
+- `Docs/02_projects/jobcron/api-contracts.md`
+- `Docs/02_projects/jobcron/database.md`
+- `Docs/02_projects/jobcron/feature-availability.md`
+- `Docs/02_projects/jobcron/README.md`
+- `Docs/02_projects/docucore/feature-visibility-map.md`
+- `Docs/pendientes/pendientes.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+
+## Implementacion
+
+- Se creo `API.PY.DJANGO.JobCron` con API Django/DRF.
+- Se agregaron tablas y migraciones:
+  - `JobCronFeatureAvailability`
+  - `JobCronFeatureAvailabilityAudit`
+- Se agrego seed inicial con herramientas y modulos DocuCore visibles aunque
+  algunas funciones sigan marcadas como `development`, `mvp`, `internal` o
+  `disabled`.
+- Se implementaron endpoints:
+  - `GET /api/jobcron/health/`
+  - `GET /api/features/availability/`
+  - `GET|POST /api/features/admin/`
+  - `GET|PATCH /api/features/admin/{feature_key}/`
+  - `GET /api/features/audit/`
+- Se agrego panel JobCron en `/admin/feature-availability` para listar modulos,
+  estados, visibilidad y readiness.
+- Se conecto DocuCore para consumir JobCron cuando este disponible y conservar
+  fallback local si el API no responde.
+
+## Validaciones ejecutadas
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `API.PY.DJANGO.JobCron` | `python manage.py check` | Correcto, sin issues. |
+| `API.PY.DJANGO.JobCron` | `python manage.py makemigrations --check --dry-run` | Correcto, sin cambios pendientes. |
+| `API.PY.DJANGO.JobCron` | `python -m compileall features config` | Correcto. |
+| `API.PY.DJANGO.JobCron` | `python manage.py migrate --noinput` | Correcto. |
+| `API.PY.DJANGO.JobCron` | prueba DRF de `/api/features/availability/` | Correcto, `200` y `14` features DocuCore. |
+| `WEB.NJ.NEXT.JobCron` | `npm run build` | Correcto. |
+| `WEB.NJ.NEXT.DocuCore` | `npm run build` | Correcto. |
+| `API.PY.DJANGO.DocuCore` | `python manage.py check` | Correcto. |
+| `API.PY.DJANGO.DocuCore.Gateway` | `python manage.py check` | Correcto. |
+| JobCron API local | `GET http://127.0.0.1:8020/api/features/availability/?project=docucore&country=MX&environment=internal` | Correcto, `200` y `14` features. |
+| JobCron web local | `GET http://localhost:3006/admin/feature-availability` | Correcto, `200`. |
+| `API.PY.DJANGO.JobCron` | `git init`, `git commit` y `git push -u origin main` | Commit local `c24b702`; push bloqueado porque `https://github.com/MexIngSoft/API.PY.DJANGO.JobCron.git` no existe o no esta accesible. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Vision modular DocuCore ya estaba implementada y se conserva. |
+| `AGENTS-001.md` | Completado | Navegacion por flujos DocuCore ya estaba implementada y se conserva. |
+| `AGENTS-002.md` | Completado | Mockups React convertidos en rutas Next.js. |
+| `AGENTS-003.md` | Completado | Identidad visual empresarial DocuCore conservada. |
+| `AGENTS-004.md` | Completado | Workspace y documento activo permanecen como maqueta marcada. |
+| `AGENTS-005.md` | Completado | Superficies home, SEO, workspace, cuenta, admin y API se mantienen. |
+| `AGENTS-006.md` | Completado | Superficies principales existen como rutas. |
+| `AGENTS-007.md` | Completado | Mockup multipantalla representado en web. |
+| `AGENTS-008.md` | Completado | Mockups criticos agregados y marcados segun estado. |
+| `AGENTS-009.md` | Completado | `FeatureAvailability` real quedo implementado en JobCron con API, tablas, migraciones, seed, auditoria y panel. |
+| `AGENTS-010.md` | Completado | JobCron ahora tiene base tecnica para gobernar visibilidad y ciclo de vida de features. |
+| `AGENTS-011.md` | Completado | Vision Business Software Builder queda documentada y enlazada al control de features. |
+| `AGENTS-012.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Informacion faltante o ambigua
+
+- Falta integrar Auth real al panel administrativo de JobCron para permisos por
+  usuario/rol.
+- Falta decidir si la publicacion final usara SQL Server con schema
+  `[JobCron]` o el fallback local SQLite usado para validacion.
+- Falta definir fuente real de pais/region del usuario final para aplicar
+  reglas geograficas sin depender de parametros manuales.
+- Falta definir responsable operativo de aprobar cambios de visibilidad.
+- Falta crear o habilitar el repositorio remoto
+  `https://github.com/MexIngSoft/API.PY.DJANGO.JobCron.git` para publicar el
+  commit local inicial.
+
+## Decisiones tomadas
+
+- Crear un API Django propio para JobCron porque no existia backend dedicado y
+  era la forma mas directa de cerrar el agent sin mezclar responsabilidades con
+  DocuCore.
+- Mantener nombres de tabla locales compatibles con SQLite y documentar la
+  equivalencia SQL Server `[JobCron].[FeatureAvailability]`.
+- Mantener fallback local en DocuCore para no romper navegacion cuando JobCron
+  este apagado.
+- Marcar funciones no productivas con estado/readiness en lugar de ocultarlas o
+  simular que ya funcionan.
+- Inicializar `API.PY.DJANGO.JobCron` como repositorio Git propio porque el
+  contenedor `Docker.API.PY` ignora por diseno las carpetas
+  `API.PY.DJANGO.*`.
+
+## Pendientes
+
+No quedan pendientes bloqueantes del set activo de agents. Las mejoras de Auth,
+SQL Server productivo, responsables de aprobacion y fuente geografica quedan
+documentadas como evolucion del modulo, no como requisito pendiente del agent.
+La unica accion operativa externa pendiente es crear/habilitar el repositorio
+remoto de `API.PY.DJANGO.JobCron` para poder publicar el commit local.
+
+## Limpieza
+
+Como `AGENTS-000.md` a `AGENTS-011.md` quedaron completados y
+`AGENTS-012.md` a `AGENTS-030.md` no contienen instrucciones, el set activo se
+archiva en `Docs/_archive/agents/2026-05-30-docucore-feature-availability/` y
+los archivos `Docs/agents/AGENTS-*.md` quedan limpios para futuras corridas.

@@ -153,6 +153,8 @@
 | Business | `02_projects/imagrafity/README.md` | Imagrafity | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/innovation-engines-repair/README.md` | Innovation Engines Repair | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/jobcron/01_tecnotelec_admin_process.md` | Proceso administrativo Tecno Telec en JobCron | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/jobcron/api-contracts.md` | Contratos API JobCron | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/jobcron/database.md` | Base de datos JobCron | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/jobcron/feature-availability.md` | FeatureAvailability en JobCron | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/jobcron/README.md` | JobCron | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/jobcron/ui/00_jobcron_mockup_analysis.md` | Analisis de fuente visual JobCron | ARCHIVE_REFERENCE | P3 | Equipo documental |

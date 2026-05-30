@@ -41,3 +41,28 @@ DocuCoreGateway
 ## Nota
 
 El agent original tenia `Document0.FileProcessingResults`; se corrige a `Document.FileProcessingResults`.
+
+## Tablas DocuCore
+
+| Tabla | Proposito |
+|---|---|
+| `DocuCore.Modules` | Inventario de modulos funcionales de DocuCore: PDF, conversion, OCR, IA documental, expedientes, procesos, archivos, API y cuenta. |
+| `DocuCore.Tools` | Inventario de herramientas ejecutables o planeadas, con estado activo/no activo, visibilidad, creditos, extensiones aceptadas y salida esperada. |
+| `DocuCore.ProcessingHistory` | Historial ligero de ejecucion/configuracion del producto DocuCore. |
+
+## Estados de herramientas
+
+| Estado | Uso |
+|---|---|
+| `enabled` | Herramienta activa y ejecutable desde Gateway. |
+| `planned` | Inventariada y visible como roadmap, pero no ejecutable. |
+| `development` | Flujo visual o tecnico en construccion. |
+| `beta` | Disponible solo para uso controlado. |
+| `internal` | Solo operacion/admin/desarrollo. |
+| `disabled` | No debe mostrarse publicamente. |
+
+## Regla
+
+Toda capacidad mencionada por documentacion o agents debe existir como fila de
+catalogo antes de mostrarse en UI. Si no tiene motor real, `Enabled = false` y
+`Status` no puede ser `enabled`.

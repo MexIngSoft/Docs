@@ -85,11 +85,49 @@ Project
 -> Versions
 ```
 
-## Pendientes
+## Implementacion MVP 2026-05-30
 
-- Definir modelos Django o API responsable dentro de JobCron.
-- Definir panel administrativo.
-- Definir relacion con Auth para permisos internos.
-- Definir si reglas regionales usaran ubicacion de usuario, cliente, dominio o
-  configuracion manual del proyecto.
-- Definir auditoria de cambios de visibilidad.
+Estado actual: implementado como MVP funcional.
+
+Backend responsable:
+
+```text
+Docker.API.PY/API.PY.DJANGO.JobCron
+```
+
+Tablas Django publicadas en PascalCase:
+
+```text
+JobCronFeatureAvailability
+JobCronFeatureAvailabilityAudit
+```
+
+Endpoints:
+
+```http
+GET /api/features/availability/?project=docucore&country=MX&region=JAL&environment=internal
+GET /api/features/admin/
+POST /api/features/admin/
+GET /api/features/admin/{feature_key}/
+PATCH /api/features/admin/{feature_key}/
+GET /api/features/audit/
+```
+
+Panel administrativo:
+
+```text
+WEB.NJ.NEXT.JobCron /admin/feature-availability
+```
+
+Semilla inicial:
+
+```text
+DocuCore feature map
+```
+
+## Limites del MVP
+
+- La autenticacion real de administradores queda pendiente de integrar con Auth.
+- Las reglas regionales ya aceptan pais/region, pero la fuente final de
+  ubicacion del usuario o tenant se definira en la integracion Auth/tenant.
+- DocuCore conserva fallback local seguro si JobCron no responde.

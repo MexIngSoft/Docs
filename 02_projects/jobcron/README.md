@@ -39,8 +39,7 @@ Orquesta modulos de ventas, inventario, logistica, pagos, analitica, reglas y op
 
 - Definir marca visual.
 - Definir si JobCron sera producto SaaS publico o ERP interno.
-- Definir e implementar `FeatureAvailability` para controlar visibilidad,
-  estado de desarrollo y disponibilidad por proyecto/web.
+- Integrar Auth real al panel de `FeatureAvailability`.
 
 ## FeatureAvailability
 
@@ -48,6 +47,16 @@ Documento canonico:
 
 ```txt
 feature-availability.md
+```
+
+Estado: MVP funcional con API Django, migraciones, semilla inicial DocuCore,
+auditoria y panel administrativo en la web JobCron.
+
+Contratos y datos:
+
+```txt
+api-contracts.md
+database.md
 ```
 
 ## Regla de base de datos publicada

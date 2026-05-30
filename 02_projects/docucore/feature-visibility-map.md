@@ -55,7 +55,17 @@ como disponible publicamente.
 
 ## Pendientes
 
-- Consumir `FeatureAvailability` desde JobCron cuando exista API.
-- Sustituir el mapa local de maqueta por configuracion central.
-- Definir pais, estado/region y modo de desarrollo por feature.
 - Conectar permisos reales de Auth para zonas internas.
+
+## Integracion JobCron 2026-05-30
+
+DocuCore consulta `FeatureAvailability` desde JobCron cuando el API esta
+disponible:
+
+```http
+GET /api/features/availability/?project=docucore&country=MX&environment=internal
+```
+
+Si JobCron no responde, conserva un fallback local seguro para no romper la
+navegacion. Ese fallback no autoriza operaciones backend sensibles; solo evita
+una pantalla vacia en desarrollo.

@@ -42,6 +42,8 @@
 - `02_projects/innovation-engines-repair/README.md`
 - `02_projects/jobcron/README.md`
 - `02_projects/jobcron/feature-availability.md`
+- `02_projects/jobcron/api-contracts.md`
+- `02_projects/jobcron/database.md`
 - `02_projects/lavanderia-3p/README.md`
 - `02_projects/lexnova/README.md`
 - `02_projects/lexnova/access-control.md`
