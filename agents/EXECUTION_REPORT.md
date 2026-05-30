@@ -4444,3 +4444,10 @@ limito a JobCron y al servidor PostgreSQL Docker relacionado.
   migraciones.
 - No se limpia `AGENTS-000.md` porque el criterio de aceptacion exige migracion
   real contra PostgreSQL y el requisito externo aun no esta disponible.
+
+## Cierre manual posterior
+
+El usuario confirmo que el agente queda completado para limpieza. Con esa
+confirmacion, el contenido de `Docs/agents/AGENTS-000.md` se archiva en
+`Docs/_archive/agents/2026-05-30-jobcron-postgresql-correction/` y el archivo
+activo queda limpio para futuras corridas.
