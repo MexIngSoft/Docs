@@ -171,3 +171,156 @@ Subida -> Proceso -> Descarga
 
 La animacion debe ser sutil y funcional: solo indicar que el proceso esta en
 curso, sin simular progreso falso ni ocultar errores.
+
+## Ajuste de workspace universal 2026-05-30
+
+La ruta `/upload` deja de pedir herramienta antes del archivo. El flujo
+principal queda:
+
+```text
+Subida de uno o varios archivos
+-> analisis de tipos
+-> acciones compatibles
+-> configuracion
+-> proceso
+-> resultado
+```
+
+Reglas aplicadas:
+
+- El selector de herramienta no aparece como primer paso.
+- La pantalla inicial muestra zona de arrastre y capacidades visibles.
+- El usuario puede agregar varios archivos desde el mismo workspace.
+- DocuCore detecta familia documental por extension: PDF, Word, Excel,
+  imagen, ZIP, XML, texto u otro.
+- Las acciones se renderizan como tarjetas compatibles segun archivos
+  seleccionados.
+- ZIP combinado con otros tipos muestra advertencia y prioriza inspeccion ZIP.
+- El panel lateral muestra resumen, tipos, peso, acciones, preview y proceso.
+- La vista previa es informativa en MVP: paginas simuladas para PDF,
+  miniatura conceptual para imagen y analisis previo para ZIP.
+- El procesamiento conserva el contrato actual de Gateway por job. Hasta que
+  exista contrato multiarchivo real, si hay varios archivos seleccionados se
+  avisa que el primer archivo seleccionado sera el que se envie al job.
+
+Este ajuste mantiene la regla de producto: el usuario trabaja en un espacio
+documental inteligente y no en formularios separados por herramienta.
+
+## Ajuste de workspace especializado 2026-05-30
+
+Cuando el usuario ya cargo archivos, `/upload` deja de mostrar el dropzone
+principal. La pantalla cambia de proposito y se convierte en una estacion de
+trabajo especializada:
+
+```text
+Herramientas compatibles | Vista del documento | Configuracion activa
+```
+
+Reglas aplicadas:
+
+- Estado vacio: solo se muestra la zona de carga y las capacidades generales.
+- Estado con archivos: desaparece el bloque central grande de carga.
+- El boton para agregar mas archivos queda como control compacto dentro del
+  workspace.
+- Las herramientas compatibles se muestran en un rail izquierdo.
+- La vista previa del documento queda en el centro.
+- La configuracion de la herramienta activa queda en el panel derecho.
+- `pdf-split` muestra opciones de configuracion profesionales: rango, paginas
+  seleccionadas, cada X paginas, tamano, marcadores, una pagina por archivo y
+  deteccion de separadores.
+- El workspace conserva acciones sugeridas para continuar el flujo sin volver
+  al inicio.
+
+Esta regla aplica a PDF, Word, Excel, imagenes, OCR, ZIP y futuros modulos:
+toda herramienta debe operar dentro de un workspace y no como pantalla aislada.
+
+## Ajuste canvas PDF 2026-05-30
+
+La experiencia de edicion PDF queda separada en dos superficies:
+
+```text
+/upload    -> preparacion de archivos y seleccion de accion compatible
+/workspace -> edicion tipo canvas con preview central y herramientas bajo demanda
+```
+
+Reglas aplicadas:
+
+- `/upload` no abre el workspace al cargar archivos.
+- En estado vacio, `/upload` muestra una dropzone grande, clickeable y
+  accionable.
+- Cuando ya existen archivos, `/upload` oculta la dropzone grande, muestra la
+  lista cargada, una dropzone compacta para agregar mas archivos y las acciones
+  compatibles.
+- Las etiquetas generales de formatos dejan de dominar la pantalla cuando ya
+  hay archivos; el foco pasa a acciones compatibles.
+- El workspace se abre solo cuando el usuario elige una accion.
+- `/workspace` muestra header compacto, preview PDF central, miniaturas
+  seleccionables, controles rapidos y barra inferior flotante.
+- Las herramientas, configuracion, archivos, informacion y resultado se abren
+  en drawers o controles bajo demanda.
+- La configuracion de `pdf-split` incluye: rango, paginas seleccionadas, cada X
+  paginas, tamano, marcadores, una pagina por archivo y deteccion de
+  separadores.
+- Despues de aplicar cambios, el usuario puede continuar con otra herramienta
+  sin salir del workspace.
+
+Pendiente tecnico:
+
+- Renderizar miniaturas reales de PDF desde el archivo cargado. El MVP actual
+  usa miniaturas renderizadas/conceptuales para validar estructura, flujo y
+  layout sin introducir todavia un motor PDF en frontend.
+
+## Regla de prioridad de preview 2026-05-30
+
+La vista previa del documento siempre tiene prioridad sobre cualquier panel.
+
+Si existe conflicto entre herramientas, configuracion, informacion y preview,
+la preview gana. Los demas elementos deben colapsarse, ocultarse o convertirse
+en overlays temporales.
+
+Reglas aplicadas:
+
+- Al entrar a una herramienta, la configuracion puede abrirse automaticamente
+  para orientar la primera accion.
+- Cuando el usuario interactua con paginas, zoom o area de trabajo, la
+  configuracion debe colapsarse para liberar espacio.
+- Debe existir un boton flotante de configuracion para volver a abrir el panel.
+- Las herramientas se muestran como barra de iconos por defecto.
+- La barra de herramientas puede expandirse por hover, focus, toque o fijarse
+  si el usuario lo solicita.
+
+## Estandar de acciones primarias DocuCore 2026-05-30
+
+Toda accion que genera proceso, modificacion o resultado debe verse como boton
+principal, no como texto plano ni tarjeta pasiva.
+
+Acciones de nivel 1:
+
+- Seleccionar archivos.
+- Agregar mas archivos.
+- Aplicar cambios.
+- Procesar documento.
+- Descargar resultado.
+- Ejecutar OCR.
+- Convertir archivo.
+- Dividir PDF.
+- Unir PDF.
+
+Reglas visuales:
+
+- Rojo corporativo DocuCore.
+- Alto minimo de 48px.
+- Icono visible.
+- Texto en negrita.
+- Hover y sombra suave.
+- Misma familia visual para upload, workspace, acciones compatibles y
+  resultado.
+
+Regla de implementacion:
+
+```text
+PrimaryActionButton
+```
+
+Las acciones principales deben consumir el componente reutilizable de accion
+primaria para evitar multiples estilos independientes dentro de DocuCore.

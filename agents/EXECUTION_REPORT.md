@@ -4451,3 +4451,768 @@ El usuario confirmo que el agente queda completado para limpieza. Con esa
 confirmacion, el contenido de `Docs/agents/AGENTS-000.md` se archiva en
 `Docs/_archive/agents/2026-05-30-jobcron-postgresql-correction/` y el archivo
 activo queda limpio para futuras corridas.
+
+---
+
+# Reporte de ejecucion Agents - DocuCore workspace universal
+
+Fecha: 2026-05-30
+
+## Alcance
+
+Se ejecuto `Docs/agents/AGENTS-000.md` en orden numerico. El agent solicitaba
+corregir el flujo de la pantalla de carga de DocuCore para que el usuario suba
+uno o varios archivos primero, DocuCore detecte tipos y despues muestre
+acciones compatibles. `AGENTS-001.md` a `AGENTS-030.md` estaban vacios.
+
+## Documentos revisados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/tools-catalog.md`
+- `Docs/02_projects/docucore/feature-visibility-map.md`
+
+## Implementacion
+
+- Se reemplazo la experiencia de `/upload` en
+  `WEB.NJ.NEXT.DocuCore/app/upload/UploadClient.tsx`.
+- La pantalla ahora inicia con zona de arrastre y boton para seleccionar varios
+  archivos.
+- Se agrego analisis local por familia de archivo: PDF, Word, Excel, imagen,
+  ZIP, XML, texto u otro.
+- Las herramientas compatibles se muestran dinamicamente como tarjetas despues
+  de cargar archivos.
+- Se agrego lista de archivos cargados, seleccion individual, boton permanente
+  para agregar mas archivos y panel de configuracion.
+- Se agrego panel lateral con resumen, tipos, peso, acciones, preview,
+  progreso y procesos recientes.
+- ZIP mezclado con otros tipos queda advertido y prioriza `zip-extract`.
+- Se mantiene el contrato actual de Gateway por job individual; cuando hay
+  varios archivos seleccionados se informa que el job procesara el primer
+  archivo hasta que exista contrato multiarchivo real.
+- Se actualizaron estilos en `WEB.NJ.NEXT.DocuCore/app/globals.css`.
+
+## Documentacion actualizada
+
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones ejecutadas
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `WEB.NJ.NEXT.DocuCore` | `npm run build` | Correcto, 20 rutas generadas. |
+| `WEB.NJ.NEXT.DocuCore` | `npm run lint` | Correcto, sin warnings ni errores; Next.js avisa que `next lint` queda deprecado para Next 16. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | `/upload` quedo convertido en workspace universal con carga multiarchivo, deteccion de tipos, acciones compatibles y panel contextual. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Informacion faltante o ambigua
+
+- Falta contrato backend multiarchivo para procesar operaciones como merge,
+  extraccion selectiva ZIP o pipelines por lote en un solo job.
+- Falta preview real de PDF/Office/imagen desde backend o cliente.
+- Falta inspeccion real de contenido ZIP antes de extraccion selectiva.
+
+## Limpieza
+
+Como el agent activo quedo completado, `AGENTS-000.md` se archiva en
+`Docs/_archive/agents/2026-05-30-docucore-universal-workspace/` y el archivo
+activo queda limpio para futuras corridas.
+
+---
+
+# Reporte de ejecucion Agent 0 - DocuCore workspace especializado
+
+Fecha: 2026-05-30
+
+## Alcance
+
+Se ejecuto solamente `Docs/agents/AGENTS-000.md`, por instruccion explicita del
+usuario. El agent solicitaba eliminar la redundancia entre `Seleccionar
+archivos` y `Agregar archivos`, y hacer que la pantalla cambie visualmente de
+carga inicial a workspace documental especializado despues de subir archivos.
+
+## Documentos revisados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/tools-catalog.md`
+- `Docs/02_projects/docucore/feature-visibility-map.md`
+
+## Implementacion
+
+- `WEB.NJ.NEXT.DocuCore/app/upload/UploadClient.tsx` ahora renderiza dos
+  estados claramente distintos:
+  - sin archivos: solo zona de carga y capacidades generales;
+  - con archivos: workspace especializado.
+- El workspace especializado queda dividido en:
+  - rail izquierdo de herramientas compatibles;
+  - area central de archivos y vista previa;
+  - panel derecho de configuracion de herramienta activa.
+- El boton de agregar archivos queda compacto dentro del workspace; ya no
+  coexiste con el bloque grande de carga.
+- `pdf-split` muestra opciones profesionales de configuracion: rango, paginas
+  seleccionadas, cada X paginas, tamano, marcadores, una pagina por archivo y
+  deteccion de separadores.
+- Se agregaron acciones sugeridas para continuar el flujo sin volver al inicio.
+- `WEB.NJ.NEXT.DocuCore/app/globals.css` se actualizo para soportar el layout
+  de workspace especializado y responsive.
+
+## Documentacion actualizada
+
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones ejecutadas
+
+| Proyecto | Comando | Resultado |
+|---|---|---|
+| `WEB.NJ.NEXT.DocuCore` | `npm run build` | Correcto, 20 rutas generadas. El primer intento fallo por cache `.next` mientras dev server estaba activo; se limpio `.next` y el build paso. |
+| `WEB.NJ.NEXT.DocuCore` | `npm run lint` | Correcto, sin warnings ni errores; Next.js avisa que `next lint` queda deprecado para Next 16. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | `/upload` cambia de carga inicial a workspace documental especializado con herramientas, preview, configuracion y siguientes acciones. |
+
+## Informacion faltante o ambigua
+
+- Falta contrato backend real para configuraciones avanzadas de `pdf-split`
+  como marcadores, tamano, separadores, QR o codigo de barras.
+- Falta preview real de paginas desde PDF y seleccion visual de paginas.
+- Falta contrato multiarchivo real para merge, split por lote y pipelines
+  encadenados sobre el mismo documento.
+
+## Limpieza
+
+Como `AGENTS-000.md` quedo completado, se archiva en
+`Docs/_archive/agents/2026-05-30-docucore-specialized-workspace/` y el archivo
+activo queda limpio para futuras corridas.
+
+---
+
+# Reporte de ejecucion Agents - Gobierno global y estandarizacion
+
+Fecha: 2026-05-30
+
+## Alcance
+
+Se ejecutaron `Docs/agents/AGENTS-000.md` a `Docs/agents/AGENTS-030.md` en
+orden numerico. Los agents activos pedian consolidar conceptos para que los
+proyectos salgan mejor: separacion carga/workspace en DocuCore, creditos,
+publicidad, rol administrativo de JobCron, estrategia e identidad de
+Imagrafity, reglas globales para agents, gobierno de arquitectura, UI/UX,
+API/Gateway, producto y catalogo de modulos.
+
+`AGENTS-016.md` a `AGENTS-030.md` estaban vacios.
+
+## Documentos revisados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/03_standards/README.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/tools-catalog.md`
+- `Docs/02_projects/docucore/feature-visibility-map.md`
+- `Docs/02_projects/jobcron/README.md`
+- `Docs/02_projects/jobcron/feature-availability.md`
+- `Docs/02_projects/imagrafity/README.md`
+- `Docs/02_projects/imagrafity/analitics-pendiente.md`
+
+## Documentos creados
+
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/03_standards/global-governance.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+- `Docs/03_standards/architecture/api-gateway-standard.md`
+- `Docs/03_standards/product/product-strategy.md`
+- `Docs/03_standards/product/module-catalog.md`
+- `Docs/02_projects/docucore/monetization-and-credits.md`
+- `Docs/02_projects/docucore/advertising-strategy.md`
+- `Docs/02_projects/jobcron/operational-admin-center.md`
+- `Docs/02_projects/imagrafity/design-system.md`
+- `Docs/02_projects/imagrafity/product-strategy.md`
+- `Docs/02_projects/imagrafity/site-map.md`
+
+## Documentos actualizados
+
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/README.md`
+- `Docs/03_standards/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/jobcron/README.md`
+- `Docs/02_projects/imagrafity/README.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado documental | Se consolido la regla DocuCore: carga documental y workspace de procesamiento son fases separadas; el workspace se abre al elegir accion. |
+| `AGENTS-001.md` | Completado documental | El mockup de workspace profesional quedo absorbido en el estandar UI/UX y reglas DocuCore, sin copiar dependencia React/framer-motion al proyecto. |
+| `AGENTS-002.md` | Completado documental | Se documento monetizacion y creditos DocuCore por consumo de recursos. |
+| `AGENTS-003.md` | Completado documental | Se documento publicidad como estrategia opcional y por etapas, no como ingreso principal del MVP. |
+| `AGENTS-004.md` | Completado documental | Se incorporo la publicidad/freemium como herramienta de adquisicion, con limites. |
+| `AGENTS-005.md` | Completado documental | Se documento flujo de estimacion de costo, saldo y creditos antes de procesar. |
+| `AGENTS-006.md` | Completado documental | Se documento publicidad pasiva y recompensada con restricciones de UX. |
+| `AGENTS-007.md` | Completado documental | Se registraron etapas y pendientes del modulo de monetizacion. |
+| `AGENTS-008.md` | Completado documental | Se documento JobCron como centro administrativo operativo, financiero y comercial. |
+| `AGENTS-009.md` | Completado documental | Se creo sistema de diseno Imagrafity con identidad, paleta y reglas visuales. |
+| `AGENTS-010.md` | Completado documental | Se documento estrategia de producto Imagrafity como plataforma creativa, no tienda generica. |
+| `AGENTS-011.md` | Completado documental | Se documento mapa de sitio Imagrafity y modulos futuros. |
+| `AGENTS-012.md` | Completado documental | Se creo capa global de reglas para agents. |
+| `AGENTS-013.md` | Completado documental | Se creo gobierno global y auditorias de arquitectura, UI/UX, producto y limites. |
+| `AGENTS-014.md` | Completado documental | Se adapto la propuesta de docs globales a la estructura canonica real de `Docs/03_standards`. |
+| `AGENTS-015.md` | Completado documental | Se actualizo el proceso de ejecucion de agents con autonomia, dependencias, bloqueos y validacion. |
+| `AGENTS-016.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tarea ejecutable. |
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Existencia de documentos nuevos con Python | Correcto, sin faltantes. |
+| Validacion basica de `Docs/_meta/master-index.yaml` | Correcto, conserva raiz `documents:` e incluye nuevas rutas. |
+| `rg` sobre rutas nuevas en README, indices, proyectos y agents | Correcto, rutas enlazadas. |
+| `git diff --check` en `Docs` antes de limpieza | Detecto trailing whitespace solo dentro de agents fuente `009`, `010` y `011`; se corrige al archivar/limpiar agents. |
+
+No se ejecutaron builds de aplicaciones porque esta corrida solo creo y
+actualizo documentacion. No se modifico codigo de APIs, web ni Docker.
+
+## Informacion faltante o ambigua
+
+- Valor real de `1 Credito DocuCore`.
+- Tabla de costos por herramienta, paginas, MB, OCR e IA.
+- Proveedor publicitario inicial y politica de privacidad/tracking.
+- Ledger real de creditos y relacion final con Billing.
+- Productos iniciales y proveedor de produccion de Imagrafity.
+- Mockups finales y assets definitivos de Imagrafity.
+- Contratos backend para preview real de PDF, Word, Excel, imagenes y ZIP en
+  DocuCore.
+
+## Decisiones tomadas
+
+- No se crearon documentos globales en la raiz como `Docs/STANDARDS.md` porque
+  la estructura canonica actual ubica estandares en `Docs/03_standards`.
+- La propuesta de `API_GATEWAY_STANDARD.md`, `PRODUCT_STRATEGY.md` y
+  `MODULE_CATALOG.md` se materializo bajo `Docs/03_standards`.
+- Las reglas globales de agents se ubicaron en `Docs/agents/AGENT_GLOBAL_RULES.md`.
+- La publicidad DocuCore se documento como opcional y controlada, no como flujo
+  obligatorio.
+- JobCron queda como administrador de reglas, creditos, visibilidad, auditoria
+  y reportes; no como procesador documental o creativo.
+
+## Limpieza
+
+Como `AGENTS-000.md` a `AGENTS-015.md` quedaron completados documentalmente y
+`AGENTS-016.md` a `AGENTS-030.md` no tienen instrucciones, el set activo se
+archiva en `Docs/_archive/agents/2026-05-30-global-governance-standardization/`
+y los archivos activos quedan limpios para futuras corridas.
+
+---
+
+# Reporte de estandarizacion - Prompts con y sin agents
+
+Fecha: 2026-05-30
+
+## Alcance
+
+Se estandarizaron las instrucciones largas que antes se pegaban manualmente
+para ejecutar agents, trabajar sin agents, revisar documentacion y modernizar
+pantallas sin documentacion especifica.
+
+## Documentos creados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/03_standards/documentation-first-workflow.md`
+- `Docs/03_standards/frontend/undocumented-modernization-standard.md`
+
+## Documentos actualizados
+
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/03_standards/operations/codex-working-rules.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+- `Docs/03_standards/README.md`
+- `Docs/README.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Resultado
+
+Quedaron tres prompts oficiales:
+
+- prompt corto con agents;
+- prompt corto sin agents;
+- prompt para modernizacion visual no documentada.
+
+Tambien quedo documentado cuando actualizar `EXECUTION_REPORT.md`: obligatorio
+con agents, opcional sin agents salvo que el usuario lo pida o la tarea afecte
+directamente a agents.
+
+## Validaciones
+
+- Rutas enlazadas en README, indices y estandares.
+- Validacion local de existencia de documentos.
+- Validacion basica de `master-index.yaml`.
+
+## Pendientes
+
+- Ningun pendiente bloqueante. Los prompts podran ajustarse cuando cambie el
+  flujo operativo del repositorio.
+
+---
+
+# Reporte agents Imagrafity marketplace ERP
+
+Fecha: 2026-05-30
+
+## Alcance
+
+Se ejecutaron los agents activos de `Docs/agents` en orden numerico para
+redisenar Imagrafity como marketplace, crear imagenes demo y dejar productos,
+precios e inventario almacenados en los modulos ERP locales.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/imagrafity/README.md`
+- `Docs/02_projects/imagrafity/architecture.md`
+- `Docs/02_projects/imagrafity/frontend.md`
+- `Docs/02_projects/imagrafity/api-contracts.md`
+- `Docs/02_projects/imagrafity/database.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+- `Docs/03_standards/frontend/catalog-visibility-rules.md`
+- `Docs/03_standards/frontend/02_placeholder_strategy.md`
+- `Docs/01_core_erp/apis/02_catalog_api.md`
+- `Docs/01_core_erp/apis/04_pricing_api.md`
+- `Docs/01_core_erp/database/06_pricing_model.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se implemento la separacion Web vende / ERP opera: la web consume Gateway, la API expone catalogo y personalizacion, y precio/inventario vienen de proyecciones ERP. |
+| `AGENTS-001.md` - `AGENTS-010.md` | Sin instrucciones | Archivos vacios; no habia tarea ejecutable. |
+| `AGENTS-011.md` | Completado | Se redisenio la home como tienda tipo marketplace con hero comercial, todos los productos, filtros, categorias, secciones comerciales, detalle y rutas de personalizacion. |
+| `AGENTS-012.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tarea ejecutable. |
+
+## Tareas ejecutadas
+
+- Creacion de 3 categorias demo: ropa y moda, hogar y decoracion, publicidad y empresa.
+- Creacion de 9 productos demo, 3 por categoria.
+- Creacion de imagenes placeholder personalizadas para cada producto demo.
+- Creacion de imagenes de categoria, marca, favicon, placeholder y hero web.
+- Agregado de tablas `ErpCatalogProduct`, `ErpProductPrice` y `ErpInventoryStock`.
+- Enlace de `CustomizableProduct` con el producto de Catalog ERP.
+- Exposicion de `public_price`, `stock_available`, `commercial_availability` y `erp_sources` en API/Gateway.
+- Redisenio completo de `WEB.NJ.NEXT.Imagrafity/app/page.tsx` y estilos de marketplace.
+- Actualizacion de fallback frontend para desarrollo local.
+- Actualizacion de documentacion canonica de frontend, contratos API, base de datos e implementation report.
+
+## Archivos modificados principales
+
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity/core/models.py`
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity/core/serializers.py`
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity/core/views.py`
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity/core/catalog.py`
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity/core/management/commands/seed_imagrafity_demo.py`
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity/core/migrations/0002_erpcatalogproduct_customizableproduct_badges_and_more.py`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity/app/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity/app/layout.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity/lib/api.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity/types/imagrafity.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity/public/brand/*`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity/public/products/*`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity/public/placeholders/product.svg`
+- `Docs/02_projects/imagrafity/frontend.md`
+- `Docs/02_projects/imagrafity/api-contracts.md`
+- `Docs/02_projects/imagrafity/database.md`
+- `Docs/02_projects/imagrafity/implementation-report.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `python manage.py makemigrations core` en API | Aprobado, creo migracion `0002`. |
+| `python manage.py migrate` en API | Aprobado. |
+| `python manage.py seed_imagrafity_demo` en API | Aprobado, 9 productos activos. |
+| `python manage.py check` en API | Aprobado. |
+| `python manage.py test` en API | 2 pruebas aprobadas. |
+| `python manage.py check` en Gateway | Aprobado. |
+| `python manage.py test` en Gateway | 1 prueba aprobada. |
+| `npm run build` en Web | Aprobado. |
+| `npm run lint` en Web | Aprobado; `next lint` muestra aviso de deprecacion para Next 16. |
+| `npm audit --audit-level=moderate` en Web | 0 vulnerabilidades. |
+| `GET /api/imagrafity/products/` en API `8019` | 9 productos, precio desde ERP Pricing. |
+| `GET /api/imagrafity/products/` en Gateway `8018` | 9 productos, inventario desde ERP Inventory. |
+| `GET http://127.0.0.1:3006/` | 200; muestra hero, producto demo y `Gateway activo`. |
+
+## Decisiones tomadas
+
+- Los productos demo se almacenan en las proyecciones ERP locales, no en la web.
+- Las imagenes de producto son placeholders visuales; el dato comercial sigue
+  viniendo del ERP.
+- Los productos `IMG-*` obsoletos se deshabilitan al sembrar, sin eliminarlos.
+- El Gateway local se levanto con `IMAGRAFITY_API_BASE_URL=http://127.0.0.1:8019`
+  porque el valor por defecto apunta al host Docker `api-backend-python`.
+- Se uso asset generado para hero web y assets programaticos para productos y
+  categorias, por no existir imagen final canonica de catalogo.
+
+## Informacion faltante o ambigua
+
+- Catalogo real definitivo del ERP.
+- Reglas reales de impuestos, descuentos, listas de precio y vigencia.
+- Politica de reservacion de inventario y stock por sucursal.
+- Checkout, pagos, facturacion, envios y auth.
+- Criterios de moderacion de imagenes, derechos de autor y uploads.
+- Imagenes finales de productos reales.
+
+## Limpieza
+
+Los agents con instrucciones completadas se archivan en
+`Docs/_archive/agents/2026-05-30-imagrafity-marketplace-erp/`. Los archivos
+activos completados quedan limpios para futuras corridas. Las imagenes de
+referencia dejadas por el usuario en `Docs/agents` se conservan como insumo
+visual y no se eliminan.
+
+---
+
+# Reporte agents Imagrafity editor y prompts
+
+Fecha: 2026-05-30
+
+## Alcance
+
+Se ejecutaron los agents activos `AGENTS-000.md` a `AGENTS-004.md` para
+documentar y desarrollar el flujo de editor, navegacion, prompts editables y
+preview obligatorio de Imagrafity.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/imagrafity/README.md`
+- `Docs/02_projects/imagrafity/architecture.md`
+- `Docs/02_projects/imagrafity/frontend.md`
+- `Docs/02_projects/imagrafity/api-contracts.md`
+- `Docs/02_projects/imagrafity/database.md`
+- `Docs/02_projects/imagrafity/design-system.md`
+- `Docs/02_projects/imagrafity/product-strategy.md`
+- `Docs/02_projects/imagrafity/site-map.md`
+- `Docs/02_projects/imagrafity/security.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Parcialmente completado | Se documento la decision tecnica: Konva.js para editor 2D, Three.js para 3D futuro e IA por proveedor pendiente. No se integro Konva aun porque el MVP implementado es prompts + preview persistido. |
+| `AGENTS-001.md` | Parcialmente completado | Se amplio el sitemap/flujo de Imagrafity y se agrego navegacion conectada visible en home. Quedan pendientes paginas reales de carrito, cuenta, comunidad, blog y checkout. |
+| `AGENTS-002.md` | Parcialmente completado | Se documento la regla de paginas no aisladas y se agrego bloque de navegacion conectada. Queda pendiente implementar rutas completas. |
+| `AGENTS-003.md` | Completado MVP | Se agregaron prompts editables por producto en base de datos, serializer, endpoints, seed y documentacion. |
+| `AGENTS-004.md` | Completado MVP | Se agrego `PromptPreview`, endpoint de preview y UI que muestra el resultado sobre el producto antes de aplicar. |
+| `AGENTS-005.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tarea ejecutable. |
+
+## Tareas ejecutadas
+
+- Creacion de `ProductPrompt`.
+- Creacion de `PromptPreview`.
+- Endpoint `GET/POST /products/<id>/prompts/`.
+- Endpoint `POST /products/<id>/prompt-previews/`.
+- Gateway proxy para endpoints nuevos.
+- Seed de 3 prompts por cada uno de los 9 productos activos.
+- UI de prompts en la home de Imagrafity.
+- UI de preview sobre producto y flujo obligatorio.
+- Documentos nuevos:
+  - `Docs/02_projects/imagrafity/personalization-editor.md`
+  - `Docs/02_projects/imagrafity/prompt-preview-flow.md`
+- Actualizacion de README, contratos, database, frontend, product strategy,
+  security, sitemap, indices y implementation report.
+
+## Archivos modificados principales
+
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity/core/models.py`
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity/core/serializers.py`
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity/core/views.py`
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity/core/urls.py`
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity/core/catalog.py`
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity/core/tests.py`
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity/core/management/commands/seed_imagrafity_demo.py`
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity/core/migrations/0003_productprompt_promptpreview_and_more.py`
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity.Gateway/gateway/views.py`
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity.Gateway/gateway/urls.py`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity/app/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity/lib/api.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity/types/imagrafity.ts`
+- `Docs/02_projects/imagrafity/*`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `python manage.py makemigrations core` | Aprobado, creo migracion `0003`. |
+| `python manage.py migrate` | Aprobado. |
+| `python manage.py seed_imagrafity_demo` | Aprobado, 27 prompts activos. |
+| `python manage.py check` en API | Aprobado. |
+| `python manage.py test` en API | 3 pruebas aprobadas. |
+| `python manage.py check` en Gateway | Aprobado. |
+| `python manage.py test` en Gateway | 1 prueba aprobada. |
+| `python -m compileall` en API y Gateway | Aprobado. |
+| `npm run build` | Aprobado. |
+| `npm run lint` | Aprobado; `next lint` esta deprecado para Next 16. |
+| `npm audit --audit-level=moderate` | 0 vulnerabilidades. |
+| HTTP Gateway prompts | 3 prompts para `IMG-TSHIRT-AURORA`. |
+| HTTP Gateway prompt preview | `preview_ready` y `requires_visual_review=true`. |
+| HTTP Web `3006` | 200; muestra prompts, preview y navegacion conectada. |
+| Validacion YAML con PyYAML | No ejecutada; el modulo `yaml` no esta instalado en el entorno local. |
+| `rg` de rutas y entidades nuevas | Aprobado; documentos, API y web referencian rutas y entidades nuevas. |
+
+## Decisiones tomadas
+
+- Se implemento el MVP de prompts y preview persistido antes de integrar Konva
+  o Three.js, para no introducir un editor incompleto.
+- IA real queda pendiente hasta seleccionar proveedor, storage, moderacion y
+  reglas legales.
+- Los prompts demo quedan en base de datos mediante seed, no quemados como
+  fuente productiva en la web.
+- El preview actual es placeholder operativo sobre el mockup del producto y
+  exige revision visual antes de avanzar.
+
+## Informacion faltante o ambigua
+
+- Proveedor IA.
+- Storage de imagenes generadas.
+- Admin autenticado y permisos.
+- Medidas reales de areas imprimibles.
+- Politica legal para prompts, imagenes y derechos de autor.
+- Checkout, pagos, facturacion y envios.
+
+## Limpieza
+
+Los agents `AGENTS-000.md` a `AGENTS-004.md` se archivan en
+`Docs/_archive/agents/2026-05-30-imagrafity-editor-prompts/`. Los agents vacios
+quedan activos sin instrucciones para futuras corridas. Las imagenes de
+referencia que estaban en `Docs/agents` y la hoja temporal de referencia se
+movieron a
+`Docs/_archive/agents/2026-05-30-imagrafity-editor-prompts/visual-references/`
+para que ya no queden como insumos activos de agent.
+
+---
+
+# Reporte agents DocuCore canvas PDF y upload preparatorio
+
+Fecha: 2026-05-30
+
+## Alcance
+
+Se ejecutaron los agents activos `AGENTS-000.md` y `AGENTS-001.md` en orden
+numerico para separar la carga documental de DocuCore del workspace de edicion
+PDF tipo canvas.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/tools-catalog.md`
+- `Docs/02_projects/docucore/feature-visibility-map.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado MVP | Se implemento `/workspace` como editor PDF tipo canvas con preview central, miniaturas seleccionables, header compacto, barra inferior flotante y drawers bajo demanda para herramientas, configuracion, archivos, informacion y resultado. |
+| `AGENTS-001.md` | Completado | Se modifico `/upload` para mantenerlo como pantalla de preparacion: dropzone grande accionable en vacio, lista de archivos al cargar, dropzone compacta para agregar mas y acciones compatibles que abren el workspace. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tarea ejecutable. |
+
+## Tareas ejecutadas
+
+- La zona "Arrastra tus archivos aqui" ahora es un boton/dropzone grande,
+  clickeable, con borde visible, sombra, hover y cursor.
+- Al cargar archivos, `/upload` oculta la dropzone principal y muestra archivos
+  cargados.
+- Se agrego dropzone compacta: "+ Agregar mas archivos" con instruccion de
+  arrastre o clic.
+- Se muestran acciones compatibles despues de cargar archivos; subir archivos
+  ya no inicia workspace ni procesamiento automaticamente.
+- Las acciones compatibles enlazan a `/workspace?tool=<slug>`.
+- `/workspace` concentra la vista PDF como centro de la experiencia.
+- Las herramientas y configuraciones ya no ocupan columnas fijas permanentes.
+- La configuracion de Dividir PDF se abre en drawer derecho.
+- Los archivos se abren en drawer izquierdo.
+- La informacion documental y resultado se abren bajo solicitud.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/upload/UploadClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado. |
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; `next lint` muestra aviso de deprecacion para Next 16. |
+
+## Decisiones tomadas
+
+- Se mantuvo `/upload` como preparacion, no como edicion.
+- Se creo `/workspace` como superficie separada de edicion para no mezclar
+  carga, configuracion y preview en una sola pantalla fija.
+- Las miniaturas PDF son conceptuales/renderizadas en MVP; no se integro motor
+  PDF real porque no existe contrato final de archivo activo ni libreria PDF
+  seleccionada en la documentacion.
+- No se cambio backend ni contrato de procesamiento.
+
+## Informacion faltante o ambigua
+
+- Motor frontend/backend para renderizar miniaturas reales de PDF.
+- Contrato para pasar el archivo cargado real desde `/upload` hacia
+  `/workspace` con persistencia de sesion.
+- Reglas finales de guardado, descarga y jobs multiarchivo.
+- Motor real para firma, extraccion de imagenes y configuraciones avanzadas.
+
+## Limpieza
+
+Los agents `AGENTS-000.md` y `AGENTS-001.md` se archivan en
+`Docs/_archive/agents/2026-05-30-docucore-canvas-upload/`. Los archivos activos
+quedan limpios para futuras corridas.
+
+---
+
+# Reporte agents DocuCore panel inteligente y acciones primarias
+
+Fecha: 2026-05-30
+
+## Alcance
+
+Se ejecutaron los agents activos `AGENTS-000.md` y `AGENTS-001.md` en orden
+numerico. Antes de implementar se atendio Git segun la instruccion del agent:
+se validaron, commitearon y publicaron los cambios pendientes de la iteracion
+anterior de DocuCore Web.
+
+## Git previo a la implementacion
+
+| Repositorio | Resultado |
+|---|---|
+| `WEB.NJ.NEXT.DocuCore` | Commit `ea954e1` publicado en `main` con mensaje `feat(docucore): add upload prep and canvas workspace`. |
+| `Docs` | Documentacion de la iteracion anterior publicada en rama `feature/docucore-canvas-upload-20260530`, commit `cbc598d`. |
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/tools-catalog.md`
+- `Docs/02_projects/docucore/feature-visibility-map.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado MVP | Se agrego comportamiento de configuracion inteligente: el panel abre al entrar, se colapsa al interactuar con paginas y queda boton flotante para reabrir. Tambien se agrego barra de herramientas por iconos con expansion por hover/focus y opcion de fijar panel. |
+| `AGENTS-001.md` | Completado MVP | Se creo `PrimaryActionButton` y se conectaron acciones principales de upload, acciones compatibles, aplicar cambios, agregar archivos y descarga al mismo patron visual. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tarea ejecutable. |
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/components/PrimaryActionButton.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/upload/UploadClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado, 20 rutas generadas. |
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; `next lint` muestra aviso de deprecacion para Next 16. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado. |
+
+## Decisiones tomadas
+
+- La preview gana sobre herramientas, configuracion e informacion.
+- El panel de configuracion se abre para orientar la primera accion, pero se
+  cierra cuando el usuario trabaja en paginas.
+- La barra de herramientas del workspace se muestra como iconos por defecto y
+  se expande bajo demanda.
+- Las acciones que generan proceso, modificacion o resultado usan el mismo
+  componente base `PrimaryActionButton`.
+
+## Informacion faltante o ambigua
+
+- Persistencia real de configuracion por herramienta.
+- Reglas finales para panel fijado por usuario entre sesiones.
+- Motor real de preview PDF, zoom y seleccion sobre paginas renderizadas.
+
+## Limpieza
+
+Los agents `AGENTS-000.md` y `AGENTS-001.md` se archivan en
+`Docs/_archive/agents/2026-05-30-docucore-smart-workspace-actions/`. Los
+archivos activos quedan limpios para futuras corridas.

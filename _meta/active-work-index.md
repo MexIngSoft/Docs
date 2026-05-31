@@ -36,6 +36,19 @@ Antes de desarrollar o reordenar documentacion:
 | Future | `Docs/pendientes` | Ideas grandes o modulos sin MVP cerrado. |
 | Archive | `Docs/_archive` | Fuentes historicas y evidencia conservada. |
 
+## Gobierno global obligatorio
+
+Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
+
+| Documento | Uso |
+|---|---|
+| `Docs/agents/AGENT_GLOBAL_RULES.md` | Marco comun para agents, autonomia, bloqueos y validacion. |
+| `Docs/03_standards/global-governance.md` | Gobierno del ecosistema y criterios para iniciar proyectos. |
+| `Docs/03_standards/frontend/ui-ux-standard.md` | Mobile first, mockups aprobados, UX por dominio y cierre UI. |
+| `Docs/03_standards/architecture/api-gateway-standard.md` | Regla Frontend -> Gateway -> API -> Core/Shared. |
+| `Docs/03_standards/product/product-strategy.md` | Clasificacion y monetizacion de modulos. |
+| `Docs/03_standards/product/module-catalog.md` | Catalogo global de modulos core, shared, comerciales e internos. |
+
 ## Ruta rapida por tipo de tarea
 
 | Tarea | Leer primero | Despues leer |
@@ -48,6 +61,7 @@ Antes de desarrollar o reordenar documentacion:
 | Trabajar LexNova | `02_projects/lexnova/README.md` | `legal-process-data-model.md`, `document-intelligence.md`, `document-api-integration-review.md`. |
 | Trabajar Tecno Telec | `02_projects/tecnotelec/AGENTE.md` | `tasks/*`, `backend/*`, `frontend/*`, `quotes/*`, `solutions/*`. |
 | Trabajar JobCron | `02_projects/jobcron/README.md` | `01_tecnotelec_admin_process.md`, `ui/*`, Core APIs relacionadas. |
+| Trabajar Imagrafity | `02_projects/imagrafity/README.md` | `architecture.md`, `api-contracts.md`, `database.md`, `frontend.md`, `security.md`. |
 | Trabajar seguridad/Auth | `01_core_erp/auth/README.md` | `01_core_erp/apis/01_auth_api.md`, `architecture/04_security.md`, `03_standards/security/*`. |
 | Trabajar frontend | `03_standards/frontend/README.md` | Frontend del proyecto y checklist pre-development. |
 | Trabajar Git/publicacion | `03_standards/operations/git-repository-map.md` | Git branch governance, release flow y execution reports. |

@@ -150,7 +150,16 @@
 | Business | `02_projects/fiscora/decisions/adr_0001_api_boundaries.md` | ADR 0001 - Limites APIs Fiscora | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/imagiland/README.md` | Imagiland | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/imagrafity/analitics-pendiente.md` | Analitics Pendiente | FUTURE_OR_PENDING | P2 | Equipo documental |
-| Business | `02_projects/imagrafity/README.md` | Imagrafity | FUTURE_OR_PENDING | P2 | Equipo documental |
+| Business | `02_projects/imagrafity/README.md` | Imagrafity | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/imagrafity/architecture.md` | Arquitectura Imagrafity | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/imagrafity/api-contracts.md` | Contratos API Imagrafity | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/imagrafity/database.md` | Base de datos Imagrafity | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/imagrafity/frontend.md` | Frontend Imagrafity | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/imagrafity/implementation-report.md` | Reporte de implementacion Imagrafity | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/imagrafity/personalization-editor.md` | Editor de personalizacion Imagrafity | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/imagrafity/prompt-preview-flow.md` | Flujo de prompts y preview Imagrafity | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/imagrafity/repositories.md` | Repositorios Imagrafity | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/imagrafity/security.md` | Seguridad Imagrafity | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/innovation-engines-repair/README.md` | Innovation Engines Repair | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/jobcron/01_tecnotelec_admin_process.md` | Proceso administrativo Tecno Telec en JobCron | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/jobcron/api-contracts.md` | Contratos API JobCron | ACTIVE | P1 | Equipo documental |
@@ -322,4 +331,24 @@
 | Future | `pendientes/pendientes.md` | Lo que actualmente YA tienes parcialmente cubierto | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Other | `README.md` | Documentacion del proyecto | ACTIVE | P3 | Equipo documental |
 | Other | `tecnotelec-ui/README.md` | Fuente visual Tecno Telec | ACTIVE | P3 | Equipo documental |
+
+## Entradas agregadas por gobierno global 2026-05-30
+
+| Dominio | Ruta | Descripcion | Estado | Prioridad | Owner |
+|---|---|---|---|---|---|
+| Agents | `agents/AGENT_GLOBAL_RULES.md` | Reglas globales para ejecutar agents con autonomia responsable | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/global-governance.md` | Gobierno global del ecosistema de productos | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/frontend/ui-ux-standard.md` | Estandar UI/UX mobile first y por dominio | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/frontend/undocumented-modernization-standard.md` | Modernizacion visual cuando no hay documentacion especifica | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/documentation-first-workflow.md` | Flujo documentation-first para tareas sin agents | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/operations/standard-request-prompts.md` | Prompts estandar con agents, sin agents y modernizacion visual | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/architecture/api-gateway-standard.md` | Estandar de API y Gateway por proyecto | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/product/product-strategy.md` | Estrategia de producto y monetizacion | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/product/module-catalog.md` | Catalogo global de modulos | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/docucore/monetization-and-credits.md` | Monetizacion y creditos DocuCore | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/docucore/advertising-strategy.md` | Estrategia de publicidad DocuCore | ACTIVE | P2 | Equipo documental |
+| Business | `02_projects/jobcron/operational-admin-center.md` | JobCron como centro administrativo operativo | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/imagrafity/design-system.md` | Sistema de diseno Imagrafity | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/imagrafity/product-strategy.md` | Estrategia de producto Imagrafity | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/imagrafity/site-map.md` | Mapa del sitio Imagrafity | ACTIVE | P1 | Equipo documental |
 | Meta | `_meta/active-work-index.md` | Indice operativo de trabajo activo | ACTIVE | P1 | Equipo documental |

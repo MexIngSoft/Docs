@@ -36,7 +36,9 @@ $apiServices = @(
     @{ Name = "fiscora_gateway"; Port = 8014; Expected = @(200, 301, 302, 401, 403, 404) },
     @{ Name = "fiscora"; Port = 8015; Expected = @(200, 301, 302, 401, 403, 404) },
     @{ Name = "fiscal"; Port = 8016; Expected = @(200, 301, 302, 401, 403, 404) },
-    @{ Name = "lexnova_gateway"; Port = 8017; CheckPath = "/api/lexnova/health/"; Expected = @(200) }
+    @{ Name = "lexnova_gateway"; Port = 8017; CheckPath = "/api/lexnova/health/"; Expected = @(200) },
+    @{ Name = "imagrafity_gateway"; Port = 8018; CheckPath = "/api/imagrafity/health/"; Expected = @(200) },
+    @{ Name = "imagrafity"; Port = 8019; CheckPath = "/api/imagrafity/health/"; Expected = @(200) }
 )
 
 $webServices = @(
@@ -44,7 +46,8 @@ $webServices = @(
     @{ Name = "tecnotelec"; Port = 3001; Url = "http://localhost:3001/" },
     @{ Name = "lexnova"; Port = 3002; Url = "http://localhost:3002/auth/login"; CssProject = "lexnova" },
     @{ Name = "docucore"; Port = 3004; Url = "http://localhost:3004/" },
-    @{ Name = "fiscora"; Port = 3005; Url = "http://localhost:3005/"; Static = $true }
+    @{ Name = "fiscora"; Port = 3005; Url = "http://localhost:3005/"; Static = $true },
+    @{ Name = "imagrafity"; Port = 3006; Url = "http://localhost:3006/" }
 )
 
 function Write-Step {

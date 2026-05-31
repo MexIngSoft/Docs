@@ -32,6 +32,8 @@ MVP funcional creado por agents y cerrado en fases documentadas:
 - `frontend-navigation-and-ux.md`: orden de interfaz y navegacion inteligente.
 - `feature-visibility-map.md`: que se muestra, que queda interno y que depende
   de desarrollo real.
+- `monetization-and-credits.md`: reglas base para creditos, costos y consumo.
+- `advertising-strategy.md`: publicidad opcional y creditos recompensados.
 
 ## Documentos
 
@@ -42,6 +44,8 @@ api-contracts.md
 document-intelligence.md
 frontend-navigation-and-ux.md
 feature-visibility-map.md
+monetization-and-credits.md
+advertising-strategy.md
 mvp-roadmap.md
 tools-catalog.md
 security.md

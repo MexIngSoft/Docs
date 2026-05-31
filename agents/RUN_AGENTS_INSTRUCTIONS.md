@@ -12,18 +12,20 @@ Ejecuta todos los archivos AGENTS-*.md ubicados en Docs/agents, en orden numeric
 
 1. Leer `Docs/agents/AGENTS-*.md` en orden numerico.
 2. Revisar `Docs/agents/EXECUTION_REPORT.md` para no repetir trabajo ya cerrado.
-3. Identificar el proyecto afectado y su documentacion canonica.
-4. Implementar en el menor alcance funcional posible.
-5. Validar con comandos locales:
+3. Leer `Docs/agents/AGENT_GLOBAL_RULES.md` si existe.
+4. Identificar el proyecto afectado y su documentacion canonica.
+5. Detectar dependencias, tareas duplicadas, bloqueos e informacion faltante.
+6. Implementar en el menor alcance funcional posible.
+7. Validar con comandos locales:
    - APIs: `python manage.py check` y `python -m py_compile`.
    - Web: `npm run build`.
    - Docker: revisar compose/Dockerfile si el agent modifica infraestructura.
-6. Documentar:
+8. Documentar:
    - archivos creados/modificados,
    - pruebas ejecutadas,
    - pendientes reales,
    - decisiones tomadas.
-7. Actualizar `Docs/agents/EXECUTION_REPORT.md`.
+9. Actualizar `Docs/agents/EXECUTION_REPORT.md`.
 
 ## Reglas
 
@@ -32,6 +34,9 @@ Ejecuta todos los archivos AGENTS-*.md ubicados en Docs/agents, en orden numeric
 - Si una tarea pide una fase demasiado grande, crear MVP funcional y documentar limites.
 - No borrar trabajo previo sin instruccion explicita.
 - No mezclar proyectos sin necesidad.
+- No inventar informacion critica; si falta, documentar bloqueo y preguntas.
+- Todo agent debe respetar las reglas globales de arquitectura, UI/UX,
+  producto, seguridad y validacion definidas en `AGENT_GLOBAL_RULES.md`.
 
 ## Resultado esperado del asistente
 

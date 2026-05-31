@@ -18,6 +18,10 @@ Las instrucciones amplias deben vivir en documentos especificos dentro de `Docs`
 
 | Tema | Documento |
 |---|---|
+| Prompts estandar con agents, sin agents y modernizacion visual | `03_standards/operations/standard-request-prompts.md` |
+| Flujo documentation-first sin agents | `03_standards/documentation-first-workflow.md` |
+| Modernizacion visual sin documentacion especifica | `03_standards/frontend/undocumented-modernization-standard.md` |
+| Reglas globales para agents | `agents/AGENT_GLOBAL_RULES.md` |
 | Flujo Git, ramas, commits y validacion | `03_standards/operations/git-environments-and-release-flow.md` |
 | Cierre y estructura de APIs Django | `03_standards/operations/project-closure-standard.md` |
 | Separacion futura de APIs y bases | `01_core_erp/architecture/08_data_isolation_and_reference_tables.md` |

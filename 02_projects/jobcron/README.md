@@ -57,6 +57,7 @@ Contratos y datos:
 ```txt
 api-contracts.md
 database.md
+operational-admin-center.md
 ```
 
 ## Regla de base de datos publicada

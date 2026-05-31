@@ -42,6 +42,20 @@ tambien:
 Docs/00_audit/10_development_gap_analysis.md
 ```
 
+Antes de ejecutar agents o iniciar una fase nueva, leer tambien:
+
+```text
+Docs/agents/AGENT_GLOBAL_RULES.md
+Docs/03_standards/operations/standard-request-prompts.md
+Docs/03_standards/documentation-first-workflow.md
+Docs/03_standards/global-governance.md
+Docs/03_standards/frontend/ui-ux-standard.md
+Docs/03_standards/frontend/undocumented-modernization-standard.md
+Docs/03_standards/architecture/api-gateway-standard.md
+Docs/03_standards/product/product-strategy.md
+Docs/03_standards/product/module-catalog.md
+```
+
 ## Que pertenece al nucleo ERP
 
 Va en `01_core_erp` todo lo que pueda reutilizarse para varios negocios:
@@ -85,6 +99,12 @@ Proyecto principal actual:
 02_projects/tecnotelec
 ```
 
+Proyecto creativo activo:
+
+```text
+02_projects/imagrafity
+```
+
 Mapa del ecosistema:
 
 ```text
@@ -105,6 +125,8 @@ Va en `03_standards` todo lo que define como se trabaja:
 - Testing.
 - Docker local.
 - Publicacion de tablas y campos con nombres PascalCase estilo SQL Server.
+- Gobierno global, UI/UX, API/Gateway, producto y catalogo de modulos.
+- Prompts estandar para pedir trabajo con agents, sin agents y modernizacion visual.
 
 ## Que pertenece a integraciones
 
@@ -145,13 +167,20 @@ Proveedor actual:
 17. `02_projects/tecnotelec/frontend/12_initial_web_blueprint.md`
 18. `02_projects/tecnotelec/frontend/13_visual_mockup_spec.md`
 19. `03_standards/frontend/nextjs-project-standard.md`
-20. `03_standards/frontend/shared-docker-frontend-architecture.md`
-21. `03_standards/database/sql-server-publication-standard.md`
-22. `00_audit/09_api_routes_inventory.md`
-23. `02_projects/tecnotelec/tasks/04_development_order.md`
-24. `02_projects/_ecosystem/00_ecosystem_overview.md`
-25. `02_projects/_ecosystem/01_company_portfolio.md`
-26. `02_projects/_ecosystem/04_process_convergence_and_conflicts.md`
+20. `03_standards/frontend/ui-ux-standard.md`
+21. `03_standards/frontend/undocumented-modernization-standard.md`
+22. `03_standards/frontend/shared-docker-frontend-architecture.md`
+23. `03_standards/operations/standard-request-prompts.md`
+24. `03_standards/documentation-first-workflow.md`
+25. `03_standards/architecture/api-gateway-standard.md`
+26. `03_standards/product/product-strategy.md`
+27. `03_standards/product/module-catalog.md`
+28. `03_standards/database/sql-server-publication-standard.md`
+29. `00_audit/09_api_routes_inventory.md`
+30. `02_projects/tecnotelec/tasks/04_development_order.md`
+31. `02_projects/_ecosystem/00_ecosystem_overview.md`
+32. `02_projects/_ecosystem/01_company_portfolio.md`
+33. `02_projects/_ecosystem/04_process_convergence_and_conflicts.md`
 
 ## Reglas
 
