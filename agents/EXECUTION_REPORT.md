@@ -5387,6 +5387,13 @@ Orden tecnico aplicado:
 |---|---|
 | `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
 | `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo avisos LF/CRLF de Git. |
+| `git diff --check` en `Docs` | Aprobado; solo avisos LF/CRLF de Git. |
+| `Start-NextLocalWeb.ps1 -Project docucore -CleanCache -SkipBuild -SkipLint -SkipInstall` | Aprobado; reinicio local en puerto 3004. |
+| `Repair-NextCss.ps1 -Project docucore -Url http://localhost:3004 -Local` | Aprobado; CSS disponible. |
+| `GET http://localhost:3004/` | `200`. |
+| `GET http://localhost:3004/upload` | `200`. |
+| `GET http://localhost:3004/workspace` | `200`. |
 
 ## Decisiones tomadas
 
