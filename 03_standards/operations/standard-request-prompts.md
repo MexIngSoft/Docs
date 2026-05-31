@@ -94,6 +94,24 @@ documenta decisiones e informacion faltante en el reporte correspondiente.
 | Hay pantalla vieja sin especificacion | Prompt de modernizacion visual |
 | Falta informacion critica | Documentar bloqueo y preguntas |
 
+## Prompt corto para web Next.js rota
+
+Usar cuando una web local se ve sin estilos, no carga despues de cambios o el
+dev server queda atorado.
+
+```text
+Ejecuta el protocolo de recuperacion runtime Next.js para [PROYECTO].
+
+Usa:
+- Docs/03_standards/frontend/nextjs-runtime-recovery-standard.md
+- Docs/03_standards/operations/local-port-registry.md
+
+Corre lint/build, detén solo el puerto del proyecto, limpia `.next`, levanta el
+dev server en su puerto canonico y valida rutas + CSS con los scripts
+estandarizados. No borres `node_modules` ni cambies puertos salvo que el
+diagnostico lo justifique.
+```
+
 ## Reporte esperado sin agents
 
 Cuando no se usan agents, no es obligatorio actualizar

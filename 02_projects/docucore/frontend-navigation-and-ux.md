@@ -289,6 +289,28 @@ Reglas aplicadas:
 - La barra de herramientas puede expandirse por hover, focus, toque o fijarse
   si el usuario lo solicita.
 
+## Correccion de acciones centralizadas 2026-05-30
+
+Las herramientas del documento deben existir en un solo lugar centralizado.
+
+Componentes activos:
+
+| Componente | Ubicacion | Funcion | Activador | Contenido | Documento activo | Relacion |
+|---|---|---|---|---|---|---|
+| `ToolbarPrincipal` | Barra inferior flotante de `/workspace` | Accesos generales del workspace | Siempre visible con documento activo | Herramientas, configuracion, subir mas y resultado | Documento seleccionado | Activa drawers y paneles; no lista herramientas duplicadas. |
+| `PanelAccionesDocumento` | Drawer izquierdo `Herramientas disponibles` | Lista unica de acciones documentales | Boton `Herramientas` de la barra principal | Dividir PDF, unir PDF, comprimir, PDF a Word, OCR, extraer imagenes, firmar y generar indice | Documento seleccionado | Reemplaza cualquier `tool-dock` o barra secundaria. |
+| `PanelConfiguracionAccion` | Drawer derecho de configuracion | Parametros de la accion seleccionada | Seleccionar herramienta o boton `Configuracion` | Modo, rangos y opciones de la herramienta activa | Documento seleccionado | Depende de `PanelAccionesDocumento` y `selectedAction`. |
+| `PanelArchivosWorkspace` | Drawer izquierdo de archivos | Ver, ordenar, eliminar o agregar archivos | Boton `Subir mas` | Lista de archivos cargados | Documento seleccionado o lista activa | No duplica acciones de herramienta. |
+| `PanelResultado` | Drawer derecho de resultado | Mostrar salida y permitir continuar flujo | Boton `Resultado` o `Aplicar cambios` | Estado, descarga y usar otra herramienta | Documento seleccionado | Depende del job/resultado activo. |
+
+Reglas aplicadas:
+
+- No debe existir `tool-dock`, `tool-dock-pin` ni `tool-dock-item`.
+- No se deben duplicar herramientas en barras laterales o flotantes.
+- La fuente unica de acciones es la lista central `tools` del workspace.
+- El estado unico de accion es `activeTool` y el panel visible es `drawer`.
+- Toda accion actua sobre el documento seleccionado o activo.
+
 ## Estandar de acciones primarias DocuCore 2026-05-30
 
 Toda accion que genera proceso, modificacion o resultado debe verse como boton
@@ -324,3 +346,248 @@ PrimaryActionButton
 
 Las acciones principales deben consumir el componente reutilizable de accion
 primaria para evitar multiples estilos independientes dentro de DocuCore.
+
+## Preview modular por tipo de archivo 2026-05-30
+
+DocuCore no debe asumir que todos los archivos se previsualizan igual. La vista
+previa se define por familia documental:
+
+| Tipo | Preview esperado | Motor sugerido |
+|---|---|---|
+| PDF | Miniaturas por pagina, pagina activa, zoom, busqueda y seleccion de texto. | PDF.js como primera opcion MVP. |
+| Word/DOCX | HTML temporal seguro, sin descargar archivo. | Mammoth.js o docx-preview. |
+| Excel/CSV | Tabla HTML/JSON con selector de hojas, filtros y busqueda. | SheetJS. |
+| Imagen | Imagen directa con zoom, rotacion, recorte y comparacion. | Render nativo + herramientas de imagen. |
+| OCR | Vista dividida: documento/imagen y texto extraido. | Document API + motor OCR futuro. |
+| ZIP | Arbol navegable de archivos internos. | Preview Service backend. |
+| XML | XML original y vista estructurada. | Parser XML seguro backend/frontend. |
+| TXT | Editor o tabla segun contenido. | Render texto/CSV seguro. |
+
+Orden recomendado de implementacion:
+
+1. PDF.js para PDF.
+2. Imagenes.
+3. Word con HTML temporal.
+4. Excel/CSV como tabla.
+5. OCR lado a lado.
+6. ZIP navegable.
+7. XML estructurado.
+
+La infraestructura debe servir tambien a LexNova y otros proyectos porque el
+preview vive en `API.PY.DJANGO.Document` y se consume por Gateway.
+
+## Estandar de estados y acciones del workspace 2026-05-30
+
+La pagina `/workspace` debe ejecutar acciones sobre un estado unico de
+documento activo, sin duplicar controles ni bloquear la previsualizacion.
+
+Estados obligatorios de pagina:
+
+| Estado | Proposito | UI esperada |
+|---|---|---|
+| `idle` | No hay documento activo. | Redirigir al flujo de carga o mostrar accion principal de upload. |
+| `metadata-loading` | DocuCore detecta tipo, peso y numero de paginas. | Header con nombre de archivo y skeleton de estructura. |
+| `preview-loading` | Existe metadata y las paginas se renderizan progresivamente. | Placeholder por pagina y contador de paginas listas. |
+| `page-ready` | Una pagina ya tiene preview utilizable. | Miniatura o render real seleccionable. |
+| `page-error` | Una pagina no pudo cargarse. | Estado de error dentro de esa pagina, sin bloquear las demas. |
+| `ready` | El documento esta disponible para trabajar. | Herramientas compatibles, configuracion y preview activa. |
+| `applying` | Se ejecuta una accion. | Boton principal deshabilitado, job visible y preview conservada. |
+| `result-ready` | Existe artefacto o resultado. | Drawer de resultado con descarga y siguiente accion. |
+| `failed` | Fallo global de accion o job. | Error normalizado, reintento y datos de diagnostico. |
+
+Acciones permitidas de pagina:
+
+| Accion | Estado que modifica | Regla |
+|---|---|---|
+| `selectFiles` | `idle` -> `metadata-loading` | Viene desde `/upload`; no debe seleccionar herramienta antes del archivo. |
+| `openToolsPanel` | `ready` | Abre la lista unica de acciones documentales. |
+| `filterTools` | `ready` | Filtra por nombre, categoria, accion, sinonimo y compatibilidad documental. |
+| `selectAction` | `ready` | Cambia `activeTool` y abre configuracion cuando aplique. |
+| `selectPages` | `ready` | Cambia seleccion local sin bloquear render de paginas. |
+| `applyChanges` | `ready` -> `applying` | Usa `PrimaryActionButton` y conserva contexto del documento. |
+| `openResult` | `result-ready` | Muestra descarga y acciones posteriores. |
+| `retryPagePreview` | `page-error` -> `preview-loading` | Reintenta solo la pagina fallida. |
+
+Reglas del cuadro de herramientas:
+
+- La barra inferior es compacta, basada en iconos y con tooltip/etiqueta por
+  hover, focus o toque.
+- La lista unica de herramientas vive en el drawer `Herramientas disponibles`.
+- No se deben crear barras secundarias, rails duplicados ni accesos paralelos a
+  las mismas acciones.
+- La busqueda debe resolver coincidencia exacta, categoria, palabras clave y
+  sinonimos de accion, por ejemplo `cortar`, `texto`, `reducir` o `firma`.
+- Las herramientas visibles dependen del tipo documental y de la accion activa;
+  PDF no debe mostrar de forma plana herramientas exclusivas de Excel, XML o
+  ZIP.
+
+Reglas de previsualizacion progresiva:
+
+- Al tener metadata, la UI debe pintar todos los placeholders de paginas antes
+  de terminar de renderizar previews reales.
+- Cada pagina tiene estado independiente: `pending`, `loading`, `ready` o
+  `error`.
+- La pagina visible y las cercanas tienen prioridad de render.
+- Si una pagina no puede cargarse, muestra preloader/error local y no bloquea
+  herramientas, seleccion de paginas ni configuracion.
+- El MVP puede usar miniaturas conceptuales mientras no exista motor PDF.js o
+  endpoint real de preview; debe quedar marcado como deuda tecnica documentada.
+
+## Implementacion frontend de miniaturas PDF 2026-05-30
+
+La ruta `/upload` debe transferir el PDF seleccionado al workspace antes de
+navegar a `/workspace`. Mientras no exista backend de preview por `file_id`, el
+frontend usa una sesion local temporal:
+
+```text
+sessionStorage["docucore.workspace.document"]
+```
+
+Contenido minimo:
+
+- `documentId`
+- `fileName`
+- `fileType`
+- `extension`
+- `size`
+- `objectUrl`
+- `createdAt`
+
+Reglas aplicadas:
+
+- `/upload` crea un `objectUrl` del archivo real seleccionado y lo registra en
+  `sessionStorage` antes de abrir `/workspace`.
+- `/workspace` lee esa sesion, valida que sea PDF y usa PDF.js para obtener el
+  numero real de paginas.
+- Las miniaturas se renderizan en canvas y se convierten a imagen de preview
+  por pagina.
+- Cada pagina conserva estado independiente `pending`, `loading`, `ready` o
+  `error`.
+- Si el usuario abre `/workspace` directamente sin PDF activo, se muestra error
+  local y se indica volver a `/upload`.
+- Esta implementacion es puente frontend MVP. Cuando Gateway entregue previews
+  por `file_id`, debe sustituirse `objectUrl` por los endpoints documentados en
+  `api-contracts.md`.
+
+## Correccion de marcos adaptativos de preview 2026-05-30
+
+Cada miniatura del workspace debe respetar la proporcion real de la pagina o
+imagen previsualizada. No se permite usar un rectangulo fijo universal para
+todas las paginas.
+
+Metadata minima por pagina:
+
+```ts
+{
+  page: 1,
+  status: "ready",
+  previewUrl: "data:image/webp;base64,...",
+  width: 612,
+  height: 792,
+  sizeName: "Carta",
+  orientation: "portrait"
+}
+```
+
+Reglas aplicadas:
+
+- PDF.js obtiene `width` y `height` reales con escala 1 antes de renderizar la
+  miniatura.
+- El frontend detecta tamano aproximado: A5, A4, Carta, Oficio, Legal o
+  Personalizado.
+- El frontend detecta orientacion: vertical, horizontal o cuadrada.
+- El marco visual usa la proporcion real mediante `aspect-ratio`.
+- La imagen renderizada usa `object-fit: contain` y `overflow: hidden` para no
+  salirse del contenedor.
+- Cada pagina muestra metadata visible, por ejemplo:
+
+```text
+Pagina 1
+Carta | V
+```
+
+Pendiente:
+
+- Mover esta metadata al contrato real de Gateway cuando exista preview por
+  `file_id`.
+- La metadata completa debe quedar en `title`, tooltip o panel contextual, no
+  como texto permanente dentro de una miniatura pequena.
+
+## Acciones rapidas por pagina 2026-05-31
+
+Cada pagina del preview debe exponer acciones frecuentes sin obligar al usuario
+a abrir otro panel ni salir del workspace.
+
+Acciones visibles al pasar cursor, enfocar o seleccionar una pagina:
+
+| Accion | Alcance | Estado MVP |
+|---|---|---|
+| Girar izquierda | Pagina seleccionada | Preparado en UI. |
+| Girar derecha | Pagina seleccionada | Preparado en UI. |
+| Extraer pagina | Pagina seleccionada | Preparado en UI. |
+| Duplicar pagina | Pagina seleccionada | Preparado en UI. |
+| Eliminar pagina | Pagina seleccionada con confirmacion futura | Preparado en UI. |
+| Mas opciones | Menu avanzado por pagina | Preparado en UI. |
+
+Reglas:
+
+- La barra rapida aparece sobre la pagina en hover/focus o cuando la pagina ya
+  esta seleccionada.
+- Las acciones deben mantener la seleccion activa y mostrar retroalimentacion
+  inmediata.
+- Las acciones avanzadas futuras incluyen OCR por pagina, notas, etiquetas,
+  marcadores, reordenamiento, descarga individual, recorte, correccion de
+  inclinacion, mejora de contraste, firma, marca de agua y traduccion.
+- Mientras no existan motores backend para modificar el PDF, la UI solo deja el
+  estado preparado y no debe prometer descarga final real.
+
+## Correccion de acciones compatibles en upload 2026-05-31
+
+La seccion `Acciones compatibles` de `/upload` usa tarjetas de decision, no
+botones de ejecucion inmediata.
+
+Reglas obligatorias:
+
+- Las tarjetas deben mantenerse blancas, con titulo oscuro, subtitulo gris,
+  borde `#E5E7EB`, sombra suave e icono rojo DocuCore.
+- El estado activo usa borde `var(--brand-primary)` o `var(--primary)` y fondo
+  rojo muy claro, sin convertir la tarjeta en bloque rojo solido.
+- Las acciones se ordenan por prioridad del tipo de archivo. Para PDF el orden
+  preferente es: Dividir PDF, Unir PDF, Comprimir PDF, PDF a Word, OCR,
+  Generar indice y Exportar PDF indexado.
+- Las etiquetas de salida deben ser legibles para usuario final:
+  `PDF -> ZIP`, `PDF -> PDF`, `PDF -> DOCX`, `Imagen -> Texto`,
+  `PDF -> Indice` y `PDF -> PDF Indexado`.
+- Si existen mas de seis acciones compatibles, la UI puede usar grid
+  responsive o carrusel, siempre sin romper el layout mobile first.
+
+## Correccion compacta de miniaturas PDF 2026-05-31
+
+`pdf-thumb` debe ser una tarjeta compacta y accesible. La tarjeta no debe
+contener un boton que a su vez contenga otros elementos con `role="button"` o
+botones internos.
+
+Estructura esperada:
+
+```tsx
+<article className="pdf-thumb">
+  <button className="thumb-select" type="button">...</button>
+  <div className="page-quick-actions">
+    <button className="page-action" type="button">...</button>
+  </div>
+</article>
+```
+
+Reglas:
+
+- Dentro de la miniatura solo se muestra `Pagina N`, metadata corta y un punto
+  visual de estado.
+- La imagen renderizada debe usar `object-fit: contain`, `overflow: hidden` y
+  `aspect-ratio` calculado desde la pagina real.
+- En tarjetas pequenas solo se muestran girar izquierda, girar derecha y mas
+  opciones. Extraer, duplicar, eliminar, metadata, descargar, reemplazar,
+  insertar, OCR, nota, etiqueta e importante viven en el menu.
+- La eliminacion requiere confirmacion o undo antes de modificar el estado del
+  workspace.
+- Las rotaciones pueden aplicarse visualmente en frontend, pero la persistencia
+  real queda pendiente del motor backend o contrato de job.

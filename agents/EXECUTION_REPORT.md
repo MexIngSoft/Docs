@@ -5216,3 +5216,424 @@ anterior de DocuCore Web.
 Los agents `AGENTS-000.md` y `AGENTS-001.md` se archivan en
 `Docs/_archive/agents/2026-05-30-docucore-smart-workspace-actions/`. Los
 archivos activos quedan limpios para futuras corridas.
+
+# Reporte agents DocuCore acciones compatibles y miniaturas compactas
+
+Fecha: 2026-05-31
+
+## Alcance
+
+Se ejecuto la corrida activa de `Docs/agents/AGENTS-*.md` en orden numerico.
+Los agents con contenido fueron `AGENTS-000.md`, `AGENTS-001.md` y
+`AGENTS-002.md`; `AGENTS-003.md` a `AGENTS-030.md` estaban vacios.
+
+## Documentacion revisada
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Las tarjetas de `Acciones compatibles` en `/upload` quedaron blancas, con contraste correcto, icono rojo, estado activo claro, hover controlado, etiquetas de salida normalizadas y prioridad por tipo de archivo. |
+| `AGENTS-001.md` | Completado | `pdf-thumb` quedo compacto: miniatura contenida, texto visible minimo, metadata completa en tooltip, punto visual de estado y acciones rapidas sin ocupar espacio permanente. |
+| `AGENTS-002.md` | Completado MVP | Las acciones de pagina usan botones reales fuera del boton de seleccion. Girar modifica rotacion visual, duplicar inserta copia, eliminar pide confirmacion y el menu concentra acciones avanzadas. |
+| `AGENTS-003.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tarea ejecutable. |
+
+## Tareas ejecutadas
+
+- Se ordenaron herramientas compatibles por prioridad de familia documental.
+- Se normalizaron etiquetas visibles de salida: `PDF -> ZIP`, `PDF -> PDF`,
+  `PDF -> DOCX`, `Imagen -> Texto`, `PDF -> Indice` y
+  `PDF -> PDF Indexado`.
+- Se separo la estructura de miniatura en `article.pdf-thumb`,
+  `button.thumb-select` y botones reales para acciones.
+- Se movieron acciones avanzadas a menu por pagina.
+- Se documento el estandar canonico de estas correcciones en DocuCore.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/upload/UploadClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin errores ni warnings. Next.js mantiene aviso de deprecacion de `next lint`. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado, 20 rutas generadas. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo avisos LF/CRLF de Git. |
+| `git diff --check` en `Docs` | Aprobado; solo avisos LF/CRLF de Git. |
+| `Start-NextLocalWeb.ps1 -Project docucore -CleanCache -SkipBuild -SkipLint -SkipInstall` | Aprobado en segundo intento. El primero fallo al limpiar `.next` por bloqueo temporal de Windows; se reintento sin tocar otros proyectos. |
+| `Repair-NextCss.ps1 -Project docucore -Url http://localhost:3004 -Local` | Aprobado; CSS disponible. |
+| `GET http://localhost:3004/` | `200`. |
+| `GET http://localhost:3004/upload` | `200`. |
+| `GET http://localhost:3004/workspace` | `200`. |
+
+## Decisiones tomadas
+
+- Las tarjetas compatibles de upload quedan aisladas por selector
+  `.prep-actions` para no cambiar otros botones primarios del sistema.
+- El estado de pagina usa punto visual compacto en lugar de texto permanente.
+- La rotacion se aplica visualmente en frontend mientras no exista contrato
+  backend para persistir cambios reales de PDF.
+- La eliminacion requiere confirmacion inmediata para no perder paginas por
+  clic accidental.
+
+## Informacion faltante o ambigua
+
+- Falta contrato backend/job para persistir rotar, extraer, duplicar, eliminar,
+  OCR por pagina y descarga individual.
+- Falta definir si las paginas duplicadas deben renumerarse visualmente o
+  conservar referencia a la pagina original en el contrato real.
+- Windows puede mantener `.next` bloqueado unos segundos despues de detener el
+  puerto local; el protocolo debe permitir reintento antes de escalar a
+  limpieza manual.
+
+## Limpieza
+
+`AGENTS-000.md`, `AGENTS-001.md` y `AGENTS-002.md` se archivaron en
+`Docs/_archive/agents/2026-05-31-docucore-compatible-actions-compact-thumbs/`.
+Los archivos activos `AGENTS-000.md` a `AGENTS-030.md` quedaron vacios para
+futuras corridas.
+
+---
+
+# Reporte agents DocuCore preview modular y acciones centralizadas
+
+Fecha: 2026-05-30
+
+## Alcance
+
+Se ejecutaron los agents activos `AGENTS-000.md` y `AGENTS-001.md` en orden
+numerico. El primero define preview modular por tipo de archivo; el segundo
+corrige duplicacion de herramientas eliminando la barra `tool-dock`.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/document-intelligence.md`
+- `Docs/02_projects/docucore/feature-visibility-map.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado documental | Se documento el preview modular por tipo de archivo y contratos objetivo de Preview Service en Gateway/Document API. No se integro PDF.js porque falta contrato real de `file_id` activo y seleccion de motor. |
+| `AGENTS-001.md` | Completado | Se elimino la barra duplicada `tool-dock`; las herramientas quedaron centralizadas en el drawer `Herramientas disponibles` activado desde la barra principal. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tarea ejecutable. |
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado. |
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; `next lint` muestra aviso de deprecacion para Next 16. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado. |
+| `git diff --check` en `Docs` | Aprobado. |
+
+## Decisiones tomadas
+
+- Las acciones del documento viven en una unica lista `tools`.
+- El panel correcto de herramientas es el drawer `Herramientas disponibles`.
+- Se elimino cualquier clase e implementacion `tool-dock`, `tool-dock-pin` y
+  `tool-dock-item` para evitar doble barra.
+- El preview real se documenta como servicio modular de Document API consumido
+  por Gateway, no como logica aislada en cada pantalla.
+
+## Informacion faltante o ambigua
+
+- Motor real elegido para PDF: PDF.js, React PDF Viewer o PDFium WASM.
+- Contrato final para persistir y pasar `file_id` activo a `/workspace`.
+- Storage y URLs firmadas para miniaturas y previews generados.
+- Motores reales para DOCX, Excel, OCR, ZIP y XML.
+
+## Limpieza
+
+Los agents `AGENTS-000.md` y `AGENTS-001.md` se archivan en
+`Docs/_archive/agents/2026-05-30-docucore-preview-actions/`. Los archivos
+activos quedan limpios para futuras corridas.
+
+---
+
+# Reporte agents DocuCore estados, acciones y preview progresivo
+
+Fecha: 2026-05-30
+
+## Alcance
+
+Se ejecutaron los agents activos `AGENTS-000.md` y `AGENTS-001.md` en orden
+numerico. El primero estandariza el cuadro de herramientas compacto, buscable y
+sin duplicacion. El segundo define e implementa un preview progresivo por
+pagina con estados independientes.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado MVP | El workspace conserva una barra inferior compacta de iconos con etiquetas por interaccion. Las herramientas documentales viven en el drawer unico `Herramientas disponibles`, con busqueda por nombre, categoria, accion y sinonimos, filtrada por tipo documental PDF. |
+| `AGENTS-001.md` | Completado MVP | Se agrego estado de preview por pagina (`pending`, `loading`, `ready`, `error`), placeholder inmediato, preloader por pagina y error local sin bloquear herramientas ni seleccion. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tarea ejecutable. |
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; `next lint` muestra aviso de deprecacion para Next 16. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado, 20 rutas generadas. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo aviso LF/CRLF de Git. |
+| `git diff --check` en `Docs` | Aprobado; solo aviso LF/CRLF de Git. |
+
+## Decisiones tomadas
+
+- El drawer de herramientas es la fuente unica de acciones documentales.
+- La barra inferior conserva accesos generales y muestra texto solo por
+  interaccion para priorizar el documento.
+- La busqueda del drawer resuelve sinonimos de usuario como `cortar`, `texto`,
+  `reducir` y `firma`.
+- El preview actual usa render conceptual progresivo mientras no exista motor
+  PDF.js o endpoint real de paginas.
+- La pagina con error no bloquea la seleccion ni las acciones de workspace.
+
+## Informacion faltante o ambigua
+
+- Endpoint real para obtener `file_id`, metadata y total de paginas desde
+  Gateway.
+- Motor final de preview PDF y formato cacheado definitivo.
+- Politica de reintento real por pagina y expiracion de miniaturas.
+- Persistencia de historial/frecuencia de herramientas por usuario.
+
+## Limpieza
+
+Los agents `AGENTS-000.md` y `AGENTS-001.md` se archivan en
+`Docs/_archive/agents/2026-05-30-docucore-preview-states-actions/`. Los
+archivos activos quedan limpios para futuras corridas.
+
+---
+
+# Reporte agents DocuCore preview real y marcos adaptativos
+
+Fecha: 2026-05-30
+
+## Alcance
+
+Se ejecutaron los agents activos `AGENTS-000.md` y `AGENTS-002.md` en orden
+numerico. `AGENTS-000.md` refuerza la previsualizacion progresiva por pagina;
+`AGENTS-002.md` corrige el visualizador para que cada pagina respete su tamano
+real y no se salga del marco.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | La preview progresiva ya existe en `/workspace`: se obtiene el PDF desde `/upload`, se calcula el total real de paginas con PDF.js, se muestran placeholders y se renderiza cada miniatura de forma independiente. |
+| `AGENTS-002.md` | Completado | Cada pagina guarda `width`, `height`, `sizeName` y `orientation`; el marco usa proporcion real con `aspect-ratio`, centra el contenido y evita desbordamiento con `object-fit: contain` y `overflow: hidden`. |
+| `AGENTS-001.md`, `AGENTS-003.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tarea ejecutable. |
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/upload/UploadClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/package.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/package-lock.json`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; `next lint` muestra aviso de deprecacion para Next 16. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado, 20 rutas generadas. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo aviso LF/CRLF de Git. |
+| `git diff --check` en `Docs` | Aprobado; solo aviso LF/CRLF de Git. |
+
+## Decisiones tomadas
+
+- Se mantiene PDF.js como motor MVP de preview real en frontend.
+- La metadata visual se calcula desde el viewport original de PDF.js con escala
+  1 para conservar ancho, alto y orientacion reales.
+- El nombre de tamano se detecta de forma aproximada: A5, A4, Carta, Oficio,
+  Legal o Personalizado.
+- El contrato objetivo de Gateway se amplio para incluir `size_name` y
+  `orientation`.
+
+## Informacion faltante o ambigua
+
+- Endpoint productivo de Gateway para sustituir `sessionStorage` y `objectUrl`
+  por `file_id`.
+- Politica de cache y expiracion de miniaturas generadas.
+- Precision final de deteccion para tamanos regionales no estandar.
+- Modos de zoom completos: ajustar al ancho, pagina completa, 100% y zoom
+  manual.
+
+## Limpieza
+
+Los agents `AGENTS-000.md` y `AGENTS-002.md` se archivan en
+`Docs/_archive/agents/2026-05-30-docucore-real-preview-adaptive-frames/`. Los
+archivos activos quedan limpios para futuras corridas.
+
+---
+
+# Reporte agents DocuCore acciones por pagina y protocolo Next.js
+
+Fecha: 2026-05-31
+
+## Alcance
+
+Se ejecuto el agent activo `AGENTS-000.md` en orden numerico. La tarea del
+agent agrega acciones rapidas por pagina dentro del preview de DocuCore. A
+solicitud del usuario, tambien se creo un estandar operativo para recuperar
+webs Next.js cuando despues de cambios quedan sin estilos, con cache rota,
+`500` temporal o dev server atorado.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/03_standards/frontend/README.md`
+- `Docs/03_standards/frontend/shared-docker-frontend-architecture.md`
+- `Docs/03_standards/operations/local-port-registry.md`
+- `Docs/02_projects/docucore/docker.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado MVP | Se agrego barra de acciones rapidas por pagina en el preview: girar izquierda, girar derecha, extraer, duplicar, eliminar y mas opciones. La barra aparece por hover/focus o al seleccionar pagina y mantiene la seleccion activa. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tarea ejecutable. |
+
+## Estandar operativo creado
+
+| Archivo | Proposito |
+|---|---|
+| `Docs/03_standards/frontend/nextjs-runtime-recovery-standard.md` | Protocolo canonico para reparar webs Next.js locales con CSS roto, cache vieja, `500` temporal o dev server atorado. |
+| `Docs/03_standards/operations/scripts/Start-NextLocalWeb.ps1` | Script ejecutable para lint/build opcional, detener solo el puerto del proyecto, limpiar `.next`, levantar `npm run dev` y validar rutas. |
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/03_standards/frontend/README.md`
+- `Docs/03_standards/frontend/nextjs-runtime-recovery-standard.md`
+- `Docs/03_standards/operations/local-port-registry.md`
+- `Docs/03_standards/operations/scripts/Start-NextLocalWeb.ps1`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; `next lint` muestra aviso de deprecacion para Next 16. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado, 20 rutas generadas. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo aviso LF/CRLF de Git. |
+| `git diff --check` en `Docs` | Aprobado; solo aviso LF/CRLF de Git. |
+| `Start-NextLocalWeb.ps1 -Project docucore -CleanCache -SkipBuild -SkipLint -SkipInstall` | Aprobado; reinicio local y rutas validadas. |
+| `Repair-NextCss.ps1 -Project docucore -Url http://localhost:3004 -Local` | Aprobado; CSS disponible. |
+| `GET http://localhost:3004/` | `200`. |
+| `GET http://localhost:3004/upload` | `200`. |
+| `GET http://localhost:3004/workspace` | `200`. |
+
+## Decisiones tomadas
+
+- El protocolo de recuperacion queda como estandar frontend porque el problema
+  se repite en varias webs Next.js, no solo en DocuCore.
+- No se borra `node_modules` como primer intento; primero se valida lint/build,
+  se limpia `.next` y se reinicia solo el puerto canonico.
+- El script no cambia puertos; usa el registro local.
+- Las acciones rapidas por pagina son MVP visual/preparado. No prometen
+  modificacion real de PDF hasta que exista motor backend o contrato de job.
+
+## Informacion faltante o ambigua
+
+- Aun falta integrar capturas visuales automáticas con Playwright.
+- Falta definir motor backend para aplicar realmente rotar, extraer, duplicar
+  y eliminar paginas.
+- Falta decidir si el protocolo se ejecutara automaticamente desde Docker o
+  solo bajo demanda.
+
+## Limpieza
+
+El agent `AGENTS-000.md` se archiva en
+`Docs/_archive/agents/2026-05-31-docucore-page-actions-next-recovery/`. Los
+archivos activos quedan limpios para futuras corridas.

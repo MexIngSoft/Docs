@@ -339,6 +339,7 @@
 | Agents | `agents/AGENT_GLOBAL_RULES.md` | Reglas globales para ejecutar agents con autonomia responsable | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/global-governance.md` | Gobierno global del ecosistema de productos | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/frontend/ui-ux-standard.md` | Estandar UI/UX mobile first y por dominio | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/frontend/nextjs-runtime-recovery-standard.md` | Estandar de recuperacion runtime Next.js | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/frontend/undocumented-modernization-standard.md` | Modernizacion visual cuando no hay documentacion especifica | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/documentation-first-workflow.md` | Flujo documentation-first para tareas sin agents | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/standard-request-prompts.md` | Prompts estandar con agents, sin agents y modernizacion visual | ACTIVE | P1 | Equipo documental |

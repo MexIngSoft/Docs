@@ -91,6 +91,7 @@
 - `02_projects/tip-smart/README.md`
 - `03_standards/frontend/README.md`
 - `03_standards/frontend/ui-ux-standard.md`
+- `03_standards/frontend/nextjs-runtime-recovery-standard.md`
 - `03_standards/frontend/undocumented-modernization-standard.md`
 - `03_standards/global-governance.md`
 - `03_standards/documentation-first-workflow.md`

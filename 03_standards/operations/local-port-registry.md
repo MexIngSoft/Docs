@@ -156,6 +156,34 @@ powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations
 Regla: antes de borrar cache manualmente, correr este script para dejar
 evidencia de si la falla era pagina, CSS o servidor.
 
+## Script de arranque limpio Next.js local
+
+Script:
+
+```text
+Docs/03_standards/operations/scripts/Start-NextLocalWeb.ps1
+```
+
+Este script ejecuta el protocolo local para webs Next.js cuando despues de un
+cambio la pagina queda sin estilos, responde `500`, conserva cache vieja o se
+atora el dev server. Ejecuta lint/build, detiene solo el puerto del proyecto,
+limpia `.next` si se pide y levanta `npm run dev` en el puerto canonico.
+
+DocuCore con limpieza de cache:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-NextLocalWeb.ps1 -Project docucore -CleanCache
+```
+
+DocuCore sin limpiar cache:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-NextLocalWeb.ps1 -Project docucore
+```
+
+Regla: cuando una web Next.js se vea mal despues de cambios, usar este script
+antes de reinicios manuales repetidos.
+
 ## Script unificado de arranque Docker
 
 Script:
