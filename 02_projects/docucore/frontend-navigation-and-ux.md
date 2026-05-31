@@ -591,3 +591,62 @@ Reglas:
   workspace.
 - Las rotaciones pueden aplicarse visualmente en frontend, pero la persistencia
   real queda pendiente del motor backend o contrato de job.
+
+## Roadmap interactivo del workspace PDF 2026-05-31
+
+El workspace de DocuCore adopta un modelo progresivo para manipulacion de
+paginas y division de PDF. El frontend puede preparar y visualizar cambios,
+pero el motor real de escritura de PDF sigue pendiente de contrato backend.
+
+Orden funcional:
+
+1. Estado individual por pagina: rotacion, modificacion, papelera, OCR y
+   metadata visual.
+2. Acciones rapidas: girar, copiar, cortar, pegar, duplicar, descartar,
+   restaurar y marcar.
+3. Reordenamiento: arrastrar y soltar paginas dentro del preview.
+4. Menu avanzado por pagina: agrupa acciones destructivas, OCR, metadata,
+   descargas, reemplazo, insercion y acciones futuras.
+5. Dividir PDF por modos: secciones, paginas, marcadores, automatico y
+   avanzado.
+6. Secciones visuales: cada seccion tiene nombre, color y paginas asociadas.
+7. Papelera reversible: descartar no elimina inmediatamente; las paginas se
+   pueden ocultar, restaurar o eliminar permanentemente.
+8. Seleccion avanzada: seleccion individual, presets, rangos escritos y
+   acciones masivas.
+9. Marcadores: estructura manual inicial para navegar y dividir documentos.
+10. Division automatica: solo genera sugerencias; nunca aplica cambios sin
+    confirmacion.
+
+Reglas de estado:
+
+- Una pagina rotada debe intercambiar ancho y alto para calcular su marco
+  visual cuando la rotacion sea 90 o 270 grados.
+- Toda pagina modificada debe mostrar una insignia breve: Girado, Copiado,
+  Cortado, Pegado, Movido, Descartado, OCR, Importante o Etiqueta.
+- Copiar no elimina la pagina original.
+- Cortar no elimina la pagina original hasta que el usuario pega en una zona.
+- Pegar limpia el portapapeles.
+- Descartar manda la pagina a papelera reversible.
+- OCR, marcadores automaticos y division inteligente se muestran como estados
+  preparados cuando no exista motor backend real.
+
+Modos de `Dividir PDF`:
+
+| Modo | Uso | Estado MVP |
+|---|---|---|
+| Secciones | Crear bloques visuales con paginas seleccionadas. | Implementado en frontend local. |
+| Paginas | Seleccionar paginas por texto, rango o presets. | Implementado en frontend local. |
+| Marcadores | Crear marcadores manuales y navegar/dividir por ellos. | Implementado como estructura local inicial. |
+| Automatico | Generar sugerencias reversibles por reglas. | Implementado como analisis local simulado. |
+| Avanzado | Preparar OCR, sensibilidad y reglas futuras. | Documentado/preparado; requiere backend. |
+
+Pendiente backend:
+
+- Persistir operaciones reales de PDF: rotar, mover, cortar, pegar, duplicar,
+  descartar y restaurar.
+- Ejecutar OCR real por pagina o documento y devolver texto, confianza,
+  bloques y errores.
+- Detectar bookmarks PDF reales y estructuras OCR automaticamente.
+- Generar propuesta inteligente real por paginas en blanco, QR, layout, texto
+  personalizado e IA documental.

@@ -5308,6 +5308,117 @@ Los agents con contenido fueron `AGENTS-000.md`, `AGENTS-001.md` y
 Los archivos activos `AGENTS-000.md` a `AGENTS-030.md` quedaron vacios para
 futuras corridas.
 
+# Reporte agents DocuCore workspace PDF avanzado
+
+Fecha: 2026-05-31
+
+## Publicacion previa solicitada
+
+Antes de ejecutar los nuevos agents se guardaron y publicaron los cambios
+existentes:
+
+| Repositorio | Rama | Commit | Push |
+|---|---|---|---|
+| `MexIngSoft/WEB.NJ.NEXT.DocuCore` | `main` | `9953435` - `Improve DocuCore PDF workspace` | Correcto. |
+| `MexIngSoft/Docs` | `feature/lex-nova-tech-identification` | `a057279` - `Document DocuCore agent updates` | Correcto. |
+
+`gh` no esta instalado en el entorno local, por lo que no se crearon PRs desde
+CLI. Se uso `git commit` y `git push` con los remotos ya configurados.
+
+## Orden de ejecucion definido
+
+Se leyeron completos los agents activos `AGENTS-000.md` a `AGENTS-014.md`.
+`AGENTS-015.md` a `AGENTS-030.md` estaban vacios.
+
+Orden tecnico aplicado:
+
+1. `AGENTS-000.md`: estado de pagina, rotacion y modificacion.
+2. `AGENTS-001.md`: copiar, cortar, pegar y zonas de insercion.
+3. `AGENTS-002.md`: reordenamiento por arrastrar y soltar.
+4. `AGENTS-003.md` y `AGENTS-004.md`: menu avanzado por pagina. Son
+   duplicados, se resolvieron con una sola implementacion.
+5. `AGENTS-005.md`: OCR avanzado. Quedo como preparacion visual; falta motor
+   backend.
+6. `AGENTS-006.md`: acciones futuras por pagina. Quedo como menu/configuracion
+   preparada.
+7. `AGENTS-007.md`: nuevo modelo UX de Dividir PDF.
+8. `AGENTS-008.md` a `AGENTS-014.md`: secciones, colores, papelera,
+   visibilidad, seleccion, marcadores y division automatica. Quedaron como MVP
+   frontend/documental donde no existe backend real.
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado MVP | La rotacion recalcula el marco visual, intercambia ancho/alto en 90/270 grados, actualiza metadata y marca paginas modificadas. |
+| `AGENTS-001.md` | Completado MVP | Se agrego portapapeles local para copiar/cortar, zonas de pegado, pegado de copia/movimiento y limpieza de portapapeles. |
+| `AGENTS-002.md` | Completado MVP | Se habilito reordenamiento local por drag/drop y marca visual de pagina movida. |
+| `AGENTS-003.md` | Completado MVP | Menu avanzado reordenado con acciones agrupadas, nombres corregidos y botones accesibles. |
+| `AGENTS-004.md` | Completado por duplicado | El contenido era duplicado de `AGENTS-003.md`; queda cubierto por la misma implementacion. |
+| `AGENTS-005.md` | Parcialmente completado | OCR por pagina queda en estado visual `queued` y documentado. Falta motor backend Tesseract/PaddleOCR, calidad, fallback y combinacion real. |
+| `AGENTS-006.md` | Parcialmente completado | Acciones futuras aparecen preparadas en menu, sin prometer ejecucion real hasta existir handlers/backend. |
+| `AGENTS-007.md` | Completado MVP | Drawer de Dividir PDF cambio a modos visuales: Secciones, Paginas, Marcadores, Automatico y Avanzado, con resumen antes de aplicar. |
+| `AGENTS-008.md` | Parcialmente completado | Secciones visuales locales con color, nombre y paginas seleccionadas. Falta persistencia y edicion completa. |
+| `AGENTS-009.md` | Parcialmente completado | Colores e indicadores visuales iniciales para secciones/paginas modificadas. Falta personalizacion completa. |
+| `AGENTS-010.md` | Parcialmente completado | Descartar envia a papelera reversible; restaurar y eliminar permanente existen en menu. Falta panel dedicado de papelera. |
+| `AGENTS-011.md` | Parcialmente completado | Control para mostrar/ocultar paginas descartadas agregado al resumen del drawer. |
+| `AGENTS-012.md` | Parcialmente completado | Seleccion individual, presets y rangos escritos. Falta seleccion por arrastre/Shift completa. |
+| `AGENTS-013.md` | Parcialmente completado | Marcadores manuales locales desde seleccion. Falta deteccion PDF/OCR, jerarquia y reordenamiento real. |
+| `AGENTS-014.md` | Parcialmente completado | Division automatica genera sugerencias locales reversibles. Falta OCR/QR/layout/IA real. |
+| `AGENTS-015.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-002.md`
+- `Docs/agents/AGENTS-003.md`
+- `Docs/agents/AGENTS-004.md`
+- `Docs/agents/AGENTS-007.md`
+- `Docs/_archive/agents/2026-05-31-docucore-workspace-page-mvp/`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas. |
+
+## Decisiones tomadas
+
+- Se implemento un MVP frontend amplio para no bloquear el avance visual del
+  workspace mientras se definen contratos backend.
+- No se prometen salidas PDF reales para OCR, auto split, marcadores
+  detectados, QR o IA documental.
+- La eliminacion inicial se trato como descarte reversible, no como borrado
+  irreversible.
+- Solo se archivaron agents completados como MVP validado. Los agents con
+  dependencias reales pendientes se mantienen activos.
+
+## Pendientes y bloqueos
+
+- Backend para persistir operaciones reales de PDF.
+- Motor OCR real y normalizacion Tesseract/PaddleOCR.
+- Deteccion real de bookmarks, OCR, QR, paginas en blanco, layout e IA.
+- Persistencia de secciones, marcadores, papelera, sugerencias y seleccion.
+- Panel dedicado de papelera y acciones masivas completas.
+- Seleccion por arrastre y Shift con accesibilidad completa.
+
+## Limpieza
+
+Se archivaron `AGENTS-000.md`, `AGENTS-001.md`, `AGENTS-002.md`,
+`AGENTS-003.md`, `AGENTS-004.md` y `AGENTS-007.md` en:
+
+`Docs/_archive/agents/2026-05-31-docucore-workspace-page-mvp/`
+
+Se conservaron activos `AGENTS-005.md`, `AGENTS-006.md` y `AGENTS-008.md` a
+`AGENTS-014.md` porque tienen implementacion parcial o dependencias backend
+pendientes.
+
 ---
 
 # Reporte agents DocuCore preview modular y acciones centralizadas
