@@ -1070,3 +1070,71 @@ Pendiente:
 - Validar manualmente en navegador con PDF real que la imagen rotada no pierda
   izquierda/derecha/arriba/abajo y que las paginas verticales de la fila no se
   deformen.
+
+## Viewport exacto para previews rotadas 2026-06-01
+
+El preview rotado debe verse completo dentro del marco visible. La solucion no
+puede depender de `overflow: visible`, `scale()` ni de reducir artificialmente
+la imagen.
+
+Reglas aplicadas:
+
+- La estructura obligatoria de preview es `paper-mini` -> `paper-viewport` ->
+  `paper-rotator` -> `img`.
+- `.paper-mini` mide exactamente `--thumb-width` por
+  `--thumb-preview-height`, sin padding interno que reduzca el viewport real.
+- `.paper-viewport` ocupa 100% del marco y conserva `overflow: hidden`.
+- Para 90 y 270 grados, `.paper-rotator` invierte dimensiones:
+  `inline-size: var(--thumb-preview-height)` y
+  `block-size: var(--thumb-width)`.
+- Para 0 y 180 grados, `.paper-rotator` usa `inline-size:
+  var(--thumb-width)` y `block-size: var(--thumb-preview-height)`.
+- La imagen siempre usa `object-fit: contain` dentro del rotador y no usa
+  `max-width`/`max-height` como limite falso que recorte al rotar.
+- Se conserva metadata, numero de pagina, insignia de cambio y punto de estado
+  fuera del rotador.
+
+Validacion tecnica:
+
+- `npm run lint` aprobado.
+- `npm run build` aprobado.
+- Pruebas puras de layout de miniaturas aprobadas.
+- Busqueda local sin `scale()`, anchos `56%` ni variables de parche.
+
+Pendiente:
+
+- Validacion visual manual con PDF real en navegador para confirmar que
+  `imgBox` queda dentro de `.paper-viewport` en izquierda, derecha, arriba y
+  abajo para 90, 180 y 270 grados.
+
+## Altura exacta de previews verticales 2026-06-01
+
+La altura de una pagina vertical debe salir de su aspecto visual real, no de la
+altura mayor de toda la fila.
+
+Reglas aplicadas:
+
+- `getPageLayoutBox` calcula `thumbWidthPx` y `thumbHeightPx` desde
+  `visualWidth` y `visualHeight`.
+- Para una pagina vertical, el ancho base se mantiene en `170px` y la altura
+  se calcula como `Math.round(170 * (visualHeight / visualWidth))`.
+- Para una pagina horizontal, el ancho crece segun proporcion y la altura base
+  se mantiene compacta.
+- `--row-preview-height` puede reservar espacio y centrar previews de menor
+  altura dentro de su fila, pero no define la altura de `.paper-mini`.
+- `.paper-mini` usa siempre `height`, `min-height` y `max-height` con
+  `--thumb-preview-height`.
+- Si una pagina es mas baja que la mayor de su fila, se centra con
+  `margin-block-start` calculado desde la diferencia de fila, sin estirar el
+  preview.
+
+Validacion tecnica:
+
+- `getPageLayoutBox(639, 1000, 0)` devuelve ancho `170px` y alto `266px`.
+- La suite `page-visual-box.test.ts` cubre 7 casos de rotacion, orientacion y
+  proporcion visual.
+
+Pendiente:
+
+- Agregar prueba visual automatizada que mida `getBoundingClientRect()` de
+  `.paper-mini`, `.paper-viewport` e `img` en un PDF real con paginas mixtas.

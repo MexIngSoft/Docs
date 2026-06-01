@@ -7113,3 +7113,99 @@ El agent exige que una pagina PDF visualmente horizontal no solo cambie su
 
 `AGENTS-000.md` queda completado y listo para archivo. Los demas agents no se
 evaluaron ni ejecutaron por instruccion explicita del usuario.
+# Ejecucion agents 000-001 - viewport rotado y altura exacta de preview
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Por instruccion del usuario se realizaron primero los commits pendientes y
+despues se ejecutaron solamente los agents activos `AGENTS-000.md` y
+`AGENTS-001.md`. Los demas agents fueron ignorados en esta ejecucion.
+
+## Commits previos
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore`: `527d5e9` -
+  `Improve DocuCore workspace preview layout`.
+- `Docs`: `0fe1991` - `Document DocuCore workspace agent progress`.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+- `Docs/03_standards/frontend/nextjs-runtime-recovery-standard.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se corrigio el viewport de miniaturas rotadas para que `paper-mini`, `paper-viewport`, `paper-rotator` e imagen no recorten paginas en 90, 180 ni 270 grados. |
+| `AGENTS-001.md` | Completado | Se mantuvo altura exacta por aspecto real para previews verticales y se agrego prueba para `639 x 1000 -> 170 x 266`. |
+
+## Tareas ejecutadas
+
+- Se elimino el padding interno de `.paper-mini` para que el viewport visible no
+  sea menor que las variables calculadas.
+- `.paper-mini` ahora fija `width`, `min-width`, `max-width`, `height`,
+  `min-height` y `max-height` desde `--thumb-width` y
+  `--thumb-preview-height`.
+- `.paper-rotator` define dimensiones explicitas para paginas no rotadas y para
+  paginas `is-quarter-rotated`.
+- Las imagenes del preview usan `object-fit: contain` sin limites `max-width` o
+  `max-height` que recorten al rotar.
+- `--row-preview-height` se conserva para reservar y centrar filas, pero no se
+  usa como altura directa de `.paper-mini`.
+- Se agrego una prueba a `page-visual-box.test.ts` para asegurar que una pagina
+  vertical `639 x 1000` con base `170px` renderice alto `266px`.
+- Se actualizo la documentacion canonica de DocuCore.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/page-visual-box.test.ts`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/_archive/agents/2026-06-01-docucore-rotated-preview-viewport-height/AGENTS-000.md`
+- `Docs/_archive/agents/2026-06-01-docucore-rotated-preview-viewport-height/AGENTS-001.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
+| Pruebas `page-visual-box.test.ts` compiladas con `tsc` y ejecutadas con `node --test` | Aprobado; 7 pruebas pasaron. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas. |
+| `rg "scale\\(|width:\\s*56|56%|56\\.3|--paper-rotator-ratio|--paper-original-width|--preview-aspect" app/globals.css app/workspace` | Aprobado; sin coincidencias. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+| `Repair-NextCss.ps1 -Project docucore -Url http://localhost:3004 -Local` | Primero detecto CSS 404 por cache/runtime viejo. |
+| `Start-NextLocalWeb.ps1 -Project docucore -CleanCache` | Aprobado; limpio `.next`, reinicio solo DocuCore y dejo el puerto `3004` activo. |
+| `Repair-NextCss.ps1 -Project docucore -Url http://localhost:3004 -Local` | Aprobado; CSS disponible. |
+| `Invoke-WebRequest http://localhost:3004/workspace` | Aprobado; HTTP 200. |
+| `git diff --check` en `Docs` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+
+## Informacion faltante
+
+- Falta validacion visual manual con PDF real para confirmar que `imgBox` queda
+  dentro de `.paper-viewport` en 90, 180 y 270 grados.
+- Falta prueba visual automatizada con navegador que mida miniaturas mixtas
+  verticales/horizontales en una fila real.
+- El runtime local puede conservar referencias viejas a CSS despues de cambios;
+  cuando vuelva a ocurrir, aplicar el protocolo documentado en
+  `Docs/03_standards/frontend/nextjs-runtime-recovery-standard.md`.
+
+## Limpieza
+
+`AGENTS-000.md` y `AGENTS-001.md` quedan archivados al completarse. Los demas
+agents no fueron evaluados ni ejecutados en esta corrida.
+
+---
