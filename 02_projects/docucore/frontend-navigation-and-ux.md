@@ -650,3 +650,125 @@ Pendiente backend:
 - Detectar bookmarks PDF reales y estructuras OCR automaticamente.
 - Generar propuesta inteligente real por paginas en blanco, QR, layout, texto
   personalizado e IA documental.
+
+## Optimizacion ergonomica del workspace 2026-06-01
+
+El workspace de documentos debe maximizar el area util del preview. La
+prioridad visual es:
+
+```text
+Documento / preview
+-> herramientas necesarias
+-> informacion contextual
+-> navegacion secundaria
+```
+
+Reglas aplicadas:
+
+- `canvas-header` deja de ser un bloque alto y pasa a resumen compacto flotante
+  con blur, nombre de archivo truncado, peso, paginas y seleccion.
+- Las acciones frecuentes viven en `floating-toolbar`: herramientas,
+  configuracion, seleccion, subir mas, informacion, resultado y aplicar
+  cambios.
+- `floating-toolbar` muestra solo iconos por defecto, usa `data-label` para
+  tooltips y no debe generar scrollbar horizontal.
+- Los accesos duplicados `config-fab` e `info-fab` no deben renderizarse cuando
+  esas acciones ya estan disponibles en la barra inferior.
+- Los controles de seleccion de paginas se mueven fuera de `pdf-toolbar` a un
+  panel dedicado de `Seleccion`.
+- `pdf-toolbar` queda como estado compacto de preview, sin controles de accion
+  que roben altura al documento.
+- `canvas-workspace` y `canvas-main` deben mantener `max-width: 100vw` y
+  `overflow-x: hidden` para evitar desplazamiento lateral.
+- `page-grid` ocupa el alto disponible del viewport con padding reservado para
+  header y toolbar, manteniendo scroll interno solo para paginas.
+
+Pendiente:
+
+- Validar con captura visual Playwright en desktop y mobile cuando el entorno
+  tenga navegador automatizado disponible.
+- Definir si la toolbar inferior debe permitir atajo de teclado para cada
+  accion frecuente.
+
+## Cierre instruccion por instruccion 2026-06-01
+
+Matriz de cumplimiento del agent ergonomico:
+
+| Instruccion | Estado | Evidencia |
+|---|---|---|
+| Corregir `floating-toolbar` sin scrollbar horizontal | Cumplido | Toolbar fija centrada, `overflow: visible`, icon-only y `data-label` para tooltip. |
+| Mover acciones superiores a barra inferior | Cumplido | Toolbar inferior contiene herramientas, configuracion, seleccion, subir mas, informacion, resultado y aplicar cambios. |
+| Reducir `canvas-header` | Cumplido | Header compacto flotante con nombre truncado y resumen del documento; no contiene accion primaria duplicada. |
+| Corregir `canvas-workspace` | Cumplido | Workspace ocupa `100dvh`, elimina marco externo y reserva espacio solo para overlays. |
+| Optimizar `pdf-toolbar` | Cumplido | La toolbar del PDF queda como estado compacto de carga/preview; los controles de seleccion viven en panel dedicado. |
+| Topbar de inicio de sesion | Cumplido | Topbar fija, semitransparente, compacta, con hover/focus y botones globales de login/registro. |
+| Sidebar colapsable | Cumplido | Sidebar inicia oculta, se abre con pestaña lateral, soporta modo iconos, expansion por hover, pin y cierre con Escape. |
+| Eventos de toolbar/sidebar/topbar | Cumplido MVP | Toolbar abre drawers; sidebar usa click/hover/pin/Escape; topbar abre modal global de login/registro y conserva el shell. |
+| Regla contra duplicacion | Cumplido | No se renderizan ni quedan estilos activos para `page-controls`, `config-fab` o `info-fab`. |
+| Layout final esperado | Cumplido | Topbar semitransparente arriba, sidebar por pestaña lateral, preview central y toolbar inferior sin scroll. |
+
+Nota de alcance:
+
+- `Aplicar cambios` sigue abriendo `Resultado` como confirmacion MVP porque el
+  contrato backend para escribir PDFs modificados sigue pendiente.
+- La validacion automatizada fue tecnica (`lint`, `build`, rutas y CSS). La
+  validacion visual con captura Playwright queda como mejora de QA.
+
+## Cierre MVP agents workspace PDF 2026-06-01
+
+Se integraron en el frontend las fases activas del workspace PDF sin prometer
+motores backend inexistentes.
+
+| Fase | Estado frontend | Pendiente backend |
+|---|---|---|
+| OCR avanzado | Resultado OCR normalizado por pagina con motor primario, fallback, combinacion y confianza. | Conectar Tesseract/PaddleOCR reales desde Document API. |
+| Acciones futuras por pagina | Acciones centralizadas en `PageActionConfig` dentro del menu de tres puntos. | Jobs reales para firma, marca de agua, traduccion, imagenes e insercion. |
+| Secciones visuales | Leyenda, color por seccion, zonas `Dividir aqui`, colapsar/fusionar y vista previa por secciones. | Persistencia de proyecto y exportacion real por seccion. |
+| Colores e identificacion | Bordes por seccion, estados visuales de OCR, descartado, firmado, marca, numerado, traducido y salida. | Guardar colores/preferencias por proyecto/usuario. |
+| Papelera inteligente | Descartar no elimina; restaurar individual, restaurar masivo y eliminar permanente local. | Papelera persistente con auditoria. |
+| Visibilidad de descartadas | Modos visible, compacta y oculta independientes del estado documental. | Guardar preferencia en perfil/proyecto. |
+| Seleccion de paginas | Presets, rango manual, invertir seleccion y acciones masivas MVP. | Seleccion por arrastre y Shift completa con pruebas visuales. |
+| Marcadores e indices | Marcadores manuales, navegacion por leyenda/seccion y base para division por marcadores. | Detectar bookmarks reales del PDF y OCR de titulos. |
+| Division automatica | Sugerencias reversibles por regla, bookmarks, layout y OCR sin aplicar cambios automaticamente. | Detectores reales por paginas en blanco, QR, texto personalizado e IA documental. |
+
+Regla de producto:
+
+- Todo lo anterior es estado local frontend para revision y preparacion. La
+  escritura real de PDF, OCR productivo, persistencia de proyecto y exportacion
+  final deben ejecutarse por Gateway/Document API.
+
+## Correccion de alcance del shell global 2026-06-01
+
+El shell historico de DocuCore mantiene sidebar y header persistentes para las
+rutas generales del producto. Los cambios solicitados para ocultamiento,
+transparencia y navegacion compacta aplican solo al workspace documental.
+
+Reglas aplicadas:
+
+- El layout global conserva `shell` en dos columnas: sidebar compacta fija /
+  sticky y contenido principal.
+- La topbar global conserva posicion superior persistente dentro del flujo de
+  la pagina, con fondo claro y borde inferior.
+- La sidebar global inicia en modo iconos y puede expandirse por hover, focus o
+  pin; no debe quedar oculta por defecto.
+- El boton lateral de apertura (`sidebar-tab`) solo se renderiza en
+  `/workspace`.
+- Los estilos flotantes, translucidos y de ocultamiento se limitan a
+  `.shell-workspace`.
+- En `/workspace`, la sidebar puede iniciar oculta para maximizar la preview, y
+  la topbar compacta flotante puede mantenerse transparente.
+- Ninguna mejora del workspace debe modificar el comportamiento base de `/`,
+  `/upload`, `/jobs`, `/history` u otras rutas generales.
+
+Decision tecnica:
+
+- `AppShell` detecta la ruta activa y agrega `.shell-workspace` solo en
+  `/workspace`.
+- Los selectores CSS del modo flotante quedan scopeados bajo
+  `.shell-workspace` para evitar regresiones visuales globales.
+
+Informacion faltante:
+
+- No existe aun una prueba visual automatizada obligatoria para bloquear
+  regresiones de shell global vs workspace. Se recomienda agregar captura de
+  `/`, `/upload` y `/workspace` en el protocolo de QA visual.

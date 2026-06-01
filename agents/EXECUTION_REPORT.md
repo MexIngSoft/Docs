@@ -5552,6 +5552,11 @@ pagina con estados independientes.
 | `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado, 20 rutas generadas. |
 | `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo aviso LF/CRLF de Git. |
 | `git diff --check` en `Docs` | Aprobado; solo aviso LF/CRLF de Git. |
+| `git diff --check` en `Docs` | Aprobado; solo aviso LF/CRLF de Git. |
+| `Start-NextLocalWeb.ps1 -Project docucore -CleanCache -SkipBuild -SkipLint -SkipInstall` | Aprobado; web local reiniciada en puerto 3004. |
+| `GET http://localhost:3004/workspace` | `200`. |
+| `GET http://localhost:3004/_next/static/css/app/layout.css` | `200`. |
+| `git diff --check` en `Docs` | Aprobado; solo aviso LF/CRLF de Git. |
 
 ## Decisiones tomadas
 
@@ -5755,3 +5760,311 @@ webs Next.js cuando despues de cambios quedan sin estilos, con cache rota,
 El agent `AGENTS-000.md` se archiva en
 `Docs/_archive/agents/2026-05-31-docucore-page-actions-next-recovery/`. Los
 archivos activos quedan limpios para futuras corridas.
+
+---
+
+# Reporte agents DocuCore workspace ergonomico
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Se ejecuto el agent activo `AGENTS-000.md` en orden numerico. El objetivo fue
+mejorar el espacio de trabajo documental de DocuCore para que el preview del
+PDF tenga prioridad visual sobre controles, barras y navegacion secundaria.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/mvp-roadmap.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se compacto el header del workspace, se movieron acciones frecuentes a la barra inferior, se elimino el scrollbar horizontal de `floating-toolbar`, se agrego panel de seleccion de paginas y se retiraron accesos duplicados `config-fab`/`info-fab` del render. |
+| `AGENTS-001.md` - `AGENTS-004.md`, `AGENTS-007.md`, `AGENTS-015.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tarea ejecutable. |
+| `AGENTS-005.md` - `AGENTS-006.md`, `AGENTS-008.md` - `AGENTS-014.md` | Pendientes | Agents activos relacionados con OCR, acciones futuras, secciones, colores, papelera, seleccion, marcadores y division automatica. No se ejecutaron en esta pasada para no mezclar cambios fuera del agent ergonomico solicitado; varios requieren contrato backend o validacion funcional adicional. |
+
+## Tareas ejecutadas
+
+- Header `canvas-header` convertido en resumen compacto flotante con nombre de
+  archivo truncado.
+- Barra `floating-toolbar` centrada, icon-only, sin `overflow-x` visible y con
+  tooltips por `data-label`.
+- Acciones inferiores normalizadas: herramientas, configuracion, seleccion,
+  subir mas, informacion, resultado y aplicar cambios.
+- Seleccion de paginas movida desde `pdf-toolbar` a drawer propio.
+- `pdf-toolbar` reducido a estado de preview y carga.
+- `canvas-workspace`, `canvas-main` y `page-grid` ajustados para ocupar viewport
+  sin overflow horizontal.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; `next lint` muestra aviso de deprecacion para Next 16. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado, 20 rutas generadas. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo aviso LF/CRLF de Git. |
+
+## Decisiones tomadas
+
+- La barra inferior es la fuente unica de acciones frecuentes del workspace.
+- La accion `Aplicar cambios` abre `Resultado` porque el motor real de escritura
+  PDF sigue pendiente de contrato backend.
+- El panel de seleccion concentra presets, rango escrito y visibilidad de
+  paginas descartadas para liberar espacio vertical del preview.
+- Se mantiene `page-grid` con scroll interno para paginas; el body no debe
+  generar desplazamiento lateral.
+
+## Informacion faltante o ambigua
+
+- No existe contrato backend final para aplicar cambios reales sobre PDF.
+- Falta automatizar capturas visuales desktop/mobile para validar ergonomia con
+  documentos largos.
+- Falta definir atajos de teclado para acciones frecuentes de toolbar.
+
+## Limpieza
+
+El agent `AGENTS-000.md` se archivo en
+`Docs/_archive/agents/2026-06-01-docucore-workspace-ergonomics/`. Los agents
+pendientes se conservan activos.
+
+---
+
+# Reejecucion verificada agent DocuCore workspace ergonomico
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Se reejecuto el primer agent activo `AGENTS-000.md` instruccion por
+instruccion porque la implementacion anterior no habia cubierto todos los
+puntos. Esta pasada completa los puntos faltantes de topbar, sidebar, eventos
+de shell y limpieza de estilos duplicados.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/mvp-roadmap.md`
+
+## Matriz instruccion por instruccion
+
+| Instruccion del agent | Estado | Evidencia |
+|---|---|---|
+| `floating-toolbar` sin scrollbar horizontal ni overflow-x | Cumplido | CSS usa toolbar fija centrada, `max-width: calc(100vw - 24px)`, `overflow: visible`, botones de 42px e iconos sin texto permanente. |
+| Acciones superiores movidas a barra inferior | Cumplido | `WorkspaceClient.tsx` concentra herramientas, configuracion, seleccion, subir mas, informacion, resultado y aplicar cambios en `floating-toolbar`. |
+| Seleccion de paginas en menu inferior | Cumplido | Se agrego drawer `Seleccion de paginas` con presets: todas, impares, pares y limpiar seleccion, mas rango manual. |
+| `canvas-header` reducido | Cumplido | Header compacto flotante con resumen y `canvas-summary-file` truncado con `title`. |
+| `canvas-workspace` a ventana completa | Cumplido | Workspace usa `100dvh`, `max-width: 100vw`, sin tarjeta externa, y reserva espacio para topbar/header/toolbar. |
+| `pdf-toolbar` compacta | Cumplido | Solo conserva estado de preview/carga; ya no contiene controles de seleccion. |
+| Topbar semitransparente y compacta | Cumplido | `AppShell` renderiza topbar fija, semitransparente, con hover/focus y acciones de login/registro. |
+| Sidebar oculta/compacta por defecto | Cumplido | `AppShell` maneja `SidebarState = hidden/icons/expanded`, pestaña lateral, hover, pin y Escape. |
+| Eventos necesarios | Cumplido MVP | Toolbar abre drawers; topbar abre modal auth; sidebar abre, expande, fija y cierra con Escape. |
+| Regla contra duplicacion | Cumplido | Busqueda local confirma que no quedan referencias a `page-controls`, `config-fab` ni `info-fab` en `app`. |
+| Layout responsive y enfocado en preview | Cumplido | CSS mobile mantiene topbar compacta, sidebar fija por pestaña, toolbar inferior centrada y `page-grid` con scroll interno. |
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/components/AppShell.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/layout.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; `next lint` muestra aviso de deprecacion para Next 16. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado, 20 rutas generadas. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo aviso LF/CRLF de Git. |
+| `git diff --check` en `Docs` | Aprobado; solo aviso LF/CRLF de Git. |
+| Busqueda local de `page-controls`, `config-fab`, `info-fab` | Aprobado; no quedan referencias activas en `app`. |
+| `Start-NextLocalWeb.ps1 -Project docucore -CleanCache -SkipBuild -SkipLint -SkipInstall` | Aprobado; web reiniciada en puerto 3004. |
+| `GET http://localhost:3004/` | `200`. |
+| `GET http://localhost:3004/workspace` | `200`. |
+| `GET http://localhost:3004/_next/static/css/app/layout.css` | `200`. |
+
+## Decisiones tomadas
+
+- Se creo `AppShell` como componente cliente para manejar estado de sidebar y
+  modal auth sin convertir `layout.tsx` completo en componente cliente.
+- Login y registro se resuelven con modal global MVP para cumplir el evento
+  esperado y conservar el contexto visual.
+- La sidebar inicia oculta para maximizar el workspace; el usuario puede
+  abrirla con la pestaña lateral y fijarla si necesita navegacion persistente.
+
+## Informacion faltante o ambigua
+
+- El backend real para aplicar cambios de PDF sigue pendiente; por eso
+  `Aplicar cambios` abre resultado/confirmacion MVP.
+- Falta validacion visual automatizada con Playwright en desktop/mobile.
+
+## Limpieza
+
+`AGENTS-000.md` se archivo en
+`Docs/_archive/agents/2026-06-01-docucore-workspace-ergonomics/` y el archivo
+activo quedo vacio para evitar reejecucion accidental.
+
+---
+
+# Ejecucion agents DocuCore workspace PDF avanzado
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Se revisaron los agents activos en orden numerico. `AGENTS-000.md` ya estaba
+cerrado en ejecuciones anteriores, por lo que no se repitio implementacion. Se
+ejecutaron las tareas pendientes de `AGENTS-005.md` a `AGENTS-014.md` en el
+alcance seguro disponible para frontend: estado local, UI, ayudas visuales,
+configuracion centralizada y documentacion. No se inventaron motores backend ni
+se marco como productivo nada que dependa de Document API/Gateway.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/mvp-roadmap.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/document-intelligence.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Ya completado | Ya estaba implementado y reportado: ergonomia del workspace, toolbar inferior, topbar y sidebar compacta. Se limpiara el duplicado activo. |
+| `AGENTS-001.md` - `AGENTS-004.md`, `AGENTS-007.md`, `AGENTS-015.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tarea ejecutable. |
+| `AGENTS-005.md` | Parcialmente completado MVP | OCR normalizado por pagina con motor primario, fallback, combinacion, confianza y resultado visible en estado local. Pendiente conectar Tesseract/PaddleOCR reales por backend. |
+| `AGENTS-006.md` | Completado MVP frontend | Acciones futuras centralizadas en `PageActionConfig`, dentro del menu de tres puntos, sin saturar miniaturas. |
+| `AGENTS-008.md` | Completado MVP frontend | Secciones visuales con colores, leyenda, zona `Dividir aqui`, crear por seleccion, colapsar/fusionar y resumen. |
+| `AGENTS-009.md` | Completado MVP frontend | Identificacion visual por seccion y estados de pagina: OCR, descartada, importante, etiqueta, firma, marca, numeracion, traduccion y salida. |
+| `AGENTS-010.md` | Completado MVP frontend | Papelera reversible: descartar, restaurar, restaurar masivo y eliminar permanente local. |
+| `AGENTS-011.md` | Completado MVP frontend | Modos de visibilidad para descartadas: visible, compacta y oculta sin modificar resultado documental. |
+| `AGENTS-012.md` | Completado MVP frontend | Seleccion individual, presets, rango escrito, invertir seleccion y contador visible. Arrastre/Shift completo queda pendiente de QA visual. |
+| `AGENTS-013.md` | Parcialmente completado MVP | Marcadores manuales y navegacion visual por secciones. Pendiente detectar bookmarks reales del PDF y generar indice exportable. |
+| `AGENTS-014.md` | Parcialmente completado MVP | Analisis automatico reversible con sugerencias por reglas, bookmarks, layout y OCR. Pendiente detectores reales por QR, paginas en blanco, texto personalizado e IA. |
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/components/AppShell.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/layout.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; `next lint` muestra aviso de deprecacion para Next 16. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado, 20 rutas generadas. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo aviso LF/CRLF de Git. |
+
+## Decisiones tomadas
+
+- Los agents `005-014` se resolvieron como MVP frontend/preparado porque la
+  documentacion canonica indica que OCR productivo, escritura real de PDF,
+  persistencia de proyecto y exportacion final dependen de Gateway/Document
+  API.
+- Las acciones futuras no se muestran como botones permanentes; viven en el
+  menu de tres puntos.
+- Las sugerencias automaticas nunca aplican cambios por si solas; quedan como
+  propuestas aceptables/rechazables.
+- La visibilidad de paginas descartadas es independiente del estado documental.
+
+## Informacion faltante o ambigua
+
+- Contrato backend final para persistir proyecto de workspace PDF.
+- Job real para aplicar operaciones de PDF por pagina/seccion.
+- Motores OCR productivos y formato de respuesta por pagina.
+- Deteccion real de bookmarks PDF, paginas en blanco, QR, layout y texto
+  personalizado.
+- QA visual con Playwright para seleccion por arrastre, Shift y mobile.
+
+## Limpieza
+
+`AGENTS-000.md` se limpio y el duplicado activo se archivo como
+`Docs/_archive/agents/2026-06-01-docucore-workspace-ergonomics/AGENTS-000-duplicate-cleanup.md`.
+Los agents `005-014` se mantienen activos si se requiere completar backend real;
+el MVP frontend queda documentado y validado.
+
+---
+
+# Recuperacion runtime CSS DocuCore
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Se aplico el protocolo estandar de recuperacion Next.js porque DocuCore cargaba
+HTML pero el CSS no se aplicaba correctamente.
+
+## Diagnostico
+
+| Revision | Resultado |
+|---|---|
+| `GET http://localhost:3004/` antes de reparar | `200`. |
+| CSS detectado por HTML | `/_next/static/css/app/layout.css?v=...`. |
+| `Repair-NextCss.ps1 -Project docucore -Url http://localhost:3004 -Local` antes de reparar | Fallo: CSS respondia `404`. |
+
+## Accion ejecutada
+
+Se ejecuto:
+
+```powershell
+Docs/03_standards/operations/scripts/Start-NextLocalWeb.ps1 -Project docucore -CleanCache
+```
+
+El script detuvo solo el proceso del puerto canonico `3004`, limpio `.next`,
+reconstruyo el runtime local y levanto nuevamente `npm run dev`.
+
+## Validaciones posteriores
+
+| Validacion | Resultado |
+|---|---|
+| `GET http://localhost:3004/` | `200`. |
+| `GET http://localhost:3004/workspace` | `200`. |
+| `Repair-NextCss.ps1 -Project docucore -Url http://localhost:3004 -Local` | Aprobado; CSS disponible. |
+| CSS enlazado por HTML | `200`, contenido disponible. |
+
+## Decision
+
+El fallo correspondia a cache/manifest de Next.js desfasado. No se modifico
+funcionalidad ni se cambiaron puertos.
