@@ -14,6 +14,8 @@
 - `01_core_erp/auth/README.md`
 - `01_core_erp/README.md`
 - `01_core_erp/erp/23_business_software_builder.md`
+- `01_core_erp/erp/24_execution_resource_manager.md`
+- `01_core_erp/apis/16_execution_resource_manager_api.md`
 - `02_projects/buildora/README.md`
 - `02_projects/clientix/README.md`
 - `02_projects/cloudra/README.md`
@@ -24,6 +26,7 @@
 - `02_projects/docucore/frontend-navigation-and-ux.md`
 - `02_projects/docucore/feature-visibility-map.md`
 - `02_projects/docucore/monetization-and-credits.md`
+- `02_projects/docucore/execution-policy.md`
 - `02_projects/docucore/advertising-strategy.md`
 - `02_projects/docucore/mvp-roadmap.md`
 - `02_projects/festora/README.md`

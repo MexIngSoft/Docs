@@ -19,6 +19,7 @@
 | Billing | Datos fiscales, facturacion, notas y relacion fiscal con ventas. | Calcular precios o mover inventario. |
 | Notifications | Eventos, mensajes, plantillas y reintentos de comunicacion. | Bloquear ventas o pagos. |
 | Documents | Archivos, anexos y evidencias. | Decidir viabilidad comercial. |
+| ExecutionResourceManager | Eventos de ejecucion, costos internos, creditos cobrados, fallback, ahorro operativo y carga por proyecto. | Procesar archivos, ejecutar OCR o decidir precio final por si solo. |
 | ChannelAssortment | Publicacion por proyecto/canal. | Descargar proveedores o normalizar productos. |
 | ProductCompatibility | Compatibilidad tecnica entre productos. | Vender o cotizar por si mismo. |
 
@@ -40,3 +41,4 @@
 - `20_channel_assortment.md`
 - `21_product_compatibility.md`
 - `22_pricing_costing_future_map.md`
+- `24_execution_resource_manager.md`

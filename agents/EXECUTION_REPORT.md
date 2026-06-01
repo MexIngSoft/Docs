@@ -6161,3 +6161,379 @@ indices y documentacion canonica de DocuCore.
 Se archivan los agents `AGENTS-000.md` a `AGENTS-003.md` por quedar cerrados en
 el alcance Workspace frontend. Los agents `005-014` se conservan activos solo si
 se decide completar backend real.
+---
+
+# Ejecucion agent unico DocuCore borradores persistentes
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Se ejecuto solamente el primer agent activo, `AGENTS-000.md`, siguiendo la
+instruccion del usuario de no avanzar a otros agents hasta concluir este
+proceso. El alcance se limito a DocuCore Workspace, Upload, shell de navegacion
+y documentacion canonica relacionada.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/AGENTS-000.md`
+
+## Resultado del agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se implementaron zonas inteligentes de insercion, sidebar con cierre automatico/guardado previo a navegacion, concepto de Borrador documental y persistencia local con IndexedDB/localStorage. |
+
+## Tareas detectadas
+
+- Convertir las zonas entre paginas en puntos delgados de insercion, division,
+  pegado y reordenamiento.
+- Mostrar menu contextual con nueva pagina vacia, dividir aqui, pegar aqui,
+  insertar PDF e insertar imagen.
+- Mostrar estados visuales para copia, corte, drag/drop y posicion resaltada.
+- Guardar Workspace antes de navegar desde sidebar y mostrar toast.
+- Cerrar automaticamente la sidebar de workspace si no hay interaccion.
+- Usar `Borrador documental` como concepto de trabajos pendientes.
+- Mostrar borradores pendientes en `/upload` con Abrir, Duplicar, Renombrar y
+  Eliminar.
+- Persistir estado local y documento base con IndexedDB/localStorage.
+- Recuperar sesiones tras refresh o regreso posterior.
+
+## Tareas ejecutadas
+
+- Se agrego `lib/workspace-drafts.ts` con indice local, almacenamiento de
+  archivos y registros de borrador en IndexedDB.
+- `/upload` guarda el archivo seleccionado en IndexedDB antes de abrir
+  `/workspace`.
+- `/upload` lista borradores pendientes y permite abrir, duplicar, renombrar
+  o eliminar.
+- `/workspace` guarda automaticamente paginas, documento, herramienta,
+  seleccion, secciones, descartadas, modo y scroll.
+- `/workspace` restaura borradores por `draftId` o por borrador activo local.
+- `AppShell` guarda el workspace antes de navegar, muestra toast y cierra la
+  sidebar de workspace por inactividad.
+- Las zonas antiguas de pegado/division se sustituyeron por una guia vertical
+  inteligente integrada en cada miniatura.
+- Se documento el estandar de Borrador documental persistente en la
+  documentacion canonica de DocuCore.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/workspace-drafts.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/upload/UploadClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/components/AppShell.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas. |
+
+## Decisiones tomadas
+
+- Se uso IndexedDB para documento y registro completo de borrador; localStorage
+  queda solo como indice liviano para listar borradores rapidamente.
+- La insercion real de PDF/imagen queda preparada como estado UI porque aun
+  depende de contratos backend de escritura PDF.
+- La recuperacion de borrador conserva el estado de paginas y usa el archivo
+  guardado en IndexedDB cuando esta disponible.
+- No se avanzo a ningun otro agent por instruccion expresa del usuario.
+
+## Informacion faltante
+
+- Falta contrato backend para sincronizar borradores con cuenta de usuario.
+- Falta job real para insertar PDF/imagen y escribir el resultado final.
+- Falta QA visual automatizado para confirmar hover/drop en desktop y mobile.
+
+## Limpieza
+
+`AGENTS-000.md` queda listo para archivo por estar completado y documentado en
+este reporte.
+
+---
+
+# Ejecucion agents de planeacion DocuCore y ERP
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Se ejecutaron los agents activos en orden numerico. Los agents `AGENTS-000.md`,
+`AGENTS-001.md` y `AGENTS-002.md` contenian la planeacion nueva sobre politica
+cliente/hibrido/servidor, costos internos, creditos y modulo ERP transversal.
+Los agents posteriores fueron evaluados contra el reporte existente; las fases
+`005-014` ya estaban cerradas como MVP frontend o dependen de backend real, por
+lo que no se reimplementaron.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/03_standards/operations/agents-documentation-order.md`
+- `Docs/03_standards/global-governance.md`
+- `Docs/03_standards/architecture/api-gateway-standard.md`
+- `Docs/03_standards/product/product-strategy.md`
+- `Docs/03_standards/product/module-catalog.md`
+- `Docs/01_core_erp/erp/01_modules.md`
+- `Docs/01_core_erp/apis/00_api_index.md`
+- `Docs/01_core_erp/architecture/07_project_api_pattern.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/architecture.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/monetization-and-credits.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se evaluo la relacion entre agents 0-1, se documento el orden recomendado, el estandar general de agents y la propuesta del modulo ERP Administrador de Ejecucion y Recursos. |
+| `AGENTS-001.md` | Completado | Se documento la politica cliente/hibrido/servidor, criterios de fallback, tareas candidatas por modo y datos de recursos a medir. |
+| `AGENTS-002.md` | Completado | Se resolvio la politica de creditos: el costo interno cambia por modo de ejecucion, pero los creditos/precio al usuario no cambian automaticamente. |
+| `AGENTS-003.md` - `AGENTS-004.md` | Sin instrucciones | Archivos vacios. |
+| `AGENTS-005.md` - `AGENTS-014.md` | Parcialmente completados / bloqueados por backend | Ya estaban cerrados como MVP frontend en reportes previos. Quedan pendientes motores backend reales para OCR productivo, escritura PDF, bookmarks reales, IA, QR, deteccion de paginas en blanco y persistencia remota. |
+| `AGENTS-015.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+## Orden recomendado
+
+1. `AGENTS-000.md`: primero porque establece evaluacion, estandar de agents y
+   planeacion transversal.
+2. `AGENTS-001.md`: despues porque define la politica tecnica de ejecucion.
+3. `AGENTS-002.md`: despues porque resuelve la regla comercial de creditos y
+   costo interno.
+4. `AGENTS-005.md` en adelante: no se reabren hasta tener contratos/backend
+   faltantes o una instruccion especifica para ampliar el MVP frontend.
+
+## Cambios realizados
+
+- Se creo `Docs/02_projects/docucore/execution-policy.md`.
+- Se creo `Docs/01_core_erp/erp/24_execution_resource_manager.md`.
+- Se creo `Docs/01_core_erp/apis/16_execution_resource_manager_api.md`.
+- Se amplio `Docs/03_standards/operations/agents-documentation-order.md` con
+  formato obligatorio, estados, prioridades, criterios de bloqueo y archivo.
+- Se actualizo `Docs/02_projects/docucore/monetization-and-credits.md` para
+  separar creditos visibles, costo interno y ahorro operativo.
+- Se actualizo `Docs/02_projects/docucore/api-contracts.md` con eventos de
+  ejecucion y recursos.
+- Se actualizo el indice de APIs, catalogo de modulos, README de DocuCore e
+  indices `_meta`.
+
+## Decisiones tomadas
+
+- El procesamiento local reduce costo interno, no reduce automaticamente el
+  precio ni los creditos cobrados al usuario.
+- El ahorro operativo se registra en ERP y puede convertirse en promociones,
+  mas creditos, mejor infraestructura o reduccion de costos solo por regla
+  comercial explicita.
+- El modulo recomendado es `API.PY.DJANGO.ExecutionResourceManager` o modulo
+  desacoplado del ERP, no parte interna de DocuCore.
+- Los eventos deben usar `execution_id`, `trace_id`, `request_id`,
+  `project_code`, `module_code` y `task_type` para trazabilidad.
+- No se implemento logica productiva del modulo ERP porque el agent era de
+  planeacion y documentacion.
+
+## Informacion faltante o ambigua
+
+- Formula definitiva de costo interno por CPU, memoria, storage, transferencia
+  y tiempo.
+- Tabla comercial final de creditos por herramienta.
+- Permisos ERP para vistas financieras y tecnicas.
+- Decision final: API separada o modulo interno desacoplado del ERP.
+- Retencion de eventos y agregaciones historicas.
+- Contratos backend reales para completar phases `005-014`.
+
+## Archivos modificados
+
+- `Docs/03_standards/operations/agents-documentation-order.md`
+- `Docs/03_standards/product/module-catalog.md`
+- `Docs/01_core_erp/apis/00_api_index.md`
+- `Docs/01_core_erp/apis/16_execution_resource_manager_api.md`
+- `Docs/01_core_erp/erp/01_modules.md`
+- `Docs/01_core_erp/erp/24_execution_resource_manager.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/execution-policy.md`
+- `Docs/02_projects/docucore/monetization-and-credits.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `git diff --check` en Docs | Aprobado; solo avisos LF/CRLF de Git. |
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas. |
+| Busqueda `rg` de rutas canonicas nuevas | Aprobado; las referencias existen en indices y documentos relacionados. |
+
+## Limpieza
+
+`AGENTS-000.md`, `AGENTS-001.md` y `AGENTS-002.md` quedan listos para archivo.
+Los agents `005-014` se mantienen activos por dependencias backend reales y no
+se limpian.
+
+---
+
+# Arranque operativo DocuCore y revision de agents activos
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Se intento levantar DocuCore y sus dependencias segun el estandar operativo del
+repositorio. Tambien se revisaron los agents activos actuales para no repetir
+tareas ya cerradas ni implementar fases bloqueadas por backend real.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/03_standards/operations/local-port-registry.md`
+- `Docs/02_projects/docucore/README.md`
+
+## Resultado operativo
+
+| Componente | Puerto | Estado | Resultado |
+|---|---:|---|---|
+| `WEB.NJ.NEXT.DocuCore` | 3004 | Corriendo local | `http://localhost:3004` responde correctamente. |
+| `API.PY.DJANGO.Document` | 8011 | Bloqueado | No escucha; Docker daemon no disponible. |
+| `API.PY.DJANGO.DocuCore` | 8012 | Bloqueado | No escucha; Docker daemon no disponible. |
+| `API.PY.DJANGO.DocuCore.Gateway` | 8013 | Bloqueado | No escucha; Docker daemon no disponible. |
+
+## Comandos ejecutados
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-WorkspaceDocker.ps1 -WaitSeconds 90
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-NextLocalWeb.ps1 -Project docucore -CleanCache
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Repair-NextCss.ps1 -Project docucore -Url http://localhost:3004 -Local
+```
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| Docker workspace | Fallo: `dockerDesktopLinuxEngine` no esta disponible. |
+| `GET http://localhost:3004/` | 200 |
+| `GET http://localhost:3004/upload` | 200 |
+| `GET http://localhost:3004/workspace` | 200 |
+| CSS DocuCore | Aprobado; `/_next/static/css/app/layout.css` disponible. |
+| Puertos `8011`, `8012`, `8013` | No escuchan por dependencia Docker bloqueada. |
+
+## Resultado por agents
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` - `AGENTS-004.md` | Sin instrucciones | Archivos vacios despues de cierre/archivo previo. |
+| `AGENTS-005.md` - `AGENTS-014.md` | Parcialmente completados / bloqueados por backend | Ya documentados como MVP frontend o pendientes de backend real; no se reimplementan sin contratos de OCR, PDF writer, bookmarks, IA, QR y persistencia remota. |
+| `AGENTS-015.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+## Bloqueo
+
+Docker Desktop no expone el daemon `dockerDesktopLinuxEngine`, por lo que no se
+pudieron levantar Document API, DocuCore API ni DocuCore Gateway. La web queda
+usable para trabajo frontend y pantallas MVP, pero las funciones que requieran
+Gateway/API real dependeran de reiniciar o reparar Docker Desktop.
+
+## Decision
+
+Se dejo corriendo DocuCore Web en local para que el equipo pueda visualizar y
+trabajar en la interfaz mientras se desbloquean las dependencias Docker.
+
+---
+
+# Ejecucion agents 000 y 001 - previews rotadas DocuCore
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Por instruccion del usuario se ejecutaron solamente `AGENTS-000.md` y
+`AGENTS-001.md`. Ambos describian la misma correccion completa de miniaturas
+PDF: paginas rotadas, barra rapida de acciones, metadata visual, drag and drop
+y zonas inteligentes de insercion. Los demas agents fueron ignorados.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se corrigio el calculo visual de paginas rotadas, la visibilidad de acciones rapidas y la alineacion de zonas de insercion. |
+| `AGENTS-001.md` | Completado | Contenido duplicado/complementario del agent 000; se cerro con la misma implementacion y validacion. |
+
+## Tareas ejecutadas
+
+- Se agrego estructura separada de `paper-viewport` y `paper-rotator` dentro de
+  la miniatura.
+- `pageFrameStyle` calcula proporcion visual, proporcion original y ancho
+  interno para rotaciones 90/270.
+- La barra rapida ya no queda visible solo por pagina seleccionada; aparece por
+  hover, focus, menu abierto o estado tactil.
+- Las paginas rotadas conservan metadata de orientacion visual final.
+- Las zonas inteligentes de insercion usan separacion uniforme y se agrego zona
+  inicial antes de la primera pagina.
+- Las zonas de inicio, medio y final quedan centradas con variables CSS.
+- Se documento la regla en la documentacion canonica de DocuCore.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo avisos LF/CRLF de Git. |
+
+## Informacion faltante
+
+- Falta validacion visual manual con PDF real horizontal/vertical y casos de
+  rotacion 90/270.
+- Falta prueba automatizada visual para confirmar hover, focus, touch y zonas
+  entre pagina normal y pagina rotada.
+
+## Limpieza
+
+`AGENTS-000.md` y `AGENTS-001.md` quedan completados y listos para archivo.

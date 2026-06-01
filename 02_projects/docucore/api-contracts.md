@@ -286,3 +286,31 @@ Respuesta base:
 
 La respuesta es propuesta tecnica. La aprobacion final y la relacion con un
 caso, expediente o procedimiento pertenecen al proyecto consumidor.
+
+## Eventos de ejecucion y recursos
+
+DocuCore debe emitir eventos tecnicos para el ERP cuando una herramienta
+ejecute procesos relevantes, use fallback o consuma recursos medibles.
+
+Destino documentado:
+
+```text
+API.PY.DJANGO.ExecutionResourceManager
+```
+
+Contrato canonico:
+
+```text
+Docs/01_core_erp/apis/16_execution_resource_manager_api.md
+Docs/01_core_erp/erp/24_execution_resource_manager.md
+```
+
+Reglas:
+
+- Gateway o API responsable emite el evento; el frontend no debe escribir
+  directo en el ERP.
+- El evento no debe incluir contenido del documento, OCR completo ni binarios.
+- Los creditos cobrados se registran como dato comercial, pero el modo de
+  ejecucion solo mide costo interno.
+- Si hay fallback, se conserva trazabilidad con `execution_id`, `trace_id` y
+  `request_id` para no duplicar cobros.

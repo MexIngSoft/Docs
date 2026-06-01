@@ -20,6 +20,7 @@
 | billing-api | FALTA | Datos fiscales, facturacion, notas y documentos fiscales. | MEDIA |
 | notifications-api | FALTA | Eventos, mensajes y reintentos de notificacion. | MEDIA |
 | documents-api | FALTA | Archivos, anexos, evidencias y relaciones documentales. | MEDIA |
+| execution-resource-manager-api | PROPUESTO | Eventos de ejecucion, costos internos, creditos, fallback, carga y ahorro operativo por proyecto. | ALTA |
 
 ## Regla de separacion
 
@@ -33,4 +34,5 @@ Cost API      = costos reales/estimados y base de rentabilidad
 Rules API     = decisiones configurables
 Billing API   = datos y documentos fiscales
 Documents API = anexos, evidencias y archivos por contexto
+Execution Resource Manager API = medicion transversal de ejecucion y recursos
 ```

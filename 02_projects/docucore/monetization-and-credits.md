@@ -61,6 +61,29 @@ Usuario sube archivos
 - Registrar estimado y consumo real cuando el backend lo permita.
 - Distinguir creditos comprados, promocionales y recompensados.
 - Documentar limites para archivos enormes, OCR avanzado e IA.
+- Los creditos cobrados al usuario no cambian automaticamente por ejecutar en
+  cliente, servidor o modo hibrido. El ahorro por procesamiento local se mide
+  internamente y solo puede convertirse en beneficios mediante reglas
+  comerciales explicitas.
+- Si una tarea usa fallback de cliente a servidor, no debe cobrarse dos veces;
+  el evento tecnico puede tener varios intentos, pero el cargo comercial debe
+  mantenerse ligado a una sola solicitud confirmada.
+
+## Relacion con costo interno
+
+DocuCore separa tres conceptos:
+
+| Concepto | Responsable | Regla |
+|---|---|---|
+| Creditos visibles | Producto/Billing/ERP | Define lo que paga el usuario por herramienta o plan. |
+| Costo interno | Administrador de Ejecucion y Recursos | Mide CPU, memoria, storage, transferencia, fallback y ahorro. |
+| Ahorro operativo | ERP | Sirve para decisiones comerciales, capacidad o infraestructura. |
+
+La politica canonica de ejecucion vive en:
+
+```text
+execution-policy.md
+```
 
 ## Pendientes
 

@@ -810,3 +810,78 @@ Informacion faltante:
 - Persistencia real de proyecto de workspace.
 - Pruebas visuales automatizadas para confirmar que el unico scroll vertical
   sea el del navegador en desktop y mobile.
+
+## Borrador documental persistente 2026-06-01
+
+El workspace debe conservar el avance del usuario aunque recargue la pagina,
+cambie de ruta o vuelva desde `/upload`.
+
+Reglas aplicadas:
+
+- El nombre visible del trabajo pendiente es `Borrador documental`; no se usa
+  `Trabajo sin nombre`.
+- `/upload` revisa borradores locales y muestra `Continuar trabajo anterior`
+  con nombre, herramienta, numero de paginas y fecha de ultima modificacion.
+- Las acciones disponibles para cada borrador son Abrir, Duplicar, Renombrar y
+  Eliminar.
+- `/workspace` guarda automaticamente estado local ante cambios, navegacion,
+  `beforeunload`, `visibilitychange` y `pagehide`.
+- La navegacion desde la sidebar emite guardado antes de cambiar de ruta y
+  muestra el toast `Trabajo guardado automaticamente.`
+- La sidebar de `/workspace` se abre con la pestaña lateral, se mantiene abierta
+  si hay interaccion y se cierra automaticamente si no hay actividad.
+- Los datos pequenos del indice de borradores viven en `localStorage`.
+- Los documentos cargados y el estado completo del borrador se guardan en
+  `IndexedDB` como base local para futura sincronizacion con usuario.
+- La recuperacion intenta restaurar archivo, paginas, seleccion, secciones,
+  vista de descartadas, modo de trabajo y posicion de scroll.
+
+Reglas de zonas de insercion:
+
+- Las zonas entre paginas no se renderizan como tarjetas independientes.
+- Cada pagina expone una guia vertical delgada en su borde derecho como punto
+  de insercion, division, pegado y reordenamiento.
+- La guia ocupa el alto util de la miniatura, se expande por hover/focus y
+  muestra menu contextual con nueva pagina vacia, dividir, pegar, insertar PDF
+  e insertar imagen.
+- Copiar/cortar/arrastrar cambia el estado visual de las zonas.
+- Al soltar o pegar se resalta la posicion durante dos segundos.
+- Toda pagina modificada conserva borde/insignia de modificacion segun la
+  accion preparada.
+
+Pendiente backend:
+
+- Persistir borradores en cuenta de usuario cuando exista autenticacion real.
+- Sincronizar el indice local con proyecto remoto.
+- Ejecutar insercion real de PDF/imagen y escritura final de PDF desde
+  Gateway/Document API.
+
+## Correccion de previews rotadas e insercion 2026-06-01
+
+Las miniaturas PDF deben separar tarjeta, area clickeable, marco visual,
+rotador interno y acciones flotantes para evitar que una pagina rotada rompa el
+grid.
+
+Reglas aplicadas:
+
+- Cuando una pagina rota 90 o 270 grados, el frontend invierte ancho y alto
+  para calcular la proporcion visual.
+- La metadata corta y larga usa la orientacion visual final, no solo la
+  orientacion original del PDF.
+- `.paper-mini` reserva la proporcion visual y `.paper-rotator` rota el
+  contenido interno con la proporcion original.
+- La barra `page-quick-actions` queda oculta por defecto y se muestra solo por
+  hover, focus, menu abierto o interaccion tactil.
+- La seleccion de pagina no vuelve permanente la barra rapida.
+- El check de seleccion permanece fijo en la tarjeta y no rota con la hoja.
+- Las zonas `.smart-insertion-zone` usan variables de separacion para quedar
+  centradas entre previews; tambien existen al inicio y al final del grid.
+- El menu de insercion flota sobre la zona y no debe empujar el layout.
+- Drag and drop se conserva sobre toda la tarjeta aunque la pagina este rotada.
+
+Pendiente:
+
+- Validacion visual manual en navegador con PDFs horizontales y verticales
+  reales, incluyendo hover, focus y tactil.
+- Prueba automatizada visual futura para casos de rotacion 90/270 e insercion
+  entre pagina normal y pagina rotada.

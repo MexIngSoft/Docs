@@ -16,6 +16,7 @@ Mantener una vista unica de modulos core, compartidos, comerciales e internos.
 | PDF Tools | Commercial Module | `02_projects/docucore/tools-catalog.md` | MVP |
 | DocuCore Credits | Commercial Module | `02_projects/docucore/monetization-and-credits.md` | Documentado |
 | DocuCore Ads | Commercial Module | `02_projects/docucore/advertising-strategy.md` | Documentado |
+| Execution Resource Manager | Core ERP / Shared Operational Module | `01_core_erp/erp/24_execution_resource_manager.md` | Documentado |
 | LexNova Case Management | Independent Product Module | `02_projects/lexnova` | Activo |
 | Fiscora CFDI | Independent Product Module | `02_projects/fiscora` | Activo |
 | Imagrafity Customizer | Independent Product Module | `02_projects/imagrafity` | Pendiente |

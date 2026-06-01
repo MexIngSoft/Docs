@@ -32,6 +32,7 @@
 | Core | `01_core_erp/apis/13_billing_api.md` | Billing API | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/apis/14_notifications_api.md` | Notifications API | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/apis/15_documents_api.md` | Documents API | ACTIVE | P1 | Equipo documental |
+| Core | `01_core_erp/apis/16_execution_resource_manager_api.md` | Execution Resource Manager API | FUTURE_OR_PENDING | P1 | Equipo documental |
 | Core | `01_core_erp/architecture/00_general_architecture.md` | Arquitectura general | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/architecture/01_project_communication.md` | Comunicacion entre proyectos | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/architecture/02_api_gateway.md` | API Gateway | ACTIVE | P1 | Equipo documental |
@@ -98,6 +99,7 @@
 | Core | `01_core_erp/erp/21_product_compatibility.md` | Compatibilidad entre productos | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/erp/22_pricing_costing_future_map.md` | Mapa futuro de Pricing, Costing y Rentabilidad | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Core | `01_core_erp/erp/23_business_software_builder.md` | Business Software Builder | ACTIVE | P1 | Equipo documental |
+| Core | `01_core_erp/erp/24_execution_resource_manager.md` | Administrador de Ejecucion y Recursos | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/flows/00_flow_index.md` | Indice de flujos | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/flows/01_customer_quote_flow.md` | Flujo de cotizacion del cliente | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/flows/02_customer_purchase_flow.md` | Flujo de compra del cliente | FUTURE_OR_PENDING | P2 | Equipo documental |
@@ -129,6 +131,7 @@
 | Business | `02_projects/docucore/error-handling.md` | Manejo de errores DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/frontend-navigation-and-ux.md` | Navegacion e interfaz DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/feature-visibility-map.md` | Mapa de visibilidad DocuCore | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/docucore/execution-policy.md` | Politica de ejecucion DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/mvp-roadmap.md` | Roadmap MVP DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/qa-checklist.md` | QA checklist DocuCore | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/docucore/README.md` | DocuCore | ACTIVE | P1 | Equipo documental |

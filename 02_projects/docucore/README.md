@@ -33,6 +33,8 @@ MVP funcional creado por agents y cerrado en fases documentadas:
 - `feature-visibility-map.md`: que se muestra, que queda interno y que depende
   de desarrollo real.
 - `monetization-and-credits.md`: reglas base para creditos, costos y consumo.
+- `execution-policy.md`: politica cliente/hibrido/servidor, fallback y eventos
+  ERP de costo/ahorro.
 - `advertising-strategy.md`: publicidad opcional y creditos recompensados.
 
 ## Documentos
@@ -45,6 +47,7 @@ document-intelligence.md
 frontend-navigation-and-ux.md
 feature-visibility-map.md
 monetization-and-credits.md
+execution-policy.md
 advertising-strategy.md
 mvp-roadmap.md
 tools-catalog.md

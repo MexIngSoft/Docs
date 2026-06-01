@@ -21,6 +21,103 @@ Docs/_meta/navigation-map.md
 
 Despues se leen solo los documentos canonicos relacionados con el agent.
 
+## Formato obligatorio de un agent
+
+Todo archivo `Docs/agents/AGENTS-*.md` con instrucciones ejecutables debe
+declarar o permitir inferir:
+
+| Campo | Obligatorio | Regla |
+|---|---|---|
+| Titulo | Si | Nombre claro de la tarea o fase. |
+| Proyecto afectado | Si | Ejemplo: DocuCore, LexNova, Imagrafity, ERP. |
+| Tipo | Si | Documentacion, frontend, API, Gateway, datos, operacion o planeacion. |
+| Prioridad | Si | P0, P1, P2 o P3. |
+| Estado | Si | Pendiente, en progreso, completado, bloqueado o archivado. |
+| Dependencias | Si | Agents, documentos, APIs, backend o decisiones requeridas. |
+| Alcance permitido | Si | Archivos, modulos o rutas que puede modificar. |
+| Fuera de alcance | Si | Funcionalidad o proyectos que no debe tocar. |
+| Documentacion canonica | Si | Documentos que debe leer antes de implementar. |
+| Criterios de aceptacion | Si | Condiciones para marcar completado. |
+| Validaciones | Si | Build, lint, checks, pruebas o validacion documental. |
+| Reporte esperado | Si | Que debe registrar en `EXECUTION_REPORT.md`. |
+
+Si un agent no incluye estos campos, Codex debe inferirlos desde la
+documentacion canonica y registrar la informacion faltante.
+
+## Estados oficiales
+
+| Estado | Uso |
+|---|---|
+| Pendiente | Existe tarea clara aun no ejecutada. |
+| En progreso | La tarea se esta ejecutando en la corrida actual. |
+| Completado | Implementado o documentado, validado y reportado. |
+| Parcialmente completado | Hay MVP o documento, pero quedan dependencias reales. |
+| Bloqueado | Falta informacion, backend, contrato, permiso o decision critica. |
+| No aplicable | El estado actual del proyecto hace que la tarea no corresponda. |
+| Sin instrucciones | Archivo vacio o sin tarea accionable. |
+| Archivado | Agent completado y movido a `_archive` para trazabilidad. |
+
+## Criterios de prioridad
+
+| Prioridad | Uso |
+|---|---|
+| P0 | Bloquea desarrollo, seguridad, datos o ejecucion local. |
+| P1 | Necesario para cerrar MVP, arquitectura o flujo principal. |
+| P2 | Mejora importante pero no bloqueante. |
+| P3 | Limpieza, investigacion o referencia futura. |
+
+## Archivos permitidos y prohibidos
+
+Antes de editar, cada agent debe clasificar:
+
+- archivos permitidos por el alcance;
+- archivos prohibidos por riesgo o proyecto distinto;
+- documentos canonicos que deben actualizarse;
+- reportes o indices que deben sincronizarse;
+- codigo productivo que no debe tocarse si el agent es solo de planeacion.
+
+Regla critica:
+
+```text
+Un agent de planeacion no debe implementar logica productiva.
+```
+
+## Criterios para completar
+
+Un agent queda completado si:
+
+- las tareas no completadas fueron ejecutadas o documentadas como no aplicables;
+- los criterios de aceptacion se cumplieron;
+- las validaciones disponibles fueron ejecutadas;
+- `EXECUTION_REPORT.md` registra resultado, decisiones y pendientes;
+- si creo documento canonico, se actualizaron indices o referencias necesarias;
+- no quedan bloqueos esenciales dentro del alcance declarado.
+
+## Criterios para bloquear
+
+Bloquear y no inventar cuando falte:
+
+- contrato API requerido;
+- decision de negocio o precio;
+- permiso de seguridad;
+- motor backend real;
+- criterio de aceptacion verificable;
+- definicion de datos sensibles;
+- repositorio o infraestructura indispensable.
+
+## Criterios para archivar
+
+Un agent puede archivarse si:
+
+- esta completado, no aplicable o sin instrucciones;
+- el resultado ya esta en documentacion canonica;
+- la validacion quedo registrada;
+- no quedan tareas pendientes dentro del archivo;
+- el archivo archivado conserva trazabilidad en `_archive/agents/<fecha>-<tema>/`.
+
+No se archiva si contiene tareas pendientes o bloqueos que el usuario todavia
+debe resolver.
+
 ## Secuencia oficial
 
 1. Identificar agents activos con `AGENTS-*.md` ordenados numericamente.
