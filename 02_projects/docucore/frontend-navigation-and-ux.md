@@ -885,3 +885,188 @@ Pendiente:
   reales, incluyendo hover, focus y tactil.
 - Prueba automatizada visual futura para casos de rotacion 90/270 e insercion
   entre pagina normal y pagina rotada.
+
+## Menus flotantes del workspace 2026-06-01
+
+Los menus de pagina e insercion del workspace deben comportarse como controles
+flotantes de primer nivel, no como contenido interno de la miniatura.
+
+Reglas aplicadas:
+
+- Solo puede existir un menu flotante abierto a la vez.
+- Los menus `page-menu` e `insertion-menu` se renderizan en un portal sobre
+  `document.body` mediante una capa `floating-menu-layer`.
+- La posicion se calcula desde el rectangulo real del boton o zona que abrio el
+  menu y se ajusta a los bordes visibles del viewport.
+- Los menus se cierran al hacer clic fuera, presionar `Escape`, hacer scroll,
+  cambiar el tamano de ventana, iniciar arrastre, ejecutar una accion o abrir
+  la sidebar del workspace.
+- Las acciones del menu de pagina filtran opciones incompatibles con papelera
+  o portapapeles: restaurar/eliminar permanente solo aparecen en descartadas y
+  pegar solo aparece cuando hay contenido copiado o cortado.
+- Las acciones del menu de insercion ejecutan hoja en blanco, nueva seccion,
+  pegar, insertar PDF e insertar imagen sin mover el layout ni tapar el grid.
+- La pestaña lateral `sidebar-tab` solo aparece cuando la sidebar del workspace
+  esta oculta.
+- El boton `Registrarme` conserva estado primario visible, hover/focus/active y
+  disabled para evitar regresiones visuales en topbar.
+
+Pendiente:
+
+- Agregar prueba visual automatizada para z-index, cierre por eventos globales
+  y posicionamiento en bordes superior/inferior del viewport.
+- Confirmar manualmente en navegador con PDF real que los menus flotantes no se
+  recortan en desktop, tablet y mobile.
+
+## Regla estricta de rotacion PDF 2026-06-01
+
+La rotacion de miniaturas PDF no debe resolverse reduciendo artificialmente la
+imagen. El layout debe adaptarse a la orientacion visual final.
+
+Reglas aplicadas:
+
+- La funcion pura `getPageVisualBox` normaliza rotacion y calcula dimensiones
+  originales, dimensiones visuales, aspectos y orientacion visual.
+- Para rotaciones 90 y 270 grados se intercambian ancho y alto: una pagina
+  `1000 x 563` rotada a `270` se trata visualmente como `563 x 1000`.
+- `.paper-mini` reserva el aspecto visual final mediante
+  `--paper-visual-aspect`.
+- `.paper-rotator` conserva el aspecto original y solo rota el contenido.
+- No se permite usar `scale()` ni variables de ancho reducido como parche para
+  hacer caber previews rotadas.
+- `page-grid` usa flex wrap para permitir que las tarjetas reacomoden a sus
+  vecinas segun el tamano visual real.
+- El menu de tres puntos tiene altura maxima, scroll interno y z-index alto
+  para no quedar debajo de previews ni salirse del viewport.
+
+Validacion tecnica:
+
+- `getPageVisualBox(1000, 563, 270)` devuelve `563 x 1000` y orientacion `V`.
+- La busqueda local no debe encontrar `scale(`, `--paper-original-width`,
+  `56.3` ni `--preview-aspect` en Workspace/CSS.
+
+Pendiente:
+
+- Validacion visual manual con PDF real rotando una pagina horizontal a 270
+  grados y revisando hover, focus, cierre del menu y reacomodo del grid.
+
+## Ancho real de previews rotadas 2026-06-01
+
+La rotacion correcta de previews PDF tambien exige cambiar el ancho real de la
+tarjeta cuando la pagina queda visualmente horizontal.
+
+Reglas aplicadas:
+
+- `getPageLayoutBox` extiende el calculo visual con `thumbWidthPx` y
+  `thumbHeightPx`.
+- El `article.pdf-thumb` recibe `--thumb-width` y cambia su `flex-basis`,
+  `inline-size`, `min-inline-size` y `max-inline-size`.
+- `.thumb-select` y `.paper-mini` usan el ancho completo de la tarjeta.
+- `.paper-mini` usa `--thumb-preview-height` para mantener altura visual
+  coherente por orientacion.
+- Las paginas visualmente horizontales se vuelven mas anchas; las verticales
+  conservan ancho base y crecen en altura.
+- En rotaciones 90/270, `.paper-rotator` toma como ancho el alto visual del
+  preview para que al rotar ocupe el contenedor real sin usar escalas.
+- Queda prohibido corregir este caso con `scale()`, `width: 56%`,
+  `--paper-rotator-ratio`, `--paper-original-width` o anchos artificiales.
+
+Validacion tecnica:
+
+- `getPageLayoutBox(563, 1000, 90)` devuelve orientacion `H`, ancho `302px` y
+  alto `170px` con base `170`.
+- `getPageLayoutBox(1000, 563, 270)` conserva ancho `170px` y alto `302px` al
+  quedar vertical.
+
+Pendiente:
+
+- Validar manualmente en navegador que al rotar pagina 3 a horizontal el DOM
+  tenga `articleWidth > ancho de pagina vertical` y `paperWidth > paperHeight`.
+
+## Altura real de previews horizontales 2026-06-01
+
+Una pagina visualmente horizontal debe ser mas ancha y tambien mas baja. No
+debe conservar el alto de una tarjeta vertical ni empujar la metadata hacia
+abajo.
+
+Reglas aplicadas:
+
+- `page-grid` usa `align-items: flex-start` para permitir alturas distintas por
+  tarjeta sin estirar la fila.
+- `.pdf-thumb` usa `block-size: auto`, `height: auto`,
+  `min-block-size: auto` y `min-height: auto`.
+- `.thumb-select` usa altura automatica, `min-block-size: unset` y filas
+  compactas para preview, titulo, metadata, badge y estado.
+- `.paper-mini` usa exactamente `--thumb-preview-height` como `block-size`,
+  `height` y `max-block-size`.
+- `.paper-mini` y `.paper-viewport` usan `overflow: hidden` para evitar que la
+  imagen rotada invada tarjetas vecinas.
+- Las paginas horizontales fuerzan visibilidad de titulo, metadata, badge y
+  punto de estado inmediatamente debajo del preview.
+- No se permiten `min-height` fijos en `.pdf-thumb`, alturas fijas en
+  `.thumb-select`, padding inferior grande ni `align-self: stretch` para las
+  tarjetas horizontales.
+
+Pendiente:
+
+- Validar manualmente en navegador que la pagina horizontal tenga menor altura
+  visual, metadata visible y sin espacio vacio grande debajo de la imagen.
+
+## Fila estable y centrado de preview horizontal 2026-06-01
+
+Las paginas horizontales rotadas deben centrarse dentro de su marco sin alterar
+la altura normal de las paginas verticales de la misma fila.
+
+Reglas aplicadas:
+
+- `page-grid` conserva `display: flex`, `flex-wrap: wrap` y
+  `align-items: flex-start`.
+- `.thumb-select`, `.paper-mini`, `.paper-viewport` y `.paper-rotator` usan
+  flex para centrar la hoja dentro del marco.
+- `.paper-mini` y `.paper-viewport` mantienen `overflow: hidden`; la imagen no
+  debe salirse del borde de preview.
+- En paginas rotadas 90/270, `.paper-rotator` intercambia dimensiones:
+  `inline-size: var(--thumb-preview-height)` y
+  `block-size: var(--thumb-width)`.
+- En paginas rotadas 90/270, la imagen usa altura completa del rotador,
+  `inline-size: auto`, `max-inline-size: none` y `object-fit: contain`.
+- `.pdf-thumb.is-landscape .thumb-select` centra el contenido verticalmente y
+  `.paper-mini` mantiene margen inferior corto para que metadata y badge sigan
+  visibles.
+- No se modifica la altura de paginas verticales para compensar horizontales.
+
+Pendiente:
+
+- Validar manualmente en DOM con PDF real que `imgInsideX` e `imgInsideY` sean
+  verdaderos y que las paginas vecinas conserven su altura normal.
+
+## Normalizacion logica por filas de preview 2026-06-01
+
+El ajuste de previews rotadas no debe depender solo de CSS global. El workspace
+normaliza cada fila despues del render para que las paginas verticales de la
+misma fila compartan el alto visual de la vertical mas alta, mientras las
+horizontales se centran sin deformar la fila.
+
+Reglas aplicadas:
+
+- `DocumentWorkspacePreview` calcula filas logicas agrupando `.pdf-thumb` por
+  `offsetTop`.
+- Antes de agrupar, cada miniatura limpia `--row-preview-height` para evitar
+  arrastrar medidas obsoletas despues de rotar, reordenar u ocultar paginas.
+- Cada fila calcula el mayor `offsetHeight` de `.paper-mini` entre paginas
+  `is-portrait`.
+- Si la fila tiene paginas verticales, todas las miniaturas de esa fila reciben
+  `--row-preview-height`.
+- `.thumb-select` usa `min-block-size:
+  calc(var(--row-preview-height, var(--thumb-preview-height)) + 92px)` para
+  reservar espacio estable para preview, titulo, metadata, badge y estado.
+- La normalizacion corre despues del render, al cambiar paginas visibles, al
+  redimensionar ventana y cuando carga una miniatura.
+- `.paper-mini` y `.paper-viewport` mantienen `overflow: hidden`; la imagen
+  rotada debe verse completa dentro del marco.
+
+Pendiente:
+
+- Validar manualmente en navegador con PDF real que la imagen rotada no pierda
+  izquierda/derecha/arriba/abajo y que las paginas verticales de la fila no se
+  deformen.

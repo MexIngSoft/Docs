@@ -6537,3 +6537,579 @@ y zonas inteligentes de insercion. Los demas agents fueron ignorados.
 ## Limpieza
 
 `AGENTS-000.md` y `AGENTS-001.md` quedan completados y listos para archivo.
+
+---
+
+# Ejecucion agents 000 y 001 - menus flotantes Workspace DocuCore
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Se ejecutaron los agents activos `AGENTS-000.md` y `AGENTS-001.md` en orden
+numerico. Ambos aplican al area Workspace de DocuCore y corrigen acciones de
+pagina, menus flotantes, zonas de insercion, sidebar del workspace y estados
+visuales relacionados. No se implementaron agents posteriores porque `002-004`
+estan vacios y `005-014` corresponden a fases previamente documentadas como
+dependientes de backend real.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se implemento estado unico de menu flotante, portal de menus, cierre global, posicion inteligente, acciones de pagina filtradas y zonas de insercion sin recorte. |
+| `AGENTS-001.md` | Completado | Se documento y aplico el estandar UX complementario: z-index, cierre por eventos, sidebar-tab condicionada, boton `Registrarme` estable y pendientes de prueba visual futura. |
+
+## Tareas ejecutadas
+
+- Se reemplazo la apertura local de menus por `floatingMenu` unico para pagina
+  e insercion.
+- `page-menu` e `insertion-menu` se renderizan en portal sobre `document.body`
+  para evitar recortes por `overflow` del grid o miniaturas.
+- Los menus se cierran por click externo, `Escape`, scroll, resize, inicio de
+  drag, accion ejecutada y apertura de la sidebar del workspace.
+- Las acciones de pagina ocultan opciones incompatibles con pagina descartada o
+  portapapeles vacio.
+- Las zonas inteligentes de insercion se mantienen como guias delgadas y abren
+  el menu flotante desde su rectangulo real.
+- `sidebar-tab` solo se muestra cuando la sidebar del workspace esta oculta.
+- `topbar-primary` conserva estilo primario explicito para `Registrarme` con
+  hover, focus, active y disabled.
+- Se actualizo la documentacion canonica de navegacion/UX de DocuCore.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/components/AppShell.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+
+## Problemas encontrados
+
+- El primer build fallo porque se trato `pageMenuActions` como funcion cuando
+  en el codigo canonico es un arreglo. Se corrigio filtrando el arreglo antes
+  de renderizar el menu.
+- La implementacion intermedia mezclaba `activePageMenu` con `floatingMenu`;
+  se elimino la referencia obsoleta.
+
+## Riesgos detectados
+
+- Falta prueba visual automatizada para confirmar que menus flotantes no se
+  recorten en todos los viewports.
+- Falta validacion manual con PDF real para hover, focus, touch, drag/drop y
+  menus cerca de bordes del viewport.
+
+## Informacion faltante
+
+- No existe criterio automatizado de screenshots para aprobar z-index y cierre
+  por eventos globales.
+- No existe contrato backend nuevo; estas tareas permanecen dentro del alcance
+  frontend Workspace.
+
+## Limpieza
+
+`AGENTS-000.md` y `AGENTS-001.md` quedan completados y listos para archivo. Los
+agents `005-014` se mantienen activos/bloqueados por dependencias backend
+reales ya documentadas. Los agents vacios se mantienen sin accion.
+
+---
+
+# Ejecucion agent 000 - rotacion estricta de previews PDF DocuCore
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Por instruccion del usuario se ejecuto solamente `AGENTS-000.md`. Todos los
+demas agents fueron ignorados.
+
+El agent exige corregir definitivamente la rotacion de previews PDF sin
+reducir, escalar o achicar artificialmente la imagen. Tambien exige que el menu
+grande de tres puntos tenga scroll interno y no quede debajo de las previews.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+- `Docs/agents/AGENTS-000.md`
+
+## Resultado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Rotacion de previews PDF normalizada con funcion pura, contenedor adaptativo por orientacion visual, grid flexible, menu con scroll interno y validaciones aprobadas. |
+
+## Tareas ejecutadas
+
+- Se creo `getPageVisualBox` y `normalizeRotation` como funciones puras
+  exportadas.
+- Se agregaron pruebas para rotaciones `0`, `90`, `180` y `270` usando el caso
+  `1000 x 563`.
+- `pageFrameStyle` usa `visualAspect` y `originalAspect` calculados desde
+  `getPageVisualBox`.
+- Se elimino el uso de `--paper-original-width`, `--preview-aspect` y `scale()`
+  como parches de layout.
+- `.paper-mini` reserva el aspecto visual final y `.paper-rotator` conserva el
+  aspecto original antes de rotar.
+- `page-grid` se cambio a `flex-wrap` para permitir reacomodo real de tarjetas
+  horizontales y verticales.
+- `page-menu.floating-menu-card` ahora tiene altura maxima, scroll interno,
+  `overscroll-behavior: contain` y `z-index: 10000`.
+- La documentacion canonica de DocuCore fue actualizada con la regla estricta
+  de rotacion.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/page-visual-box.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/page-visual-box.test.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas. |
+| Pruebas `page-visual-box.test.ts` compiladas y ejecutadas con `node --test` | Aprobado; 4 pruebas pasaron. |
+| `rg "scale\\(|--paper-original-width|56\\.3|--preview-aspect" app/globals.css app/workspace` | Aprobado; sin coincidencias. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+
+## Informacion faltante
+
+- Falta validacion visual manual con PDF real horizontal `1000 x 563` rotado a
+  `270` grados.
+- Falta prueba automatizada con navegador para confirmar DOM, menu flotante y
+  reacomodo visual del grid.
+
+## Limpieza
+
+`AGENTS-000.md` queda completado y listo para archivo. Los demas agents no se
+evaluaron ni ejecutaron por instruccion explicita del usuario.
+
+---
+
+# Ejecucion agents activos - altura real de previews horizontales
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Se ejecutaron los agents activos en orden numerico. `AGENTS-000.md` contenia
+una instruccion nueva y ejecutable para corregir la altura real de tarjetas PDF
+rotadas. `AGENTS-001.md` a `AGENTS-004.md`, `AGENTS-007.md` y `AGENTS-015.md`
+a `AGENTS-030.md` estan vacios. `AGENTS-005.md`, `AGENTS-006.md` y
+`AGENTS-008.md` a `AGENTS-014.md` siguen siendo fases antiguas ya documentadas
+como MVP frontend o bloqueadas por backend real; no se reimplementaron para no
+duplicar trabajo ni prometer motores inexistentes.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/AGENTS-000.md`
+- Resumen de contenido de `AGENTS-005.md`, `AGENTS-006.md` y
+  `AGENTS-008.md` a `AGENTS-014.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se corrigio la altura de tarjetas horizontales para que no conserven alto vertical ni oculten metadata/badge/estado. |
+| `AGENTS-001.md` - `AGENTS-004.md` | Sin instrucciones | Archivos vacios. |
+| `AGENTS-005.md` | Bloqueado / ya documentado | OCR avanzado con motores reales requiere contratos y servicios backend Document API. |
+| `AGENTS-006.md` | Parcialmente completado / ya documentado | Acciones futuras por pagina ya existen como configuracion frontend/menu; los jobs reales siguen pendientes. |
+| `AGENTS-007.md` | Sin instrucciones | Archivo vacio. |
+| `AGENTS-008.md` - `AGENTS-014.md` | Parcialmente completados / bloqueados | Fases de secciones, colores, papelera, visibilidad, seleccion, marcadores y division inteligente ya estan documentadas como MVP frontend o pendientes de backend real. |
+| `AGENTS-015.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+## Tareas ejecutadas
+
+- `page-grid` cambio a `align-items: flex-start` para permitir alturas reales
+  distintas por tarjeta.
+- `.pdf-thumb` quedo con `block-size`, `height`, `min-block-size` y
+  `min-height` automaticos.
+- `.thumb-select` dejo de reservar altura vertical y usa filas compactas.
+- `.paper-mini` usa `--thumb-preview-height` como altura exacta y limita
+  overflow.
+- `.paper-viewport` usa `overflow: hidden` para evitar invasiones visuales.
+- `.pdf-thumb.is-landscape` mantiene titulo, metadata, badge y punto de estado
+  visibles justo debajo del preview.
+- Se actualizo la documentacion canonica de DocuCore con la regla de altura
+  real para previews horizontales.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas. |
+| Pruebas `page-visual-box.test.ts` compiladas y ejecutadas con `node --test` | Aprobado; 6 pruebas pasaron. |
+| Busqueda de parches prohibidos (`scale`, `56%`, `--paper-rotator-ratio`, `--paper-original-width`, `--preview-aspect`) | Aprobado; sin coincidencias relevantes en Workspace/CSS. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+
+## Informacion faltante
+
+- Falta validacion visual manual con PDF real para confirmar que una pagina
+  horizontal tenga menor alto visual, metadata visible, badge visible y sin
+  espacio vacio grande debajo del preview.
+- Las fases `005-014` requieren contratos backend reales para cerrar OCR,
+  escritura PDF, bookmarks, indices, division inteligente y persistencia.
+
+## Limpieza
+
+`AGENTS-000.md` queda completado y listo para archivo. Los agents vacios se
+mantienen sin accion. Los agents `005-014` se mantienen activos/bloqueados por
+dependencias backend reales ya documentadas.
+
+---
+
+# Ejecucion agents activos - AGENTS-000 duplicado ya completado
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Se revisaron los agents activos en orden numerico. `AGENTS-000.md` contenia el
+mismo texto ya archivado en
+`Docs/_archive/agents/2026-06-01-docucore-stable-preview-row/AGENTS-000.md`
+con hash SHA256 identico. No se reimplemento codigo porque la tarea ya estaba
+cerrada, documentada y validada.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado previamente / duplicado | Se verifico hash identico contra archivo ya archivado; no hubo cambios de codigo. |
+| `AGENTS-001.md` - `AGENTS-004.md` | Sin instrucciones | Archivos vacios. |
+| `AGENTS-005.md` | Bloqueado / ya documentado | OCR avanzado requiere motores y contratos backend reales. |
+| `AGENTS-006.md` | Parcialmente completado / ya documentado | Acciones futuras existen como estructura frontend; jobs reales pendientes. |
+| `AGENTS-007.md` | Sin instrucciones | Archivo vacio. |
+| `AGENTS-008.md` - `AGENTS-014.md` | Parcialmente completados / bloqueados | Fases de secciones, colores, papelera, seleccion, marcadores y division inteligente dependen de backend real para cierre total. |
+| `AGENTS-015.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+## Tareas ejecutadas
+
+- Se comparo `Docs/agents/AGENTS-000.md` contra el archivo archivado previo
+  mediante SHA256.
+- Se archivo el duplicado en
+  `Docs/_archive/agents/2026-06-01-docucore-stable-preview-row-duplicate/`.
+- Se dejo `Docs/agents/AGENTS-000.md` vacio para evitar reejecucion.
+- No se modifico funcionalidad porque el alcance ya estaba implementado.
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
+| Pruebas `page-visual-box.test.ts` compiladas y ejecutadas con `node --test` | Aprobado; 6 pruebas pasaron. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado despues de limpiar `.next`; primer intento fallo por cache `/_not-found`. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+| `git diff --check` en `Docs` | Aprobado despues de archivar el duplicado; solo avisos LF/CRLF de Git en Windows. |
+
+## Informacion faltante
+
+- Sigue pendiente validacion visual manual con PDF real para el comportamiento
+  de pagina horizontal rotada.
+- Las fases `005-014` siguen requiriendo backend real para cerrar OCR,
+  escritura PDF, bookmarks, indices, division inteligente y persistencia.
+
+## Limpieza
+
+`AGENTS-000.md` quedo vacio. El duplicado se archivo. Los agents vacios se
+mantienen sin accion y los agents `005-014` se mantienen activos/bloqueados por
+dependencias backend reales ya documentadas.
+
+---
+
+# Ejecucion agents activos - normalizacion logica por filas de preview
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Se ejecutaron los agents activos en orden numerico. `AGENTS-000.md` contenia
+una instruccion nueva y ejecutable para normalizar filas logicas de previews
+PDF rotadas. Los demas agents se evaluaron por estado: archivos vacios sin
+instrucciones y fases `005-014` bloqueadas o parcialmente completadas por
+dependencias backend reales ya documentadas.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+- `Docs/agents/AGENTS-000.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se agrego normalizacion logica por filas con `--row-preview-height`, recalculo despues de render/resize/carga de imagen y CSS asociado. |
+| `AGENTS-001.md` - `AGENTS-004.md` | Sin instrucciones | Archivos vacios. |
+| `AGENTS-005.md` | Bloqueado / ya documentado | OCR avanzado requiere motores y contratos backend reales. |
+| `AGENTS-006.md` | Parcialmente completado / ya documentado | Acciones futuras existen como estructura frontend; jobs reales pendientes. |
+| `AGENTS-007.md` | Sin instrucciones | Archivo vacio. |
+| `AGENTS-008.md` - `AGENTS-014.md` | Parcialmente completados / bloqueados | Fases de secciones, colores, papelera, seleccion, marcadores y division inteligente dependen de backend real para cierre total. |
+| `AGENTS-015.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+## Tareas ejecutadas
+
+- Se agrego `normalizePreviewRows` para agrupar miniaturas por `offsetTop`.
+- La funcion limpia `--row-preview-height` antes de recalcular cada fila.
+- Cada fila toma el mayor alto de `.paper-mini` entre paginas `is-portrait` y
+  lo publica como `--row-preview-height` en todas las miniaturas de la fila.
+- El grid de paginas usa `ref` para normalizar despues del render.
+- La normalizacion corre en `resize` y mediante el evento interno
+  `docucore:normalize-preview-rows`.
+- Las imagenes de miniatura disparan el evento al terminar de cargar.
+- `.thumb-select` usa el alto de fila calculado para mantener visible titulo,
+  metadata, badge y punto de estado.
+- Se actualizo la documentacion canonica de DocuCore.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
+| Pruebas `page-visual-box.test.ts` compiladas y ejecutadas con `node --test` | Aprobado; 6 pruebas pasaron. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas. |
+| Busqueda de parches prohibidos (`scale`, `56%`, `--paper-rotator-ratio`, `--paper-original-width`, `--preview-aspect`) | Aprobado; sin coincidencias en Workspace/CSS. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+
+## Informacion faltante
+
+- Falta validacion visual manual con PDF real para confirmar que la imagen
+  rotada no pierde bordes dentro de `.paper-mini` y que las paginas verticales
+  de la misma fila conservan su altura normal.
+- Las fases `005-014` siguen requiriendo backend real para cerrar OCR,
+  escritura PDF, bookmarks, indices, division inteligente y persistencia.
+
+## Limpieza
+
+`AGENTS-000.md` queda completado y listo para archivo. Los agents vacios se
+mantienen sin accion y los agents `005-014` se mantienen activos/bloqueados por
+dependencias backend reales ya documentadas.
+
+---
+
+# Ejecucion agents activos - fila estable y preview horizontal centrado
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Se ejecutaron los agents activos en orden numerico. `AGENTS-000.md` contenia
+una instruccion nueva y ejecutable para estabilizar la fila de previews PDF y
+centrar la hoja horizontal rotada dentro de `.paper-mini`. El resto de agents
+se evaluo por estado: archivos vacios sin instrucciones y fases antiguas
+`005-014` permanecen bloqueadas o parcialmente cerradas por backend real.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+- `Docs/agents/AGENTS-000.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se estabilizo la fila de previews, se centro el preview horizontal con flex y se evito que la imagen rotada salga de `.paper-mini`. |
+| `AGENTS-001.md` - `AGENTS-004.md` | Sin instrucciones | Archivos vacios. |
+| `AGENTS-005.md` | Bloqueado / ya documentado | OCR avanzado requiere motores y contratos backend reales. |
+| `AGENTS-006.md` | Parcialmente completado / ya documentado | Acciones futuras existen como estructura frontend; jobs reales pendientes. |
+| `AGENTS-007.md` | Sin instrucciones | Archivo vacio. |
+| `AGENTS-008.md` - `AGENTS-014.md` | Parcialmente completados / bloqueados | Fases de secciones, colores, papelera, seleccion, marcadores y division inteligente dependen de backend real para cierre total. |
+| `AGENTS-015.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+## Tareas ejecutadas
+
+- `.thumb-select`, `.paper-mini`, `.paper-viewport` y `.paper-rotator` fueron
+  normalizados a flex para centrar el contenido.
+- `.paper-mini` y `.paper-viewport` conservan `overflow: hidden` para que la
+  imagen rotada no invada paginas vecinas.
+- `.paper-rotator` usa ancho/alto completos y para 90/270 invierte dimensiones
+  con `--thumb-preview-height` y `--thumb-width`.
+- La imagen dentro de pagina 90/270 usa altura completa, ancho automatico,
+  `max-inline-size: none` y `object-fit: contain`.
+- `.pdf-thumb.is-landscape` centra verticalmente el contenido sin estirar la
+  fila ni modificar la altura normal de paginas verticales.
+- Se actualizo la documentacion canonica de DocuCore.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas. |
+| Pruebas `page-visual-box.test.ts` compiladas y ejecutadas con `node --test` | Aprobado; 6 pruebas pasaron. |
+| Busqueda de parches prohibidos (`scale`, `56%`, `--paper-rotator-ratio`, `--paper-original-width`, `--preview-aspect`) | Aprobado; sin coincidencias en Workspace/CSS. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+
+## Informacion faltante
+
+- Falta validacion visual manual con PDF real para confirmar `imgInsideX`,
+  `imgInsideY`, centrado vertical de la pagina horizontal y altura normal de
+  paginas vecinas.
+- Las fases `005-014` siguen requiriendo backend real para cerrar OCR,
+  escritura PDF, bookmarks, indices, division inteligente y persistencia.
+
+## Limpieza
+
+`AGENTS-000.md` queda completado y listo para archivo. Los agents vacios se
+mantienen sin accion. Los agents `005-014` se mantienen activos/bloqueados por
+dependencias backend reales ya documentadas.
+
+---
+
+# Ejecucion agent 000 - ancho real de tarjetas PDF rotadas
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Por instruccion del usuario se ejecuto solamente `AGENTS-000.md`; todos los
+demas agents fueron ignorados.
+
+El agent exige que una pagina PDF visualmente horizontal no solo cambie su
+`aspect-ratio`, sino tambien el ancho real de `article.pdf-thumb`,
+`thumb-select`, `paper-mini` y el item flex del grid.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/AGENTS-000.md`
+
+## Resultado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se agrego calculo de layout real para tarjetas rotadas, ancho flexible por orientacion visual y pruebas especificas para paginas horizontales/verticales. |
+
+## Tareas ejecutadas
+
+- Se agrego `PageLayoutBox` y `getPageLayoutBox`.
+- Se calcula `thumbWidthPx` y `thumbHeightPx` a partir de orientacion visual y
+  base `170px`.
+- El `article.pdf-thumb` recibe variables `--thumb-width`,
+  `--thumb-preview-height`, `--paper-visual-aspect` y `--preview-rotation`.
+- `.pdf-thumb` usa `flex: 0 0 var(--thumb-width)`, `inline-size`,
+  `min-inline-size` y `max-inline-size`.
+- `.thumb-select` ocupa el ancho completo de la tarjeta y organiza preview,
+  titulo, metadata, badge y estado.
+- `.paper-mini` ocupa el ancho completo de la tarjeta y su altura visual se
+  deriva de `--thumb-preview-height`.
+- `.paper-rotator` ya no usa `--paper-rotator-ratio`; para 90/270 toma como
+  ancho el alto visual del preview.
+- Se documento la regla canonica en DocuCore.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/page-visual-box.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/page-visual-box.test.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas. |
+| Pruebas `page-visual-box.test.ts` compiladas y ejecutadas con `node --test` | Aprobado; 6 pruebas pasaron. |
+| `rg "scale\\(|width:\\s*56|56%|56\\.3|--paper-rotator-ratio|--paper-original-width|--preview-aspect" app/globals.css app/workspace` | Aprobado; sin coincidencias. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+
+## Informacion faltante
+
+- Falta validacion visual manual con PDF real para confirmar que pagina 3
+  horizontal tenga `articleWidth` mayor al ancho de una pagina vertical y
+  `paperWidth > paperHeight`.
+
+## Limpieza
+
+`AGENTS-000.md` queda completado y listo para archivo. Los demas agents no se
+evaluaron ni ejecutaron por instruccion explicita del usuario.
