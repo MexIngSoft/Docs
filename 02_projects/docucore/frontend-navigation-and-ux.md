@@ -772,3 +772,41 @@ Informacion faltante:
 - No existe aun una prueba visual automatizada obligatoria para bloquear
   regresiones de shell global vs workspace. Se recomienda agregar captura de
   `/`, `/upload` y `/workspace` en el protocolo de QA visual.
+
+## Workspace limpio a pantalla completa 2026-06-01
+
+La ruta `/workspace` debe tratar el preview como superficie principal. La
+informacion operativa no debe competir con las miniaturas.
+
+Reglas aplicadas:
+
+- `canvas-header` no se renderiza como bloque permanente dentro del workspace.
+- `pdf-toolbar` no se renderiza encima del preview.
+- `workspace-status-row` y `section-legend` no ocupan espacio permanente.
+- La informacion de documento se abre desde el boton inferior `Documento`.
+- El estado de miniaturas, carga e incidencias se abre desde el boton inferior
+  `Estado`.
+- La leyenda de secciones se abre desde el boton inferior `Secciones`.
+- El area `page-grid` es el contenido principal visible de `pdf-stage`.
+- `canvas-main`, `pdf-stage` y `page-grid` usan `overflow: visible`; el scroll
+  vertical esperado es el del navegador.
+- La barra inferior concentra herramientas, documento, estado, secciones,
+  configuracion, seleccion, subir mas, resultado y aplicar cambios.
+- Las zonas intermedias `section-split-zone` y `page-insert-zone` son guias
+  delgadas, semitransparentes y de bajo peso visual. Solo resaltan por hover,
+  focus, copia/corte o arrastre.
+
+Decision tecnica:
+
+- Se mantuvieron drawers existentes en vez de introducir un sistema nuevo de
+  popovers, porque ya existian cierre por backdrop, foco visual y patron
+  consistente con el workspace.
+- Los agents de OCR, papelera, secciones, marcadores y division automatica se
+  mantienen como MVP frontend/preparado cuando dependen de backend real.
+
+Informacion faltante:
+
+- Motor backend para aplicar escritura real de PDF.
+- Persistencia real de proyecto de workspace.
+- Pruebas visuales automatizadas para confirmar que el unico scroll vertical
+  sea el del navegador en desktop y mobile.

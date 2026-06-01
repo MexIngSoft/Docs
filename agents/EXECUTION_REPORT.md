@@ -6068,3 +6068,96 @@ reconstruyo el runtime local y levanto nuevamente `npm run dev`.
 
 El fallo correspondia a cache/manifest de Next.js desfasado. No se modifico
 funcionalidad ni se cambiaron puertos.
+
+---
+
+# Ejecucion agents DocuCore workspace limpio
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Se ejecutaron los agents activos en orden numerico, limitando la implementacion
+al area Workspace de DocuCore. Antes de modificar se revisaron reglas de agents,
+indices y documentacion canonica de DocuCore.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/03_standards/documentation-first-workflow.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/document-intelligence.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se elimino `canvas-header`, `pdf-toolbar`, `workspace-status-row` y `section-legend` como bloques visibles permanentes dentro del preview. |
+| `AGENTS-001.md` | Completado | Se aplico el modelo de workspace tipo editor: preview central, barra inferior icon-only y paneles bajo demanda para documento, estado, secciones, configuracion, seleccion y resultado. |
+| `AGENTS-002.md` | Completado | Se tomo como referencia visual HTML/CSS para consolidar topbar/sidebar/workspace limpio sin cambiar rutas ni funcionalidad fuera de `/workspace`. |
+| `AGENTS-003.md` | Completado | `section-split-zone` y `page-insert-zone` quedaron como guias delgadas, semitransparentes y de bajo peso visual; solo resaltan por hover/focus o acciones relacionadas. |
+| `AGENTS-004.md` | Sin instrucciones | Archivo vacio. |
+| `AGENTS-005.md` - `AGENTS-014.md` | Ya completados MVP / parcialmente bloqueados por backend | Ya estaban implementados como MVP frontend en ejecucion previa. No se repitio implementacion para no inventar OCR productivo, escritura real de PDF, bookmarks reales ni persistencia sin Gateway/Document API. |
+| `AGENTS-015.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+## Tareas ejecutadas
+
+- Se movio informacion de documento a drawer `Documento`.
+- Se movio estado de miniaturas, carga e incidencias a drawer `Estado`.
+- Se movio leyenda de secciones a drawer `Secciones`.
+- Se retiro el render permanente de `canvas-header` y `pdf-toolbar`.
+- Se retiro el render permanente de `workspace-status-row` y `section-legend`
+  dentro de `pdf-stage`.
+- `canvas-main`, `pdf-stage` y `page-grid` quedaron con `overflow: visible`
+  para priorizar scroll principal del navegador.
+- La barra inferior agrega accesos a Herramientas, Documento, Estado,
+  Secciones, Configuracion, Seleccion, Subir mas, Resultado y Aplicar.
+- Las zonas de insercion/division quedaron compactas y discretas.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; `next lint` muestra aviso de deprecacion para Next 16. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado, 20 rutas generadas. |
+| Busqueda local de render permanente `canvas-header`, `DocumentPreviewToolbar`, `pdf-toolbar`, `workspace-status-row`, `section-legend` en `WorkspaceClient.tsx` | Aprobado; no hay coincidencias. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo aviso LF/CRLF de Git. |
+
+## Decisiones tomadas
+
+- Se usaron drawers existentes en lugar de crear un sistema paralelo de
+  popovers para mantener consistencia con el workspace actual.
+- No se tocaron API, Gateway ni rutas externas a Workspace.
+- Los agents `005-014` no se reimplementaron porque sus cambios MVP ya estaban
+  documentados y lo restante depende de backend real.
+
+## Informacion faltante o ambigua
+
+- Falta contrato backend para persistir proyecto, aplicar cambios reales de PDF
+  y exportar resultados definitivos.
+- Falta motor OCR productivo y deteccion real de bookmarks, QR, paginas en
+  blanco y layout.
+- Falta QA visual automatizado en desktop/mobile.
+
+## Limpieza
+
+Se archivan los agents `AGENTS-000.md` a `AGENTS-003.md` por quedar cerrados en
+el alcance Workspace frontend. Los agents `005-014` se conservan activos solo si
+se decide completar backend real.
