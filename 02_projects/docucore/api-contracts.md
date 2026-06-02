@@ -108,6 +108,55 @@ Respuesta base:
 }
 ```
 
+## Document Projects
+
+Estado 2026-06-01: pendiente de backend productivo.
+
+La web agrupa borradores locales como proyectos documentales para que `/upload`
+muestre trabajos recientes, documentos internos y estado de avance. Cuando se
+lleve a Gateway/API, el contrato objetivo debe separar proyecto de job:
+
+```http
+GET /api/gateway/projects/
+POST /api/gateway/projects/
+GET /api/gateway/projects/{project_id}/
+PATCH /api/gateway/projects/{project_id}/
+DELETE /api/gateway/projects/{project_id}/archive/
+POST /api/gateway/projects/{project_id}/documents/
+PATCH /api/gateway/projects/{project_id}/documents/{document_id}/
+DELETE /api/gateway/projects/{project_id}/documents/{document_id}/
+GET /api/gateway/projects/{project_id}/jobs/
+```
+
+Respuesta base:
+
+```json
+{
+  "id": "uuid",
+  "name": "Sentencia condenatoria 332024",
+  "status": "in_progress",
+  "current_step": "workspace",
+  "selected_action": "pdf-split",
+  "documents_count": 2,
+  "pages_count": 56,
+  "documents": [
+    {
+      "id": "uuid",
+      "file_id": "uuid",
+      "name": "SENTENCIA CONDENATORIA 332024.pdf",
+      "page_count": 28,
+      "status": "modified"
+    }
+  ]
+}
+```
+
+Regla:
+
+- `/upload` muestra proyectos recientes y borradores.
+- `/workspace` edita el proyecto/documento activo.
+- `/jobs` muestra ejecuciones, resultados y descargas por proyecto o globales.
+
 ## Download
 
 ```http

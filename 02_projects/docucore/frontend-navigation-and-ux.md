@@ -1138,3 +1138,202 @@ Pendiente:
 
 - Agregar prueba visual automatizada que mida `getBoundingClientRect()` de
   `.paper-mini`, `.paper-viewport` e `img` en un PDF real con paginas mixtas.
+
+## Correccion de marco y tarjeta de preview 2026-06-01
+
+La tarjeta de una pagina PDF no puede medir lo mismo que el viewport real del
+documento si tambien tiene padding, borde lateral de seccion, check de
+seleccion y zonas de insercion. Esa configuracion provoca desbordes laterales
+en paginas verticales y deja el marco horizontal pegado a la imagen.
+
+Reglas aplicadas:
+
+- `--thumb-width` y `--thumb-preview-height` representan el viewport real de
+  la pagina renderizada.
+- `.paper-mini` representa el marco visual y agrega padding interno propio sin
+  cambiar el tamano del viewport.
+- `.paper-viewport` ocupa el contenido util de `.paper-mini`; ahi vive la hoja
+  real, sin recortes ni `scale()`.
+- `.pdf-thumb` usa un ancho de tarjeta mayor que `--thumb-width` para reservar
+  padding, borde y marco.
+- Las paginas verticales no deben desbordar el borde rojo/naranja de la
+  tarjeta.
+- Las paginas horizontales deben mostrar aire entre imagen y marco sin reducir
+  artificialmente la miniatura.
+- La separacion visual debe lograrse ampliando tarjeta y marco, no achicando
+  la pagina renderizada.
+
+Validacion esperada:
+
+- En vertical, `.paper-mini` queda contenido dentro de `.pdf-thumb`.
+- En horizontal, la imagen no queda pegada al borde del marco.
+- La metadata, insignia y punto verde quedan centrados bajo el preview.
+- Las zonas de insercion no invaden la imagen ni el bloque de detalles.
+
+## Correccion de selector e insercion entre previews 2026-06-01
+
+La preview del workspace debe conservar controles de pagina predecibles aunque
+la pagina no este seleccionada y aunque existan paginas verticales y
+horizontales mezcladas.
+
+Reglas aplicadas:
+
+- El selector de pagina se mantiene visible en estado neutro gris cuando la
+  pagina no esta seleccionada.
+- El selector cambia a verde solo cuando la pagina queda seleccionada.
+- La guia de insercion entre paginas debe centrarse con base en el espacio real
+  entre tarjetas: `page-gap + insertion-zone-width`.
+- La guia de insercion no debe pegarse al borde de una tarjeta ni invadir el
+  marco de la pagina vecina.
+- El marco de preview debe ser delgado: suficiente para separar hoja y tarjeta,
+  pero sin crear un margen pesado alrededor de la imagen.
+- El ajuste de marco no debe reducir artificialmente la imagen renderizada ni
+  usar `scale()`.
+
+Validacion esperada:
+
+- Entre dos paginas, la barra azul queda visualmente centrada en el canal entre
+  tarjetas.
+- Paginas no seleccionadas muestran selector gris y paginas seleccionadas
+  muestran selector verde.
+- El marco de cada imagen queda mas compacto sin que la miniatura desborde en
+  paginas verticales ni quede pegada en paginas horizontales.
+
+## Correccion de shell, sidebar y pestaña Workspace 2026-06-01
+
+La navegacion principal de DocuCore debe mantenerse legible por encima del
+contenido operativo sin que el header la recorte cuando la sidebar se expande.
+En Workspace, la pestaña que abre la sidebar oculta debe verse como un control
+centrado y no como una barra incompleta.
+
+Reglas aplicadas:
+
+- En rutas normales, la sidebar debe ser fija para que el usuario siempre pueda
+  acceder a la navegacion al desplazarse.
+- En rutas generales como `/`, la sidebar expandida debe tener prioridad visual
+  sobre el header para no quedar cortada por la topbar.
+- La topbar conserva posicion sticky, no fija global, para acompanar el flujo
+  sin competir con la sidebar ni bloquear contenido.
+- `/workspace` es la excepcion: su sidebar puede ocultarse y funcionar como
+  panel flotante para priorizar el canvas documental.
+- En `/workspace`, el boton lateral `sidebar-tab` debe centrar su icono vertical
+  y horizontalmente dentro de la pestaña.
+- La pestaña lateral solo abre la navegacion; no debe competir con controles de
+  pagina, menus flotantes ni preview del documento.
+
+Validacion esperada:
+
+- En `/upload`, `/jobs`, `/history` y rutas generales, la sidebar se mantiene
+  fija durante el scroll.
+- En Home, al expandir la sidebar, el panel se ve completo desde arriba hasta
+  abajo y no queda cubierto por el header.
+- En Workspace, la pestaña lateral muestra el icono centrado dentro del boton.
+
+## Centrado vertical de previews horizontales 2026-06-01
+
+Las paginas horizontales deben ser faciles de distinguir dentro de una fila con
+paginas verticales. No deben estirarse hasta ocupar toda la altura de la fila,
+pero tampoco deben quedar pegadas arriba con todo el hueco visual abajo.
+
+Reglas aplicadas:
+
+- `.pdf-thumb.is-landscape` se centra verticalmente dentro de la fila flex.
+- La tarjeta horizontal conserva altura compacta y no hereda la altura completa
+  de las paginas verticales vecinas.
+- La metadata de pagina, orientacion, badge y punto de estado siguen debajo del
+  preview horizontal.
+- Las guias de insercion permanecen asociadas a cada tarjeta y no se convierten
+  en etiquetas verticales de fila completa.
+
+Validacion esperada:
+
+- En filas mixtas, la pagina horizontal queda visualmente centrada respecto a
+  las paginas verticales.
+- El usuario puede detectar rapidamente cuales previews son horizontales por su
+  tarjeta compacta.
+
+## Proyectos documentales en Upload 2026-06-01
+
+La pantalla `/upload` no debe presentar borradores como documentos sueltos
+repetidos. Debe tratarlos como proyectos documentales recientes, porque el
+usuario vuelve a un trabajo completo: documentos, paginas, accion activa,
+workspace, modificaciones y siguiente paso.
+
+Modelo funcional MVP:
+
+```text
+Proyecto documental
+-> Documentos
+-> Workspace
+-> Historial local
+-> Jobs futuros o ejecuciones reales
+```
+
+Reglas aplicadas:
+
+- `/upload` muestra tarjetas de proyecto documental en `Continuar trabajos
+  anteriores`.
+- Cada tarjeta muestra nombre del proyecto, estado, paso actual, accion
+  pendiente, cantidad de documentos, paginas y fecha de ultima actualizacion.
+- Los documentos internos se muestran dentro de la tarjeta del proyecto, no
+  como filas principales independientes.
+- Abrir, duplicar, renombrar y eliminar operan sobre el proyecto/borrador.
+- Los borradores antiguos que solo tengan `name`, `tool` y `pageCount` se
+  normalizan como proyecto de un documento para no romper recuperacion local.
+- `Workspace` guarda en el resumen local `status`, `currentStep`,
+  `documentCount` y `documents` como puente MVP.
+- `/jobs` queda reservado para ejecuciones reales, historial, resultados y
+  descargas; no reemplaza la lista de proyectos recientes de `/upload`.
+
+Diferencia obligatoria:
+
+```text
+Proyecto documental = agrupacion editable de documentos y modificaciones.
+Job = ejecucion concreta de una accion sobre un proyecto o documento.
+```
+
+Pendiente backend:
+
+- Crear contrato productivo `Project`/`DocumentProject` si DocuCore requiere
+  persistencia remota por usuario.
+- Definir si eliminar proyecto es archive o hard delete.
+- Definir si duplicar proyecto duplica binarios o solo referencias.
+- Relacionar `Document.FileProcessingJobs` con `project_id` cuando existan
+  jobs multiarchivo o ejecuciones de larga duracion.
+
+## Gate MVP de vistas y herramientas 2026-06-01
+
+DocuCore debe salir con un MVP enfocado en herramientas con backend real. Las
+capacidades documentales avanzadas se documentan como vision de producto, pero
+no deben ejecutarse ni verse como listas para usar.
+
+Reglas aplicadas:
+
+- `feature-gates.ts` es la fuente frontend para decidir que herramienta, vista
+  o accion se puede usar.
+- El dashboard puede mostrar tarjetas aplazadas como `Proximamente` para
+  validar interes, sin abrir procesos.
+- `/upload` filtra herramientas no ejecutables antes de calcular acciones
+  compatibles.
+- `/workspace` filtra herramientas internas del drawer y acciones de pagina
+  futuras.
+- La navegacion global oculta vistas que no sean `released` o `mvp` publicas.
+- El acceso directo por URL puede existir para desarrollo, pero no debe
+  prometer disponibilidad publica ni iniciar jobs sin backend.
+
+Bloqueado por ahora:
+
+- OCR por pagina, OCR por lotes y OCR por regiones.
+- Generacion de indices, PDF indexado y busqueda documental.
+- IA documental, clasificacion, resumen y extraccion estructurada.
+- Firma, marca de agua, numeracion, traduccion y extraccion de imagenes como
+  acciones de pagina.
+- Integraciones cloud, portal API publico, workflows OCR e insercion externa
+  de PDF/imagen.
+
+Pendiente:
+
+- Conectar JobCron/FeatureAvailability productivo con permisos por usuario,
+  ambiente y pais.
+- Agregar pruebas de UI que confirmen que herramientas aplazadas no aparecen
+  en `/upload` ni en el drawer de `/workspace`.

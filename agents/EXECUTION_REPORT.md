@@ -6604,6 +6604,12 @@ dependientes de backend real.
 | `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
 | `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas. |
 | `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+| `git diff --check` en `Docs` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+| `Repair-NextCss.ps1 -Project docucore -Url http://localhost:3004 -Local` | Detecto runtime/CSS no disponible inicialmente. |
+| `Start-NextLocalWeb.ps1 -Project docucore -CleanCache` | Aprobado; reinicio DocuCore con cache limpia. |
+| `Repair-NextCss.ps1 -Project docucore -Url http://localhost:3004 -Local` | Aprobado; CSS disponible. |
+| `Invoke-WebRequest http://localhost:3004/upload` | Aprobado; HTTP 200. |
+| `Invoke-WebRequest http://localhost:3004/workspace` | Aprobado; HTTP 200. |
 
 ## Problemas encontrados
 
@@ -7207,5 +7213,284 @@ despues se ejecutaron solamente los agents activos `AGENTS-000.md` y
 
 `AGENTS-000.md` y `AGENTS-001.md` quedan archivados al completarse. Los demas
 agents no fueron evaluados ni ejecutados en esta corrida.
+
+---
+# Ejecucion agents activos - gate MVP de vistas y herramientas DocuCore
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Se ejecutaron los agents activos en orden numerico. La prioridad tecnica fue
+aplicar el componente de visibilidad documentado para bloquear lo que no se
+trabajara en el MVP: OCR, indexacion documental, IA, firma, integraciones,
+workflows OCR y acciones avanzadas sin backend real.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/feature-visibility-map.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-005.md`
+- `Docs/agents/AGENTS-006.md`
+- `Docs/agents/AGENTS-008.md`
+- `Docs/agents/AGENTS-009.md`
+- `Docs/agents/AGENTS-010.md`
+- `Docs/agents/AGENTS-011.md`
+- `Docs/agents/AGENTS-012.md`
+- `Docs/agents/AGENTS-013.md`
+- `Docs/agents/AGENTS-014.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se aplico estrategia MVP: OCR, indexacion e IA quedan aplazadas, visibles solo como proximamente y bloqueadas como accion ejecutable. |
+| `AGENTS-001.md` | Completado | Se ajusto espaciado, centrado de detalles, gap de fila y separacion de zonas de insercion en miniaturas del workspace. |
+| `AGENTS-002.md` - `AGENTS-004.md` | Sin instrucciones | Archivos vacios. |
+| `AGENTS-005.md` | Bloqueado / Pendiente | OCR avanzado requiere motores y contratos backend reales; queda fuera del MVP actual. |
+| `AGENTS-006.md` | Bloqueado / Pendiente | Acciones futuras que requieren firma, OCR, traduccion, marca de agua o escritura real de PDF quedan bloqueadas por gate. |
+| `AGENTS-007.md` | Sin instrucciones | Archivo vacio. |
+| `AGENTS-008.md` - `AGENTS-014.md` | Bloqueados / Pendientes | Secciones avanzadas, colores, papelera, seleccion, marcadores e inteligencia automatica se documentan como trabajo pendiente cuando dependan de backend, persistencia, OCR o exportacion real. |
+| `AGENTS-015.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+## Tareas ejecutadas
+
+- Se creo `WEB.NJ.NEXT.DocuCore/lib/feature-gates.ts` como gate central para
+  herramientas, vistas y acciones aplazadas.
+- La navegacion global ahora solo incluye features publicas `released` o `mvp`.
+- `/workspace` deja de aparecer como acceso directo global; se abre desde el
+  flujo de `/upload` cuando corresponde.
+- OCR, indices, IA, expedientes, workflows OCR, integraciones cloud y API keys
+  quedan fuera de ejecucion MVP.
+- `/upload` usa el gate central para filtrar herramientas compatibles
+  ejecutables.
+- El dashboard conserva tarjetas aplazadas como `Proximamente`, sin enlace a
+  ejecucion.
+- El drawer de herramientas del workspace excluye OCR, firma, indice y
+  extraccion de imagenes.
+- El menu de pagina excluye acciones futuras como OCR, firma, marca de agua,
+  numeracion, traduccion y extraccion de imagenes.
+- La insercion externa de PDF/imagen queda deshabilitada como `Proximamente`.
+- Se ajusto CSS del workspace para padding uniforme, detalles centrados,
+  mayor separacion entre tarjetas y zonas de insercion fuera del contenido.
+- Se actualizaron los documentos canonicos de DocuCore.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/feature-gates.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/feature-availability.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/catalog-fallback.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/layout.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/upload/UploadClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/feature-visibility-map.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+| `git diff --check` en `Docs` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+
+## Informacion faltante
+
+- No existe aun contrato productivo de JobCron/FeatureAvailability con permisos
+  por usuario, ambiente y pais.
+- No existe backend real para OCR avanzado, indexacion, IA documental, firma,
+  marca de agua, traduccion, bookmarks reales, exportacion por secciones ni
+  persistencia avanzada.
+- Falta prueba automatizada que verifique que herramientas aplazadas no abren
+  `/upload`, `/workspace` ni jobs.
+
+## Limpieza
+
+Los agents completados y bloqueados por alcance MVP quedan archivados en
+`Docs/_archive/agents/2026-06-01-docucore-mvp-feature-gates/`. Los archivos
+activos correspondientes quedan vacios para no repetir trabajo ya documentado.
+
+---
+# Ejecucion agents activos - cierre duplicado de espaciado workspace
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Se revisaron los agents activos en orden numerico. Solo `AGENTS-000.md` tenia
+contenido. Su instruccion corresponde al ajuste visual final de espaciado,
+centrado de detalles y distribucion adaptativa de previews, ya implementado y
+documentado en la ejecucion anterior.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/feature-visibility-map.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado / duplicado | Ya estaba implementado: `.pdf-thumb` tiene padding uniforme, `.thumb-select` usa grid centrado, `.page-grid` usa `gap: 26px var(--page-gap)` con `--page-gap: 28px`, `.paper-mini` centra con `margin-inline: auto` y las zonas de insercion quedan separadas con `right: -18px`. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+## Tareas ejecutadas
+
+- Se verifico que el CSS actual cumple el agent sin requerir cambios nuevos.
+- Se archivo `AGENTS-000.md` para no repetir una tarea ya cerrada.
+- Se mantuvieron intactos los cambios existentes del gate MVP y del workspace.
+
+## Archivos modificados
+
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/_archive/agents/2026-06-01-docucore-preview-spacing-duplicate/AGENTS-000.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `git diff --check` en `Docs` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas. |
+
+## Informacion faltante
+
+- No hay informacion faltante para este agent. La validacion visual manual con
+  PDF real sigue recomendada como QA futuro, no como bloqueo de implementacion.
+
+## Limpieza
+
+`AGENTS-000.md` queda archivado como duplicado completado en
+`Docs/_archive/agents/2026-06-01-docucore-preview-spacing-duplicate/`.
+
+---
+# Ejecucion agents activos - proyectos documentales en Upload DocuCore
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Se ejecutaron los agents activos `AGENTS-000.md`, `AGENTS-001.md` y
+`AGENTS-002.md`. El objetivo fue corregir la pantalla `/upload`, que estaba
+mostrando documentos/borradores repetidos como filas planas, y establecer la
+relacion correcta entre proyectos documentales, documentos, workspace y jobs.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/mvp-roadmap.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/database.md`
+- `Docs/02_projects/docucore/tools-catalog.md`
+- `Docs/02_projects/jobcron/feature-availability.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-002.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | `/upload` ahora muestra proyectos documentales recientes con documentos internos, estado, paso actual, accion pendiente y acciones de proyecto. |
+| `AGENTS-001.md` | Completado | Se aplico la explicacion conceptual: Upload muestra proyectos/documentos; Jobs queda como historial de ejecuciones y resultados. |
+| `AGENTS-002.md` | Completado parcial | Se adopto la recomendacion MVP: `Project -> Documents -> Workspace -> History/Results`; Jobs queda documentado para ejecuciones reales y backend futuro. |
+| `AGENTS-003.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios, sin tarea ejecutable. |
+
+## Tareas ejecutadas
+
+- Se amplio `WorkspaceDraftSummary` con `status`, `currentStep`,
+  `documentCount` y `documents`.
+- El workspace guarda esos campos al persistir un borrador local.
+- `/upload` normaliza borradores antiguos como proyectos de un documento para
+  no romper recuperacion local.
+- La seccion `Continuar trabajo anterior` cambia a `Continuar trabajos
+  anteriores` y muestra tarjetas de proyecto documental.
+- Cada tarjeta muestra nombre, estado, paso, documentos, paginas, accion,
+  fecha de actualizacion y documentos internos.
+- Las acciones Abrir/Continuar, Duplicar, Renombrar y Eliminar operan sobre el
+  proyecto/borrador.
+- Se documentaron contratos API objetivo para `Document Projects`.
+- Se documento el modelo de datos futuro para proyectos, documentos, cambios y
+  relacion con jobs.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/workspace-drafts.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/upload/UploadClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/database.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+
+## Decisiones tomadas
+
+- Se implemento un MVP frontend/local usando borradores existentes en
+  localStorage/IndexedDB, porque no existe contrato backend productivo de
+  proyectos documentales.
+- No se modifico `/jobs` en codigo: se mantiene como pantalla de ejecuciones
+  reales consumidas desde Gateway.
+- No se cambio la ruta `/workspace` a `/workspace/:projectId`; se documento
+  como decision futura porque hoy el workspace usa query params y borradores
+  locales.
+
+## Informacion faltante
+
+- Falta decidir si `DocumentProject` sera entidad de `DocuCore` API o si vivira
+  parcialmente en `Document` API.
+- Falta definir si eliminar proyecto sera archive o hard delete.
+- Falta definir si duplicar proyecto duplica binarios o solo referencias.
+- Falta relacion productiva `project_id` en jobs cuando existan ejecuciones
+  multiarchivo o de larga duracion.
+
+## Limpieza
+
+`AGENTS-000.md`, `AGENTS-001.md` y `AGENTS-002.md` quedan archivados como
+completados en:
+
+```text
+Docs/_archive/agents/2026-06-01-docucore-upload-projects-jobs/
+```
+
+Los agents `003` a `030` siguen sin instrucciones.
 
 ---

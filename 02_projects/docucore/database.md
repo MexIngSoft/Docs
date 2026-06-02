@@ -50,6 +50,28 @@ El agent original tenia `Document0.FileProcessingResults`; se corrige a `Documen
 | `DocuCore.Tools` | Inventario de herramientas ejecutables o planeadas, con estado activo/no activo, visibilidad, creditos, extensiones aceptadas y salida esperada. |
 | `DocuCore.ProcessingHistory` | Historial ligero de ejecucion/configuracion del producto DocuCore. |
 
+## Modelo futuro de proyectos documentales
+
+El MVP frontend ya agrupa borradores locales como proyectos documentales para
+evitar listas planas de archivos repetidos en `/upload`. Si se persiste en
+backend, el modelo recomendado es:
+
+| Tabla | Proposito |
+|---|---|
+| `DocuCore.DocumentProjects` | Proyecto editable: nombre, estado, paso actual, usuario, fechas y accion activa. |
+| `DocuCore.DocumentProjectFiles` | Relacion entre proyecto y `Document.Files`, con orden, nombre visible, estado y metadata de paginas. |
+| `DocuCore.DocumentProjectChanges` | Cambios reversibles por documento: rotacion, eliminacion, reordenamiento, renombre, secciones y seleccion. |
+| `DocuCore.DocumentProjectJobs` | Relacion entre proyecto y `Document.FileProcessingJobs` cuando una accion genere ejecucion real. |
+
+Regla:
+
+```text
+Project -> Documents -> Workspace -> Jobs/Results
+```
+
+Un job no sustituye al proyecto. El job representa una ejecucion concreta; el
+proyecto conserva el contexto editable y puede generar varios jobs.
+
 ## Estados de herramientas
 
 | Estado | Uso |

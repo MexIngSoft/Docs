@@ -52,10 +52,49 @@ como disponible publicamente.
   generar realmente.
 - Si una herramienta depende de OCR real y OCR no esta disponible, la pantalla
   debe explicarlo como limite y no como falla inesperada.
+- El gate frontend oficial vive en `WEB.NJ.NEXT.DocuCore/lib/feature-gates.ts`.
+  Cualquier vista, herramienta o accion aplazada debe bloquearse desde ahi
+  antes de agregarse a navegacion, upload o workspace.
+- Las vistas `development`, `beta`, `internal` y `disabled` no entran a la
+  navegacion publica. Pueden existir como rutas tecnicas, pero no deben
+  presentarse como flujo activo.
+- Las herramientas `planned` pueden mostrarse como tarjeta informativa
+  `Proximamente`, pero no deben abrir `/upload`, `/workspace` ni jobs.
 
 ## Pendientes
 
 - Conectar permisos reales de Auth para zonas internas.
+
+## Bloqueo MVP DocuCore 2026-06-01
+
+Para salida MVP se aplazan explicitamente OCR, indexacion documental, IA
+documental, busqueda por contenido, firma electronica, integraciones cloud,
+workflows OCR y acciones de insercion externa.
+
+Reglas aplicadas:
+
+- OCR e indexacion se muestran como `planned` o `Proximamente`, no como
+  herramientas ejecutables.
+- `WEB.NJ.NEXT.DocuCore/lib/feature-gates.ts` centraliza:
+  - herramientas ejecutables;
+  - herramientas informativas;
+  - acciones de pagina permitidas;
+  - vistas navegables publicas.
+- `/upload` solo recibe herramientas con backend real y estado ejecutable.
+- `/workspace` oculta herramientas y acciones de pagina aplazadas como OCR,
+  firmar, marca de agua, numerar, traducir, extraer imagenes e indice.
+- La navegacion publica solo muestra features `released` o `mvp` con
+  `publicVisible = true`.
+
+Pendientes documentales:
+
+- `AGENTS-005.md`: OCR avanzado queda pendiente hasta existir motor OCR
+  productivo y contrato Gateway/Document API.
+- `AGENTS-006.md`: acciones futuras por pagina quedan pendientes si requieren
+  escritura real de PDF, firma, marca de agua, traduccion o backend.
+- `AGENTS-008.md` a `AGENTS-014.md`: secciones, colores, papelera,
+  seleccion, marcadores e inteligencia automatica quedan como trabajo futuro
+  cuando requieran persistencia, OCR, bookmarks reales o exportacion backend.
 
 ## Integracion JobCron 2026-05-30
 
