@@ -1801,3 +1801,33 @@ No incluido:
 
 - `.runtime/` del frontend contiene logs locales de servidor y no forma parte
   del codigo fuente ni de la documentacion canonica.
+
+## Reflow de zoom y prioridad de controles 2026-06-05
+
+El zoom del Workspace debe cambiar el tamano de las miniaturas sin provocar
+encimamientos entre tarjetas ni ocultar el popover con controles laterales.
+
+Reglas aplicadas:
+
+- `page-grid` calcula `--preview-slot-width` desde el zoom actual.
+- El slot base escala con el mismo criterio que la tarjeta vertical:
+  `170px * zoom + extra de tarjeta`.
+- Si el zoom aumenta y ya no caben las paginas en la fila, la grilla debe crear
+  nuevas filas en lugar de superponer previews.
+- Las paginas horizontales conservan `span 2`; el slot ampliado les da espacio
+  suficiente sin perder el orden documental.
+- El selector sidebar/toolbar queda por debajo del popover de zoom en la pila
+  visual.
+- El popover de zoom debe mantenerse usable aunque el selector lateral este
+  cerca.
+
+Validacion esperada:
+
+- Al usar zoom 140% o superior, las miniaturas no se enciman.
+- Las filas se recalculan segun ancho disponible y zoom activo.
+- El boton de sidebar no queda por encima de la barra/popover de zoom.
+
+Pendiente:
+
+- Agregar prueba visual automatizada que cambie zoom 100%, 140% y 180% con PDF
+  mixto vertical/horizontal y confirme ausencia de solapes.
