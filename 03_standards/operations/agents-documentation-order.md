@@ -55,7 +55,7 @@ documentacion canonica y registrar la informacion faltante.
 | Bloqueado | Falta informacion, backend, contrato, permiso o decision critica. |
 | No aplicable | El estado actual del proyecto hace que la tarea no corresponda. |
 | Sin instrucciones | Archivo vacio o sin tarea accionable. |
-| Archivado | Agent completado y movido a `_archive` para trazabilidad. |
+| Archivado | Agent completado copiado a `_archive` para trazabilidad; el archivo original se conserva vacio. |
 
 ## Criterios de prioridad
 
@@ -105,7 +105,7 @@ Bloquear y no inventar cuando falte:
 - definicion de datos sensibles;
 - repositorio o infraestructura indispensable.
 
-## Criterios para archivar
+## Criterios para archivar y limpiar
 
 Un agent puede archivarse si:
 
@@ -117,6 +117,21 @@ Un agent puede archivarse si:
 
 No se archiva si contiene tareas pendientes o bloqueos que el usuario todavia
 debe resolver.
+
+Regla obligatoria:
+
+```text
+No eliminar ni mover el archivo original `Docs/agents/AGENTS-XXX.md`.
+```
+
+Cuando un agent queda completado:
+
+1. Copiar su contenido a `_archive/agents/<fecha>-<tema>/AGENTS-XXX.md`.
+2. Vaciar el contenido del archivo original.
+3. Conservar el placeholder vacio en `Docs/agents`.
+
+Esto evita perder numeracion, simplifica nuevas corridas y conserva la
+trazabilidad historica en `_archive`.
 
 ## Secuencia oficial
 
@@ -185,8 +200,8 @@ Un agent debe quedar documentado como pendiente, no implementado, cuando:
 ## Limpieza de agents
 
 Si todos los agents con contenido quedaron completados o convertidos en
-documentacion canonica, se deben limpiar para dejarlos listos para la siguiente
-corrida.
+documentacion canonica, se deben copiar al historico y limpiar su contenido
+para dejarlos listos para la siguiente corrida.
 
 Si queda alguna tarea real pendiente, no se limpian los agents pendientes; se
 registra la razon en `EXECUTION_REPORT.md`.

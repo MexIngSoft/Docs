@@ -27,6 +27,9 @@
 - `02_projects/docucore/feature-visibility-map.md`
 - `02_projects/docucore/monetization-and-credits.md`
 - `02_projects/docucore/execution-policy.md`
+- `02_projects/docucore/tool-readiness-and-configuration.md`
+- `02_projects/docucore/supported-file-types.md`
+- `02_projects/docucore/observability-and-diagnostics.md`
 - `02_projects/docucore/advertising-strategy.md`
 - `02_projects/docucore/mvp-roadmap.md`
 - `02_projects/festora/README.md`

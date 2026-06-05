@@ -36,6 +36,13 @@ Cada herramienta debe indicar:
 - Salida esperada.
 - Preparacion frontend/backend/documentacion.
 
+El detalle de paneles de configuracion, eventos, mensajes al usuario y estado
+por herramienta vive en:
+
+```text
+tool-readiness-and-configuration.md
+```
+
 ## Herramientas activas MVP
 
 | Tool | Slug | Categoria |

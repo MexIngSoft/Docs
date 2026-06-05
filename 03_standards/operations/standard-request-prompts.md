@@ -32,9 +32,9 @@ pendientes, riesgos e informacion faltante en:
 
 Docs/agents/EXECUTION_REPORT.md
 
-Valida con los comandos disponibles. Al finalizar, archiva o limpia los agents
-completados segun el estandar y dime: completados, parciales, bloqueados,
-pendientes, validaciones y reporte.
+Valida con los comandos disponibles. Al finalizar, copia al historico los
+agents completados y limpia su contenido conservando los archivos originales;
+dime: completados, parciales, bloqueados, pendientes, validaciones y reporte.
 ```
 
 ## Prompt corto sin agents
@@ -144,3 +144,7 @@ Sin instrucciones: ...
 Validaciones: ...
 Reporte: Docs/agents/EXECUTION_REPORT.md
 ```
+
+Regla de limpieza: no eliminar ni mover los archivos originales
+`Docs/agents/AGENTS-*.md`. Si un agent queda completado, se copia a
+`Docs/_archive/agents/<fecha>-<tema>/` y el original queda vacio.

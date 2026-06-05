@@ -60,6 +60,15 @@ Respuesta correcta:
 }
 ```
 
+Los tipos permitidos y planeados se rigen por:
+
+```text
+supported-file-types.md
+```
+
+El upload debe bloquear formatos `PLANNED`, desconocidos, peligrosos, vacios o
+que excedan tamano maximo antes de abrir Workspace.
+
 ## Process
 
 ```http
@@ -220,7 +229,7 @@ Reglas por tipo:
 | OCR | Vista dividida: imagen/documento y texto extraido. |
 | ZIP | Arbol navegable de archivos internos sin descargar automaticamente. |
 | XML | Vista doble: XML original y estructura normalizada. |
-| TXT | Editor o tabla segun contenido detectado. |
+| TXT | Planeado; no se permite carga publica hasta tener visor, validacion y reglas de Workspace. |
 
 Pendiente: elegir motor real para PDF, DOCX, Excel y OCR. Hasta entonces el
 workspace puede usar miniaturas conceptuales, marcadas como MVP visual.

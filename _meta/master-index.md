@@ -133,11 +133,14 @@
 | Business | `02_projects/docucore/feature-visibility-map.md` | Mapa de visibilidad DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/execution-policy.md` | Politica de ejecucion DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/mvp-roadmap.md` | Roadmap MVP DocuCore | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/docucore/observability-and-diagnostics.md` | Observabilidad y diagnostico DocuCore | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/docucore/supported-file-types.md` | Tipos de archivo soportados DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/qa-checklist.md` | QA checklist DocuCore | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/docucore/README.md` | DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/repositories.md` | Repositorios DocuCore | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/docucore/security.md` | Seguridad DocuCore | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/docucore/tools-catalog.md` | Catalogo de herramientas DocuCore | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/docucore/tool-readiness-and-configuration.md` | Estado configuracion y eventos de herramientas DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/festora/README.md` | Festora | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/fiscora/README.md` | Fiscora | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/fiscora/platform-overview.md` | Vision general Fiscora | ACTIVE | P1 | Equipo documental |

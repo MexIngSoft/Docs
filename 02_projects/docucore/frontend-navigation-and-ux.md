@@ -192,7 +192,8 @@ Reglas aplicadas:
 - La pantalla inicial muestra zona de arrastre y capacidades visibles.
 - El usuario puede agregar varios archivos desde el mismo workspace.
 - DocuCore detecta familia documental por extension: PDF, Word, Excel,
-  imagen, ZIP, XML, texto u otro.
+  imagen, XML o contenedor ZIP/RAR/7Z; texto queda planeado hasta tener visor
+  y validacion real.
 - Las acciones se renderizan como tarjetas compatibles segun archivos
   seleccionados.
 - ZIP combinado con otros tipos muestra advertencia y prioriza inspeccion ZIP.
@@ -205,6 +206,71 @@ Reglas aplicadas:
 
 Este ajuste mantiene la regla de producto: el usuario trabaja en un espacio
 documental inteligente y no en formularios separados por herramienta.
+
+## Ajuste Workspace contextual 2026-06-01
+
+`/workspace` queda como una superficie universal, no como una vista exclusiva
+de PDF. El flujo esperado es:
+
+```text
+Archivo activo
+-> detectar tipo documental
+-> resolver document-mode o archive-mode
+-> mostrar solo herramientas compatibles
+-> configurar accion
+-> ejecutar Gateway
+-> mostrar job, error o descarga
+```
+
+Reglas UX:
+
+- PDF conserva preview por paginas, seleccion, secciones y herramientas de
+  pagina permitidas.
+- Word, imagen, Excel, CSV y XML usan `document-mode` contextual mientras no
+  exista visor real por tipo; la pantalla debe decir que la miniatura avanzada
+  esta pendiente y no debe simular paginas reales.
+- ZIP, RAR y 7Z usan `archive-mode`; el usuario debe entender que son contenedores,
+  no documentos para dividir, convertir o comprimir directamente.
+- ZIP puede ejecutar `zip-extract`; las demas acciones de archivo comprimido se
+  muestran como pendientes si ayudan a explicar el roadmap, pero no se aplican.
+- RAR queda bloqueado hasta tener procesador real.
+- El drawer de herramientas debe explicar por que una accion esta pendiente en
+  vez de permitir que falle como si fuera ejecutable.
+- El boton Aplicar solo queda habilitado si la herramienta esta en estado
+  ejecutable y existe archivo local disponible para enviar al Gateway.
+
+## Sistema visual de bloques documentales 2026-06-01
+
+El Workspace debe ayudar a identificar donde inicia y termina cada documento
+dentro de un trabajo PDF grande. Las secciones visuales existentes funcionan
+como bloques documentales locales y no deben formar parte del PDF final hasta
+que exista exportacion backend confirmada.
+
+Reglas UX:
+
+- Cada bloque tiene color propio, nombre, rango de paginas y contador.
+- Al inicio de cada bloque se muestra un separador visual.
+- El separador intermedio usa dos colores: el bloque anterior y el bloque que
+  inicia.
+- Al final del ultimo bloque se muestra un separador de cierre.
+- Cada pagina muestra una etiqueta/rail de bloque para no perder pertenencia al
+  desplazarse.
+- Con 1 a 4 bloques se usa modo expandido con etiquetas visibles.
+- Con 5 o mas bloques se usa modo compacto para reducir saturacion visual.
+- Un bloque fijado conserva informacion visible aunque el modo sea compacto.
+- El usuario puede renombrar, cambiar color, fijar, fusionar con el bloque
+  anterior o convertir todo en un documento.
+- Las zonas de insercion existentes permiten crear nuevas divisiones
+  documentales sin recargar el Workspace.
+- Cuando existan varios bloques se muestra un mini mapa de colores para saltar
+  rapidamente al bloque correspondiente.
+
+Limites MVP:
+
+- La reorganizacion y division son estado local del Workspace.
+- La exportacion independiente por bloque requiere contrato backend
+  multiarchivo/proyecto documental.
+- El sistema no modifica binarios hasta ejecutar una herramienta Gateway.
 
 ## Ajuste de workspace especializado 2026-05-30
 
@@ -600,56 +666,53 @@ pero el motor real de escritura de PDF sigue pendiente de contrato backend.
 
 Orden funcional:
 
-1. Estado individual por pagina: rotacion, modificacion, papelera, OCR y
-   metadata visual.
+1. Estado individual por pagina: rotacion, modificacion, papelera y metadata
+   visual.
 2. Acciones rapidas: girar, copiar, cortar, pegar, duplicar, descartar,
    restaurar y marcar.
 3. Reordenamiento: arrastrar y soltar paginas dentro del preview.
-4. Menu avanzado por pagina: agrupa acciones destructivas, OCR, metadata,
-   descargas, reemplazo, insercion y acciones futuras.
-5. Dividir PDF por modos: secciones, paginas, marcadores, automatico y
-   avanzado.
-6. Secciones visuales: cada seccion tiene nombre, color y paginas asociadas.
+4. Menu avanzado por pagina: agrupa acciones destructivas, metadata, descargas,
+   reemplazo, insercion y acciones futuras permitidas por feature gate.
+5. Dividir PDF por modos MVP: paginas, bloques visuales y cada N paginas.
+6. Bloques visuales: cada bloque tiene nombre, color y paginas asociadas.
 7. Papelera reversible: descartar no elimina inmediatamente; las paginas se
    pueden ocultar, restaurar o eliminar permanentemente.
 8. Seleccion avanzada: seleccion individual, presets, rangos escritos y
    acciones masivas.
-9. Marcadores: estructura manual inicial para navegar y dividir documentos.
-10. Division automatica: solo genera sugerencias; nunca aplica cambios sin
-    confirmacion.
+9. Marcadores PDF nativos: pendientes hasta poder leer bookmarks embebidos del
+   archivo real.
+10. Division inteligente, OCR, capitulos y analisis semantico: fuera del MVP.
 
 Reglas de estado:
 
 - Una pagina rotada debe intercambiar ancho y alto para calcular su marco
   visual cuando la rotacion sea 90 o 270 grados.
 - Toda pagina modificada debe mostrar una insignia breve: Girado, Copiado,
-  Cortado, Pegado, Movido, Descartado, OCR, Importante o Etiqueta.
+  Cortado, Pegado, Movido, Descartado, Importante o Etiqueta.
 - Copiar no elimina la pagina original.
 - Cortar no elimina la pagina original hasta que el usuario pega en una zona.
 - Pegar limpia el portapapeles.
 - Descartar manda la pagina a papelera reversible.
-- OCR, marcadores automaticos y division inteligente se muestran como estados
-  preparados cuando no exista motor backend real.
+- OCR, marcadores automaticos y division inteligente no se muestran como
+  acciones MVP si no existe motor backend real.
 
 Modos de `Dividir PDF`:
 
 | Modo | Uso | Estado MVP |
 |---|---|---|
-| Secciones | Crear bloques visuales con paginas seleccionadas. | Implementado en frontend local. |
 | Paginas | Seleccionar paginas por texto, rango o presets. | Implementado en frontend local. |
-| Marcadores | Crear marcadores manuales y navegar/dividir por ellos. | Implementado como estructura local inicial. |
-| Automatico | Generar sugerencias reversibles por reglas. | Implementado como analisis local simulado. |
-| Avanzado | Preparar OCR, sensibilidad y reglas futuras. | Documentado/preparado; requiere backend. |
+| Bloques visuales | Crear bloques con paginas seleccionadas, arrastre y separadores visibles. | Implementado en frontend local. |
+| Cada N paginas | Crear bloques por intervalos simples de 5, 10 o 20 paginas. | Implementado en frontend local. |
 
 Pendiente backend:
 
 - Persistir operaciones reales de PDF: rotar, mover, cortar, pegar, duplicar,
   descartar y restaurar.
+- Leer bookmarks PDF nativos cuando el archivo los tenga embebidos.
 - Ejecutar OCR real por pagina o documento y devolver texto, confianza,
-  bloques y errores.
-- Detectar bookmarks PDF reales y estructuras OCR automaticamente.
+  bloques y errores cuando se reactive como fase futura.
 - Generar propuesta inteligente real por paginas en blanco, QR, layout, texto
-  personalizado e IA documental.
+  personalizado e IA documental cuando exista contrato backend.
 
 ## Optimizacion ergonomica del workspace 2026-06-01
 
@@ -786,11 +849,11 @@ Reglas aplicadas:
 - La informacion de documento se abre desde el boton inferior `Documento`.
 - El estado de miniaturas, carga e incidencias se abre desde el boton inferior
   `Estado`.
-- La leyenda de secciones se abre desde el boton inferior `Secciones`.
+- La leyenda de bloques se abre desde el boton inferior `Bloques`.
 - El area `page-grid` es el contenido principal visible de `pdf-stage`.
 - `canvas-main`, `pdf-stage` y `page-grid` usan `overflow: visible`; el scroll
   vertical esperado es el del navegador.
-- La barra inferior concentra herramientas, documento, estado, secciones,
+- La barra inferior concentra herramientas, documento, estado, bloques,
   configuracion, seleccion, subir mas, resultado y aplicar cambios.
 - Las zonas intermedias `section-split-zone` y `page-insert-zone` son guias
   delgadas, semitransparentes y de bajo peso visual. Solo resaltan por hover,
@@ -801,8 +864,9 @@ Decision tecnica:
 - Se mantuvieron drawers existentes en vez de introducir un sistema nuevo de
   popovers, porque ya existian cierre por backdrop, foco visual y patron
   consistente con el workspace.
-- Los agents de OCR, papelera, secciones, marcadores y division automatica se
-  mantienen como MVP frontend/preparado cuando dependen de backend real.
+- Los agents de OCR, marcadores y division automatica quedan como pendientes
+  si dependen de backend real. El MVP actual conserva solo bloques visuales,
+  seleccion de paginas y cada N paginas.
 
 Informacion faltante:
 
@@ -833,7 +897,7 @@ Reglas aplicadas:
 - Los datos pequenos del indice de borradores viven en `localStorage`.
 - Los documentos cargados y el estado completo del borrador se guardan en
   `IndexedDB` como base local para futura sincronizacion con usuario.
-- La recuperacion intenta restaurar archivo, paginas, seleccion, secciones,
+- La recuperacion intenta restaurar archivo, paginas, seleccion, bloques,
   vista de descartadas, modo de trabajo y posicion de scroll.
 
 Reglas de zonas de insercion:

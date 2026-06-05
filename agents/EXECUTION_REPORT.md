@@ -236,6 +236,259 @@ Fecha: 2026-05-16
 
 ---
 
+# Ejecucion agents activos - Tipos de archivo soportados DocuCore
+
+Fecha: 2026-06-04
+
+## Alcance
+
+Se ejecutaron los agents activos `AGENTS-000.md` y `AGENTS-001.md`, ambos
+relacionados con la definicion y estandarizacion de tipos de archivo soportados
+en DocuCore.
+
+Los agents `AGENTS-002.md` a `AGENTS-030.md` estaban vacios y se consideran
+sin instrucciones ejecutables.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/mvp-roadmap.md`
+- `Docs/02_projects/docucore/tools-catalog.md`
+- `Docs/02_projects/docucore/tool-readiness-and-configuration.md`
+- `Docs/02_projects/docucore/observability-and-diagnostics.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se consolido la lista MVP de formatos activos: PDF, Word, Excel/CSV, imagenes, XML y comprimidos ZIP/RAR/7Z, con reglas especiales para contenedores. |
+| `AGENTS-001.md` | Completado | Se creo estandar canonico de estados de soporte, validacion centralizada, formatos PLANNED y regla para no activar formatos solo agregando extension. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no aplican. |
+
+## Tareas ejecutadas
+
+- Se creo `supported-file-types.md` como documento canonico de DocuCore.
+- Se agrego `supported-file-types.ts` en Web como fuente central de formatos,
+  estados, categorias, MIME esperados y `accept` del input.
+- `/upload` ahora bloquea formatos no reconocidos o `PLANNED` antes de agregar
+  archivos al Workspace y muestra mensaje amigable.
+- Se retiro la promesa visible de cargar texto como formato activo del MVP.
+- Se agrego `sevenZip` como tipo de Workspace para `.7z` y se trata como
+  contenedor en `archive-mode`.
+- Se sincronizaron `zip-extract`, compatibilidad de herramientas y catalogo
+  fallback con ZIP/RAR/7Z, DOC/DOCX, XLS/XLSX, BMP y TIFF.
+- Document API ahora valida extension, MIME, estado del formato, tamano y
+  extensiones peligrosas con codigos normalizados.
+- DocuCore API actualizo `allowed_extensions` y catalogo estatico de desarrollo
+  para coincidir con el MVP documentado.
+- Se enlazo el nuevo estandar desde README, contratos API, readiness de
+  herramientas, observabilidad e indices.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/workspace/supported-file-types.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/workspace/detect-file-type.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/workspace/workspace-tool-compatibility.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/workspace/get-compatible-tools.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/workspace/workspace-mode.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/catalog-fallback.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/upload/UploadClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.API.PY/API.PY.DJANGO.Document/validation/services.py`
+- `Docker.API.PY/API.PY.DJANGO.Document/files/views.py`
+- `Docker.API.PY/API.PY.DJANGO.DocuCore/core/catalog.py`
+- `Docs/02_projects/docucore/supported-file-types.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/tool-readiness-and-configuration.md`
+- `Docs/02_projects/docucore/observability-and-diagnostics.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas y tipos validados. |
+| `python manage.py check` en `API.PY.DJANGO.Document` | Aprobado. |
+| `python manage.py check` en `API.PY.DJANGO.DocuCore` | Aprobado. |
+| `python -m py_compile validation/services.py files/views.py` | Aprobado. |
+| `python -m py_compile core/catalog.py` | Aprobado. |
+| Prueba directa `validate_upload` | Aprobado: PDF y XLSX permitidos; TXT devuelve `FILE_TYPE_PLANNED`; EXE devuelve `DANGEROUS_EXTENSION` y `EXTENSION_NOT_ALLOWED`. |
+| `git diff --check` en Web/API/Docs tocados | Aprobado; solo avisos LF/CRLF de Git en Windows para Docs. |
+| `rg` documental/codigo de `supported-file-types`, `sevenZip`, `FILE_TYPE_PLANNED`, `MIME_TYPE_NOT_ALLOWED` | Aprobado; referencias encontradas en codigo, docs e indices. |
+
+## Decisiones tomadas
+
+- `.txt`, `.rtf`, PowerPoint, OpenDocument, email, EPUB, JSON/YAML y HTML
+  quedan `PLANNED`, no cargables publicamente.
+- `.7z` se trata como `sevenZip` para no mezclarlo con ZIP en el tipo interno,
+  pero usa la herramienta `zip-extract` mientras el contrato de contenedores se
+  mantiene unificado.
+- `application/octet-stream` se acepta como MIME generico para formatos activos
+  porque navegadores y proxies pueden no reportar MIME especifico, pero la
+  extension sigue validandose contra el registro central.
+- No se habilito edicion directa dentro de ZIP/RAR/7Z; primero debe existir
+  extraccion y documento independiente.
+
+## Informacion faltante
+
+- Falta contrato backend productivo para extraer entradas internas de
+  ZIP/RAR/7Z y convertirlas en documentos de trabajo independientes.
+- Falta endpoint de preview real para Word, Excel, CSV, XML, imagen avanzada y
+  contenedores.
+- Falta persistir el registro de tipos soportados en DocuCore API/base de datos
+  si se quiere administrarlo desde ERP o panel interno.
+
+## Limpieza
+
+`AGENTS-000.md` y `AGENTS-001.md` se copian a:
+
+```text
+Docs/_archive/agents/2026-06-04-docucore-supported-file-types/
+```
+
+Despues de copiarse, los archivos originales se conservan en `Docs/agents/`
+pero quedan vacios. Los agents vacios `002` a `030` se dejan sin cambios.
+
+---
+
+# Ejecucion de agents - DocuCore alcance MVP manual y workspace contextual - 2026-06-02
+
+## Lectura previa
+
+Se siguio el estandar de agents y se revisaron:
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/feature-visibility-map.md`
+- `Docs/02_projects/docucore/tool-readiness-and-configuration.md`
+- `Docs/02_projects/docucore/docker.md`
+- `Docs/03_standards/operations/local-port-registry.md`
+
+## Agents detectados
+
+| Agent | Estado inicial | Decision |
+|---|---|---|
+| `AGENTS-000.md` | Activo | Ejecutar primero por alcance MVP y bloqueo de funciones OCR/IA/indice. |
+| `AGENTS-001.md` | Activo | Ejecutar despues porque depende del modelo de herramientas permitido por tipo/cantidad de documentos. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | No ejecutar; archivos vacios. |
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se retiro de las superficies MVP la promesa de OCR, IA, indexacion, capitulos, marcadores generados y division inteligente. `pdf-split` quedo limitado a paginas, bloques visuales y cada N paginas. |
+| `AGENTS-001.md` | Completado | El workspace ya calcula herramientas por tipo y cantidad de documentos; `pdf-merge` solo aparece con 2 o mas PDFs y sin mezcla de tipos. La configuracion queda vacia hasta elegir herramienta. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | No aplican en esta corrida. |
+
+## Tareas ejecutadas
+
+- Se reemplazaron modos de `Dividir PDF` por `Paginas`, `Bloques visuales` y
+  `Cada N paginas`.
+- Se elimino la accion visible `OCR por pagina` del menu de pagina.
+- Se dejo `Marcadores PDF nativos` como pendiente documentado hasta existir
+  lectura real de bookmarks embebidos.
+- Se agrego normalizacion de borradores antiguos que pudieran traer modo
+  `sections`, redirigiendolos a `visual`.
+- Se agrego creacion local de bloques por intervalo simple de 5, 10 o 20
+  paginas.
+- Se retiro OCR como capacidad activa en `/upload` y textos visibles de home,
+  API, resultados, workflows y expediente.
+- Se ajusto el panel de configuracion para mostrar estado vacio hasta que el
+  usuario seleccione una herramienta.
+- Se uso la lista completa de documentos del workspace para calcular
+  compatibilidad de herramientas.
+- Se documento la regla en `feature-visibility-map.md`,
+  `tool-readiness-and-configuration.md` y `frontend-navigation-and-ux.md`.
+- Se preservo la correccion previa de hidratacion del portal flotante y la
+  persistencia multi-documento para mostrar varios documentos en proyectos.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/upload/UploadClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/api/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/casefile/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/pdf-a-word/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/results/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workflows/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/workspace-drafts.ts`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/feature-visibility-map.md`
+- `Docs/02_projects/docucore/tool-readiness-and-configuration.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas. |
+| `docker compose -f Docker.API.PY/docker-compose.docucore.yml config --quiet` | Aprobado. |
+| `docker compose -f Docker.WEB.NJ/docker-compose.docucore.yml config --quiet` | Aprobado. |
+| Health local DocuCore posterior al arranque focalizado | Aprobado: web `3004`, Document `8011`, DocuCore API `8012` y Gateway `8013` respondieron `200`. |
+| Busqueda textual de promesas OCR/IA/indices en pantallas tocadas | Aprobado; solo queda mension controlada de OCR fuera del MVP en PDF escaneado y marcadores nativos como pendiente. |
+
+## Decisiones tomadas
+
+- No se implemento OCR, IA, indices ni analisis semantico porque el agent los
+  declara fuera de Fase 1.
+- No se mostro configuracion generica cuando no hay herramienta activa; se
+  muestra un estado vacio accionable.
+- `pdf-merge` se oculta con un solo PDF o mezcla de tipos para evitar acciones
+  incompatibles.
+- Se mantuvo el estado interno `sections` como estructura tecnica de bloques
+  para no romper borradores existentes ni aumentar el alcance del cambio.
+- Los compose focalizados de DocuCore creados en la tarea operativa previa se
+  validaron porque forman parte del estado actual para probar la web.
+
+## Informacion faltante
+
+- Falta contrato backend `DocumentProject` productivo para manejar multiples
+  documentos y orden multiarchivo de forma persistente.
+- Falta lectura real de bookmarks PDF nativos.
+- Falta contrato backend para exportar bloques visuales como archivos
+  independientes.
+- Falta definir si el workspace migrara de drawers a paneles permanentes
+  izquierda/centro/derecha en una fase posterior; por ahora se conserva el
+  patron actual para no romper ergonomia existente.
+
+## Limpieza
+
+`AGENTS-000.md` y `AGENTS-001.md` se copian a:
+
+```text
+Docs/_archive/agents/2026-06-02-docucore-mvp-workspace-tools/
+```
+
+Despues de copiarse, los archivos originales se conservan en `Docs/agents/`
+pero quedan vacios. Los agents `002` a `030` ya estaban vacios y permanecen
+como placeholders.
+
+---
+
 # Reporte de ejecucion Agents - Investigacion juridica LexNova
 
 Fecha: 2026-05-18
@@ -7492,5 +7745,465 @@ Docs/_archive/agents/2026-06-01-docucore-upload-projects-jobs/
 ```
 
 Los agents `003` a `030` siguen sin instrucciones.
+
+---
+
+# Ejecucion agents activos - Workspace contextual DocuCore
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Se ejecutaron paso a paso los agents activos `AGENTS-000.md`,
+`AGENTS-001.md`, `AGENTS-002.md` y `AGENTS-003.md`. El objetivo fue validar el
+estado real de herramientas DocuCore, convertir el Workspace en una superficie
+universal contextual por tipo de archivo y separar el modo documento del modo
+archivo comprimido.
+
+Los agents `AGENTS-004.md` a `AGENTS-030.md` fueron revisados y estan vacios,
+por lo que no tienen tarea ejecutable.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/mvp-roadmap.md`
+- `Docs/02_projects/docucore/tools-catalog.md`
+- `Docs/02_projects/docucore/tool-readiness-and-configuration.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/feature-visibility-map.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-002.md`
+- `Docs/agents/AGENTS-003.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se valido el estado real de herramientas: 11 slugs activos por Gateway, OCR/IA/index y herramientas futuras siguen bloqueadas por feature gate. |
+| `AGENTS-001.md` | Completado | Se adopto la decision de un Workspace universal con herramientas contextuales por tipo de archivo. |
+| `AGENTS-002.md` | Completado | Se implemento mapa central de compatibilidad, detector de tipo, selector de herramientas y ejecucion centralizada contra Gateway. `/upload` y `/workspace` usan ahora reglas compartidas. |
+| `AGENTS-003.md` | Completado | Se implemento `archive-mode` para ZIP/RAR. ZIP ejecuta `zip-extract`; RAR y acciones internas de archivo quedan documentadas y bloqueadas. |
+| `AGENTS-004.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no aplican. |
+
+## Tareas ejecutadas
+
+- Se creo el mapa central `WORKSPACE_TOOL_RULES` con estados, tipos compatibles,
+  salida esperada, keywords y razon de bloqueo.
+- Se agrego detector de tipo documental para PDF, Word, imagen, Excel, CSV,
+  XML, ZIP, RAR y desconocido.
+- Se agrego selector de herramientas compatibles que respeta feature gates y
+  evita mostrar herramientas futuras como ejecutables.
+- Se separo `document-mode` de `archive-mode`.
+- Se centralizo la ejecucion de herramientas con Gateway; no se simulan
+  resultados locales.
+- `/upload` ahora usa el detector/matriz compartida para sugerir herramientas
+  compatibles.
+- `/workspace` dejo de depender de una lista PDF hardcodeada y ahora muestra
+  herramientas segun el tipo del archivo activo.
+- El boton Aplicar en Workspace queda deshabilitado si la herramienta esta
+  pendiente o no hay archivo local disponible.
+- Los resultados del Workspace muestran estado real de ejecucion, error, job y
+  descarga cuando Gateway entrega artefacto.
+- Los tipos no-PDF abren preview contextual informativo sin fingir miniaturas
+  reales.
+- ZIP/RAR se tratan como contenedores y no reciben herramientas documentales
+  directas.
+- Se documentaron reglas, faltantes y decisiones en la documentacion canonica
+  de DocuCore.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/upload/UploadClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/api.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/workspace/detect-file-type.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/workspace/execute-workspace-tool.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/workspace/get-compatible-tools.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/workspace/workspace-mode.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/lib/workspace/workspace-tool-compatibility.ts`
+- `Docs/02_projects/docucore/tool-readiness-and-configuration.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/feature-visibility-map.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; build productivo generado y 20 rutas validadas. |
+| `npm pkg get scripts.test` en `WEB.NJ.NEXT.DocuCore` | No existe script `test`; no se ejecutaron tests automatizados. |
+| `git diff --check` en `WEB.NJ.NEXT.DocuCore` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+| `git diff --check -- 02_projects/docucore agents/EXECUTION_REPORT.md` en `Docs` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+
+## Decisiones tomadas
+
+- La fuente UI de compatibilidad queda en frontend mientras el catalogo backend
+  no entregue una matriz completa por tipo documental.
+- El Workspace no promete preview real no-PDF; muestra contexto y deja el visor
+  especializado como pendiente.
+- `zip-extract` es la unica accion ZIP ejecutable en esta fase.
+- RAR queda documentado en `archive-mode`, pero bloqueado hasta tener
+  procesador real.
+- Las acciones internas de archivo comprimido quedan como roadmap documentado,
+  no como funcionalidad ejecutable.
+
+## Informacion faltante
+
+- Falta contrato backend productivo para proyecto/documento multiarchivo.
+- Falta endpoint de preview por tipo documental para Word, imagen avanzada,
+  Excel, CSV, XML, ZIP y RAR.
+- Falta confirmar limites de tamano, memoria, timeout y numero de archivos por
+  herramienta.
+- Falta emision real de eventos hacia `ExecutionResourceManager`.
+- Falta procesador RAR productivo.
+- Falta contrato para listar, descargar entradas, agregar, eliminar y
+  recomprimir archivos dentro de ZIP/RAR.
+
+## Riesgos
+
+- `pdf-merge` sigue limitado por contrato multiarchivo; ejecutar desde Workspace
+  sobre un solo archivo no sustituye la union real de varios documentos.
+- Los previews no-PDF son informativos hasta que exista visor real.
+- Si Gateway cambia slugs o salidas, se debe actualizar el mapa central para no
+  desincronizar la UI.
+
+## Limpieza
+
+`AGENTS-000.md`, `AGENTS-001.md`, `AGENTS-002.md` y `AGENTS-003.md` quedan
+completados y se archivan en:
+
+```text
+Docs/_archive/agents/2026-06-01-docucore-contextual-workspace/
+```
+
+Los agents `004` a `030` permanecen vacios y sin tarea ejecutable.
+
+---
+
+# Ejecucion agents activos - bloques documentales Workspace DocuCore
+
+Fecha: 2026-06-01
+
+## Alcance
+
+Se ejecutaron los agents activos `AGENTS-000.md` y `AGENTS-001.md`. El objetivo
+fue mejorar el Workspace de DocuCore para identificar visualmente bloques
+documentales, separadores, colores y agrupaciones adaptativas al trabajar con
+PDFs grandes o cortes documentales.
+
+Tambien se estandarizo la limpieza de agents: los archivos originales
+`Docs/agents/AGENTS-*.md` no se eliminan ni se mueven; se copia su contenido al
+historico y se vacia el archivo original.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/03_standards/operations/agents-documentation-order.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/tool-readiness-and-configuration.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se implemento MVP visual de bloques documentales: separadores automaticos, cierre de bloque, color por bloque, rail/etiqueta por pagina, acciones de fusion, renombrado, color, fijado y unificacion. |
+| `AGENTS-001.md` | Completado | Se implemento modo adaptativo de agrupacion: expandido para pocos bloques, compacto para 5 o mas, fijado individual y mini mapa de colores para navegacion rapida. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no aplican. |
+
+## Tareas ejecutadas
+
+- Se extendio el modelo local de secciones con `pinned` y `description`.
+- Se agregaron separadores visuales al inicio de cada bloque documental.
+- Los separadores intermedios usan color del bloque anterior y del bloque que
+  inicia.
+- Se agrego separador final para indicar cierre del ultimo bloque.
+- Cada pagina muestra rail/etiqueta de bloque con color, nombre y contador.
+- Con 5 o mas bloques, los rails y separadores se compactan para reducir
+  saturacion visual.
+- Los bloques fijados mantienen informacion visible aunque el modo sea
+  compacto.
+- Se agrego mini mapa de colores para saltar al bloque correspondiente.
+- Se agregaron acciones locales: renombrar, cambiar color, fijar/soltar,
+  fusionar con anterior y convertir todo en un documento.
+- Se documento el sistema visual de bloques en la documentacion canonica de
+  DocuCore.
+- Se actualizo el estandar de limpieza de agents para conservar placeholders.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/03_standards/operations/agents-documentation-order.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; 20 rutas generadas. |
+| `git diff --check -- app/workspace/WorkspaceClient.tsx app/globals.css` | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+| `git diff --check` en documentos tocados | Aprobado; solo avisos LF/CRLF de Git en Windows. |
+
+## Decisiones tomadas
+
+- Se uso el sistema existente de `sections` como base de bloques documentales
+  para no crear un estado paralelo ni romper borradores.
+- La exportacion por bloque queda como estado visual/local; no se prometen
+  artefactos independientes hasta tener contrato backend multiarchivo.
+- La insercion manual de separadores se apoya en las zonas de insercion
+  existentes y la accion `Dividir desde aqui`.
+- Se conserva trazabilidad de agents copiando contenido a `_archive`, pero los
+  archivos originales permanecen vacios.
+
+## Informacion faltante
+
+- Falta contrato backend para exportar cada bloque como archivo independiente.
+- Falta modelo productivo `DocumentProject` para multiples documentos reales en
+  un workspace compartido.
+- Falta reemplazar prompts nativos de navegador por modal propio para
+  renombrado si se requiere UX final pulida.
+
+## Limpieza
+
+`AGENTS-000.md` y `AGENTS-001.md` se copian a:
+
+```text
+Docs/_archive/agents/2026-06-01-docucore-document-blocks/
+```
+
+Despues de copiarse, los archivos originales se conservan en `Docs/agents/`
+pero quedan vacios.
+
+---
+
+# Ejecucion agents activos - DocuCore Observability and Diagnostics
+
+Fecha: 2026-06-04
+
+## Alcance
+
+Se ejecuto el unico agent activo con contenido: `AGENTS-000.md`. Los agents
+`AGENTS-001.md` a `AGENTS-030.md` estan vacios y se consideran sin
+instrucciones ejecutables.
+
+El objetivo fue crear el estandar canonico de observabilidad y diagnostico de
+DocuCore sin modificar funcionalidad de Web, Gateway, APIs ni Docker.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/03_standards/operations/observability.md`
+- `Docs/01_core_erp/erp/24_execution_resource_manager.md`
+- `Docs/01_core_erp/apis/16_execution_resource_manager_api.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/error-handling.md`
+- `Docs/02_projects/docucore/execution-policy.md`
+- `Docs/02_projects/docucore/mvp-roadmap.md`
+- `Docs/02_projects/docucore/tool-readiness-and-configuration.md`
+- `Docs/agents/AGENTS-000.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se creo el estandar canonico `observability-and-diagnostics.md` para logs, errores, diagnostico, metricas, issues, alertas, retencion y limpieza operativa de DocuCore. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no aplican en esta corrida. |
+
+## Tareas ejecutadas
+
+- Se documento la arquitectura observable de DocuCore entre Web, Gateway, APIs,
+  motores documentales, storage, jobs y descargas.
+- Se definieron identificadores obligatorios: `request_id`, `session_id`,
+  `project_id`, `document_id`, `job_id`, `issue_id`, `trace_id` y
+  `execution_id`.
+- Se normalizaron tipos de eventos, niveles, etapas, flujo PDF minimo y estados
+  de preview.
+- Se definieron tablas objetivo `docucore_logs` y `docucore_errors`.
+- Se agrego regla de `fingerprint` para agrupar errores sin exponer datos
+  sensibles.
+- Se creo catalogo inicial de codigos de error para PDF, Word, Excel/CSV,
+  imagen, ZIP/XML y motores futuros.
+- Se documentaron prioridades, reglas para crear issues, vista de diagnostico,
+  retencion, limpieza programada, metricas minimas e integracion con JobCron.
+- Se enlazo el nuevo estandar desde README, manejo de errores, politica de
+  ejecucion, estado de herramientas e indices documentales.
+
+## Archivos modificados
+
+- `Docs/02_projects/docucore/observability-and-diagnostics.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/error-handling.md`
+- `Docs/02_projects/docucore/execution-policy.md`
+- `Docs/02_projects/docucore/tool-readiness-and-configuration.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `rg -n "observability-and-diagnostics\|DocuCore Observability\|PDF_RENDER_FAILED\|job_cleanup_docucore_logs" Docs` | Aprobado; se confirmaron referencias en documento canonico, README, documentos relacionados e indices. |
+| `Test-Path Docs/02_projects/docucore/observability-and-diagnostics.md` | Aprobado. |
+| Build/Lint/Test de Web o APIs | No ejecutado; la corrida solo modifico documentacion y metadatos documentales. |
+
+## Decisiones tomadas
+
+- Se creo un documento canonico especifico de DocuCore en lugar de modificar el
+  estandar global de observabilidad, porque el agent pide reglas operativas
+  propias del producto documental.
+- OCR, IA documental e indexacion inteligente quedan como motores futuros o
+  bloqueados cuando no exista backend productivo habilitado, para respetar el
+  alcance actual de herramientas visibles.
+- `request_id` se permite como `REQ-YYYYMMDD-000001` o UUID cuando ya exista
+  trazabilidad tecnica, evitando contradiccion con contratos ERP existentes.
+- No se implementaron tablas, jobs ni dashboards porque el agent no incluia
+  criterios tecnicos suficientes para tocar APIs productivas.
+
+## Informacion faltante
+
+- Falta definir en que repositorio se implementaran primero `docucore_logs` y
+  `docucore_errors`.
+- Falta modelo fisico de base de datos, migraciones y permisos de diagnostico.
+- Falta contrato backend de la vista `Workspace -> Diagnostico`.
+- Falta decidir si `job_cleanup_docucore_logs` vive en JobCron, Document API o
+  una API operativa compartida.
+
+## Limpieza
+
+`AGENTS-000.md` se copia a:
+
+```text
+Docs/_archive/agents/2026-06-04-docucore-observability-diagnostics/
+```
+
+Despues de copiarse, el archivo original se conserva en `Docs/agents/` pero
+queda vacio. Los agents vacios `001` a `030` se dejan sin cambios.
+
+---
+
+# Ejecucion agents activos - Diagnostico carga PDF DocuCore
+
+Fecha: 2026-06-04
+
+## Alcance
+
+Se solicito ejecutar agents activos y explicar por que no cargaban debidamente
+los PDFs en DocuCore. Al revisar `Docs/agents/AGENTS-*.md`, todos los archivos
+estan vacios, por lo que no habia tareas ejecutables de agent.
+
+Se realizo diagnostico directo con base en la documentacion canonica de
+DocuCore y el estado runtime del contenedor.
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/observability-and-diagnostics.md`
+- `Docs/02_projects/docucore/error-handling.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tarea ejecutable. |
+
+## Diagnostico detectado
+
+La documentacion de `api-contracts.md` indica que el preview backend por pagina
+sigue siendo objetivo pendiente y que el frontend usa un puente MVP con PDF.js
+y `objectUrl` en `sessionStorage`.
+
+En runtime se encontro que el contenedor `web-frontend-node` no tenia
+`pdfjs-dist` instalado dentro de `/usr/src/web/docucore/node_modules`, aunque
+el `package.json` del proyecto si declara la dependencia. Esto ocurrio porque
+el compose usa un volumen anonimo para `node_modules`; cuando cambia
+`package.json`, el volumen puede conservar dependencias antiguas o incompletas.
+
+El log de Next mostraba:
+
+```text
+Module not found: Can't resolve 'pdfjs-dist'
+Module not found: Can't resolve 'pdfjs-dist/build/pdf.worker.mjs'
+```
+
+Impacto:
+
+- `/workspace` no podia compilar correctamente el modulo que genera miniaturas
+  reales.
+- El puente MVP de PDF.js fallaba antes de leer/renderizar el archivo.
+- El error corresponde a `PDF_PREVIEW_FAILED` o `PDF_RENDER_FAILED` segun la
+  etapa documentada en `observability-and-diagnostics.md`.
+
+## Accion aplicada
+
+Se sincronizaron dependencias dentro del contenedor activo:
+
+```text
+docker exec web-frontend-node sh -lc "cd /usr/src/web/docucore && npm install --no-audit --no-fund"
+docker restart web-frontend-node
+```
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `docker exec web-frontend-node sh -lc "cd /usr/src/web/docucore && npm ls pdfjs-dist --depth=0"` | Aprobado; `pdfjs-dist@4.10.38` instalado. |
+| `Invoke-WebRequest http://127.0.0.1:3004/workspace` | Aprobado; status `200`. |
+| `docker logs web-frontend-node --since 30s` | Aprobado; `/workspace` compilo y respondio sin repetir el error de modulo faltante en logs nuevos. |
+
+## Decisiones tomadas
+
+- No se modifico codigo porque la causa inmediata fue desincronizacion de
+  dependencias dentro del contenedor runtime.
+- Se dejo identificado que el contrato backend definitivo de previews por
+  pagina sigue pendiente; mientras tanto, el frontend depende de PDF.js local.
+
+## Informacion faltante
+
+- Falta un protocolo automatizado para reinstalar dependencias del contenedor
+  cuando cambia `package.json` o `package-lock.json` y existe volumen anonimo de
+  `node_modules`.
+- Falta implementar el endpoint backend definitivo:
+  `GET /api/gateway/files/{file_id}/pages/{page}/preview/`.
 
 ---

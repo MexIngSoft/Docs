@@ -143,6 +143,16 @@ Cada ejecucion relevante debe generar un evento hacia el ERP:
 }
 ```
 
+La trazabilidad operativa interna de logs, etapas, errores e issues debe seguir
+el estandar:
+
+```text
+observability-and-diagnostics.md
+```
+
+El evento hacia ERP mide recursos y costo. Los eventos de diagnostico de
+DocuCore explican el ciclo tecnico del proceso y permiten soporte.
+
 ## Datos que no deben enviarse
 
 El evento de ejecucion no debe incluir:

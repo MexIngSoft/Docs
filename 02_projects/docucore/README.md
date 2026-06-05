@@ -35,6 +35,12 @@ MVP funcional creado por agents y cerrado en fases documentadas:
 - `monetization-and-credits.md`: reglas base para creditos, costos y consumo.
 - `execution-policy.md`: politica cliente/hibrido/servidor, fallback y eventos
   ERP de costo/ahorro.
+- `tool-readiness-and-configuration.md`: matriz de herramientas, paneles de
+  configuracion, mensajes de usuario y eventos minimos.
+- `supported-file-types.md`: formatos activos, planeados y reglas de validacion
+  para carga y Workspace.
+- `observability-and-diagnostics.md`: logs, errores, diagnostico, metricas,
+  issues, alertas y limpieza operativa de DocuCore.
 - `advertising-strategy.md`: publicidad opcional y creditos recompensados.
 
 ## Documentos
@@ -48,6 +54,9 @@ frontend-navigation-and-ux.md
 feature-visibility-map.md
 monetization-and-credits.md
 execution-policy.md
+tool-readiness-and-configuration.md
+supported-file-types.md
+observability-and-diagnostics.md
 advertising-strategy.md
 mvp-roadmap.md
 tools-catalog.md

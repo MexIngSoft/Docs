@@ -288,3 +288,41 @@ Arranque con checks:
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-LexNovaFiscora.ps1 -Build -RunChecks
 ```
+
+## Script focalizado DocuCore
+
+Script:
+
+```text
+Docs/03_standards/operations/scripts/Start-DocuCore.ps1
+```
+
+Este script baja los compose completos de APIs/Web y levanta solo lo necesario
+para probar DocuCore:
+
+- `Docker.DB.PG`
+- APIs: `Document` (`8011`), `DocuCore` (`8012`) y `DocuCore Gateway`
+  (`8013`).
+- Web: `WEB.NJ.NEXT.DocuCore` (`3004`).
+
+No levanta JobCron, TecnoTelec, LexNova, Fiscora, Imagrafity, Catalog,
+Supplier, Pricing, Inventory, Sales, Procurement, Customization ni el worker
+SYSCOM.
+
+Arranque sin rebuild:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-DocuCore.ps1
+```
+
+Arranque reconstruyendo imagenes:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-DocuCore.ps1 -Build
+```
+
+Arranque con checks:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-DocuCore.ps1 -Build -RunChecks
+```

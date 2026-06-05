@@ -85,6 +85,22 @@ Reglas aplicadas:
   firmar, marca de agua, numerar, traducir, extraer imagenes e indice.
 - La navegacion publica solo muestra features `released` o `mvp` con
   `publicVisible = true`.
+- `/workspace` usa un mapa central de compatibilidad por tipo de archivo para
+  no exponer herramientas incompatibles.
+- `/workspace` tambien valida cantidad de documentos: `pdf-merge` se oculta
+  con un solo PDF o cuando hay mezcla de tipos como PDF + Word.
+- Dividir PDF en MVP solo muestra seleccion de paginas, bloques visuales y
+  cada N paginas. No se muestran secciones inteligentes, capitulos, marcadores
+  generados, OCR, IA ni analisis semantico.
+- Las herramientas activas en Workspace son: `pdf-split`, `pdf-merge`,
+  `pdf-compress`, `pdf-word`, `word-pdf`, `image-pdf`, `image-clean`,
+  `excel-csv`, `csv-excel`, `xml-read` y `zip-extract`.
+- `zip-extract` opera en `archive-mode`; acciones como listar, descargar
+  entradas, agregar, eliminar o recomprimir archivos internos quedan visibles
+  solo como pendientes documentados si se muestran en panel de configuracion.
+- RAR queda en `archive-mode` conceptual y bloqueado hasta existir procesador
+  real.
+- No se deben aplicar herramientas documentales directamente sobre ZIP/RAR.
 
 Pendientes documentales:
 
