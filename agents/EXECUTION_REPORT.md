@@ -8207,3 +8207,325 @@ docker restart web-frontend-node
   `GET /api/gateway/files/{file_id}/pages/{page}/preview/`.
 
 ---
+
+# Ejecucion agents activos - Arquitectura visual Workspace DocuCore
+
+Fecha: 2026-06-05
+
+## Alcance
+
+Se ejecutaron los agents activos `AGENTS-000.md` y `AGENTS-001.md`. Los agents
+`AGENTS-002.md` a `AGENTS-030.md` estaban vacios y no contenian instrucciones
+ejecutables.
+
+Antes de implementar se hicieron commits de los cambios previos en los
+repositorios afectados para dejar una base limpia de trabajo.
+
+## Orden de ejecucion
+
+| Orden | Agent | Motivo |
+|---|---|---|
+| 1 | `AGENTS-000.md` | Define la arquitectura visual y jerarquia del Workspace. |
+| 2 | `AGENTS-001.md` | Propone la estructura de codigo basada en herramientas, documento y configuracion. |
+
+## Documentos revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/tool-readiness-and-configuration.md`
+- `Docs/02_projects/docucore/feature-visibility-map.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+- `Docs/03_standards/frontend/nextjs-runtime-recovery-standard.md`
+
+## Tareas ejecutadas
+
+- Se separo el Workspace en tres zonas operativas:
+  herramientas a la izquierda, preview central y configuracion a la derecha.
+- Se agrego una cabecera compacta con documento activo, paginas, bloques,
+  previews listas y estado operativo.
+- Se movieron las herramientas compatibles al rail izquierdo del Workspace.
+- Se dejo la configuracion de herramienta activa como panel derecho persistente.
+- Se redujo la barra inferior a accesos secundarios y accion de aplicar,
+  evitando duplicar herramientas y configuracion.
+- Se mantuvieron los drawers existentes para documento, estado, bloques,
+  seleccion, archivos, informacion y resultado.
+- Se documento la nueva regla canonica en
+  `Docs/02_projects/docucore/frontend-navigation-and-ux.md`.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores ESLint. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; Next.js compilo, valido tipos y genero rutas. |
+| Script de test dedicado | No existe script `test` en `package.json`; `build` cubrio typecheck de Next. |
+
+## Decisiones tomadas
+
+- `AGENTS-000.md` se ejecuto primero porque contiene la decision de arquitectura
+  visual; `AGENTS-001.md` se uso despues como guia de implementacion.
+- No se reemplazo todo el Workspace por la maqueta del agent; se adapto la
+  estructura sobre el componente real para no perder preview PDF, drawers,
+  seleccion, bloques ni ejecucion Gateway ya existentes.
+- No se modificaron APIs ni contratos backend porque el alcance era de
+  interfaz y procesos visuales del Workspace.
+- Las herramientas no ejecutables siguen gobernadas por `feature-gates.ts` y
+  por `workspace-tool-compatibility.ts`.
+
+## Informacion faltante
+
+- Falta prueba visual automatizada desktop/mobile para verificar que rail,
+  panel derecho, cabecera compacta y barra inferior no se solapan.
+- Falta definir comportamiento completo de configuracion colapsada en mobile
+  para herramientas complejas.
+- Falta contrato backend productivo de proyectos documentales multiarchivo para
+  que algunas configuraciones de herramientas puedan persistirse remotamente.
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Jerarquia visual del Workspace aplicada y documentada. |
+| `AGENTS-001.md` | Completado parcial | Estructura herramientas/documento/configuracion aplicada sobre codigo real; la maqueta completa queda adaptada, no copiada literalmente. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Limpieza
+
+`AGENTS-000.md` y `AGENTS-001.md` se copian al historico de agents completados
+y los archivos originales se conservan en `Docs/agents/` vacios. Los agents
+vacios `002` a `030` se dejan sin cambios.
+
+---
+
+# Ejecucion Agents DocuCore - 2026-06-05 - Workspace multi-documento y Dividir PDF simple
+
+## Alcance
+
+Se ejecuto solo `Docs/agents/AGENTS-000.md`. Los archivos `AGENTS-001.md` a
+`AGENTS-030.md` estaban vacios, por lo que no contenian tareas ejecutables.
+
+## Documentacion revisada
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/api-contracts.md`
+- `Docs/02_projects/docucore/tool-readiness-and-configuration.md`
+- `Docs/02_projects/docucore/observability-and-diagnostics.md`
+- `Docs/02_projects/docucore/supported-file-types.md`
+
+## Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Ajustes de Workspace multi-documento, panel ocultable, zoom de previews y simplificacion de Dividir PDF implementados y documentados. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Tareas detectadas
+
+- Permitir varios documentos en un mismo proyecto local sin reemplazar el
+  primero.
+- Mostrar selector de documentos y renderizar solo el documento activo.
+- Agregar archivos desde Workspace sin crear automaticamente otro proyecto.
+- Registrar cada documento agregado con `requestId`.
+- Hacer ocultable y recuperable el panel derecho de configuracion.
+- Agregar zoom de previews entre 60% y 180%.
+- Simplificar el panel de `Dividir PDF`.
+- Quitar eventos internos, logs, portapapeles y bloques visuales del panel de
+  usuario.
+- Evitar scroll horizontal en el panel derecho.
+- Documentar decisiones, faltantes y validaciones.
+
+## Tareas ejecutadas
+
+- `WorkspaceClient.tsx` ahora mantiene selector visual cuando existen dos o mas
+  documentos en el proyecto.
+- Se agrego input oculto para sumar archivos al proyecto abierto desde el drawer
+  de Archivos.
+- Cada archivo agregado recibe `documentId`, se guarda con `saveWorkspaceFile`
+  y registra evento tecnico `docucore_workspace_document_added` con
+  `requestId` en consola.
+- El documento activo se conserva en `sessionStorage` y el cambio de documento
+  recarga `/workspace` con `documentId` correspondiente.
+- El panel derecho de configuracion puede ocultarse y recuperarse con boton
+  visible; su estado se persiste en `localStorage`.
+- El area central se expande cuando el panel de configuracion esta oculto.
+- Se agrego control de zoom para miniaturas con botones, slider, porcentaje y
+  reset; el zoom se persiste en `localStorage`.
+- Se simplifico `Dividir PDF` a cuatro opciones de usuario: rango, paginas
+  seleccionadas, cada pagina y cada N paginas.
+- Se retiro el bloque de eventos esperados del panel de usuario.
+- Se actualizo la documentacion canonica de Workspace y readiness de
+  herramientas.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/tool-readiness-and-configuration.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/_archive/agents/2026-06-05-docucore-workspace-multidoc-simple-tools/AGENTS-000.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores ESLint. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; Next.js compilo, valido tipos y genero rutas. |
+| Script de test dedicado | No existe script `test` en `package.json`; `build` cubrio typecheck de Next. |
+
+## Decisiones tomadas
+
+- El soporte multi-documento queda local en frontend hasta tener contrato
+  productivo de proyecto documental en backend.
+- Los logs de archivo agregado se registran en consola tecnica con `requestId`;
+  Observability remoto queda pendiente de contrato.
+- El selector cambia el documento activo mediante `documentId` en la URL y
+  `sessionStorage` para reutilizar el cargador existente de previews sin
+  duplicar logica PDF.
+- Los bloques visuales siguen existiendo como soporte interno/drawers del
+  Workspace, pero ya no aparecen en el panel simple de `Dividir PDF`.
+- Los eventos internos de herramienta se conservan como configuracion tecnica,
+  pero no se renderizan en la UI de usuario final.
+
+## Informacion faltante
+
+- Falta contrato backend para persistir proyectos documentales multiarchivo.
+- Falta endpoint de log/observability para registrar `requestId` de cada archivo
+  fuera de consola del navegador.
+- Falta prueba visual automatizada desktop/mobile para selector
+  multi-documento, panel oculto/visible, zoom y ausencia de scroll horizontal.
+- Falta validar manualmente con dos PDF reales en navegador que ambos se
+  agregan al mismo proyecto y pueden alternarse desde el selector.
+
+## Limpieza
+
+`AGENTS-000.md` se archivo en
+`Docs/_archive/agents/2026-06-05-docucore-workspace-multidoc-simple-tools/` y
+el archivo original se conserva vacio en `Docs/agents/`. Los demas agentes se
+dejaron sin cambios porque ya estaban vacios.
+
+---
+
+# Ejecucion Agents DocuCore - 2026-06-05 - Workspace layout aislado
+
+## Alcance
+
+Se ejecutaron `Docs/agents/AGENTS-000.md` y `Docs/agents/AGENTS-001.md` en
+orden numerico. Ambos trataban el mismo problema: aislar el layout del
+Workspace para evitar encimamientos entre topbar global, header documental,
+herramientas, zoom y configuracion.
+
+`AGENTS-002.md` a `AGENTS-030.md` estaban vacios y quedaron como sin
+instrucciones.
+
+## Documentacion revisada
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/tool-readiness-and-configuration.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+
+## Agents ejecutados
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se aplico aislamiento de layout del Workspace: header documental dentro del Workspace, body en grid y estilos scoped bajo `.shell-workspace`/`workspace-*`. |
+| `AGENTS-001.md` | Completado | Se adapto la maqueta propuesta al componente real sin reemplazar la logica existente de PDF, documentos, herramientas ni jobs. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Tareas ejecutadas
+
+- Se reestructuro `WorkspaceClient.tsx` para envolver herramientas, documento y
+  configuracion dentro de `workspace-body`.
+- Se mantuvo `workspace-status-header` dentro de `workspace-root`.
+- Se agregaron pestañas laterales dentro del area documental para
+  configuracion y zoom.
+- El zoom dejo de ser toolbar permanente y ahora aparece como popover temporal.
+- El panel derecho se comporta como columna real cuando esta visible y deja
+  expandir el documento cuando se oculta.
+- Se agregaron reglas CSS scoped bajo `.shell-workspace` para no afectar otras
+  rutas.
+- Se compactaron separadores de bloque y sus acciones secundarias quedan
+  visibles solo en hover/foco.
+- Se documento el nuevo estandar en
+  `Docs/02_projects/docucore/frontend-navigation-and-ux.md`.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/_archive/agents/2026-06-05-docucore-workspace-isolated-layout/AGENTS-000.md`
+- `Docs/_archive/agents/2026-06-05-docucore-workspace-isolated-layout/AGENTS-001.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores ESLint. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; Next.js compilo, valido tipos y genero rutas. |
+| Script de test dedicado | No existe script `test` en `package.json`; `build` cubrio typecheck de Next. |
+
+## Decisiones tomadas
+
+- No se copio la maqueta del agent de forma literal; se adapto al componente
+  real para conservar carga de PDFs, seleccion, documentos multiples, drawers,
+  ejecucion Gateway y configuracion simple ya implementada.
+- No se modificaron estilos globales de `topbar`, `sidebar`, `app-content`,
+  `main`, `header`, `aside`, `button`, `section` o `article` fuera de reglas
+  scoped del Workspace.
+- Se conservaron clases historicas como `canvas-workspace` para no romper
+  componentes existentes, pero el nuevo layout queda gobernado por
+  `workspace-root` y `workspace-body`.
+
+## Informacion faltante
+
+- Falta prueba visual automatizada desktop/mobile con capturas reales de
+  `/workspace`.
+- Falta validacion manual con PDF real para confirmar que no hay encimamiento
+  en navegador despues de reiniciar el contenedor.
+
+## Limpieza
+
+`AGENTS-000.md` y `AGENTS-001.md` se copiaron al historico:
+
+`Docs/_archive/agents/2026-06-05-docucore-workspace-isolated-layout/`
+
+Los archivos originales se conservaron en `Docs/agents/` vacios. Los demas
+agents quedaron sin cambios por estar vacios.
+
+---

@@ -30,7 +30,7 @@ ejecutable.
 
 | Herramienta | Slug | Funcion MVP | Configuracion UI | Evento requerido | Estado |
 |---|---|---|---|---|---|
-| Dividir PDF | `pdf-split` | ZIP con paginas/rangos/bloques visuales. | Panel MVP con seleccion manual, bloques visuales y cada N paginas. No muestra OCR, IA, marcadores generados, capitulos ni division semantica. | `tool_config_opened`, `tool_option_changed`, `pages_selected`, `document_blocks_changed`, `process_requested`, `execution_resource_event` | Lista MVP. |
+| Dividir PDF | `pdf-split` | ZIP con paginas/rangos/selecciones simples. | Panel simple con rango, paginas seleccionadas, cada pagina y cada N paginas. No muestra bloques visuales, portapapeles, eventos internos, OCR, IA, marcadores generados, capitulos ni division semantica. | `tool_config_opened`, `tool_option_changed`, `pages_selected`, `document_blocks_changed`, `process_requested`, `execution_resource_event` en diagnostico/logs. | Lista MVP. |
 | Unir PDF | `pdf-merge` | Normalizacion PDF y preparacion de union. | Panel guiado con orden de archivos y dependencia multiarchivo. Solo debe aparecer cuando existan 2 o mas PDFs y no haya mezcla de tipos. | `tool_config_opened`, `file_order_changed`, `process_requested`, `execution_resource_event` | Parcial: multiarchivo remoto pendiente. |
 | Comprimir PDF | `pdf-compress` | PDF optimizado. | Panel base con perfil seguro y salida. | `tool_config_opened`, `compression_profile_selected`, `process_requested`, `execution_resource_event` | Lista MVP; parametros finos pendientes. |
 | PDF a Word | `pdf-word` | DOCX con texto embebido. | Panel base con tipo de conversion y advertencia de OCR bloqueado. | `tool_config_opened`, `conversion_profile_selected`, `process_requested`, `execution_resource_event` | Lista MVP; OCR previo pendiente. |
@@ -81,7 +81,7 @@ normalizan en `observability-and-diagnostics.md`.
 
 | Superficie | Regla |
 |---|---|
-| `/workspace` | Toda herramienta activa visible en el drawer debe tener panel de configuracion, opciones, mensaje de usuario y eventos esperados. |
+| `/workspace` | Toda herramienta activa visible en el drawer debe tener panel de configuracion, opciones y mensaje de usuario. Los eventos esperados van a diagnostico/logs, no al panel de usuario. |
 | `/upload` | Las herramientas no-PDF ejecutables pueden iniciar proceso desde tarjetas compatibles, pero deben migrar a workspace especializado por tipo documental. |
 | `/jobs` | Debe mostrar resultado, estado y descarga; no debe sustituir la configuracion de herramientas. |
 | Feature gate | Si no hay backend real, la herramienta se documenta como pendiente y no se ejecuta. |
@@ -132,9 +132,12 @@ Reglas:
 - La configuracion derecha del workspace permanece vacia hasta seleccionar una
   herramienta. No se debe renderizar configuracion generica.
 - `pdf-merge` no aparece con un solo PDF ni con documentos mezclados.
-- `pdf-split` solo expone modos MVP: paginas, bloques visuales y cada N
-  paginas. Marcadores PDF nativos quedan pendientes hasta lectura real de
-  bookmarks embebidos; OCR, IA, capitulos y analisis semantico no se muestran.
+- `pdf-split` solo expone opciones simples para usuario final: rango de
+  paginas, paginas seleccionadas, cada pagina en un PDF y cada N paginas.
+  Bloques visuales, portapapeles, eventos internos, `requestId`, logs y nombres
+  tecnicos no deben mostrarse en el panel de configuracion. Marcadores PDF
+  nativos quedan pendientes hasta lectura real de bookmarks embebidos; OCR, IA,
+  capitulos y analisis semantico no se muestran.
 
 Mapa operativo inicial:
 
@@ -169,7 +172,8 @@ drawer tienen ahora panel de configuracion declarativo con:
 - resumen funcional;
 - mensaje para el usuario;
 - opciones listas o pendientes;
-- eventos esperados.
 
 Esto evita que el usuario vea un panel generico vacio y deja documentado que
 las opciones avanzadas no deben prometerse hasta tener contrato backend.
+Los eventos esperados y trazas tecnicas quedan reservados para diagnostico,
+logs internos, consola de desarrollo u Observability.

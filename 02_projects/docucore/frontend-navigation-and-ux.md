@@ -1246,7 +1246,7 @@ Reglas aplicadas:
   pagina no esta seleccionada.
 - El selector cambia a verde solo cuando la pagina queda seleccionada.
 - La guia de insercion entre paginas debe centrarse con base en el espacio real
-  entre tarjetas: `page-gap + insertion-zone-width`.
+  medido entre tarjetas de la misma fila, no solo con el `page-gap` teorico.
 - La guia de insercion no debe pegarse al borde de una tarjeta ni invadir el
   marco de la pagina vecina.
 - El marco de preview debe ser delgado: suficiente para separar hoja y tarjeta,
@@ -1401,3 +1401,403 @@ Pendiente:
   ambiente y pais.
 - Agregar pruebas de UI que confirmen que herramientas aplazadas no aparecen
   en `/upload` ni en el drawer de `/workspace`.
+
+## Arquitectura visual Workspace 2026-06-05
+
+El Workspace debe priorizar el documento y separar claramente navegacion,
+herramientas y configuracion. Cuando el usuario ya esta en `/workspace`, la
+navegacion global queda como excepcion colapsable del shell y no debe competir
+con el area de trabajo documental.
+
+Reglas aplicadas:
+
+- La cabecera del Workspace es compacta y muestra solo estado operativo:
+  documento activo, paginas, bloques, previews listas y estado de guardado o
+  proceso.
+- Las herramientas compatibles viven en un rail izquierdo propio del Workspace.
+  Este rail no reemplaza la navegacion global; solo cambia la herramienta
+  activa del documento.
+- La configuracion de la herramienta activa vive en un panel derecho
+  persistente. No debe repetirse como toolbar por pagina ni como lista flotante
+  permanente sobre el documento.
+- El centro queda reservado para la preview y las miniaturas. Los paneles
+  secundarios de documento, estado, bloques, seleccion, archivos, informacion y
+  resultado se abren bajo demanda.
+- La barra inferior queda limitada a accesos secundarios y accion de aplicar;
+  no debe duplicar la lista de herramientas ni la configuracion principal.
+- En pantallas estrechas, el rail puede compactarse como tira horizontal y la
+  configuracion puede colapsarse para no tapar la preview.
+
+Validacion esperada:
+
+- `/workspace` muestra tres zonas reconocibles: herramientas, documento y
+  configuracion.
+- El documento conserva mas area util que los controles.
+- No hay herramientas repetidas por cada pagina.
+- Las herramientas no ejecutables siguen bloqueadas por `feature-gates.ts` y
+  por el mapa de compatibilidad del Workspace.
+
+Pendiente:
+
+- Agregar prueba visual automatizada desktop/mobile para medir que el rail,
+  panel derecho, header compacto y barra inferior no se solapan.
+- Definir comportamiento completo de configuracion colapsada en mobile si se
+  requiere operar herramientas complejas desde telefono.
+
+## Workspace multi-documento y configuracion simple 2026-06-05
+
+El Workspace debe permitir que un proyecto local contenga varios documentos sin
+reemplazar el documento anterior. Cada archivo agregado desde Upload o desde el
+drawer de Archivos recibe `documentId` propio, se conserva en IndexedDB y se
+registra con `requestId` en consola tecnica del navegador hasta que exista log
+remoto de proyecto documental.
+
+Reglas aplicadas:
+
+- El documento activo es el unico que se renderiza en el area central.
+- El selector de documentos aparece cuando el proyecto tiene dos o mas
+  documentos.
+- Las herramientas se ejecutan solo sobre el archivo activo, salvo que el
+  contrato de herramienta soporte multiarchivo.
+- Agregar archivos desde Workspace no debe crear automaticamente otro proyecto;
+  debe sumar documentos al proyecto local abierto.
+- El panel derecho de configuracion puede ocultarse y recuperarse con un boton
+  visible. Al ocultarse, el area central usa el espacio disponible.
+- El zoom de previews afecta solo miniaturas, no la interfaz completa. Rango
+  permitido: 60% a 180%, default 100%, persistido en `localStorage`.
+- El panel derecho no debe generar scroll horizontal. Sus controles deben
+  ajustarse al ancho disponible.
+
+Configuracion visible de `Dividir PDF`:
+
+- Dividir por rango de paginas.
+- Extraer paginas seleccionadas.
+- Separar cada pagina en un PDF.
+- Dividir cada N paginas.
+
+Los eventos internos, `requestId`, nombres tecnicos, portapapeles, bloques
+visuales y logs no deben mostrarse en el panel de usuario. Esa informacion
+pertenece a consola tecnica, diagnostico admin u Observability.
+
+Pendiente:
+
+- Persistir proyectos/documentos multiarchivo en backend cuando exista contrato
+  productivo de proyecto documental.
+- Agregar prueba visual automatizada que cubra selector multi-documento, panel
+  oculto/visible y zoom en desktop/mobile.
+
+## Layout aislado del Workspace 2026-06-05
+
+El Workspace debe vivir como superficie aislada dentro de DocuCore. Sus headers,
+paneles, zoom, pestañas flotantes, rail de herramientas y configuracion no
+deben modificar ni depender de reglas globales usadas por Upload, Jobs,
+History, Results, Home o Landing Pages.
+
+Reglas aplicadas:
+
+- En `/workspace`, la topbar global del shell no se renderiza. La barra unica
+  superior pertenece al Workspace y contiene el contexto operativo dinamico.
+- `workspace-status-header` queda dentro de `workspace-root` y no usa
+  `position: fixed`.
+- `workspace-body` usa grid interno:
+  `herramientas | documento | configuracion`.
+- Cuando la configuracion esta oculta, el grid elimina la columna derecha y el
+  documento ocupa el espacio disponible.
+- El rail de herramientas y el panel de configuracion ya no flotan sobre la
+  preview cuando estan fijados.
+- La configuracion se controla desde una pestaña lateral siempre disponible.
+- El zoom se abre desde una segunda pestaña lateral y aparece como popover
+  temporal; no ocupa espacio permanente ni cambia el tamaño de toda la UI.
+- Los separadores de bloque quedan compactos y proporcionales a las previews.
+  Sus acciones secundarias solo aparecen en hover o foco.
+- Las reglas CSS nuevas del layout estan encapsuladas bajo
+  `.shell-workspace` y clases `workspace-*`.
+
+Validacion esperada:
+
+- En `/workspace`, la topbar global no se encima con el header del documento.
+- El panel derecho no tapa previews cuando esta fijado.
+- Las pestañas de configuracion y zoom quedan visibles en el lado derecho del
+  area documental.
+- No hay scroll horizontal en el panel de configuracion.
+- Upload, Results, Jobs, History y Home conservan su layout previo.
+
+Pendiente:
+
+- Prueba visual automatizada con captura desktop/mobile para confirmar que no
+  hay encimamientos entre topbar, header, rail, preview, tabs y panel derecho.
+
+## Vista completa de proyecto documental en Workspace 2026-06-05
+
+Cuando un proyecto contiene dos o mas PDF, el area central del Workspace debe
+mostrar todos los documentos del proyecto en el mismo canvas. Las pestañas
+superiores indican documento activo para acciones, pero no deben ocultar los
+demas documentos del proyecto.
+
+Reglas aplicadas:
+
+- Cada pagina de preview conserva `documentId`, nombre de documento y numero de
+  pagina interno.
+- Cada PDF se renderiza como bloque documental propio con separador visible.
+- El separador marca el inicio del documento y muestra el rango de paginas de
+  ese PDF dentro del proyecto.
+- Las miniaturas muestran el numero de pagina interno del PDF, no solo el
+  indice global del proyecto.
+- El documento activo sigue definiendo el archivo que se envia a herramientas
+  de backend que aun no soportan multiarchivo.
+- La vista completa del proyecto no debe crear un proyecto nuevo ni reemplazar
+  documentos anteriores.
+
+Pendiente:
+
+- Definir contrato backend multiarchivo para aplicar herramientas sobre varios
+  documentos al mismo tiempo cuando la herramienta lo soporte.
+
+## Pestañas Tools y Zoom del Workspace 2026-06-05
+
+El Workspace no debe mostrar dos barras verticales encimadas en el borde del
+area documental. La navegacion de herramientas y el control de zoom se tratan
+como pestañas alternas.
+
+Reglas aplicadas:
+
+- `Tools` es la pestaña/barra visible por defecto.
+- El control de zoom permanece oculto hasta que el usuario presiona la pestaña
+  de zoom.
+- Al abrir zoom, la barra de Tools permanece visible; solo aparece el popover
+  con herramientas de zoom.
+- Mientras el usuario mueve el slider o botones de zoom, el control permanece
+  visible.
+- Si no hay interaccion con el zoom durante el tiempo de inactividad definido,
+  el slider se oculta sin cambiar la pestaña activa de Tools.
+- El ultimo porcentaje de zoom usado se guarda localmente y se restaura al
+  volver a abrir el workspace en otra sesion del navegador.
+- Las pestañas se ubican dentro del contexto de Workspace y no deben encimarse
+  con la sidebar global ni con el rail de herramientas.
+
+Validacion esperada:
+
+- En `/workspace`, Tools y Zoom no aparecen como dos barras simultaneas una
+  encima de otra.
+- Abrir Zoom no oculta Tools.
+- Cerrar Zoom o esperar inactividad solo cierra el popover de zoom.
+- Recargar o volver a abrir el workspace conserva el ultimo zoom usado por el
+  usuario.
+
+## Barra superior unica de Workspace 2026-06-05
+
+El Workspace debe tener una sola barra superior. No debe renderizar una topbar
+global adicional ni una segunda subbarra documental. El contenido visible de la
+barra cambia segun el estado del area de trabajo y el documento activo.
+
+Reglas aplicadas:
+
+- En `/workspace`, la topbar global del shell se omite.
+- `workspace-status-header` es la unica barra superior.
+- La barra muestra contexto dinamico: nombre del workspace, estado de proceso,
+  documento activo, paginas, documentos y estado de guardado o proceso.
+- La barra conserva acciones de cuenta (`Iniciar sesion` y `Registrarme`)
+  dentro del mismo header para permitir guardar o recuperar trabajo sin crear
+  una segunda topbar.
+- Si el usuario activa una herramienta o proceso, el texto principal puede
+  cambiar para orientar la accion actual.
+- El nombre del documento se muestra en una sola linea con elipsis si no cabe.
+- Las metricas de paginas, documentos y estado se muestran como pills
+  compactas en la misma fila.
+- La barra no debe crecer mas que lo necesario; la preview conserva prioridad
+  de espacio.
+- Esta regla aplica solo bajo `.shell-workspace` para no modificar Upload,
+  Jobs, History, Home ni otras rutas.
+
+Validacion esperada:
+
+- En `/workspace`, existe una sola barra superior visible.
+- No queda espacio reservado para una topbar inexistente.
+- No hay solape entre la barra superior, pestañas flotantes, tools, zoom ni
+  preview.
+
+## Orden ergonomico de controles laterales Workspace 2026-06-05
+
+El Workspace separa controles por responsabilidad para evitar que zoom,
+configuracion y herramientas compitan por el mismo borde visual.
+
+Reglas aplicadas:
+
+- El borde izquierdo pertenece a los modos de trabajo del documento.
+- `Tools` y `Zoom` se muestran como dos pestañas compactas del mismo grupo.
+- `Tools` permanece activo y visible por defecto.
+- Al abrir `Zoom`, el rail de herramientas se oculta temporalmente y el popover
+  de zoom queda anclado al grupo izquierdo.
+- Si el usuario cierra `Zoom` o deja de interactuar con el control, vuelve
+  `Tools`.
+- La configuracion de la herramienta activa no vive en el grupo izquierdo; se
+  controla desde una pestaña derecha asociada al panel de configuracion.
+- La pestaña derecha debe permanecer disponible aunque el panel este oculto.
+- La pestaña que abre la sidebar global no forma parte del rail de
+  herramientas; debe quedar anclada al borde del canvas y fuera del flujo de
+  botones `Tools`.
+- La sidebar global y el rail de herramientas se comportan como estados
+  alternos de la misma bahia izquierda: al abrir sidebar se oculta `Tools`, y
+  al cerrarse o auto-ocultarse vuelve `Tools`.
+- La bahia izquierda conserva siempre el mismo ancho para evitar que las hojas
+  del preview se reacomoden al cambiar entre navegacion, herramientas o zoom.
+- La transicion entre sidebar y toolbar se controla con dos pestañas visibles
+  del mismo selector lateral: navegacion y herramientas. La pestaña activa debe
+  marcarse visualmente.
+- Las dos pestañas del selector lateral se muestran en vertical. La pestaña
+  seleccionada queda visualmente al frente y la inactiva aparece mas opaca.
+- Las pestañas no deben tener contenedor flotante independiente. Cada pestaña
+  debe verse como una extension del rail activo, con el mismo fondo, borde y
+  transicion de la barra.
+- La pestaña inactiva debe quedar parcialmente sumida dentro de la bahia
+  izquierda. Solo la pestaña activa sobresale completamente.
+- Al ocultarse o mostrarse una barra lateral, la pestaña debe animarse junto
+  con la barra para evitar que parezca un elemento fijo separado.
+- Si la sidebar se expande, el selector lateral debe desplazarse con el borde
+  derecho de la sidebar para conservar la lectura de una sola pieza.
+- Cuando la sidebar esta abierta, la pestaña de herramientas permite invertir
+  el estado sin dejar controles encimados.
+- Ninguna pestaña lateral debe tapar botones de herramienta, el preview, la
+  barra superior unica ni la sidebar global.
+
+Validacion esperada:
+
+- La configuracion aparece del lado derecho del Workspace.
+- El lado izquierdo no muestra tres controles amontonados.
+- Abrir Zoom deja de encimar el slider sobre las herramientas.
+- Cerrar Zoom restaura el rail de herramientas sin cambiar la herramienta
+  activa.
+- La pestaña de sidebar no cubre acciones como dividir, unir, comprimir o
+  convertir PDF.
+- Abrir la sidebar reemplaza visualmente al rail de herramientas y no lo tapa.
+- Al auto-ocultarse la sidebar, el rail de herramientas vuelve a ocupar la
+  bahia izquierda.
+- Cambiar entre sidebar, toolbar y zoom no desplaza ni recalcula la distribucion
+  de miniaturas del preview.
+
+## Preloader y cache de previews Workspace 2026-06-05
+
+La carga de miniaturas PDF debe comunicar avance por pagina y evitar trabajo
+repetido durante la misma sesion de usuario.
+
+Reglas aplicadas:
+
+- Cada pagina de preview usa estados `pending`, `loading`, `ready` y `error`.
+- Las paginas pendientes muestran un preloader circular con texto `En cola`.
+- La pagina en render muestra preloader circular activo con texto `Cargando`.
+- La barra superior puede mostrar avance de previews como `Cargando previews
+  listas/total`.
+- Las miniaturas generadas se guardan en cache temporal de memoria por
+  `documentId:pageNumber` durante la sesion del navegador.
+- Si la miniatura ya existe en cache temporal, la pagina entra directo a
+  `ready` sin volver a renderizar PDF.js.
+- La cache temporal no reemplaza persistencia productiva de previews. Si se
+  requiere cache durable por usuario, debe definirse contrato backend o
+  IndexedDB con politicas de limpieza.
+
+Validacion esperada:
+
+- El usuario ve feedback por hoja aunque la preview tarde.
+- Reabrir el mismo documento durante la sesion evita recalcular miniaturas ya
+  generadas.
+- Fallar una miniatura no debe bloquear el documento completo.
+
+## Algoritmo de slots para preview PDF 2026-06-05
+
+El preview del Workspace no debe depender de `flex-wrap` para ordenar paginas
+cuando existen documentos mixtos, paginas horizontales, verticales y
+separadores. El layout debe usar una grilla de slots estables para conservar la
+secuencia documental y evitar filas desalineadas al final del documento.
+
+Reglas aplicadas:
+
+- El orden del DOM sigue siendo el orden documental real.
+- Cada pagina vertical ocupa 1 slot de grilla.
+- Cada pagina horizontal ocupa 2 slots de grilla.
+- Los separadores de inicio y fin de bloque ocupan 1 slot y deben parecer una
+  hoja compacta distinguible, usando el color del bloque documental.
+- Los separadores no deben crear huecos grandes ni ocupar media pantalla salvo
+  que el viewport sea mobile y necesiten una fila completa.
+- El gap horizontal debe ser compacto por defecto; solo puede crecer por
+  necesidad de zoom, ancho disponible o legibilidad de insercion.
+- La guia de insercion se calcula desde el canal real entre previews y debe
+  quedar centrada aunque cambie el gap o el tipo de pagina.
+- El canal real se mide por fila despues del render. Cada miniatura puede
+  exponer `--next-channel-width` para centrar su guia de insercion respecto a
+  la siguiente preview visible.
+- Los separadores de inicio y fin de documento tambien participan en la
+  medicion de canales. La guia debe centrarse entre separador y pagina, o entre
+  pagina y separador final, no pegarse al borde de la pagina.
+- La guia posterior de un separador debe usar el canal real hacia la siguiente
+  preview; no debe volver al `page-gap` teorico.
+- La guia inicial de un separador debe tener aire suficiente respecto al borde
+  del separador para no parecer parte de la tarjeta.
+- Los separadores deben alinearse al inicio de la fila (`align-self: start`) y
+  no centrarse verticalmente, porque la medicion de canales agrupa elementos por
+  fila real.
+- Todo separador debe exponer guia de insercion antes y despues para permitir
+  insertar documentos en ambas fronteras del bloque.
+- Si la siguiente pieza del flujo es un separador, la pagina anterior no debe
+  renderizar su propia guia `end`; la frontera queda representada solo por la
+  guia alta del separador para evitar dobles barras.
+- Si despues de la ultima pagina visible aparece el separador final del bloque,
+  la pagina final tampoco debe renderizar guia `end`; la frontera queda bajo la
+  guia alta del separador final.
+- No se usa `grid-auto-flow: dense`, porque puede rellenar huecos con paginas
+  posteriores y romper la lectura secuencial.
+- La normalizacion por filas sigue permitida para igualar alturas visuales, pero
+  no debe cambiar el orden ni la columna asignada por el algoritmo de slots.
+- En mobile, todas las paginas y separadores ocupan la fila completa para evitar
+  scroll horizontal o columnas implicitas.
+
+Validacion esperada:
+
+- Las paginas se ven formadas una tras otra aunque haya mezcla de orientaciones.
+- Una pagina horizontal reserva el espacio de dos paginas verticales.
+- Los separadores se leen como tarjetas/hojas de bloque, no como banners
+  gigantes.
+- La barra de insertar queda en medio de dos previews, no pegada a una pagina ni
+  perdida en el gap.
+- Cambiar zoom, rotar paginas, ocultar descartadas o alternar sidebar/tools no
+  debe reordenar las miniaturas.
+
+## Checkpoint de cambios Workspace 2026-06-05
+
+Antes de continuar con nuevos ajustes visuales, se registra el estado acumulado
+del Workspace para preservar trazabilidad y permitir commits separados por
+repositorio.
+
+Cambios documentados:
+
+- `AppShell` en Workspace alterna sidebar y toolbar como estados de una misma
+  bahia izquierda.
+- Las pestañas de sidebar/toolbar se integran visualmente al rail y no deben
+  flotar como controles independientes.
+- Zoom abre un popover de herramientas sin ocultar `Tools` y conserva el ultimo
+  porcentaje usado en almacenamiento local.
+- El preview usa grilla de slots: paginas verticales ocupan 1 slot,
+  horizontales 2 slots y separadores 1 slot compacto.
+- Los separadores de bloque se muestran como tarjetas tipo hoja usando el color
+  del bloque.
+- Las guias de insercion se centran por canal real medido entre elementos del
+  flujo, incluyendo separadores.
+- Se eliminaron dobles guias cuando una frontera queda representada por un
+  separador.
+
+Validaciones ya ejecutadas antes del checkpoint:
+
+- `npm run lint` en `WEB.NJ.NEXT.DocuCore`.
+- `npm run build` en `WEB.NJ.NEXT.DocuCore`.
+- Reinicio de `web-frontend-node`.
+- Verificacion HTTP de `/workspace` con respuesta `200`.
+
+Pendiente despues del checkpoint:
+
+- Ajustar prioridad visual entre pestaña sidebar y popover de zoom.
+- Corregir reflow de miniaturas al cambiar zoom para que generen nuevas filas
+  sin encimarse.
+
+No incluido:
+
+- `.runtime/` del frontend contiene logs locales de servidor y no forma parte
+  del codigo fuente ni de la documentacion canonica.
