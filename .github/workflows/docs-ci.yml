@@ -1,0 +1,32 @@
+name: docs-ci
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - dev
+      - pro
+      - "feature/**"
+
+jobs:
+  validate-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate front matter
+        run: python scripts/validate_frontmatter.py
+
+      - name: Build generated master index
+        run: python scripts/build_master_index.py
+
+      - name: Check generated index is stable
+        run: git diff --exit-code _meta/generated/master-index.json

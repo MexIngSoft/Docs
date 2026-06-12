@@ -1,0 +1,3506 @@
+[
+  {
+    "path": ".github/PULL_REQUEST_TEMPLATE.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "other",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": ".github/SECURITY.md",
+    "title": "Security Policy",
+    "domain": "other",
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo documental"
+  },
+  {
+    "path": ".github/SUPPORT.md",
+    "title": "Support",
+    "domain": "other",
+    "status": "active",
+    "priority": "p2",
+    "owner": "Equipo documental"
+  },
+  {
+    "path": "00_audit/00_full_repository_map.md",
+    "title": "Mapa documental",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "00_audit/00_inventory.md",
+    "title": "Inventario documental",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "00_audit/01_consistency_matrix.md",
+    "title": "Matriz de consistencia documental",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "00_audit/02_missing_documents.md",
+    "title": "Documentos faltantes detectados",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "00_audit/03_inconsistencies.md",
+    "title": "Inconsistencias",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "00_audit/04_document_status.md",
+    "title": "Estado documental",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "00_audit/05_global_dictionary.md",
+    "title": "Diccionario global",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "00_audit/07_recommended_documentation_strategy.md",
+    "title": "Estrategia recomendada de documentacion",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "00_audit/08_new_architecture_review.md",
+    "title": "Revision nueva arquitectura Tecno Telec + JobCron",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "00_audit/09_api_routes_inventory.md",
+    "title": "Inventario actual de rutas API",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "00_audit/10_development_gap_analysis.md",
+    "title": "Analisis global de pendientes de desarrollo",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "00_audit/11_documentation_structure_optimization.md",
+    "title": "Optimizacion de estructura documental",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "00_audit/99_final_review.md",
+    "title": "Revision final documental",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/00_api_index.md",
+    "title": "Indice de APIs",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/01_auth_api.md",
+    "title": "Auth API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/02_catalog_api.md",
+    "title": "Catalog API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/03_supplier_api.md",
+    "title": "Supplier API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/04_pricing_api.md",
+    "title": "Pricing API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/05_quote_api.md",
+    "title": "Quote API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/06_sales_api.md",
+    "title": "Sales API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/07_logistics_api.md",
+    "title": "Logistics API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/08_rules_engine_api.md",
+    "title": "Rules Engine API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/09_gateway_api.md",
+    "title": "Tecno Telec Gateway API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/10_cart_api.md",
+    "title": "Cart API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/10_tecnotelec_api.md",
+    "title": "Tecno Telec API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/11_pos_api.md",
+    "title": "POS API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/12_government_tender_api.md",
+    "title": "GovernmentTender API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/13_billing_api.md",
+    "title": "Billing API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/14_notifications_api.md",
+    "title": "Notifications API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/15_documents_api.md",
+    "title": "Documents API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/16_execution_resource_manager_api.md",
+    "title": "Execution Resource Manager API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/00_general_architecture.md",
+    "title": "Arquitectura general",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/01_project_communication.md",
+    "title": "Comunicacion entre proyectos",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/02_api_gateway.md",
+    "title": "API Gateway",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/03_bff_strategy.md",
+    "title": "Estrategia BFF",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/04_security.md",
+    "title": "Seguridad",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/05_future_microservices_split.md",
+    "title": "Separacion futura de microservicios",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/06_general_system_diagram.md",
+    "title": "Diagrama general del sistema ERP",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/07_project_api_pattern.md",
+    "title": "Patron de API por proyecto",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/08_data_isolation_and_reference_tables.md",
+    "title": "Aislamiento de datos y tablas referenciadas",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/09_tecnotelec_gateway_corrected_pattern.md",
+    "title": "Patron corregido TecnoTelec Gateway",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/events/event-catalog.md",
+    "title": "Catalogo de eventos",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/events/event-driven-architecture.md",
+    "title": "Arquitectura de eventos",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/events/event-naming.md",
+    "title": "Naming de eventos",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/events/event-payloads.md",
+    "title": "Payloads de eventos",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/scheduling/job-dependencies.md",
+    "title": "Dependencias de jobs",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/scheduling/scheduler-architecture.md",
+    "title": "Arquitectura de scheduler",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/scheduling/scheduler-rules.md",
+    "title": "Reglas de scheduler",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/auth/devices.md",
+    "title": "Dispositivos",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/auth/permissions.md",
+    "title": "Permisos",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/auth/README.md",
+    "title": "Auth Core",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/auth/roles.md",
+    "title": "Roles",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/auth/security-policies.md",
+    "title": "Politicas de seguridad Auth",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/auth/sessions.md",
+    "title": "Sesiones",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/auth/tokens.md",
+    "title": "Tokens",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/00_database_overview.md",
+    "title": "Panorama de base de datos",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/01_schemas.md",
+    "title": "Schemas",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/02_entities.md",
+    "title": "Entidades oficiales",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/03_relationships.md",
+    "title": "Relaciones",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/04_catalog_model.md",
+    "title": "Modelo Catalog",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/05_supplier_model.md",
+    "title": "Modelo Supplier",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/06_pricing_model.md",
+    "title": "Modelo Pricing",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/07_sales_model.md",
+    "title": "Modelo Sales",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/08_quotes_model.md",
+    "title": "Modelo Quote",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/09_cart_model.md",
+    "title": "Modelo de datos: Cart",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/10_pos_model.md",
+    "title": "Modelo de datos: POS",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/11_rules_model.md",
+    "title": "Modelo de datos: Rules",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/12_billing_model.md",
+    "title": "Modelo de datos: Billing",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/13_government_tender_model.md",
+    "title": "Modelo de datos: GovernmentTender",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/14_documents_model.md",
+    "title": "Modelo de datos: Documents",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/15_channel_assortment_model.md",
+    "title": "Modelo de datos: ChannelAssortment",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/16_product_compatibility_model.md",
+    "title": "Modelo de datos: ProductCompatibility",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/17_sql_server_table_publication.md",
+    "title": "Publicacion de nombres de tablas estilo SQL Server",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/00_erp_vision.md",
+    "title": "Vision ERP",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/01_modules.md",
+    "title": "Modulos ERP",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/02_rules_engine.md",
+    "title": "Rules Engine",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/03_quote_engine.md",
+    "title": "Motor de cotizacion",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/04_sales_model.md",
+    "title": "Modelo de ventas",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/05_purchase_model.md",
+    "title": "Modelo de compras",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/06_logistics_model.md",
+    "title": "Modelo logistico",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/07_cart_model.md",
+    "title": "Modelo de carrito web",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/08_pos_model.md",
+    "title": "Modelo de punto de venta",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/09_system_states.md",
+    "title": "Estados del sistema",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/10_roles_permissions.md",
+    "title": "Roles y permisos",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/11_costs_profitability.md",
+    "title": "Costos, precios y utilidad",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/12_billing_returns.md",
+    "title": "Facturacion y devoluciones",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/13_error_consistency.md",
+    "title": "Errores y consistencia",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/14_async_jobs_notifications.md",
+    "title": "Jobs asincronos y notificaciones",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/15_bundles_kits.md",
+    "title": "Bundles y kits",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/16_addresses_customers.md",
+    "title": "Clientes y direcciones",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/17_government_tender.md",
+    "title": "Modelo de licitaciones publicas",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/18_government_tender_adoption.md",
+    "title": "Uso de licitaciones por empresa",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/19_supplier_catalog_strategy.md",
+    "title": "Estrategia de catalogo multi-proveedor",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/20_channel_assortment.md",
+    "title": "Surtido por proyecto y canal",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/21_product_compatibility.md",
+    "title": "Compatibilidad entre productos",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/22_pricing_costing_future_map.md",
+    "title": "Mapa futuro de Pricing, Costing y Rentabilidad",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/23_business_software_builder.md",
+    "title": "Business Software Builder",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/erp/24_execution_resource_manager.md",
+    "title": "Administrador de Ejecucion y Recursos",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/flows/00_flow_index.md",
+    "title": "Indice de flujos",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/flows/01_customer_quote_flow.md",
+    "title": "Flujo de cotizacion del cliente",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/flows/02_customer_purchase_flow.md",
+    "title": "Flujo de compra del cliente",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/flows/03_supplier_sync_flow.md",
+    "title": "Flujo de sincronizacion de proveedor",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/flows/04_pricing_flow.md",
+    "title": "Flujo de pricing",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/flows/05_logistics_flow.md",
+    "title": "Flujo logistico",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/flows/06_order_flow.md",
+    "title": "Flujo de orden",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/flows/07_cart_flow.md",
+    "title": "Flujo de carrito web",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/flows/08_pos_flow.md",
+    "title": "Flujo de punto de venta",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/flows/09_returns_flow.md",
+    "title": "Flujo de devoluciones",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/flows/10_error_consistency_flow.md",
+    "title": "Flujo de errores y consistencia",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/flows/11_government_tender_flow.md",
+    "title": "Flujo de licitaciones publicas",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/README.md",
+    "title": "Nucleo ERP",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/_ecosystem/00_ecosystem_overview.md",
+    "title": "Ecosistema empresarial",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/_ecosystem/01_company_portfolio.md",
+    "title": "Portafolio de empresas y proyectos",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/_ecosystem/02_jobcron_shared_modules.md",
+    "title": "Modulos compartidos JobCron",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/_ecosystem/03_development_strategy.md",
+    "title": "Estrategia de desarrollo gradual",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/_ecosystem/04_process_convergence_and_conflicts.md",
+    "title": "Procesos compartidos y contradicciones entre empresas",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/_ecosystem/05_lexnova_docucore_fiscora_mvp_alignment.md",
+    "title": "Alineacion MVP LexNova, DocuCore y Fiscora",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/buildora/README.md",
+    "title": "Buildora",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/clientix/README.md",
+    "title": "Clientix",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/cloudra/README.md",
+    "title": "Cloudra",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/datara/README.md",
+    "title": "Datara",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/advertising-strategy.md",
+    "title": "Estrategia de publicidad DocuCore",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/api-contracts.md",
+    "title": "Contratos API DocuCore",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/architecture.md",
+    "title": "Arquitectura DocuCore",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/database.md",
+    "title": "Base de datos DocuCore Document",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/docker.md",
+    "title": "Docker DocuCore",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/document-intelligence.md",
+    "title": "DocuCore Document Intelligence",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/error-handling.md",
+    "title": "Manejo de errores DocuCore",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/execution-policy.md",
+    "title": "Politica de ejecucion DocuCore",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/feature-visibility-map.md",
+    "title": "Mapa de visibilidad DocuCore",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/frontend-navigation-and-ux.md",
+    "title": "Navegacion e interfaz DocuCore",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/monetization-and-credits.md",
+    "title": "Monetizacion y creditos DocuCore",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/mvp-roadmap.md",
+    "title": "Roadmap MVP DocuCore",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/observability-and-diagnostics.md",
+    "title": "DocuCore Observability and Diagnostics Standard",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/qa-checklist.md",
+    "title": "QA checklist DocuCore",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/README.md",
+    "title": "DocuCore",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/repositories.md",
+    "title": "Repositorios DocuCore",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/security.md",
+    "title": "Seguridad DocuCore",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/supported-file-types.md",
+    "title": "Tipos de archivo soportados DocuCore",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/tool-readiness-and-configuration.md",
+    "title": "Estado, configuracion y eventos de herramientas DocuCore",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/docucore/tools-catalog.md",
+    "title": "Catalogo de herramientas DocuCore",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/festora/README.md",
+    "title": "Festora",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/fiscora/animations/animation-guidelines.md",
+    "title": "Animaciones web Fiscora",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/fiscora/api-contracts.md",
+    "title": "Contratos API Fiscora",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/fiscora/architecture.md",
+    "title": "Arquitectura Fiscora",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/fiscora/database/cfdi-data-model.md",
+    "title": "Modelo de datos CFDI",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/fiscora/decisions/adr_0001_api_boundaries.md",
+    "title": "ADR 0001 - Limites entre Fiscora, Fiscal, Gateway y Document",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/fiscora/frontend/animation-preview.md",
+    "title": "Preview frontend Fiscora",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/fiscora/local-runbook.md",
+    "title": "Fiscora local runbook",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/fiscora/platform-overview.md",
+    "title": "Vision general Fiscora",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/fiscora/README.md",
+    "title": "Fiscora",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/fiscora/repositories.md",
+    "title": "Repositorios Fiscora",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/fiscora/security.md",
+    "title": "Seguridad Fiscora",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/fiscora/tasks/00_mvp_scope.md",
+    "title": "Alcance MVP Fiscora",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/fiscora/tasks/01_pending_tasks.md",
+    "title": "Pendientes Fiscora",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/fiscora/tasks/02_cfdi_multiversion_implementation.md",
+    "title": "Implementacion CFDI multiversion",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/imagiland/README.md",
+    "title": "Imagiland",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/imagrafity/analitics-pendiente.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/imagrafity/api-contracts.md",
+    "title": "Contratos API Imagrafity",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/imagrafity/architecture.md",
+    "title": "Arquitectura Imagrafity",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/imagrafity/database.md",
+    "title": "Base de datos Imagrafity",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/imagrafity/design-system.md",
+    "title": "Sistema de diseno Imagrafity",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/imagrafity/frontend.md",
+    "title": "Frontend Imagrafity",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/imagrafity/implementation-report.md",
+    "title": "Reporte de implementacion Imagrafity",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/imagrafity/local-runbook.md",
+    "title": "Imagrafity local runbook",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/imagrafity/personalization-editor.md",
+    "title": "Editor de personalizacion Imagrafity",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/imagrafity/product-strategy.md",
+    "title": "Estrategia de producto Imagrafity",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/imagrafity/prompt-preview-flow.md",
+    "title": "Flujo de prompts y preview Imagrafity",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/imagrafity/README.md",
+    "title": "Imagrafity",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/imagrafity/repositories.md",
+    "title": "Repositorios Imagrafity",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/imagrafity/security.md",
+    "title": "Seguridad Imagrafity",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/imagrafity/site-map.md",
+    "title": "Mapa del sitio Imagrafity",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/innovation-engines-repair/README.md",
+    "title": "Innovation Engines Repair",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/jobcron/01_tecnotelec_admin_process.md",
+    "title": "Proceso administrativo Tecno Telec en JobCron",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/jobcron/api-contracts.md",
+    "title": "Contratos API JobCron",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/jobcron/database.md",
+    "title": "Base de datos JobCron",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/jobcron/feature-availability.md",
+    "title": "FeatureAvailability en JobCron",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/jobcron/local-runbook.md",
+    "title": "JobCron local runbook",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/jobcron/operational-admin-center.md",
+    "title": "JobCron como centro administrativo operativo",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/jobcron/README.md",
+    "title": "JobCron",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/jobcron/ui/00_jobcron_mockup_analysis.md",
+    "title": "Analisis de fuente visual JobCron",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/jobcron/ui/01_navigation_map.md",
+    "title": "Mapa de navegacion JobCron",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/jobcron/ui/02_layout_and_design_system.md",
+    "title": "Maquetacion y sistema visual JobCron",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/jobcron/ui/03_dynamic_content_model.md",
+    "title": "Modelo de contenido dinamico JobCron",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/jobcron/ui/04_web_review_and_better_proposal.md",
+    "title": "Revision de web JobCron y propuesta mejorada",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/jobcron/ui/05_pdf_visual_extraction.md",
+    "title": "Extraccion visual del PDF JobCron",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/jobcron/ui/06_public_website_structure_research.md",
+    "title": "Investigacion y propuesta de web publica JobCron",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/lavanderia-3p/README.md",
+    "title": "Lavanderia 3P",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/leadhunter/api-contracts.md",
+    "title": "LeadHunter API Contracts",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/leadhunter/architecture.md",
+    "title": "LeadHunter Architecture",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/leadhunter/database.md",
+    "title": "LeadHunter Database",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/leadhunter/frontend.md",
+    "title": "LeadHunter Frontend",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/leadhunter/local-runbook.md",
+    "title": "LeadHunter local runbook",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/leadhunter/README.md",
+    "title": "LeadHunter",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/lexnova/access-control.md",
+    "title": "LexNova access control",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/lexnova/architecture.md",
+    "title": "LexNova architecture",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/lexnova/auth-seed.md",
+    "title": "Semilla Auth LexNova",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/lexnova/case-participants-access.md",
+    "title": "LexNova Case Participants and Access",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/lexnova/document-api-integration-review.md",
+    "title": "Revision de integracion LexNova + Document API",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/lexnova/document-intelligence.md",
+    "title": "LexNova Document Intelligence",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/lexnova/frontend/identity-interface.md",
+    "title": "LexNova identity interface",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/lexnova/legal-domain-research.md",
+    "title": "LexNova legal domain research",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/lexnova/legal-process-data-model.md",
+    "title": "LexNova legal process data model",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/lexnova/local-dependency-runbook.md",
+    "title": "LexNova local dependency runbook",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/lexnova/process-tracking.md",
+    "title": "LexNova Process Tracking",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/lexnova/README.md",
+    "title": "LexNova",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/lexnova/repositories.md",
+    "title": "LexNova repositories",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/lexnova/tasks/definition-questionnaire.md",
+    "title": "LexNova definition questionnaire",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/mexingsof/README.md",
+    "title": "Mexingsof",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/mockwander/README.md",
+    "title": "MockWander",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/modulix/README.md",
+    "title": "Modulix",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/nexora/README.md",
+    "title": "Nexora",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/nutriva/README.md",
+    "title": "Nutriva",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/pagora/README.md",
+    "title": "Pagora",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/pensavart/README.md",
+    "title": "Pensavart",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/phone-shop/README.md",
+    "title": "Proyecto Phone Shop",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/README.md",
+    "title": "Proyectos",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refakto/README.md",
+    "title": "Refakto",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/rutexa/README.md",
+    "title": "Rutexa",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/sekura-tech/README.md",
+    "title": "Sekura Tech",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/social-networks/README.md",
+    "title": "Social Networks",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/stockara/README.md",
+    "title": "Stockara",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/00_initial_stage_readiness_review.md",
+    "title": "Revision de cierre de etapa inicial Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/AGENTE.md",
+    "title": "Agente de desarrollo Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/auth/00_user_process.md",
+    "title": "Proceso de usuarios Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/backend/00_gateway_product_endpoints.md",
+    "title": "Endpoints publicos Gateway para productos",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/business/00_tecnotelec_identity.md",
+    "title": "Identidad de Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/business/01_objectives.md",
+    "title": "Objetivos",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/business/02_foda.md",
+    "title": "FODA",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/business/03_business_model.md",
+    "title": "Modelo de negocio",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/business/04_services.md",
+    "title": "Servicios",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/business/05_customer_segments.md",
+    "title": "Segmentos de cliente",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/business/06_value_proposition.md",
+    "title": "Propuesta de valor",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/cart/00_cart_future_process.md",
+    "title": "Proceso futuro de carrito, pedido y compra",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/catalog/00_public_catalog_process.md",
+    "title": "Proceso de catalogo publico Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/catalog/01_product_detail_process.md",
+    "title": "Proceso de detalle de producto",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/decisions/adr_0001_api_gateway_name.md",
+    "title": "ADR 0001 - Nombre del API Gateway",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/decisions/adr_0002_modular_erp_strategy.md",
+    "title": "ADR 0002 - Estrategia ERP modular",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/decisions/adr_0003_supplier_catalog_strategy.md",
+    "title": "ADR 0003 - Estrategia Supplier y Catalog",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/decisions/adr_0004_quote_to_order_flow.md",
+    "title": "ADR 0004 - Flujo Quote a Order",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/decisions/adr_0005_rules_engine_strategy.md",
+    "title": "ADR 0005 - Estrategia Rules Engine",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/decisions/adr_0006_project_api_boundary.md",
+    "title": "ADR 0006 - API propia del proyecto Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/00_frontend_overview.md",
+    "title": "Frontend overview",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/01_routes.md",
+    "title": "Rutas frontend",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/02_layout.md",
+    "title": "Layout",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/03_components.md",
+    "title": "Componentes",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/04_web_references.md",
+    "title": "Referencias web y visuales",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/05_design_system.md",
+    "title": "Sistema de diseno",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/06_image_sizes.md",
+    "title": "Tamanos de imagen",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/07_purchase_flow.md",
+    "title": "Flujo frontend de compra",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/08_quote_flow.md",
+    "title": "Flujo frontend de cotizacion",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/09_interface_proposal.md",
+    "title": "Propuesta de interfaz Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/10_pre_development_analysis.md",
+    "title": "Analisis previo al desarrollo web",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/11_web_platform_structure.md",
+    "title": "Estructura funcional de la plataforma web",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/12_initial_web_blueprint.md",
+    "title": "Blueprint inicial web Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/13_visual_mockup_spec.md",
+    "title": "Especificacion visual de maqueta Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/14_navbar_standard.md",
+    "title": "Estandar de Navbar Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/15_site_navigation_map.md",
+    "title": "Mapa de navegacion Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/16_catalog_user_experience_correction.md",
+    "title": "Correccion de experiencia: catalogo visible Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/17_user_navigation_experience_review.md",
+    "title": "Revision de navegacion para usuario final",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/18_solution_navigation_map.md",
+    "title": "Mapa de navegacion de soluciones Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/18_stage_one_user_experience_closure.md",
+    "title": "Cierre etapa 1: experiencia publica Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/19_dynamic_catalog_and_navigation_rule.md",
+    "title": "Regla de catalogo y navegacion dinamica",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/20_manual_review_checklist_and_ports.md",
+    "title": "Checklist manual y puertos Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/21_product_catalog_interface_execution.md",
+    "title": "Ejecucion interfaz de productos Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/frontend/22_product_catalog_visual_responsive_execution.md",
+    "title": "Ejecucion visual responsiva del catalogo Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/local-runbook.md",
+    "title": "TecnoTelec local runbook",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/pricing/00_price_publication_process.md",
+    "title": "Proceso de publicacion de precios en Web",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/pricing/01_advanced_pricing_future.md",
+    "title": "Pricing avanzado futuro",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/quotes/00_quote_process.md",
+    "title": "Proceso de cotizacion Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/quotes/01_quote_mvp_sales_decision.md",
+    "title": "Decision MVP: cotizacion en Sales API",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/quotes/02_quote_implementation_scope_analysis.md",
+    "title": "Analisis de implementacion para cotizaciones Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/README.md",
+    "title": "Proyecto Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/solutions/00_solution_presentation_and_assembly_strategy.md",
+    "title": "Estrategia de armado y presentacion de soluciones Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/solutions/01_dynamic_solution_technical_design.md",
+    "title": "Diseno tecnico dinamico de soluciones Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/solutions/02_solution_operating_architecture_analysis.md",
+    "title": "Analisis operativo y arquitectura para soluciones cotizables Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/solutions/03_development_start_recommendation.md",
+    "title": "Recomendacion para cerrar analisis e iniciar desarrollo",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/solutions/05_solution_module_implementation_report.md",
+    "title": "Tecno Telec Solution Module Implementation Report",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/solutions/06_solution_detail_definition.md",
+    "title": "Definicion del detalle de soluciones",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/00_pending_tasks.md",
+    "title": "Tareas pendientes",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/01_required_apis.md",
+    "title": "APIs requeridas",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/02_required_tables.md",
+    "title": "Tablas requeridas",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/03_required_frontend_views.md",
+    "title": "Vistas frontend requeridas",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/04_development_order.md",
+    "title": "Orden de desarrollo",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/05_mvp_scope.md",
+    "title": "Alcance MVP Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/06_pricing_first_plan.md",
+    "title": "Plan Pricing First",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/07_pre_development_checklist.md",
+    "title": "Checklist previo a programar Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/roadmap.md",
+    "title": "Roadmap del proyecto",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tip-smart/README.md",
+    "title": "Tip Smart",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/architecture/api-gateway-standard.md",
+    "title": "Estandar API y Gateway por proyecto",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/database/sql-server-publication-standard.md",
+    "title": "Estandar de nombres SQL Server para tablas publicadas",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/docker/grouped-containers-isolated-config.md",
+    "title": "Contenedores agrupados con configuracion aislada",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/docker/jobcron-official-docker-architecture.md",
+    "title": "Arquitectura Docker oficial JobCron",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/docker.md",
+    "title": "Docker local",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/documentation/frontmatter-spec.md",
+    "title": "Front Matter Specification",
+    "domain": "standards",
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo documental"
+  },
+  {
+    "path": "03_standards/documentation/naming-conventions.md",
+    "title": "Documentation Naming Conventions",
+    "domain": "standards",
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo documental"
+  },
+  {
+    "path": "03_standards/documentation/README.md",
+    "title": "Documentation Standards",
+    "domain": "standards",
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo documental"
+  },
+  {
+    "path": "03_standards/documentation/repository-structure.md",
+    "title": "Repository Structure Standard",
+    "domain": "standards",
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo documental"
+  },
+  {
+    "path": "03_standards/documentation-first-workflow.md",
+    "title": "Flujo documentation-first",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/documentation-maintenance-policy.md",
+    "title": "Politica de mantenimiento documental",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/documentation-pr-checklist.md",
+    "title": "Checklist PR documental",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/frontend/02_placeholder_strategy.md",
+    "title": "Estrategia de placeholders frontend",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/frontend/catalog-visibility-rules.md",
+    "title": "Reglas de visibilidad en frontend",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/frontend/nextjs-project-standard.md",
+    "title": "Estandar de proyecto Next.js",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/frontend/nextjs-runtime-recovery-standard.md",
+    "title": "Estandar de recuperacion runtime Next.js",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/frontend/pre-development-checklist.md",
+    "title": "Checklist previo a desarrollo frontend",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/frontend/README.md",
+    "title": "Estandares frontend",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/frontend/shared-docker-frontend-architecture.md",
+    "title": "Arquitectura Docker frontend compartida",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/frontend/ui-ux-standard.md",
+    "title": "Estandar UI/UX del ecosistema",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/frontend/undocumented-modernization-standard.md",
+    "title": "Estandar para modernizacion visual no documentada",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/global-governance.md",
+    "title": "Gobierno global del ecosistema",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/agents-documentation-order.md",
+    "title": "Orden de ejecucion documental por Agents",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/codex-working-rules.md",
+    "title": "Reglas de trabajo para Codex",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/data-quality.md",
+    "title": "Data Quality — Limpieza y normalización",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/django-api-project-compliance.md",
+    "title": "Validacion de cumplimiento de proyectos Django API",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/docker-recovery-runbook.md",
+    "title": "Runbook Docker local",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/error-handling.md",
+    "title": "Error Handling",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/git-environments-and-release-flow.md",
+    "title": "Flujo Git, entornos y validacion",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/git-repository-map.md",
+    "title": "Mapa de repositorios Git",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/github-branch-governance.md",
+    "title": "Gobierno de ramas y GitHub",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/jobs/failure-recovery.md",
+    "title": "Recuperacion ante fallos de jobs",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/jobs/job-catalog.md",
+    "title": "Catalogo de jobs",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/jobs/job-schedule.md",
+    "title": "Calendario de jobs",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/jobs/retry-policy.md",
+    "title": "Politica de reintentos",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/local-port-registry.md",
+    "title": "Registro local de puertos",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/multi-provider.md",
+    "title": "Estrategia multi-proveedor",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/observability.md",
+    "title": "Observabilidad",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/project-closure-standard.md",
+    "title": "Estandar de cierre para proyectos Django API",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/provider-integration-standard.md",
+    "title": "Estandar para integrar proveedores",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/reporting.md",
+    "title": "Reporting",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/runbook.md",
+    "title": "Runbook operativo",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/scheduling.md",
+    "title": "Scheduling - Procesos programados",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/security.md",
+    "title": "Security",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/standard-request-prompts.md",
+    "title": "Prompts estandar para pedir trabajo",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/product/module-catalog.md",
+    "title": "Catalogo global de modulos",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/product/product-strategy.md",
+    "title": "Estrategia de producto y monetizacion",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/project-completeness-standard.md",
+    "title": "Estandar de proyecto completo Web/API",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/README.md",
+    "title": "Estandares",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/security/audit-policy.md",
+    "title": "Politica de auditoria",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/security/mfa-future.md",
+    "title": "MFA futuro",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/security/password-policy.md",
+    "title": "Politica de password",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/security/secrets-management.md",
+    "title": "Manejo de secretos",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/testing/testing-strategy.md",
+    "title": "Estrategia de pruebas",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/ct-internacional/README.md",
+    "title": "Integracion CT Internacional",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/dc-mayorista/README.md",
+    "title": "Integracion DC Mayorista",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/README.md",
+    "title": "Integraciones",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/api_reference/syscom-api-app.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/api_reference/syscom-auth.md",
+    "title": "SYSCOM Auth API",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/api_reference/syscom-brands.md",
+    "title": "SYSCOM Brands API",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/api_reference/syscom-categories.md",
+    "title": "SYSCOM Categories API",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/api_reference/syscom-exchange-rate.md",
+    "title": "SYSCOM Exchange Rate API",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/api_reference/syscom-product-detail.md",
+    "title": "SYSCOM Product Detail API",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/api_reference/syscom-products.md",
+    "title": "SYSCOM Products API",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/api_reference/syscom-related-accessories.md",
+    "title": "SYSCOM Related Products and Accessories APIs",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/etl/docker-worker.md",
+    "title": "Worker Docker para ETLs SYSCOM",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/etl/overview.md",
+    "title": "ETL overview",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/etl/reset-and-auto-sync.md",
+    "title": "Reset limpio y sincronizacion automatica SYSCOM",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/etl/sync-brands.md",
+    "title": "ETL marcas",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/etl/sync-categories.md",
+    "title": "ETL categorias",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/etl/sync-products.md",
+    "title": "ETL productos",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/etl/sync-related-accessories.md",
+    "title": "ETL relacionados y accesorios",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/etl/sync-stock-prices.md",
+    "title": "ETL stock y precios",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/etl/sync-token.md",
+    "title": "ETL token SYSCOM",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/etl/syscom-commands.md",
+    "title": "Ejecutables SYSCOM",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "04_integrations/syscom/etl/text-encoding-and-search.md",
+    "title": "SYSCOM text encoding and searchable catalog data",
+    "domain": "integration",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/active-work-index.md",
+    "title": "Indice operativo de trabajo activo",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/api_documentation_report.md",
+    "title": "Reporte de documentacion API",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/archive_report.md",
+    "title": "Reporte de archivo",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/business_documentation_report.md",
+    "title": "Reporte de documentacion por proyecto",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/cleanup_report.md",
+    "title": "Reporte de limpieza documental",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/codex_execution_plan.md",
+    "title": "Plan de ejecucion documental para Codex",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/core_vs_business_report.md",
+    "title": "Reporte Core vs Business",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/database_documentation_report.md",
+    "title": "Reporte de documentacion de base de datos",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/delete_candidates.md",
+    "title": "Candidatos de eliminacion",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/document-relations.md",
+    "title": "Relaciones documentales",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/document_classification.md",
+    "title": "Clasificacion documental",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/document_inventory.md",
+    "title": "Inventario documental",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/duplicate_report.md",
+    "title": "Reporte de duplicados",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/final_review_report.md",
+    "title": "Revision final documental",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/folder_rules.md",
+    "title": "Reglas de carpetas",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/frontend_documentation_report.md",
+    "title": "Reporte de documentacion frontend",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/master-index.md",
+    "title": "Indice maestro documental",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/navigation-map.md",
+    "title": "Mapa de navegacion",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/owners.md",
+    "title": "Owners documentales",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/project-runtime-readiness-report.md",
+    "title": "Project runtime readiness report",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/proposed_structure.md",
+    "title": "Estructura documental propuesta",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "_meta/quality_gate_report.md",
+    "title": "Quality gate documental",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENT_GLOBAL_RULES.md",
+    "title": "Reglas globales para Agents",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-000.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-001.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-002.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-003.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-004.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-005.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-006.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-007.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-008.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-009.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-010.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-011.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-012.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-013.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-014.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-015.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-016.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-017.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-018.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-019.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-020.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-021.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-022.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-023.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-024.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-025.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-026.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-027.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-028.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-029.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/AGENTS-030.md",
+    "title": "PENDIENTE_DE_DEFINIR",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/EXECUTION_REPORT.md",
+    "title": "Ejecucion Agents - 2026-06-12 - Estructura documental de plataforma",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/RUN_AGENTS_INSTRUCTIONS.md",
+    "title": "Instrucciones para correr agents",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "CHANGELOG.md",
+    "title": "Changelog",
+    "domain": "other",
+    "status": "active",
+    "priority": "p2",
+    "owner": "Equipo documental"
+  },
+  {
+    "path": "CONTRIBUTING.md",
+    "title": "Contributing",
+    "domain": "other",
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo documental"
+  },
+  {
+    "path": "pendientes/pendientes.md",
+    "title": "Lo que actualmente YA tienes parcialmente cubierto",
+    "domain": "future",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "README.md",
+    "title": "Documentacion del proyecto",
+    "domain": "other",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "tecnotelec-ui/README.md",
+    "title": "Fuente visual Tecno Telec",
+    "domain": "other",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "templates/adr-template.md",
+    "title": "Titulo",
+    "domain": "templates",
+    "status": "draft",
+    "priority": "P2",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "templates/api-template.md",
+    "title": "Titulo",
+    "domain": "templates",
+    "status": "draft",
+    "priority": "P2",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "templates/business-template.md",
+    "title": "Titulo",
+    "domain": "templates",
+    "status": "draft",
+    "priority": "P2",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "templates/database-template.md",
+    "title": "Titulo",
+    "domain": "templates",
+    "status": "draft",
+    "priority": "P2",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "templates/etl-template.md",
+    "title": "Titulo",
+    "domain": "templates",
+    "status": "draft",
+    "priority": "P2",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "templates/event-template.md",
+    "title": "Titulo",
+    "domain": "templates",
+    "status": "draft",
+    "priority": "P2",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "templates/frontend-template.md",
+    "title": "Titulo",
+    "domain": "templates",
+    "status": "draft",
+    "priority": "P2",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "templates/overview-template.md",
+    "title": "Titulo",
+    "domain": "templates",
+    "status": "draft",
+    "priority": "P2",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "templates/runbook-template.md",
+    "title": "Titulo",
+    "domain": "templates",
+    "status": "draft",
+    "priority": "P2",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  }
+]

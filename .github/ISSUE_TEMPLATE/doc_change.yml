@@ -1,0 +1,38 @@
+name: Documentation change
+description: Request a documentation structure, standard, or content update.
+title: "[docs]: "
+labels:
+  - documentation
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: What needs to change and why?
+      placeholder: Describe the documentation change.
+    validations:
+      required: true
+  - type: dropdown
+    id: domain
+    attributes:
+      label: Domain
+      options:
+        - Core ERP
+        - Project
+        - Standards
+        - Integration
+        - Metadata
+        - Agents
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: canonical_docs
+    attributes:
+      label: Canonical documents reviewed
+      placeholder: List related files under Docs/.
+  - type: textarea
+    id: validation
+    attributes:
+      label: Expected validation
+      placeholder: List commands or manual checks.

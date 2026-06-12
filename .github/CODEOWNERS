@@ -1,0 +1,10 @@
+# Ownership is route-based. Replace placeholder teams with the final GitHub
+# teams once organization permissions are configured.
+* @MexIngSoft/docs-admin
+
+/01_core_erp/ @MexIngSoft/erp-architecture
+/02_projects/ @MexIngSoft/project-owners
+/03_standards/ @MexIngSoft/platform-standards
+/04_integrations/ @MexIngSoft/integrations
+/_meta/ @MexIngSoft/docs-automation
+/agents/ @MexIngSoft/docs-admin

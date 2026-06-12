@@ -284,6 +284,10 @@
 | Business | `02_projects/tecnotelec/tasks/roadmap.md` | Roadmap del proyecto | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/tip-smart/README.md` | Tip Smart | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Standards | `03_standards/database/sql-server-publication-standard.md` | Estandar de nombres SQL Server para tablas publicadas | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/documentation/README.md` | Estandares de documentacion | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/documentation/frontmatter-spec.md` | Especificacion de front matter documental | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/documentation/naming-conventions.md` | Convenciones de nombres documentales | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/documentation/repository-structure.md` | Estandar de estructura del repositorio documental | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/docker.md` | Docker local | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/docker/grouped-containers-isolated-config.md` | Contenedores agrupados con configuracion aislada | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/docker/jobcron-official-docker-architecture.md` | Arquitectura Docker oficial JobCron | ACTIVE | P1 | Equipo documental |

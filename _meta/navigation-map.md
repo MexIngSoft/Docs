@@ -110,6 +110,10 @@
 - `03_standards/frontend/ui-ux-standard.md`
 - `03_standards/frontend/nextjs-runtime-recovery-standard.md`
 - `03_standards/frontend/undocumented-modernization-standard.md`
+- `03_standards/documentation/README.md`
+- `03_standards/documentation/frontmatter-spec.md`
+- `03_standards/documentation/naming-conventions.md`
+- `03_standards/documentation/repository-structure.md`
 - `03_standards/docker/jobcron-official-docker-architecture.md`
 - `03_standards/global-governance.md`
 - `03_standards/documentation-first-workflow.md`

@@ -23,6 +23,20 @@ La regla principal es separar:
 | Integraciones | `04_integrations` | Proveedores externos y ETL. |
 | Archivo | `_archive` | Fuentes utiles conservadas para trazabilidad. |
 
+## Directorios de soporte
+
+Ademas de la estructura canonica funcional, este repositorio incluye carpetas
+de soporte para gobierno, metadatos, agents, plantillas y automatizacion:
+
+| Area | Carpeta | Contenido |
+|---|---|---|
+| Gobierno GitHub | `.github` | CODEOWNERS, plantillas, seguridad, soporte y CI documental. |
+| Metadatos | `_meta` | Indices, relaciones, inventarios y reportes de calidad. |
+| Agents | `agents` | Instrucciones temporales y reporte de ejecucion. |
+| Scripts | `scripts` | Automatizacion local y de CI para documentacion. |
+| Plantillas | `templates` | Esqueletos reutilizables para documentos nuevos. |
+| Pendientes | `pendientes` | Ideas o modulos sin MVP cerrado. |
+
 ## Ruta rapida de trabajo
 
 Para trabajar mas rapido sin leer todo `Docs`, usar:
@@ -118,6 +132,7 @@ Va en `03_standards` todo lo que define como se trabaja:
 - Estandar de proyectos Django API.
 - Estandar de proyectos Next.js.
 - Estandar de proyecto completo Web/API.
+- Estandares de estructura, metadata y naming documental.
 - Arquitectura Docker frontend compartida.
 - Estandar de cierre.
 - Runbook.
@@ -183,6 +198,7 @@ Proveedor actual:
 32. `02_projects/_ecosystem/01_company_portfolio.md`
 33. `02_projects/_ecosystem/04_process_convergence_and_conflicts.md`
 34. `03_standards/project-completeness-standard.md`
+35. `03_standards/documentation/README.md`
 
 ## Reglas
 

@@ -4,3 +4,31 @@ Docker.DB.PG/
 Docker.API.PY/
 Docker.SW.Nginx/
 Docker.WEB.NJ/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local tooling
+.venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+node_modules/
+.npm/
+.pnpm-store/
+
+# Generated outputs
+_site/
+dist/
+coverage/
+reports/
+docs.zip
+
+# Local secrets
+.env
+.env.local
+.env.*.local

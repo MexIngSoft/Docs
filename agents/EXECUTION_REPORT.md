@@ -1,3 +1,98 @@
+# Ejecucion Agents - 2026-06-12 - Estructura documental de plataforma
+
+## Alcance
+
+Se ejecuto `Docs/agents/AGENTS-000.md`, unico agent activo. Los archivos
+`AGENTS-001.md` a `AGENTS-030.md` estaban vacios.
+
+El agent solicitaba mejorar la estructura del repositorio documental,
+fortalecer gobernanza, automatizacion, metadata y estandares de documentacion.
+Se ejecuto un MVP seguro sin mover carpetas grandes ni tomar decisiones legales
+no definidas.
+
+## Documentacion revisada
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/03_standards/documentation-maintenance-policy.md`
+- `Docs/03_standards/documentation-pr-checklist.md`
+- `Docs/03_standards/operations/github-branch-governance.md`
+- `Docs/03_standards/operations/git-environments-and-release-flow.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se agrego capa de gobernanza GitHub, scripts de validacion documental, estandares de estructura/naming/front matter y metadata generada. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Cambios realizados
+
+- Se agrego `.github/` con `CODEOWNERS`, plantilla de PR, issue template,
+  `SECURITY.md`, `SUPPORT.md` y workflow `docs-ci.yml`.
+- Se agregaron `CONTRIBUTING.md` y `CHANGELOG.md`.
+- Se agrego `scripts/validate_frontmatter.py`.
+- Se agrego `scripts/build_master_index.py`.
+- Se creo `03_standards/documentation/` con:
+  - `README.md`;
+  - `frontmatter-spec.md`;
+  - `naming-conventions.md`;
+  - `repository-structure.md`.
+- Se actualizo `README.md` para explicar directorios de soporte de plataforma.
+- Se actualizaron `Docs/_meta/master-index.md`,
+  `Docs/_meta/master-index.yaml` y `Docs/_meta/navigation-map.md`.
+- Se actualizo `.gitignore` para ignorar artefactos locales/generados como
+  `docs.zip`.
+- Se genero `_meta/generated/master-index.json` como indice derivado inicial.
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `python scripts/validate_frontmatter.py` | OK; reporta warnings por documentos existentes sin front matter y 0 malformed. |
+| `python scripts/build_master_index.py` | OK; genero indice derivado. |
+| `git diff --check` | OK despues de archivar y limpiar el agent completado. |
+
+## Decisiones
+
+- No se movio `tecnotelec-ui/` porque requiere actualizar referencias visuales y
+  confirmar que no haya dependencias activas.
+- No se migro `02_projects/docucore/` a estructura profunda porque seria una
+  reestructura de alto impacto y debe hacerse en una fase dedicada.
+- No se agrego `LICENSE` porque la intencion legal no esta definida; queda como
+  pendiente explicito.
+- El validador de front matter no falla por documentos historicos sin metadata;
+  solo falla si hay front matter mal formado.
+- `docs.zip` queda ignorado por `.gitignore`; no se versiona.
+
+## Pendientes
+
+- Definir licencia del repositorio (`LICENSE`) con owner legal o responsable.
+- Decidir migracion gradual de `tecnotelec-ui/` a `_archive/visual_sources/`.
+- Ejecutar fase separada para homogeneizar `02_projects/docucore/`.
+- Migrar front matter en documentos existentes de forma gradual.
+- Confirmar equipos reales de GitHub usados en `.github/CODEOWNERS`.
+
+## Limpieza
+
+`AGENTS-000.md` se copio al historico:
+
+```text
+Docs/_archive/agents/2026-06-12-docs-platform-structure-governance/AGENTS-000.md
+```
+
+Despues de copiarse, el archivo original se conserva en `Docs/agents/` pero
+queda vacio.
+
+---
+
 # Ejecucion Agents - 2026-06-12 - Cierre Web/API y publicacion
 
 ## Alcance
