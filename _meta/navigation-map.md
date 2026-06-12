@@ -9,6 +9,7 @@
 
 ## Entradas principales
 - `_meta/active-work-index.md`
+- `_meta/project-runtime-readiness-report.md`
 - `00_audit/10_development_gap_analysis.md`
 - `00_audit/11_documentation_structure_optimization.md`
 - `01_core_erp/auth/README.md`
@@ -34,6 +35,7 @@
 - `02_projects/docucore/mvp-roadmap.md`
 - `02_projects/festora/README.md`
 - `02_projects/fiscora/README.md`
+- `02_projects/fiscora/local-runbook.md`
 - `02_projects/fiscora/platform-overview.md`
 - `02_projects/fiscora/architecture.md`
 - `02_projects/fiscora/api-contracts.md`
@@ -47,6 +49,7 @@
 - `02_projects/fiscora/decisions/adr_0001_api_boundaries.md`
 - `02_projects/imagiland/README.md`
 - `02_projects/imagrafity/README.md`
+- `02_projects/imagrafity/local-runbook.md`
 - `02_projects/imagrafity/architecture.md`
 - `02_projects/imagrafity/api-contracts.md`
 - `02_projects/imagrafity/database.md`
@@ -59,8 +62,15 @@
 - `02_projects/imagrafity/repositories.md`
 - `02_projects/imagrafity/security.md`
 - `02_projects/imagrafity/site-map.md`
+- `02_projects/leadhunter/README.md`
+- `02_projects/leadhunter/architecture.md`
+- `02_projects/leadhunter/api-contracts.md`
+- `02_projects/leadhunter/database.md`
+- `02_projects/leadhunter/frontend.md`
+- `02_projects/leadhunter/local-runbook.md`
 - `02_projects/innovation-engines-repair/README.md`
 - `02_projects/jobcron/README.md`
+- `02_projects/jobcron/local-runbook.md`
 - `02_projects/jobcron/feature-availability.md`
 - `02_projects/jobcron/api-contracts.md`
 - `02_projects/jobcron/database.md`
@@ -94,16 +104,19 @@
 - `02_projects/social-networks/README.md`
 - `02_projects/stockara/README.md`
 - `02_projects/tecnotelec/README.md`
+- `02_projects/tecnotelec/local-runbook.md`
 - `02_projects/tip-smart/README.md`
 - `03_standards/frontend/README.md`
 - `03_standards/frontend/ui-ux-standard.md`
 - `03_standards/frontend/nextjs-runtime-recovery-standard.md`
 - `03_standards/frontend/undocumented-modernization-standard.md`
+- `03_standards/docker/jobcron-official-docker-architecture.md`
 - `03_standards/global-governance.md`
 - `03_standards/documentation-first-workflow.md`
 - `03_standards/architecture/api-gateway-standard.md`
 - `03_standards/product/product-strategy.md`
 - `03_standards/product/module-catalog.md`
+- `03_standards/project-completeness-standard.md`
 - `03_standards/operations/github-branch-governance.md`
 - `03_standards/operations/standard-request-prompts.md`
 - `03_standards/operations/agents-documentation-order.md`

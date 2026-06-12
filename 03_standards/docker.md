@@ -1,5 +1,22 @@
 # Docker local
 
+## Arquitectura oficial JobCron
+
+La regla oficial para Docker del ecosistema JobCron vive en:
+
+```txt
+Docs/03_standards/docker/jobcron-official-docker-architecture.md
+```
+
+Ese documento define la separacion entre corridas `master`, corridas por
+proyecto, Dockerfiles base/especificos, variables `.env.master` y
+`.env.<proyecto>`, red compartida objetivo `jobcron_network`, reutilizacion de
+APIs compartidas y criterios para no duplicar contenedores.
+
+El entorno actual conserva compatibilidad con la red heredada `crejo` mientras
+la migracion a `jobcron_network` se haga de forma coordinada en compose,
+scripts, Nginx y documentacion operativa.
+
 El entorno local usa varios compose separados bajo el proyecto Docker `crejo`:
 
 - `Docker.DB.PG`: PostgreSQL local.
@@ -62,6 +79,18 @@ docker compose -f Docker.API.PY\docker-compose.yml up -d --build
 docker compose -f Docker.WEB.NJ\docker-compose.yml up -d --build
 docker compose -f Docker.SW.Nginx\docker-compose.yml up -d --build
 ```
+
+Comandos por proyecto:
+
+```powershell
+docker compose -f Docker.DB.PG\docker-compose.<proyecto>.db.yml up -d
+docker compose -f Docker.API.PY\docker-compose.<proyecto>.api.yml up -d --build
+docker compose -f Docker.WEB.NJ\docker-compose.<proyecto>.web.yml up -d --build
+```
+
+Los compose por proyecto se guardan en la carpeta de su capa. Si solo cambia la
+lista de procesos, deben ser overlays delgados que extiendan el compose base y
+definan `API_PROJECTS` o `WEB_PROJECTS`.
 
 Si el diagnostico muestra conflictos en puertos reservados, liberarlos antes de
 levantar Docker:
@@ -171,6 +200,11 @@ http://localhost
 - `fiscal`
 - `fiscora`
 - `fiscora_gateway`
+- `imagrafity`
+- `imagrafity_gateway`
+- `jobcron`
+- `leadhunter`
+- `leadhunter_gateway`
 - `lexnova_gateway`
 - `lexnova`
 - `pricing`
@@ -200,6 +234,11 @@ http://localhost
 - `fiscora`: `8015`
 - `fiscal`: `8016`
 - `lexnova_gateway`: `8017`
+- `imagrafity_gateway`: `8018`
+- `imagrafity`: `8019`
+- `leadhunter_gateway`: `8020`
+- `leadhunter`: `8021`
+- `jobcron`: `8022`
 
 Rangos reservados:
 

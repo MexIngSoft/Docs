@@ -38,7 +38,10 @@ $apiServices = @(
     @{ Name = "fiscal"; Port = 8016; Expected = @(200, 301, 302, 401, 403, 404) },
     @{ Name = "lexnova_gateway"; Port = 8017; CheckPath = "/api/lexnova/health/"; Expected = @(200) },
     @{ Name = "imagrafity_gateway"; Port = 8018; CheckPath = "/api/imagrafity/health/"; Expected = @(200) },
-    @{ Name = "imagrafity"; Port = 8019; CheckPath = "/api/imagrafity/health/"; Expected = @(200) }
+    @{ Name = "imagrafity"; Port = 8019; CheckPath = "/api/imagrafity/health/"; Expected = @(200) },
+    @{ Name = "leadhunter_gateway"; Port = 8020; CheckPath = "/api/leadhunter/health/"; Expected = @(200) },
+    @{ Name = "leadhunter"; Port = 8021; CheckPath = "/api/leadhunter/health/"; Expected = @(200) },
+    @{ Name = "jobcron"; Port = 8022; Expected = @(200, 301, 302, 401, 403, 404) }
 )
 
 $webServices = @(
@@ -47,7 +50,8 @@ $webServices = @(
     @{ Name = "lexnova"; Port = 3002; Url = "http://localhost:3002/auth/login"; CssProject = "lexnova" },
     @{ Name = "docucore"; Port = 3004; Url = "http://localhost:3004/" },
     @{ Name = "fiscora"; Port = 3005; Url = "http://localhost:3005/"; Static = $true },
-    @{ Name = "imagrafity"; Port = 3006; Url = "http://localhost:3006/" }
+    @{ Name = "imagrafity"; Port = 3006; Url = "http://localhost:3006/" },
+    @{ Name = "leadhunter"; Port = 3007; Url = "http://localhost:3007/prospectos" }
 )
 
 function Write-Step {
@@ -67,8 +71,8 @@ function Invoke-WorkspaceCommand {
 
 function Test-DockerReady {
     try {
-        docker version --format "{{.Server.Version}}" | Out-Null
-        return $true
+        $serverVersion = docker version --format "{{.Server.Version}}" 2>$null
+        return ($LASTEXITCODE -eq 0 -and -not [string]::IsNullOrWhiteSpace($serverVersion))
     } catch {
         return $false
     }

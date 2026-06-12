@@ -63,6 +63,14 @@ Arranque focalizado con solo LexNova + Fiscora:
 powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-LexNovaFiscora.ps1 -Build
 ```
 
+Arranque focalizado solo LexNova:
+
+```powershell
+docker compose -f Docker.DB.PG\docker-compose.lexnova.db.yml up -d
+docker compose -f Docker.API.PY\docker-compose.lexnova.api.yml up -d --build
+docker compose -f Docker.WEB.NJ\docker-compose.lexnova.web.yml up -d --build
+```
+
 Desde la raiz del workspace:
 
 ```powershell

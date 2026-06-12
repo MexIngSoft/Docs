@@ -13,7 +13,9 @@ Guardar reglas de trabajo, operacion, seguridad, pruebas y cierre de proyectos.
 - `database`: estandar de publicacion de tablas y campos con nombres PascalCase estilo SQL Server.
 - `security`: manejo de secretos.
 - `testing`: estrategia de pruebas.
-- `docker.md`: Docker local.
+- `docker.md`: Docker local y enlace a la arquitectura Docker oficial JobCron.
+- `docker/jobcron-official-docker-architecture.md`: corridas master, corridas
+  por proyecto, red compartida, variables y reutilizacion de servicios Docker.
 - `global-governance.md`: gobierno global del ecosistema.
 - `documentation-first-workflow.md`: flujo para tareas sin agents, basado en indices y documentacion canonica.
 - `operations/standard-request-prompts.md`: prompts cortos estandar para pedir trabajo con agents, sin agents y modernizacion visual.

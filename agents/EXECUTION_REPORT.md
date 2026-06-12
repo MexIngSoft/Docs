@@ -236,6 +236,328 @@ Fecha: 2026-05-16
 
 ---
 
+# Ejecucion Agents DocuCore - 2026-06-05 - Documentos y barra rapida lateral
+
+## Alcance
+
+Se ejecuto `Docs/agents/AGENTS-000.md`, unico agent activo. Los archivos
+`AGENTS-001.md` a `AGENTS-030.md` estaban vacios y quedaron como sin
+instrucciones ejecutables.
+
+El agent solicita completar pendientes del Workspace de DocuCore: administrar
+documentos desde las pestañas superiores, navegar automaticamente al inicio del
+documento seleccionado y mover la barra rapida de pagina al borde derecho del
+preview para no cubrir contenido.
+
+## Documentacion revisada
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+- `Docs/agents/AGENTS-000.md`
+
+## Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Las pestañas superiores ahora activan, navegan, descargan, renombran y eliminan documentos del proyecto; la barra rapida de pagina se movio al lateral derecho del preview. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Tareas detectadas
+
+- Convertir la barra superior de documentos en navegador/indice operativo.
+- Permitir activar, renombrar, descargar y eliminar documentos del proyecto.
+- Al hacer click en una pestaña, navegar al separador de inicio del documento.
+- Evitar que la barra rapida de pagina aparezca sobre la hoja o el selector.
+- Mantener la jerarquia visual: selector `40`, barra rapida `30`, preview `10`.
+- Documentar reglas, decisiones y pendientes.
+
+## Tareas ejecutadas
+
+- Se agrego `scrollToWorkspaceDocumentStart()` usando
+  `data-document-start-id` y `scrollIntoView()`.
+- `activateWorkspaceDocument()` ya no recarga la pagina: actualiza sesion,
+  documento activo, archivo activo, seleccion inicial y URL con
+  `history.replaceState`.
+- Se agregaron acciones de documento: descarga desde IndexedDB/objectURL,
+  renombrado local y eliminacion del documento dentro del proyecto.
+- Al eliminar documentos se renumeran las paginas restantes, se actualizan
+  secciones y se mantiene vivo el proyecto.
+- Las pestañas superiores ahora tienen boton principal y acciones independientes
+  para evitar botones anidados invalidos.
+- La barra `.page-quick-actions` paso a rail vertical en el borde derecho del
+  preview y escala con `--zoom-scale`.
+- El selector de pagina queda independiente con `z-index: 40`; la barra rapida
+  queda en `z-index: 30`; el preview queda en `z-index: 10`.
+- Se actualizo la documentacion canonica del Workspace.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/_archive/agents/2026-06-05-docucore-document-tabs-quick-rail/AGENTS-000.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores ESLint. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; Next.js compilo, valido tipos y genero rutas. |
+| `docker restart web-frontend-node` | Aprobado; frontend reiniciado para cargar cambios. |
+| `Invoke-WebRequest http://127.0.0.1:3004/workspace` | Aprobado; respuesta `HTTP 200`. |
+
+## Decisiones tomadas
+
+- Se mantuvo la persistencia local existente del Workspace; los cambios de
+  documentos quedan cubiertos por el autosave del borrador.
+- La eliminacion remueve el documento del proyecto local, pero no borra el
+  archivo original ni el borrador completo.
+- Se uso confirmacion nativa por ahora porque el agent solo exigia confirmar y
+  no existe modal canonico especifico para esta accion en Workspace.
+- No se modificaron Gateway, API ni contratos backend; el alcance quedo en
+  Workspace frontend y documentacion.
+
+## Informacion faltante
+
+- Falta reemplazar confirmaciones nativas por modal DocuCore cuando se cierre
+  el estandar de modales del Workspace.
+- Falta prueba visual automatizada para hover/focus de la barra lateral derecha
+  en zoom 10%, 100%, 300% y 500%.
+- Falta contrato backend para registrar eventos de proyecto documental fuera de
+  consola tecnica.
+
+## Limpieza
+
+`AGENTS-000.md` se copia al historico:
+
+```text
+Docs/_archive/agents/2026-06-05-docucore-document-tabs-quick-rail/AGENTS-000.md
+```
+
+Despues de copiarse, el archivo original se conserva en `Docs/agents/` pero
+queda vacio. Los demas agents se dejan sin cambios porque ya estaban vacios.
+
+---
+
+# Ejecucion Agents DocuCore - 2026-06-05 - Acciones rapidas opcion 2
+
+## Alcance
+
+Se ejecuto `Docs/agents/AGENTS-000.md`, unico agent activo. Los archivos
+`AGENTS-001.md` a `AGENTS-030.md` estaban vacios y quedaron como sin
+instrucciones ejecutables.
+
+El agent comparaba cuatro alternativas para resolver el conflicto visual entre
+selector de pagina y barra de acciones rapidas. La solicitud del usuario fue
+implementar la opcion 2, cuidando que el comportamiento siga siendo correcto
+cuando el zoom cambia el tamano de las hojas.
+
+## Documentacion revisada
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+- `Docs/agents/AGENTS-000.md`
+
+## Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se implemento la opcion 2: selector exterior anclado a la tarjeta y barra rapida libre en la zona superior interna del preview. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Tareas detectadas
+
+- Evitar que el selector de pagina y la barra rapida compitan por la misma zona.
+- Conservar la barra rapida por hover/focus sin moverla fuera de la tarjeta.
+- Anclar el selector en la esquina exterior de la tarjeta.
+- Hacer que selector, offset e iconos de la barra rapida respondan al zoom de
+  la hoja.
+- Documentar la decision en la documentacion canonica del Workspace.
+
+## Tareas ejecutadas
+
+- Se separo el selector de pagina en un boton propio `.page-select-toggle`.
+- `thumb-select` conserva el preview y la interaccion de seleccion existente,
+  pero ya no contiene el icono selector.
+- La barra `.page-quick-actions` mantiene la zona superior interna del preview
+  libre de solapes con el selector.
+- Los tamanos de botones, iconos, offsets y espacios usan `--zoom-scale` y
+  `--thumb-width` para sostener proporciones con zoom bajo, normal y alto.
+- Se actualizo `frontend-navigation-and-ux.md` con la regla de opcion 2.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/_archive/agents/2026-06-05-docucore-page-quick-actions-option-2/AGENTS-000.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores ESLint. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; Next.js compilo, valido tipos y genero rutas. |
+
+## Decisiones tomadas
+
+- Se eligio la opcion 2 porque fue la solicitada por el usuario y resuelve el
+  solape directo sin cambiar el modelo funcional de acciones rapidas.
+- No se movio la barra rapida fuera de la tarjeta para conservar el flujo de
+  hover/focus ya implementado.
+- No se modificaron acciones, permisos, Gateway ni contratos backend; el alcance
+  quedo limitado al Workspace frontend y documentacion canonica.
+- Se conservaron las reglas previas de zoom tipo Word y metadata real de pagina.
+
+## Informacion faltante
+
+- Falta prueba visual automatizada con capturas en zoom 10%, 100%, 300% y 500%
+  para confirmar visualmente la proporcion del selector exterior.
+- Falta validacion manual en navegador con PDF real para revisar comodidad en
+  mobile y pantallas estrechas.
+
+## Limpieza
+
+`AGENTS-000.md` se copia al historico:
+
+```text
+Docs/_archive/agents/2026-06-05-docucore-page-quick-actions-option-2/AGENTS-000.md
+```
+
+Despues de copiarse, el archivo original se conserva en `Docs/agents/` pero
+queda vacio. Los demas agents se dejan sin cambios porque ya estaban vacios.
+
+---
+
+# Ejecucion Agents DocuCore - 2026-06-05 - Zoom Word 10-500 Workspace
+
+## Alcance
+
+Se ejecuto `Docs/agents/AGENTS-000.md`, unico agent activo. Los archivos
+`AGENTS-001.md` a `AGENTS-030.md` estaban vacios y quedaron como sin
+instrucciones ejecutables.
+
+El agent solicita ajustar el zoom, escala y comportamiento visual del Workspace
+de DocuCore usando Microsoft Word como referencia, sin romper el esquema ya
+implementado.
+
+## Documentacion revisada
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+
+## Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se implemento zoom tipo Word de 10% a 500% sobre previews, grid y separadores del Workspace, manteniendo header, herramientas y paneles fuera del escalado. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Tareas detectadas
+
+- Ampliar el rango de zoom del Workspace a minimo 10%, default 100% y maximo
+  500%.
+- Mantener el zoom como efecto visual exclusivo del area documental.
+- Recalcular previews, grid, gaps y separadores segun la escala.
+- Permitir scroll natural en zoom alto sin comprimir paginas ni mover controles.
+- Persistir el zoom en `localStorage`.
+- Documentar criterios y validaciones.
+
+## Tareas ejecutadas
+
+- `WorkspaceClient.tsx` ahora define `WORKSPACE_PREVIEW_ZOOM_MIN = 10`,
+  `WORKSPACE_PREVIEW_ZOOM_MAX = 500` y `WORKSPACE_PREVIEW_ZOOM_STEP = 10`.
+- El slider y los botones de zoom usan el mismo rango y pasos del agent.
+- Los valores heredados en `localStorage` se normalizan al rango valido.
+- La escala base conserva la proporcion tipo Word: puntos PDF a pixeles CSS
+  (`1pt = 96 / 72px`), por lo que Carta vertical queda cerca de 816px al 100%.
+- El grid calcula `--preview-slot-width`, `--page-gap`,
+  `--preview-row-gap`, `--workspace-separator-width` y
+  `--workspace-separator-height` a partir del zoom.
+- Los separadores de bloque escalan con ancho aproximado de 75% de pagina y
+  altura limitada entre 24px y 80px.
+- La escala de render PDF.js subio para sostener mejor zoom alto sin depender
+  solo de escalado CSS.
+- Se actualizo la documentacion canonica del Workspace.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/_archive/agents/2026-06-05-docucore-word-zoom/AGENTS-000.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores ESLint. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; Next.js compilo, valido tipos y genero rutas. |
+| `docker restart web-frontend-node` | Aprobado; frontend reiniciado para cargar cambios. |
+| `Invoke-WebRequest http://127.0.0.1:3004/workspace` | Aprobado; respuesta `HTTP 200`. |
+
+## Decisiones tomadas
+
+- Se mantuvo la clave existente `docucore.workspace.previewZoom` para no romper
+  preferencias actuales; cumple la persistencia requerida por el agent.
+- No se escalo la topbar, header, rail de herramientas, panel derecho, tabs ni
+  botones flotantes.
+- Se permitio scroll natural del area documental para zoom alto en lugar de
+  comprimir o deformar las paginas.
+- Los separadores quedan proporcionales pero con altura maxima para conservar
+  legibilidad y no volver a ocupar espacio excesivo.
+
+## Informacion faltante
+
+- Falta prueba visual automatizada con capturas para zoom 10%, 100%, 300% y
+  500% usando PDF mixto vertical/horizontal.
+- Falta validacion manual fina en navegador con documento real para confirmar
+  la comodidad visual en 300% y 500%.
+
+## Limpieza
+
+`AGENTS-000.md` se copia al historico:
+
+```text
+Docs/_archive/agents/2026-06-05-docucore-word-zoom/AGENTS-000.md
+```
+
+Despues de copiarse, el archivo original se conserva en `Docs/agents/` pero
+queda vacio. Los demas agents se dejan sin cambios porque ya estaban vacios.
+
+---
+
 # Ejecucion agents activos - Tipos de archivo soportados DocuCore
 
 Fecha: 2026-06-04
@@ -8529,3 +8851,730 @@ Los archivos originales se conservaron en `Docs/agents/` vacios. Los demas
 agents quedaron sin cambios por estar vacios.
 
 ---
+
+# Ejecucion Agents DocuCore - 2026-06-05 - Metadata real y reflow de zoom
+
+## Alcance
+
+Se ejecuto `Docs/agents/AGENTS-000.md`. Los archivos `AGENTS-001.md` a
+`AGENTS-030.md` estaban vacios y quedaron como sin instrucciones.
+
+## Documentacion revisada
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/02_projects/docucore/tool-readiness-and-configuration.md`
+
+## Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se ajusto el Workspace para recalcular zoom, scroll, separadores e inserciones desde metadata real de pagina PDF. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Tareas detectadas
+
+- Recalcular layout completo al cambiar zoom.
+- Evitar scroll fantasma por medidas viejas de filas.
+- Detectar tamano real de pagina por metadata PDF.
+- Identificar `LETTER`, `LEGAL`, `A4` y `CUSTOM` con tolerancia.
+- Mantener escala visual coherente sin deformar previews.
+- Recalcular separadores e inserciones con base en paginas visibles.
+- Mantener visibles etiquetas y zonas de insercion.
+
+## Tareas ejecutadas
+
+- `previewGridStyle` ahora recibe las paginas visibles y calcula slot,
+  separadores y gaps desde dimensiones reales de PDF.
+- `pageLayoutStyle` expone variables de metadata (`--page-width-points`,
+  `--page-height-points`, `--page-aspect-inverse`, `--zoom-scale`) ademas de
+  las dimensiones visuales usadas por la preview.
+- `detectPageSizeName` usa tolerancia de 12 puntos y normaliza a `LETTER`,
+  `LEGAL`, `A4` o `CUSTOM`.
+- Se agrego recalculo diferido de grid con limpieza previa de
+  `--row-preview-height` y `--next-channel-width`.
+- Se agrego `ResizeObserver` para volver a medir el grid cuando cambia su
+  tamano real.
+- Las guias de insercion se miden por fila real con `getBoundingClientRect`.
+- El scroll del area PDF se limita al nuevo tamano disponible despues del
+  recalculo.
+- La resolucion interna de render PDF.js subio para soportar mejor zoom alto.
+- Se documento la regla canonica en
+  `Docs/02_projects/docucore/frontend-navigation-and-ux.md`.
+
+## Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/workspace/WorkspaceClient.tsx`
+- `Docs/02_projects/docucore/frontend-navigation-and-ux.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/_archive/agents/2026-06-05-docucore-metadata-zoom-reflow/AGENTS-000.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.DocuCore` | Aprobado; sin warnings ni errores ESLint. |
+| `npm run build` en `WEB.NJ.NEXT.DocuCore` | Aprobado; Next.js compilo, valido tipos y genero rutas. |
+
+## Decisiones tomadas
+
+- Se conservaron las reglas ya estabilizadas de zoom tipo Word 10%-500% y el
+  esquema de tabs/sidebar/tools existente.
+- No se cambio el motor de preview ni el contrato Gateway; el ajuste queda en
+  layout, metadata y render PDF.js del frontend.
+- Se uso metadata de PDF.js (`getViewport({ scale: 1 })`) como fuente de
+  verdad para ancho, alto, orientacion y tamano de papel.
+- No se modifico funcionalidad fuera del Workspace.
+
+## Informacion faltante
+
+- Falta prueba visual automatizada que recorra 10%, 100%, 300% y 500% con PDF
+  mixto vertical/horizontal.
+- Falta validacion manual en navegador con documentos reales para confirmar
+  que no quedan guias ocultas ni scroll fantasma al cambiar zoom rapidamente.
+- Falta contrato backend para persistir metadata por pagina si se requiere
+  compartir el mismo proyecto documental entre sesiones o usuarios.
+
+## Limpieza
+
+`AGENTS-000.md` se copio al historico
+`Docs/_archive/agents/2026-06-05-docucore-metadata-zoom-reflow/` y el archivo
+original se conserva vacio en `Docs/agents/`. Los demas agents se dejaron sin
+cambios por estar vacios.
+
+---
+# 2026-06-07 - LeadHunter Active Agents Execution
+
+## Agents Ejecutados
+
+1. `AGENTS-000.md`
+   - Estado: completado y archivado en `Docs/_archive/agents/2026-06-07-leadhunter/AGENTS-000.md`.
+   - Resultado: se aplicaron reglas backend/frontend, variables de entorno, validacion, documentacion y evidencia de ejecucion.
+
+2. `AGENTS-001.md`
+   - Estado: completado y archivado en `Docs/_archive/agents/2026-06-07-leadhunter/AGENTS-001.md`.
+   - Resultado: se implemento el MVP LeadHunter con API, Gateway, Web, PostgreSQL-ready models, Apify client, sample mode, scoring, filtros y exportaciones.
+
+## Puntos Cumplidos
+
+1. Se definio el producto independiente `LeadHunter`.
+2. Se creo `Docker.API.PY/API.PY.DJANGO.LeadHunter`.
+3. Se creo `Docker.API.PY/API.PY.DJANGO.LeadHunter.Gateway`.
+4. Se creo `Docker.WEB.NJ/WEB.NJ.NEXT.LeadHunter`.
+5. Se definieron categorias de alto valor: transporte pesado, maquinaria pesada, autos premium, off-road, industria/negocio y tecnologia premium.
+6. Se implemento busqueda dinamica por latitud, longitud, radio, pais, estado, ciudad y direccion.
+7. Se implemento cliente Apify Google Maps Scraper con `APIFY_TOKEN`, `APIFY_ACTOR_ID` y `LEADHUNTER_USE_SAMPLE_DATA`.
+8. Se implemento persistencia de `ProspectSearches` y `BusinessProspects`.
+9. Se implemento scoring comercial.
+10. Se implementaron filtros sin telefono, sin website, reviews y score.
+11. Se implemento export CSV por Gateway y XLS desde Web.
+12. Se dejo Docker enfocado por defecto en `auth leadhunter_gateway leadhunter` y Web en `leadhunter`.
+13. Se documentaron modulos ERP vs independientes.
+14. Se actualizaron indices documentales, catalogo de modulos y registro de puertos.
+15. Se inicializaron repos Git locales independientes para `API.PY.DJANGO.LeadHunter`, `API.PY.DJANGO.LeadHunter.Gateway` y `WEB.NJ.NEXT.LeadHunter`.
+
+## Clasificacion ERP vs Independiente
+
+| Modulo/API | Clasificacion | Estado |
+| --- | --- | --- |
+| `WEB.NJ.NEXT.LeadHunter` | Independiente | Implementado |
+| `API.PY.DJANGO.LeadHunter.Gateway` | Independiente | Implementado |
+| `API.PY.DJANGO.LeadHunter` | Independiente | Implementado |
+| Apify Google Maps integration | Independiente LeadHunter | Implementado |
+| Prospect scoring | Independiente LeadHunter | Implementado |
+| `API.PY.DJANGO.Auth` | ERP/Core | Dependencia por Gateway |
+| CRM/Customers | ERP futuro | Pendiente |
+| Sales opportunities | ERP futuro | Pendiente |
+| Notifications | Core futuro | Pendiente |
+| Job scheduler async searches | Core/Shared futuro | Pendiente |
+
+## Validaciones
+
+| Validacion | Resultado |
+| --- | --- |
+| `python manage.py check` LeadHunter API | OK |
+| `python manage.py check` LeadHunter Gateway | OK |
+| `python -m compileall` API/Gateway | OK |
+| `python manage.py makemigrations --check --dry-run` | OK |
+| `npm install` LeadHunter Web | OK |
+| `npm run build` LeadHunter Web | OK |
+| `npm run build` LeadHunter Web despues de limpiar assets heredados | OK |
+| `docker compose config --quiet` API | OK |
+| `docker compose config --quiet` Web | OK |
+| Docker runtime | Pendiente externo: Docker Desktop no estaba activo |
+| Local API/Gateway/Web runtime | OK con SQLite y sample mode |
+
+## Prueba Funcional Local
+
+- API local: `http://127.0.0.1:8021/api/leadhunter/health/`
+- Gateway local: `http://127.0.0.1:8020/api/leadhunter/health/`
+- Web local: `http://127.0.0.1:3007/prospectos`
+- Busqueda de prueba por Gateway: completada con `total_found=4` y `total_without_phone=4`.
+
+## Pendientes Externos
+
+1. Probar Docker real cuando Docker Desktop este encendido.
+2. Probar Apify real con `APIFY_TOKEN` y creditos disponibles usando `LEADHUNTER_USE_SAMPLE_DATA=false`.
+3. Crear remotos GitHub si se requiere publicar por repositorio separado:
+   - `MexIngSoft/API.PY.DJANGO.LeadHunter`
+   - `MexIngSoft/API.PY.DJANGO.LeadHunter.Gateway`
+   - `MexIngSoft/WEB.NJ.NEXT.LeadHunter`
+
+## Documentos Revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/03_standards/global-governance.md`
+- `Docs/03_standards/architecture/api-gateway-standard.md`
+- `Docs/03_standards/product/product-strategy.md`
+- `Docs/03_standards/product/module-catalog.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+- `Docs/03_standards/frontend/undocumented-modernization-standard.md`
+- `Docs/03_standards/frontend/shared-docker-frontend-architecture.md`
+- `Docs/03_standards/operations/local-port-registry.md`
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/docker/grouped-containers-isolated-config.md`
+- `Docs/03_standards/operations/django-api-project-compliance.md`
+- `Docs/03_standards/database/sql-server-publication-standard.md`
+
+## Quedo Fuera
+
+- Busqueda exhaustiva en todo `Docs`; se uso indice documental y documentos canonicos relacionados.
+- Publicacion a GitHub; no fue parte de este pedido.
+
+---
+
+# 2026-06-07 - LeadHunter Export CSV Gateway Fix
+
+## Agents Ejecutados
+
+| Agent | Estado | Resultado |
+| --- | --- | --- |
+| `AGENTS-000.md` | Completado | Se corrigio la descarga CSV de LeadHunter Gateway para evitar `TemplateDoesNotExist: rest_framework/api.html`. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Problema Detectado
+
+Al descargar resultados desde:
+
+```text
+GET /api/leadhunter/prospects/export.csv?search_id=<uuid>
+```
+
+el navegador enviaba `Accept: text/html,...` y el Gateway respondia el archivo usando `rest_framework.response.Response`. DRF intentaba renderizar la respuesta con el browsable API template `rest_framework/api.html`, que no esta instalado en este proyecto, provocando:
+
+```text
+TemplateDoesNotExist at /api/leadhunter/prospects/export.csv
+rest_framework/api.html
+```
+
+## Implementacion
+
+- Se cambio `proxy_file` en `API.PY.DJANGO.LeadHunter.Gateway` para devolver `django.http.HttpResponse` nativo.
+- Se preservan `Content-Type` y `Content-Disposition` del API de dominio.
+- Se mantiene `Response` de DRF solo para endpoints JSON y errores estructurados.
+
+## Archivos Modificados
+
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter.Gateway/gateway/views.py`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/_archive/agents/2026-06-07-leadhunter-export-csv-fix/AGENTS-000.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+| --- | --- |
+| `python manage.py check` en `API.PY.DJANGO.LeadHunter.Gateway` | OK |
+| `python -m compileall gateway config` en `API.PY.DJANGO.LeadHunter.Gateway` | OK |
+| `python manage.py check` en `API.PY.DJANGO.LeadHunter` | OK |
+| `docker compose -f Docker.API.PY/docker-compose.yml config --quiet` | OK |
+| Reinicio de `api-multiproyecto` | OK |
+| `GET /api/leadhunter/health/` en Gateway | OK |
+| Descarga `export.csv` con `Accept: text/html,...` | OK, `200`, `text/csv; charset=utf-8`, `Content-Disposition=attachment` |
+
+## Decisiones
+
+- Se uso `HttpResponse` nativo para archivos porque evita negociacion de renderer de DRF y es el patron correcto para bytes/descargas.
+- No se cambio el contrato del API de dominio ni la ruta publica.
+- No se agrego `rest_framework` a `INSTALLED_APPS` solo para ocultar el error, porque eso mantendria una respuesta de archivo acoplada al renderer HTML.
+
+## Informacion Faltante
+
+- Falta prueba automatizada unitaria/integracion para validar headers de descarga en Gateway.
+
+## Limpieza
+
+`AGENTS-000.md` se copio a:
+
+```text
+Docs/_archive/agents/2026-06-07-leadhunter-export-csv-fix/AGENTS-000.md
+```
+
+El archivo original se conserva vacio en `Docs/agents/`.
+
+---
+
+# 2026-06-11 - Estandar de proyecto completo Web/API
+
+## Agents Ejecutados
+
+| Agent | Estado | Resultado |
+| --- | --- | --- |
+| `AGENTS-000.md` | Completado | Se convirtio la instruccion temporal en documentacion canonica complementaria para definir el minimo obligatorio de una Web/API completa. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Implementacion
+
+- Se creo `Docs/03_standards/project-completeness-standard.md`.
+- Se documento que toda Web/API debe tener identidad, variables, metadata,
+  documentacion, healthcheck y entrada Docker.
+- Se aclaro que no se necesita Dockerfile por proyecto salvo runtime,
+  dependencias de sistema, build o configuracion realmente distintos.
+- Se enlazo el nuevo estandar desde `Docs/README.md`.
+- Se agrego el documento a `Docs/_meta/master-index.md`,
+  `Docs/_meta/master-index.yaml` y `Docs/_meta/navigation-map.md`.
+
+## Decisiones
+
+- No se modificaron masivamente todas las Webs/APIs existentes para evitar
+  regresiones sin auditoria especifica por proyecto.
+- La aplicacion del estandar a proyectos existentes queda como auditoria futura
+  y debe hacerse proyecto por proyecto.
+- Se mantiene Dockerfile base por capa y compose por proyecto como overlay
+  delgado, de acuerdo con el estandar Docker vigente.
+
+## Validaciones
+
+| Validacion | Resultado |
+| --- | --- |
+| Busqueda local de estandares existentes de Web/API/Docker | OK |
+| Actualizacion de indices documentales | OK |
+| Archivo de `AGENTS-000.md` | OK |
+
+## Documentos Revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+- `Docs/03_standards/operations/project-closure-standard.md`
+- `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
+- `Docs/03_standards/frontend/shared-docker-frontend-architecture.md`
+
+## Quedo Fuera
+
+- Auditoria completa de cada Web/API existente contra el nuevo estandar.
+- Cambios funcionales en proyectos Web/API.
+- Crear Dockerfiles especificos por proyecto sin una diferencia real de build.
+
+## Limpieza
+
+`AGENTS-000.md` se copio a:
+
+```text
+Docs/_archive/agents/2026-06-11-web-api-project-completeness-standard/AGENTS-000.md
+```
+
+El archivo original se conserva vacio en `Docs/agents/`.
+
+---
+
+# 2026-06-07 - LeadHunter Async Search And Panel Controls
+
+## Agents Ejecutados
+
+| Agent | Estado | Resultado |
+| --- | --- | --- |
+| `AGENTS-000.md` | Completado | Se implemento busqueda asincrona para evitar timeout HTTP mientras Apify procesa. |
+| `AGENTS-001.md` | Completado | Se dejo Docker/API listos para cargar Apify desde `.env` sin export manual y sin guardar tokens reales. |
+| `AGENTS-002.md` | Completado | Se corrigio el selector de ciudades con grid responsivo, scroll interno y ciudad/estado visibles. |
+| `AGENTS-003.md` | Completado | Se agrego seleccion multiple reutilizable, seleccionar/deseleccionar todo por bloque, validaciones y ordenamiento por prioridad. |
+| `AGENTS-004.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Implementacion
+
+- `POST /api/leadhunter/prospects/search/` ahora crea una busqueda `pending` y responde sin esperar Apify.
+- El procesamiento Apify corre en segundo plano con `ThreadPoolExecutor` controlado para el MVP.
+- Se agregaron campos de progreso: `TotalQueries`, `CompletedQueries`, `StartedAt`, `FinishedAt`.
+- Se agregaron endpoints de polling:
+  - `GET /api/leadhunter/prospects/searches/<search_id>/status/`
+  - `GET /api/leadhunter/prospects/searches/<search_id>/results/`
+- El Gateway expone los mismos endpoints para mantener Web -> Gateway -> API.
+- La web ahora crea busqueda, consulta estado cada 3 segundos y carga resultados al completar.
+- El selector de ciudades muestra todas las ubicaciones con grid responsivo, scroll vertical y estado activo.
+- Todas las verticales, marcas, servicios y palabras reales inician seleccionadas.
+- Cada bloque tiene `Seleccionar todo` y `Deseleccionar todo`.
+- La web bloquea busquedas sin verticales o sin criterios seleccionados.
+- Los resultados se ordenan por defecto por `score DESC`, `rating DESC`, `reviews_count DESC`.
+- La tabla permite ordenar por score, rating, resenas, nombre, ciudad/direccion y categoria.
+- El CSV/Excel incluye `latitude`, `longitude`, `source` y campos comerciales.
+- Docker Compose carga `Docker.API.PY/.env` mediante `env_file`.
+
+## Archivos Modificados
+
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/core/models.py`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/core/migrations/0002_async_search_progress.py`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/core/prospect_service.py`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/core/serializers.py`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/core/views.py`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/core/urls.py`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/README.md`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter.Gateway/gateway/views.py`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter.Gateway/gateway/urls.py`
+- `Docker.API.PY/docker-compose.yml`
+- `Docker.API.PY/.env.example`
+- `Docker.API.PY/.env` local con token vacio
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LeadHunter/lib/api.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LeadHunter/app/prospectos/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LeadHunter/app/globals.css`
+- `Docs/02_projects/leadhunter/architecture.md`
+- `Docs/02_projects/leadhunter/api-contracts.md`
+- `Docs/02_projects/leadhunter/database.md`
+- `Docs/02_projects/leadhunter/frontend.md`
+- `Docs/02_projects/leadhunter/local-runbook.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+| --- | --- |
+| `python manage.py check` en `API.PY.DJANGO.LeadHunter` | OK |
+| `python manage.py migrate --noinput` local LeadHunter | OK |
+| `python -m compileall core config` en `API.PY.DJANGO.LeadHunter` | OK |
+| `python manage.py check` en `API.PY.DJANGO.LeadHunter.Gateway` | OK |
+| `python -m compileall gateway config` en `API.PY.DJANGO.LeadHunter.Gateway` | OK |
+| `npm run build` en `WEB.NJ.NEXT.LeadHunter` | OK |
+| `docker compose -f Docker.API.PY/docker-compose.yml config --quiet` | OK |
+| `docker compose -f Docker.WEB.NJ/docker-compose.yml config --quiet` | OK |
+| Recreate de `api-multiproyecto` | OK |
+| Migracion Docker `core.0002_async_search_progress` | OK |
+| `POST /api/leadhunter/prospects/search/` via Gateway | OK, 0.807s, `pending` |
+| `GET /api/leadhunter/prospects/searches/<id>/status/` | OK, `failed` controlado cuando falta token |
+| `GET /prospectos` | OK, HTTP 200 |
+| Busqueda de textos sample/mock/fake/demo/placeholder en codigo vivo | OK, solo regla de bloqueo y texto documental permitido |
+| Busqueda de tokens `apify_api_*` | OK, sin tokens reales despues de archivar/redactar agents |
+
+## Documentos Revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/leadhunter/architecture.md`
+- `Docs/02_projects/leadhunter/api-contracts.md`
+- `Docs/02_projects/leadhunter/database.md`
+- `Docs/02_projects/leadhunter/frontend.md`
+- `Docs/02_projects/leadhunter/local-runbook.md`
+
+## Decisiones
+
+- Se uso `ThreadPoolExecutor` en vez de Celery/Redis porque esa infraestructura no esta activa en el Docker enfocado de LeadHunter.
+- No se guardo el token real recibido en codigo, TypeScript, Dockerfile, compose ni documentacion.
+- `Docker.API.PY/.env` queda con `APIFY_TOKEN=` vacio para que el usuario coloque el valor real localmente fuera del repositorio.
+- Con token faltante, la busqueda termina en `failed` controlado y la web no muestra datos inventados.
+- La ruta canonica se mantiene como `/api/leadhunter/*`; no se agrego `/api/v1` para no romper el estandar Gateway actual del proyecto.
+
+## Quedo Fuera
+
+- Prueba masiva real con Apify en Docker, porque no se persistio el token real por seguridad.
+- Celery/Redis productivo; queda como mejora futura si se requiere cola durable.
+
+## Limpieza
+
+`AGENTS-000.md` a `AGENTS-003.md` se copiaron con secretos redactados a:
+
+```text
+Docs/_archive/agents/2026-06-07-leadhunter-async-search-and-controls/
+```
+
+Los archivos originales se conservan vacios en `Docs/agents/`.
+
+---
+
+# 2026-06-07 - LeadHunter Apify Real Configuration
+
+## Agents Ejecutados
+
+| Agent | Estado | Resultado |
+| --- | --- | --- |
+| `AGENTS-000.md` | Completado | Se verifico el token real de Apify sin guardarlo en codigo, se detecto actor configurado invalido y se actualizo LeadHunter para usar un actor publico valido con `locationQuery`. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Hallazgos
+
+- El token entregado corresponde al user id de Apify informado.
+- El actor anterior `nwua9Gu5YrADL7ZDj` no existe o no es accesible con ese token.
+- El actor publico `compass~crawler-google-places` si es accesible y devuelve datos reales de Google Maps.
+- Una prueba real limitada a 1 resultado devolvio un negocio real con nombre, direccion y URL de Google Maps.
+- Ese resultado tenia telefono, por lo que LeadHunter correctamente no lo guardaria como prospecto prioritario sin telefono.
+
+## Implementacion
+
+- Se cambio el actor por defecto a `compass~crawler-google-places`.
+- Se agrego `locationQuery` al payload de Apify usando ciudad, estado y pais, manteniendo latitud/longitud/radio para actores que soporten busqueda por area.
+- Se agregaron parametros de bajo enriquecimiento (`maximumLeadsEnrichmentRecords=0`, `maxImages=0`) para reducir costo y ruido en busquedas iniciales.
+- Se separo el error `APIFY_EXECUTION_FAILED` para distinguir fallas de actor/proveedor de errores genericos.
+- Se actualizo documentacion y ejemplos de entorno sin registrar el token real.
+
+## Archivos Modificados
+
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/core/apify_client.py`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/core/views.py`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/.env.local.example`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/README.md`
+- `Docker.API.PY/docker-compose.yml`
+- `Docs/02_projects/leadhunter/api-contracts.md`
+- `Docs/02_projects/leadhunter/local-runbook.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/_archive/agents/2026-06-07-leadhunter-apify-real-configuration/AGENTS-000.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+| --- | --- |
+| Verificacion de user id Apify con token temporal | OK |
+| Verificacion actor anterior `nwua9Gu5YrADL7ZDj` | Fallo esperado: actor no encontrado o sin acceso |
+| Verificacion actor `compass~crawler-google-places` | OK |
+| Prueba Apify real limitada a 1 resultado | OK, devolvio negocio real con direccion y URL Google Maps |
+| `python manage.py check` en `API.PY.DJANGO.LeadHunter` | OK |
+| `python -m compileall core config` en `API.PY.DJANGO.LeadHunter` | OK |
+| `python manage.py check` en `API.PY.DJANGO.LeadHunter.Gateway` | OK |
+| `python -m compileall gateway config` en `API.PY.DJANGO.LeadHunter.Gateway` | OK |
+| `npm run build` en `WEB.NJ.NEXT.LeadHunter` | OK |
+| `docker compose -f Docker.API.PY/docker-compose.yml config --quiet` | OK |
+| `docker compose -f Docker.WEB.NJ/docker-compose.yml config --quiet` | OK |
+| Recreate de `api-multiproyecto` | OK |
+| `GET /api/leadhunter/health/` en Domain API | OK |
+| `POST /api/leadhunter/prospects/search/` sin token persistido | OK, `APIFY_NOT_CONFIGURED`; no genera datos falsos |
+| `GET /prospectos` en web local | OK, HTTP 200 |
+
+## Documentos Revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/02_projects/leadhunter/README.md`
+- `Docs/02_projects/leadhunter/api-contracts.md`
+- `Docs/02_projects/leadhunter/local-runbook.md`
+- Documentacion publica de Apify sobre `run-sync-get-dataset-items` y Google Maps Scraper input.
+
+## Decisiones
+
+- No se guardo el token real en codigo, compose, `.env.local.example` ni documentacion.
+- El agent archivado se redacto para no conservar secretos en el repositorio.
+- Se mantiene la regla de negocio: si los resultados reales tienen telefono, no se guardan como prospectos prioritarios.
+- Si no hay token configurado en el entorno, el sistema muestra error controlado y no inventa datos.
+
+## Quedo Fuera
+
+- Guardar el token en `.env` local; debe configurarse manualmente fuera del repositorio.
+- Busquedas masivas con Apify; solo se hizo una prueba minima para validar datos reales y reducir consumo.
+
+## Limpieza
+
+`AGENTS-000.md` se copio con token redactado a:
+
+```text
+Docs/_archive/agents/2026-06-07-leadhunter-apify-real-configuration/AGENTS-000.md
+```
+
+El archivo original se conserva vacio en `Docs/agents/`.
+
+---
+
+# 2026-06-07 - LeadHunter Real Results Only Search
+
+## Agents Ejecutados
+
+| Agent | Estado | Resultado |
+| --- | --- | --- |
+| `AGENTS-000.md` | Completado | Se elimino el flujo de datos inventados y se reforzo LeadHunter para mostrar solo negocios reales obtenidos por Apify/Google Maps, o nada/error controlado cuando no exista proveedor configurado. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Implementacion
+
+- Se elimino el uso de modo sample/fallback en `API.PY.DJANGO.LeadHunter`.
+- Se agrego catalogo editable de ciudades para Pachuca, CDMX, Monterrey, Guadalajara, Queretaro, Puebla, Toluca, Leon, San Luis Potosi, Aguascalientes, Merida, Tijuana, Cancun, Saltillo y Torreon.
+- Se reemplazaron categorias genericas por verticales de alto valor: transporte pesado, pipas/liquidos, maquinaria pesada, off-road, autos premium e industria B2B.
+- Se agregaron marcas, servicios y keywords reales por vertical para construir busquedas mas precisas.
+- Se agregaron filtros de calidad: sin telefono, nombre real, direccion, URL de Google Maps, deduplicacion y descarte de `sample`, `test`, `demo`, `fake` y `placeholder`.
+- Se ajusto el scoring para priorizar negocios sin telefono, sin sitio web, con categoria de alto valor, rating, reviews, direccion completa y coordenadas validas.
+- Se agrego endpoint `GET /api/leadhunter/locations/` en API de dominio y Gateway.
+- Se actualizo la web para seleccionar ciudad, vertical, marcas, servicios y keywords, con el boton `Buscar negocios reales sin telefono`.
+- Se actualizo la documentacion canonica de LeadHunter para dejar claro que no se generan datos de ejemplo.
+
+## Archivos Modificados
+
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/core/categories.py`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/core/prospect_service.py`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/core/scoring_service.py`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/core/serializers.py`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/core/views.py`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/core/urls.py`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/core/apify_client.py`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/README.md`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter.Gateway/gateway/views.py`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter.Gateway/gateway/urls.py`
+- `Docker.API.PY/docker-compose.yml`
+- `Docker.API.PY/API.PY.DJANGO.LeadHunter/.env.local.example`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LeadHunter/lib/api.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LeadHunter/app/prospectos/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LeadHunter/app/globals.css`
+- `Docs/02_projects/leadhunter/README.md`
+- `Docs/02_projects/leadhunter/api-contracts.md`
+- `Docs/02_projects/leadhunter/local-runbook.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+| --- | --- |
+| `python manage.py check` en `API.PY.DJANGO.LeadHunter` | OK |
+| `python -m compileall core config` en `API.PY.DJANGO.LeadHunter` | OK |
+| `python manage.py check` en `API.PY.DJANGO.LeadHunter.Gateway` | OK |
+| `python -m compileall gateway config` en `API.PY.DJANGO.LeadHunter.Gateway` | OK |
+| `npm run build` en `WEB.NJ.NEXT.LeadHunter` | OK |
+| `docker compose -f Docker.API.PY/docker-compose.yml config --quiet` | OK |
+| `docker compose -f Docker.WEB.NJ/docker-compose.yml config --quiet` | OK |
+| Reinicio de `api-multiproyecto` y `web-frontend-node` | OK |
+| `GET /api/leadhunter/categories/` por Gateway | OK, 6 verticales reales |
+| `GET /api/leadhunter/locations/` por Gateway | OK, 15 ciudades configurables |
+| `GET /prospectos` en web local | OK, HTTP 200 |
+| `POST /api/leadhunter/prospects/search/` sin Apify configurado | OK, HTTP 424 `APIFY_NOT_CONFIGURED`; no se generan datos falsos |
+
+## Documentos Revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/leadhunter/README.md`
+- `Docs/02_projects/leadhunter/architecture.md`
+- `Docs/02_projects/leadhunter/api-contracts.md`
+- `Docs/02_projects/leadhunter/local-runbook.md`
+
+## Decisiones
+
+- Si Apify no esta configurado, la busqueda falla con `APIFY_NOT_CONFIGURED` y no se inventan negocios.
+- Si Apify devuelve cero resultados reales, la busqueda queda completada con lista vacia y mensaje claro.
+- Las coordenadas viven en un catalogo central editable, no mezcladas en la logica principal de busqueda.
+- El frontend consume categorias y ciudades del API para evitar listas divergentes.
+
+## Quedo Fuera
+
+- Busqueda exhaustiva en todo `Docs`; se uso el indice documental y documentos canonicos relacionados.
+- Commit/push a GitHub; no fue parte de este pedido.
+- Prueba con Apify real, porque el entorno local no tiene `APIFY_TOKEN` y `APIFY_ACTOR_ID` configurados.
+
+## Limpieza
+
+`AGENTS-000.md` se copio a:
+
+```text
+Docs/_archive/agents/2026-06-07-leadhunter-real-results-only/AGENTS-000.md
+```
+
+El archivo original se conserva vacio en `Docs/agents/`.
+
+---
+
+# 2026-06-11 - Arquitectura Docker oficial JobCron
+
+## Agents Ejecutados
+
+| Agent | Estado | Resultado |
+| --- | --- | --- |
+| `AGENTS-000.md` | Completado | Se documento como regla oficial la arquitectura Docker del ecosistema JobCron: corridas master, corridas por proyecto, red objetivo compartida, variables por scope y reutilizacion de APIs compartidas. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Implementacion
+
+- Se creo el documento canonico `Docs/03_standards/docker/jobcron-official-docker-architecture.md`.
+- Se enlazo la regla desde `Docs/03_standards/docker.md`.
+- Se actualizo `Docs/03_standards/docker/grouped-containers-isolated-config.md` para declarar que los contenedores agrupados son compatibilidad de bajo costo y no contradicen la arquitectura objetivo.
+- Se actualizo `Docs/03_standards/frontend/shared-docker-frontend-architecture.md` y `Docs/03_standards/frontend/pre-development-checklist.md` para usar `jobcron_network` como red objetivo y `crejo` como red heredada.
+- Se actualizo `Docs/03_standards/operations/docker-recovery-runbook.md` para diferenciar estado operativo actual de arquitectura objetivo.
+- Se agrego referencia en `Docs/02_projects/jobcron/README.md`.
+- Se sincronizaron indices: `Docs/_meta/master-index.md`, `Docs/_meta/master-index.yaml` y `Docs/_meta/navigation-map.md`.
+
+## Decision principal
+
+No se renombraron redes ni compose reales de `crejo` a `jobcron_network` en esta corrida, porque el estado actual tiene compose, scripts, Nginx y runbooks acoplados a `crejo`. La migracion debe hacerse como fase coordinada para evitar romper comunicacion interna o duplicar servicios compartidos.
+
+## Validaciones
+
+| Validacion | Resultado |
+| --- | --- |
+| `git -C Docs diff --check` | OK |
+| `docker compose -f Docker.DB.PG/docker-compose.yml config --quiet` | OK |
+| `docker compose -f Docker.API.PY/docker-compose.yml config --quiet` | OK |
+| `docker compose -f Docker.WEB.NJ/docker-compose.yml config --quiet` | OK |
+| `docker compose -f Docker.SW.Nginx/docker-compose.yml config --quiet` | OK |
+| Busqueda local de `jobcron-official-docker-architecture`, `jobcron_network` y `crejo` | OK; referencias objetivo y compatibilidad quedaron documentadas. |
+
+## Documentos Revisados
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/docker/grouped-containers-isolated-config.md`
+- `Docs/03_standards/frontend/shared-docker-frontend-architecture.md`
+- `Docs/03_standards/frontend/pre-development-checklist.md`
+- `Docs/03_standards/operations/docker-recovery-runbook.md`
+- `Docs/03_standards/operations/local-port-registry.md`
+- `Docs/02_projects/jobcron/README.md`
+
+## Quedo Fuera
+
+- Crear fisicamente los compose `docker-compose.master.*.yml` y `docker-compose.<proyecto>.*.yml`.
+- Migrar los compose actuales, scripts, Nginx y contenedores activos de `crejo` a `jobcron_network`.
+- Cambiar nombres de contenedores actuales como `api-backend-python` o `web-frontend-node`.
+
+## Limpieza
+
+`AGENTS-000.md` se copia a:
+
+```text
+Docs/_archive/agents/2026-06-11-jobcron-official-docker-architecture/AGENTS-000.md
+```
+
+El archivo original se conserva vacio en `Docs/agents/`.

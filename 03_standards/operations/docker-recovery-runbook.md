@@ -2,6 +2,16 @@
 
 Este documento permite reconstruir el entorno Docker local `crejo` si se pierde configuracion o se cambia de equipo.
 
+La arquitectura Docker objetivo del ecosistema JobCron vive en:
+
+```txt
+Docs/03_standards/docker/jobcron-official-docker-architecture.md
+```
+
+Este runbook describe el estado operativo actual. La red heredada `crejo` se
+mantiene hasta migrar compose, scripts y Nginx de forma coordinada a
+`jobcron_network`.
+
 ## Servicios
 
 | Carpeta | Servicio | Contenedor | Puerto host | Red |
@@ -73,7 +83,7 @@ propio cuando exista.
 
 ## Red Docker
 
-Todos los compose deben declarar:
+En el estado actual, todos los compose heredados declaran:
 
 ```yaml
 networks:
@@ -87,6 +97,17 @@ Esto permite que Nginx resuelva:
 web-frontend-node
 api-backend-python
 ```
+
+Para nuevos compose y refactors Docker, usar la red objetivo:
+
+```yaml
+networks:
+  jobcron_network:
+    external: true
+```
+
+No migrar un compose aislado si Nginx, scripts y servicios dependientes siguen
+en `crejo`.
 
 ## Variables de PostgreSQL
 

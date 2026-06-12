@@ -6,6 +6,16 @@ Definir el patron oficial para despliegues de bajo costo: pocos contenedores, pe
 
 Este patron aplica para desarrollo, staging y produccion inicial.
 
+Este documento complementa la arquitectura Docker oficial de JobCron:
+
+```txt
+Docs/03_standards/docker/jobcron-official-docker-architecture.md
+```
+
+Si hay conflicto, la arquitectura oficial define el objetivo y este documento
+explica la compatibilidad de bajo costo mientras existan contenedores
+agrupados.
+
 ## Topologia permitida por costo
 
 ```txt
@@ -83,6 +93,20 @@ COMERCIAL_DB_USER          -> POSTGRES_USER / DB_USER
 COMERCIAL_DB_PASSWORD      -> POSTGRES_PASSWORD / DB_PASSWORD
 SUPPLIER_DB_SCHEMA         -> DB_SCHEMA
 ```
+
+## Red compartida
+
+Los contenedores agrupados deben participar en una red compartida del
+ecosistema. El nombre objetivo para nuevos compose y refactors Docker es:
+
+```txt
+jobcron_network
+```
+
+El entorno local heredado puede seguir usando `crejo` solo como compatibilidad
+temporal. No se deben crear redes aisladas por proyecto como regla general,
+porque APIs compartidas como Auth, Catalog, Supplier o Pricing deben poder ser
+reutilizadas por varias webs sin duplicar contenedores.
 
 ## `.env.local`
 

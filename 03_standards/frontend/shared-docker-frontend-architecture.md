@@ -44,15 +44,21 @@ Por costo inicial, varios frontends pueden correr como procesos separados dentro
 
 ## Red
 
-Todos los proyectos web deben usar la red Docker:
+Todos los proyectos web deben usar la red Docker compartida del ecosistema. El
+nombre objetivo para nuevos compose y refactors es:
 
 ```yaml
 networks:
-  default:
-    name: crejo
+  jobcron_network:
+    external: true
 ```
 
-Esto permite que Nginx y otros servicios resuelvan los contenedores por nombre.
+Esto permite que Nginx, Gateways y APIs compartidas resuelvan contenedores por
+nombre de servicio.
+
+Compatibilidad: los compose actuales pueden seguir usando la red heredada
+`crejo` hasta ejecutar la migracion coordinada a `jobcron_network`. No se deben
+crear redes aisladas por frontend como regla general.
 
 ## Proxy reverso
 

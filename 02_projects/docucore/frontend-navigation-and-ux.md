@@ -253,10 +253,11 @@ Reglas UX:
 - El separador intermedio usa dos colores: el bloque anterior y el bloque que
   inicia.
 - Al final del ultimo bloque se muestra un separador de cierre.
-- Cada pagina muestra una etiqueta/rail de bloque para no perder pertenencia al
-  desplazarse.
-- Con 1 a 4 bloques se usa modo expandido con etiquetas visibles.
-- Con 5 o mas bloques se usa modo compacto para reducir saturacion visual.
+- En modo expandido, la pertenencia al bloque se comunica principalmente con
+  separadores de inicio/fin y color; no se repite una etiqueta de titulo sobre
+  cada pagina para evitar ruido visual.
+- Con 5 o mas bloques se puede usar un rail compacto por pagina para no perder
+  pertenencia al desplazarse.
 - Un bloque fijado conserva informacion visible aunque el modo sea compacto.
 - El usuario puede renombrar, cambiar color, fijar, fusionar con el bloque
   anterior o convertir todo en un documento.
@@ -597,8 +598,17 @@ Acciones visibles al pasar cursor, enfocar o seleccionar una pagina:
 
 Reglas:
 
-- La barra rapida aparece sobre la pagina en hover/focus o cuando la pagina ya
-  esta seleccionada.
+- La barra rapida aparece en el borde derecho del preview en hover/focus o
+  cuando el menu de pagina esta abierto.
+- La opcion activa para evitar solapes separa responsabilidades: el selector de
+  pagina se ancla fuera de la esquina superior izquierda de la tarjeta y la
+  barra rapida usa un rail vertical en el borde derecho. No debe cubrir la
+  imagen, metadata, selector, indicadores de insercion ni controles de menu.
+- La jerarquia visual obligatoria es: selector de pagina `z-index: 40`, barra
+  rapida `z-index: 30`, preview `z-index: 10`.
+- El selector exterior y la barra rapida deben escalar sus offsets y tamano de
+  iconos con `--zoom-scale` y las dimensiones visibles de la pagina para
+  mantenerse proporcionados en zoom bajo, normal y alto.
 - Las acciones deben mantener la seleccion activa y mostrar retroalimentacion
   inmediata.
 - Las acciones avanzadas futuras incluyen OCR por pagina, notas, etiquetas,
@@ -1454,17 +1464,23 @@ remoto de proyecto documental.
 
 Reglas aplicadas:
 
-- El documento activo es el unico que se renderiza en el area central.
-- El selector de documentos aparece cuando el proyecto tiene dos o mas
-  documentos.
+- El area central renderiza todos los documentos del proyecto para permitir
+  comparar y reorganizar paginas sin cambiar de vista.
+- El selector de documentos aparece cuando el proyecto tiene al menos un
+  documento para permitir activar, descargar, renombrar o eliminar desde una
+  superficie consistente. Si hay varios documentos, tambien define cual es el
+  documento activo para acciones que aun son monoarchivo.
 - Las herramientas se ejecutan solo sobre el archivo activo, salvo que el
   contrato de herramienta soporte multiarchivo.
 - Agregar archivos desde Workspace no debe crear automaticamente otro proyecto;
   debe sumar documentos al proyecto local abierto.
 - El panel derecho de configuracion puede ocultarse y recuperarse con un boton
   visible. Al ocultarse, el area central usa el espacio disponible.
-- El zoom de previews afecta solo miniaturas, no la interfaz completa. Rango
-  permitido: 60% a 180%, default 100%, persistido en `localStorage`.
+- El zoom de previews afecta solo miniaturas, no la interfaz completa. Usa un
+  rango tipo Word de 10% a 500%, con pasos de 10%, default 100% y persistencia
+  en `localStorage`. La proporcion base debe imitar Word: 100% equivale a
+  convertir puntos PDF a pixeles CSS fisicos (`1pt = 96 / 72px`), por lo que
+  una pagina Carta de `612pt` se muestra cerca de `816px` de ancho.
 - El panel derecho no debe generar scroll horizontal. Sus controles deben
   ajustarse al ancho disponible.
 
@@ -1552,6 +1568,32 @@ Pendiente:
 
 - Definir contrato backend multiarchivo para aplicar herramientas sobre varios
   documentos al mismo tiempo cuando la herramienta lo soporte.
+
+## Pestañas de documentos como indice y acciones 2026-06-05
+
+Las pestañas superiores del Workspace no son solo informativas. Funcionan como
+indice operativo de documentos dentro del proyecto abierto.
+
+Reglas aplicadas:
+
+- Click en una pestaña activa ese documento y navega con `scrollIntoView()` al
+  separador de inicio del bloque documental.
+- Doble click sobre la pestaña inicia renombrado local del documento.
+- Cada pestaña expone acciones rapidas para descargar, renombrar y eliminar el
+  documento del proyecto.
+- Eliminar un documento solicita confirmacion, lo quita del proyecto local y
+  conserva vivo el proyecto. La accion no elimina el archivo original ni el
+  borrador completo.
+- La eliminacion renumera las paginas restantes y actualiza secciones para no
+  dejar huecos visuales en el canvas.
+- Las acciones de agregar, renombrar, descargar y eliminar registran evento en
+  consola tecnica con `requestId` mientras no exista bitacora backend del
+  proyecto documental.
+
+Pendiente:
+
+- Reemplazar confirmaciones nativas del navegador por modal DocuCore cuando el
+  sistema de modales del Workspace quede estandarizado.
 
 ## Pestañas Tools y Zoom del Workspace 2026-06-05
 
@@ -1809,13 +1851,39 @@ encimamientos entre tarjetas ni ocultar el popover con controles laterales.
 
 Reglas aplicadas:
 
+- El control de zoom usa rango tipo Word: minimo 10%, maximo 500%, default
+  100% y saltos de 10%. Valores heredados fuera del rango se normalizan al
+  valor valido mas cercano.
 - `page-grid` calcula `--preview-slot-width` desde el zoom actual.
-- El slot base escala con el mismo criterio que la tarjeta vertical:
-  `170px * zoom + extra de tarjeta`.
+- El slot base escala con el mismo criterio que Word y navegadores: puntos PDF
+  a pixeles CSS (`pagina.visualWidthPt * 96 / 72 * zoom`). Para Carta vertical
+  esto da aproximadamente `816px` al 100%, mas el extra minimo de tarjeta.
 - Si el zoom aumenta y ya no caben las paginas en la fila, la grilla debe crear
   nuevas filas en lugar de superponer previews.
 - Las paginas horizontales conservan `span 2`; el slot ampliado les da espacio
   suficiente sin perder el orden documental.
+- El marco de `paper-mini` debe quedar ajustado al tamano renderizado de la
+  pagina y no agregar aire artificial grande alrededor de la imagen.
+- `paper-mini` no debe redefinir `--thumb-width` ni
+  `--thumb-preview-height` por inline style; esas variables se heredan desde la
+  tarjeta de pagina ya escalada para evitar que el contenedor crezca y la
+  imagen interna se quede pequena.
+- Los botones de zoom disminuyen/aumentan en pasos de 10%; reset vuelve a
+  100%, y el porcentaje actual siempre queda visible.
+- A zoom bajo caben mas paginas por fila y se reduce el gap proporcional; a
+  zoom alto no se comprime la hoja: el area documental genera scroll horizontal
+  y vertical natural sin mover herramientas ni paneles.
+- Los separadores de bloque escalan con la pagina visible: ancho aproximado de
+  75% del ancho de pagina y altura aproximada de 20% del alto, limitada entre
+  24px y 80px para seguir siendo reconocibles.
+- La normalizacion de altura por fila puede reservar espacio para alinear
+  tarjetas, pero no debe estirar el marco real del preview ni deformar la
+  imagen.
+- Las miniaturas PDF se renderizan con resolucion suficiente para sostener
+  zoom alto sin depender solo de escalado CSS.
+- El contenido interno del PDF no se recorta automaticamente: si el archivo
+  original trae margenes grandes o una digitalizacion pequena centrada, el
+  preview debe respetarlo para no cortar informacion legal.
 - El selector sidebar/toolbar queda por debajo del popover de zoom en la pila
   visual.
 - El popover de zoom debe mantenerse usable aunque el selector lateral este
@@ -1823,11 +1891,71 @@ Reglas aplicadas:
 
 Validacion esperada:
 
-- Al usar zoom 140% o superior, las miniaturas no se enciman.
+- Al usar zoom 10%, 100%, 300% o 500%, las miniaturas no se enciman ni se
+  deforman.
 - Las filas se recalculan segun ancho disponible y zoom activo.
 - El boton de sidebar no queda por encima de la barra/popover de zoom.
+- El contenedor visual de cada pagina queda proporcional a la imagen renderizada
+  y no muestra marcos sobredimensionados por CSS.
+- A 500% el Workspace permite scroll natural del area documental, conservando
+  fijos header, rail de herramientas y panel de configuracion.
 
 Pendiente:
 
-- Agregar prueba visual automatizada que cambie zoom 100%, 140% y 180% con PDF
+- Agregar prueba visual automatizada que cambie zoom 10%, 100%, 300% y 500% con PDF
   mixto vertical/horizontal y confirme ausencia de solapes.
+
+## Metadata real de pagina y recalculo de scroll Workspace 2026-06-05
+
+El Workspace debe calcular el tamano visual de cada preview desde la metadata
+real de la pagina PDF, no desde el tamano de la imagen renderizada ni desde
+estilos guardados por una medicion previa.
+
+Reglas aplicadas:
+
+- Cada pagina lee `width`, `height`, `aspectRatio`, orientacion visual y tamano
+  detectado desde `PDFPage.getViewport({ scale: 1 })`.
+- Los tamanos de papel minimos reconocidos son `LETTER`, `LEGAL`, `A4` y
+  `CUSTOM`, con tolerancia de 12 puntos para PDFs que no vienen exactos.
+- La escala visual usa puntos PDF convertidos a pixeles CSS
+  (`1pt = 96 / 72px`) y se multiplica por el zoom activo.
+- Las paginas verticales ocupan 1 slot; las horizontales ocupan 2 slots, pero
+  el ancho base del slot se recalcula con las dimensiones reales visibles.
+- Los separadores usan el promedio visible de las paginas actuales:
+  aproximadamente 75% del ancho promedio y 20% del alto promedio, limitado en
+  altura entre 24px y 80px.
+- Al cambiar zoom, visibilidad, seleccion, drag and drop o tamano del
+  contenedor, el grid limpia primero `--row-preview-height` y
+  `--next-channel-width`, deja pintar al navegador y luego vuelve a medir.
+- La medicion de canales se hace por fila real con `getBoundingClientRect`,
+  para que las guias de insercion queden centradas entre piezas consecutivas.
+- La guia de insercion puede conservar su ownership tecnico en la pagina o
+  separador que define el indice de insercion, pero visualmente debe comportarse
+  como carril del grid: centrada en el canal entre dos piezas, con aire minimo
+  suficiente para no parecer parte de ningun articulo.
+- Cada pieza del flujo puede exponer `--previous-channel-width` y
+  `--next-channel-width`; las guias `start` usan el canal anterior y las guias
+  `end` usan el canal posterior.
+- Durante un recalculo de layout, las guias de insercion conservan la ultima
+  medicion valida de canal hasta que la nueva medicion este lista. No deben
+  volver temporalmente a una posicion fallback visible porque eso produce
+  saltos molestos entre una preview y otra.
+- Cuando todavia no existe medicion real, el fallback de canal usa el mismo
+  `--page-gap` visible de la grilla para mantener la guia cerca del centro
+  esperado desde el primer render.
+- El gap horizontal tiene un minimo legible para que el carril clickeable de
+  insercion quepa entre previews incluso con zoom bajo.
+- Despues del recalculo se ajusta el scroll del area PDF al nuevo
+  `scrollWidth/scrollHeight` para evitar scroll fantasma cuando el zoom baja.
+- Las miniaturas PDF se renderizan a mayor resolucion interna para soportar
+  zoom alto sin cambiar la proporcion ni deformar la hoja.
+
+Validacion esperada:
+
+- Al bajar zoom, el scroll se reduce y no quedan zonas vacias por medidas
+  anteriores.
+- Al subir zoom, el canvas crece de forma natural y permite scroll sin
+  encimar paginas.
+- Los separadores e inserciones siguen visibles aunque haya paginas verticales,
+  horizontales o documentos mezclados.
+- Carta/Letter, Legal, A4 y Custom se identifican con base en metadata PDF.

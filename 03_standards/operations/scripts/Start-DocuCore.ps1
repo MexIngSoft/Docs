@@ -51,7 +51,7 @@ Invoke-Step "Starting PostgreSQL" {
 
 $apiArgs = @(
     "compose",
-    "-f", (Join-Path $root "Docker.API.PY\docker-compose.docucore.yml"),
+    "-f", (Join-Path $root "Docker.API.PY\docker-compose.docucore.api.yml"),
     "up", "-d"
 )
 
@@ -65,7 +65,7 @@ Invoke-Step "Starting focused DocuCore APIs: Document, DocuCore and Gateway" {
 
 $webArgs = @(
     "compose",
-    "-f", (Join-Path $root "Docker.WEB.NJ\docker-compose.docucore.yml"),
+    "-f", (Join-Path $root "Docker.WEB.NJ\docker-compose.docucore.web.yml"),
     "up", "-d"
 )
 

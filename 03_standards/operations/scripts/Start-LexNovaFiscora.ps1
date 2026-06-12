@@ -46,7 +46,7 @@ Invoke-Step "Starting PostgreSQL" {
 
 $apiArgs = @(
     "compose",
-    "-f", (Join-Path $root "Docker.API.PY\docker-compose.lexnova-fiscora.yml"),
+    "-f", (Join-Path $root "Docker.API.PY\docker-compose.yml"),
     "up", "-d"
 )
 
@@ -55,12 +55,14 @@ if ($Build) {
 }
 
 Invoke-Step "Starting focused APIs: Auth, LexNova, Document, Fiscora and Fiscal" {
-    docker @apiArgs
+    Invoke-WithEnv @{ API_PROJECTS = "auth lexnova lexnova_gateway document fiscora_gateway fiscora fiscal" } {
+        docker @apiArgs
+    }
 }
 
 $webArgs = @(
     "compose",
-    "-f", (Join-Path $root "Docker.WEB.NJ\docker-compose.lexnova-fiscora.yml"),
+    "-f", (Join-Path $root "Docker.WEB.NJ\docker-compose.yml"),
     "up", "-d"
 )
 
@@ -69,7 +71,9 @@ if ($Build) {
 }
 
 Invoke-Step "Starting focused webs: LexNova and Fiscora" {
-    docker @webArgs
+    Invoke-WithEnv @{ WEB_PROJECTS = "lexnova fiscora" } {
+        docker @webArgs
+    }
 }
 
 if ($RunChecks) {

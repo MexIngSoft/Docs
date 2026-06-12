@@ -117,6 +117,7 @@ Va en `03_standards` todo lo que define como se trabaja:
 
 - Estandar de proyectos Django API.
 - Estandar de proyectos Next.js.
+- Estandar de proyecto completo Web/API.
 - Arquitectura Docker frontend compartida.
 - Estandar de cierre.
 - Runbook.
@@ -181,6 +182,7 @@ Proveedor actual:
 31. `02_projects/_ecosystem/00_ecosystem_overview.md`
 32. `02_projects/_ecosystem/01_company_portfolio.md`
 33. `02_projects/_ecosystem/04_process_convergence_and_conflicts.md`
+34. `03_standards/project-completeness-standard.md`
 
 ## Reglas
 

@@ -143,6 +143,7 @@
 | Business | `02_projects/docucore/tool-readiness-and-configuration.md` | Estado configuracion y eventos de herramientas DocuCore | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/festora/README.md` | Festora | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/fiscora/README.md` | Fiscora | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/fiscora/local-runbook.md` | Runbook local Fiscora | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/fiscora/platform-overview.md` | Vision general Fiscora | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/fiscora/architecture.md` | Arquitectura Fiscora | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/fiscora/api-contracts.md` | Contratos API Fiscora | ACTIVE | P1 | Equipo documental |
@@ -162,8 +163,15 @@
 | Business | `02_projects/imagrafity/database.md` | Base de datos Imagrafity | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/imagrafity/frontend.md` | Frontend Imagrafity | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/imagrafity/implementation-report.md` | Reporte de implementacion Imagrafity | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/imagrafity/local-runbook.md` | Runbook local Imagrafity | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/imagrafity/personalization-editor.md` | Editor de personalizacion Imagrafity | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/imagrafity/prompt-preview-flow.md` | Flujo de prompts y preview Imagrafity | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/leadhunter/README.md` | LeadHunter | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/leadhunter/architecture.md` | Arquitectura LeadHunter | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/leadhunter/api-contracts.md` | Contratos API LeadHunter | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/leadhunter/database.md` | Base de datos LeadHunter | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/leadhunter/frontend.md` | Frontend LeadHunter | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/leadhunter/local-runbook.md` | Runbook local LeadHunter | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/imagrafity/repositories.md` | Repositorios Imagrafity | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/imagrafity/security.md` | Seguridad Imagrafity | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/innovation-engines-repair/README.md` | Innovation Engines Repair | FUTURE_OR_PENDING | P2 | Equipo documental |
@@ -172,6 +180,7 @@
 | Business | `02_projects/jobcron/database.md` | Base de datos JobCron | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/jobcron/feature-availability.md` | FeatureAvailability en JobCron | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/jobcron/README.md` | JobCron | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/jobcron/local-runbook.md` | Runbook local JobCron | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/jobcron/ui/00_jobcron_mockup_analysis.md` | Analisis de fuente visual JobCron | ARCHIVE_REFERENCE | P3 | Equipo documental |
 | Business | `02_projects/jobcron/ui/01_navigation_map.md` | Mapa de navegacion JobCron | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/jobcron/ui/02_layout_and_design_system.md` | Maquetacion y sistema visual JobCron | ACTIVE | P1 | Equipo documental |
@@ -257,6 +266,7 @@
 | Business | `02_projects/tecnotelec/quotes/01_quote_mvp_sales_decision.md` | Decision MVP: cotizacion en Sales API | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/tecnotelec/quotes/02_quote_implementation_scope_analysis.md` | Analisis de implementacion para cotizaciones Tecno Telec | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/tecnotelec/README.md` | Proyecto Tecno Telec | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/tecnotelec/local-runbook.md` | Runbook local TecnoTelec | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/tecnotelec/solutions/00_solution_presentation_and_assembly_strategy.md` | Estrategia de armado y presentacion de soluciones Tecno Telec | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/tecnotelec/solutions/01_dynamic_solution_technical_design.md` | Diseno tecnico dinamico de soluciones Tecno Telec | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/tecnotelec/solutions/02_solution_operating_architecture_analysis.md` | Analisis operativo y arquitectura para soluciones cotizables Tecno Telec | ACTIVE | P1 | Equipo documental |
@@ -276,6 +286,7 @@
 | Standards | `03_standards/database/sql-server-publication-standard.md` | Estandar de nombres SQL Server para tablas publicadas | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/docker.md` | Docker local | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/docker/grouped-containers-isolated-config.md` | Contenedores agrupados con configuracion aislada | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/docker/jobcron-official-docker-architecture.md` | Arquitectura Docker oficial JobCron | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/documentation-maintenance-policy.md` | Politica de mantenimiento documental | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/documentation-pr-checklist.md` | Checklist PR documental | ARCHIVE_REFERENCE | P3 | Equipo documental |
 | Standards | `03_standards/frontend/02_placeholder_strategy.md` | Estrategia de placeholders frontend | ACTIVE | P1 | Equipo documental |
@@ -306,6 +317,7 @@
 | Standards | `03_standards/operations/runbook.md` | Runbook operativo | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Standards | `03_standards/operations/scheduling.md` | Scheduling - Procesos programados | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/security.md` | Security | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/project-completeness-standard.md` | Estandar de proyecto completo Web/API | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/README.md` | Estandares | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/security/audit-policy.md` | Politica de auditoria | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/security/mfa-future.md` | MFA futuro | FUTURE_OR_PENDING | P2 | Equipo documental |
@@ -359,3 +371,4 @@
 | Business | `02_projects/imagrafity/product-strategy.md` | Estrategia de producto Imagrafity | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/imagrafity/site-map.md` | Mapa del sitio Imagrafity | ACTIVE | P1 | Equipo documental |
 | Meta | `_meta/active-work-index.md` | Indice operativo de trabajo activo | ACTIVE | P1 | Equipo documental |
+| Meta | `_meta/project-runtime-readiness-report.md` | Reporte de preparacion runtime por proyecto | ACTIVE | P1 | Equipo documental |
