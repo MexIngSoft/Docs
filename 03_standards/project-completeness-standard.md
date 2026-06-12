@@ -19,6 +19,19 @@ documentacion, healthcheck y ruta Docker definida.
 
 No se considera completo un proyecto que solo tenga paginas o endpoints.
 
+Para crear proyectos nuevos se debe usar el scaffolder operativo:
+
+```powershell
+Docs/03_standards/operations/scripts/New-WorkspaceProject.ps1 -Type web -Name NombreProyecto -Port 3000
+Docs/03_standards/operations/scripts/New-WorkspaceProject.ps1 -Type api -Name NombreProyecto -Port 8000
+```
+
+El scaffolder crea estructura minima, `.env.local.example`, README, healthcheck
+base y compose por proyecto. Si despues se integra al contenedor
+multi-proyecto, tambien se deben registrar manualmente volumen, puerto,
+`WEB_PROJECTS`/`API_PROJECTS` y `start.sh`, porque esos datos dependen de la
+asignacion real de puertos y responsabilidades.
+
 ## Web completa
 
 Una Web debe incluir:

@@ -87,3 +87,42 @@ Dockerfile por proyecto: solo si hay dependencias o build realmente distintos.
 No encontrado en la documentacion actual: reglas concretas de Nginx por proyecto
 para todos los hosts locales. Se mantiene fuera de alcance hasta documentar
 rutas/proxy por proyecto.
+
+## Revision 2026-06-12 - Cumplimiento Web/API al crear proyectos
+
+### Resultado
+
+Los estandares Web/API existen y quedaron conectados a un scaffolder operativo:
+
+```text
+Docs/03_standards/operations/scripts/New-WorkspaceProject.ps1
+```
+
+El scaffolder crea la estructura minima para:
+
+- `WEB.NJ.NEXT.<Proyecto>`;
+- `API.PY.DJANGO.<Proyecto>`;
+- `.env.local.example`;
+- README;
+- healthcheck base;
+- compose por proyecto cuando no se usa `-SkipDockerCompose`.
+
+### Correcciones aplicadas
+
+- `API.PY.DJANGO.JobCron` ahora tiene `README.md` y `requirements.txt`.
+- `WEB.NJ.NEXT.Fiscora` ahora tiene `public/favicon.svg` y metadata de icono.
+- `Docker.WEB.NJ/docker-compose.yml` monta `WEB.NJ.NEXT.Fiscora`.
+- `Docker.WEB.NJ/start.sh` inicia Fiscora como proyecto Next.js, no como ruta
+  estatica inexistente.
+
+### Decision
+
+Para proyectos nuevos, el scaffolder deja `PENDIENTE_DE_DEFINIR` cuando falta
+informacion real de negocio, gateway, permisos o datos. Esto evita inventar
+contratos y mantiene el cumplimiento documental.
+
+### Pendiente fuera de alcance
+
+El scaffolder no registra automaticamente una Web/API en `start.sh` ni en el
+compose base multi-proyecto. Esa integracion debe hacerse al asignar puerto y
+responsabilidades reales para evitar colisiones o servicios duplicados.

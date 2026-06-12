@@ -1,3 +1,83 @@
+# Ejecucion Agents - 2026-06-12 - Cierre Web/API y publicacion
+
+## Alcance
+
+Se ejecuto una pasada sobre `Docs/agents/AGENTS-*.md` en orden numerico,
+siguiendo `Docs/03_standards/operations/standard-request-prompts.md`.
+
+No habia agents activos: `AGENTS-000.md` a `AGENTS-030.md` estaban vacios.
+Por lo tanto, no se ejecuto implementacion adicional desde agents ni se archivo
+ningun agent nuevo.
+
+La corrida se uso para cerrar la publicacion de cambios ya realizados sobre el
+cumplimiento Web/API y su documentacion complementaria.
+
+## Documentacion revisada
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/03_standards/project-completeness-standard.md`
+- `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+- `Docs/03_standards/frontend/shared-docker-frontend-architecture.md`
+- `Docs/03_standards/operations/project-closure-standard.md`
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables ni limpieza pendiente. |
+
+## Cambios relacionados a publicar
+
+- `Docs/03_standards/operations/scripts/New-WorkspaceProject.ps1`
+- `Docs/03_standards/project-completeness-standard.md`
+- `Docs/_meta/project-runtime-readiness-report.md`
+- `Docker.WEB.NJ/docker-compose.yml`
+- `Docker.WEB.NJ/start.sh`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Fiscora/app/layout.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Fiscora/public/favicon.svg`
+- `Docker.API.PY/API.PY.DJANGO.JobCron/README.md`
+- `Docker.API.PY/API.PY.DJANGO.JobCron/requirements.txt`
+
+## Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Parse PowerShell de `New-WorkspaceProject.ps1` | OK |
+| `New-WorkspaceProject.ps1 -WhatIf` para API | OK |
+| Auditoria minima Web/API | OK |
+| `npm run build --prefix Docker.WEB.NJ/WEB.NJ.NEXT.Fiscora` | OK |
+| `python -m compileall Docker.API.PY/API.PY.DJANGO.JobCron` | OK |
+| `docker compose config --quiet` Web base, Web Fiscora y API JobCron | OK |
+| `git diff --check` en repos tocados | OK con advertencias CRLF de Git en Windows |
+
+## Decisiones
+
+- No se ejecutaron agents vacios ni se creo archivo de archivo historico para
+  ellos.
+- El scaffolder queda como entrada estandar para proyectos nuevos, pero no
+  registra automaticamente `start.sh` ni compose base multi-proyecto para evitar
+  colisiones de puertos o responsabilidades inventadas.
+- Fiscora Web se corrige como proyecto Next.js montado en Docker, no como
+  carpeta estatica inexistente.
+- JobCron API conserva alcance administrativo y queda documentada con README y
+  dependencias minimas.
+
+## Informacion faltante
+
+- No encontrado en la documentacion actual: reglas completas de Nginx por
+  proyecto para todos los hosts locales. Se mantiene pendiente hasta definir
+  rutas/proxy por proyecto.
+
+---
+
 # Reporte de ejecucion de Agents documentales
 
 Fecha: 2026-05-16
