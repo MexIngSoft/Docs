@@ -211,6 +211,14 @@
 | Business | `02_projects/pensavart/README.md` | Pensavart | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/phone-shop/README.md` | Proyecto Phone Shop | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/README.md` | Proyectos | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/refapart/README.md` | REFAPART | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/refapart/architecture.md` | Arquitectura REFAPART | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/refapart/api-contracts.md` | Contratos API REFAPART | FUTURE_OR_PENDING | P1 | Equipo documental |
+| Business | `02_projects/refapart/database.md` | Base de datos REFAPART | FUTURE_OR_PENDING | P1 | Equipo documental |
+| Business | `02_projects/refapart/frontend.md` | Frontend REFAPART | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/refapart/visual-identity.md` | Identidad visual REFAPART | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/refapart/local-runbook.md` | Runbook local REFAPART | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/refapart/repositories.md` | Repositorios REFAPART | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/refakto/README.md` | Refakto | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/rutexa/README.md` | Rutexa | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/sekura-tech/README.md` | Sekura Tech | FUTURE_OR_PENDING | P2 | Equipo documental |

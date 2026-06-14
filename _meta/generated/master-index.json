@@ -1768,6 +1768,70 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "02_projects/refapart/api-contracts.md",
+    "title": "Contratos API REFAPART",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/architecture.md",
+    "title": "Arquitectura REFAPART",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/database.md",
+    "title": "Base de datos REFAPART",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/frontend.md",
+    "title": "Frontend REFAPART",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/local-runbook.md",
+    "title": "Runbook local REFAPART",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/README.md",
+    "title": "REFAPART",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/repositories.md",
+    "title": "Repositorios REFAPART",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/visual-identity.md",
+    "title": "Identidad visual REFAPART",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "02_projects/rutexa/README.md",
     "title": "Rutexa",
     "domain": "business",

@@ -59,6 +59,7 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | Trabajar Fiscora | `02_projects/fiscora/README.md` | `architecture.md`, `api-contracts.md`, `tasks/*`, `database/cfdi-data-model.md`. |
 | Trabajar DocuCore | `02_projects/docucore/README.md` | `mvp-roadmap.md`, `api-contracts.md`, `document-intelligence.md`, `database.md`. |
 | Trabajar LexNova | `02_projects/lexnova/README.md` | `legal-process-data-model.md`, `document-intelligence.md`, `document-api-integration-review.md`. |
+| Trabajar REFAPART | `02_projects/refapart/README.md` | `architecture.md`, `frontend.md`, `visual-identity.md`, `api-contracts.md`, `database.md`, `local-runbook.md`. |
 | Trabajar Tecno Telec | `02_projects/tecnotelec/AGENTE.md` | `tasks/*`, `backend/*`, `frontend/*`, `quotes/*`, `solutions/*`. |
 | Trabajar JobCron | `02_projects/jobcron/README.md` | `01_tecnotelec_admin_process.md`, `ui/*`, Core APIs relacionadas. |
 | Trabajar Imagrafity | `02_projects/imagrafity/README.md` | `architecture.md`, `api-contracts.md`, `database.md`, `frontend.md`, `security.md`. |

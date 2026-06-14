@@ -9304,6 +9304,94 @@ El archivo original se conserva vacio en `Docs/agents/`.
 
 ---
 
+# 2026-06-13 - REFAPART MVP web y documentacion base
+
+## Agents Ejecutados
+
+| Agent | Estado | Resultado |
+| --- | --- | --- |
+| `AGENTS-000.md` | Completado | Se construyo el MVP web responsive tipo marketplace controlado de refacciones, usando el nombre canonico `REFAPART` y datos mock. |
+| `AGENTS-001.md` | Completado | Se documento la regla operativa: el cliente compra a REFAPART y los proveedores quedan detras de la operacion. |
+| `AGENTS-002.md` | Completado | Se documento la separacion tecnica REFAPART Web/Gateway/API frente a JobCron como ERP operativo. |
+| `AGENTS-003.md` | Completado | Se consolido el MVP como plataforma de localizacion y abastecimiento de piezas, no tienda tradicional. |
+| `AGENTS-004.md` | Completado | Se documento alcance MVP, roles, flujo principal, base de datos futura e integraciones pendientes. |
+| `AGENTS-005.md` | Completado | Se documento identidad visual premium, paleta, logo, reglas de uso y proporcion 70/20/10. |
+| `AGENTS-006.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Implementacion
+
+- Se creo la documentacion canonica de `Docs/02_projects/refapart/`:
+  - `README.md`
+  - `architecture.md`
+  - `api-contracts.md`
+  - `database.md`
+  - `frontend.md`
+  - `visual-identity.md`
+  - `local-runbook.md`
+  - `repositories.md`
+- Se actualizo el ecosistema para declarar `REFAPART` como proyecto activo y mantener `Refakto` como referencia historica/futura hasta decision posterior.
+- Se actualizaron indices y puerto canonico:
+  - `_meta/master-index.md`
+  - `_meta/master-index.yaml`
+  - `_meta/navigation-map.md`
+  - `_meta/active-work-index.md`
+  - `_meta/generated/master-index.json`
+  - `03_standards/operations/local-port-registry.md`
+- Se creo `Docker.WEB.NJ/WEB.NJ.NEXT.Refapart` con Next.js 15, React, TypeScript y App Router.
+- Se implementaron rutas:
+  - `/`
+  - `/resultados`
+  - `/pieza/[id]`
+  - `/publicar-busqueda`
+  - `/favoritos`
+  - `/cuenta`
+  - `/proveedor`
+- Se copiaron assets de marca al frontend:
+  - `public/brand/refapart-icon.png`
+  - `public/brand/refapart-logo-dark.png`
+  - `public/brand/refapart-logo-usage-dark.png`
+  - `public/brand/refapart-logo-usage-transparent.png`
+- Se actualizo `Docker.WEB.NJ/docker-compose.yml`, `Docker.WEB.NJ/start.sh` y `Docker.WEB.NJ/README.md` para publicar REFAPART en `3008`.
+
+## Decisiones
+
+- El nombre final visible es `REFAPART`; variantes previas como `RepuestosMax`, `RefaPart`, `Refapart` y `Refakto` no gobiernan la nueva implementacion.
+- La web queda como MVP visual y funcional con datos mock, sin backend real.
+- No se crean API ni Gateway en esta corrida porque los agents los definen como contrato/fase futura.
+- REFAPART no muestra telefono ni nombre real del proveedor al cliente; las tarjetas indican `Vendido por REFAPART`.
+- Los assets fuente se archivan y los assets productivos viven en `WEB.NJ.NEXT.Refapart/public/brand`.
+
+## Validaciones
+
+| Validacion | Resultado |
+| --- | --- |
+| `npm install` en `WEB.NJ.NEXT.Refapart` | Parcial por timeout de herramienta, pero genero `package-lock.json` y `node_modules` sin procesos pendientes. |
+| `npm run build` en `WEB.NJ.NEXT.Refapart` | OK; build Next.js completado sin warnings despues de corregir CSS. |
+| `docker compose config --quiet` en `Docker.WEB.NJ` | OK. |
+| `python scripts/validate_frontmatter.py` en `Docs` | OK con warnings existentes de front matter faltante; `0 malformed`. |
+| `python scripts/build_master_index.py` en `Docs` | OK; genero `_meta/generated/master-index.json` con 446 entradas. |
+| `Invoke-WebRequest http://localhost:3008` | OK; `HTTP 200` y contenido `REFAPART` presente. |
+
+## Pendientes
+
+- Crear repositorio propio `WEB.NJ.NEXT.Refapart` si se confirma estrategia de publicacion separada.
+- Crear `API.PY.DJANGO.Refapart.Gateway` y `API.PY.DJANGO.Refapart`.
+- Definir dominio final, politica de garantia/devoluciones, pasarela de pago y contratos reales con JobCron.
+- Validar visualmente en navegador si se requiere inspeccion manual detallada; el servidor local ya responde `HTTP 200`.
+
+## Limpieza
+
+`AGENTS-000.md` a `AGENTS-005.md` y las cuatro imagenes fuente se archivaron en:
+
+```text
+Docs/_archive/agents/2026-06-13-refapart-mvp/
+```
+
+Los archivos originales `AGENTS-000.md` a `AGENTS-005.md` se conservan vacios en
+`Docs/agents/`.
+
+---
+
 # 2026-06-11 - Estandar de proyecto completo Web/API
 
 ## Agents Ejecutados

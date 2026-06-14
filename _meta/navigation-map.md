@@ -98,6 +98,14 @@
 - `02_projects/pensavart/README.md`
 - `02_projects/phone-shop/README.md`
 - `02_projects/README.md`
+- `02_projects/refapart/README.md`
+- `02_projects/refapart/architecture.md`
+- `02_projects/refapart/api-contracts.md`
+- `02_projects/refapart/database.md`
+- `02_projects/refapart/frontend.md`
+- `02_projects/refapart/visual-identity.md`
+- `02_projects/refapart/local-runbook.md`
+- `02_projects/refapart/repositories.md`
 - `02_projects/refakto/README.md`
 - `02_projects/rutexa/README.md`
 - `02_projects/sekura-tech/README.md`

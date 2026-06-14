@@ -21,9 +21,9 @@ Compartir cliente no significa mostrarle la misma experiencia.
 | Proceso compartido | Empresas/proyectos | Modulo base | Decision previa |
 |---|---|---|---|
 | Identidad y acceso | Todos | Auth | Roles globales, roles por empresa y permisos por canal. |
-| Catalogo normalizado | Tecno Telec, Buildora, Phone Shop, Refakto, Imagrafity, Nutriva | Catalog | Categorias internas, atributos requeridos y calidad minima de datos. |
-| Descarga de proveedores | Tecno Telec, Buildora, Phone Shop, Refakto, Sekura Tech | Supplier | Proveedores activos, frecuencia de sync y datos obligatorios. |
-| Surtido por canal | Tecno Telec, Buildora, Phone Shop, Refakto | ChannelAssortment | Que se muestra, se oculta, se bloquea o solo se cotiza por proyecto. |
+| Catalogo normalizado | Tecno Telec, Buildora, Phone Shop, REFAPART, Refakto, Imagrafity, Nutriva | Catalog | Categorias internas, atributos requeridos y calidad minima de datos. |
+| Descarga de proveedores | Tecno Telec, Buildora, Phone Shop, REFAPART, Refakto, Sekura Tech | Supplier | Proveedores activos, frecuencia de sync y datos obligatorios. |
+| Surtido por canal | Tecno Telec, Buildora, Phone Shop, REFAPART, Refakto | ChannelAssortment | Que se muestra, se oculta, se bloquea o solo se cotiza por proyecto. |
 | Precios y margenes | Todos los comerciales | Pricing | Listas de precio, margen minimo, descuentos y moneda. |
 | Cotizaciones | Tecno Telec, Nexora, Buildora, Refakto, servicios locales | Quote/Sales | Vigencia, aprobacion humana, snapshots y conversion a venta. |
 | Ventas y pagos | Todos los que cobran | Sales/Pagora | Metodos de pago, anticipos, devoluciones y conciliacion. |
@@ -42,8 +42,8 @@ Compartir cliente no significa mostrarle la misma experiencia.
 |---|---|---|---|
 | Mismo producto, distinta marca/canal | Tecno Telec vs Phone Shop vs Buildora | Tecno Telec puede parecer tienda generica si publica telefonos o accesorios sueltos. | Definir `ChannelAssortment` por proyecto antes de publicar. |
 | Catalogo grande vs experiencia consultiva | Tecno Telec, Nexora | El usuario compra productos sueltos cuando el negocio quiere vender solucion. | Definir si el producto es `SELLABLE`, `QUOTE_ONLY` o `COMPONENT_ONLY`. |
-| Producto compatible vs producto solo disponible | Buildora, Refakto, Tecno Telec | Se vende una configuracion tecnicamente invalida. | Definir reglas `ProductCompatibility` antes de habilitar compra directa. |
-| Stock proveedor vs stock propio | Tecno Telec, Buildora, Refakto, Stockara | Se promete entrega inmediata de producto que solo existe en proveedor. | Definir fuente de disponibilidad y mensaje al cliente. |
+| Producto compatible vs producto solo disponible | Buildora, REFAPART, Refakto, Tecno Telec | Se vende una configuracion tecnicamente invalida. | Definir reglas `ProductCompatibility` antes de habilitar compra directa. |
+| Stock proveedor vs stock propio | Tecno Telec, Buildora, REFAPART, Refakto, Stockara | Se promete entrega inmediata de producto que solo existe en proveedor. | Definir fuente de disponibilidad y mensaje al cliente. |
 | Margen diferente por negocio | Todos los comerciales | Un descuento rentable en un canal puede perder dinero en otro. | Definir listas de precio y margen minimo por proyecto/canal. |
 | Devoluciones por tipo de negocio | Phone Shop, Refakto, Nutriva, Lavanderia 3P | Un flujo unico de devolucion puede ser incorrecto para perecederos, usados o servicios. | Definir politica de devolucion por proyecto. |
 | Facturacion y documentos | Tecno Telec, LexNova, GovernmentTender, Sales | Documentos sensibles visibles para usuarios incorrectos. | Definir permisos y tipos documentales antes de integrar `Documents`. |
@@ -137,7 +137,8 @@ Debe definirse:
 |---|---|
 | Phone Shop | Definir si sera marca independiente, canal dentro de otro comercio o tienda fisica/digital. |
 | Buildora | Definir atributos tecnicos obligatorios por categoria. |
-| Refakto | Definir calidad, estado, garantia y compatibilidad de refacciones usadas. |
+| REFAPART | Activo como marca final de esta fase; mantener proveedor oculto, compra a REFAPART y backend futuro por Gateway/API propios. |
+| Refakto | Mantener como referencia historica/futura hasta confirmar si se fusiona, renombra o queda como proyecto separado. |
 | Tecno Telec | Definir surtido bloqueado vs componente para telefonos, cables y accesorios. |
 | Nexora | Definir si cotiza como consultora o si solo canaliza proyectos a Tecno Telec/otros. |
 | Rutexa | Definir si opera logistica interna, externa o ambas. |
@@ -145,4 +146,3 @@ Debe definirse:
 | LexNova | Definir aislamiento de datos legales frente al CRM comercial. |
 | Social Networks | Definir aprobacion por marca antes de publicar. |
 | MockWander | Definir limites eticos/legales y separacion de tracking operativo real. |
-

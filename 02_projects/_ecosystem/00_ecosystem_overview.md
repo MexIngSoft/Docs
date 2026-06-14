@@ -26,6 +26,7 @@ Ordenar las empresas, marcas y productos que pueden crecer alrededor del ERP Job
 | Plataforma fiscal | Fiscora | SaaS para descargar, organizar, visualizar y automatizar CFDI del SAT. |
 | Comercio | Imagrafity | Personalizacion de productos. |
 | Comercio | Buildora | Configurador y venta de PCs/equipos a medida. |
+| Comercio | REFAPART | Localizacion y abastecimiento controlado de refacciones automotrices. |
 | Comercio | Refakto | Marketplace de refacciones usadas. |
 | Operacion | Rutexa | Logistica y envios. |
 | Operacion | Stockara | Inventarios y almacenes. |
