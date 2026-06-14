@@ -2,12 +2,12 @@
 
 ## Estado
 
-FUTURE_OR_PENDING
+Auth via Gateway central ACTIVE; contratos comerciales FUTURE_OR_PENDING.
 
 ## Base futura
 
 ```text
-NEXT_PUBLIC_REFAPART_GATEWAY_BASE_URL=http://localhost:8023/api/refapart
+NEXT_PUBLIC_GATEWAY_BASE_URL=http://localhost:8025/api/v1
 ```
 
 ## Endpoints publicos esperados
@@ -20,6 +20,19 @@ NEXT_PUBLIC_REFAPART_GATEWAY_BASE_URL=http://localhost:8023/api/refapart
 | `GET` | `/quotations/{id}` | Ver cotizacion visible para cliente. |
 | `POST` | `/orders` | Crear pedido desde cotizacion aceptada. |
 | `GET` | `/orders/{id}/tracking` | Consultar seguimiento publico. |
+
+## Auth implementado
+
+| Metodo | Ruta | Uso |
+|---|---|---|
+| `POST` | `/auth/login/` | Iniciar sesion con cookies HttpOnly. |
+| `POST` | `/auth/logout/` | Cerrar sesion. |
+| `POST` | `/auth/refresh/` | Renovar access token. |
+| `GET` | `/auth/me/` | Obtener usuario actual. |
+| `GET` | `/auth/me/permissions/` | Obtener roles y permisos REFAPART. |
+| `POST` | `/auth/register/` | Crear cliente con rol `CUSTOMER`. |
+| `POST` | `/auth/password/reset/` | Solicitar recuperacion. |
+| `POST` | `/auth/password/reset/confirm/` | Confirmar nueva contrasena. |
 
 ## Eventos hacia JobCron
 
@@ -41,7 +54,7 @@ NEXT_PUBLIC_REFAPART_GATEWAY_BASE_URL=http://localhost:8023/api/refapart
 
 ## Errores
 
-El Gateway debe normalizar errores sin exponer trazas internas:
+El Gateway central debe normalizar errores sin exponer trazas internas:
 
 ```json
 {

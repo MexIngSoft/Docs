@@ -40,10 +40,10 @@ Los proyectos existentes fueron migrados operativamente a la nomenclatura estand
 | `API.PY.DJANGO.Supplier` | Cumple con excepcion | `origin`: `https://github.com/MexIngSoft/API.PY.DJANGO.Supplier.git`. Usa paquete `config`. |
 | `API.PY.DJANGO.Document` | Cumple | `origin`: `https://github.com/MexIngSoft/API.PY.DJANGO.Document.git`. Check Django y compilacion Python correctos. |
 | `API.PY.DJANGO.DocuCore` | Cumple | `origin`: `https://github.com/MexIngSoft/API.PY.DJANGO.DocuCore.git`. Check Django y compilacion Python correctos. |
-| `API.PY.DJANGO.DocuCore.Gateway` | Cumple | `origin`: `https://github.com/MexIngSoft/API.PY.DJANGO.DocuCore.Gateway.git`. Check Django y compilacion Python correctos. |
+| `API.PY.DJANGO.DocuCore.Gateway` | Retirado | Reemplazado por `API.PY.DJANGO.Gateway` el 2026-06-14. |
 | `API.PY.DJANGO.Fiscal` | Cumple | `origin`: `https://github.com/MexIngSoft/API.PY.DJANGO.Fiscal.git`. Check Django y compilacion Python correctos. |
 | `API.PY.DJANGO.Fiscora` | Cumple | `origin`: `https://github.com/MexIngSoft/API.PY.DJANGO.Fiscora.git`. Check Django y compilacion Python correctos. |
-| `API.PY.DJANGO.Fiscora.Gateway` | Cumple | `origin`: `https://github.com/MexIngSoft/API.PY.DJANGO.Fiscora.Gateway.git`. Check Django y compilacion Python correctos. |
+| `API.PY.DJANGO.Fiscora.Gateway` | Retirado | Reemplazado por `API.PY.DJANGO.Gateway` el 2026-06-14. |
 
 ## Pendientes no aplicados
 

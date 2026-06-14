@@ -13,7 +13,7 @@ API fiscal, Gateway, Web estatica y base de datos.
 
 ```text
 WEB.NJ.NEXT.Fiscora
-  -> API.PY.DJANGO.Fiscora.Gateway
+  -> API.PY.DJANGO.Gateway
   -> API.PY.DJANGO.Auth
   -> API.PY.DJANGO.Document
   -> API.PY.DJANGO.Fiscora

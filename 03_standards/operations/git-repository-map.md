@@ -19,23 +19,19 @@ Los commits y pushes se hacen por repositorio y por responsabilidad. No se debe 
 | API Catalog | `Docker.API.PY/API.PY.DJANGO.Catalog` | `https://github.com/MexIngSoft/API.PY.DJANGO.Catalog.git` | Separado |
 | API Customization | `Docker.API.PY/API.PY.DJANGO.Customization` | `https://github.com/MexIngSoft/API.PY.DJANGO.Customization.git` | Separado |
 | API Inventory | `Docker.API.PY/API.PY.DJANGO.Inventory` | `https://github.com/MexIngSoft/API.PY.DJANGO.Inventory.git` | Separado |
-| API LexNova Gateway | `Docker.API.PY/API.PY.DJANGO.LexNova.Gateway` | `https://github.com/MexIngSoft/API.PY.DJANGO.LexNova.Gateway.git` | Separado |
 | API LexNova | `Docker.API.PY/API.PY.DJANGO.LexNova` | `https://github.com/MexIngSoft/API.PY.DJANGO.LexNova.git` | Separado |
 | API Pricing | `Docker.API.PY/API.PY.DJANGO.Pricing` | `https://github.com/MexIngSoft/API.PY.DJANGO.Pricing.git` | Separado |
+| API Gateway central | `Docker.API.PY/API.PY.DJANGO.Gateway` | `https://github.com/MexIngSoft/API.PY.DJANGO.Gateway.git` | Local; remoto pendiente de verificar/publicar |
 | API Procurement | `Docker.API.PY/API.PY.DJANGO.Procurement` | `https://github.com/MexIngSoft/API.PY.DJANGO.Procurement.git` | Separado |
 | API Sales | `Docker.API.PY/API.PY.DJANGO.Sales` | `https://github.com/MexIngSoft/API.PY.DJANGO.Sales.git` | Separado |
 | API Supplier | `Docker.API.PY/API.PY.DJANGO.Supplier` | `https://github.com/MexIngSoft/API.PY.DJANGO.Supplier.git` | Separado |
 | API TecnoTelec | `Docker.API.PY/API.PY.DJANGO.TecnoTelec` | `https://github.com/MexIngSoft/API.PY.DJANGO.TecnoTelec.git` | Separado |
-| API TecnoTelec Gateway | `Docker.API.PY/API.PY.DJANGO.TecnoTelec.Gateway` | `https://github.com/MexIngSoft/API.PY.DJANGO.TecnoTelec.Gateway.git` | Separado |
 | API Document | `Docker.API.PY/API.PY.DJANGO.Document` | `https://github.com/MexIngSoft/API.PY.DJANGO.Document.git` | Separado |
 | API DocuCore | `Docker.API.PY/API.PY.DJANGO.DocuCore` | `https://github.com/MexIngSoft/API.PY.DJANGO.DocuCore.git` | Separado |
-| API DocuCore Gateway | `Docker.API.PY/API.PY.DJANGO.DocuCore.Gateway` | `https://github.com/MexIngSoft/API.PY.DJANGO.DocuCore.Gateway.git` | Separado |
 | API Fiscal | `Docker.API.PY/API.PY.DJANGO.Fiscal` | `https://github.com/MexIngSoft/API.PY.DJANGO.Fiscal.git` | Separado |
 | API Fiscora | `Docker.API.PY/API.PY.DJANGO.Fiscora` | `https://github.com/MexIngSoft/API.PY.DJANGO.Fiscora.git` | Separado |
-| API Fiscora Gateway | `Docker.API.PY/API.PY.DJANGO.Fiscora.Gateway` | `https://github.com/MexIngSoft/API.PY.DJANGO.Fiscora.Gateway.git` | Separado |
 | API JobCron | `Docker.API.PY/API.PY.DJANGO.JobCron` | `https://github.com/MexIngSoft/API.PY.DJANGO.JobCron.git` | Publicado en `dev`, `pro` y `main` |
 | API Imagrafity | `Docker.API.PY/API.PY.DJANGO.Imagrafity` | `https://github.com/MexIngSoft/API.PY.DJANGO.Imagrafity.git` | Publicado en `dev`, `pro` y `main` |
-| API Imagrafity Gateway | `Docker.API.PY/API.PY.DJANGO.Imagrafity.Gateway` | `https://github.com/MexIngSoft/API.PY.DJANGO.Imagrafity.Gateway.git` | Publicado en `dev`, `pro` y `main` |
 | Docker PostgreSQL | `Docker.DB.PG` | `https://github.com/MexIngSoft/Docker.DB.PG.git` | Separado |
 | Docker Nginx | `Docker.SW.Nginx` | `https://github.com/1CASH1/Docker.SW.Nginx` | Separado |
 | Docker Web | `Docker.WEB.NJ` | `https://github.com/MexIngSoft/Docker.WEB.NJ.git` | Separado, requiere validar propiedad local |
@@ -66,7 +62,7 @@ Si una web no tiene repo Git propio, antes de subirla como proyecto separado se 
 
 1. `Docs`: documentacion base, decisiones y reglas de publicacion.
 2. APIs de dominio: cambios propios por API.
-3. `API.PY.DJANGO.TecnoTelec.Gateway`: integracion entre web TecnoTelec y Core APIs.
+3. `API.PY.DJANGO.Gateway`: entrada central y registro de proyectos.
 4. `Docker.DB.PG`: schemas, scripts de inicializacion y reglas de base de datos.
 5. `Docker.API.PY`: compose, Dockerfile, `start.sh`, workers y variables por proyecto.
 6. `Docker.WEB.NJ`: frontend compartido o webs contenidas en ese repo.
@@ -90,12 +86,9 @@ Ejemplos:
 | `API.PY.DJANGO.Supplier` | `Add Syscom catalog sync endpoints` |
 | `API.PY.DJANGO.Document` | `Add document processing MVP` |
 | `API.PY.DJANGO.DocuCore` | `Add DocuCore tool catalog MVP` |
-| `API.PY.DJANGO.DocuCore.Gateway` | `Expose DocuCore gateway endpoints` |
 | `API.PY.DJANGO.Fiscal` | `Add fiscal core MVP` |
 | `API.PY.DJANGO.Fiscora` | `Add Fiscora product API MVP` |
-| `API.PY.DJANGO.Fiscora.Gateway` | `Add Fiscora gateway MVP` |
-| `API.PY.DJANGO.LexNova.Gateway` | `Add LexNova gateway MVP` |
-| `API.PY.DJANGO.TecnoTelec.Gateway` | `Expose product catalog through gateway` |
+| `API.PY.DJANGO.Gateway` | `Register project routes in central gateway` |
 | `Docker.WEB.NJ` | `Update TecnoTelec catalog mockup` |
 | `WEB.NJ.NEXT.DocuCore` | `Add DocuCore dashboard MVP` |
 | `WEB.NJ.NEXT.Fiscora` | `Add Fiscora animation preview` |

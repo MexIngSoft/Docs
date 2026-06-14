@@ -3,7 +3,7 @@
 ## Gateway Base URL
 
 ```text
-http://localhost:8020/api/leadhunter
+http://localhost:8025/api/v1/projects/LEADHUNTER
 ```
 
 ## Domain API Base URL

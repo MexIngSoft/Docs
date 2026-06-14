@@ -40,7 +40,7 @@ hasta documentar migracion.
 ## Compatibilidad
 
 Un proyecto activo puede permanecer en `Auth v1` mientras otro migra a `Auth v2`.
-El Gateway del proyecto decide que version consume.
+El Gateway central decide que version consume cada proyecto mediante su registro.
 
 No se debe migrar todos los proyectos automaticamente por un cambio de Auth.
 

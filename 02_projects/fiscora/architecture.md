@@ -6,7 +6,7 @@
 WEB.NJ.NEXT.Fiscora
         |
         v
-API.PY.DJANGO.Fiscora.Gateway
+API.PY.DJANGO.Gateway
         |
         +--> API.PY.DJANGO.Fiscora
         |       - planes
@@ -52,7 +52,7 @@ API.PY.DJANGO.Fiscora.Gateway
 | Capa | Responsable | No debe hacer |
 |---|---|---|
 | `WEB.NJ.NEXT.Fiscora` | Experiencia publica, dashboard y preview visual. | Consumir APIs internas directamente o guardar secretos SAT. |
-| `API.PY.DJANGO.Fiscora.Gateway` | BFF, permisos, sesiones, errores, rate limiting y contrato frontend. | Persistir CFDI como fuente oficial o ejecutar logica fuerte SAT. |
+| `API.PY.DJANGO.Gateway` | Entrada central, permisos, sesiones, errores, rate limiting y routing `FISCORA`. | Persistir CFDI como fuente oficial o ejecutar logica fuerte SAT. |
 | `API.PY.DJANGO.Fiscora` | Producto comercial, planes, creditos, preferencias y reglas de uso. | Parsear XML, descargar SAT o transformar documentos. |
 | `API.PY.DJANGO.Fiscal` | CFDI, SAT, XML fiscal, paquetes, jobs, reportes y auditoria. | Definir experiencia comercial o planes SaaS. |
 | `API.PY.DJANGO.Document` | Render visual, PDF, plantillas y transformaciones documentales. | Cambiar el XML original o decidir reglas fiscales. |

@@ -24,7 +24,9 @@
 - `02_projects/datara/README.md`
 - `02_projects/_ecosystem/05_lexnova_docucore_fiscora_mvp_alignment.md`
 - `02_projects/_ecosystem/api-version-matrix.md`
+- `02_projects/_ecosystem/gateway-matrix.md`
 - `02_projects/_templates/auth-migration-template.md`
+- `02_projects/_templates/gateway-migration-template.md`
 - `02_projects/_templates/api-dependencies-template.md`
 - `02_projects/docucore/README.md`
 - `02_projects/docucore/document-intelligence.md`
@@ -104,12 +106,15 @@
 - `02_projects/README.md`
 - `02_projects/refapart/README.md`
 - `02_projects/refapart/architecture.md`
+- `02_projects/refapart/architecture/api-dependencies.md`
+- `02_projects/refapart/architecture/gateway-migration.md`
 - `02_projects/refapart/api-contracts.md`
 - `02_projects/refapart/database.md`
 - `02_projects/refapart/frontend.md`
 - `02_projects/refapart/visual-identity.md`
 - `02_projects/refapart/local-runbook.md`
 - `02_projects/refapart/repositories.md`
+- `02_projects/refapart/security/auth-migration.md`
 - `02_projects/refakto/README.md`
 - `02_projects/rutexa/README.md`
 - `02_projects/sekura-tech/README.md`
@@ -132,6 +137,11 @@
 - `03_standards/architecture/api-gateway-standard.md`
 - `03_standards/auth/web-auth-login-standard.md`
 - `03_standards/auth/auth-versioning-standard.md`
+- `03_standards/gateway/central-gateway-standard.md`
+- `03_standards/gateway/gateway-migration-standard.md`
+- `03_standards/gateway/gateway-routing-standard.md`
+- `03_standards/gateway/legacy-gateway-deprecation-standard.md`
+- `03_standards/gateway/legacy-gateway-retirement-2026-06-14.md`
 - `03_standards/product/product-strategy.md`
 - `03_standards/product/module-catalog.md`
 - `03_standards/project-completeness-standard.md`
@@ -139,6 +149,9 @@
 - `03_standards/operations/standard-request-prompts.md`
 - `03_standards/operations/agents-documentation-order.md`
 - `03_standards/operations/local-port-registry.md`
+- `03_standards/operations/module-lifecycle-and-feature-flags.md`
+- `03_standards/operations/observability.md`
+- `03_standards/operations/provider-integration-standard.md`
 - `03_standards/README.md`
 - `04_integrations/ct-internacional/README.md`
 - `04_integrations/dc-mayorista/README.md`

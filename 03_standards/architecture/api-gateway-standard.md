@@ -1,4 +1,4 @@
-# Estandar API y Gateway por proyecto
+# Estandar API de proyecto y Gateway central
 
 ## Objetivo
 
@@ -9,7 +9,7 @@ Cada proyecto con dominio propio debe tener frontera backend clara.
 
 ```text
 Frontend del proyecto
--> Gateway/BFF del proyecto
+-> API.PY.DJANGO.Gateway
 -> API propia del proyecto
 -> APIs Core ERP / Shared Modules / Integraciones
 ```
@@ -27,7 +27,7 @@ Proyecto A -> Base de datos de Proyecto B
 | Capa | Responsabilidad |
 |---|---|
 | Frontend | UX, estado visual, validacion ligera, consumo del Gateway. |
-| Gateway/BFF | Sesion, permisos de frontera, agregacion, normalizacion de errores, proxy seguro. |
+| Gateway central | Sesion, permisos de frontera, routing, normalizacion de errores y proxy seguro. |
 | API del proyecto | Reglas del dominio, persistencia propia, contratos publicables. |
 | Core ERP | Capacidades reutilizables y datos compartidos controlados. |
 | Shared Module | Servicio especializado reusable, por ejemplo Document API o FeatureAvailability. |
@@ -60,7 +60,7 @@ Cada proyecto debe documentar:
 
 Antes de cerrar una fase:
 
-- el frontend consume Gateway;
+- el frontend consume `API.PY.DJANGO.Gateway`;
 - el Gateway no expone secretos;
 - la API documenta errores normalizados;
 - los endpoints estan listados;

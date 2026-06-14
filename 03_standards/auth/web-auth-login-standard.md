@@ -23,7 +23,7 @@ El frontend no consume Auth directamente.
 
 ```text
 Frontend Web
--> Project Gateway / BFF
+-> API.PY.DJANGO.Gateway
 -> API.PY.DJANGO.Auth
 ```
 

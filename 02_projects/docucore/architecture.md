@@ -10,7 +10,7 @@ Separar responsabilidades entre producto, procesamiento documental, gateway y fr
 WEB.NJ.NEXT.DocuCore
         |
         v
-API.PY.DJANGO.DocuCore.Gateway
+API.PY.DJANGO.Gateway
         |
         +--> API.PY.DJANGO.DocuCore
         |       - catalogo de herramientas

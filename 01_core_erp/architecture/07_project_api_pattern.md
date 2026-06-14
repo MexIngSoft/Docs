@@ -10,7 +10,7 @@ Todo proyecto debe separar tres capas:
 
 ```text
 Web/Mobile/Admin
-  -> Project Gateway / BFF API
+  -> API.PY.DJANGO.Gateway
   -> Project Domain API
   -> Core ERP APIs
 ```
@@ -20,19 +20,19 @@ Web/Mobile/Admin
 | Capa | Responsabilidad | Ejemplo Tecno Telec |
 |---|---|---|
 | Cliente web/mobile | Interfaz de usuario. | Web Tecno Telec, app movil futura. |
-| Project Gateway / BFF API | Punto unico de entrada para pantallas y canales. | `tecnotelec-gateway-api`. |
+| Gateway central | Punto unico de entrada versionado para pantallas y canales. | `API.PY.DJANGO.Gateway`. |
 | Project Domain API | Reglas, tablas y procesos propios del proyecto. | `tecnotelec-api`. |
 | Core ERP APIs | Modulos reutilizables del ERP. | Auth, Catalog, Pricing, Sales, Projects, Logistics. |
 
 ## Regla principal
 
-El frontend no debe consumir directamente las APIs core del ERP. Siempre debe pasar por la API intermedia del proyecto.
+El frontend no debe consumir directamente las APIs core del ERP. Siempre debe pasar por `API.PY.DJANGO.Gateway`.
 
-Auth tambien se consume por medio del Gateway/BFF del proyecto. El frontend no
+Auth tambien se consume por medio del Gateway central. El frontend no
 debe llamar directamente a `API.PY.DJANGO.Auth`; el Gateway propaga o deriva
 `ApplicationCode` / `X-Application-Code` y normaliza errores de sesion.
 
-## Project Gateway / BFF API
+## Gateway central
 
 Debe:
 
@@ -102,10 +102,10 @@ Para APIs Django:
 API.PY.DJANGO.NombreProyecto
 ```
 
-Para gateway/BFF:
+Para el Gateway central:
 
 ```text
-API.PY.DJANGO.NombreProyecto.Gateway
+API.PY.DJANGO.Gateway
 ```
 
 Para API propia del proyecto:
@@ -117,22 +117,22 @@ API.PY.DJANGO.NombreProyecto
 Ejemplo:
 
 ```text
-API.PY.DJANGO.TecnoTelec.Gateway
+API.PY.DJANGO.Gateway
 API.PY.DJANGO.TecnoTelec
 ```
 
 Regla de creacion:
 
-- Si un proyecto necesita Gateway/BFF, crear `API.PY.DJANGO.NombreProyecto.Gateway`.
+- No crear Gateway propio por defecto. Una excepcion requiere ADR por aislamiento, regulacion, volumen, orquestacion o seguridad especial.
 - Si el proyecto tiene tablas, procesos, formularios, configuracion o reglas propias, crear tambien `API.PY.DJANGO.NombreProyecto`.
 - Si el proyecto solo consume APIs core sin datos propios, la API de dominio puede omitirse, pero la decision debe quedar documentada.
-- Ambas carpetas deben ser repositorios Git independientes y subirse a GitHub al momento de crearlas.
+- La API de proyecto y el frontend deben ser repositorios Git independientes.
 - El repositorio orquestador Docker debe ignorar `API.PY.DJANGO.*/` para no versionar APIs externas dentro del compose.
 
 El nombre operativo puede documentarse en kebab-case:
 
 ```text
-tecnotelec-gateway-api
+central-gateway-api
 tecnotelec-api
 ```
 
@@ -140,7 +140,7 @@ tecnotelec-api
 
 ```text
 Web Tecno Telec
-  -> tecnotelec-gateway-api
+  -> central-gateway-api
   -> tecnotelec-api
   -> projects-api
   -> pricing-api

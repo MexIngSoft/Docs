@@ -96,10 +96,10 @@ documentacion canonica.
 
 ## Comunicacion con APIs
 
-El frontend debe consumir solo el gateway/BFF del proyecto.
+El frontend debe consumir solo el Gateway central.
 
 ```text
-Frontend -> Project Gateway/BFF -> Project API + Core ERP APIs
+Frontend -> API.PY.DJANGO.Gateway -> Project API + Core ERP APIs
 ```
 
 No permitido:
@@ -137,10 +137,10 @@ app/
 
 ## Autenticacion y permisos
 
-- La sesion debe resolverse contra el gateway/auth.
+- La sesion debe resolverse contra `API.PY.DJANGO.Gateway`.
 - Todo proyecto web nuevo debe incluir login estandar, salvo excepcion
   documentada con `auth_required: false`.
-- El flujo obligatorio es `Frontend -> Project Gateway/BFF -> Auth`; el
+- El flujo obligatorio es `Frontend -> API.PY.DJANGO.Gateway -> Auth`; el
   frontend no debe consumir `API.PY.DJANGO.Auth` directamente.
 - Las llamadas de sesion/permisos deben poder incluir `X-Application-Code`.
 - Los permisos se deben validar en backend y reflejar en frontend solo para experiencia de usuario.

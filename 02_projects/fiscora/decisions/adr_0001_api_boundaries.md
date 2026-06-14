@@ -15,7 +15,7 @@ riesgo de mezclar datos fiscales con reglas comerciales.
 
 Separar responsabilidades:
 
-- `API.PY.DJANGO.Fiscora.Gateway` es el unico contrato consumido por el
+- `API.PY.DJANGO.Gateway` es el unico contrato consumido por el
   frontend.
 - `API.PY.DJANGO.Fiscora` administra producto comercial, planes, creditos,
   preferencias y reglas de uso.

@@ -217,12 +217,14 @@
 | Business | `02_projects/README.md` | Proyectos | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/refapart/README.md` | REFAPART | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/refapart/architecture.md` | Arquitectura REFAPART | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/refapart/architecture/api-dependencies.md` | Dependencias API REFAPART | ACTIVE | P1 | Equipo REFAPART |
 | Business | `02_projects/refapart/api-contracts.md` | Contratos API REFAPART | FUTURE_OR_PENDING | P1 | Equipo documental |
 | Business | `02_projects/refapart/database.md` | Base de datos REFAPART | FUTURE_OR_PENDING | P1 | Equipo documental |
 | Business | `02_projects/refapart/frontend.md` | Frontend REFAPART | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/refapart/visual-identity.md` | Identidad visual REFAPART | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/refapart/local-runbook.md` | Runbook local REFAPART | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/refapart/repositories.md` | Repositorios REFAPART | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/refapart/security/auth-migration.md` | Migracion Auth REFAPART | ACTIVE | P1 | Equipo REFAPART |
 | Business | `02_projects/refakto/README.md` | Refakto | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/rutexa/README.md` | Rutexa | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/sekura-tech/README.md` | Sekura Tech | FUTURE_OR_PENDING | P2 | Equipo documental |
@@ -311,6 +313,11 @@
 | Standards | `03_standards/frontend/pre-development-checklist.md` | Checklist previo a desarrollo frontend | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/frontend/README.md` | Estandares frontend | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/frontend/shared-docker-frontend-architecture.md` | Arquitectura Docker frontend compartida | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/gateway/central-gateway-standard.md` | Estandar de Gateway central | ACTIVE | P1 | Equipo de plataforma |
+| Standards | `03_standards/gateway/gateway-migration-standard.md` | Migracion gradual al Gateway central | ACTIVE | P1 | Equipo de plataforma |
+| Standards | `03_standards/gateway/gateway-routing-standard.md` | Routing y registro del Gateway central | ACTIVE | P1 | Equipo de plataforma |
+| Standards | `03_standards/gateway/legacy-gateway-deprecation-standard.md` | Deprecacion de Gateways legacy | ACTIVE | P1 | Equipo de plataforma |
+| Standards | `03_standards/gateway/legacy-gateway-retirement-2026-06-14.md` | Retiro de Gateways legacy 2026-06-14 | COMPLETED | P1 | Equipo de plataforma |
 | Standards | `03_standards/operations/codex-working-rules.md` | Reglas de trabajo para Codex | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/data-quality.md` | Data Quality — Limpieza y normalización | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/django-api-project-compliance.md` | Validacion de cumplimiento de proyectos Django API | ACTIVE | P1 | Equipo documental |
@@ -325,6 +332,7 @@
 | Standards | `03_standards/operations/jobs/job-schedule.md` | Calendario de jobs | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/jobs/retry-policy.md` | Politica de reintentos | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/local-port-registry.md` | Registro local de puertos | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/operations/module-lifecycle-and-feature-flags.md` | Ciclo de vida de modulos y feature flags | ACTIVE | P1 | Equipo de plataforma |
 | Standards | `03_standards/operations/multi-provider.md` | Estrategia multi-proveedor | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/observability.md` | Observabilidad | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Standards | `03_standards/operations/project-closure-standard.md` | Estandar de cierre para proyectos Django API | ACTIVE | P1 | Equipo documental |

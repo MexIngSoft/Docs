@@ -64,24 +64,25 @@ Hasta entonces:
 | `8005` | Procurement API | `Docker.API.PY/API.PY.DJANGO.Procurement` | Activo |
 | `8006` | Sales API | `Docker.API.PY/API.PY.DJANGO.Sales` | Activo |
 | `8007` | Supplier API | `Docker.API.PY/API.PY.DJANGO.Supplier` | Activo |
-| `8008` | TecnoTelec Gateway | `Docker.API.PY/API.PY.DJANGO.TecnoTelec.Gateway` | Activo |
+| `8008` | Libre | Gateway TecnoTelec retirado | Disponible |
 | `8009` | TecnoTelec API | `Docker.API.PY/API.PY.DJANGO.TecnoTelec` | Activo |
 | `8010` | Customization API | `Docker.API.PY/API.PY.DJANGO.Customization` | Activo |
 | `8011` | Document API | `Docker.API.PY/API.PY.DJANGO.Document` | Activo |
 | `8012` | DocuCore API | `Docker.API.PY/API.PY.DJANGO.DocuCore` | Activo |
-| `8013` | DocuCore Gateway | `Docker.API.PY/API.PY.DJANGO.DocuCore.Gateway` | Activo |
-| `8014` | Fiscora Gateway | `Docker.API.PY/API.PY.DJANGO.Fiscora.Gateway` | Activo |
+| `8013` | Libre | Gateway DocuCore retirado | Disponible |
+| `8014` | Libre | Gateway Fiscora retirado | Disponible |
 | `8015` | Fiscora API | `Docker.API.PY/API.PY.DJANGO.Fiscora` | Activo |
 | `8016` | Fiscal API | `Docker.API.PY/API.PY.DJANGO.Fiscal` | Activo |
-| `8017` | LexNova Gateway | `Docker.API.PY/API.PY.DJANGO.LexNova.Gateway` | Activo |
-| `8018` | Imagrafity Gateway | `Docker.API.PY/API.PY.DJANGO.Imagrafity.Gateway` | Activo |
+| `8017` | Libre | Gateway LexNova retirado | Disponible |
+| `8018` | Libre | Gateway Imagrafity retirado | Disponible |
 | `8019` | Imagrafity API | `Docker.API.PY/API.PY.DJANGO.Imagrafity` | Activo |
-| `8020` | LeadHunter Gateway | `Docker.API.PY/API.PY.DJANGO.LeadHunter.Gateway` | Activo |
+| `8020` | Libre | Gateway LeadHunter retirado | Disponible |
 | `8021` | LeadHunter API | `Docker.API.PY/API.PY.DJANGO.LeadHunter` | Activo |
 | `8022` | JobCron API | `Docker.API.PY/API.PY.DJANGO.JobCron` | Activo |
-| `8023` | REFAPART Gateway | `Docker.API.PY/API.PY.DJANGO.Refapart.Gateway` | PENDIENTE_DE_DEFINIR |
+| `8023` | Libre | Gateway RefaPart retirado | Disponible |
 | `8024` | REFAPART API | `Docker.API.PY/API.PY.DJANGO.Refapart` | PENDIENTE_DE_DEFINIR |
-| `8025-8050` | Futuras APIs/Gateways | PENDIENTE_DE_DEFINIR | Reservado |
+| `8025` | Gateway central | `Docker.API.PY/API.PY.DJANGO.Gateway` | Activo; entrada estandar versionada |
+| `8026-8050` | Futuras APIs/Gateways | PENDIENTE_DE_DEFINIR | Reservado |
 
 ## Script Windows
 
@@ -271,8 +272,7 @@ Docs/03_standards/operations/scripts/Start-LexNovaFiscora.ps1
 Este script levanta solo lo necesario para ejecutar LexNova y Fiscora en local:
 
 - `Docker.DB.PG`
-- APIs: Auth, LexNova, LexNova Gateway, Document, Fiscora Gateway, Fiscora y
-  Fiscal.
+- APIs: Auth, Gateway central, LexNova, Document, Fiscora y Fiscal.
 - Webs: LexNova y Fiscora.
 
 No levanta JobCron, TecnoTelec, DocuCore, Catalog, Supplier, Pricing, Inventory,
@@ -308,8 +308,7 @@ Este script baja los compose completos de APIs/Web y levanta solo lo necesario
 para probar DocuCore:
 
 - `Docker.DB.PG`
-- APIs: `Document` (`8011`), `DocuCore` (`8012`) y `DocuCore Gateway`
-  (`8013`).
+- APIs: Gateway central (`8025`), `Document` (`8011`) y `DocuCore` (`8012`).
 - Web: `WEB.NJ.NEXT.DocuCore` (`3004`).
 
 No levanta JobCron, TecnoTelec, LexNova, Fiscora, Imagrafity, Catalog,

@@ -15,7 +15,7 @@ LexNova no funciona como una web aislada. La cadena local obligatoria es:
 
 ```text
 WEB.NJ.NEXT.LexNova
-  -> API.PY.DJANGO.LexNova.Gateway
+  -> API.PY.DJANGO.Gateway
   -> API.PY.DJANGO.Auth
   -> API.PY.DJANGO.LexNova
   -> PostgreSQL
@@ -28,7 +28,7 @@ Responsabilidades:
 | `Docker.DB.PG` | `5432` | PostgreSQL local para Auth, LexNova y schemas de soporte. |
 | `API.PY.DJANGO.Auth` | `8000` | Usuarios, tokens, sesiones, roles, permisos y semilla LexNova. |
 | `API.PY.DJANGO.LexNova` | `8003` | Casos, procedimientos, documentos, evidencia y analisis legal. |
-| `API.PY.DJANGO.LexNova.Gateway` | `8017` | BFF obligatorio para la web; proxy de Auth y API de dominio. |
+| `API.PY.DJANGO.Gateway` | `8025` | Entrada central para Auth y API de dominio con codigo `LEXNOVA`. |
 | `WEB.NJ.NEXT.LexNova` | `3002` | Web oficial local. Puede usarse `3003` si `3002` esta ocupado. |
 
 ## Variables obligatorias
@@ -36,7 +36,7 @@ Responsabilidades:
 Frontend:
 
 ```text
-NEXT_PUBLIC_LEXNOVA_GATEWAY_BASE_URL=http://localhost:8017/api/lexnova
+NEXT_PUBLIC_LEXNOVA_GATEWAY_BASE_URL=http://localhost:8025/api/v1/projects/LEXNOVA
 ```
 
 `NEXT_PUBLIC_GATEWAY_BASE_URL` puede existir por compatibilidad con otros
@@ -97,7 +97,7 @@ npm run dev -- -p 3003
 Antes de probar login:
 
 ```powershell
-Invoke-WebRequest http://localhost:8017/api/lexnova/health/
+Invoke-WebRequest http://localhost:8025/health/
 Invoke-WebRequest http://localhost:3002/auth/login
 ```
 
@@ -112,7 +112,7 @@ Validar preflight CORS cuando aparezca `Failed to fetch`:
 ```powershell
 Invoke-WebRequest `
   -Method OPTIONS `
-  -Uri http://localhost:8017/api/lexnova/auth/jwt/create/ `
+  -Uri http://localhost:8025/api/v1/auth/login/ `
   -Headers @{
     Origin = "http://localhost:3003"
     "Access-Control-Request-Method" = "POST"
@@ -126,7 +126,7 @@ La respuesta debe incluir `Access-Control-Allow-Origin` con el origen de la web.
 | Sintoma | Causa probable | Accion |
 |---|---|---|
 | `Failed to fetch` | Gateway apagado o CORS no permite el puerto web. | Validar `8017`, CORS y reiniciar `api-multiproyecto`. |
-| `Gateway no disponible` | `API.PY.DJANGO.LexNova.Gateway` no esta corriendo. | Levantar `Docker.API.PY` o revisar logs. |
+| `Gateway no disponible` | `API.PY.DJANGO.Gateway` no esta corriendo. | Levantar `Docker.API.PY` o revisar logs. |
 | `Credenciales incorrectas` | Password/correo invalidos o semilla no aplicada. | Revisar `auth-seed.md` y migraciones de Auth. |
 | Redireccion inesperada al dashboard | Estado local viejo o cookie vieja. | Verificar sesion contra Gateway y limpiar almacenamiento local si persiste. |
 | `403` en API de dominio | Endpoint protegido sin token valido. | Probar primero login y permisos via Gateway. |

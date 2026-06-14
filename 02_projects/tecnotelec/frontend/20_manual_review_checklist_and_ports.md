@@ -30,7 +30,7 @@ http://api-backend-python:8008
 Cuando se pruebe sin Docker, puede usarse:
 
 ```text
-http://localhost:8008
+http://localhost:8025/api/v1/projects/TECNOTELEC
 ```
 
 ## APIs de soporte para validar datos
@@ -39,11 +39,10 @@ Estas rutas son solo para validacion tecnica. No deben mostrarse como enlaces pr
 
 | API | URL local |
 |---|---|
-| Gateway health | `http://localhost:8008/api/health/` |
-| Soluciones publicas | `http://localhost:8008/api/public/solutions/` |
-| Productos visibles | `http://localhost:8008/api/products/?page=1&pageSize=24` |
-| Categorias dinamicas | `http://localhost:8008/api/categories/` |
-| Marcas dinamicas | `http://localhost:8008/api/brands/` |
+| Gateway health | `http://localhost:8025/health/` |
+| Soluciones publicas | `http://localhost:8025/api/v1/projects/TECNOTELEC/api/solutions/` |
+| API de proyecto | `http://localhost:8025/api/v1/projects/TECNOTELEC/` |
+| Catalog API | `http://localhost:8025/api/v1/core/catalog/` |
 
 ## Enlaces publicos a revisar
 

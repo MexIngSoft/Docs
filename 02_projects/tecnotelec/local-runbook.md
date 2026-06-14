@@ -13,7 +13,7 @@ y base de datos.
 
 ```text
 WEB.NJ.NEXT.TecnoTelec
-  -> API.PY.DJANGO.TecnoTelec.Gateway
+  -> API.PY.DJANGO.Gateway
   -> Auth, Catalog, Inventory, Pricing, Procurement, Sales, Supplier, Customization
   -> API.PY.DJANGO.TecnoTelec
   -> PostgreSQL

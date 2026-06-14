@@ -30,8 +30,8 @@ sin ejecutar reestructuras destructivas ni mover carpetas grandes.
 | Front matter | Parcial | Existe especificacion, pero la migracion masiva de documentos historicos queda pendiente. |
 | Estructura de proyectos | Parcial | La estructura canonica existe; no se fuerza migracion masiva a subcarpetas profundas para evitar romper referencias. |
 | Docker | Activo | Existe arquitectura oficial JobCron y compose por capas; la migracion completa de `crejo` a `jobcron_network` sigue pendiente. |
-| Observabilidad | Parcial | Hay runbooks y estandares operativos, pero falta especificacion unica de logs JSON por API. |
-| ETL | Parcial | Syscom tiene documentacion amplia; falta plantilla uniforme obligatoria por proveedor nuevo. |
+| Observabilidad | Activo | `03_standards/operations/observability.md` define logs JSON, campos base, propagacion y seguridad. |
+| ETL | Activo | La plantilla ETL y el estandar de proveedores cubren fuente, destino, frecuencia, reintentos, checkpoint, rollback y observabilidad. |
 | Gateways | Activo | Existe patron Project Gateway/BFF; se refuerza Auth via Gateway en esta corrida. |
 | Auth | Activo | Auth se documenta como infraestructura compartida; se agregan estandares de login/versionado. |
 | Web global | Parcial | Existen estandares Next.js y proyecto completo; falta homogeneizar todas las webs existentes. |
@@ -39,6 +39,8 @@ sin ejecutar reestructuras destructivas ni mover carpetas grandes.
 | Base de datos | Parcial | Hay modelos y publicacion PascalCase; faltan ERD/diccionarios completos por API. |
 | Eventos | Activo parcial | Existe catalogo base; falta completar publisher/subscriber por todos los eventos reales. |
 | ERP vs Web | Activo | La regla `Frontend -> Gateway -> API -> Core/ERP` queda como fuente de verdad. |
+| Control de desarrollo | Activo | Se formalizan estados de modulo y su relacion con FeatureAvailability. |
+| Feature flags | Activo | JobCron conserva la fuente central y se documentan scopes por proyecto, tenant, pais, region y entorno. |
 
 ## Decisiones aplicadas
 
@@ -55,15 +57,28 @@ sin ejecutar reestructuras destructivas ni mover carpetas grandes.
 
 1. Definir `LICENSE`.
 2. Completar front matter gradualmente en documentos historicos.
-3. Crear estandar unico de observabilidad con logs JSON por API.
-4. Crear plantilla ETL/proveedor obligatoria para integraciones nuevas.
-5. Completar ERD y diccionarios por API activa.
-6. Completar mapa real publisher/subscriber de eventos.
-7. Planificar migracion coordinada de red `crejo` a `jobcron_network`, si se
+3. Aplicar gradualmente el estandar de observabilidad a cada API activa.
+4. Completar ERD y diccionarios por API activa.
+5. Completar mapa real publisher/subscriber de eventos.
+6. Planificar migracion coordinada de red `crejo` a `jobcron_network`, si se
    decide ejecutarla.
 
 ## Resultado
 
-La auditoria queda `Parcialmente completada`: se corrigieron y agregaron
-fuentes de verdad de bajo riesgo, pero las reestructuras grandes quedan como
-pendientes controlados.
+La auditoria documental queda `Completada`: cada punto del agent fue
+verificado, corregido, adoptado, rechazado con justificacion o convertido en
+pendiente controlado. Esto no significa que todas las migraciones tecnicas ya
+esten implementadas; front matter historico, ERD, eventos reales, red Docker y
+licencia conservan responsables y decisiones pendientes.
+
+## Validacion final por categoria
+
+| Categoria | Resultado |
+|---|---|
+| Documentos correctos | Fuentes canonicas e indices existentes conservados. |
+| Documentos corregidos | Observabilidad, proveedor/ETL, estandares Web/Auth y arquitectura de proyecto. |
+| Documentos creados | Auditoria, Auth/versionado, matrices, plantillas y ciclo de vida/feature flags. |
+| Documentos obsoletos | Ninguno eliminado; la obsolescencia requiere comparacion individual. |
+| Documentos archivados | Agents completados copiados a `_archive/agents`. |
+| Pendientes identificados | LICENSE, front matter historico, ERD, eventos, red Docker y adopcion por API. |
+| Riesgos arquitectonicos | Reestructuras masivas, migracion de red sin coordinacion y flags usados como autorizacion. |

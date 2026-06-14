@@ -4,7 +4,7 @@ LeadHunter follows the repository standard for product isolation:
 
 ```text
 WEB.NJ.NEXT.LeadHunter
-  -> API.PY.DJANGO.LeadHunter.Gateway
+  -> API.PY.DJANGO.Gateway
     -> API.PY.DJANGO.Auth
     -> API.PY.DJANGO.LeadHunter
       -> Apify Google Maps Scraper
@@ -15,7 +15,7 @@ The Web must not call Auth or the domain API directly. All browser-facing calls 
 
 ## API Responsibilities
 
-`API.PY.DJANGO.LeadHunter.Gateway`:
+`API.PY.DJANGO.Gateway`:
 
 - Exposes `/api/leadhunter/*` to the web.
 - Proxies Auth routes under `/api/leadhunter/auth/*`.
@@ -55,7 +55,7 @@ status becomes `failed`; the system never returns invented businesses.
 The following repositories are required if this product is moved to remote GitHub repositories:
 
 - `MexIngSoft/API.PY.DJANGO.LeadHunter`
-- `MexIngSoft/API.PY.DJANGO.LeadHunter.Gateway`
+- `MexIngSoft/API.PY.DJANGO.Gateway`
 - `MexIngSoft/WEB.NJ.NEXT.LeadHunter`
 
 No separate ERP repository is required for the MVP. Auth already exists as a core dependency.

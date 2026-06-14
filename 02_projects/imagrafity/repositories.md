@@ -9,14 +9,14 @@ ACTIVE
 | Proyecto | Ruta | Tipo |
 |---|---|---|
 | `WEB.NJ.NEXT.Imagrafity` | `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity` | Next.js frontend |
-| `API.PY.DJANGO.Imagrafity.Gateway` | `Docker.API.PY/API.PY.DJANGO.Imagrafity.Gateway` | Django Gateway/BFF |
+| `API.PY.DJANGO.Gateway` | `Docker.API.PY/API.PY.DJANGO.Gateway` | Gateway central |
 | `API.PY.DJANGO.Imagrafity` | `Docker.API.PY/API.PY.DJANGO.Imagrafity` | Django API |
 
 ## Remotos GitHub
 
 ```text
 https://github.com/MexIngSoft/WEB.NJ.NEXT.Imagrafity.git
-https://github.com/MexIngSoft/API.PY.DJANGO.Imagrafity.Gateway.git
+https://github.com/MexIngSoft/API.PY.DJANGO.Gateway.git
 https://github.com/MexIngSoft/API.PY.DJANGO.Imagrafity.git
 ```
 
@@ -25,7 +25,7 @@ https://github.com/MexIngSoft/API.PY.DJANGO.Imagrafity.git
 | Proyecto | Remoto | Estado |
 |---|---|---|
 | `WEB.NJ.NEXT.Imagrafity` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.Imagrafity.git` | Publicado en `dev`, `pro` y `main`. Commit `c88204b`. |
-| `API.PY.DJANGO.Imagrafity.Gateway` | `https://github.com/MexIngSoft/API.PY.DJANGO.Imagrafity.Gateway.git` | Publicado en `dev`, `pro` y `main`. Commit `3facb84`. |
+| `API.PY.DJANGO.Gateway` | `https://github.com/MexIngSoft/API.PY.DJANGO.Gateway.git` | Entrada central vigente. |
 | `API.PY.DJANGO.Imagrafity` | `https://github.com/MexIngSoft/API.PY.DJANGO.Imagrafity.git` | Publicado en `dev`, `pro` y `main`. Commit `d1296a5`. |
 
 ## Ramas requeridas

@@ -30,8 +30,16 @@ Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart
 | `/pieza/[id]` | Detalle de pieza con compatibilidad, precio, garantia y CTA. |
 | `/publicar-busqueda` | Formulario UI para solicitar una pieza no encontrada. |
 | `/favoritos` | Favoritos locales del navegador. |
-| `/cuenta` | Placeholder funcional de cuenta cliente. |
+| `/cuenta` | Cuenta cliente protegida por Auth. |
 | `/proveedor` | Placeholder funcional para proveedor. |
+| `/login` | Login central Auth con marca REFAPART. |
+| `/register` | Registro de cliente. |
+| `/forgot-password` | Solicitud de recuperacion. |
+| `/reset-password` | Confirmacion de nueva contrasena. |
+| `/dashboard` | Resumen privado de actividad. |
+| `/profile` | Perfil de usuario autenticado. |
+| `/settings` | Preferencias privadas. |
+| `/403` | Acceso denegado. |
 
 ## Regla visual
 
@@ -69,5 +77,6 @@ mezclar identidades visuales.
 
 ## Backend
 
-El MVP visual no conecta backend. La variable futura queda documentada en
-`.env.local.example`.
+El catalogo MVP continua local. Auth conecta al Gateway central en `8025`; el
+Gateway REFAPART en `8023` queda como fallback y la web nunca consume
+`API.PY.DJANGO.Auth` directamente.

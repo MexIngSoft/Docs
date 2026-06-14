@@ -7,7 +7,7 @@ ACTIVE
 ## Base URLs locales
 
 ```text
-Gateway: http://localhost:8018/api/imagrafity
+Gateway: http://localhost:8025/api/v1/projects/IMAGRAFITY
 API:     http://localhost:8019/api/imagrafity
 ```
 

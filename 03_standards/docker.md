@@ -102,7 +102,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations
 La validacion no debe asumir que `GET /` devuelve `200` en cada API. Varias
 APIs Django no exponen pagina raiz y pueden responder `404` en `/` aunque el
 servicio este activo. Validar proceso, puerto publicado y rutas propias como
-`/api/lexnova/health/` en el gateway LexNova.
+`/health/` en el Gateway central.
 
 Registro canonico de puertos:
 
@@ -117,7 +117,7 @@ validar ni entregar solo el frontend. La validacion local debe cubrir toda la
 cadena documentada por el proyecto:
 
 ```text
-DB -> Core APIs -> Project Domain API -> Project Gateway/BFF -> Web
+DB -> Core APIs -> Project Domain API -> Central Gateway -> Web
 ```
 
 Cada proyecto con esta forma debe tener un runbook propio en
@@ -191,28 +191,23 @@ http://localhost
 ## Proyectos disponibles
 
 - `auth`
+- `gateway`
 - `catalog`
 - `inventory`
 - `customization`
 - `document`
 - `docucore`
-- `docucore_gateway`
 - `fiscal`
 - `fiscora`
-- `fiscora_gateway`
 - `imagrafity`
-- `imagrafity_gateway`
 - `jobcron`
 - `leadhunter`
-- `leadhunter_gateway`
-- `lexnova_gateway`
 - `lexnova`
 - `pricing`
 - `procurement`
 - `sales`
 - `supplier`
 - `tecnotelec`
-- `tecnotelec_gateway`
 
 ## Puertos
 
@@ -224,21 +219,16 @@ http://localhost
 - `procurement`: `8005`
 - `sales`: `8006`
 - `supplier`: `8007`
-- `tecnotelec_gateway`: `8008`
 - `tecnotelec`: `8009`
 - `customization`: `8010`
 - `document`: `8011`
 - `docucore`: `8012`
-- `docucore_gateway`: `8013`
-- `fiscora_gateway`: `8014`
 - `fiscora`: `8015`
 - `fiscal`: `8016`
-- `lexnova_gateway`: `8017`
-- `imagrafity_gateway`: `8018`
 - `imagrafity`: `8019`
-- `leadhunter_gateway`: `8020`
 - `leadhunter`: `8021`
 - `jobcron`: `8022`
+- `gateway`: `8025`
 
 Rangos reservados:
 

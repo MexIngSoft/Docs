@@ -20,7 +20,7 @@
 
 ## Pendientes tecnicos
 
-- Conectar `WEB.NJ.NEXT.Fiscora` con `API.PY.DJANGO.Fiscora.Gateway`.
+- Validar `WEB.NJ.NEXT.Fiscora` contra `API.PY.DJANGO.Gateway`.
 - Completar parser XML CFDI con validacion XSD/cadena original y
   normalizacion especializada de complementos.
 - Implementar generacion real de PDF visual con `API.PY.DJANGO.Document`.

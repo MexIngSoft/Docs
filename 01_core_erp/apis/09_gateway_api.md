@@ -1,14 +1,14 @@
-# Tecno Telec Gateway API
+# Gateway central API
 
 ## Nombre
 
 ```text
-tecnotelec-gateway-api
+central-gateway-api
 ```
 
 ## Responsabilidad
 
-Servir como API Gateway y BFF para el frontend web.
+Servir como API Gateway unico y versionado para todos los frontends.
 
 ## Endpoints sugeridos
 
@@ -27,19 +27,19 @@ Servir como API Gateway y BFF para el frontend web.
 Existe como proyecto Django:
 
 ```txt
-Docker.API.PY/API.PY.DJANGO.TecnoTelec.Gateway
+Docker.API.PY/API.PY.DJANGO.Gateway
 ```
 
 Puerto local Docker:
 
 ```txt
-8008
+8025
 ```
 
-Nginx expone el Gateway bajo:
+La entrada versionada se expone bajo:
 
 ```txt
-/api/gateway/
+/api/v1/
 ```
 
 ## Regla

@@ -8,7 +8,7 @@ DocuCore es el ecosistema documental del workspace comercial.
 |---|---|---|
 | `API.PY.DJANGO.Document` | Upload, validacion, storage, procesamiento y jobs de archivos. | `8011` |
 | `API.PY.DJANGO.DocuCore` | Catalogo de herramientas, configuracion, limites, historial y personalizacion. | `8012` |
-| `API.PY.DJANGO.DocuCore.Gateway` | Contrato frontend-backend y proxy seguro hacia APIs internas. | `8013` |
+| `API.PY.DJANGO.Gateway` | Entrada central y routing seguro hacia DocuCore y Document. | `8025` |
 | `WEB.NJ.NEXT.DocuCore` | Dashboard, herramientas, upload, jobs, downloads e historial. | `3004` |
 
 ## Document Intelligence

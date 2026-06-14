@@ -16,7 +16,7 @@ LeadHunter is an independent prospecting product for finding high-value business
 | Component | Repository name | Type | Responsibility |
 | --- | --- | --- | --- |
 | Web | `WEB.NJ.NEXT.LeadHunter` | Independent product web | Prospecting cockpit and exports |
-| Gateway | `API.PY.DJANGO.LeadHunter.Gateway` | Independent product gateway | Single public API surface for Web |
+| Gateway | `API.PY.DJANGO.Gateway` | Central gateway with `LEADHUNTER` routing | Single public API surface for Web |
 | Domain API | `API.PY.DJANGO.LeadHunter` | Independent product API | Apify integration, scoring, persistence |
 | Auth | `API.PY.DJANGO.Auth` | ERP/Core dependency | Identity, tokens and application access |
 

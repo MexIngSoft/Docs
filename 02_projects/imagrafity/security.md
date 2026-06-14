@@ -6,7 +6,7 @@ ACTIVE
 
 ## Reglas MVP
 
-- El frontend consume solo `API.PY.DJANGO.Imagrafity.Gateway`.
+- El frontend consume solo `API.PY.DJANGO.Gateway` con `application_code=IMAGRAFITY`.
 - Los secretos viven en `.env.local` o variables de entorno y no se publican.
 - `.env.local.example` documenta variables sin secretos reales.
 - CORS local queda limitado a `http://localhost:3006`.

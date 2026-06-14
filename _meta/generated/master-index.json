@@ -976,6 +976,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "02_projects/_ecosystem/gateway-matrix.md",
+    "title": "Matriz de Gateways",
+    "domain": "ecosystem",
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo de plataforma"
+  },
+  {
     "path": "02_projects/_templates/api-dependencies-template.md",
     "title": "Dependencias API - <Proyecto>",
     "domain": "business",
@@ -990,6 +998,14 @@
     "status": "unknown",
     "priority": "unknown",
     "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/_templates/gateway-migration-template.md",
+    "title": "Plantilla de migracion de Gateway",
+    "domain": "template",
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo documental"
   },
   {
     "path": "02_projects/buildora/README.md",
@@ -1808,6 +1824,22 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "02_projects/refapart/architecture/api-dependencies.md",
+    "title": "Dependencias API de REFAPART",
+    "domain": "business",
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo REFAPART"
+  },
+  {
+    "path": "02_projects/refapart/architecture/gateway-migration.md",
+    "title": "Migracion de Gateway REFAPART",
+    "domain": "business",
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo REFAPART"
+  },
+  {
     "path": "02_projects/refapart/architecture.md",
     "title": "Arquitectura REFAPART",
     "domain": "business",
@@ -1854,6 +1886,14 @@
     "status": "unknown",
     "priority": "unknown",
     "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/security/auth-migration.md",
+    "title": "Migracion Auth de REFAPART",
+    "domain": "business",
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo REFAPART"
   },
   {
     "path": "02_projects/refapart/visual-identity.md",
@@ -2433,7 +2473,7 @@
   },
   {
     "path": "03_standards/architecture/api-gateway-standard.md",
-    "title": "Estandar API y Gateway por proyecto",
+    "title": "Estandar API de proyecto y Gateway central",
     "domain": "standards",
     "status": "unknown",
     "priority": "unknown",
@@ -2616,6 +2656,38 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "03_standards/gateway/central-gateway-standard.md",
+    "title": "Estandar de Gateway central",
+    "domain": "standards",
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo de plataforma"
+  },
+  {
+    "path": "03_standards/gateway/gateway-migration-standard.md",
+    "title": "Estandar de migracion al Gateway central",
+    "domain": "standards",
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo de plataforma"
+  },
+  {
+    "path": "03_standards/gateway/gateway-routing-standard.md",
+    "title": "Estandar de routing del Gateway",
+    "domain": "standards",
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo de plataforma"
+  },
+  {
+    "path": "03_standards/gateway/legacy-gateway-deprecation-standard.md",
+    "title": "Deprecacion de Gateways legacy",
+    "domain": "standards",
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo de plataforma"
+  },
+  {
     "path": "03_standards/global-governance.md",
     "title": "Gobierno global del ecosistema",
     "domain": "standards",
@@ -2736,6 +2808,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "03_standards/operations/module-lifecycle-and-feature-flags.md",
+    "title": "Ciclo de vida de modulos y feature flags",
+    "domain": "standards",
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo de plataforma"
+  },
+  {
     "path": "03_standards/operations/multi-provider.md",
     "title": "Estrategia multi-proveedor",
     "domain": "standards",
@@ -2745,11 +2825,11 @@
   },
   {
     "path": "03_standards/operations/observability.md",
-    "title": "Observabilidad",
+    "title": "Observabilidad operativa",
     "domain": "standards",
-    "status": "unknown",
-    "priority": "unknown",
-    "owner": "PENDIENTE_DE_DEFINIR"
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo de plataforma"
   },
   {
     "path": "03_standards/operations/project-closure-standard.md",
@@ -2763,9 +2843,9 @@
     "path": "03_standards/operations/provider-integration-standard.md",
     "title": "Estandar para integrar proveedores",
     "domain": "standards",
-    "status": "unknown",
-    "priority": "unknown",
-    "owner": "PENDIENTE_DE_DEFINIR"
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo de integraciones"
   },
   {
     "path": "03_standards/operations/reporting.md",
@@ -3241,7 +3321,7 @@
   },
   {
     "path": "agents/AGENTS-000.md",
-    "title": "AUDITORÍA GENERAL DE DOCUMENTACIÓN Y ARQUITECTURA",
+    "title": "PENDIENTE_DE_DEFINIR",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -3257,7 +3337,7 @@
   },
   {
     "path": "agents/AGENTS-002.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "PROMPT CODEX — IMPLEMENTACIÓN ESTÁNDAR AUTH EN PROYECTOS EXISTENTES",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -3265,7 +3345,7 @@
   },
   {
     "path": "agents/AGENTS-003.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "AGENTE CODEX — MIGRACIÓN A GATEWAY CENTRAL",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -3577,10 +3657,10 @@
   },
   {
     "path": "templates/etl-template.md",
-    "title": "Titulo",
-    "domain": "templates",
-    "status": "draft",
-    "priority": "P2",
+    "title": "ETL title",
+    "domain": "integration",
+    "status": "template",
+    "priority": "p2",
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {

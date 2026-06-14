@@ -12,7 +12,7 @@ Ejecutar Imagrafity localmente con Gateway, API de dominio, Web y base de datos.
 
 ```text
 WEB.NJ.NEXT.Imagrafity
-  -> API.PY.DJANGO.Imagrafity.Gateway
+  -> API.PY.DJANGO.Gateway
   -> API.PY.DJANGO.Imagrafity
   -> PostgreSQL
 ```

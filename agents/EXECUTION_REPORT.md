@@ -93,6 +93,66 @@ queda vacio.
 
 ---
 
+# 2026-06-14 - Modularizacion del Gateway central
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-002.md` | Parcialmente completado | RefaPart Auth continua implementado; la prueba integrada Auth/PostgreSQL sigue bloqueada porque Docker Desktop no expone el daemon. |
+| `AGENTS-003.md` | Parcialmente completado | Gateway central y migracion RefaPart existen; se reforzaron versionado, rate limit y tests. Los demas proyectos siguen en migracion planificada. |
+| `AGENTS-004.md` | Completado | Gateway central separado por core, Auth, router, registro, clientes, versionado, observabilidad, rate limit, adapters y tests de contrato. |
+| `AGENTS-005.md` - `AGENTS-030.md` | Sin instrucciones | Placeholders vacios. |
+
+## Implementacion
+
+- Se dividio `API.PY.DJANGO.Gateway` en modulos con responsabilidades
+  independientes: `gateway_core`, `auth_proxy`, `project_router`,
+  `api_registry`, `versioning`, `observability`, `rate_limit`, `health`,
+  `clients` y `adapters`.
+- El registro YAML ahora declara versiones Auth, Project y Core por proyecto.
+- Se separaron clientes para Auth, APIs de proyecto y APIs Core.
+- Los logs incluyen timestamp, request/correlation ID, application code,
+  usuario, target, version, status, duracion y error code.
+- Se agrego rate limit configurable por IP, aplicacion, usuario y endpoint con
+  respuesta normalizada `RATE_LIMIT_EXCEEDED`.
+- Se agregaron pruebas separadas de Auth, registro, versionado, router,
+  RefaPart y rate limit.
+- Se actualizaron los estandares canonicos de Gateway con la estructura y las
+  protecciones contra regresion.
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `python manage.py test tests` en Gateway central | OK; 13 tests. |
+| `python manage.py check` en Gateway central | OK. |
+| `python -m compileall apps clients adapters config routes tests` | OK. |
+| `git diff --check` en Gateway central | OK. |
+| Log JSON runtime | OK; target, version y error code verificados. |
+| Docker daemon | No disponible; `dockerDesktopLinuxEngine` no existe. |
+
+## Decisiones y pendientes
+
+- No se cambiaron frontends adicionales: cada migracion requiere validar sus
+  contratos antes de reemplazar el Gateway legacy.
+- El rate limit usa `LocMemCache` para el MVP local. Produccion con multiples
+  replicas requiere Redis u otro cache compartido.
+- `AGENTS-002.md` y `AGENTS-003.md` permanecen activos hasta completar pruebas
+  integradas y migraciones por proyecto.
+
+## Limpieza
+
+`AGENTS-004.md` se archivo en:
+
+```text
+Docs/_archive/agents/2026-06-14-central-gateway-modularization/AGENTS-004.md
+```
+
+El placeholder original queda vacio.
+
+---
+
 # 2026-06-14 - Auditoria arquitectura documental y estandar Auth web
 
 ## Alcance
@@ -1370,7 +1430,8 @@ tareas ejecutables.
 | `AGENTS-000.md` | Completado | Regla oficial de IA documental, OCR, clasificacion, segmentacion, indice y revision humana documentada. |
 | `AGENTS-001.md` | Completado | Ubicacion backend/API documental separada documentada y enlazada con LexNova/DocuCore. |
 | `AGENTS-002.md` | Completado | Decision de API Documentos reutilizable, indice web primero y PDF indexado opcional documentada. |
-| `AGENTS-003.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+| `AGENTS-003.md` | Parcialmente completado | Se creo el Gateway central y se migro RefaPart con fallback legacy. Los demas proyectos quedan planificados hasta validar sus contratos y runtimes. |
+| `AGENTS-004.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
 
 ## Pendientes
 
@@ -9951,3 +10012,186 @@ Docs/_archive/agents/2026-06-11-jobcron-official-docker-architecture/AGENTS-000.
 ```
 
 El archivo original se conserva vacio en `Docs/agents/`.
+# 2026-06-14 - Cierre auditoria general de documentacion y arquitectura
+
+## Agents ejecutados
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se verificaron los 21 bloques de auditoria; lo seguro se corrigio y las migraciones destructivas, legales o dependientes de evidencia quedaron como pendientes controlados. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Implementacion
+
+- Se reforzo el estandar de observabilidad con logs JSON, identificadores de
+  solicitud/correlacion, version, entorno, seguridad y propagacion entre
+  servicios.
+- Se normalizo `templates/etl-template.md` con fuente, destino, dependencias,
+  frecuencia, timeout, reintentos, checkpoint, idempotencia, rollback y
+  validacion.
+- Se amplio el estandar de proveedores con una estructura documental uniforme
+  y reglas para integraciones pequenas o no aplicables.
+- Se creo `03_standards/operations/module-lifecycle-and-feature-flags.md` para
+  estados de desarrollo y visibilidad por proyecto, tenant, pais, region y
+  entorno.
+- Se completo el informe `00_audit/12_general_documentation_architecture_audit.md`
+  con resultados, pendientes y riesgos por categoria.
+- Se actualizaron indices y navegacion documental.
+
+## Decisiones
+
+- No se creo `LICENSE`; requiere eleccion legal del owner.
+- No se migro masivamente front matter historico, estructura de proyectos ni
+  carpetas Docker.
+- No se cambio la red operativa `crejo` a `jobcron_network`; requiere una fase
+  coordinada entre compose, scripts, Nginx y runbooks.
+- No se crearon documentos vacios por proveedor: una integracion pequena puede
+  cubrir los temas obligatorios dentro de su README.
+- Feature flags controlan disponibilidad, pero nunca sustituyen permisos ni
+  autorizacion de backend.
+- CPU y memoria son metricas obligatorias solo cuando puedan obtenerse de forma
+  fiable y proporcional al costo operativo.
+
+## Informacion faltante y pendientes
+
+- Tipo de licencia del repositorio.
+- Owners nominales por proyecto y dominio.
+- Adopcion gradual de front matter en documentos historicos.
+- ERD y diccionarios completos por API activa.
+- Publisher/subscriber confirmado para todos los eventos reales.
+- Plan aprobado para migrar la red Docker heredada.
+- Aplicacion del nuevo estandar de observabilidad en cada API.
+
+## Validaciones
+
+- `python scripts/build_master_index.py`.
+- `python scripts/validate_frontmatter.py`.
+- `git diff --check`.
+- Busqueda local de referencias a observabilidad, ETL, proveedores,
+  FeatureAvailability e indices.
+
+## Limpieza
+
+`AGENTS-000.md` se copio a:
+
+```text
+Docs/_archive/agents/2026-06-14-general-documentation-architecture-audit/AGENTS-000.md
+```
+
+El archivo original se conserva como placeholder vacio en `Docs/agents/`.
+
+---
+
+# 2026-06-14 - Implementacion Auth centralizada en RefaPart
+
+## Alcance
+
+Se ejecutaron los agents activos en orden numerico y se implemento el MVP de
+autenticacion de RefaPart conforme al patron Web -> Gateway/BFF -> Auth.
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | El estandar Auth solicitado ya estaba documentado y se verifico contra la documentacion canonica. |
+| `AGENTS-001.md` | Completado | Se confirmo que el estandar obligatorio de login, versionado y migracion ya existe y esta indexado. |
+| `AGENTS-002.md` | Parcialmente completado | Se implementaron Gateway, registro REFAPART en Auth, flujos web y Docker enfocado. Falta la prueba integrada con Auth/PostgreSQL porque Docker Desktop no esta disponible. |
+| `AGENTS-003.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Implementacion
+
+- Se creo `API.PY.DJANGO.RefaPart.Gateway` como repositorio independiente y
+  unica entrada de la web hacia Auth.
+- Se agregaron login, refresh, logout, usuario actual, permisos, registro y
+  recuperacion de contrasena con cookies HttpOnly.
+- Auth ahora siembra la aplicacion `REFAPART`, su configuracion de correo y el
+  rol inicial `CUSTOMER`; el registro REFAPART asigna ese rol por defecto.
+- La web incorpora proveedor de sesion, cliente con refresh automatico,
+  guardas y rutas de login, registro, recuperacion, cuenta, dashboard, perfil,
+  configuracion, logout y acceso denegado.
+- Se agrego `docker-compose.refapart.api.yml` para levantar solo Auth y el
+  Gateway central junto al Gateway legacy de RefaPart, compatible con el
+  compose enfocado de la web.
+- Se creo `API.PY.DJANGO.Gateway` con Auth versionado, registro YAML de
+  proyectos, routing controlado, request/correlation IDs, errores normalizados
+  y health checks.
+- RefaPart Web ahora usa `http://localhost:8025/api/v1`; el Gateway legacy
+  permanece disponible en `8023` como rollback.
+- Se actualizaron contratos, arquitectura, dependencias, migracion Auth,
+  runbook, repositorios, puertos, matriz API e indices documentales.
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| Tests del Gateway | OK; 4 tests. |
+| Tests del Gateway central | OK; 4 tests. |
+| `python manage.py check` del Gateway | OK. |
+| `python manage.py check` de Auth | OK; PostgreSQL local detenido genero solo advertencia de conexion. |
+| `python manage.py makemigrations --check --dry-run` de Auth | OK; sin cambios pendientes. |
+| `python -m compileall` en Auth y Gateway | OK. |
+| `npm run lint` en RefaPart Web | OK. |
+| `npm run build` en RefaPart Web | OK; 30 paginas generadas. |
+| `docker compose ... config --quiet` para API y Web RefaPart | OK. |
+| Health local del Gateway en `http://127.0.0.1:8023/api/refapart/health/` | OK, HTTP 200. |
+| Health local del Gateway central en `http://127.0.0.1:8025/health/` | OK, HTTP 200. |
+| Registro de proyectos en `/api/health/projects/` | OK, HTTP 200. |
+| Auth sin `X-Application-Code` | OK, HTTP 400 `APPLICATION_CODE_REQUIRED`. |
+| Auth con REFAPART y upstream detenido | OK, HTTP 502 normalizado con `correlation_id`. |
+| Pagina local `http://127.0.0.1:3008/login` | OK, HTTP 200. |
+| Prueba visual con Browser | No ejecutable; el navegador integrado reporto `iab` no disponible. |
+| Prueba integrada Docker/Auth/PostgreSQL | Bloqueada; Docker Desktop no expone `dockerDesktopLinuxEngine`. |
+
+## Decisiones y pendientes
+
+- La web nunca consume Auth directamente; toda sesion pasa por el Gateway.
+- Los tokens no se guardan en `localStorage`; se usan cookies HttpOnly.
+- Los permisos REFAPART quedan vacios hasta definir el catalogo funcional del
+  proyecto; no se inventaron permisos de negocio.
+- El correo usa valores locales y requiere dominio, remitente y URLs publicas
+  antes de produccion.
+- El nuevo Gateway tiene `origin` configurado hacia
+  `MexIngSoft/API.PY.DJANGO.RefaPart.Gateway`, pero no se verifico la existencia
+  o publicacion del remoto en esta corrida.
+- El Gateway central tiene `origin` configurado hacia
+  `MexIngSoft/API.PY.DJANGO.Gateway`, tambien pendiente de verificar/publicar.
+- `AGENTS-002.md` permanece activo hasta completar la prueba integrada y
+  registrar evidencia de login, refresh, logout, registro y recuperacion.
+- `AGENTS-003.md` permanece activo: RefaPart esta en estado `migrating`; los
+  demas frontends no se cambiaron sin pruebas especificas y el Gateway legacy
+  no puede pasar a `disabled` hasta validar Auth/PostgreSQL en Docker.
+- Quedan pendientes del Gateway central: rate limit persistente, auditoria
+  tecnica durable, pruebas de routing Core/Project con servicios reales y la
+  migracion individual de los demas frontends.
+
+## Limpieza
+
+`AGENTS-000.md` y `AGENTS-001.md` se archivaron en:
+
+```text
+Docs/_archive/agents/2026-06-14-refapart-auth-implementation/
+```
+
+Sus placeholders activos quedaron vacios. `AGENTS-002.md` y `AGENTS-003.md` no
+se limpiaron porque conservan pendientes de validacion y migracion gradual.
+
+---
+
+# 2026-06-14 - Continuacion agents Auth y Gateway central
+
+## Cierre de la corrida
+
+- `AGENTS-002.md`: parcialmente completado; Auth RefaPart esta implementado,
+  pero Docker/PostgreSQL siguen no disponibles para prueba integrada.
+- `AGENTS-003.md`: parcialmente completado; RefaPart usa el Gateway central y
+  los demas proyectos permanecen planificados hasta validar contratos propios.
+- `AGENTS-004.md`: completado, archivado y limpiado. El Gateway central quedo
+  modular, versionado, observable, con rate limit y adapters.
+- `AGENTS-005.md` a `AGENTS-030.md`: sin instrucciones.
+
+Validacion final: 13 tests Gateway, checks Django Auth/Gateway, build y lint de
+RefaPart Web, compose config, shell syntax, indices y front matter sin errores
+malformados. Docker daemon continua bloqueado por ausencia de
+`dockerDesktopLinuxEngine`.
+
+---

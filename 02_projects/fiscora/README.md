@@ -10,7 +10,7 @@ Fiscora no debe percibirse como un descargador de XML. Debe sentirse como una pl
 
 | Proyecto | Rol | Estado |
 |---|---|---|
-| `API.PY.DJANGO.Fiscora.Gateway` | BFF, seguridad, sesiones, rate limiting y contrato frontend-backend. | MVP creado |
+| `API.PY.DJANGO.Gateway` | Entrada central, seguridad, sesiones, rate limiting y routing `FISCORA`. | Activo |
 | `API.PY.DJANGO.Fiscora` | Producto comercial, planes, creditos, preferencias y reglas de uso. | MVP creado |
 | `API.PY.DJANGO.Fiscal` | Nucleo fiscal ERP para CFDI, SAT, XML, solicitudes, paquetes, reportes y auditoria. | MVP creado |
 | `API.PY.DJANGO.Document` | XML, PDF, render visual, plantillas y transformaciones documentales. | Existente |
@@ -26,7 +26,7 @@ La fase actual es cierre de definicion MVP:
 - Usar `API.PY.DJANGO.Fiscal` como nucleo reutilizable de CFDI/SAT.
 - Usar `API.PY.DJANGO.Fiscora` para producto comercial, planes, creditos y
   preferencias.
-- Usar `API.PY.DJANGO.Fiscora.Gateway` como unica entrada del frontend.
+- Usar `API.PY.DJANGO.Gateway` como unica entrada del frontend.
 - Usar `API.PY.DJANGO.Document` para render visual, XML, PDF y plantillas.
 - Mantener `WEB.NJ.NEXT.Fiscora` como preview visual hasta conectar datos reales
   del gateway.

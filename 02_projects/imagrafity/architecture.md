@@ -13,7 +13,7 @@ creativa con catalogo, editor, preview, cotizacion y orden de produccion.
 
 ```text
 WEB.NJ.NEXT.Imagrafity
--> API.PY.DJANGO.Imagrafity.Gateway
+-> API.PY.DJANGO.Gateway
 -> API.PY.DJANGO.Imagrafity
 -> Core ERP / JobCron / integraciones futuras
 ```
@@ -23,7 +23,7 @@ WEB.NJ.NEXT.Imagrafity
 | Capa | Ruta | Puerto | Responsabilidad |
 |---|---|---:|---|
 | Frontend | `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity` | `3006` | Catalogo, editor visual, preview, cotizacion y seguimiento inicial. |
-| Gateway | `Docker.API.PY/API.PY.DJANGO.Imagrafity.Gateway` | `8018` | Frontera BFF, proxy seguro, normalizacion de errores y consumo unico por frontend. |
+| Gateway central | `Docker.API.PY/API.PY.DJANGO.Gateway` | `8025` | Frontera unica, routing por `IMAGRAFITY` y normalizacion de errores. |
 | API | `Docker.API.PY/API.PY.DJANGO.Imagrafity` | `8019` | Dominio de personalizacion, productos, plantillas, disenos y ordenes. |
 
 ## Dependencias futuras

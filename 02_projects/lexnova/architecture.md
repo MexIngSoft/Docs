@@ -32,7 +32,7 @@ LexNova debe usar gateway/BFF propio:
 
 ```text
 WEB.NJ.NEXT.LexNova
-  -> API.PY.DJANGO.LexNova.Gateway
+  -> API.PY.DJANGO.Gateway
   -> API.PY.DJANGO.LexNova
   -> Core ERP APIs
 ```
@@ -41,7 +41,7 @@ Auth es una API core y solo debe ser consumida por el gateway:
 
 ```text
 WEB.NJ.NEXT.LexNova
-  -> API.PY.DJANGO.LexNova.Gateway
+  -> API.PY.DJANGO.Gateway
   -> API.PY.DJANGO.Auth
 ```
 
@@ -58,7 +58,7 @@ WEB.NJ.NEXT.LexNova -> Core ERP APIs
 | Capa | Repositorio |
 |---|---|
 | Web | `WEB.NJ.NEXT.LexNova` |
-| Gateway/BFF | `API.PY.DJANGO.LexNova.Gateway` |
+| Gateway central | `API.PY.DJANGO.Gateway` |
 | Domain API | `API.PY.DJANGO.LexNova` |
 | Auth Core | `API.PY.DJANGO.Auth` |
 
@@ -101,7 +101,7 @@ LexNova.
 La web debe configurar:
 
 ```text
-NEXT_PUBLIC_LEXNOVA_GATEWAY_BASE_URL=http://localhost:8017/api/lexnova
+NEXT_PUBLIC_LEXNOVA_GATEWAY_BASE_URL=http://localhost:8025/api/v1/projects/LEXNOVA
 ```
 
 El cliente HTTP del frontend debe construir llamadas relativas al gateway. Las
@@ -139,7 +139,7 @@ Reglas:
 ## Puerto local
 
 ```text
-API.PY.DJANGO.LexNova.Gateway -> 8017
+API.PY.DJANGO.Gateway -> 8025
 API.PY.DJANGO.LexNova -> 8003
 API.PY.DJANGO.Auth -> 8000
 WEB.NJ.NEXT.LexNova -> 3002

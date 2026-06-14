@@ -59,7 +59,7 @@ if ($Build) {
     $apiArgs += "--build"
 }
 
-Invoke-Step "Starting focused DocuCore APIs: Document, DocuCore and Gateway" {
+Invoke-Step "Starting focused DocuCore APIs: central Gateway, Document and DocuCore" {
     docker @apiArgs
 }
 
@@ -105,15 +105,10 @@ if ($RunChecks) {
         }
         Pop-Location
 
-        Push-Location (Join-Path $root "Docker.API.PY\API.PY.DJANGO.DocuCore.Gateway")
+        Push-Location (Join-Path $root "Docker.API.PY\API.PY.DJANGO.Gateway")
         Invoke-WithEnv @{
-            DJANGO_SECRET_KEY = "local-docucore-gateway-secret"
-            POSTGRES_DB = "comercial"
-            POSTGRES_USER = "comercial_user"
-            POSTGRES_PASSWORD = "local-comercial-password"
-            DB_SCHEMA = "DocuCoreGateway"
-            DOCUMENT_API_BASE_URL = "http://localhost:8011"
-            DOCUCORE_API_BASE_URL = "http://localhost:8012"
+            DJANGO_SECRET_KEY = "local-central-gateway-secret"
+            DOCUMENTS_API_BASE_URL = "http://localhost:8011"
             DEVELOPMENT_MODE = "True"
         } {
             python manage.py check
@@ -132,4 +127,4 @@ Write-Host ""
 Write-Host "DocuCore Web: http://localhost:3004/"
 Write-Host "Document API: http://localhost:8011/"
 Write-Host "DocuCore API: http://localhost:8012/"
-Write-Host "DocuCore Gateway: http://localhost:8013/api/docucore/health/"
+Write-Host "Central Gateway: http://localhost:8025/health/"

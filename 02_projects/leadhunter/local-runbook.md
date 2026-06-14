@@ -13,7 +13,7 @@ no relacionados.
 
 ```text
 WEB.NJ.NEXT.LeadHunter
-  -> API.PY.DJANGO.LeadHunter.Gateway
+  -> API.PY.DJANGO.Gateway
   -> API.PY.DJANGO.Auth
   -> API.PY.DJANGO.LeadHunter
   -> PostgreSQL
@@ -55,7 +55,7 @@ docker compose -f Docker.WEB.NJ\docker-compose.leadhunter.web.yml up -d --build
 ```powershell
 docker compose -f Docker.API.PY\docker-compose.leadhunter.api.yml config --quiet
 docker compose -f Docker.WEB.NJ\docker-compose.leadhunter.web.yml config --quiet
-Invoke-WebRequest http://localhost:8020/api/leadhunter/health/
+Invoke-WebRequest http://localhost:8025/health/
 Invoke-WebRequest http://localhost:8021/api/leadhunter/health/
 Invoke-WebRequest http://localhost:3007/prospectos
 ```

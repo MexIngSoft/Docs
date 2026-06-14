@@ -9,7 +9,7 @@ JobCron.
 
 ```text
 REFAPART Web
--> REFAPART Gateway/BFF
+-> API.PY.DJANGO.Gateway
 -> REFAPART API
 -> JobCron / Core ERP / integraciones
 ```
@@ -21,7 +21,7 @@ El frontend no debe consumir JobCron, Core ERP ni base de datos directamente.
 | Capa | Responsabilidad |
 |---|---|
 | REFAPART Web | UX comercial, busqueda, resultados, favoritos, solicitud y seguimiento visible. |
-| REFAPART Gateway | Sesion, permisos de frontera, agregacion, normalizacion de respuestas y proxy seguro. |
+| Gateway central | Sesion, permisos de frontera, routing, normalizacion de respuestas y proxy seguro. |
 | REFAPART API | Clientes, busquedas, cotizaciones visibles, pedidos, pagos y tracking publico. |
 | JobCron | Proveedores, costos, compras internas, WhatsApp proveedor, logistica profunda, comisiones, auditoria y jobs. |
 
@@ -51,3 +51,8 @@ El frontend no debe consumir JobCron, Core ERP ni base de datos directamente.
 La primera implementacion web usa datos mock locales para validar interfaz. No
 simula backend real ni promete pagos, inventario o proveedor final como
 funcionalidad productiva.
+
+Auth ya se implementa mediante `API.PY.DJANGO.Gateway`; el Gateway especifico
+de RefaPart queda temporalmente como fallback `deprecated`. Las funciones
+comerciales de piezas, cotizaciones y pedidos continuan en modo visual/mock
+hasta crear `API.PY.DJANGO.RefaPart`.

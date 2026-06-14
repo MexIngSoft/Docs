@@ -27,21 +27,16 @@ $apiServices = @(
     @{ Name = "procurement"; Port = 8005; Expected = @(200, 301, 302, 401, 403, 404) },
     @{ Name = "sales"; Port = 8006; Expected = @(200, 301, 302, 401, 403, 404) },
     @{ Name = "supplier"; Port = 8007; Expected = @(200, 301, 302, 401, 403, 404) },
-    @{ Name = "tecnotelec_gateway"; Port = 8008; Expected = @(200, 301, 302, 401, 403, 404) },
     @{ Name = "tecnotelec"; Port = 8009; Expected = @(200, 301, 302, 401, 403, 404) },
     @{ Name = "customization"; Port = 8010; Expected = @(200, 301, 302, 401, 403, 404) },
     @{ Name = "document"; Port = 8011; Expected = @(200, 301, 302, 401, 403, 404) },
     @{ Name = "docucore"; Port = 8012; Expected = @(200, 301, 302, 401, 403, 404) },
-    @{ Name = "docucore_gateway"; Port = 8013; Expected = @(200, 301, 302, 401, 403, 404) },
-    @{ Name = "fiscora_gateway"; Port = 8014; Expected = @(200, 301, 302, 401, 403, 404) },
     @{ Name = "fiscora"; Port = 8015; Expected = @(200, 301, 302, 401, 403, 404) },
     @{ Name = "fiscal"; Port = 8016; Expected = @(200, 301, 302, 401, 403, 404) },
-    @{ Name = "lexnova_gateway"; Port = 8017; CheckPath = "/api/lexnova/health/"; Expected = @(200) },
-    @{ Name = "imagrafity_gateway"; Port = 8018; CheckPath = "/api/imagrafity/health/"; Expected = @(200) },
     @{ Name = "imagrafity"; Port = 8019; CheckPath = "/api/imagrafity/health/"; Expected = @(200) },
-    @{ Name = "leadhunter_gateway"; Port = 8020; CheckPath = "/api/leadhunter/health/"; Expected = @(200) },
     @{ Name = "leadhunter"; Port = 8021; CheckPath = "/api/leadhunter/health/"; Expected = @(200) },
-    @{ Name = "jobcron"; Port = 8022; Expected = @(200, 301, 302, 401, 403, 404) }
+    @{ Name = "jobcron"; Port = 8022; Expected = @(200, 301, 302, 401, 403, 404) },
+    @{ Name = "gateway"; Port = 8025; CheckPath = "/health/"; Expected = @(200) }
 )
 
 $webServices = @(
@@ -295,7 +290,7 @@ try {
 
     if ($RunDjangoChecks) {
         Write-Step "Django checks principales"
-        foreach ($project in @("auth", "lexnova", "lexnova_gateway")) {
+        foreach ($project in @("auth", "gateway", "lexnova")) {
             docker compose -f $composeFiles.Api exec -T api-multiproyecto sh /usr/src/api/start.sh manage $project check
         }
     }

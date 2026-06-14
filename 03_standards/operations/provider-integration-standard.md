@@ -1,3 +1,12 @@
+---
+title: Estandar para integrar proveedores
+domain: standards
+status: active
+priority: p1
+owner: Equipo de integraciones
+last_reviewed: 2026-06-14
+---
+
 # Estandar para integrar proveedores
 
 ## Objetivo
@@ -26,6 +35,31 @@ supplier/{provider}/sync
 supplier/management/commands/sync_{provider}_*.py
 supplier/management/commands/publish_{provider}_*.py
 ```
+
+## Documentacion canonica por proveedor
+
+Cada proveedor nuevo debe cubrir estos temas. Se permiten archivos separados o
+un README canonico con secciones equivalentes cuando la integracion sea pequena:
+
+```text
+04_integrations/<provider>/
+  README.md
+  authentication.md
+  catalog.md
+  inventory.md
+  pricing.md
+  orders.md
+  etl.md
+  mapping.md
+  known-issues.md
+```
+
+No se crean documentos vacios solo para completar la estructura. Los temas no
+aplicables deben quedar declarados como `No aplicable` en el README.
+
+El documento ETL debe partir de `Docs/templates/etl-template.md` y registrar
+fuente, destino, frecuencia, dependencias, timeout, reintentos, checkpoint,
+idempotencia, rollback y observabilidad.
 
 ## Requisitos de datos
 
@@ -63,3 +97,6 @@ Cada proveedor debe guardar:
 - Los errores por registro no deben detener todo el proceso.
 - El dato original queda disponible para auditoria.
 - Los modulos internos no conocen detalles de la API externa.
+- La documentacion declara limites, rate limits, manejo de secretos y fallos
+  conocidos.
+- Los logs cumplen `Docs/03_standards/operations/observability.md`.

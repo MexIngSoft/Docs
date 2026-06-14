@@ -51,7 +51,7 @@ Permite personalizar productos como tazas, playeras u otros articulos con editor
 | Proyecto | Ruta | Puerto |
 |---|---|---:|
 | Frontend | `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity` | `3006` |
-| Gateway | `Docker.API.PY/API.PY.DJANGO.Imagrafity.Gateway` | `8018` |
+| Gateway central | `Docker.API.PY/API.PY.DJANGO.Gateway` | `8025` |
 | API | `Docker.API.PY/API.PY.DJANGO.Imagrafity` | `8019` |
 
 ## Pendientes

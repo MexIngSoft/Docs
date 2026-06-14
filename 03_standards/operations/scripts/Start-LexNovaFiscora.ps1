@@ -54,8 +54,8 @@ if ($Build) {
     $apiArgs += "--build"
 }
 
-Invoke-Step "Starting focused APIs: Auth, LexNova, Document, Fiscora and Fiscal" {
-    Invoke-WithEnv @{ API_PROJECTS = "auth lexnova lexnova_gateway document fiscora_gateway fiscora fiscal" } {
+Invoke-Step "Starting focused APIs: Auth, central Gateway, LexNova, Document, Fiscora and Fiscal" {
+    Invoke-WithEnv @{ API_PROJECTS = "auth gateway lexnova document fiscora fiscal" } {
         docker @apiArgs
     }
 }
@@ -106,12 +106,10 @@ if ($RunChecks) {
         }
         Pop-Location
 
-        Push-Location (Join-Path $root "Docker.API.PY\API.PY.DJANGO.LexNova.Gateway")
+        Push-Location (Join-Path $root "Docker.API.PY\API.PY.DJANGO.Gateway")
         Invoke-WithEnv @{
-            DJANGO_SECRET_KEY = "local-lexnova-gateway-secret"
-            DATABASE_URL = "sqlite:///:memory:"
+            DJANGO_SECRET_KEY = "local-central-gateway-secret"
             AUTH_API_BASE_URL = "http://localhost:8000"
-            LEXNOVA_API_BASE_URL = "http://localhost:8003"
             DEVELOPMENT_MODE = "True"
         } {
             python manage.py check
@@ -125,21 +123,6 @@ if ($RunChecks) {
             POSTGRES_USER = "comercial_user"
             POSTGRES_PASSWORD = "local-comercial-password"
             DB_SCHEMA = "Document"
-            DEVELOPMENT_MODE = "True"
-        } {
-            python manage.py check
-        }
-        Pop-Location
-
-        Push-Location (Join-Path $root "Docker.API.PY\API.PY.DJANGO.Fiscora.Gateway")
-        Invoke-WithEnv @{
-            DJANGO_SECRET_KEY = "local-fiscora-gateway-secret"
-            POSTGRES_DB = "comercial"
-            POSTGRES_USER = "comercial_user"
-            POSTGRES_PASSWORD = "local-comercial-password"
-            DB_SCHEMA = "FiscoraGateway"
-            FISCORA_API_BASE_URL = "http://localhost:8015"
-            FISCAL_API_BASE_URL = "http://localhost:8016"
             DEVELOPMENT_MODE = "True"
         } {
             python manage.py check
@@ -183,5 +166,4 @@ if ($RunChecks) {
 Write-Host ""
 Write-Host "LexNova: http://localhost:3002/auth/login"
 Write-Host "Fiscora: http://localhost:3005/"
-Write-Host "LexNova Gateway: http://localhost:8017/api/lexnova/health/"
-Write-Host "Fiscora Gateway: http://localhost:8014/api/fiscora/health/"
+Write-Host "Central Gateway: http://localhost:8025/health/"

@@ -32,7 +32,7 @@ primera experiencia usable de Fiscora.
 - `npm run build` en `WEB.NJ.NEXT.Fiscora`.
 - `python manage.py check` en `API.PY.DJANGO.Fiscal`.
 - `python manage.py check` en `API.PY.DJANGO.Fiscora`.
-- `python manage.py check` en `API.PY.DJANGO.Fiscora.Gateway`.
+- `python manage.py check` en `API.PY.DJANGO.Gateway`.
 - `docker compose config` en `Docker.API.PY` y `Docker.WEB.NJ`.
 
 ## Arranque local focalizado
