@@ -87,7 +87,12 @@ NEXT_PUBLIC_APP_NAME=
 NEXT_PUBLIC_HOST=
 NEXT_PUBLIC_GATEWAY_BASE_URL=
 NEXT_PUBLIC_ENVIRONMENT=
+NEXT_PUBLIC_APPLICATION_CODE=
 ```
+
+`NEXT_PUBLIC_APPLICATION_CODE` es obligatorio cuando el proyecto usa Auth. Si
+el proyecto no requiere login, debe documentar `auth_required: false` en su
+documentacion canonica.
 
 ## Comunicacion con APIs
 
@@ -133,8 +138,19 @@ app/
 ## Autenticacion y permisos
 
 - La sesion debe resolverse contra el gateway/auth.
+- Todo proyecto web nuevo debe incluir login estandar, salvo excepcion
+  documentada con `auth_required: false`.
+- El flujo obligatorio es `Frontend -> Project Gateway/BFF -> Auth`; el
+  frontend no debe consumir `API.PY.DJANGO.Auth` directamente.
+- Las llamadas de sesion/permisos deben poder incluir `X-Application-Code`.
 - Los permisos se deben validar en backend y reflejar en frontend solo para experiencia de usuario.
 - El frontend nunca debe ser la unica barrera de seguridad.
+
+Referencia canonica:
+
+```text
+Docs/03_standards/auth/web-auth-login-standard.md
+```
 
 ## Errores, logs y auditoria
 
@@ -160,3 +176,5 @@ Un frontend queda estandarizado cuando:
 - Tiene rutas y layouts documentados.
 - Tiene README con arranque local.
 - Tiene reglas de UI, auth, permisos y errores documentadas.
+- Si usa Auth, esta registrado en
+  `Docs/02_projects/_ecosystem/api-version-matrix.md`.

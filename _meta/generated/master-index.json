@@ -120,6 +120,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "00_audit/12_general_documentation_architecture_audit.md",
+    "title": "Auditoria general de documentacion y arquitectura",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "00_audit/99_final_review.md",
     "title": "Revision final documental",
     "domain": "audit",
@@ -954,6 +962,30 @@
   {
     "path": "02_projects/_ecosystem/05_lexnova_docucore_fiscora_mvp_alignment.md",
     "title": "Alineacion MVP LexNova, DocuCore y Fiscora",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/_ecosystem/api-version-matrix.md",
+    "title": "Matriz de versiones API por proyecto",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/_templates/api-dependencies-template.md",
+    "title": "Dependencias API - <Proyecto>",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/_templates/auth-migration-template.md",
+    "title": "Migracion Auth - <Proyecto>",
     "domain": "business",
     "status": "unknown",
     "priority": "unknown",
@@ -2408,6 +2440,22 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "03_standards/auth/auth-versioning-standard.md",
+    "title": "Estandar de versionado Auth",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/auth/web-auth-login-standard.md",
+    "title": "Estandar de login Auth para webs",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "03_standards/database/sql-server-publication-standard.md",
     "title": "Estandar de nombres SQL Server para tablas publicadas",
     "domain": "standards",
@@ -3193,7 +3241,7 @@
   },
   {
     "path": "agents/AGENTS-000.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "AUDITORÍA GENERAL DE DOCUMENTACIÓN Y ARQUITECTURA",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",

@@ -14,6 +14,7 @@
 | Audit | `00_audit/09_api_routes_inventory.md` | Inventario actual de rutas API | ACTIVE | P3 | Equipo documental |
 | Audit | `00_audit/10_development_gap_analysis.md` | Analisis global de pendientes de desarrollo | ACTIVE | P1 | Equipo documental |
 | Audit | `00_audit/11_documentation_structure_optimization.md` | Optimizacion de estructura documental | ACTIVE | P1 | Equipo documental |
+| Audit | `00_audit/12_general_documentation_architecture_audit.md` | Auditoria general de documentacion y arquitectura | ACTIVE | P1 | Equipo documental |
 | Audit | `00_audit/99_final_review.md` | Revision final documental | ARCHIVE_REFERENCE | P3 | Equipo documental |
 | Core | `01_core_erp/apis/00_api_index.md` | Indice de APIs | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/apis/01_auth_api.md` | Auth API | ACTIVE | P1 | Equipo documental |
@@ -119,6 +120,9 @@
 | Business | `02_projects/_ecosystem/03_development_strategy.md` | Estrategia de desarrollo gradual | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/_ecosystem/04_process_convergence_and_conflicts.md` | Procesos compartidos y contradicciones entre empresas | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/_ecosystem/05_lexnova_docucore_fiscora_mvp_alignment.md` | Alineacion MVP LexNova DocuCore Fiscora | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/_ecosystem/api-version-matrix.md` | Matriz de versiones API por proyecto | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/_templates/auth-migration-template.md` | Plantilla de migracion Auth por proyecto | ACTIVE | P2 | Equipo documental |
+| Business | `02_projects/_templates/api-dependencies-template.md` | Plantilla de dependencias API por proyecto | ACTIVE | P2 | Equipo documental |
 | Business | `02_projects/buildora/README.md` | Buildora | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/clientix/README.md` | Clientix | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Business | `02_projects/cloudra/README.md` | Cloudra | FUTURE_OR_PENDING | P2 | Equipo documental |
@@ -374,6 +378,8 @@
 | Standards | `03_standards/documentation-first-workflow.md` | Flujo documentation-first para tareas sin agents | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/standard-request-prompts.md` | Prompts estandar con agents, sin agents y modernizacion visual | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/architecture/api-gateway-standard.md` | Estandar de API y Gateway por proyecto | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/auth/web-auth-login-standard.md` | Estandar de login Auth para webs | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/auth/auth-versioning-standard.md` | Estandar de versionado Auth | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/product/product-strategy.md` | Estrategia de producto y monetizacion | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/product/module-catalog.md` | Catalogo global de modulos | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/docucore/monetization-and-credits.md` | Monetizacion y creditos DocuCore | ACTIVE | P1 | Equipo documental |

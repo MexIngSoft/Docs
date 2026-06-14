@@ -46,6 +46,8 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | `Docs/03_standards/global-governance.md` | Gobierno del ecosistema y criterios para iniciar proyectos. |
 | `Docs/03_standards/frontend/ui-ux-standard.md` | Mobile first, mockups aprobados, UX por dominio y cierre UI. |
 | `Docs/03_standards/architecture/api-gateway-standard.md` | Regla Frontend -> Gateway -> API -> Core/Shared. |
+| `Docs/03_standards/auth/web-auth-login-standard.md` | Login web via Gateway/BFF y excepciones documentadas. |
+| `Docs/03_standards/auth/auth-versioning-standard.md` | Versionado Auth y compatibilidad entre proyectos. |
 | `Docs/03_standards/product/product-strategy.md` | Clasificacion y monetizacion de modulos. |
 | `Docs/03_standards/product/module-catalog.md` | Catalogo global de modulos core, shared, comerciales e internos. |
 
@@ -56,6 +58,7 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | Cerrar MVP o brecha de desarrollo | `00_audit/10_development_gap_analysis.md` | Proyecto afectado, APIs involucradas y estandares aplicables. |
 | Crear/modificar API core | `01_core_erp/apis/00_api_index.md` | Documento de API especifica, DB relacionada, arquitectura y testing. |
 | Crear/modificar proyecto | `02_projects/_ecosystem/04_process_convergence_and_conflicts.md` | README del proyecto, tasks, decisions y frontend/API propios. |
+| Crear/modificar Auth/login web | `03_standards/auth/web-auth-login-standard.md` | `02_projects/_ecosystem/api-version-matrix.md`, Auth core, Gateway del proyecto y plan `auth-migration.md`. |
 | Trabajar Fiscora | `02_projects/fiscora/README.md` | `architecture.md`, `api-contracts.md`, `tasks/*`, `database/cfdi-data-model.md`. |
 | Trabajar DocuCore | `02_projects/docucore/README.md` | `mvp-roadmap.md`, `api-contracts.md`, `document-intelligence.md`, `database.md`. |
 | Trabajar LexNova | `02_projects/lexnova/README.md` | `legal-process-data-model.md`, `document-intelligence.md`, `document-api-integration-review.md`. |

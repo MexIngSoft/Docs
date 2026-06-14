@@ -199,6 +199,9 @@ En especial deben revisarse:
 - Secretos fuera del repositorio.
 - Variables sensibles documentadas con nombres, no valores reales.
 - Permisos revisados.
+- Si actua como Gateway/BFF, endpoints de sesion documentados y conectados
+  contra Auth por version declarada.
+- Si consume Auth, `ApplicationCode` / `X-Application-Code` documentado.
 - Endpoints internos protegidos.
 
 ## Estados permitidos
@@ -234,6 +237,9 @@ Antes de marcar un proyecto como `closed`, validar:
 - [ ] Migraciones listas.
 - [ ] Endpoints conectados.
 - [ ] Permisos revisados.
+- [ ] Auth versionado o excepcion documentada.
+- [ ] `ApplicationCode` documentado cuando aplique.
+- [ ] Dependencias API registradas en matriz/versionado del proyecto.
 - [ ] Variables de entorno documentadas.
 - [ ] Schema de base de datos documentado con `DB_SCHEMA` si aplica.
 - [ ] Tablas y campos publicados documentados con nombres PascalCase estilo SQL Server.

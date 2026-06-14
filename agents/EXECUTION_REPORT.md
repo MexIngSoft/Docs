@@ -93,6 +93,116 @@ queda vacio.
 
 ---
 
+# 2026-06-14 - Auditoria arquitectura documental y estandar Auth web
+
+## Alcance
+
+Se ejecuto `Docs/agents/AGENTS-000.md` y `Docs/agents/AGENTS-001.md` en orden
+numerico, siguiendo `Docs/03_standards/operations/standard-request-prompts.md`.
+
+`AGENTS-002.md` a `AGENTS-030.md` estaban vacios y se marcaron como sin
+instrucciones.
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Parcialmente completado | Se genero auditoria general segura y se documentaron brechas sin ejecutar reestructuras destructivas, migraciones masivas ni decisiones legales. |
+| `AGENTS-001.md` | Completado | Se creo el estandar obligatorio de login Auth via Gateway/BFF, versionado Auth, matriz de versiones API y plantillas de migracion/dependencias. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+## Documentacion revisada
+
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/01_core_erp/auth/README.md`
+- `Docs/01_core_erp/apis/01_auth_api.md`
+- `Docs/01_core_erp/architecture/07_project_api_pattern.md`
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+- `Docs/03_standards/project-completeness-standard.md`
+- `Docs/03_standards/operations/project-closure-standard.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/02_projects/lexnova/frontend/identity-interface.md`
+
+## Archivos creados
+
+- `Docs/00_audit/12_general_documentation_architecture_audit.md`
+- `Docs/03_standards/auth/web-auth-login-standard.md`
+- `Docs/03_standards/auth/auth-versioning-standard.md`
+- `Docs/02_projects/_ecosystem/api-version-matrix.md`
+- `Docs/02_projects/_templates/auth-migration-template.md`
+- `Docs/02_projects/_templates/api-dependencies-template.md`
+
+## Archivos modificados
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/generated/master-index.json`
+- `Docs/01_core_erp/architecture/07_project_api_pattern.md`
+- `Docs/03_standards/README.md`
+- `Docs/03_standards/frontend/README.md`
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+- `Docs/03_standards/project-completeness-standard.md`
+- `Docs/03_standards/operations/project-closure-standard.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| `python scripts/build_master_index.py` | OK; regenero `_meta/generated/master-index.json` con 452 entradas. |
+| `python scripts/validate_frontmatter.py` | OK; 0 malformed, warnings existentes por documentos historicos sin front matter. |
+| Verificacion JSON de rutas nuevas en `_meta/generated/master-index.json` | OK; sin rutas faltantes para Auth, matriz API y auditoria. |
+| `git -C Docs diff --check` | OK; solo advertencias CRLF esperadas en Windows. |
+
+## Decisiones
+
+- No se creo `LICENSE` porque requiere decision legal del owner.
+- No se migro toda la estructura de `02_projects/<project>` a subcarpetas
+  profundas, porque hay referencias activas y el impacto requiere fase dedicada.
+- No se archivaron documentos antiguos de forma masiva; se documento la brecha
+  en auditoria para revision posterior.
+- Auth queda como infraestructura compartida; los frontends deben consumirlo
+  mediante Gateway/BFF del proyecto.
+- Todo proyecto web nuevo debe incluir Auth, salvo excepcion documentada con
+  `auth_required: false`.
+- La matriz `api-version-matrix.md` queda como fuente inicial para evitar
+  migraciones Auth que rompan proyectos activos.
+
+## Informacion faltante
+
+- Owner legal para definir `LICENSE`.
+- Version Auth final por varios proyectos activos, marcada como
+  `PENDIENTE_DE_DEFINIR`.
+- Plan detallado para migrar proyectos existentes a login estandar.
+- Especificacion unica de observabilidad JSON por API.
+- ERD/diccionario completo por cada API activa.
+
+## Limpieza
+
+`AGENTS-001.md` se copio a:
+
+```text
+Docs/_archive/agents/2026-06-14-auth-login-standard-and-architecture-audit/AGENTS-001.md
+```
+
+El archivo original se conserva en `Docs/agents/` y quedo vacio.
+
+`AGENTS-000.md` no se limpio porque quedo parcialmente completado y conserva
+pendientes de auditoria/reparacion de alto impacto.
+
+---
+
 # Ejecucion Agents - 2026-06-12 - Cierre Web/API y publicacion
 
 ## Alcance

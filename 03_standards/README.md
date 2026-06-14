@@ -9,6 +9,7 @@ Guardar reglas de trabajo, operacion, seguridad, pruebas y cierre de proyectos.
 - `operations`: runbook, reglas Codex, recuperacion Docker, registro de puertos locales, flujo Git/entornos, observabilidad, cierre, seguridad operativa y calidad.
 - `frontend`: estandares Next.js, Docker frontend compartido, checklist previo y visibilidad comercial.
 - `architecture`: estandares de API/Gateway, limites y comunicacion entre proyectos.
+- `auth`: login web obligatorio via Gateway/BFF, versionado de Auth y compatibilidad entre proyectos.
 - `product`: estrategia de producto, monetizacion y catalogo global de modulos.
 - `database`: estandar de publicacion de tablas y campos con nombres PascalCase estilo SQL Server.
 - `security`: manejo de secretos.

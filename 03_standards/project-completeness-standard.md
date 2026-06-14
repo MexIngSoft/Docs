@@ -45,6 +45,8 @@ Una Web debe incluir:
 - logo principal, logo reducido y assets de marca cuando aplique;
 - variables `NEXT_PUBLIC_*` documentadas;
 - gateway/BFF definido;
+- Auth definido via Gateway/BFF o excepcion `auth_required: false` documentada;
+- `NEXT_PUBLIC_APPLICATION_CODE` cuando use Auth;
 - comandos de `build`, `lint` o validacion equivalente;
 - compose Web por proyecto en `Docker.WEB.NJ/docker-compose.<proyecto>.web.yml`.
 
@@ -55,6 +57,7 @@ NEXT_PUBLIC_APP_NAME=
 NEXT_PUBLIC_HOST=
 NEXT_PUBLIC_GATEWAY_BASE_URL=
 NEXT_PUBLIC_ENVIRONMENT=
+NEXT_PUBLIC_APPLICATION_CODE=
 ```
 
 Si el proyecto requiere metadata comercial adicional, documentar tambien:
@@ -140,6 +143,8 @@ Antes de marcar Web/API como lista:
 
 - favicon, titulo y metadata visibles;
 - gateway y APIs requeridas definidos;
+- Auth/login definido, versionado o excepcion documentada;
+- proyecto registrado en `Docs/02_projects/_ecosystem/api-version-matrix.md`;
 - variables completas sin secretos reales;
 - healthcheck funcionando o ruta documentada;
 - Docker individual funcional;

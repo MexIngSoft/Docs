@@ -12,6 +12,7 @@
 - `_meta/project-runtime-readiness-report.md`
 - `00_audit/10_development_gap_analysis.md`
 - `00_audit/11_documentation_structure_optimization.md`
+- `00_audit/12_general_documentation_architecture_audit.md`
 - `01_core_erp/auth/README.md`
 - `01_core_erp/README.md`
 - `01_core_erp/erp/23_business_software_builder.md`
@@ -22,6 +23,9 @@
 - `02_projects/cloudra/README.md`
 - `02_projects/datara/README.md`
 - `02_projects/_ecosystem/05_lexnova_docucore_fiscora_mvp_alignment.md`
+- `02_projects/_ecosystem/api-version-matrix.md`
+- `02_projects/_templates/auth-migration-template.md`
+- `02_projects/_templates/api-dependencies-template.md`
 - `02_projects/docucore/README.md`
 - `02_projects/docucore/document-intelligence.md`
 - `02_projects/docucore/frontend-navigation-and-ux.md`
@@ -126,6 +130,8 @@
 - `03_standards/global-governance.md`
 - `03_standards/documentation-first-workflow.md`
 - `03_standards/architecture/api-gateway-standard.md`
+- `03_standards/auth/web-auth-login-standard.md`
+- `03_standards/auth/auth-versioning-standard.md`
 - `03_standards/product/product-strategy.md`
 - `03_standards/product/module-catalog.md`
 - `03_standards/project-completeness-standard.md`

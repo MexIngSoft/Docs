@@ -66,6 +66,8 @@ Docs/03_standards/global-governance.md
 Docs/03_standards/frontend/ui-ux-standard.md
 Docs/03_standards/frontend/undocumented-modernization-standard.md
 Docs/03_standards/architecture/api-gateway-standard.md
+Docs/03_standards/auth/web-auth-login-standard.md
+Docs/03_standards/auth/auth-versioning-standard.md
 Docs/03_standards/product/product-strategy.md
 Docs/03_standards/product/module-catalog.md
 ```
@@ -189,16 +191,19 @@ Proveedor actual:
 23. `03_standards/operations/standard-request-prompts.md`
 24. `03_standards/documentation-first-workflow.md`
 25. `03_standards/architecture/api-gateway-standard.md`
-26. `03_standards/product/product-strategy.md`
-27. `03_standards/product/module-catalog.md`
-28. `03_standards/database/sql-server-publication-standard.md`
-29. `00_audit/09_api_routes_inventory.md`
-30. `02_projects/tecnotelec/tasks/04_development_order.md`
-31. `02_projects/_ecosystem/00_ecosystem_overview.md`
-32. `02_projects/_ecosystem/01_company_portfolio.md`
-33. `02_projects/_ecosystem/04_process_convergence_and_conflicts.md`
-34. `03_standards/project-completeness-standard.md`
-35. `03_standards/documentation/README.md`
+26. `03_standards/auth/web-auth-login-standard.md`
+27. `03_standards/auth/auth-versioning-standard.md`
+28. `02_projects/_ecosystem/api-version-matrix.md`
+29. `03_standards/product/product-strategy.md`
+30. `03_standards/product/module-catalog.md`
+31. `03_standards/database/sql-server-publication-standard.md`
+32. `00_audit/09_api_routes_inventory.md`
+33. `02_projects/tecnotelec/tasks/04_development_order.md`
+34. `02_projects/_ecosystem/00_ecosystem_overview.md`
+35. `02_projects/_ecosystem/01_company_portfolio.md`
+36. `02_projects/_ecosystem/04_process_convergence_and_conflicts.md`
+37. `03_standards/project-completeness-standard.md`
+38. `03_standards/documentation/README.md`
 
 ## Reglas
 
