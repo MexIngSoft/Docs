@@ -1,38 +1,54 @@
-# Indice de APIs
+# Indice canonico de APIs
 
-| API | Estado | Responsabilidad | Prioridad |
-|---|---|---|---|
-| auth-api | EXISTE | Usuarios, roles, permisos. | ALTA |
-| catalog-api | EXISTE/PARCIAL | Productos internos. | ALTA |
-| supplier-api | EXISTE | Proveedores y sync. | ALTA |
-| pricing-api | EXISTE/PARCIAL | Precios, margenes, impuestos. | ALTA |
-| cost-api | FUTURO | Costos reales/estimados, asignacion de gastos y rentabilidad base. | MEDIA |
-| quote-api | FALTA | Cotizaciones y snapshots. | ALTA |
-| sales-api | EXISTE/PARCIAL | Ordenes, pagos, ventas. | ALTA |
-| logistics-api | FALTA | Envios, costos, tracking. | MEDIA |
-| rules-engine-api | FALTA | Decisiones de negocio. | ALTA |
-| tecnotelec-gateway-api | DRAFT | Gateway/BFF web. | ALTA |
-| tecnotelec-api | DRAFT | Procesos, formularios y configuracion propia de Tecno Telec. | ALTA |
-| projects-api | FALTA | Soluciones y proyectos. | ALTA |
-| cart-api | FALTA | Carrito web. | MEDIA |
-| pos-api | FALTA | Punto de venta fisico. | BAJA |
-| government-tender-api | FALTA | Licitaciones y oportunidades publicas. | BAJA |
-| billing-api | FALTA | Datos fiscales, facturacion, notas y documentos fiscales. | MEDIA |
-| notifications-api | FALTA | Eventos, mensajes y reintentos de notificacion. | MEDIA |
-| documents-api | FALTA | Archivos, anexos, evidencias y relaciones documentales. | MEDIA |
-| execution-resource-manager-api | PROPUESTO | Eventos de ejecucion, costos internos, creditos, fallback, carga y ahorro operativo por proyecto. | ALTA |
+La existencia se determina por repositorio ejecutable, migraciones y contrato,
+no por una idea documental.
 
-## Regla de separacion
+## Compartidas confirmadas
 
-```text
-Cart API      = intencion de compra web
-POS API       = venta fisica rapida
-Projects API  = solucion consultiva
-Sales API     = cotizacion, venta, pagos y estado comercial
-Pricing API   = listas de precios, margenes e impuestos
-Cost API      = costos reales/estimados y base de rentabilidad
-Rules API     = decisiones configurables
-Billing API   = datos y documentos fiscales
-Documents API = anexos, evidencias y archivos por contexto
-Execution Resource Manager API = medicion transversal de ejecucion y recursos
-```
+| API | Estado | Responsabilidad |
+|---|---|---|
+| Auth | ACTIVA | Identidad, usuarios, roles, permisos, sesiones y tokens. |
+| Gateway | ACTIVA | Entrada central modular, sesion, routing, permisos de frontera y errores. |
+| Catalog | ACTIVA | Productos, categorias, marcas y relaciones normalizadas. |
+| Inventory | ACTIVA | Existencias propias, ubicaciones y movimientos. |
+| Pricing | ACTIVA | Listas, precios publicables, margenes e impuestos. |
+| Procurement | ACTIVA | Solicitudes y ordenes de compra, recepcion y devolucion. |
+| Sales | ACTIVA | Cotizacion MVP, ordenes, pagos y estado comercial. |
+| Supplier | ACTIVA | Proveedores, catalogos externos normalizados y sincronizacion. |
+| Document | ACTIVA | Archivos, evidencias y procesamiento documental compartido. |
+| Fiscal | ACTIVA | Datos y procesos fiscales compartidos. |
+| Address | ACTIVA | Catalogo geografico y direcciones normalizadas. |
+
+## APIs de proyecto confirmadas
+
+| API | Estado | Proyecto |
+|---|---|---|
+| JobCron | ACTIVA | ERP administrador y FeatureAvailability. |
+| TecnoTelec | ACTIVA | Comercio e integracion propia TecnoTelec. |
+| LexNova | ACTIVA | Dominio legal. |
+| DocuCore | ACTIVA | Producto documental. |
+| Fiscora | ACTIVA | Producto fiscal. |
+| Imagrafity | ACTIVA | Producto de personalizacion. |
+| RefaPart | ACTIVA | Busqueda, demanda, cotizacion, pedido y logistica de refacciones. |
+| LeadHunter | ACTIVA_INTERNA | Motor Prospecting operado desde JobCron. |
+
+## Capacidades derivadas
+
+Quote permanece dentro de Sales para el Core y dentro de cada API de proyecto
+cuando el flujo sea especifico. Solo se separara como API con contrato y
+necesidad de escalamiento aprobados.
+
+| Capacidad | Estado |
+|---|---|
+| Quote API independiente | PENDIENTE_DE_DEFINIR |
+| Logistics API compartida | PENDIENTE_DE_DEFINIR |
+| Rules Engine API | PENDIENTE_DE_DEFINIR |
+| Projects API | PENDIENTE_DE_DEFINIR |
+| Cart API compartida | PENDIENTE_DE_DEFINIR |
+| POS API | PENDIENTE_DE_DEFINIR |
+| Billing API independiente | PENDIENTE_DE_DEFINIR |
+| Notifications API | PENDIENTE_DE_DEFINIR |
+| Reporting API | PENDIENTE_DE_DEFINIR |
+
+Los pendientes no son dependencias obligatorias hasta tener contrato,
+persistencia, seguridad, compose y pruebas aprobadas.

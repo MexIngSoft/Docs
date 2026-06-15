@@ -1,5 +1,11 @@
 # Docker local
 
+## Regla superior
+
+La ejecucion focalizada se rige por
+`03_standards/docker/docker-compose-project-standard.md`: base general por capa
+y overlay por proyecto. No se levantan todas las webs para probar una sola.
+
 ## Arquitectura oficial JobCron
 
 La regla oficial para Docker del ecosistema JobCron vive en:
