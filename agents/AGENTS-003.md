@@ -1,202 +1,484 @@
-CORRECCIÓN OBLIGATORIA DE CONTRADICCIONES DOCUMENTALES
+# AGENTS-003.md
 
-Objetivo:
-Eliminar definitivamente todas las referencias contradictorias relacionadas con Gateway por proyecto, BFF por proyecto, SQLite y cualquier arquitectura no aprobada.
+# ESTRUCTURA OFICIAL DE REPOSITORIOS, DOCKER Y POSTGRESQL
 
-Regla principal:
-Si una instrucción contradice una decisión canónica vigente, debe eliminarse completamente del repositorio. No debe quedar texto ambiguo, notas históricas, ejemplos antiguos ni referencias indirectas que puedan ser interpretadas nuevamente por agentes futuros.
+## OBJETIVO
 
-Tareas obligatorias:
+Definir una única estructura física para todos los proyectos, APIs, bases de datos, Docker, despliegues y repositorios del ecosistema.
 
-FASE 1 - INVENTARIO
+Este agente debe garantizar que todos los proyectos futuros mantengan la misma organización.
 
-Buscar en TODO el repositorio:
-
-* Gateway
-* BFF
-* Backend For Frontend
-* SQLite
-* sqlite
-* DATABASE_URL
-* local database
-* embedded database
-* file database
-* Search service
-* search module
-* PostgreSQL
-* Postgres
-
-Generar listado completo de archivos afectados.
+No se permiten estructuras alternativas.
 
 ---
 
-FASE 2 - ELIMINACIÓN DE GATEWAYS POR PROYECTO
+# OBJETIVO PRINCIPAL
 
-Eliminar completamente cualquier texto que indique o sugiera:
+Garantizar:
 
-* Un Gateway por proyecto web.
-* Un BFF por proyecto web.
-* Gateways independientes por aplicación.
-* Gateways específicos para LexNova.
-* Gateways específicos para Refapart.
-* Gateways específicos para Fiscora.
-* Gateways específicos para cualquier otro proyecto.
-
-Sustituir por:
-
-ARQUITECTURA CANÓNICA:
-
-* Existe un único Gateway General del ecosistema.
-* El Gateway General es modular.
-* Los proyectos consumen el Gateway General.
-* Las APIs mantienen su responsabilidad propia.
-* El Gateway no debe duplicar lógica de negocio.
-
-No deben quedar referencias históricas.
+* Orden.
+* Escalabilidad.
+* Reutilización.
+* Mantenimiento.
+* Despliegue consistente.
+* Integración sencilla.
+* Administración centralizada.
 
 ---
 
-FASE 3 - ELIMINACIÓN DE SQLITE
+No existe un Docker por proyecto.
 
-Eliminar completamente:
+Existe un Docker por objetivo:
 
-* sqlite
-* SQLite
-* db.sqlite3
-* fallback SQLite
-* temporary SQLite
-* local SQLite
-* SQLite para desarrollo
-* SQLite para pruebas documentadas
-* SQLite mientras llega PostgreSQL
+1. Docker.DB
+   - PostgreSQL
+   - bases
+   - schemas
+   - usuarios
+   - backups
 
-Eliminar ejemplos:
+2. Docker.API.PY
+   - todas las APIs Python/Django/FastAPI
+   - Auth
+   - Gateway General
+   - APIs comerciales
+   - APIs de proyectos
+   - integraciones internas
 
-ENGINE=sqlite
-sqlite:///...
-db.sqlite3
+3. Docker.WEB.NJ
+   - todas las webs Next.js
+   - JobCron
+   - Refapart
+   - TecnoTelec
+   - LexNova
+   - DocuCore
+   - Fiscora
+   - Imagrafity
 
-Eliminar docker compose que lo mencionen.
+Los compose por proyecto NO crean otro Docker.
+Solo levantan los servicios necesarios dentro del Docker correspondiente.
 
-Eliminar diagramas que lo muestren.
+REGLA CORREGIDA DE DOCKER
 
-Eliminar ejemplos de agentes.
+La arquitectura oficial NO crea imágenes, Dockerfiles ni contenedores base por cada proyecto.
 
-Eliminar ADRs que lo sugieran.
+La arquitectura oficial usa un Docker por objetivo:
+
+- Docker.DB para bases de datos.
+- Docker.API.PY para todas las APIs.
+- Docker.WEB.NJ para todas las webs.
+
+Cada proyecto puede tener un docker-compose enfocado, pero ese compose solo selecciona qué servicios levantar.
+
+Está prohibido:
+
+- Crear Docker.API.PY.Refapart
+- Crear Docker.API.PY.TecnoTelec
+- Crear Docker.WEB.NJ.Refapart
+- Crear Docker.WEB.NJ.TecnoTelec
+- Crear Docker.DB.Refapart
+- Crear Docker.DB.TecnoTelec
+- Crear Dockerfile por proyecto si duplica el Dockerfile general
+- Crear imagen base por proyecto sin justificación técnica aprobada
+
+Permitido:
+
+- Carpetas por proyecto dentro del Docker correspondiente.
+- Variables por proyecto.
+- Servicios por proyecto en compose.
+- Compose enfocado por proyecto.
+- Puertos por proyecto.
+- Procesos separados dentro del mismo objetivo.
+- Build args para seleccionar proyecto cuando sea necesario.
+
+Regla final:
+
+Un Docker por objetivo.
+No un Docker por proyecto.
+
+Ningún proyecto debe romper esta estructura.
 
 ---
 
-FASE 4 - REEMPLAZO POR POSTGRESQL
+# DOCKER.DB
 
-Establecer como única verdad documental:
+## RESPONSABILIDAD
 
-Base de datos oficial:
+Administrar PostgreSQL.
+
+---
+
+## CONTENIDO
 
 PostgreSQL
 
-Reglas:
+Backups
 
-* Todas las APIs usan PostgreSQL.
-* Todos los entornos usan PostgreSQL.
-* Docker Database es la fuente oficial.
-* Ningún servicio puede cambiar a SQLite por ausencia de configuración.
-* Si falta configuración PostgreSQL se debe corregir la configuración.
-* No se permiten cambios de motor de base de datos para resolver errores temporales.
+Restore
 
-Agregar ejemplos:
+Scripts de mantenimiento
 
-DB_HOST=
-DB_PORT=
-DB_NAME=
-DB_USER=
-DB_PASSWORD=
+Monitoreo
 
-Agregar ejemplos Docker.
-
-Agregar ejemplos Django.
-
-Agregar ejemplos FastAPI.
+Health Checks
 
 ---
 
-FASE 5 - CORRECCIÓN DE AGENTS
+## PROHIBICIONES
 
-Revisar:
+No almacenar:
 
-agents/AGENTS-000.md
-hasta
-agents/AGENTS-999.md
-
-Para cada agent:
-
-Eliminar instrucciones que indiquen:
-
-* Crear Gateway por proyecto.
-* Crear BFF por proyecto.
-* Usar SQLite.
-* Crear db.sqlite3.
-* Usar SQLite temporal.
-
-Si el agent ya fue ejecutado:
-
-* Marcar como OBSOLETO.
-* Mover a archive.
-* Crear versión corregida.
-
-Si el agent sigue activo:
-
-* Reescribirlo completamente.
+* Código de APIs
+* Código Frontend
+* ETLs
+* Scripts de negocio
 
 ---
 
-FASE 6 - NUEVO ADR CANÓNICO
+# DOCKER.API.PY
 
-Crear:
+## RESPONSABILIDAD
 
-01_core_erp/architecture/ADR-001-gateway-general-y-postgresql.md
-
-Contenido obligatorio:
-
-DECISIÓN:
-
-1. Gateway General único para todo el ecosistema.
-2. PostgreSQL obligatorio.
-3. Docker Database obligatorio.
-
-RECHAZADO:
-
-1. Gateway por proyecto.
-2. BFF por proyecto.
-3. SQLite.
-4. Bases embebidas.
-5. Fallback a SQLite.
-
-CONSECUENCIA:
-
-Toda documentación futura debe alinearse con esta decisión.
+Contener todas las APIs Python.
 
 ---
 
-FASE 7 - VALIDACIÓN FINAL
+## ESTRUCTURA
 
-Ejecutar búsqueda global.
+Docker.API.PY
 
-No debe existir:
+├── API.PY.DJANGO.Auth
+├── API.PY.DJANGO.Gateway.General
+├── API.PY.DJANGO.Catalog
+├── API.PY.DJANGO.Inventory
+├── API.PY.DJANGO.Pricing
+├── API.PY.DJANGO.Supplier
+├── API.PY.DJANGO.Procurement
+├── API.PY.DJANGO.Sales
+├── API.PY.DJANGO.Search
+├── API.PY.DJANGO.Document
+├── API.PY.DJANGO.Notification
+├── API.PY.DJANGO.Refapart
+├── API.PY.DJANGO.LexNova
+├── API.PY.DJANGO.DocuCore
+├── API.PY.DJANGO.Fiscora
+└── API.PY.DJANGO.TecnoTelec
+
+---
+
+# REGLA DE RESPONSABILIDAD
+
+Las APIs de dominio compartidas:
+
+* Catalog
+* Inventory
+* Pricing
+* Supplier
+* Procurement
+* Sales
+* Search
+* Notification
+* Document
+
+deben ser reutilizadas por todos los proyectos.
+
+---
+
+# APIS DE PROYECTO
+
+Solo pueden existir cuando contienen lógica exclusiva.
+
+Ejemplo:
+
+Refapart API
+
+Funciones específicas de refacciones.
+
+LexNova API
+
+Funciones jurídicas.
+
+DocuCore API
+
+Funciones documentales propias.
+
+---
+
+# PROHIBICIONES DE APIS
+
+No crear:
+
+* APIs duplicadas.
+* APIs espejo.
+* APIs temporales.
+* APIs experimentales sin documentación.
+
+---
+
+# GATEWAY GENERAL
+
+Debe existir únicamente:
+
+API.PY.DJANGO.Gateway.General
+
+---
+
+# PROHIBICIONES DE GATEWAY
+
+Eliminar:
+
+API.PY.DJANGO.Refapart.Gateway
+
+API.PY.DJANGO.Fiscora.Gateway
+
+API.PY.DJANGO.DocuCore.Gateway
+
+API.PY.DJANGO.LexNova.Gateway
+
+API.PY.DJANGO.TecnoTelec.Gateway
+
+Cualquier otro Gateway por proyecto.
+
+---
+
+# AUTH
+
+Debe existir únicamente:
+
+API.PY.DJANGO.Auth
+
+Todos los proyectos deben reutilizarlo.
+
+---
+
+# DOCKER.WEB.NJ
+
+## RESPONSABILIDAD
+
+Contener todas las aplicaciones Next.js.
+
+---
+
+## ESTRUCTURA
+
+Docker.WEB.NJ
+
+├── WEB.NJ.JobCron
+├── WEB.NJ.Refapart
+├── WEB.NJ.LexNova
+├── WEB.NJ.DocuCore
+├── WEB.NJ.Fiscora
+├── WEB.NJ.TecnoTelec
+└── WEB.NJ.Imagrafity
+
+---
+
+# REGLA DE FRONTEND
+
+Las webs:
+
+* Nunca consumen PostgreSQL.
+* Nunca consumen tablas.
+* Nunca consumen servicios internos.
+
+Deben consumir:
+
+Gateway General.
+
+---
+
+# POSTGRESQL OFICIAL
+
+La única base de datos permitida es PostgreSQL.
+
+---
+
+# PROHIBICIONES DE BASE DE DATOS
+
+Eliminar completamente:
 
 SQLite
+
 sqlite
+
 db.sqlite3
-Gateway por proyecto
-BFF por proyecto
 
-excepto dentro del ADR de decisiones rechazadas.
+Local Database
 
-Generar reporte final:
+Embedded Database
 
-* Archivos corregidos.
-* Archivos eliminados.
-* Agents corregidos.
-* Contradicciones eliminadas.
-* Validación realizada.
+Fallback Database
 
-No continuar con nuevas implementaciones hasta cerrar completamente estas correcciones documentales.
+Temporary Database
+
+---
+
+# ESTRUCTURA POSTGRESQL
+
+Cada API debe utilizar schema propio.
+
+Ejemplo:
+
+auth
+
+catalog
+
+inventory
+
+pricing
+
+supplier
+
+procurement
+
+sales
+
+search
+
+notification
+
+document
+
+refapart
+
+lexnova
+
+docucore
+
+fiscora
+
+tecnotelec
+
+---
+
+# VARIABLES DE ENTORNO
+
+Toda API debe documentar:
+
+DB_HOST
+
+DB_PORT
+
+DB_NAME
+
+DB_USER
+
+DB_PASSWORD
+
+DB_SCHEMA
+
+---
+
+# DOCKER COMPOSE GENERAL
+
+Debe existir:
+
+docker-compose.db.yml
+
+docker-compose.api.yml
+
+docker-compose.web.yml
+
+---
+
+# COMPOSE POR PROYECTO
+
+Cada proyecto web debe tener:
+
+docker-compose-refapart.yml
+
+docker-compose-lexnova.yml
+
+docker-compose-docucore.yml
+
+docker-compose-fiscora.yml
+
+docker-compose-tecnotelec.yml
+
+docker-compose-imagrafity.yml
+
+---
+
+# REGLA DE COMPOSE POR PROYECTO
+
+El compose de proyecto:
+
+* Solo levanta dependencias necesarias.
+* No crea nuevos Gateways.
+* No crea nuevos Auth.
+* No crea nuevas bases.
+
+Utiliza infraestructura existente.
+
+---
+
+# RED DOCKER
+
+Debe existir una red compartida.
+
+Nombre recomendado:
+
+jobcron_network
+
+Todos los servicios deben poder comunicarse mediante esta red.
+
+---
+
+# HEALTH CHECKS
+
+Todas las APIs deben tener:
+
+/health
+
+/ready
+
+cuando aplique.
+
+---
+
+# LOGS
+
+Todas las APIs deben registrar:
+
+* inicio
+* errores
+* advertencias
+* integraciones
+* ETLs
+* autenticación
+
+---
+
+# BACKUPS
+
+PostgreSQL debe tener:
+
+* backup automático
+* restore documentado
+* validación periódica
+
+---
+
+# VALIDACIONES
+
+Verificar:
+
+* estructura de carpetas
+* docker compose
+* PostgreSQL
+* schemas
+* variables de entorno
+* dependencias
+
+---
+
+# RESULTADO ESPERADO
+
+Al finalizar:
+
+* Existirá una única estructura física.
+* Existirá un único Gateway General.
+* Existirá un único Auth.
+* Existirá una única estrategia Docker.
+* Existirá una única estrategia PostgreSQL.
+* Todos los proyectos serán desplegables bajo el mismo estándar.
