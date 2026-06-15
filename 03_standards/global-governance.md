@@ -10,7 +10,7 @@ del ecosistema comercial para que cada nuevo producto salga con mejor base.
 | Capa | Ruta canonica | Responsabilidad |
 |---|---|---|
 | Nucleo ERP | `Docs/01_core_erp` | Capacidades reutilizables, APIs core, flujos genericos, datos compartidos y reglas transversales. |
-| Proyectos | `Docs/02_projects/<proyecto>` | Marca, negocio, UX, API/Gateway propios, decisiones particulares y roadmap del producto. |
+| Proyectos | `Docs/02_projects/<proyecto>` | Marca, negocio, UX, API de dominio opcional, modulo del Gateway central, decisiones y roadmap. |
 | Estandares | `Docs/03_standards` | UI/UX, arquitectura, seguridad, testing, Docker, operacion, agentes y cierre. |
 | Integraciones | `Docs/04_integrations` | Proveedores externos, contratos, ETL, credenciales y mappers. |
 | Agents | `Docs/agents` | Instrucciones temporales y reporte de ejecucion. |

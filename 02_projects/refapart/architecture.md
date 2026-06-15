@@ -48,11 +48,12 @@ El frontend no debe consumir JobCron, Core ERP ni base de datos directamente.
 
 ## Decision MVP actual
 
-La primera implementacion web usa datos mock locales para validar interfaz. No
-simula backend real ni promete pagos, inventario o proveedor final como
-funcionalidad productiva.
+Auth y las funciones comerciales se publican exclusivamente mediante
+`API.PY.DJANGO.Gateway`. `API.PY.DJANGO.RefaPart` implementa catalogo,
+busqueda tolerante a errores, demanda, proveedores, ofertas, cotizacion y
+pedido. `API.PY.DJANGO.Address` concentra el catalogo normalizado de
+direcciones.
 
-Auth ya se implementa mediante `API.PY.DJANGO.Gateway`; el Gateway especifico
-de RefaPart queda temporalmente como fallback `deprecated`. Las funciones
-comerciales de piezas, cotizaciones y pedidos continuan en modo visual/mock
-hasta crear `API.PY.DJANGO.RefaPart`.
+El Gateway especifico anterior queda retirado y no forma parte del runtime
+canonico. Pagos, logistica profunda y eventos asincronos hacia JobCron siguen
+pendientes de integracion productiva.

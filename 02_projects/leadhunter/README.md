@@ -1,5 +1,9 @@
 # LeadHunter
 
+> Estado de producto: servicio interno de Prospecting operado desde JobCron.
+> El nombre tecnico se conserva temporalmente para no romper repositorio,
+> migraciones ni Docker. No se comercializa como producto independiente.
+
 LeadHunter is an independent prospecting product for finding high-value businesses from Google Maps data and ranking commercial opportunities.
 
 ## Product Scope

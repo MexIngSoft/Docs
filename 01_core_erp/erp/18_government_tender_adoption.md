@@ -56,7 +56,7 @@ Si se gana, se convierte en proyecto, venta u orden
 | Sekura Tech | Seguridad, control, monitoreo y cumplimiento. |
 | Innovation Engines Repair | Servicios tecnicos, mantenimiento y reparacion especializada. |
 | Buildora | Materiales, obra, instalaciones y equipamiento. |
-| Refakto | Refacciones, suministros y mantenimiento. |
+| REFAPART | Refacciones, suministros y mantenimiento. |
 | Rutexa | Logistica, entrega y rutas cuando se subcontrate transporte. |
 
 ## Regla de seguridad
@@ -73,4 +73,3 @@ PENDIENTE_DE_DEFINIR:
 - Margen minimo por licitacion.
 - Alcance geografico.
 ```
-

@@ -5,7 +5,7 @@
 ```text
 Frontend / Canales
         |
-Project Gateway / BFF
+API.PY.DJANGO.Gateway
         |
         +-- Project Domain API
         |
@@ -73,6 +73,6 @@ Billing
 
 ## Regla
 
-Cada proyecto debe tener su gateway/BFF cuando tenga web, mobile o admin propio. Si el proyecto tiene procesos o tablas propias, tambien debe tener una API de dominio del proyecto.
+Cada canal usa el Gateway central. Si el proyecto tiene procesos o tablas propias, tambien debe tener una API de dominio. Un Gateway propio solo se permite mediante ADR por aislamiento excepcional.
 
 El nucleo ERP debe conservar responsabilidades de dominio separadas.

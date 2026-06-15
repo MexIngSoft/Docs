@@ -10195,3 +10195,92 @@ malformados. Docker daemon continua bloqueado por ausencia de
 `dockerDesktopLinuxEngine`.
 
 ---
+
+# 2026-06-14 - Gateway central, REFAPART y validacion global
+
+## Preparacion
+
+Antes de implementar se crearon commits de checkpoint en todos los
+repositorios con cambios. Los remotos disponibles recibieron push. El Gateway
+central no pudo publicarse porque su remoto responde `repository not found`;
+LeadHunter API y Web no tienen `origin` configurado.
+
+## Resultado por agent
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Arquitectura y alcance REFAPART consolidados sobre Gateway central. |
+| `AGENTS-001.md` | Completado | API Address, modelo, endpoints y documentacion creados. |
+| `AGENTS-002.md` | Completado | Auth REFAPART migrado y validado con PostgreSQL en Docker. |
+| `AGENTS-003.md` | Completado | Gateway general establecido como unica entrada canonica. |
+| `AGENTS-004.md` | Completado | Demanda desde busqueda sin resultado y solicitud explicita implementada. |
+| `AGENTS-005.md` | Completado | Busqueda normalizada, tolerancia a errores, intencion y ranking implementados. |
+| `AGENTS-006.md` | Parcial | Estandar y mapa de adopcion creados; falta adoptar busqueda en cada producto aplicable. |
+| `AGENTS-007.md` | Completado | Panel REFAPART con solicitudes, proveedores, demanda y acciones MVP. |
+| `AGENTS-008.md` | Completado | Nombre REFAPART normalizado y documentacion Refakto archivada. |
+| `AGENTS-009.md` | Parcial | Flujo comercial MVP cubierto; pagos y logistica productiva siguen pendientes. |
+| `AGENTS-010.md` | Completado | Prospecting integrado como capacidad interna de JobCron. |
+| `AGENTS-011.md` | Completado | Instruccion duplicada cubierta por la misma integracion. |
+| `AGENTS-012.md` | Parcial | LeadHunter accesible por JobCron/Gateway; faltan controles completos de presupuesto y captura manual. |
+| `AGENTS-013.md` | Parcial | JobCron incorpora Prospectos; el alcance ERP amplio requiere fases posteriores. |
+| `AGENTS-014.md` | Parcial | Todas las webs compilan y todas las APIs pasan check; falta normalizacion profunda por dominio. |
+| `AGENTS-015.md` | Parcial | Validacion estatica global terminada; runtime integrado completo ejecutado para REFAPART. |
+| `AGENTS-016.md` | Completado | Estandar final de Gateway general documentado y aplicado. |
+
+## Implementacion
+
+- Se crearon `API.PY.DJANGO.Address` y `API.PY.DJANGO.RefaPart` con
+  migraciones, health, version y contratos publicados por Gateway.
+- REFAPART Web consume catalogo, busqueda, solicitudes, panel, proveedores,
+  cotizacion y pedido MVP desde la API real.
+- JobCron expone Prospecting mediante un proxy controlado hacia LeadHunter y
+  agrega la vista administrativa de prospectos.
+- Docker incorpora puertos `8024` y `8026`, compose enfocado y empaquetado de
+  Address/RefaPart en la imagen maestra.
+- Se actualizaron arquitectura, comunicacion, diagramas, gobierno, busqueda,
+  direcciones, nomenclatura, runbook y contratos REFAPART.
+
+## Validaciones
+
+| Validacion | Resultado |
+|---|---|
+| Build de ocho webs | OK; TecnoTelec conserva warnings no bloqueantes de `img`. |
+| `compileall` de APIs | OK. |
+| `manage.py check` de 21 APIs | OK. |
+| Tests Gateway central | OK; 15 tests. |
+| Tests REFAPART API | OK; 2 tests. |
+| Compose API y Web enfocados | OK. |
+| Health Gateway/Auth/REFAPART/Address | OK. |
+| Busqueda `facia nisan versa 2020` | OK; devuelve la fascia Nissan Versa 2020. |
+| Alta de solicitud por Gateway | OK. |
+| Web `/`, resultados, publicar, admin y login | HTTP 200. |
+| Browser integrado | No disponible; se ejecuto validacion HTTP y de build. |
+
+## Runtime final
+
+| Servicio | URL/puerto |
+|---|---|
+| REFAPART Web | `http://localhost:3008` |
+| Gateway central | `http://localhost:8025` |
+| REFAPART API | `http://localhost:8024` |
+| Address API | `http://localhost:8026` |
+| Auth | `http://localhost:8000` |
+| PostgreSQL | `127.0.0.1:5432` |
+
+## Pendientes controlados
+
+- Crear o corregir el remoto del Gateway central.
+- Configurar remotos para LeadHunter API y Web.
+- Ejecutar runtime Docker aislado de los siete productos restantes.
+- Completar pagos, tracking, garantias y logistica productiva de REFAPART.
+- Extender la adopcion del buscador estandar a cada proyecto aplicable.
+
+## Limpieza
+
+Los agents `000`, `001`, `002`, `003`, `004`, `005`, `007`, `008`, `010`,
+`011` y `016` se archivaron en
+`Docs/_archive/agents/2026-06-14-central-gateway-refapart-platform/` y sus
+archivos activos quedaron vacios. Permanecen activos `006`, `009`, `012`,
+`013`, `014` y `015` porque conservan trabajo pendiente.
+
+---

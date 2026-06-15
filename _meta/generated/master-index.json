@@ -209,7 +209,7 @@
   },
   {
     "path": "01_core_erp/apis/09_gateway_api.md",
-    "title": "Tecno Telec Gateway API",
+    "title": "Gateway central API",
     "domain": "core",
     "status": "unknown",
     "priority": "unknown",
@@ -274,6 +274,22 @@
   {
     "path": "01_core_erp/apis/16_execution_resource_manager_api.md",
     "title": "Execution Resource Manager API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/17_search_api.md",
+    "title": "Search API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/18_address_api.md",
+    "title": "Address API",
     "domain": "core",
     "status": "unknown",
     "priority": "unknown",
@@ -616,6 +632,22 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "01_core_erp/database/18_search_model.md",
+    "title": "Modelo Search",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/database/19_address_model.md",
+    "title": "Modelo Address",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "01_core_erp/erp/00_erp_vision.md",
     "title": "Vision ERP",
     "domain": "core",
@@ -816,6 +848,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "01_core_erp/erp/25_search_engine.md",
+    "title": "Search Engine Core",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "01_core_erp/flows/00_flow_index.md",
     "title": "Indice de flujos",
     "domain": "core",
@@ -912,6 +952,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "01_core_erp/flows/12_global_search_flow.md",
+    "title": "Flujo global de busqueda",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "01_core_erp/README.md",
     "title": "Nucleo ERP",
     "domain": "core",
@@ -962,6 +1010,14 @@
   {
     "path": "02_projects/_ecosystem/05_lexnova_docucore_fiscora_mvp_alignment.md",
     "title": "Alineacion MVP LexNova, DocuCore y Fiscora",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/_ecosystem/05_search_adoption_map.md",
+    "title": "Mapa de adopcion Search",
     "domain": "business",
     "status": "unknown",
     "priority": "unknown",
@@ -1808,14 +1864,6 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
-    "path": "02_projects/refakto/README.md",
-    "title": "Refakto",
-    "domain": "business",
-    "status": "unknown",
-    "priority": "unknown",
-    "owner": "PENDIENTE_DE_DEFINIR"
-  },
-  {
     "path": "02_projects/refapart/api-contracts.md",
     "title": "Contratos API REFAPART",
     "domain": "business",
@@ -2632,6 +2680,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "03_standards/frontend/search-component-standard.md",
+    "title": "Estandar de componentes de busqueda",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "03_standards/frontend/shared-docker-frontend-architecture.md",
     "title": "Arquitectura Docker frontend compartida",
     "domain": "standards",
@@ -2684,6 +2740,14 @@
     "title": "Deprecacion de Gateways legacy",
     "domain": "standards",
     "status": "active",
+    "priority": "p1",
+    "owner": "Equipo de plataforma"
+  },
+  {
+    "path": "03_standards/gateway/legacy-gateway-retirement-2026-06-14.md",
+    "title": "Retiro de Gateways legacy 2026-06-14",
+    "domain": "standards",
+    "status": "completed",
     "priority": "p1",
     "owner": "Equipo de plataforma"
   },
@@ -2872,6 +2936,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "03_standards/operations/search-implementation-standard.md",
+    "title": "Estandar de implementacion Search",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "03_standards/operations/security.md",
     "title": "Security",
     "domain": "standards",
@@ -2912,6 +2984,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "03_standards/project-naming-standard.md",
+    "title": "Estandar de nombres de proyecto",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "03_standards/README.md",
     "title": "Estandares",
     "domain": "standards",
@@ -2946,6 +3026,14 @@
   {
     "path": "03_standards/security/secrets-management.md",
     "title": "Manejo de secretos",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/testing/project-operational-validation.md",
+    "title": "Validacion operativa por proyecto",
     "domain": "standards",
     "status": "unknown",
     "priority": "unknown",
@@ -3337,7 +3425,7 @@
   },
   {
     "path": "agents/AGENTS-002.md",
-    "title": "PROMPT CODEX — IMPLEMENTACIÓN ESTÁNDAR AUTH EN PROYECTOS EXISTENTES",
+    "title": "PENDIENTE_DE_DEFINIR",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -3345,7 +3433,7 @@
   },
   {
     "path": "agents/AGENTS-003.md",
-    "title": "AGENTE CODEX — MIGRACIÓN A GATEWAY CENTRAL",
+    "title": "PENDIENTE_DE_DEFINIR",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -3369,7 +3457,7 @@
   },
   {
     "path": "agents/AGENTS-006.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "Regla global nueva",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -3393,7 +3481,7 @@
   },
   {
     "path": "agents/AGENTS-009.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "IMPLEMENTACIÓN COMPLETA REFAPART",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -3417,7 +3505,7 @@
   },
   {
     "path": "agents/AGENTS-012.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "Módulo ERP: Prospectos y Captación Manual",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",

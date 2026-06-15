@@ -33,10 +33,9 @@ modernizacion visual no documentada.
 
 ## Reglas de arquitectura
 
-- Todo proyecto web productivo debe tener `Frontend`, `Gateway/BFF` y `API`
-  propia cuando tenga dominio, permisos, datos o integraciones propios.
-- El frontend no debe consumir directamente APIs internas del ERP si existe o
-  debe existir un Gateway del proyecto.
+- Todo proyecto web productivo usa `Frontend`, el Gateway central modular y
+  `API` propia cuando tenga dominio, permisos, datos o integraciones propios.
+- El frontend no consume APIs internas ni Gateways legacy por proyecto.
 - El ERP conserva capacidades reutilizables; los proyectos conservan identidad,
   negocio, UX, permisos y datos especificos.
 - Las integraciones de proveedor viven en `Docs/04_integrations`.

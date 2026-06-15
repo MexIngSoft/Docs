@@ -27,7 +27,7 @@ Ordenar las empresas, marcas y productos que pueden crecer alrededor del ERP Job
 | Comercio | Imagrafity | Personalizacion de productos. |
 | Comercio | Buildora | Configurador y venta de PCs/equipos a medida. |
 | Comercio | REFAPART | Localizacion y abastecimiento controlado de refacciones automotrices. |
-| Comercio | Refakto | Marketplace de refacciones usadas. |
+| Comercio | REFAPART | Localizacion, cotizacion y venta asistida de refacciones. |
 | Operacion | Rutexa | Logistica y envios. |
 | Operacion | Stockara | Inventarios y almacenes. |
 | Operacion | Pagora | Pagos y financiamiento. |

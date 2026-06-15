@@ -50,7 +50,7 @@ Documentos principales:
 
 - `imagrafity`
 - `buildora`
-- `refakto`
+- `refapart`
 - `phone-shop`
 
 ### Operacion

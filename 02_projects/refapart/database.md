@@ -2,27 +2,19 @@
 
 ## Estado
 
-FUTURE_OR_PENDING
+ACTIVE_MVP
 
 ## Tablas comerciales propias
 
 | Tabla | Uso |
 |---|---|
-| `customers` | Clientes finales. |
-| `customer_addresses` | Direcciones de entrega. |
-| `vehicle_brands` | Marcas visibles. |
-| `vehicle_models` | Modelos visibles. |
-| `part_categories` | Categorias publicas. |
-| `public_parts` | Piezas publicables, no inventario real profundo. |
-| `public_part_compatibilities` | Compatibilidad visible. |
-| `search_requests` | Busquedas y solicitudes del cliente. |
-| `quotations` | Cotizaciones visibles. |
-| `quotation_items` | Piezas cotizadas. |
-| `orders` | Pedidos comerciales. |
-| `order_items` | Piezas del pedido. |
-| `payments` | Pagos de cliente. |
-| `customer_messages` | Mensajes visibles. |
-| `tracking_events` | Seguimiento publico. |
+| `Product` | Piezas publicables y compatibilidad MVP. |
+| `SearchQuery` | Consulta original, normalizada, intencion y ranking. |
+| `PartRequest` | Demanda explicita o creada por busqueda sin resultado. |
+| `Supplier` | Proveedores internos habilitados. |
+| `SupplierOffer` | Precio, disponibilidad, garantia y logistica de proveedor. |
+| `Quote` | Precio final y margen de la oferta seleccionada. |
+| `Order` | Pedido comercial creado desde una cotizacion aceptada. |
 
 ## Datos operativos en JobCron
 
@@ -35,7 +27,13 @@ FUTURE_OR_PENDING
 | Logistica profunda | Recoleccion, fletera, incidencias y costos reales. |
 | Automatizaciones | Jobs, reintentos y auditoria. |
 
-## Decision MVP actual
+## Direcciones
 
-No se crean migraciones en esta corrida. La web usa datos mock para validar
-experiencia, copy, flujo y assets de marca.
+El catalogo geografico vive en `API.PY.DJANGO.Address` con pais, estado,
+municipio, codigo postal, asentamiento, calle y direccion. REFAPART conserva
+solo los campos operativos minimos mientras se integra la referencia formal.
+
+## Migraciones
+
+El esquema inicial y el seed MVP estan versionados. El seed incluye tres
+piezas y dos proveedores para pruebas locales reproducibles.

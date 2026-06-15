@@ -77,6 +77,6 @@ mezclar identidades visuales.
 
 ## Backend
 
-El catalogo MVP continua local. Auth conecta al Gateway central en `8025`; el
-Gateway REFAPART en `8023` queda como fallback y la web nunca consume
-`API.PY.DJANGO.Auth` directamente.
+Catalogo, busqueda, demanda y operacion se consumen desde la API REFAPART a
+traves del Gateway central en `8025`. La web nunca consume Auth, APIs Core ni
+la API REFAPART directamente.

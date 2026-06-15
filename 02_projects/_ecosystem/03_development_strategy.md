@@ -34,7 +34,7 @@
 
 - Imagrafity.
 - Buildora.
-- Refakto.
+- REFAPART.
 
 ## Fase 5: Servicios especializados
 

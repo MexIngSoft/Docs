@@ -43,8 +43,8 @@ cuando el orquestador general de webs no se esta usando. Se usa cuando no se
 deben crear mounts, puertos ni procesos de otras webs.
 
 El Gateway principal existe en `Docker.API.PY/API.PY.DJANGO.Gateway`. El
-Gateway `API.PY.DJANGO.RefaPart.Gateway` fue retirado el 2026-06-14. La
-API comercial REFAPART sigue pendiente.
+Gateway `API.PY.DJANGO.RefaPart.Gateway` fue retirado el 2026-06-14. La API de
+dominio vive en `Docker.API.PY/API.PY.DJANGO.RefaPart` y usa el puerto `8024`.
 
 Arranque Auth focalizado:
 
@@ -53,8 +53,8 @@ cd Docker.API.PY
 docker compose -f docker-compose.refapart.api.yml up -d --build
 ```
 
-La corrida focalizada levanta solo `auth` y `gateway`, publicando
-`8000`, `8025` y `8023`. El puerto `8023` existe solo para rollback.
+La corrida focalizada levanta PostgreSQL, Auth, Gateway central y API REFAPART,
+publicando `8000`, `8024` y `8025`.
 
 ## Validacion
 
@@ -93,7 +93,6 @@ Validacion focalizada posterior 2026-06-13:
 ```text
 NEXT_PUBLIC_APP_NAME=REFAPART
 NEXT_PUBLIC_HOST=http://localhost:3008
-NEXT_PUBLIC_GATEWAY_BASE_URL=http://localhost:8025/api/v1
 NEXT_PUBLIC_GATEWAY_BASE_URL=http://localhost:8025/api/v1
 NEXT_PUBLIC_GATEWAY_FETCH_TIMEOUT_MS=30000
 NEXT_PUBLIC_ENVIRONMENT=local

@@ -8,8 +8,8 @@ Definir la arquitectura general del ERP modular y su uso por proyectos web, movi
 
 ```text
 Web/Mobile/Admin del proyecto
-  -> Project Gateway / BFF API
-  -> Project Domain API
+  -> API.PY.DJANGO.Gateway
+  -> Project Domain API opcional
   -> Core ERP APIs
   -> PostgreSQL por schemas de dominio
 ```
@@ -20,8 +20,8 @@ Todo proyecto debe seguir el patron documentado en `07_project_api_pattern.md`.
 
 ```text
 Frontend del proyecto
-  -> API intermedia del proyecto
-  -> API propia del proyecto
+  -> Gateway central modular
+  -> API propia del proyecto cuando tenga dominio propio
   -> APIs core reutilizables
 ```
 

@@ -53,12 +53,12 @@ completa de proveedores al cliente.
 ## MVP
 
 1. Buscador publico de refacciones.
-2. Resultados mock de piezas para validar UX.
+2. Resultados reales entregados por la API de dominio REFAPART.
 3. Detalle de pieza con acciones de disponibilidad y WhatsApp.
 4. Publicacion de busqueda cuando no hay pieza visible.
 5. Favoritos locales.
-6. Cuenta cliente integrada con Auth central mediante Gateway propio.
-7. Contrato documentado para API comercial futura.
+6. Cuenta cliente integrada con Auth mediante el Gateway central.
+7. API comercial REFAPART con busqueda, demanda, proveedores, cotizacion y pedidos MVP.
 
 ## Documentos
 
@@ -77,16 +77,17 @@ completa de proveedores al cliente.
 | Web | `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart` |
 | Gateway central | `API.PY.DJANGO.Gateway` |
 | Gateway retirado | `API.PY.DJANGO.RefaPart.Gateway` (retirado 2026-06-14) |
-| API futura | `API.PY.DJANGO.Refapart` |
+| API de dominio | `API.PY.DJANGO.RefaPart` |
+| API de direcciones | `API.PY.DJANGO.Address` |
 | ERP/operacion | JobCron |
 | Puerto web local | `3008` |
 | Puerto Gateway central | `8025` |
 | Puerto Gateway legacy | `8023` |
-| Puerto API futuro | `8024` |
+| Puerto API REFAPART | `8024` |
+| Puerto API Address | `8026` |
 
 ## Pendientes
 
-- Crear API comercial propia cuando se cierre fase backend.
 - Definir permisos REFAPART mas alla del rol base `CUSTOMER`.
 - Definir pasarela de pago real.
 - Definir politica de garantia, devoluciones y proveedores autorizados.
