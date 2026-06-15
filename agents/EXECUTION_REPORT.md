@@ -10203,7 +10203,9 @@ malformados. Docker daemon continua bloqueado por ausencia de
 Antes de implementar se crearon commits de checkpoint en todos los
 repositorios con cambios. Los remotos disponibles recibieron push. El Gateway
 central no pudo publicarse porque su remoto responde `repository not found`;
-LeadHunter API y Web no tienen `origin` configurado.
+LeadHunter API y Web no tienen `origin` configurado. Address y RefaPart API se
+inicializaron como repositorios independientes, pero sus remotos propuestos
+tambien responden `repository not found`.
 
 ## Resultado por agent
 
@@ -10270,10 +10272,15 @@ LeadHunter API y Web no tienen `origin` configurado.
 ## Pendientes controlados
 
 - Crear o corregir el remoto del Gateway central.
+- Crear los remotos de Address API y RefaPart API; los commits locales son
+  `9106e68` y `78bb6e7`.
 - Configurar remotos para LeadHunter API y Web.
 - Ejecutar runtime Docker aislado de los siete productos restantes.
 - Completar pagos, tracking, garantias y logistica productiva de REFAPART.
 - Extender la adopcion del buscador estandar a cada proyecto aplicable.
+- La reconstruccion posterior de la imagen maestra quedo bloqueada por dos
+  procesos BuildKit sin salida; el runtime enfocado validado usa bind mounts y
+  permanece saludable. Los Dockerfiles ya incluyen ambos servicios.
 
 ## Limpieza
 
