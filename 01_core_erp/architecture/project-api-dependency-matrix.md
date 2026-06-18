@@ -1,6 +1,6 @@
 # Matriz Proyecto A APIs
 
-## Regla Principal
+## Regla principal
 
 Los proyectos consumen APIs existentes mediante Gateway General.
 
@@ -12,44 +12,123 @@ exclusivas que no pertenezcan a una API compartida.
 
 ## JobCron
 
-Consume Gateway General, Auth, FeatureVisibility, Catalog, Inventory, Pricing, Supplier, Procurement, Sales, Search, Document, Fiscal, ETL y APIs operativas propias de JobCron.
+Consume:
 
-Responsabilidad: ERP administrador del ecosistema.
+- Gateway General
+- Auth
+- FeatureVisibility
+- Catalog
+- Inventory
+- Pricing
+- Supplier
+- Procurement
+- Sales
+- Search
+- Document
+- Fiscal
+- ETL
+- APIs operativas propias de JobCron solo si aplica
 
-## RefaPart
+Responsabilidad:
 
-Consume Gateway General, Auth, Search, Supplier, Catalog, Inventory, Pricing, Procurement, Sales, Address y API especializada solo si aplica.
+ERP administrador del ecosistema.
 
-Responsabilidad: busqueda, solicitud, cotizacion, venta y seguimiento basico de refacciones.
+## Refapart
 
-No debe tener Gateway propio.
+Consume:
+
+- Gateway General
+- Auth
+- Search
+- Supplier
+- Catalog
+- Inventory
+- Pricing
+- Procurement
+- Sales
+- Address
+- API especializada Refapart solo si aplica
+
+Responsabilidad:
+
+Busqueda, solicitud, cotizacion, venta y seguimiento basico de refacciones.
+
+Refapart no debe tener Gateway propio.
 
 ## TecnoTelec
 
-Consume Gateway General, Auth, Catalog, Inventory, Pricing, Supplier, Procurement, Sales y API especializada solo si aplica.
+Consume:
 
-Responsabilidad: operacion comercial de productos TecnoTelec.
+- Gateway General
+- Auth
+- Catalog
+- Inventory
+- Pricing
+- Supplier
+- Procurement
+- Sales
+- API especializada TecnoTelec solo si aplica
+
+Responsabilidad:
+
+Operacion comercial de productos TecnoTelec.
+
+TecnoTelec no debe tener Gateway propio.
 
 ## LexNova
 
-Consume Gateway General, Auth, Document, Search y API especializada solo si aplica.
+Consume:
 
-Responsabilidad: operacion documental y legal.
+- Gateway General
+- Auth
+- Document
+- Search
+- API especializada LexNova solo si aplica
+
+Responsabilidad:
+
+Operacion documental y legal.
 
 ## DocuCore
 
-Consume Gateway General, Auth, Document, Search y API especializada solo si aplica.
+Consume:
 
-Responsabilidad: gestion documental reutilizable.
+- Gateway General
+- Auth
+- Document
+- Search
+- API especializada DocuCore solo si aplica
+
+Responsabilidad:
+
+Gestion documental reutilizable.
 
 ## Fiscora
 
-Consume Gateway General, Auth, Fiscal, Document y Search.
+Consume:
 
-Responsabilidad: flujos fiscales y documentales.
+- Gateway General
+- Auth
+- Fiscal
+- Document
+- Search
+- API especializada Fiscora solo si aplica
+
+Responsabilidad:
+
+Flujos fiscales y documentales.
 
 ## Imagrafity
 
-Consume Gateway General, Auth, Catalog, Pricing, Search y API especializada solo si aplica.
+Consume:
 
-Responsabilidad: catalogo y operacion comercial de servicios graficos.
+- Gateway General
+- Auth
+- Catalog
+- Pricing
+- Search
+- API especializada Imagrafity solo si aplica
+
+Responsabilidad:
+
+Catalogo y operacion comercial de servicios graficos.
