@@ -6,8 +6,9 @@ La arquitectura Docker oficial del ecosistema JobCron debe permitir dos formas
 de ejecucion sin cambiar archivos generales por necesidades de un solo
 proyecto:
 
-1. Ejecutar todo el ecosistema completo.
-2. Ejecutar un proyecto web con sus APIs, bases y proxy necesarios.
+1. Ejecutar todo el ecosistema completo como ruta oficial.
+2. Conservar overlays por proyecto solo como archivos auxiliares de seleccion
+   o compatibilidad, no como ciclo principal de validacion.
 
 Esta regla aplica a `Docker.DB.PG`, `Docker.API.PY`, `Docker.WEB.NJ` y
 `Docker.SW.Nginx`.
@@ -35,10 +36,14 @@ Docker.SW.Nginx/docker-compose.master.nginx.yml
 Los compose master pueden incluir o extender los compose base de cada carpeta,
 pero deben existir como ubicacion canonica para correr todo.
 
-## Composes por proyecto
+## Composes auxiliares por proyecto
 
-Cada proyecto web debe tener compose propio para una corrida focalizada. La
-ubicacion canonica es:
+Los compose por proyecto pueden existir para documentar seleccion de servicios,
+variables y dependencias. No se deben usar para validar levantando y bajando un
+proyecto a la vez. La validacion operativa debe usar los compose master dentro
+del mismo proyecto Docker Compose.
+
+Ubicacion auxiliar:
 
 ```text
 Docker.DB.PG/docker-compose.<proyecto>.db.yml
@@ -51,16 +56,17 @@ Regla de limpieza: el compose por proyecto no debe copiar todo el servicio si
 solo cambia la lista de procesos. En ese caso debe ser un overlay delgado que
 extiende el compose base y define `API_PROJECTS` o `WEB_PROJECTS`.
 
-Una corrida por proyecto no debe duplicar APIs compartidas que ya esten sanas.
-Debe levantar solo lo que falte o reconstruir solo lo que cambio.
+Una correccion detectada al probar un proyecto debe aplicarse al patron comun
+si el origen es compartido: Dockerfile base, compose base, `.env.example`,
+scripts de arranque, Gateway General, Auth, CORS, healthchecks o Nginx.
 
 ## Dependencias por proyecto
 
 | Proyecto web | Dependencias esperadas |
 |---|---|
-| TecnoTelec | TecnoTelec Gateway, Auth, Catalog, Supplier, Pricing, Inventory, Sales, TecnoTelec API, base comercial y base auth. |
-| LexNova | LexNova Gateway, Auth, LexNova API, base auth y base LexNova. |
-| JobCron | JobCron Gateway/API, Auth, APIs administrativas necesarias, base auth y base JobCron si aplica. |
+| TecnoTelec | Gateway General, Auth, Catalog, Supplier, Pricing, Inventory, Sales, TecnoTelec API, base comercial y base auth. |
+| LexNova | Gateway General, Auth, LexNova API, Document API, base auth y base LexNova. |
+| JobCron | Gateway General, JobCron API, Auth, APIs administrativas necesarias, base auth y base JobCron si aplica. |
 
 Un proyecto web no es dueno de una API compartida. `Auth`, `Catalog`,
 `Supplier`, `Pricing`, `Inventory`, `Sales` y capacidades core pertenecen al
@@ -299,21 +305,23 @@ commercial
 ## Flujo para crear un proyecto web
 
 1. Crear Dockerfile del proyecto web solo si lo necesita.
-2. Crear `docker-compose.<proyecto>.web.yml`.
-3. Crear `docker-compose.<proyecto>.api.yml`.
-4. Crear `docker-compose.<proyecto>.db.yml` si requiere base/schemas propios.
+2. Registrar la web en el compose base o master correspondiente.
+3. Crear overlay `docker-compose.<proyecto>.web.yml` solo si aporta seleccion o
+   compatibilidad documentada.
+4. Crear overlay `docker-compose.<proyecto>.api.yml` solo si aporta seleccion o
+   compatibilidad documentada.
 5. Crear `.env.<proyecto>` solo si necesita variables locales separadas.
-6. Conectar su Gateway/BFF.
+6. Conectar el Gateway General.
 7. Definir que APIs necesita en `API_PROJECTS`.
 8. Definir que web necesita en `WEB_PROJECTS`.
-9. Probar corrida individual.
-10. Documentar la arquitectura del proyecto.
+9. Validar el stack completo del workspace.
+10. Documentar la arquitectura del proyecto y cualquier correccion transversal.
 
 ## Regla final
 
 ```text
 Master = corre todo.
-Proyecto = corre solo lo necesario.
+Proyecto = seleccion auxiliar, no validacion operativa aislada.
 API = corre una API individual.
 DB = administra bases y schemas.
 Nginx = entrada y ruteo.
@@ -324,5 +332,5 @@ Nginx = entrada y ruteo.
 ```
 
 Los Dockerfile y docker-compose generales representan la infraestructura
-completa. Los compose por proyecto representan ejecucion focalizada y deben
-preferir overlays delgados antes que duplicar servicios completos.
+completa. Los compose por proyecto son auxiliares y deben preferir overlays
+delgados antes que duplicar servicios completos.

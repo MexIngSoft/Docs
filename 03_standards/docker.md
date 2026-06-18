@@ -2,9 +2,10 @@
 
 ## Regla superior
 
-La ejecucion focalizada se rige por
-`03_standards/docker/docker-compose-project-standard.md`: base general por capa
-y overlay por proyecto. No se levantan todas las webs para probar una sola.
+La ejecucion oficial del workspace es conjunta. No se valida proyecto por
+proyecto levantando y bajando contenedores aislados. Los archivos por proyecto
+pueden existir como overlays de seleccion o compatibilidad, pero la ruta normal
+debe levantar el mismo stack Docker del workspace.
 
 ## Arquitectura oficial JobCron
 
@@ -76,27 +77,23 @@ Si una web Next.js carga HTML sin CSS:
 powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-WorkspaceDocker.ps1 -RepairCss
 ```
 
-Comandos manuales equivalentes para diagnostico:
+Comando manual equivalente para diagnostico del stack completo:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Reserve-WorkspacePorts.ps1 -DryRun
-docker compose -f Docker.DB.PG\docker-compose.yml up -d
-docker compose -f Docker.API.PY\docker-compose.yml up -d --build
-docker compose -f Docker.WEB.NJ\docker-compose.yml up -d --build
-docker compose -f Docker.SW.Nginx\docker-compose.yml up -d --build
+docker compose -p workspace_comercial -f Docker.DB.PG\docker-compose.master.db.yml -f Docker.API.PY\docker-compose.master.api.yml -f Docker.WEB.NJ\docker-compose.master.web.yml -f Docker.SW.Nginx\docker-compose.master.nginx.yml up -d --build
 ```
 
-Comandos por proyecto:
+Los compose por proyecto se conservan solo como archivos auxiliares de
+seleccion o compatibilidad. No son la ruta oficial de validacion operativa.
 
-```powershell
-docker compose -f Docker.DB.PG\docker-compose.<proyecto>.db.yml up -d
-docker compose -f Docker.API.PY\docker-compose.<proyecto>.api.yml up -d --build
-docker compose -f Docker.WEB.NJ\docker-compose.<proyecto>.web.yml up -d --build
-```
+## Correccion transversal
 
-Los compose por proyecto se guardan en la carpeta de su capa. Si solo cambia la
-lista de procesos, deben ser overlays delgados que extiendan el compose base y
-definan `API_PROJECTS` o `WEB_PROJECTS`.
+Si al probar un proyecto aparece un error causado por configuracion compartida,
+Docker, variables, Gateway General, Auth, rutas, CORS, healthchecks, scripts de
+arranque o patrones comunes, la correccion debe aplicarse en el patron comun y
+replicarse en todos los proyectos afectados. No se debe corregir solo el
+proyecto donde se descubrio el problema si el origen es transversal.
 
 Si el diagnostico muestra conflictos en puertos reservados, liberarlos antes de
 levantar Docker:
@@ -118,12 +115,12 @@ Docs/03_standards/operations/local-port-registry.md
 
 ## Regla para proyectos con dependencias cruzadas
 
-Cuando una web depende de Gateway/BFF, API de dominio y APIs core, no se debe
-validar ni entregar solo el frontend. La validacion local debe cubrir toda la
-cadena documentada por el proyecto:
+Cuando una web depende del Gateway General, API de dominio y APIs core, no se
+debe validar ni entregar solo el frontend. La validacion local debe cubrir toda
+la cadena documentada por el proyecto dentro del stack compartido:
 
 ```text
-DB -> Core APIs -> Project Domain API -> Central Gateway -> Web
+DB -> Core APIs -> Project Domain API -> Gateway General -> Web
 ```
 
 Cada proyecto con esta forma debe tener un runbook propio en
@@ -137,7 +134,7 @@ Cada proyecto con esta forma debe tener un runbook propio en
 - diagnostico de errores comunes.
 
 Si el frontend se levanta en un puerto alterno, ese puerto debe existir en
-`CORS_ALLOWED_ORIGINS` del Gateway/BFF.
+`CORS_ALLOWED_ORIGINS` del Gateway General.
 
 ## Reparacion de CSS Next.js
 
@@ -239,7 +236,7 @@ http://localhost
 Rangos reservados:
 
 - Webs Next.js: `3000-3050`
-- APIs Django/Gateway/BFF: `8000-8050`
+- APIs Django/Gateway General: `8000-8050`
 - Nginx local: `80` y `443` futuro
 - PostgreSQL local: `5432`
 

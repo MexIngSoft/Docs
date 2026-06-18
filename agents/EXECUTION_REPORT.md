@@ -10511,3 +10511,88 @@ esta regla. Desde esta entrada en adelante, el cierre de agents se registra como
 
 - Cerrados y limpiados en `Docs/agents`: `AGENTS-000`, `AGENTS-001`, `AGENTS-002`, `AGENTS-003`, `AGENTS-004`, `AGENTS-006`, `AGENTS-009`, `AGENTS-012`, `AGENTS-013`, `AGENTS-014`.
 - Pendientes activos: `AGENTS-007`, `AGENTS-015`.
+## Ejecucion 2026-06-18 - Correccion AGENTS-015 Docker conjunto
+
+### Instruccion recibida
+
+El owner indico que el agent pendiente no debe ejecutar proyecto por proyecto
+en Docker. La regla vigente queda:
+
+- No levantar y bajar cada proyecto de forma aislada.
+- Crear o ajustar los archivos necesarios para que el workspace se ejecute en
+  el mismo stack Docker.
+- Si al probar un proyecto se detecta un problema transversal, corregir el
+  patron comun y replicar la correccion en todos los proyectos afectados.
+
+### Agents revisados en orden
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-005.md` | Parcial / pendiente amplio | Contiene correccion global documental y arquitectonica ya tratada parcialmente en corridas previas; no se reejecuto completo para no mezclar el cierre Docker puntual con implementacion global de todo el ecosistema. |
+| `AGENTS-007.md` | Parcial / pendiente amplio | Contiene implementacion global de APIs, webs e integraciones; se conserva activo porque su alcance excede la correccion Docker solicitada y requiere validaciones funcionales posteriores. |
+| `AGENTS-015.md` | Completado | Su instruccion anterior de validar proyecto por proyecto contradice la regla actual. Se reemplazo por documentacion y script de ejecucion conjunta del workspace. El archivo original se vacio sin borrarlo ni moverlo. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-005.md`
+- `Docs/agents/AGENTS-007.md`
+- `Docs/agents/AGENTS-015.md`
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/docker/docker-compose-project-standard.md`
+- `Docs/03_standards/docker/grouped-containers-isolated-config.md`
+- `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
+- `Docs/03_standards/testing/project-operational-validation.md`
+- `Docs/03_standards/operations/scripts/Start-WorkspaceDocker.ps1`
+
+### Archivos modificados
+
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/docker/docker-compose-project-standard.md`
+- `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
+- `Docs/03_standards/testing/project-operational-validation.md`
+- `Docs/03_standards/operations/scripts/Start-WorkspaceDocker.ps1`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-015.md`
+
+### Decisiones documentadas
+
+- La ejecucion Docker oficial es conjunta mediante los compose master.
+- `Start-WorkspaceDocker.ps1` usa el proyecto Compose `workspace_comercial`.
+- Los overlays por proyecto quedan como auxiliares de seleccion o
+  compatibilidad, no como ruta oficial de validacion operativa.
+- Cualquier fallo transversal detectado desde un proyecto se corrige en el
+  patron comun y se replica a los proyectos afectados.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `docker compose -p workspace_comercial -f Docker.DB.PG\docker-compose.master.db.yml -f Docker.API.PY\docker-compose.master.api.yml -f Docker.WEB.NJ\docker-compose.master.web.yml -f Docker.SW.Nginx\docker-compose.master.nginx.yml config --quiet` | OK |
+| Parse PowerShell de `Start-WorkspaceDocker.ps1` | OK |
+| `git -C Docs diff --check` | OK |
+
+### Faltantes reales
+
+- `AGENTS-005.md` y `AGENTS-007.md` permanecen activos por alcance global
+  amplio. Deben cerrarse en una ejecucion posterior dedicada a arquitectura y
+  desarrollo completo, no mezclada con este cierre Docker.
+- No se ejecuto runtime Docker completo porque la instruccion actual fue crear
+  y validar archivos necesarios, no levantar proyecto por proyecto.
+
+### Contradicciones detectadas
+
+- `AGENTS-015.md` pedia validacion proyecto por proyecto y consumo de
+  Gateway/BFF por proyecto. Eso contradice la regla actual y el estandar de
+  Gateway General.
+- Documentos Docker anteriores hablaban de corrida focalizada/proyecto por
+  proyecto como ruta normal. Se corrigieron para dejar la ejecucion conjunta
+  como estandar.
+
+### Limpieza de agent
+
+- `Docs/agents/AGENTS-015.md` se vacio y se conserva en su ruta original.

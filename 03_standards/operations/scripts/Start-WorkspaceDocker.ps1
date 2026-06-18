@@ -11,11 +11,12 @@ param(
 $ErrorActionPreference = "Stop"
 
 $workspaceRoot = Resolve-Path (Join-Path $PSScriptRoot "..\..\..\..")
+$composeProjectName = "workspace_comercial"
 $composeFiles = @{
-    Db = Join-Path $workspaceRoot "Docker.DB.PG\docker-compose.yml"
-    Api = Join-Path $workspaceRoot "Docker.API.PY\docker-compose.yml"
-    Web = Join-Path $workspaceRoot "Docker.WEB.NJ\docker-compose.yml"
-    Nginx = Join-Path $workspaceRoot "Docker.SW.Nginx\docker-compose.yml"
+    Db = Join-Path $workspaceRoot "Docker.DB.PG\docker-compose.master.db.yml"
+    Api = Join-Path $workspaceRoot "Docker.API.PY\docker-compose.master.api.yml"
+    Web = Join-Path $workspaceRoot "Docker.WEB.NJ\docker-compose.master.web.yml"
+    Nginx = Join-Path $workspaceRoot "Docker.SW.Nginx\docker-compose.master.nginx.yml"
 }
 
 $apiServices = @(
@@ -62,6 +63,17 @@ function Invoke-WorkspaceCommand {
     if ($LASTEXITCODE -ne 0) {
         throw "$Label fallo con exit code $LASTEXITCODE"
     }
+}
+
+function Get-WorkspaceComposeArgs {
+    return @(
+        "compose",
+        "-p", $composeProjectName,
+        "-f", $composeFiles.Db,
+        "-f", $composeFiles.Api,
+        "-f", $composeFiles.Web,
+        "-f", $composeFiles.Nginx
+    )
 }
 
 function Test-DockerReady {
@@ -192,28 +204,15 @@ JS"
 }
 
 function Start-ComposeStack {
-    Write-Step "Levantando Docker Compose"
-    Invoke-WorkspaceCommand -Command @("docker", "compose", "-f", $composeFiles.Db, "up", "-d") -Label "PostgreSQL"
-
-    $apiArgs = @("compose", "-f", $composeFiles.Api, "up", "-d")
-    if ($BuildApi) {
-        $apiArgs += "--build"
+    Write-Step "Levantando stack Docker completo"
+    $composeArgs = Get-WorkspaceComposeArgs
+    $upArgs = $composeArgs + @("up", "-d")
+    if ($BuildApi -or $BuildWeb) {
+        $upArgs += "--build"
     } else {
-        $apiArgs += "--no-build"
+        $upArgs += "--no-build"
     }
-    $apiCommand = @("docker") + $apiArgs
-    Invoke-WorkspaceCommand -Command $apiCommand -Label "APIs Django"
-
-    $webArgs = @("compose", "-f", $composeFiles.Web, "up", "-d")
-    if ($BuildWeb) {
-        $webArgs += "--build"
-    } else {
-        $webArgs += "--no-build"
-    }
-    $webCommand = @("docker") + $webArgs
-    Invoke-WorkspaceCommand -Command $webCommand -Label "Webs Next.js"
-
-    Invoke-WorkspaceCommand -Command @("docker", "compose", "-f", $composeFiles.Nginx, "up", "-d", "--no-build") -Label "Nginx"
+    Invoke-WorkspaceCommand -Command (@("docker") + $upArgs) -Label "Workspace completo"
 }
 
 function Test-Workspace {
@@ -291,7 +290,7 @@ try {
     if ($RunDjangoChecks) {
         Write-Step "Django checks principales"
         foreach ($project in @("auth", "gateway", "lexnova")) {
-            docker compose -f $composeFiles.Api exec -T api-multiproyecto sh /usr/src/api/start.sh manage $project check
+            docker compose -p $composeProjectName -f $composeFiles.Db -f $composeFiles.Api -f $composeFiles.Web -f $composeFiles.Nginx exec -T api-multiproyecto sh /usr/src/api/start.sh manage $project check
         }
     }
 } finally {
