@@ -115,6 +115,15 @@ git commit -m "<English commit message>"
 git push origin <rama>
 ```
 
+La rama publicada debe ser una de las ramas vigentes del workspace:
+
+- `dev`
+- `pro`
+- `main`
+
+No deben quedar ramas persistentes adicionales en local ni remoto. Si una tarea
+necesita una rama temporal local, se debe integrar y eliminar antes del cierre.
+
 Antes de publicar `Docker.WEB.NJ`, si Git marca propiedad dudosa en Windows, se debe registrar la carpeta como segura para el usuario actual:
 
 ```bash
@@ -125,4 +134,5 @@ git config --global --add safe.directory C:/Users/cash1/source/repos/Workspace.C
 
 - Confirmar si `WEB.NJ.NEXT.JobCron`, `WEB.NJ.NEXT.LexNova` y `WEB.NJ.NEXT.TecnoTelec` deben mantenerse como repos Git separados y si tambien deben referenciarse desde el repo contenedor.
 - Instalar o habilitar GitHub CLI (`gh`) si se quiere crear pull requests desde terminal.
-- Confirmar si los pushes se haran directo a `main` o mediante ramas `feature/*`.
+- PENDIENTE_DE_DEFINIR: confirmar si todos los repos tendran protecciones
+  obligatorias de GitHub sobre `dev`, `pro` y `main`.

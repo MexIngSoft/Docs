@@ -124,5 +124,5 @@ Reglas operativas:
 - Informar al owner que esta listo para validar.
 - No hacer commit ni push funcional sin aprobacion del owner.
 - Separar commits por repositorio y responsabilidad.
-- Usar `feature/*`, `dev` y `main` como flujo recomendado para el equipo actual.
-- Mantener `qa`, `uat` y `pro` documentados como etapas futuras hasta que existan entornos y responsables reales.
+- Usar solamente `dev`, `pro` y `main` como ramas persistentes.
+- No dejar ramas temporales publicadas ni vivas al cerrar la tarea.

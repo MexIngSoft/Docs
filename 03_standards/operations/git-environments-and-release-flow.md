@@ -52,49 +52,42 @@ Docker se debe levantar o reconstruir cuando el cambio afecte:
 
 Para cambios pequenos de documentacion o codigo aislado, primero se valida con comandos ligeros. Docker se levanta cuando el owner pida validar el flujo completo o cuando el analisis indique que ya hay suficiente riesgo de integracion.
 
-## Ramas recomendadas
+## Ramas permitidas
 
 Para el equipo actual, el flujo recomendado es ligero:
 
 | Rama | Uso | Estado |
 |---|---|---|
-| `feature/<descripcion>` | Trabajo puntual antes de integrar. | Activa cuando el cambio lo amerite. |
-| `dev` | Integracion de desarrollo. | Recomendada para trabajo diario. |
+| `dev` | Integracion de desarrollo. | Activa para trabajo diario y validacion previa. |
 | `pro` | Produccion. | Activa para despliegues productivos. |
 | `main` | Copia estable de produccion. | Protegida; recibe cambios desde `pro` cuando ya son estables. |
-| `qa` | Pruebas formales de calidad. | Futuro, cuando exista flujo QA. |
-| `uat` | Validacion con datos reales o muy cercanos a reales. | Futuro, cuando existan usuarios validadores. |
 
 ## Decision para el estado actual
 
-Como el equipo actual es pequeno, no se recomienda crear todas las ramas desde el inicio.
+Como decision operativa vigente, cada repositorio debe conservar solamente las
+ramas `dev`, `pro` y `main`.
 
 Se recomienda:
 
-- Usar `feature/*` para cambios medianos o grandes.
-- Crear `dev` como rama de integracion cuando empecemos a hacer desarrollo continuo.
+- Usar `dev` como rama de integracion y validacion previa.
 - Usar `pro` como rama de despliegue productivo.
 - Mantener `main` como copia estable de `pro` despues de validar produccion.
-- Documentar `qa` y `uat` como etapas futuras.
+- No dejar ramas persistentes adicionales en local ni remoto.
 
-Cuando existan QA formal o usuarios validando, se podran crear `qa` y `uat`
-con reglas de promocion.
+Si por una emergencia se crea una rama temporal local, debe integrarse y
+eliminarse antes de cerrar la tarea. No debe quedar publicada como rama viva.
 
 ## Reglas de promocion
 
 | Origen | Destino | Requisito |
 |---|---|---|
-| `feature/*` | `dev` | Pruebas locales minimas y revision del owner si aplica. |
 | `dev` | `pro` | Validacion local completa y aprobacion del owner. |
 | `pro` | `main` | Produccion estable y aprobacion del owner. |
-| `dev` | `qa` | Solo cuando exista entorno QA. |
-| `qa` | `uat` | QA aprobado. |
-| `uat` | `pro` | UAT aprobado por usuario/owner. |
 
 La comunicacion principal de ramas no debe alterarse sin decision explicita:
 
 ```text
-feature/* -> dev -> pro -> main
+dev -> pro -> main
 ```
 
 Las reglas detalladas de GitHub, Pull Requests, protecciones de ramas,
@@ -111,8 +104,6 @@ La base de datos debe seguir el mismo principio, pero sin crear ambientes innece
 | Entorno | Uso | Estado actual |
 |---|---|---|
 | `dev` | Desarrollo local y pruebas tecnicas. | Recomendado ahora. |
-| `qa` | Calidad con datos controlados. | Futuro. |
-| `uat` | Pruebas con datos reales o muy cercanos a reales. | Futuro. |
 | `pro` | Produccion. | Activo cuando exista despliegue productivo del proyecto. |
 
 Reglas:

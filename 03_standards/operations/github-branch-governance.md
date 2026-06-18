@@ -8,7 +8,7 @@ Definir las reglas operativas de GitHub para proteger el flujo de ramas del
 workspace sin cambiar la comunicacion principal ya definida:
 
 ```text
-feature/* -> dev -> pro -> main
+dev -> pro -> main
 ```
 
 Este documento complementa `git-environments-and-release-flow.md` y
@@ -19,7 +19,7 @@ Este documento complementa `git-environments-and-release-flow.md` y
 - `dev` es la rama de integracion diaria.
 - `pro` es la rama de despliegue productivo.
 - `main` es copia estable de `pro`.
-- El trabajo funcional nace en ramas de tarea creadas desde `dev`.
+- No deben quedar ramas persistentes adicionales en local ni remoto.
 - Cada repositorio se publica por separado; `Workspace.Comercial` no es un
   monorepo.
 - Los cambios deben ser pequenos, reversibles y trazables por repositorio.
@@ -30,32 +30,20 @@ Este documento complementa `git-environments-and-release-flow.md` y
 
 | Rama | Rol | Regla |
 |---|---|---|
-| `dev` | Integracion de desarrollo | Recibe PRs desde `feature/*`, `fix/*` y `docs/*`. |
+| `dev` | Integracion de desarrollo | Recibe cambios validados localmente. |
 | `pro` | Produccion | Recibe PRs desde `dev` cuando el cambio ya fue validado. |
 | `main` | Copia estable de produccion | Recibe PRs desde `pro` cuando produccion queda estable. |
 
 `main` no sustituye a `pro`. `main` conserva el estado estable publicado para
 referencia, auditoria y recuperacion.
 
-## Ramas de trabajo
+## Ramas temporales
 
-Las ramas de trabajo deben salir de `dev`.
+La politica vigente conserva solamente `dev`, `pro` y `main`.
 
-```bash
-git checkout dev
-git pull origin dev
-git checkout -b feature/nombre-del-proceso
-```
-
-Prefijos permitidos:
-
-| Prefijo | Uso |
-|---|---|
-| `feature/*` | Funcionalidad nueva. |
-| `fix/*` | Correccion de bug. |
-| `docs/*` | Cambio solo documental. |
-| `chore/*` | Mantenimiento sin cambio funcional directo. |
-| `hotfix/*` | Correccion urgente preparada para produccion. |
+Si se crea una rama temporal para ordenar un cambio local, debe integrarse en
+`dev`, `pro` o `main` segun corresponda y eliminarse antes de cerrar la tarea.
+No debe quedar publicada ni persistente.
 
 Una rama no debe mezclar responsabilidades. Si un cambio toca Docs, API,
 Gateway y Web, debe publicarse por repositorio y con commits separados cuando
@@ -66,10 +54,7 @@ la separacion sea clara.
 ### Hacia `dev`
 
 ```text
-feature/* -> dev
-fix/* -> dev
-docs/* -> dev
-chore/* -> dev
+cambios locales validados -> dev
 ```
 
 Requisitos:
@@ -109,25 +94,26 @@ Requisitos:
 - no incluir cambios nuevos que no hayan pasado por `pro`;
 - conservar `main` como espejo estable de lo ya promovido.
 
-## Hotfix
+## Correccion urgente
 
-Un hotfix no cambia el flujo principal. Es una excepcion controlada para
-corregir produccion.
+Una correccion urgente no cambia el flujo principal. Es una excepcion
+controlada para corregir produccion sin dejar ramas adicionales.
 
 Flujo recomendado:
 
 ```text
-hotfix/* -> pro -> main
-           \-> dev
+pro -> main
+ \-> dev
 ```
 
 Reglas:
 
-- crear la rama desde `pro` solo si el bug existe en produccion;
+- partir del estado actual de `pro` solo si el bug existe en produccion;
 - limitar el cambio a la correccion urgente;
 - validar antes de promover;
 - despues de publicar, integrar el mismo fix a `dev` para evitar regresiones;
-- documentar la excepcion en el PR o reporte operativo.
+- documentar la excepcion en el PR o reporte operativo;
+- eliminar cualquier rama temporal local usada durante la correccion.
 
 ## Protecciones recomendadas en GitHub
 
@@ -145,7 +131,7 @@ Reglas:
 
 - bloquear push directo salvo emergencia aprobada;
 - bloquear force push;
-- requerir Pull Request desde `dev` o `hotfix/*`;
+- requerir Pull Request desde `dev` cuando haya PR disponible;
 - requerir aprobacion del owner;
 - requerir validacion de despliegue o checklist manual;
 - impedir borrar la rama.
@@ -194,15 +180,15 @@ Reglas:
 
 ## Sincronizacion de ramas activas
 
-Las ramas activas deben actualizarse frecuentemente desde `dev`.
+Las unicas ramas activas son `dev`, `pro` y `main`.
 
 ```bash
 git fetch origin
 git merge origin/dev
 ```
 
-Si una rama queda demasiado atrasada, debe actualizarse antes del PR para
-resolver conflictos fuera de `dev`.
+Si una rama temporal local queda demasiado atrasada, debe actualizarse,
+integrarse y eliminarse antes de cerrar la tarea.
 
 ## Versiones y tags
 
