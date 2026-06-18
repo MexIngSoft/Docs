@@ -59,12 +59,16 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | `Docs/00_audit/reusable-api-audit.md` | Auditoria de cobertura y faltantes reales de APIs reutilizables. |
 | `Docs/01_core_erp/apis/reusable-api-contracts.md` | Contratos resumidos de APIs reutilizables. |
 | `Docs/01_core_erp/apis/api-decision-matrix.md` | Matriz para evitar APIs duplicadas. |
+| `Docs/01_core_erp/apis/gateway-route-registry.md` | Registro de rutas Gateway para evitar rutas inventadas o consumo directo de APIs. |
+| `Docs/01_core_erp/apis/endpoint-ui-consumption-matrix.md` | Matriz de consumo endpoint a modulo UI para evitar mocks persistentes. |
 | `Docs/03_standards/operations/context-packs.md` | Context Packs oficiales para Codex. |
 | `Docs/03_standards/operations/codex-execution-standard.md` | Flujo estandar para pedir y ejecutar tareas Codex. |
 | `Docs/03_standards/operations/codex-anti-patterns.md` | Vicios prohibidos para Codex. |
 | `Docs/03_standards/codex/codex-minimal-reading-standard.md` | Lectura minima obligatoria. |
 | `Docs/03_standards/codex/codex-anti-vices-checklist.md` | Checklist anti-vicios. |
 | `Docs/03_standards/codex/codex-skills-standard.md` | Estandar de skills reutilizables para flujos Codex repetibles. |
+| `Docs/03_standards/codex/codex-output-report-standard.md` | Estandar de salida obligatoria para cierres Codex. |
+| `Docs/03_standards/architecture/shared-library-registry.md` | Registro real de librerias compartidas y faltantes. |
 | `Docs/.codex/skills/reusable-api-decision/SKILL.md` | Skill para decidir API compartida o especializada solo si aplica. |
 | `Docs/.codex/skills/api-contract-first/SKILL.md` | Skill para contrato API antes de codigo. |
 | `Docs/.codex/skills/docker-jobcron/SKILL.md` | Skill para Docker por objetivo con `jobcron_network`. |

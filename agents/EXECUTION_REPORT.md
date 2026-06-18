@@ -11815,3 +11815,113 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 - No se archivo, movio ni elimino ningun archivo `AGENTS-*.md`.
 - `AGENTS-000.md` queda cerrado vaciando su contenido y conservando el placeholder.
 - `AGENTS-001.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.
+
+---
+
+## Ejecucion 2026-06-18 - Auditoria idempotente y trazabilidad operativa Codex
+
+### Context Pack usado
+
+- `CP-00 - Preflight obligatorio`
+- Extension de tarea: `Agents`
+- Motivo: las instrucciones activas vivian en `Docs/agents/AGENTS-000.md` y
+  `Docs/agents/AGENTS-001.md`; no correspondia leer todo el repositorio ni
+  validar proyectos runtime.
+
+### Agents ejecutados
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Auditoria idempotente: no se rehicieron piezas ya cerradas; los cambios aplicados provienen de faltantes reales confirmados por `AGENTS-001.md`. |
+| `AGENTS-001.md` | Completado | Se agrego trazabilidad operativa: registro de rutas Gateway, matriz endpoint-UI, registro de librerias, plantillas estrictas, CI documental y estandar de salida Codex. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables adicionales. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/03_standards/documentation-first-workflow.md`
+- `Docs/00_audit/codex-context-map.md`
+- `Docs/03_standards/operations/context-packs.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/03_standards/architecture/api-gateway-standard.md`
+- `Docs/03_standards/architecture/shared-libraries-standard.md`
+- `Docs/03_standards/api/api-contract-first-standard.md`
+- `Docs/01_core_erp/apis/reusable-api-contracts.md`
+- `Docs/templates/api-contract-template.md`
+- `Docs/templates/api-specialized-justification-template.md`
+- `Docs/templates/frontend-module-template.md`
+- `Docs/templates/etl-contract-template.md`
+
+### Archivos creados
+
+- `Docs/01_core_erp/apis/gateway-route-registry.md`
+- `Docs/01_core_erp/apis/endpoint-ui-consumption-matrix.md`
+- `Docs/03_standards/architecture/shared-library-registry.md`
+- `Docs/03_standards/codex/codex-output-report-standard.md`
+- `Docs/.github/workflows/docs-validation.yml`
+
+### Archivos modificados
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/generated/master-index.json`
+- `Docs/00_audit/document-ownership-map.md`
+- `Docs/01_core_erp/apis/00_api_index.md`
+- `Docs/03_standards/README.md`
+- `Docs/templates/api-contract-template.md`
+- `Docs/templates/api-specialized-justification-template.md`
+- `Docs/templates/frontend-module-template.md`
+- `Docs/templates/etl-contract-template.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Busqueda de frases prohibidas con filtro de instrucciones activas | OK: no quedan instrucciones activas prohibidas; las coincidencias restantes son prohibiciones, reglas anti-vicios, obsolescencia o limpieza. |
+| `bash scripts/validate-docs-rules.sh` | No ejecutado por entorno: Bash/WSL no esta disponible y devolvio `execvpe(/bin/bash) failed: No such file or directory`. Se ejecuto validacion equivalente con PowerShell + `rg`. |
+| `python scripts/build_master_index.py` | OK: genero `_meta/generated/master-index.json` con 520 entradas. |
+| `python scripts/validate_frontmatter.py` | OK tecnico: 486 documentos sin front matter historico, 0 incomplete, 0 malformed. |
+
+### Faltantes reales
+
+- PENDIENTE_DE_DEFINIR: rutas Gateway reales por pantalla/proyecto.
+- PENDIENTE_DE_DEFINIR: matriz endpoint-UI real por proyecto cuando cada MVP
+  cierre contrato.
+- PENDIENTE_DE_DEFINIR: confirmar existencia fisica de librerias compartidas
+  `jobcron_common`, `jobcron-ui` y `jobcron-api-client`.
+- PENDIENTE_DE_DEFINIR: ejecutar `scripts/validate-docs-rules.sh` en un entorno
+  con Bash disponible o mediante GitHub Actions.
+
+### Contradicciones detectadas
+
+- `AGENTS-000.md` pedia no modificar si no habia faltantes reales; se respeto.
+  Los cambios no vienen de reescritura de estilo, sino de faltantes especificos
+  detectados por `AGENTS-001.md`.
+- `AGENTS-001.md` proponia CI documental apuntando al script existente; se
+  adapto el workflow a la estructura real del repositorio `Docs`, sin asumir un
+  subdirectorio `Docs/` dentro del checkout.
+
+### Decisiones documentadas
+
+- Las rutas Gateway y el consumo UI quedan en registros separados del contrato
+  API para evitar mezclar UI con nucleo.
+- El registro de librerias compartidas usa `PENDIENTE_DE_DEFINIR` hasta
+  confirmar existencia fisica y consumidores reales.
+- Las plantillas ahora exigen Context Pack, API reutilizable revisada,
+  anti-duplicacion, ruta Gateway, validacion Docker/PostgreSQL y criterio
+  anti-mock.
+- El cierre Codex debe reportar APIs reutilizadas, APIs no creadas y motivo.
+
+### Agents archivados o pendientes
+
+- No se archivo, movio ni elimino ningun archivo `AGENTS-*.md`.
+- `AGENTS-000.md` y `AGENTS-001.md` quedan cerrados vaciando su contenido y conservando los placeholders.
+- `AGENTS-002.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.

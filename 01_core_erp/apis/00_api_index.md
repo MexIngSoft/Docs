@@ -3,6 +3,15 @@
 La existencia se determina por repositorio ejecutable, migraciones y contrato,
 no por una idea documental.
 
+## Registros operativos
+
+| Documento | Uso |
+|---|---|
+| `gateway-route-registry.md` | Registrar rutas Gateway, API destino, permisos, request y response. |
+| `endpoint-ui-consumption-matrix.md` | Relacionar pantallas o modulos UI con endpoints Gateway para evitar mocks persistentes. |
+| `api-decision-matrix.md` | Decidir API reutilizable antes de evaluar API especializada. |
+| `reusable-api-contracts.md` | Mantener contratos resumidos y fronteras de APIs reutilizables. |
+
 ## Compartidas confirmadas
 
 | API | Estado | Responsabilidad |

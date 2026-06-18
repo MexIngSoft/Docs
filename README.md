@@ -86,7 +86,11 @@ Docs/03_standards/codex/codex-skills-standard.md
 Docs/03_standards/architecture/reusable-api-decision-standard.md
 Docs/03_standards/api/api-contract-first-standard.md
 Docs/03_standards/architecture/shared-libraries-standard.md
+Docs/03_standards/architecture/shared-library-registry.md
+Docs/03_standards/codex/codex-output-report-standard.md
 Docs/01_core_erp/apis/api-decision-matrix.md
+Docs/01_core_erp/apis/gateway-route-registry.md
+Docs/01_core_erp/apis/endpoint-ui-consumption-matrix.md
 Docs/.codex/skills/reusable-api-decision/SKILL.md
 Docs/.codex/skills/api-contract-first/SKILL.md
 Docs/.codex/skills/docker-jobcron/SKILL.md

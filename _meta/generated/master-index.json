@@ -400,6 +400,22 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "01_core_erp/apis/endpoint-ui-consumption-matrix.md",
+    "title": "Matriz endpoint a modulo UI",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/gateway-route-registry.md",
+    "title": "Registro de rutas Gateway",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "01_core_erp/apis/reusable-api-contracts.md",
     "title": "Contratos reutilizables de APIs",
     "domain": "core",
@@ -2736,6 +2752,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "03_standards/architecture/shared-library-registry.md",
+    "title": "Registro de librerias compartidas",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "03_standards/architecture/source-of-truth.md",
     "title": "Fuente de verdad arquitectonica",
     "domain": "standards",
@@ -2778,6 +2802,14 @@
   {
     "path": "03_standards/codex/codex-minimal-reading-standard.md",
     "title": "Estandar de lectura minima Codex",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/codex/codex-output-report-standard.md",
+    "title": "Estandar de salida obligatoria Codex",
     "domain": "standards",
     "status": "unknown",
     "priority": "unknown",

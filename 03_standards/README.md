@@ -10,10 +10,10 @@ Guardar reglas de trabajo, operacion, seguridad, pruebas y cierre de proyectos.
 - `operations/context-packs.md`: Context Packs oficiales para reducir lectura innecesaria de Codex, incluido proyecto completo.
 - `operations/codex-execution-standard.md`: flujo estandar de ejecucion Codex.
 - `operations/codex-anti-patterns.md`: anti-patrones prohibidos para Codex.
-- `codex`: estandares de lectura minima, skills reutilizables y checklist anti-vicios.
+- `codex`: estandares de lectura minima, skills reutilizables, salida obligatoria y checklist anti-vicios.
 - `api`: estandares contract first de APIs.
 - `frontend`: estandares Next.js, Docker frontend compartido, checklist previo y visibilidad comercial.
-- `architecture`: estandares de API/Gateway, limites, comunicacion entre proyectos, decision de APIs reutilizables y librerias compartidas.
+- `architecture`: estandares de API/Gateway, limites, comunicacion entre proyectos, decision de APIs reutilizables, librerias compartidas y registro de librerias reales.
 - `auth`: login web obligatorio via Gateway General, versionado de Auth y compatibilidad entre proyectos.
 - `gateway`: entrada central, routing, migracion gradual y deprecacion de Gateways legacy.
 - `product`: estrategia de producto, monetizacion y catalogo global de modulos.

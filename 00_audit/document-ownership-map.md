@@ -25,11 +25,14 @@ historica.
 | `00_audit/contradiction-resolution-report.md` | Equipo documental | Auditoria | Canonico | Reporta contradicciones activas y decisiones |
 | `01_core_erp/apis/00_api_index.md` | Equipo Core ERP | Nucleo | Canonico | Lista de APIs vigentes |
 | `01_core_erp/apis/api-decision-matrix.md` | Equipo Core ERP | Nucleo | Canonico | Decide si una necesidad usa API existente |
+| `01_core_erp/apis/gateway-route-registry.md` | Equipo Core ERP | Nucleo | Canonico | Registro de rutas Gateway |
+| `01_core_erp/apis/endpoint-ui-consumption-matrix.md` | Equipo Core ERP | Nucleo | Canonico | Consumo UI por endpoint |
 | `01_core_erp/apis/reusable-api-contracts.md` | Equipo Core ERP | Nucleo | Canonico | Contratos reutilizables resumidos |
 | `01_core_erp/architecture/00_general_architecture.md` | Equipo Core ERP | Nucleo | Canonico | Arquitectura general vigente |
 | `01_core_erp/architecture/07_project_api_pattern.md` | Equipo Core ERP | Nucleo | Canonico | Consumo de APIs por proyecto |
 | `03_standards/architecture/reusable-api-decision-standard.md` | Equipo plataforma | Estandar | Canonico | Arbol de decision para APIs reutilizables |
 | `03_standards/architecture/shared-libraries-standard.md` | Equipo plataforma | Estandar | Canonico | Librerias compartidas backend/frontend |
+| `03_standards/architecture/shared-library-registry.md` | Equipo plataforma | Estandar | Canonico | Registro de librerias compartidas |
 | `03_standards/api/api-contract-first-standard.md` | Equipo plataforma | Estandar | Canonico | API contract first |
 | `03_standards/architecture/api-gateway-standard.md` | Equipo plataforma | Estandar | Canonico | Gateway General y API especializada |
 | `03_standards/operations/context-packs.md` | Equipo documental | Estandar | Canonico | Context Packs oficiales |
@@ -38,6 +41,7 @@ historica.
 | `03_standards/codex/codex-minimal-reading-standard.md` | Equipo documental | Estandar | Canonico | Lectura minima Codex |
 | `03_standards/codex/codex-anti-vices-checklist.md` | Equipo documental | Estandar | Canonico | Checklist anti-vicios |
 | `03_standards/codex/codex-skills-standard.md` | Equipo documental | Estandar | Canonico | Skills reutilizables Codex |
+| `03_standards/codex/codex-output-report-standard.md` | Equipo documental | Estandar | Canonico | Salida obligatoria Codex |
 | `.codex/skills/reusable-api-decision/SKILL.md` | Equipo documental | Skill | Canonico | Decision API reutilizable/especializada |
 | `.codex/skills/api-contract-first/SKILL.md` | Equipo plataforma | Skill | Canonico | Contrato API antes de codigo |
 | `.codex/skills/docker-jobcron/SKILL.md` | Equipo plataforma | Skill | Canonico | Docker JobCron por objetivo |
