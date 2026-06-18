@@ -127,6 +127,26 @@ Reglas:
 - Los commits ya publicados con una identidad anterior no deben reescribirse
   sin decision explicita del owner, porque eso cambia historiales compartidos.
 
+### Correccion historica autorizada
+
+Si el owner solicita explicitamente que toda la historia publicada muestre una
+sola identidad, se permite reescribir la historia Git de los repositorios
+afectados.
+
+Reglas para esa correccion:
+
+- Reescribir autor y committer a `1CASH1`.
+- Usar el correo noreply verificado de GitHub:
+  `7905831+1CASH1@users.noreply.github.com`.
+- Ejecutar la correccion por repositorio, no desde `Workspace.Comercial` como
+  monorepo.
+- Empujar solo las ramas oficiales `dev`, `pro` y `main`.
+- Usar `--force-with-lease` para publicar la historia reescrita.
+- Registrar repos sin remoto o con remoto inaccesible como
+  `PENDIENTE_DE_DEFINIR`.
+- Validar despues con `git log --all` que no queden autores o committers fuera
+  de la identidad oficial.
+
 ## Publicacion por repositorio
 
 Para cada repo:
