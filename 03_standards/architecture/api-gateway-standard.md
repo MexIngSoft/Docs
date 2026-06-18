@@ -32,9 +32,9 @@ Proyecto A -> Base de datos de Proyecto B
 | Core ERP | Capacidades reutilizables y datos compartidos controlados. |
 | Shared Module | Servicio especializado reusable, por ejemplo Document API o FeatureAvailability. |
 
-## Criterios para exigir API especializada
+## Criterios para evaluar API especializada
 
-Crear API especializada si el proyecto tiene:
+Evaluar API especializada si el proyecto tiene:
 
 - datos propios;
 - permisos o roles propios;
@@ -43,6 +43,17 @@ Crear API especializada si el proyecto tiene:
 - procesos asincronos propios;
 - monetizacion propia;
 - dominio o marca independiente.
+
+La existencia de estos criterios no obliga automaticamente a crear una API
+especializada.
+
+Primero se debe revisar si la funcionalidad pertenece a una API compartida
+existente.
+
+Solo se crea API especializada cuando la responsabilidad no encaja en Auth,
+Gateway General, Catalog, Inventory, Pricing, Supplier, Procurement, Sales,
+Search, Document, Notification, FeatureVisibility, ETL u otra API compartida
+vigente.
 
 ## Documentacion minima
 

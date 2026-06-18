@@ -11266,3 +11266,70 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 ### Limpieza de agent
 
 - `Docs/agents/AGENTS-000.md` se vacia y se conserva en su ruta original.
+
+---
+
+## Ejecucion 2026-06-18 - Blindaje final de API especializada y validacion dev
+
+### Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se corrigieron las frases activas que podian interpretarse como obligacion de crear APIs por proyecto. La matriz proyecto APIs y el estandar Gateway/API quedan alineados con APIs compartidas por responsabilidad y API especializada solo si aplica. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables adicionales. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/03_standards/operations/django-api-project-compliance.md`
+- `Docs/01_core_erp/apis/00_api_index.md`
+- `Docs/01_core_erp/architecture/project-api-dependency-matrix.md`
+- `Docs/03_standards/architecture/api-gateway-standard.md`
+
+### Archivos modificados
+
+- `Docs/01_core_erp/architecture/project-api-dependency-matrix.md`
+- `Docs/03_standards/architecture/api-gateway-standard.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `rg -n "su API de dominio|Crear API especializada si|API por proyecto como patron general|API propia por proyecto|Gateway por proyecto|BFF por proyecto|Docker por proyecto|Auth por proyecto|SQLite|db.sqlite3|crejo" Docs` | OK con coincidencias esperadas en `_archive`, `agents/_archive`, `EXECUTION_REPORT.md`, prohibiciones explicitas y el agent activo antes de limpieza. |
+| Busqueda equivalente excluyendo `_archive`, `agents/_archive`, `EXECUTION_REPORT.md` y el agent activo | OK: no quedan `su API de dominio` ni `Crear API especializada si`; las coincidencias restantes son prohibiciones explicitas o `crejo` marcado como OBSOLETO / RECHAZADO / NO USAR. |
+| `python scripts/build_master_index.py` | OK: genero `_meta/generated/master-index.json` con 492 entradas. |
+| `python scripts/validate_frontmatter.py` | OK tecnico: 461 warnings historicos por front matter faltante, 0 incomplete, 0 malformed. |
+| `git diff --check` | OK: solo warnings esperados de normalizacion LF/CRLF. |
+| Revision de `Docs/agents/AGENTS-*.md` | OK: todos los placeholders se conservaron y quedaron vacios. |
+
+### Faltantes reales
+
+- No hay faltantes funcionales para este agent.
+- La validacion Docker runtime no aplica porque el agent es documental y no se modificaron compose, Dockerfile ni dependencias ejecutables.
+
+### Contradicciones detectadas
+
+- El agent senalaba frases activas que si existian en `project-api-dependency-matrix.md` y `api-gateway-standard.md`; prevalece la regla canonica actual: no existe API obligatoria por proyecto.
+- Los resultados completos de `rg` incluyen historial y reporte; esas coincidencias no son instrucciones vigentes.
+
+### Decisiones documentadas
+
+- Los proyectos consumen APIs existentes mediante Gateway General.
+- No se crean APIs nuevas si una API compartida ya cubre la responsabilidad.
+- Una API especializada solo se permite cuando haya logica exclusiva, datos propios, reglas propias, formularios propios o integraciones exclusivas fuera de una API compartida vigente.
+- El estandar Gateway/API cambia de "crear" a "evaluar" API especializada.
+- `jobcron_network` permanece como red Docker oficial vigente.
+
+### Agents archivados o pendientes
+
+- No se archivo, movio ni elimino ningun archivo `AGENTS-*.md`.
+- `AGENTS-000.md` queda cerrado vaciando su contenido y conservando el placeholder.
+- `AGENTS-001.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.
