@@ -247,3 +247,60 @@ Contradicciones detectadas y resueltas:
 
 - Los documentos operativos previos recomendaban ramas adicionales como parte
   del flujo vivo. Se reemplazaron por el estandar unico `dev`, `pro`, `main`.
+
+## Ejecucion de correccion historica de identidad Git 2026-06-18
+
+Tarea solicitada: corregir la historia publicada para que los commits del
+workspace aparezcan con la identidad oficial `1CASH1`.
+
+Documentacion leida antes de ejecutar:
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/03_standards/operations/git-environments-and-release-flow.md`
+- `Docs/03_standards/operations/github-branch-governance.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+
+Decision documentada:
+
+- Por instruccion explicita del owner, se reescribio la historia Git de los
+  repositorios del workspace para normalizar autor y committer como `1CASH1`.
+- La identidad oficial usada fue
+  `1CASH1 <7905831+1CASH1@users.noreply.github.com>`.
+- La correccion aplica a historia local y a los remotos accesibles.
+
+Resultado de ejecucion:
+
+| Resultado | Cantidad | Detalle |
+|---|---:|---|
+| Repos detectados | 34 | Todos dentro de `Workspace.Comercial`. |
+| Repos limpios antes de reescribir | 34 | No habia cambios sin commit. |
+| Repos reescritos localmente | 34 | Autor y committer quedaron en la identidad oficial. |
+| Remotos actualizados con force push | 28 | Ramas `dev`, `pro` y `main` publicadas con historia reescrita. |
+| Repos locales sin remoto | 3 | `API.PY.DJANGO.LeadHunter`, `API.PY.DJANGO.Search`, `WEB.NJ.NEXT.LeadHunter`. |
+| Remotos inaccesibles | 3 | `API.PY.DJANGO.Address`, `API.PY.DJANGO.Gateway`, `API.PY.DJANGO.RefaPart`. |
+| Ramas remotas adicionales | 1 | `WEB.NJ.NEXT.TecnoTelec/master` se reescribio con identidad oficial; GitHub no permitio borrarla porque sigue protegida/default. |
+
+Validaciones ejecutadas:
+
+| Validacion | Resultado |
+|---|---|
+| `git log --all` por repo para autor y committer | OK local en 34 repos. |
+| Push forzado de `dev`, `pro`, `main` | OK en 28 remotos accesibles. |
+| Revision de ramas remotas accesibles con `git log FETCH_HEAD` | OK: ramas remotas accesibles quedan con identidad oficial. |
+| Limpieza de ramas locales no permitidas | OK: ramas locales finales `dev`, `pro`, `main`. |
+
+Faltantes reales:
+
+- PENDIENTE_DE_DEFINIR: corregir acceso o crear remotos para
+  `API.PY.DJANGO.Address`, `API.PY.DJANGO.Gateway` y `API.PY.DJANGO.RefaPart`
+  para poder publicar tambien su historia reescrita.
+- PENDIENTE_DE_DEFINIR: asignar `main`, `dev` o `pro` como default branch de
+  `WEB.NJ.NEXT.TecnoTelec` en GitHub y despues eliminar `master`.
+- PENDIENTE_DE_DEFINIR: asignar remotos si se publicaran
+  `API.PY.DJANGO.LeadHunter`, `API.PY.DJANGO.Search` y
+  `WEB.NJ.NEXT.LeadHunter`.
