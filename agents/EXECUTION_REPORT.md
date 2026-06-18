@@ -10894,6 +10894,67 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 
 - `Docs/agents/AGENTS-000.md` se vacia y se conserva en su ruta original.
 
+## Ejecucion 2026-06-18 - Correccion final de nomenclatura de APIs
+
+### Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | El archivo contenia la instruccion rotulada como `AGENTS-011.md`. Se corrigio la seccion de repositorios de APIs en arquitectura general. |
+| `AGENTS-001.md` a `AGENTS-030.md` | Sin instrucciones | Permanecen vacios, sin tarea ejecutable nueva. |
+
+### Archivos leidos
+
+- `README.md`
+- `_meta/active-work-index.md`
+- `agents/AGENTS-000.md`
+- `agents/AGENT_GLOBAL_RULES.md`
+- `agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `03_standards/operations/standard-request-prompts.md`
+- `03_standards/documentation/documentation-cleanup-standard.md`
+- `03_standards/docker.md`
+- `01_core_erp/architecture/00_general_architecture.md`
+
+### Archivos modificados
+
+- `01_core_erp/architecture/00_general_architecture.md`
+- `agents/EXECUTION_REPORT.md`
+- `agents/AGENTS-000.md`
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `rg -n "crejo|gateway/BFF|Gateways/BFF|su gateway/BFF|Gateway por proyecto|BFF por proyecto|Docker por proyecto|Auth por proyecto|SQLite|db\.sqlite3|Cada API Django debe vivir|API propia por proyecto" Docs` | OK con coincidencias esperadas en archivo historico, `EXECUTION_REPORT.md`, prohibiciones explicitas y agent activo antes de limpieza. |
+| `rg` equivalente excluyendo `_archive`, `agents/_archive`, `EXECUTION_REPORT.md` y `AGENTS-000.md` | OK: no queda `Cada API Django debe vivir`, `API propia por proyecto`, gateway/BFF activo, Docker por proyecto activo, Auth por proyecto activo, SQLite activo ni `crejo` como red vigente. Las coincidencias restantes son prohibiciones explicitas o `crejo` marcado como OBSOLETO / RECHAZADO / NO USAR. |
+| `rg -n "jobcron_network" Docs\03_standards Docs\01_core_erp Docs\02_projects -S` | OK: `jobcron_network` aparece como red oficial vigente en documentacion canonica. |
+| `python scripts/validate_frontmatter.py` | OK tecnico: 461 warnings historicos por front matter faltante, 0 incomplete, 0 malformed. |
+| `git diff --check` | OK: solo warnings esperados de normalizacion LF/CRLF. |
+| Revision de `Docs/agents/AGENTS-*.md` | OK: todos los placeholders se conservaron y quedaron vacios. |
+
+### Faltantes reales
+
+- No hay faltantes reales para esta correccion documental.
+- No se ejecuto Docker porque el agent no modifica compose ni runtime.
+
+### Contradicciones detectadas
+
+- El agent referia una frase exacta que ya no estaba activa en `00_general_architecture.md`; aun asi, se reforzo la seccion para cerrar la ambiguedad con la redaccion canonica solicitada.
+
+### Decisiones documentadas
+
+- Las APIs Django se organizan por responsabilidad, no por cada proyecto web.
+- Las APIs compartidas obligatorias o reutilizables incluyen `Auth`, `Gateway`, `Catalog`, `Inventory`, `Pricing`, `Supplier`, `Procurement`, `Sales`, `Search`, `Document`, `Notification`, `FeatureVisibility` y `ETL`.
+- Las APIs especializadas solo se crean si existe logica exclusiva del dominio, datos propios, formularios propios, reglas propias o integraciones exclusivas que no pertenezcan a una API compartida.
+- Si una funcionalidad ya pertenece a una API compartida, no se crea una API nueva.
+- La red oficial se mantiene como `jobcron_network`.
+
+### Agents archivados o pendientes
+
+- No se archivo ni elimino ningun archivo `AGENTS-*.md`.
+- `AGENTS-000.md` queda cerrado vaciando su contenido y conservando el placeholder.
+- `AGENTS-001.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.
+
 ## Ejecucion 2026-06-18 - Limpieza final de trazabilidad historica
 
 ### Agent ejecutado
