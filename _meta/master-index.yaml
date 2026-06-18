@@ -213,7 +213,7 @@ documents:
     domain: "Core"
     status: "active"
     priority: "P1"
-    title: "Patron de API por proyecto"
+    title: "Patron de consumo de APIs por proyecto"
   - path: "01_core_erp/architecture/08_data_isolation_and_reference_tables.md"
     domain: "Core"
     status: "future_or_pending"

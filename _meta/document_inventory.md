@@ -38,7 +38,7 @@
 | `01_core_erp/architecture/04_security.md` | Core | markdown | active | P1 | Seguridad |
 | `01_core_erp/architecture/05_future_microservices_split.md` | Core | markdown | future_or_pending | P2 | Separacion futura de microservicios |
 | `01_core_erp/architecture/06_general_system_diagram.md` | Core | markdown | active | P1 | Diagrama general del sistema ERP |
-| `01_core_erp/architecture/07_project_api_pattern.md` | Core | markdown | active | P1 | Patron de API por proyecto |
+| `01_core_erp/architecture/07_project_api_pattern.md` | Core | markdown | active | P1 | Patron de consumo de APIs por proyecto |
 | `01_core_erp/architecture/08_data_isolation_and_reference_tables.md` | Core | markdown | future_or_pending | P2 | Aislamiento de datos y tablas referenciadas |
 | `01_core_erp/architecture/09_tecnotelec_gateway_corrected_pattern.md` | Core | markdown | active | P1 | Patron corregido TecnoTelec Gateway |
 | `01_core_erp/architecture/events/event-catalog.md` | Core | markdown | active | P1 | Catalogo de eventos |

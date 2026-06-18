@@ -328,7 +328,7 @@
     "domain": "Core",
     "status": "active",
     "priority": "P1",
-    "title": "Patron de API por proyecto",
+    "title": "Patron de consumo de APIs por proyecto",
     "reason": "Documento activo canonico.",
     "suggested_path": "01_core_erp/architecture/07_project_api_pattern.md"
   },

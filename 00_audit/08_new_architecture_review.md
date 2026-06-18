@@ -31,7 +31,7 @@ Web Tecno Telec
 ## Documentos listos
 
 - Identidad, servicios y propuesta de valor de Tecno Telec.
-- Patron de API por proyecto.
+- Patron de consumo de APIs por proyecto.
 - Blueprint visual y maqueta web Tecno Telec.
 - Plan Pricing First.
 - Reglas de visibilidad de catalogo.

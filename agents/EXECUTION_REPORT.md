@@ -10894,6 +10894,76 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 
 - `Docs/agents/AGENTS-000.md` se vacia y se conserva en su ruta original.
 
+## Ejecucion 2026-06-18 - Correccion final de nomenclatura de APIs especializadas
+
+### Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | El archivo contenia la instruccion rotulada como `AGENTS-012.md`. Se reforzo el patron de consumo de APIs para evitar API por proyecto como regla general. |
+| `AGENTS-001.md` a `AGENTS-030.md` | Sin instrucciones | Permanecen vacios, sin tarea ejecutable nueva. |
+
+### Archivos leidos
+
+- `README.md`
+- `_meta/active-work-index.md`
+- `agents/AGENTS-000.md`
+- `agents/AGENT_GLOBAL_RULES.md`
+- `agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `03_standards/operations/standard-request-prompts.md`
+- `03_standards/docker.md`
+- `03_standards/operations/django-api-project-compliance.md`
+- `01_core_erp/architecture/00_general_architecture.md`
+- `01_core_erp/architecture/07_project_api_pattern.md`
+
+### Archivos modificados
+
+- `01_core_erp/architecture/07_project_api_pattern.md`
+- `00_audit/08_new_architecture_review.md`
+- `_meta/master-index.md`
+- `_meta/master-index.yaml`
+- `_meta/generated/master-index.json`
+- `_meta/document_inventory.md`
+- `_meta/document_inventory.csv`
+- `_meta/document_inventory.json`
+- `_meta/document_classification.json`
+- `agents/EXECUTION_REPORT.md`
+- `agents/AGENTS-000.md`
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `python scripts/build_master_index.py` | OK: genero `_meta/generated/master-index.json` con 492 entradas. |
+| `rg` de `Cada API Django debe vivir`, `API propia por proyecto`, `API por proyecto como patron general`, `API.PY.DJANGO.NombreProyecto`, `# Patron de API por proyecto`, `Patron de API por proyecto` excluyendo archive, report y agent activo | OK: solo quedan prohibiciones explicitas contra API por proyecto como patron general. No queda la frase antigua ni `NombreProyecto` como regla general. |
+| `rg` de `crejo`, gateway/BFF, Docker/Auth por proyecto, SQLite y `db.sqlite3` excluyendo archive, report y agent activo | OK: las coincidencias activas son prohibiciones explicitas o `crejo` marcado como OBSOLETO / RECHAZADO / NO USAR. |
+| `python scripts/validate_frontmatter.py` | OK tecnico: 461 warnings historicos por front matter faltante, 0 incomplete, 0 malformed. |
+| `git diff --check` | OK: solo warnings esperados de normalizacion LF/CRLF. |
+| Revision de `Docs/agents/AGENTS-*.md` | OK: todos los placeholders se conservaron y quedaron vacios. |
+
+### Faltantes reales
+
+- No hay faltantes reales para esta correccion documental.
+- No se ejecuto Docker porque el agent no modifica compose ni runtime.
+
+### Contradicciones detectadas
+
+- El agent indicaba que `00_general_architecture.md` conservaba la frase antigua; el estado local ya la tenia corregida por ejecucion previa. Se mantuvo esa correccion y se completo el pendiente real en `07_project_api_pattern.md` e indices relacionados.
+
+### Decisiones documentadas
+
+- La documentacion ahora usa `Patron de consumo de APIs por proyecto`.
+- La API especializada no es obligatoria.
+- Las APIs especializadas solo existen si hay logica exclusiva del dominio que no pertenece a una API compartida.
+- No se debe crear una API por proyecto como patron general.
+- La red oficial sigue siendo `jobcron_network`.
+
+### Agents archivados o pendientes
+
+- No se archivo ni elimino ningun archivo `AGENTS-*.md`.
+- `AGENTS-000.md` queda cerrado vaciando su contenido y conservando el placeholder.
+- `AGENTS-001.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.
+
 ## Ejecucion 2026-06-18 - Correccion final de nomenclatura de APIs
 
 ### Agent ejecutado

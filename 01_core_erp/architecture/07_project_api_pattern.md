@@ -1,4 +1,4 @@
-# Patron de API por proyecto
+# Patron de consumo de APIs por proyecto
 
 ## Objetivo
 
@@ -14,6 +14,13 @@ Web/Mobile/Admin
   -> APIs compartidas
   -> API especializada solo si aplica
 ```
+
+La API especializada no es obligatoria.
+
+Solo se permite cuando el proyecto tiene logica exclusiva del dominio que no
+pertenece a una API compartida.
+
+No se debe crear una API por proyecto como patron general.
 
 ## Capas
 
@@ -97,7 +104,7 @@ Son APIs reutilizables. Deben conservar responsabilidades de dominio:
 
 ## Nomenclatura
 
-Para APIs Django:
+Para APIs Django compartidas:
 
 ```text
 API.PY.DJANGO.NombreDominio
@@ -112,22 +119,27 @@ API.PY.DJANGO.Gateway
 Para API especializada:
 
 ```text
-API.PY.DJANGO.NombreDominio
+API.PY.DJANGO.NombreEspecializado
 ```
 
 Ejemplo:
 
 ```text
 API.PY.DJANGO.Gateway
-API.PY.DJANGO.TecnoTelec
+API.PY.DJANGO.Refapart
+API.PY.DJANGO.LexNova
+API.PY.DJANGO.Fiscora
 ```
+
+Estos repositorios especializados solo existen si hay logica exclusiva.
 
 Regla de creacion:
 
 - La entrada publica de frontend pasa unicamente por Gateway General.
 - Las APIs especializadas solo se crean cuando existe logica exclusiva del dominio.
 - Si el proyecto tiene tablas, procesos, formularios, configuracion o reglas
-  exclusivas, evaluar una API especializada `API.PY.DJANGO.NombreDominio`.
+  exclusivas, evaluar una API especializada
+  `API.PY.DJANGO.NombreEspecializado`.
 - Si el proyecto solo consume APIs core sin datos propios, la API de dominio puede omitirse, pero la decision debe quedar documentada.
 - La API especializada y el frontend deben ser repositorios Git independientes
   cuando ambos existan.

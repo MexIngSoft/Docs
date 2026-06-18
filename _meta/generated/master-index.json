@@ -385,7 +385,7 @@
   },
   {
     "path": "01_core_erp/architecture/07_project_api_pattern.md",
-    "title": "Patron de API por proyecto",
+    "title": "Patron de consumo de APIs por proyecto",
     "domain": "core",
     "status": "unknown",
     "priority": "unknown",
@@ -3561,7 +3561,7 @@
   },
   {
     "path": "agents/AGENTS-000.md",
-    "title": "AGENTS-009.md",
+    "title": "AGENTS-012.md",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",

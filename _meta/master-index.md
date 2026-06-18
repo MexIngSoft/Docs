@@ -41,7 +41,7 @@
 | Core | `01_core_erp/architecture/04_security.md` | Seguridad | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/architecture/05_future_microservices_split.md` | Separacion futura de microservicios | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Core | `01_core_erp/architecture/06_general_system_diagram.md` | Diagrama general del sistema ERP | ACTIVE | P1 | Equipo documental |
-| Core | `01_core_erp/architecture/07_project_api_pattern.md` | Patron de API por proyecto | ACTIVE | P1 | Equipo documental |
+| Core | `01_core_erp/architecture/07_project_api_pattern.md` | Patron de consumo de APIs por proyecto | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/architecture/08_data_isolation_and_reference_tables.md` | Aislamiento de datos y tablas referenciadas | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Core | `01_core_erp/architecture/09_tecnotelec_gateway_corrected_pattern.md` | Patron corregido TecnoTelec Gateway | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/architecture/events/event-catalog.md` | Catalogo de eventos | ACTIVE | P1 | Equipo documental |
