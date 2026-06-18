@@ -10291,3 +10291,156 @@ archivos activos quedaron vacios. Permanecen activos `006`, `009`, `012`,
 `013`, `014` y `015` porque conservan trabajo pendiente.
 
 ---
+## Ejecucion 2026-06-18 - Agents activos 000-004,006,007,009,012,013,014,015
+
+### Resumen
+
+- Se ejecuto el orden numerico ascendente de agents activos detectados.
+- Se completaron y archivaron: `AGENTS-000`, `AGENTS-001`, `AGENTS-002`, `AGENTS-003`, `AGENTS-004`, `AGENTS-006`, `AGENTS-009`, `AGENTS-012`, `AGENTS-013`, `AGENTS-014`.
+- Permanecen activos: `AGENTS-007` y `AGENTS-015`, porque la validacion Docker runtime proyecto por proyecto quedo bloqueada por infraestructura local: Docker Desktop no estaba disponible al final de la ejecucion.
+- No se revirtieron cambios existentes.
+- No se invento informacion oficial faltante; lo no definido queda como `PENDIENTE_DE_DEFINIR`.
+
+### Archivos Leidos
+
+- `Docs/README.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-002.md`
+- `Docs/agents/AGENTS-003.md`
+- `Docs/agents/AGENTS-004.md`
+- `Docs/agents/AGENTS-006.md`
+- `Docs/agents/AGENTS-007.md`
+- `Docs/agents/AGENTS-009.md`
+- `Docs/agents/AGENTS-012.md`
+- `Docs/agents/AGENTS-013.md`
+- `Docs/agents/AGENTS-014.md`
+- `Docs/agents/AGENTS-015.md`
+- `Docs/03_standards/operations/*`
+- `Docs/03_standards/frontend/*`
+- `Docs/03_standards/docker/*`
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/testing/*`
+- `Docs/03_standards/security/*`
+- `Docs/03_standards/database/*`
+- `Docs/04_integrations/*`
+- Proyectos modificados en `Docker.API.PY`, `Docker.WEB.NJ`, `Docker.DB.PG`.
+
+### Archivos Modificados
+
+- Docs:
+  - `Docs/01_core_erp/architecture/ADR-001-arquitectura-base-jobcron.md`
+  - `Docs/01_core_erp/architecture/docker-objective-matrix.md`
+  - `Docs/01_core_erp/architecture/project-api-dependency-matrix.md`
+  - `Docs/01_core_erp/apis/api-responsibility-matrix.md`
+  - `Docs/01_core_erp/erp/16_search_engine.md`
+  - `Docs/01_core_erp/apis/16_search_api.md`
+  - `Docs/01_core_erp/database/16_search_model.md`
+  - `Docs/01_core_erp/flows/03_global_search_flow.md`
+  - `Docs/03_standards/backend/search-implementation-standard.md`
+  - `Docs/03_standards/operations/definition-of-done.md`
+  - `Docs/agents/EXECUTION_REPORT.md`
+  - `Docs/agents/_archive/2026-06-18/*`
+- API:
+  - `Docker.API.PY/API.PY.DJANGO.Auth/access/migrations/0017_seed_refapart_operational_permissions.py`
+  - `Docker.API.PY/API.PY.DJANGO.Gateway/config/project_registry.yaml`
+  - `Docker.API.PY/API.PY.DJANGO.Gateway/config/settings.py`
+  - `Docker.API.PY/API.PY.DJANGO.Inventory/inventory/views.py`
+  - `Docker.API.PY/API.PY.DJANGO.Inventory/inventory/urls.py`
+  - `Docker.API.PY/API.PY.DJANGO.JobCron/config/urls.py`
+  - `Docker.API.PY/API.PY.DJANGO.JobCron/features/models.py`
+  - `Docker.API.PY/API.PY.DJANGO.JobCron/features/views.py`
+  - `Docker.API.PY/API.PY.DJANGO.JobCron/features/urls.py`
+  - `Docker.API.PY/API.PY.DJANGO.JobCron/features/migrations/0003_operationalrecord.py`
+  - `Docker.API.PY/API.PY.DJANGO.JobCron/features/tests.py`
+  - `Docker.API.PY/API.PY.DJANGO.LeadHunter/core/*`
+  - `Docker.API.PY/API.PY.DJANGO.Procurement/config/settings.py`
+  - `Docker.API.PY/API.PY.DJANGO.Procurement/config/urls.py`
+  - `Docker.API.PY/API.PY.DJANGO.Procurement/procurement/*`
+  - `Docker.API.PY/API.PY.DJANGO.RefaPart/marketplace/*`
+  - `Docker.API.PY/API.PY.DJANGO.Search/*`
+  - `Docker.API.PY/API.PY.DJANGO.Supplier/supplier/views.py`
+  - `Docker.API.PY/API.PY.DJANGO.Supplier/supplier/urls.py`
+- Web:
+  - `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/app/admin/prospectos/page.tsx`
+  - `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/components/screen-page.tsx`
+  - `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/components/operation-create-form.tsx`
+  - `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/app/globals.css`
+  - `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/*`
+  - `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/components/*`
+  - `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/lib/api/refapart.ts`
+- Docker:
+  - `Docker.API.PY/Dockerfile`
+  - `Docker.API.PY/Dockerfile.api.base`
+  - `Docker.API.PY/start.sh`
+  - `Docker.API.PY/docker-compose*.api.yml`
+  - `Docker.WEB.NJ/docker-compose*.web.yml`
+  - `Docker.DB.PG/docker-compose.refapart.db.yml`
+
+### Agents Ejecutados
+
+- `AGENTS-000`: completado. Se consolido arquitectura oficial, Gateway General unico, Docker por objetivo, PostgreSQL y Auth compartido.
+- `AGENTS-001`: completado. Se documento auditoria de contradicciones y prevalencia canonica.
+- `AGENTS-002`: completado. Se creo ADR-001 y matrices base de arquitectura.
+- `AGENTS-003`: completado. Se corrigieron compose enfocados para usar la red compartida `crejo` y Docker por objetivo.
+- `AGENTS-004`: completado. Se agrego Definition of Done, matriz Docker, matriz proyecto a APIs y matriz API a responsabilidad.
+- `AGENTS-006`: completado. Se implemento Search API global, contrato canonico y documentacion core/standards.
+- `AGENTS-007`: parcial. Implementacion global avanzada completada para las areas tocadas, pero validacion runtime proyecto por proyecto queda pendiente por Docker Desktop no disponible.
+- `AGENTS-009`: completado. RefaPart quedo con busqueda, carrito, checkout, solicitudes, proveedores, ofertas, cotizaciones, ordenes, logistica basica, auditoria y permisos Auth.
+- `AGENTS-012`: completado. Prospecting quedo integrado en JobCron con captura manual, Apify controlado, scoring, deduplicacion, presupuesto y seguimiento.
+- `AGENTS-013`: completado. JobCron quedo como ERP operativo con modulos core conectados a Gateway y registros operativos persistentes para pantallas sin API especializada.
+- `AGENTS-014`: completado. Se reforzaron estandares globales de arquitectura, Search, Docker y Definition of Done.
+- `AGENTS-015`: parcial. Compose config valida para los proyectos, pero no se pudo cerrar ciclo runtime completo porque Docker Desktop no estaba disponible al final.
+
+### Validaciones Ejecutadas
+
+- `python manage.py check && python manage.py test` en Search: OK, 1 test.
+- `npm run build` en `WEB.NJ.NEXT.JobCron`: OK.
+- `npm run build` en `WEB.NJ.NEXT.RefaPart`: OK.
+- `python manage.py test` en Gateway: OK, 15 tests.
+- `python manage.py check` en Auth: OK.
+- `python manage.py test` en JobCron: OK, 1 test.
+- `python manage.py test` en LeadHunter: OK, 3 tests.
+- `python manage.py test` en RefaPart API: OK, 4 tests.
+- `python manage.py check && python manage.py test` en Inventory: OK, 0 tests disponibles.
+- `python manage.py check && python manage.py test` en Supplier: OK, 0 tests disponibles.
+- `python manage.py check` en Procurement: OK.
+- `docker compose config --quiet` para API, WEB y DB enfocados: OK para 27 compose.
+- Migraciones dentro de contenedor durante sesion Docker previa:
+  - Auth `0017_seed_refapart_operational_permissions`: OK.
+  - JobCron `0003_operationalrecord`: OK.
+  - LeadHunter `0003_prospectfollowup_prospectingbudget_and_more`: OK.
+  - Search: OK.
+- Pruebas HTTP durante sesion Docker previa:
+  - JobCron health: 200.
+  - JobCron operaciones via Gateway: create 201, list 200.
+  - Prospecting via Gateway: create 201, dashboard 200.
+  - Search via Gateway: index OK, query 200 con 1 resultado despues de reiniciar contenedor con rutas canonicas.
+
+### Faltantes Reales
+
+- `PENDIENTE_DE_DEFINIR`: secretos/credenciales definitivas para Search PostgreSQL. Se uso `SEARCH_DATABASE_URL` aislado para no reutilizar credenciales de otro dominio.
+- `PENDIENTE_DE_DEFINIR`: validacion Docker runtime completa proyecto por proyecto con Docker Desktop activo.
+- `PENDIENTE_DE_DEFINIR`: proveedores externos reales para WhatsApp/pagos/envios; la implementacion actual usa URLs y estados operativos listos para conectar proveedor real.
+
+### Contradicciones Detectadas
+
+- Agents y documentos anteriores hablaban de Gateway/BFF por proyecto; prevalece Gateway General unico.
+- Docker por proyecto aparecia como interpretacion posible; prevalece Docker por objetivo con compose enfocado.
+- Algunas validaciones locales intentaban SQLite, pero runtime canonico es PostgreSQL. SQLite queda solo como base efimera de tests locales.
+- La red Docker de APIs quedaba separada de PostgreSQL por nombre de proyecto compose; se corrigieron overlays para usar `crejo` externa.
+
+### Decisiones Documentadas
+
+- Gateway General unico.
+- Docker por objetivo.
+- Search Engine core reutilizable.
+- RefaPart como API de dominio que consume core APIs mediante Gateway.
+- Prospecting como modulo interno de JobCron, no producto separado.
+- Agents completados archivados sin borrar fuente.
+
+### Agents Archivados O Pendientes
+
+- Archivados en `Docs/agents/_archive/2026-06-18/`: `AGENTS-000`, `AGENTS-001`, `AGENTS-002`, `AGENTS-003`, `AGENTS-004`, `AGENTS-006`, `AGENTS-009`, `AGENTS-012`, `AGENTS-013`, `AGENTS-014`.
+- Pendientes activos: `AGENTS-007`, `AGENTS-015`.
