@@ -63,6 +63,10 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | `Docs/03_standards/operations/codex-anti-patterns.md` | Vicios prohibidos para Codex. |
 | `Docs/03_standards/codex/codex-minimal-reading-standard.md` | Lectura minima obligatoria. |
 | `Docs/03_standards/codex/codex-anti-vices-checklist.md` | Checklist anti-vicios. |
+| `Docs/03_standards/codex/codex-skills-standard.md` | Estandar de skills reutilizables para flujos Codex repetibles. |
+| `Docs/.codex/skills/reusable-api-decision/SKILL.md` | Skill para decidir API compartida o especializada solo si aplica. |
+| `Docs/.codex/skills/api-contract-first/SKILL.md` | Skill para contrato API antes de codigo. |
+| `Docs/.codex/skills/docker-jobcron/SKILL.md` | Skill para Docker por objetivo con `jobcron_network`. |
 
 ## Ruta rapida por tipo de tarea
 

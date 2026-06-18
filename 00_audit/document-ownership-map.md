@@ -36,6 +36,10 @@ historica.
 | `03_standards/operations/codex-anti-patterns.md` | Equipo documental | Estandar | Canonico | Vicios prohibidos |
 | `03_standards/codex/codex-minimal-reading-standard.md` | Equipo documental | Estandar | Canonico | Lectura minima Codex |
 | `03_standards/codex/codex-anti-vices-checklist.md` | Equipo documental | Estandar | Canonico | Checklist anti-vicios |
+| `03_standards/codex/codex-skills-standard.md` | Equipo documental | Estandar | Canonico | Skills reutilizables Codex |
+| `.codex/skills/reusable-api-decision/SKILL.md` | Equipo documental | Skill | Canonico | Decision API reutilizable/especializada |
+| `.codex/skills/api-contract-first/SKILL.md` | Equipo plataforma | Skill | Canonico | Contrato API antes de codigo |
+| `.codex/skills/docker-jobcron/SKILL.md` | Equipo plataforma | Skill | Canonico | Docker JobCron por objetivo |
 | `03_standards/operations/git-repository-map.md` | Equipo plataforma | Estandar | Canonico | Repositorios y publicacion |
 | `03_standards/docker.md` | Equipo plataforma | Estandar | Canonico | Docker local |
 | `03_standards/docker/jobcron-official-docker-architecture.md` | Equipo plataforma | Estandar | Canonico | Docker oficial JobCron |

@@ -11635,3 +11635,86 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 - No se archivo, movio ni elimino ningun archivo `AGENTS-*.md`.
 - `AGENTS-000.md` queda cerrado vaciando su contenido y conservando el placeholder.
 - `AGENTS-001.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.
+
+---
+
+## Ejecucion 2026-06-18 - AGENTS-018 automatizacion Codex y skills
+
+### Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | El archivo contenia la instruccion rotulada como `AGENTS-018.md`. Se crearon el estandar de skills Codex y las skills reutilizables faltantes; el resto de piezas solicitadas ya existian y se enlazaron en indices canonicos. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables adicionales. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/00_audit/codex-context-map.md`
+- `Docs/03_standards/operations/context-packs.md`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/03_standards/operations/codex-execution-standard.md`
+- `Docs/03_standards/operations/codex-anti-patterns.md`
+- `Docs/01_core_erp/apis/reusable-api-contracts.md`
+- `Docs/03_standards/architecture/api-gateway-standard.md`
+- `Docs/03_standards/api/api-contract-first-standard.md`
+- `Docs/03_standards/architecture/shared-libraries-standard.md`
+- `Docs/scripts/validate-docs-rules.sh`
+
+### Archivos creados
+
+- `Docs/03_standards/codex/codex-skills-standard.md`
+- `Docs/.codex/skills/reusable-api-decision/SKILL.md`
+- `Docs/.codex/skills/api-contract-first/SKILL.md`
+- `Docs/.codex/skills/docker-jobcron/SKILL.md`
+
+### Archivos modificados
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/generated/master-index.json`
+- `Docs/00_audit/document-ownership-map.md`
+- `Docs/03_standards/README.md`
+- `Docs/scripts/validate-docs-rules.sh`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Busqueda de frases prohibidas con filtro de instrucciones activas | OK: no quedan instrucciones activas prohibidas; las coincidencias restantes son prohibiciones, reglas anti-vicios, obsolescencia o limpieza. |
+| `bash scripts/validate-docs-rules.sh` | No ejecutado por entorno: Bash/WSL no esta disponible y devolvio `execvpe(/bin/bash) failed: No such file or directory`. Se ejecuto validacion equivalente con PowerShell + `rg`. |
+| `python scripts/build_master_index.py` | OK: genero `_meta/generated/master-index.json` con 515 entradas. |
+| `python scripts/validate_frontmatter.py` | OK tecnico: 481 documentos sin front matter historico, 0 incomplete, 0 malformed. |
+| `git diff --check` | OK: solo advertencias esperadas LF/CRLF de Git en Windows. |
+| Verificacion de placeholders `AGENTS-*.md` | OK: `AGENTS-000.md` a `AGENTS-030.md` conservan el archivo y quedan en 0 bytes. |
+
+### Faltantes reales
+
+- PENDIENTE_DE_DEFINIR: crear skills adicionales sugeridas (`docs-audit`, `frontend-gateway`, `integration-etl`, `agent-runner`) solo cuando exista flujo repetible y owner real.
+- PENDIENTE_DE_DEFINIR: ejecutar `scripts/validate-docs-rules.sh` en un entorno con Bash disponible.
+
+### Contradicciones detectadas
+
+- El agent repetia tareas ya completadas previamente (`AGENTS.md`, plantillas, script base y estandar de librerias compartidas). No se rehizo el trabajo; solo se completo lo faltante.
+- El script de validacion base podia marcar como error las propias reglas de prohibicion. Se ajusto para diferenciar instrucciones activas de prohibiciones canonicas.
+
+### Decisiones documentadas
+
+- Las skills oficiales viven bajo `Docs/.codex/skills/`.
+- `codex-skills-standard.md` es la fuente canonica para crear nuevas skills.
+- Las skills deben incluir metadata documental y no solo metadata de skill.
+- Los agents completados se cierran vaciando el contenido y conservando el archivo original.
+
+### Agents archivados o pendientes
+
+- No se archivo, movio ni elimino ningun archivo `AGENTS-*.md`.
+- `AGENTS-000.md` queda cerrado vaciando su contenido y conservando el placeholder.
+- `AGENTS-001.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.

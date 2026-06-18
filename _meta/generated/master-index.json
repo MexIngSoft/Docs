@@ -1,5 +1,29 @@
 [
   {
+    "path": ".codex/skills/api-contract-first/SKILL.md",
+    "title": "API Contract First Skill",
+    "domain": "Codex",
+    "status": "ACTIVE",
+    "priority": "P1",
+    "owner": "Equipo plataforma"
+  },
+  {
+    "path": ".codex/skills/docker-jobcron/SKILL.md",
+    "title": "Docker JobCron Skill",
+    "domain": "Codex",
+    "status": "ACTIVE",
+    "priority": "P1",
+    "owner": "Equipo plataforma"
+  },
+  {
+    "path": ".codex/skills/reusable-api-decision/SKILL.md",
+    "title": "Reusable API Decision Skill",
+    "domain": "Codex",
+    "status": "ACTIVE",
+    "priority": "P1",
+    "owner": "Equipo documental"
+  },
+  {
     "path": ".github/PULL_REQUEST_TEMPLATE.md",
     "title": "PENDIENTE_DE_DEFINIR",
     "domain": "other",
@@ -2746,6 +2770,14 @@
   {
     "path": "03_standards/codex/codex-minimal-reading-standard.md",
     "title": "Estandar de lectura minima Codex",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/codex/codex-skills-standard.md",
+    "title": "Codex Skills Standard",
     "domain": "standards",
     "status": "unknown",
     "priority": "unknown",
