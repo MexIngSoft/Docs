@@ -7,6 +7,18 @@ proyecto levantando y bajando contenedores aislados. Los archivos por proyecto
 pueden existir como overlays de seleccion o compatibilidad, pero la ruta normal
 debe levantar el mismo stack Docker del workspace.
 
+Nombre profesional del stack Docker:
+
+```text
+Comercial Platform
+```
+
+Nombre tecnico de Docker Compose:
+
+```text
+comercial_platform
+```
+
 ## Arquitectura oficial JobCron
 
 La regla oficial para Docker del ecosistema JobCron vive en:
@@ -81,11 +93,16 @@ Comando manual equivalente para diagnostico del stack completo:
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Reserve-WorkspacePorts.ps1 -DryRun
-docker compose -p workspace_comercial -f Docker.DB.PG\docker-compose.master.db.yml -f Docker.API.PY\docker-compose.master.api.yml -f Docker.WEB.NJ\docker-compose.master.web.yml -f Docker.SW.Nginx\docker-compose.master.nginx.yml up -d --build
+docker compose -p comercial_platform -f Docker.DB.PG\docker-compose.master.db.yml -f Docker.API.PY\docker-compose.master.api.yml -f Docker.WEB.NJ\docker-compose.master.web.yml -f Docker.SW.Nginx\docker-compose.master.nginx.yml up -d --build
 ```
 
 Los compose por proyecto se conservan solo como archivos auxiliares de
 seleccion o compatibilidad. No son la ruta oficial de validacion operativa.
+El mapa canonico de documentos y overlays por proyecto vive en:
+
+```text
+Docs/03_standards/docker/project-docker-execution-documents.md
+```
 
 ## Correccion transversal
 

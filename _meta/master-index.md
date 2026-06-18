@@ -305,6 +305,7 @@
 | Standards | `03_standards/docker.md` | Docker local | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/docker/grouped-containers-isolated-config.md` | Contenedores agrupados con configuracion aislada | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/docker/jobcron-official-docker-architecture.md` | Arquitectura Docker oficial JobCron | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/docker/project-docker-execution-documents.md` | Documentos de ejecucion Docker por proyecto | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/documentation-maintenance-policy.md` | Politica de mantenimiento documental | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/documentation-pr-checklist.md` | Checklist PR documental | ARCHIVE_REFERENCE | P3 | Equipo documental |
 | Standards | `03_standards/frontend/02_placeholder_strategy.md` | Estrategia de placeholders frontend | ACTIVE | P1 | Equipo documental |

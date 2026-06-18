@@ -132,6 +132,7 @@
 - `03_standards/documentation/naming-conventions.md`
 - `03_standards/documentation/repository-structure.md`
 - `03_standards/docker/jobcron-official-docker-architecture.md`
+- `03_standards/docker/project-docker-execution-documents.md`
 - `03_standards/global-governance.md`
 - `03_standards/documentation-first-workflow.md`
 - `03_standards/architecture/api-gateway-standard.md`

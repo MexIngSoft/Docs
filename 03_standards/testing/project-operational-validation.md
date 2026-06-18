@@ -6,7 +6,7 @@ No se valida levantando y bajando un proyecto a la vez. La validacion operativa
 debe usar el stack Docker compartido del workspace:
 
 ```powershell
-docker compose -p workspace_comercial -f Docker.DB.PG\docker-compose.master.db.yml -f Docker.API.PY\docker-compose.master.api.yml -f Docker.WEB.NJ\docker-compose.master.web.yml -f Docker.SW.Nginx\docker-compose.master.nginx.yml config --quiet
+docker compose -p comercial_platform -f Docker.DB.PG\docker-compose.master.db.yml -f Docker.API.PY\docker-compose.master.api.yml -f Docker.WEB.NJ\docker-compose.master.web.yml -f Docker.SW.Nginx\docker-compose.master.nginx.yml config --quiet
 ```
 
 Cuando se ejecute runtime completo, se debe usar `Start-WorkspaceDocker.ps1` o

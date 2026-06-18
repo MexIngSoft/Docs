@@ -36,6 +36,18 @@ Docker.SW.Nginx/docker-compose.master.nginx.yml
 Los compose master pueden incluir o extender los compose base de cada carpeta,
 pero deben existir como ubicacion canonica para correr todo.
 
+El stack compartido se llama:
+
+```text
+Comercial Platform
+```
+
+El nombre tecnico de Docker Compose es:
+
+```text
+comercial_platform
+```
+
 ## Composes auxiliares por proyecto
 
 Los compose por proyecto pueden existir para documentar seleccion de servicios,

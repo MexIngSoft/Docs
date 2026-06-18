@@ -10596,3 +10596,96 @@ en Docker. La regla vigente queda:
 ### Limpieza de agent
 
 - `Docs/agents/AGENTS-015.md` se vacio y se conserva en su ruta original.
+## Ejecucion 2026-06-18 - Limpieza final agents y nombre Docker profesional
+
+### Instruccion recibida
+
+El owner confirmo que no se debe probar proyecto por proyecto en Docker aunque
+un agent lo indique. La orden vigente es:
+
+- definir documentos necesarios para ejecutar cada proyecto por separado;
+- no validar Docker levantando y bajando proyectos uno a uno;
+- definir un nombre profesional para el stack Docker donde se ejecutan API, Web
+  y DB.
+
+### Decision documentada
+
+Nombre profesional del stack Docker:
+
+```text
+Comercial Platform
+```
+
+Nombre tecnico de Docker Compose:
+
+```text
+comercial_platform
+```
+
+### Agents revisados
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-005.md` | No aplicable / sustituido | Contenia instrucciones globales antiguas y alcance mayor al pedido actual. Se sustituyo por documentacion canonica Docker y se limpio el archivo conservandolo. |
+| `AGENTS-007.md` | No aplicable / sustituido | Contenia implementacion global amplia. La parte Docker queda gobernada por el nuevo estandar `comercial_platform`; se limpio el archivo conservandolo. |
+| `AGENTS-015.md` | Ya completado | Ya estaba limpio; se mantiene como placeholder vacio. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/AGENTS-005.md`
+- `Docs/agents/AGENTS-007.md`
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/docker/docker-compose-project-standard.md`
+- `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
+- `Docs/03_standards/testing/project-operational-validation.md`
+- `Docs/03_standards/project-completeness-standard.md`
+
+### Archivos modificados
+
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/docker/docker-compose-project-standard.md`
+- `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
+- `Docs/03_standards/docker/project-docker-execution-documents.md`
+- `Docs/03_standards/operations/scripts/Start-WorkspaceDocker.ps1`
+- `Docs/03_standards/testing/project-operational-validation.md`
+- `Docs/03_standards/project-completeness-standard.md`
+- `Docs/03_standards/README.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/agents/AGENTS-005.md`
+- `Docs/agents/AGENTS-007.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `docker compose -p comercial_platform -f Docker.DB.PG\docker-compose.master.db.yml -f Docker.API.PY\docker-compose.master.api.yml -f Docker.WEB.NJ\docker-compose.master.web.yml -f Docker.SW.Nginx\docker-compose.master.nginx.yml config --quiet` | OK |
+| Parse PowerShell de `Start-WorkspaceDocker.ps1` | OK |
+| `rg workspace_comercial` | OK: eliminado de documentos y script actualizados. |
+| `git -C Docs diff --check` | OK |
+
+### Faltantes reales
+
+- PENDIENTE_DE_DEFINIR: confirmar si `Docker.SW.Nginx` tendra overlays
+  auxiliares por proyecto o si todo el routing queda solo en master.
+- PENDIENTE_DE_DEFINIR: unificar nombres historicos de runbooks por proyecto
+  (`local-runbook.md` vs `local-dependency-runbook.md`) si se decide hacerlo.
+
+### Contradicciones detectadas
+
+- `AGENTS-005.md` y `AGENTS-007.md` contenian alcance de implementacion global
+  que excede la orden Docker actual. Se conservaron como archivos y se vacio su
+  contenido.
+- La documentacion anterior usaba `workspace_comercial`; se reemplazo por
+  `comercial_platform`.
+
+### Limpieza de agents
+
+- `Docs/agents/AGENTS-005.md` vacio y conservado.
+- `Docs/agents/AGENTS-007.md` vacio y conservado.
+- `Docs/agents/AGENTS-015.md` ya estaba vacio y conservado.

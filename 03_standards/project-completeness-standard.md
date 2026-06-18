@@ -44,11 +44,12 @@ Una Web debe incluir:
 - metadata de navegador y Open Graph;
 - logo principal, logo reducido y assets de marca cuando aplique;
 - variables `NEXT_PUBLIC_*` documentadas;
-- gateway/BFF definido;
-- Auth definido via Gateway/BFF o excepcion `auth_required: false` documentada;
+- Gateway General definido;
+- Auth definido via Gateway General o excepcion `auth_required: false` documentada;
 - `NEXT_PUBLIC_APPLICATION_CODE` cuando use Auth;
 - comandos de `build`, `lint` o validacion equivalente;
-- compose Web por proyecto en `Docker.WEB.NJ/docker-compose.<proyecto>.web.yml`.
+- overlay Web auxiliar en `Docker.WEB.NJ/docker-compose.<proyecto>.web.yml`
+  cuando el proyecto requiera seleccion separada.
 
 Variables recomendadas:
 
@@ -124,14 +125,17 @@ Solo se crea Dockerfile especifico cuando cambie el runtime, dependencias del
 sistema, build o configuracion que no pueda resolverse desde variables,
 `requirements.txt`, `package-lock.json` o scripts de arranque.
 
-## Compose por proyecto
+## Documentos y overlays por proyecto
 
-El compose por proyecto si debe existir como entrada canonica de ejecucion:
+Cada proyecto debe tener definidos sus documentos y overlays auxiliares. Estos
+archivos describen como seleccionar sus servicios dentro de Comercial Platform,
+pero no obligan a validar Docker levantando proyecto por proyecto.
 
 ```text
 Docker.DB.PG/docker-compose.<proyecto>.db.yml
 Docker.API.PY/docker-compose.<proyecto>.api.yml
 Docker.WEB.NJ/docker-compose.<proyecto>.web.yml
+Docs/02_projects/<proyecto>/local-runbook.md
 ```
 
 Si solo cambia la lista de procesos, debe ser overlay delgado sobre el compose
@@ -147,8 +151,8 @@ Antes de marcar Web/API como lista:
 - proyecto registrado en `Docs/02_projects/_ecosystem/api-version-matrix.md`;
 - variables completas sin secretos reales;
 - healthcheck funcionando o ruta documentada;
-- Docker individual funcional;
-- Docker master compatible;
+- overlays auxiliares documentados si aplican;
+- stack `comercial_platform` compatible;
 - README/runbook actualizado;
 - validaciones ejecutadas o faltantes documentados.
 

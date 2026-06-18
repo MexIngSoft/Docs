@@ -4,6 +4,18 @@ La ejecucion oficial no levanta proyectos uno por uno. Existe una base general
 por capa y overlays delgados por proyecto solo como archivos auxiliares de
 seleccion o compatibilidad.
 
+Nombre profesional del stack Docker compartido:
+
+```text
+Comercial Platform
+```
+
+Nombre tecnico de Docker Compose:
+
+```text
+comercial_platform
+```
+
 ```text
 Docker.DB.PG/docker-compose.master.db.yml
 Docker.API.PY/docker-compose.master.api.yml
@@ -24,7 +36,7 @@ usado como ruta principal de validacion operativa.
 Comando canonico:
 
 ```powershell
-docker compose -p workspace_comercial -f Docker.DB.PG\docker-compose.master.db.yml -f Docker.API.PY\docker-compose.master.api.yml -f Docker.WEB.NJ\docker-compose.master.web.yml -f Docker.SW.Nginx\docker-compose.master.nginx.yml up -d --build
+docker compose -p comercial_platform -f Docker.DB.PG\docker-compose.master.db.yml -f Docker.API.PY\docker-compose.master.api.yml -f Docker.WEB.NJ\docker-compose.master.web.yml -f Docker.SW.Nginx\docker-compose.master.nginx.yml up -d --build
 ```
 
 Si un proyecto revela un error transversal, se corrige el archivo comun,

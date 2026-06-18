@@ -11,7 +11,7 @@ param(
 $ErrorActionPreference = "Stop"
 
 $workspaceRoot = Resolve-Path (Join-Path $PSScriptRoot "..\..\..\..")
-$composeProjectName = "workspace_comercial"
+$composeProjectName = "comercial_platform"
 $composeFiles = @{
     Db = Join-Path $workspaceRoot "Docker.DB.PG\docker-compose.master.db.yml"
     Api = Join-Path $workspaceRoot "Docker.API.PY\docker-compose.master.api.yml"
