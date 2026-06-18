@@ -19,8 +19,9 @@ Antes de desarrollar o reordenar documentacion:
 1. Leer `Docs/README.md`.
 2. Leer `Docs/_meta/master-index.md`.
 3. Leer este documento.
-4. Leer solo los documentos canonicos del dominio afectado.
-5. Revisar `Docs/00_audit/10_development_gap_analysis.md` si la tarea toca
+4. Identificar el Context Pack minimo en `Docs/00_audit/codex-context-map.md`.
+5. Leer solo los documentos canonicos del dominio afectado.
+6. Revisar `Docs/00_audit/10_development_gap_analysis.md` si la tarea toca
    pendientes, APIs faltantes o cierre de MVP.
 
 ## Equivalencias operativas
@@ -53,6 +54,11 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | `Docs/03_standards/product/product-strategy.md` | Clasificacion y monetizacion de modulos. |
 | `Docs/03_standards/product/module-catalog.md` | Catalogo global de modulos core, shared, comerciales e internos. |
 | `Docs/03_standards/operations/module-lifecycle-and-feature-flags.md` | Estados de desarrollo y visibilidad segura por proyecto, tenant y region. |
+| `Docs/00_audit/codex-context-map.md` | Context Pack minimo por tipo de tarea para ahorrar contexto. |
+| `Docs/00_audit/reusable-api-map.md` | Mapa de necesidades funcionales contra APIs reutilizables. |
+| `Docs/01_core_erp/apis/reusable-api-contracts.md` | Contratos resumidos de APIs reutilizables. |
+| `Docs/03_standards/operations/codex-execution-standard.md` | Flujo estandar para pedir y ejecutar tareas Codex. |
+| `Docs/03_standards/operations/codex-anti-patterns.md` | Vicios prohibidos para Codex. |
 
 ## Ruta rapida por tipo de tarea
 

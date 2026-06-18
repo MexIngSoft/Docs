@@ -52,8 +52,22 @@ existente.
 
 Solo se crea API especializada cuando la responsabilidad no encaja en Auth,
 Gateway General, Catalog, Inventory, Pricing, Supplier, Procurement, Sales,
-Search, Document, Notification, FeatureVisibility, ETL u otra API compartida
-vigente.
+Search, Document, Notification, FeatureVisibility, ETL, Fiscal, Address u otra
+API compartida vigente.
+
+No se debe crear una API por proyecto como patron general.
+
+No se debe crear Gateway/BFF por proyecto.
+
+No se debe crear Auth por proyecto.
+
+No se debe crear Docker por proyecto.
+
+Si la funcionalidad pertenece a una API compartida, no se crea una API nueva.
+
+Si la funcionalidad es exclusiva del dominio, tiene reglas propias, datos
+propios, formularios propios o integracion exclusiva, entonces puede
+documentarse una API especializada solo si aplica.
 
 ## Documentacion minima
 

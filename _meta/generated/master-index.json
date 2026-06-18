@@ -136,8 +136,32 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "00_audit/codex-context-map.md",
+    "title": "Mapa de contexto Codex",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "00_audit/document-ownership-map.md",
+    "title": "Mapa de propiedad documental",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "00_audit/reports/contradictions_repair_report.md",
     "title": "Reporte de reparacion de contradicciones",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "00_audit/reusable-api-map.md",
+    "title": "Mapa de APIs reutilizables",
     "domain": "audit",
     "status": "unknown",
     "priority": "unknown",
@@ -322,6 +346,14 @@
   {
     "path": "01_core_erp/apis/api-status-matrix.md",
     "title": "Matriz de estado de APIs",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/reusable-api-contracts.md",
+    "title": "Contratos reutilizables de APIs",
     "domain": "core",
     "status": "unknown",
     "priority": "unknown",
@@ -2906,6 +2938,22 @@
   {
     "path": "03_standards/operations/agents-documentation-order.md",
     "title": "Orden de ejecucion documental por Agents",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/codex-anti-patterns.md",
+    "title": "Anti-patrones Codex",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/codex-execution-standard.md",
+    "title": "Estandar de ejecucion Codex",
     "domain": "standards",
     "status": "unknown",
     "priority": "unknown",

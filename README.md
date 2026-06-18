@@ -56,6 +56,17 @@ tambien:
 Docs/00_audit/10_development_gap_analysis.md
 ```
 
+Para reducir contexto y evitar duplicar APIs o documentacion, leer tambien:
+
+```text
+Docs/00_audit/codex-context-map.md
+Docs/00_audit/document-ownership-map.md
+Docs/00_audit/reusable-api-map.md
+Docs/01_core_erp/apis/reusable-api-contracts.md
+Docs/03_standards/operations/codex-execution-standard.md
+Docs/03_standards/operations/codex-anti-patterns.md
+```
+
 Antes de ejecutar agents o iniciar una fase nueva, leer tambien:
 
 ```text
@@ -178,40 +189,45 @@ Proveedor actual:
 4. `01_core_erp/erp/01_modules.md`
 5. `01_core_erp/architecture/00_general_architecture.md`
 6. `01_core_erp/apis/00_api_index.md`
-7. `01_core_erp/database/00_database_overview.md`
-8. `01_core_erp/architecture/06_general_system_diagram.md`
-9. `01_core_erp/architecture/07_project_api_pattern.md`
-10. `01_core_erp/erp/09_system_states.md`
-11. `01_core_erp/flows/01_customer_quote_flow.md`
-12. `02_projects/tecnotelec/business/00_tecnotelec_identity.md`
-13. `03_standards/operations/git-repository-map.md`
-13. `02_projects/tecnotelec/frontend/00_frontend_overview.md`
-14. `02_projects/tecnotelec/frontend/09_interface_proposal.md`
-15. `02_projects/tecnotelec/frontend/10_pre_development_analysis.md`
-16. `02_projects/tecnotelec/frontend/11_web_platform_structure.md`
-17. `02_projects/tecnotelec/frontend/12_initial_web_blueprint.md`
-18. `02_projects/tecnotelec/frontend/13_visual_mockup_spec.md`
-19. `03_standards/frontend/nextjs-project-standard.md`
-20. `03_standards/frontend/ui-ux-standard.md`
-21. `03_standards/frontend/undocumented-modernization-standard.md`
-22. `03_standards/frontend/shared-docker-frontend-architecture.md`
-23. `03_standards/operations/standard-request-prompts.md`
-24. `03_standards/documentation-first-workflow.md`
-25. `03_standards/documentation/documentation-cleanup-standard.md`
-26. `03_standards/architecture/api-gateway-standard.md`
-27. `03_standards/auth/web-auth-login-standard.md`
-28. `03_standards/auth/auth-versioning-standard.md`
-29. `02_projects/_ecosystem/api-version-matrix.md`
-30. `03_standards/product/product-strategy.md`
-31. `03_standards/product/module-catalog.md`
-32. `03_standards/database/sql-server-publication-standard.md`
-33. `00_audit/09_api_routes_inventory.md`
-34. `02_projects/tecnotelec/tasks/04_development_order.md`
-35. `02_projects/_ecosystem/00_ecosystem_overview.md`
-36. `02_projects/_ecosystem/01_company_portfolio.md`
-37. `02_projects/_ecosystem/04_process_convergence_and_conflicts.md`
-38. `03_standards/project-completeness-standard.md`
-39. `03_standards/documentation/README.md`
+7. `01_core_erp/apis/reusable-api-contracts.md`
+8. `00_audit/codex-context-map.md`
+9. `00_audit/reusable-api-map.md`
+10. `01_core_erp/database/00_database_overview.md`
+11. `01_core_erp/architecture/06_general_system_diagram.md`
+12. `01_core_erp/architecture/07_project_api_pattern.md`
+13. `01_core_erp/erp/09_system_states.md`
+14. `01_core_erp/flows/01_customer_quote_flow.md`
+15. `02_projects/tecnotelec/business/00_tecnotelec_identity.md`
+16. `03_standards/operations/git-repository-map.md`
+17. `02_projects/tecnotelec/frontend/00_frontend_overview.md`
+18. `02_projects/tecnotelec/frontend/09_interface_proposal.md`
+19. `02_projects/tecnotelec/frontend/10_pre_development_analysis.md`
+20. `02_projects/tecnotelec/frontend/11_web_platform_structure.md`
+21. `02_projects/tecnotelec/frontend/12_initial_web_blueprint.md`
+22. `02_projects/tecnotelec/frontend/13_visual_mockup_spec.md`
+23. `03_standards/frontend/nextjs-project-standard.md`
+24. `03_standards/frontend/ui-ux-standard.md`
+25. `03_standards/frontend/undocumented-modernization-standard.md`
+26. `03_standards/frontend/shared-docker-frontend-architecture.md`
+27. `03_standards/operations/standard-request-prompts.md`
+28. `03_standards/operations/codex-execution-standard.md`
+29. `03_standards/operations/codex-anti-patterns.md`
+30. `03_standards/documentation-first-workflow.md`
+31. `03_standards/documentation/documentation-cleanup-standard.md`
+32. `03_standards/architecture/api-gateway-standard.md`
+33. `03_standards/auth/web-auth-login-standard.md`
+34. `03_standards/auth/auth-versioning-standard.md`
+35. `02_projects/_ecosystem/api-version-matrix.md`
+36. `03_standards/product/product-strategy.md`
+37. `03_standards/product/module-catalog.md`
+38. `03_standards/database/sql-server-publication-standard.md`
+39. `00_audit/09_api_routes_inventory.md`
+40. `02_projects/tecnotelec/tasks/04_development_order.md`
+41. `02_projects/_ecosystem/00_ecosystem_overview.md`
+42. `02_projects/_ecosystem/01_company_portfolio.md`
+43. `02_projects/_ecosystem/04_process_convergence_and_conflicts.md`
+44. `03_standards/project-completeness-standard.md`
+45. `03_standards/documentation/README.md`
 
 ## Reglas
 

@@ -11336,6 +11336,103 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 
 ---
 
+## Ejecucion 2026-06-18 - Context packs y blindaje anti duplicacion Codex
+
+### Agents ejecutados
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | El archivo contenia la instruccion rotulada como `AGENTS-015.md`. Se reforzo `api-gateway-standard.md` para evitar creacion automatica de APIs especializadas y se agregaron Fiscal/Address a las APIs compartidas vigentes. |
+| `AGENTS-001.md` | Completado | Se crearon mapas y estandares para que Codex use Context Pack minimo, evite duplicar APIs y respete propiedad documental. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables adicionales. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/00_audit/99_final_review.md`
+- `Docs/00_audit/07_recommended_documentation_strategy.md`
+- `Docs/01_core_erp/apis/00_api_index.md`
+- `Docs/01_core_erp/architecture/00_general_architecture.md`
+- `Docs/01_core_erp/architecture/07_project_api_pattern.md`
+- `Docs/01_core_erp/database/00_database_overview.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+- `Docs/03_standards/frontend/shared-docker-frontend-architecture.md`
+- `Docs/03_standards/database/sql-server-publication-standard.md`
+- `Docs/03_standards/architecture/api-gateway-standard.md`
+
+### Archivos creados
+
+- `Docs/00_audit/codex-context-map.md`
+- `Docs/00_audit/document-ownership-map.md`
+- `Docs/00_audit/reusable-api-map.md`
+- `Docs/03_standards/operations/codex-execution-standard.md`
+- `Docs/03_standards/operations/codex-anti-patterns.md`
+- `Docs/01_core_erp/apis/reusable-api-contracts.md`
+
+### Archivos modificados
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/03_standards/architecture/api-gateway-standard.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Busqueda de frases prohibidas en Docs excluyendo `_archive`, `agents/_archive`, reporte y agents activos | OK: no quedan `Crear API especializada si`, `su API de dominio` ni `API.PY.DJANGO.NombreProyecto`; las coincidencias restantes son prohibiciones explicitas o `crejo` marcado como obsoleto. |
+| `rg -n "jobcron_network" Docs Docker.DB.PG Docker.API.PY Docker.WEB.NJ Docker.SW.Nginx` | OK: `jobcron_network` aparece como red oficial en compose, Docker docs, runbooks y estandares. |
+| `rg -n "crejo" Docs Docker.DB.PG Docker.API.PY Docker.WEB.NJ Docker.SW.Nginx` excluyendo archivo/reporte | OK: solo aparece como OBSOLETO / RECHAZADO / NO USAR o en reglas de limpieza documental. |
+| Busqueda de documentos nuevos enlazados desde README y `_meta/active-work-index.md` | OK: los mapas y estandares nuevos quedaron enlazados. |
+| Revision documental de proyectos solicitada por agent | Parcial: se detectaron proyectos sin alguna combinacion de `frontend`, `business`, `tasks`, `decisions` o `api-dependencies.md`; se registra como faltante real porque muchos son proyectos futuros o sin owner/MVP cerrado. |
+| Revision documental de integraciones solicitada por agent | Parcial: `ct-internacional`, `dc-mayorista` y `syscom` no tienen `auth.md`, `endpoints.md`, `mappers.md`, `sync.md` y `security.md` en raiz de integracion; se registra como faltante real sin inventar contenido. |
+| `python scripts/build_master_index.py` | OK: genero `_meta/generated/master-index.json` con 498 entradas. |
+| `python scripts/validate_frontmatter.py` | OK tecnico: 467 warnings historicos por front matter faltante, 0 incomplete, 0 malformed. |
+| `git diff --check` | OK: solo warnings esperados de normalizacion LF/CRLF. |
+| Revision de `Docs/agents/AGENTS-*.md` | OK: todos los placeholders se conservaron y quedaron vacios. |
+
+### Faltantes reales
+
+- PENDIENTE_DE_DEFINIR: endpoints reales de cada API reutilizable.
+- PENDIENTE_DE_DEFINIR: owner nominal por equipo o usuario para cada proyecto.
+- PENDIENTE_DE_DEFINIR: completar `api-dependencies.md` y carpetas/documentos
+  `frontend`, `business`, `tasks` y `decisions` solo en proyectos que tengan
+  owner, MVP y alcance real.
+- PENDIENTE_DE_DEFINIR: completar `auth.md`, `endpoints.md`, `mappers.md`,
+  `sync.md` y `security.md` en integraciones cuando exista contrato real del
+  proveedor y no solo referencia historica o API reference.
+
+### Contradicciones detectadas
+
+- `AGENTS-000.md` indicaba que `api-gateway-standard.md` aun decia `Crear API especializada si`, pero la frase ya habia sido reemplazada en una ejecucion anterior. Se aplico el refuerzo adicional solicitado por el agent.
+- `AGENTS-001.md` proponia `Project API` como nombre generico; se documento como API especializada solo si aplica para no reintroducir API obligatoria por proyecto.
+
+### Decisiones documentadas
+
+- Codex no implementa hasta identificar primero el Context Pack minimo de la tarea.
+- Antes de crear una API, se debe mapear la necesidad contra APIs reutilizables.
+- `jobcron_network` sigue siendo la red oficial vigente.
+- `crejo` queda OBSOLETO / RECHAZADO / NO USAR.
+- Proveedor externo vive en `04_integrations`; modelo interno ERP vive en `01_core_erp`.
+
+### Agents archivados o pendientes
+
+- No se archivo, movio ni elimino ningun archivo `AGENTS-*.md`.
+- `AGENTS-000.md` y `AGENTS-001.md` quedan cerrados vaciando su contenido y conservando los placeholders.
+- `AGENTS-002.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.
+
+---
+
 ## Ejecucion 2026-06-18 - Blindaje final contra APIs obligatorias por proyecto
 
 ### Agent ejecutado
