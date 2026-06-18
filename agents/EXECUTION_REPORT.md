@@ -10866,6 +10866,98 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 
 - `Docs/agents/AGENTS-000.md` se vacia y se conserva en su ruta original.
 
+## Ejecucion 2026-06-18 - Correccion definitiva de red Docker, Gateway General y APIs especializadas
+
+### Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | El archivo contenia la instruccion rotulada como `AGENTS-009.md`. Se ejecuto por ser el unico agent activo real en orden numerico. |
+| `AGENTS-001.md` a `AGENTS-030.md` | Sin instrucciones | Permanecen vacios, sin tarea ejecutable nueva. |
+
+### Archivos leidos
+
+- `README.md`
+- `_meta/active-work-index.md`
+- `agents/AGENTS-000.md`
+- `agents/AGENT_GLOBAL_RULES.md`
+- `agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `03_standards/operations/standard-request-prompts.md`
+- `03_standards/docker.md`
+- `03_standards/frontend/shared-docker-frontend-architecture.md`
+- `03_standards/docker/jobcron-official-docker-architecture.md`
+- `03_standards/docker/docker-compose-project-standard.md`
+- `03_standards/documentation/documentation-cleanup-standard.md`
+- `01_core_erp/architecture/00_general_architecture.md`
+- `01_core_erp/README.md`
+- `01_core_erp/architecture/07_project_api_pattern.md`
+- `03_standards/operations/project-closure-standard.md`
+- `03_standards/operations/django-api-project-compliance.md`
+- `02_projects/_ecosystem/02_jobcron_shared_modules.md`
+- `02_projects/tecnotelec/tasks/roadmap.md`
+- `02_projects/tecnotelec/frontend/10_pre_development_analysis.md`
+- `02_projects/tecnotelec/decisions/adr_0006_project_api_boundary.md`
+- `00_audit/12_general_documentation_architecture_audit.md`
+
+### Archivos modificados
+
+- `agents/AGENT_GLOBAL_RULES.md`
+- `agents/EXECUTION_REPORT.md`
+- `agents/AGENTS-000.md`
+- `01_core_erp/README.md`
+- `01_core_erp/architecture/00_general_architecture.md`
+- `01_core_erp/architecture/07_project_api_pattern.md`
+- `03_standards/operations/project-closure-standard.md`
+- `03_standards/operations/django-api-project-compliance.md`
+- `02_projects/_ecosystem/02_jobcron_shared_modules.md`
+- `02_projects/tecnotelec/tasks/roadmap.md`
+- `02_projects/tecnotelec/frontend/10_pre_development_analysis.md`
+- `00_audit/12_general_documentation_architecture_audit.md`
+- `_meta/document_inventory.md`
+- `_meta/document_inventory.csv`
+- `_meta/document_inventory.json`
+- `_meta/document_classification.json`
+- `_meta/generated/master-index.json`
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `python scripts/build_master_index.py` | OK: genero `_meta/generated/master-index.json` con 492 entradas. |
+| `rg` de `API propia`, `API.PY.DJANGO.NombreProyecto`, `gateway/BFF`, `Gateways/BFF`, `su gateway/BFF`, `red vigente: crejo`, `migracion futura coordinada: jobcron_network` excluyendo archive, report y agent activo | OK: sin coincidencias activas. |
+| `rg` de `crejo`, `Gateway por proyecto`, `BFF por proyecto`, `Docker por proyecto`, `Auth por proyecto`, `SQLite`, `db.sqlite3` excluyendo archive, report y agent activo | OK con coincidencias permitidas: solo prohibiciones explicitas o `crejo` marcado como OBSOLETO / RECHAZADO / NO USAR. |
+| `rg` de `crejo` en `Docs Docker.DB.PG Docker.API.PY Docker.WEB.NJ Docker.SW.Nginx` excluyendo archive, report y agent activo | OK con coincidencias permitidas: solo prohibiciones explicitas, termino de busqueda del cleanup o `crejo` marcado como OBSOLETO / RECHAZADO / NO USAR. |
+| `rg` de `jobcron_network` en `Docs Docker.DB.PG Docker.API.PY Docker.WEB.NJ Docker.SW.Nginx` | OK: aparece en compose, Docker docs y estandares como red oficial vigente. |
+| `python scripts/validate_frontmatter.py` | OK tecnico: 461 warnings historicos por front matter faltante, 0 incomplete, 0 malformed. |
+| `git diff --check` | OK: solo warnings esperados de normalizacion LF/CRLF. |
+
+### Faltantes reales
+
+- No hay informacion funcional faltante para cerrar este agent.
+- La validacion operativa Docker real no se ejecuto porque esta instruccion es documental y las reglas vigentes indican no probar proyecto por proyecto en Docker.
+
+### Contradicciones detectadas
+
+- `AGENTS-000.md` contenia una instruccion titulada `AGENTS-009.md`; se ejecuto como el agent activo real por ubicacion y orden numerico.
+- Documentacion previa y metadatos activos aun usaban `API propia` o `API.PY.DJANGO.NombreProyecto`; se normalizo a APIs compartidas por responsabilidad y API especializada solo si aplica.
+
+### Decisiones documentadas
+
+- Gateway General es el unico punto de entrada para frontends.
+- No se crea Gateway/BFF por proyecto.
+- No se crea Auth por proyecto.
+- No se crea Docker por proyecto.
+- No se crea una API por proyecto como patron general.
+- Las APIs Django se organizan por responsabilidad; las especializadas solo existen si hay logica exclusiva del dominio.
+- `jobcron_network` permanece como red Docker oficial vigente.
+- `crejo` queda permitido solo como mencion obsoleta, rechazada, historica o de reporte.
+
+### Agents archivados o pendientes
+
+- No se archivo ni elimino ningun archivo `AGENTS-*.md`.
+- `AGENTS-000.md` queda cerrado vaciando su contenido y conservando el placeholder.
+- `AGENTS-001.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.
+
 ---
 
 ## Ejecucion 2026-06-18 - Correccion final de red Docker y Gateway General

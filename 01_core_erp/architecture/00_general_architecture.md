@@ -63,10 +63,33 @@ PostgreSQL debe usar schemas separados por dominio cuando aplique:
 
 ## Repositorios
 
-Cada API Django debe vivir como repositorio independiente con nomenclatura:
+Las APIs Django se organizan por responsabilidad.
 
-```text
-API.PY.DJANGO.NombreProyecto
-```
+APIs compartidas:
+
+- `API.PY.DJANGO.Auth`.
+- `API.PY.DJANGO.Gateway`.
+- `API.PY.DJANGO.Catalog`.
+- `API.PY.DJANGO.Inventory`.
+- `API.PY.DJANGO.Pricing`.
+- `API.PY.DJANGO.Supplier`.
+- `API.PY.DJANGO.Procurement`.
+- `API.PY.DJANGO.Sales`.
+- `API.PY.DJANGO.Search`.
+- `API.PY.DJANGO.Document`.
+- `API.PY.DJANGO.Notification`.
+- `API.PY.DJANGO.FeatureVisibility`.
+
+APIs especializadas:
+
+Solo se crean cuando exista logica exclusiva del dominio.
+
+Ejemplos:
+
+- `API.PY.DJANGO.Refapart`.
+- `API.PY.DJANGO.LexNova`.
+- `API.PY.DJANGO.Fiscora`.
+
+No se debe crear una API por proyecto como patron general.
 
 Docker solo orquesta.

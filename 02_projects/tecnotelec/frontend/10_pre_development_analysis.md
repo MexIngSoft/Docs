@@ -47,7 +47,7 @@ Reglas:
 | Nombre frontend | DEFINIDO | `WEB.NJ.NEXT.TecnoTelec`. |
 | Docker frontend | EXISTE | Agregar servicio separado cuando se cree el proyecto. |
 | Gateway | PARCIAL | Confirmar endpoints reales antes de conectar UI. |
-| API propia Tecno Telec | PARCIAL | Confirmar persistencia y procesos propios. |
+| API especializada Tecno Telec | PARCIAL | Confirmar si existen persistencia y procesos propios que justifiquen API especializada. |
 | Auth | PARCIAL | Definir sesion y roles finales. |
 | Catalog/Pricing | PARCIAL | Confirmar contratos para soluciones, productos y precios. |
 | Rules Engine | PENDIENTE_DE_DEFINIR | Requerido para diagnostico inteligente avanzado. |

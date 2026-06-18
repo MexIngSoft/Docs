@@ -179,7 +179,7 @@
 | `02_projects/tecnotelec/decisions/adr_0003_supplier_catalog_strategy.md` | Business | markdown | active | P1 | ADR 0003 - Estrategia Supplier y Catalog |
 | `02_projects/tecnotelec/decisions/adr_0004_quote_to_order_flow.md` | Business | markdown | active | P1 | ADR 0004 - Flujo Quote a Order |
 | `02_projects/tecnotelec/decisions/adr_0005_rules_engine_strategy.md` | Business | markdown | active | P1 | ADR 0005 - Estrategia Rules Engine |
-| `02_projects/tecnotelec/decisions/adr_0006_project_api_boundary.md` | Business | markdown | active | P1 | ADR 0006 - API propia del proyecto Tecno Telec |
+| `02_projects/tecnotelec/decisions/adr_0006_project_api_boundary.md` | Business | markdown | active | P1 | ADR 0006 - API especializada del proyecto Tecno Telec |
 | `02_projects/tecnotelec/frontend/00_frontend_overview.md` | Business | markdown | active | P1 | Frontend overview |
 | `02_projects/tecnotelec/frontend/01_routes.md` | Business | markdown | active | P1 | Rutas frontend |
 | `02_projects/tecnotelec/frontend/02_layout.md` | Business | markdown | active | P1 | Layout |

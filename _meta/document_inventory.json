@@ -2310,7 +2310,7 @@
     "size_bytes": 1175,
     "status": "active",
     "priority": "P1",
-    "title": "ADR 0006 - API propia del proyecto Tecno Telec",
+    "title": "ADR 0006 - API especializada del proyecto Tecno Telec",
     "sha256": "f6c0828fe75ca5ba25367c59b38a69de9959c7a886b05109fd7f0628a42679c2"
   },
   {

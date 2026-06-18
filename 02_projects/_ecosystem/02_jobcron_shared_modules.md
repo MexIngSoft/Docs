@@ -28,4 +28,5 @@ Definir que modulos del ERP pueden reutilizar los proyectos del ecosistema.
 
 ## Regla
 
-Un proyecto nuevo debe intentar usar modulos compartidos antes de pedir una API propia.
+Un proyecto nuevo debe intentar usar modulos compartidos antes de justificar
+una API especializada. No se crea una API por proyecto como patron general.

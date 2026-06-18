@@ -6,7 +6,8 @@
 
 ## Resumen
 
-Los proyectos existentes fueron migrados operativamente a la nomenclatura estandar `API.PY.DJANGO.NombreProyecto`.
+Los proyectos existentes fueron migrados operativamente a la nomenclatura
+estandar `API.PY.DJANGO.NombreDominio`.
 
 `docker-compose.yml` y `Dockerfile` ya apuntan a las carpetas `API.PY.DJANGO.*`. Algunas carpetas anteriores `API.PY.DJANGO.*` quedaron como remanentes locales porque Windows bloqueo la eliminacion directa por permisos o archivos en uso.
 
@@ -23,7 +24,8 @@ Los proyectos existentes fueron migrados operativamente a la nomenclatura estand
 - Se actualizaron `docker-compose.yml` y `Dockerfile` para usar `API.PY.DJANGO.*`.
 - Se limpiaron los `.env.local` de las carpetas remanentes `API.PY.DJANGO.*`.
 - Se inicializo Git en todas las carpetas `API.PY.DJANGO.*`.
-- Se configuro `origin` en todas las APIs. Los modulos comerciales usan el patron `MexIngSoft/API.PY.DJANGO.NombreProyecto`.
+- Se configuro `origin` en todas las APIs. Los modulos comerciales usan el
+  patron `MexIngSoft/API.PY.DJANGO.NombreDominio`.
 - Se estandarizo `.gitignore` en todas las APIs con el bloque minimo Django API.
 
 ## Estado por proyecto

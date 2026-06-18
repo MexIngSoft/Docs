@@ -19,7 +19,8 @@ Objetivo: dejar estructura, documentacion y repositorios consistentes.
 
 Incluye:
 
-- Nomenclatura `API.PY.DJANGO.NombreProyecto`.
+- Nomenclatura `API.PY.DJANGO.NombreDominio`, separando APIs compartidas y
+  APIs especializadas solo si aplican.
 - Configuracion Django en `config/`.
 - `.env.local` y `.env.local.example`.
 - `.gitignore` estandar.

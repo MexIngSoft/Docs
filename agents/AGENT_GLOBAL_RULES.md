@@ -33,9 +33,15 @@ modernizacion visual no documentada.
 
 ## Reglas de arquitectura
 
-- Todo proyecto web productivo usa `Frontend`, el Gateway General y una API
-  especializada solo cuando tenga dominio, permisos, datos o integraciones
-  propios.
+- Todo proyecto web productivo usa `Frontend`, Gateway General y APIs
+  compartidas por responsabilidad.
+- Solo se permite API especializada cuando exista logica exclusiva del dominio,
+  datos propios, reglas propias, formularios propios o integracion exclusiva
+  que no pertenezca a una API compartida.
+- No se debe crear una API por proyecto como patron general.
+- No se debe crear Gateway/BFF por proyecto.
+- No se debe crear Auth por proyecto.
+- No se debe crear Docker por proyecto.
 - El frontend no consume APIs internas ni Gateways legacy por proyecto.
 - El ERP conserva capacidades reutilizables; los proyectos conservan identidad,
   negocio, UX, permisos y datos especificos.

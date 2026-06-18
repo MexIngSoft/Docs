@@ -1597,7 +1597,7 @@
     "domain": "Business",
     "status": "active",
     "priority": "P1",
-    "title": "ADR 0006 - API propia del proyecto Tecno Telec",
+    "title": "ADR 0006 - API especializada del proyecto Tecno Telec",
     "reason": "Documento activo canonico.",
     "suggested_path": "02_projects/tecnotelec/decisions/adr_0006_project_api_boundary.md"
   },

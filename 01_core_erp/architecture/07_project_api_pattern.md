@@ -100,7 +100,7 @@ Son APIs reutilizables. Deben conservar responsabilidades de dominio:
 Para APIs Django:
 
 ```text
-API.PY.DJANGO.NombreProyecto
+API.PY.DJANGO.NombreDominio
 ```
 
 Para el Gateway central:
@@ -112,7 +112,7 @@ API.PY.DJANGO.Gateway
 Para API especializada:
 
 ```text
-API.PY.DJANGO.NombreProyecto
+API.PY.DJANGO.NombreDominio
 ```
 
 Ejemplo:
@@ -126,9 +126,11 @@ Regla de creacion:
 
 - La entrada publica de frontend pasa unicamente por Gateway General.
 - Las APIs especializadas solo se crean cuando existe logica exclusiva del dominio.
-- Si el proyecto tiene tablas, procesos, formularios, configuracion o reglas exclusivas, crear tambien `API.PY.DJANGO.NombreProyecto`.
+- Si el proyecto tiene tablas, procesos, formularios, configuracion o reglas
+  exclusivas, evaluar una API especializada `API.PY.DJANGO.NombreDominio`.
 - Si el proyecto solo consume APIs core sin datos propios, la API de dominio puede omitirse, pero la decision debe quedar documentada.
-- La API de proyecto y el frontend deben ser repositorios Git independientes.
+- La API especializada y el frontend deben ser repositorios Git independientes
+  cuando ambos existan.
 - El repositorio orquestador Docker debe ignorar `API.PY.DJANGO.*/` para no versionar APIs externas dentro del compose.
 
 El nombre operativo puede documentarse en kebab-case:

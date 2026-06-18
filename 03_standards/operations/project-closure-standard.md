@@ -10,10 +10,10 @@ Establecer una nomenclatura unica y un checklist minimo para cerrar proyectos Dj
 
 ## Nomenclatura
 
-La nomenclatura oficial para proyectos Django API es:
+La nomenclatura oficial para APIs Django es:
 
 ```text
-API.PY.DJANGO.NombreProyecto
+API.PY.DJANGO.NombreDominio
 ```
 
 El Gateway compartido oficial es:
@@ -22,7 +22,9 @@ El Gateway compartido oficial es:
 API.PY.DJANGO.Gateway
 ```
 
-Las carpetas existentes con `API.PY.DJANGO` se consideran nomenclatura anterior. Para proyectos nuevos se debe usar `API.PY.DJANGO.NombreProyecto`.
+Las carpetas existentes con `API.PY.DJANGO` se consideran nomenclatura
+anterior. Para APIs nuevas se debe usar `API.PY.DJANGO.NombreDominio`, donde
+el dominio puede ser compartido o especializado solo si aplica.
 
 Ejemplos de nomenclatura:
 
@@ -41,7 +43,7 @@ API.PY.DJANGO.Gateway
 Reglas:
 
 - El prefijo debe ser siempre `API.PY.DJANGO`.
-- `NombreProyecto` debe escribirse en PascalCase.
+- `NombreDominio` debe escribirse en PascalCase.
 - Esta prohibido crear pasarelas dedicadas por proyecto.
 - No existe excepcion activa para pasarelas o capas intermedias dedicadas por proyecto.
 - El nombre debe representar el dominio principal, no una tecnologia, proveedor o tarea temporal.
@@ -70,11 +72,14 @@ API.PY.DJANGO.Supplier/
 
 Un proyecto Django API se considera cerrado cuando cumple estos puntos:
 
-- La carpeta raiz respeta `API.PY.DJANGO.NombreProyecto`.
+- La carpeta raiz respeta `API.PY.DJANGO.NombreDominio`.
 - Si es el Gateway compartido, la carpeta raiz respeta `API.PY.DJANGO.Gateway`.
 - La carpeta raiz es un repositorio Git independiente.
 - La carpeta tiene remoto `origin` configurado.
-- Al registrar un proyecto en el Gateway central, tambien debe evaluarse y crear la API de dominio `API.PY.DJANGO.NombreProyecto` cuando existan datos, formularios, configuraciones o reglas propias.
+- Al registrar un proyecto en el Gateway General, tambien debe evaluarse si
+  corresponde crear una API especializada `API.PY.DJANGO.NombreDominio` cuando
+  existan datos, formularios, configuraciones o reglas propias que no
+  pertenezcan a una API compartida.
 - Si la API de dominio no se crea, la decision debe documentarse con motivo y responsable.
 - El repo Docker orquestador debe mantener `API.PY.DJANGO.*/` en `.gitignore` para que las APIs montadas no se versionen ahi.
 - No existe otra copia viva de la misma API dentro del entorno Docker.
@@ -110,7 +115,7 @@ Cada proyecto debe incluir o documentar:
 ## Estructura minima esperada
 
 ```text
-API.PY.DJANGO.NombreProyecto/
+API.PY.DJANGO.NombreDominio/
   venv/
   .env.local.example
   manage.py
@@ -140,7 +145,7 @@ El cierre debe validarse contra este mismo estandar vigente y contra la document
 
 En especial deben revisarse:
 
-- Nombre externo `API.PY.DJANGO.NombreProyecto` o `API.PY.DJANGO.Gateway`.
+- Nombre externo `API.PY.DJANGO.NombreDominio` o `API.PY.DJANGO.Gateway`.
 - Repositorio Git propio por API.
 - Remoto `origin` configurado.
 - Sin carpetas duplicadas de la misma API.
@@ -229,7 +234,7 @@ Definicion:
 
 Antes de marcar un proyecto como `closed`, validar:
 
-- [ ] Nombre raiz: `API.PY.DJANGO.NombreProyecto` o `API.PY.DJANGO.Gateway`.
+- [ ] Nombre raiz: `API.PY.DJANGO.NombreDominio` o `API.PY.DJANGO.Gateway`.
 - [ ] Repositorio Git propio.
 - [ ] Remoto `origin` configurado.
 - [ ] Sin carpeta duplicada de la misma API.
