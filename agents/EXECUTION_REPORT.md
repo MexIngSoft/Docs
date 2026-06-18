@@ -9356,7 +9356,7 @@ cambios por estar vacios.
 | `docker compose config --quiet` API | OK |
 | `docker compose config --quiet` Web | OK |
 | Docker runtime | Pendiente externo: Docker Desktop no estaba activo |
-| Local API/Gateway/Web runtime | OK con SQLite y sample mode |
+| Local API/Gateway/Web runtime | HISTORICO - OBSOLETO POR EJECUCION POSTERIOR: en esa corrida se valido con SQLite y sample mode; la base oficial vigente es PostgreSQL. |
 
 ## Prueba Funcional Local
 
@@ -9959,14 +9959,22 @@ El archivo original se conserva vacio en `Docs/agents/`.
 - Se creo el documento canonico `Docs/03_standards/docker/jobcron-official-docker-architecture.md`.
 - Se enlazo la regla desde `Docs/03_standards/docker.md`.
 - Se actualizo `Docs/03_standards/docker/grouped-containers-isolated-config.md` para declarar que los contenedores agrupados son compatibilidad de bajo costo y no contradicen la arquitectura objetivo.
-- Se actualizo `Docs/03_standards/frontend/shared-docker-frontend-architecture.md` y `Docs/03_standards/frontend/pre-development-checklist.md` para usar `jobcron_network` como red objetivo y `crejo` como red heredada.
+- [HISTORICO - OBSOLETO POR EJECUCION POSTERIOR] Se actualizo
+  `Docs/03_standards/frontend/shared-docker-frontend-architecture.md` y
+  `Docs/03_standards/frontend/pre-development-checklist.md` para usar
+  `jobcron_network` como red objetivo y `crejo` como red heredada. Esta
+  decision quedo obsoleta. La red oficial vigente es `jobcron_network`;
+  `crejo` queda OBSOLETO / RECHAZADO / NO USAR.
 - Se actualizo `Docs/03_standards/operations/docker-recovery-runbook.md` para diferenciar estado operativo actual de arquitectura objetivo.
 - Se agrego referencia en `Docs/02_projects/jobcron/README.md`.
 - Se sincronizaron indices: `Docs/_meta/master-index.md`, `Docs/_meta/master-index.yaml` y `Docs/_meta/navigation-map.md`.
 
 ## Decision principal
 
-No se renombraron redes ni compose reales de `crejo` a `jobcron_network` en esta corrida, porque el estado actual tiene compose, scripts, Nginx y runbooks acoplados a `crejo`. La migracion debe hacerse como fase coordinada para evitar romper comunicacion interna o duplicar servicios compartidos.
+[HISTORICO - OBSOLETO POR EJECUCION POSTERIOR] En esta corrida no se
+renombraron redes ni compose reales de `crejo` a `jobcron_network`. Esta
+decision quedo obsoleta. La red oficial vigente es `jobcron_network`; `crejo`
+queda OBSOLETO / RECHAZADO / NO USAR.
 
 ## Validaciones
 
@@ -9977,7 +9985,7 @@ No se renombraron redes ni compose reales de `crejo` a `jobcron_network` en esta
 | `docker compose -f Docker.API.PY/docker-compose.yml config --quiet` | OK |
 | `docker compose -f Docker.WEB.NJ/docker-compose.yml config --quiet` | OK |
 | `docker compose -f Docker.SW.Nginx/docker-compose.yml config --quiet` | OK |
-| Busqueda local de `jobcron-official-docker-architecture`, `jobcron_network` y `crejo` | OK; referencias objetivo y compatibilidad quedaron documentadas. |
+| Busqueda local de `jobcron-official-docker-architecture`, `jobcron_network` y `crejo` | HISTORICO - OBSOLETO POR EJECUCION POSTERIOR: las referencias de compatibilidad quedaron reemplazadas por `jobcron_network` como red oficial vigente y `crejo` como OBSOLETO / RECHAZADO / NO USAR. |
 
 ## Documentos Revisados
 
@@ -10000,7 +10008,10 @@ No se renombraron redes ni compose reales de `crejo` a `jobcron_network` en esta
 ## Quedo Fuera
 
 - Crear fisicamente los compose `docker-compose.master.*.yml` y `docker-compose.<proyecto>.*.yml`.
-- Migrar los compose actuales, scripts, Nginx y contenedores activos de `crejo` a `jobcron_network`.
+- [HISTORICO - OBSOLETO POR EJECUCION POSTERIOR] Migrar los compose actuales,
+  scripts, Nginx y contenedores activos de `crejo` a `jobcron_network`. Esta
+  decision quedo obsoleta como pendiente abierto; `jobcron_network` es la red
+  oficial vigente y `crejo` queda OBSOLETO / RECHAZADO / NO USAR.
 - Cambiar nombres de contenedores actuales como `api-backend-python` o `web-frontend-node`.
 
 ## Limpieza
@@ -10043,8 +10054,10 @@ El archivo original se conserva vacio en `Docs/agents/`.
 - No se creo `LICENSE`; requiere eleccion legal del owner.
 - No se migro masivamente front matter historico, estructura de proyectos ni
   carpetas Docker.
-- No se cambio la red operativa `crejo` a `jobcron_network`; requiere una fase
-  coordinada entre compose, scripts, Nginx y runbooks.
+- [HISTORICO - OBSOLETO POR EJECUCION POSTERIOR] No se cambio la red operativa
+  `crejo` a `jobcron_network` en esa corrida. Esta decision quedo obsoleta. La
+  red oficial vigente es `jobcron_network`; `crejo` queda OBSOLETO / RECHAZADO
+  / NO USAR.
 - No se crearon documentos vacios por proveedor: una integracion pequena puede
   cubrir los temas obligatorios dentro de su README.
 - Feature flags controlan disponibilidad, pero nunca sustituyen permisos ni
@@ -10450,7 +10463,10 @@ esta regla. Desde esta entrada en adelante, el cierre de agents se registra como
 - `AGENTS-000`: completado. Se consolido arquitectura oficial, Gateway General unico, Docker por objetivo, PostgreSQL y Auth compartido.
 - `AGENTS-001`: completado. Se documento auditoria de contradicciones y prevalencia canonica.
 - `AGENTS-002`: completado. Se creo ADR-001 y matrices base de arquitectura.
-- `AGENTS-003`: completado. Se corrigieron compose enfocados para usar la red compartida `crejo` y Docker por objetivo.
+- `AGENTS-003`: completado. [HISTORICO - OBSOLETO POR EJECUCION POSTERIOR] En
+  esa corrida se corrigieron compose enfocados para usar la red compartida
+  `crejo` y Docker por objetivo. La red oficial vigente posterior es
+  `jobcron_network`; `crejo` queda OBSOLETO / RECHAZADO / NO USAR.
 - `AGENTS-004`: completado. Se agrego Definition of Done, matriz Docker, matriz proyecto a APIs y matriz API a responsabilidad.
 - `AGENTS-006`: completado. Se implemento Search API global, contrato canonico y documentacion core/standards.
 - `AGENTS-007`: parcial. Implementacion global avanzada completada para las areas tocadas, pero validacion runtime proyecto por proyecto queda pendiente por Docker Desktop no disponible.
@@ -10495,8 +10511,13 @@ esta regla. Desde esta entrada en adelante, el cierre de agents se registra como
 
 - Agents y documentos anteriores hablaban de Gateway/BFF por proyecto; prevalece Gateway General unico.
 - Docker por proyecto aparecia como interpretacion posible; prevalece Docker por objetivo con compose enfocado.
-- Algunas validaciones locales intentaban SQLite, pero runtime canonico es PostgreSQL. SQLite queda solo como base efimera de tests locales.
-- La red Docker de APIs quedaba separada de PostgreSQL por nombre de proyecto compose; se corrigieron overlays para usar `crejo` externa.
+- Algunas validaciones locales intentaban SQLite, pero runtime canonico es
+  PostgreSQL. [HISTORICO - OBSOLETO POR EJECUCION POSTERIOR] SQLite no queda
+  como opcion activa.
+- [HISTORICO - OBSOLETO POR EJECUCION POSTERIOR] La red Docker de APIs quedaba
+  separada de PostgreSQL por nombre de proyecto compose; se corrigieron
+  overlays para usar `crejo` externa. La red oficial vigente posterior es
+  `jobcron_network`; `crejo` queda OBSOLETO / RECHAZADO / NO USAR.
 
 ### Decisiones Documentadas
 
@@ -10827,7 +10848,7 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 | Validacion | Resultado |
 |---|---|
 | Busqueda de frases obsoletas de gateway dedicado/BFF/API propia por proyecto en docs activos | OK: sin coincidencias activas. |
-| Busqueda de `crejo` y `jobcron_network` en estandares Docker/frontend | OK: ambas aparecen solo con relacion explicita: `crejo` vigente y `jobcron_network` migracion futura coordinada. |
+| Busqueda de `crejo` y `jobcron_network` en estandares Docker/frontend | HISTORICO - OBSOLETO POR EJECUCION POSTERIOR: `jobcron_network` es la red oficial vigente y `crejo` queda OBSOLETO / RECHAZADO / NO USAR. |
 | `docker compose -p comercial_platform -f Docker.DB.PG\docker-compose.master.db.yml -f Docker.API.PY\docker-compose.master.api.yml -f Docker.WEB.NJ\docker-compose.master.web.yml -f Docker.SW.Nginx\docker-compose.master.nginx.yml config --quiet` | OK |
 | `python scripts/validate_frontmatter.py` | OK tecnico: 0 malformed, 0 incomplete; conserva warnings historicos por documentos sin front matter. |
 | `python scripts/build_master_index.py` | OK: regenero `_meta/generated/master-index.json`. |
@@ -10837,15 +10858,20 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 ### Faltantes reales
 
 - No queda faltante documental para los puntos del agent.
-- PENDIENTE_DE_DEFINIR: migracion futura coordinada de `crejo` a
-  `jobcron_network`, si el owner decide ejecutarla en otra fase.
+- [HISTORICO - OBSOLETO POR EJECUCION POSTERIOR] PENDIENTE_DE_DEFINIR:
+  migracion futura coordinada de `crejo` a `jobcron_network`, si el owner
+  decide ejecutarla en otra fase. Esta decision quedo obsoleta. La red oficial
+  vigente es `jobcron_network`; `crejo` queda OBSOLETO / RECHAZADO / NO USAR.
 
 ### Contradicciones detectadas
 
 - El agent identifico contradiccion entre Gateway General unico y documentos
   activos que aun mencionaban gateway dedicado/BFF por proyecto.
-- El agent identifico contradiccion entre red vigente `crejo` y documentos que
-  trataban `jobcron_network` como objetivo parcial inmediato.
+- [HISTORICO - OBSOLETO POR EJECUCION POSTERIOR] El agent identifico
+  contradiccion entre red vigente `crejo` y documentos que trataban
+  `jobcron_network` como objetivo parcial inmediato. Esta decision quedo
+  obsoleta. La red oficial vigente es `jobcron_network`; `crejo` queda OBSOLETO
+  / RECHAZADO / NO USAR.
 - Prevalecio la documentacion canonica mas actual: Gateway General unico,
   APIs especializadas solo cuando aplica, PostgreSQL oficial y `crejo` como red
   vigente hasta migracion coordinada.
@@ -10859,12 +10885,73 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
   Auth, observabilidad, Core ERP, LexNova, DocuCore, JobCron y Tecno Telec.
 - Se actualizo `New-WorkspaceProject.ps1` para que los proyectos nuevos
   documenten Gateway General y no generen texto de gateway dedicado.
-- Se mantuvo `crejo` como red vigente y `jobcron_network` como migracion futura
-  coordinada, sin mezclar parcialmente.
+- [HISTORICO - OBSOLETO POR EJECUCION POSTERIOR] Se mantuvo `crejo` como red
+  vigente y `jobcron_network` como migracion futura coordinada en esa corrida.
+  Esta decision quedo obsoleta. La red oficial vigente es `jobcron_network`;
+  `crejo` queda OBSOLETO / RECHAZADO / NO USAR.
 
 ### Limpieza de agent
 
 - `Docs/agents/AGENTS-000.md` se vacia y se conserva en su ruta original.
+
+## Ejecucion 2026-06-18 - Limpieza final de trazabilidad historica
+
+### Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | El archivo contenia la instruccion rotulada como `AGENTS-010.md`. Se limpio la trazabilidad historica ambigua en `EXECUTION_REPORT.md` sin borrar historial. |
+| `AGENTS-001.md` a `AGENTS-030.md` | Sin instrucciones | Permanecen vacios, sin tarea ejecutable nueva. |
+
+### Archivos leidos
+
+- `README.md`
+- `_meta/active-work-index.md`
+- `agents/AGENTS-000.md`
+- `agents/AGENT_GLOBAL_RULES.md`
+- `agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `03_standards/operations/standard-request-prompts.md`
+- `03_standards/operations/git-repository-map.md`
+- `03_standards/operations/github-branch-governance.md`
+- `03_standards/operations/git-environments-and-release-flow.md`
+- `agents/EXECUTION_REPORT.md`
+
+### Archivos modificados
+
+- `agents/EXECUTION_REPORT.md`
+- `agents/AGENTS-000.md`
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `rg -n "crejo|jobcron_network|gateway/BFF|Gateways/BFF|su gateway/BFF|Gateway por proyecto|BFF por proyecto|Docker por proyecto|Auth por proyecto|SQLite|db\.sqlite3" Docs` | OK: `jobcron_network` aparece como red vigente; `crejo` queda como OBSOLETO / RECHAZADO / NO USAR o historial explicitamente obsoleto; los patrones prohibidos aparecen solo como prohibicion, archivo historico, reporte o agent activo. |
+| Busqueda contextual en `EXECUTION_REPORT.md` de `crejo` vigente, `jobcron_network` como migracion futura, mantener `crejo` o no migrar a `jobcron_network` | OK: las entradas antiguas quedaron marcadas como `[HISTORICO - OBSOLETO POR EJECUCION POSTERIOR]` o explican que `jobcron_network` es la red oficial vigente. |
+| `python scripts/validate_frontmatter.py` | OK tecnico: 461 warnings historicos por front matter faltante, 0 incomplete, 0 malformed. |
+| `git diff --check` | OK: solo warnings esperados de normalizacion LF/CRLF. |
+
+### Faltantes reales
+
+- No hay faltantes reales para esta limpieza documental.
+- No se ejecuto Docker porque el agent no modifica compose ni runtime; solo limpia trazabilidad historica documental.
+
+### Contradicciones detectadas
+
+- El reporte conservaba entradas historicas que podian leerse como permiso activo para `crejo` o como migracion futura de `jobcron_network`. Se conservaron como historial, pero marcadas explicitamente como obsoletas por ejecuciones posteriores.
+
+### Decisiones documentadas
+
+- `jobcron_network` es la unica red Docker oficial vigente.
+- `crejo` queda OBSOLETO / RECHAZADO / NO USAR.
+- Gateway General unico sigue vigente.
+- PostgreSQL sigue siendo la base oficial.
+- Docker se organiza por objetivo.
+
+### Agents archivados o pendientes
+
+- No se archivo ni elimino ningun archivo `AGENTS-*.md`.
+- `AGENTS-000.md` queda cerrado vaciando su contenido y conservando el placeholder.
+- `AGENTS-001.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.
 
 ## Ejecucion 2026-06-18 - Correccion definitiva de red Docker, Gateway General y APIs especializadas
 
@@ -11030,10 +11117,10 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 
 ### Contradicciones detectadas
 
-- La documentacion canonica anterior mantenia `crejo` como red vigente y
-  `jobcron_network` como migracion futura. El agent activo corrige esa decision:
-  `jobcron_network` pasa a ser la red oficial vigente y `crejo` queda
-  OBSOLETO / RECHAZADO / NO USAR.
+- [HISTORICO - OBSOLETO POR EJECUCION POSTERIOR] La documentacion canonica
+  anterior mantenia `crejo` como red vigente y `jobcron_network` como migracion
+  futura. El agent activo corrigio esa decision: `jobcron_network` pasa a ser
+  la red oficial vigente y `crejo` queda OBSOLETO / RECHAZADO / NO USAR.
 - Habia overlays con runtime Search sobre base embebida de archivo. Se corrigio
   a PostgreSQL y se agregaron schemas `Search` y `RefaPart`.
 
