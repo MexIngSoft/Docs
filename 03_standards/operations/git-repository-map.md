@@ -103,6 +103,30 @@ Ejemplos:
 - Usar `git add` con rutas explicitas cuando haya cambios mezclados.
 - No usar `git add -A` desde `Workspace.Comercial` porque no es repo y porque podria mezclar responsabilidades si se ejecuta desde un repo padre futuro.
 
+## Identidad Git obligatoria
+
+Para los proyectos dentro de `Workspace.Comercial`, la identidad de commits debe
+corresponder al owner GitHub `1CASH1`.
+
+Configuracion vigente esperada:
+
+```bash
+git config --global user.name "1CASH1"
+git config --global user.email "7905831+1CASH1@users.noreply.github.com"
+git config --global credential.https://github.com.username "1CASH1"
+```
+
+Reglas:
+
+- No usar nombres de autor que no correspondan al owner GitHub activo.
+- No usar correos personales sin confirmar que esten verificados en la cuenta
+  GitHub correcta.
+- Si GitHub muestra otro usuario en commits nuevos, revisar primero
+  `git config --global user.name`, `git config --global user.email` y la
+  credencial HTTPS activa.
+- Los commits ya publicados con una identidad anterior no deben reescribirse
+  sin decision explicita del owner, porque eso cambia historiales compartidos.
+
 ## Publicacion por repositorio
 
 Para cada repo:
