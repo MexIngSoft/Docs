@@ -10291,12 +10291,70 @@ archivos activos quedaron vacios. Permanecen activos `006`, `009`, `012`,
 `013`, `014` y `015` porque conservan trabajo pendiente.
 
 ---
+## Correccion obligatoria 2026-06-18 - Retencion de archivos AGENTS
+
+### Regla Corregida
+
+Por instruccion directa del owner, ningun archivo `Docs/agents/AGENTS-*.md`
+debe eliminarse, moverse, renombrarse ni reemplazarse nunca.
+
+Cualquier instruccion futura que diga limpiar, quitar, retirar, cerrar,
+archivar, depurar o eliminar agents debe interpretarse exclusivamente como:
+
+1. Ejecutar o documentar el resultado real del agent.
+2. Vaciar el contenido del archivo `Docs/agents/AGENTS-XXX.md` si quedo
+   completado, no aplicable o sin instrucciones.
+3. Conservar el archivo original en `Docs/agents`.
+4. No limpiar archivos parciales, bloqueados o pendientes.
+
+Las referencias historicas previas a "archivar agents" quedan corregidas por
+esta regla. Desde esta entrada en adelante, el cierre de agents se registra como
+`cerrado y limpio`, no como archivo movido.
+
+### Agent Ejecutado
+
+- `AGENTS-005`: parcial. Se corrigio la contradiccion activa sobre mover agents
+  a `_archive`. El agent conserva otras tareas amplias pendientes y por eso no
+  se limpia.
+
+### Archivos Modificados
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-005.md`
+- `Docs/03_standards/operations/agents-documentation-order.md`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-002.md`
+- `Docs/agents/AGENTS-003.md`
+- `Docs/agents/AGENTS-004.md`
+- `Docs/agents/AGENTS-006.md`
+- `Docs/agents/AGENTS-009.md`
+- `Docs/agents/AGENTS-012.md`
+- `Docs/agents/AGENTS-013.md`
+- `Docs/agents/AGENTS-014.md`
+
+### Validaciones
+
+- `rg` de reglas activas de agents: se corrigieron las instrucciones que
+  ordenaban mover o archivar archivos originales.
+- Placeholders restaurados en `Docs/agents`: `AGENTS-000`, `001`, `002`, `003`,
+  `004`, `006`, `009`, `012`, `013`, `014` existen y estan vacios.
+
+### Pendientes
+
+- `AGENTS-005`, `AGENTS-007` y `AGENTS-015` permanecen activos por contener
+  trabajo pendiente/parcial.
+
 ## Ejecucion 2026-06-18 - Agents activos 000-004,006,007,009,012,013,014,015
 
 ### Resumen
 
 - Se ejecuto el orden numerico ascendente de agents activos detectados.
-- Se completaron y archivaron: `AGENTS-000`, `AGENTS-001`, `AGENTS-002`, `AGENTS-003`, `AGENTS-004`, `AGENTS-006`, `AGENTS-009`, `AGENTS-012`, `AGENTS-013`, `AGENTS-014`.
+- Se completaron y limpiaron: `AGENTS-000`, `AGENTS-001`, `AGENTS-002`, `AGENTS-003`, `AGENTS-004`, `AGENTS-006`, `AGENTS-009`, `AGENTS-012`, `AGENTS-013`, `AGENTS-014`.
 - Permanecen activos: `AGENTS-007` y `AGENTS-015`, porque la validacion Docker runtime proyecto por proyecto quedo bloqueada por infraestructura local: Docker Desktop no estaba disponible al final de la ejecucion.
 - No se revirtieron cambios existentes.
 - No se invento informacion oficial faltante; lo no definido queda como `PENDIENTE_DE_DEFINIR`.
@@ -10341,7 +10399,16 @@ archivos activos quedaron vacios. Permanecen activos `006`, `009`, `012`,
   - `Docs/03_standards/backend/search-implementation-standard.md`
   - `Docs/03_standards/operations/definition-of-done.md`
   - `Docs/agents/EXECUTION_REPORT.md`
-  - `Docs/agents/_archive/2026-06-18/*`
+  - `Docs/agents/AGENTS-000.md`
+  - `Docs/agents/AGENTS-001.md`
+  - `Docs/agents/AGENTS-002.md`
+  - `Docs/agents/AGENTS-003.md`
+  - `Docs/agents/AGENTS-004.md`
+  - `Docs/agents/AGENTS-006.md`
+  - `Docs/agents/AGENTS-009.md`
+  - `Docs/agents/AGENTS-012.md`
+  - `Docs/agents/AGENTS-013.md`
+  - `Docs/agents/AGENTS-014.md`
 - API:
   - `Docker.API.PY/API.PY.DJANGO.Auth/access/migrations/0017_seed_refapart_operational_permissions.py`
   - `Docker.API.PY/API.PY.DJANGO.Gateway/config/project_registry.yaml`
@@ -10438,9 +10505,9 @@ archivos activos quedaron vacios. Permanecen activos `006`, `009`, `012`,
 - Search Engine core reutilizable.
 - RefaPart como API de dominio que consume core APIs mediante Gateway.
 - Prospecting como modulo interno de JobCron, no producto separado.
-- Agents completados archivados sin borrar fuente.
+- Agents completados limpiados sin borrar, mover, renombrar ni reemplazar archivos fuente.
 
 ### Agents Archivados O Pendientes
 
-- Archivados en `Docs/agents/_archive/2026-06-18/`: `AGENTS-000`, `AGENTS-001`, `AGENTS-002`, `AGENTS-003`, `AGENTS-004`, `AGENTS-006`, `AGENTS-009`, `AGENTS-012`, `AGENTS-013`, `AGENTS-014`.
+- Cerrados y limpiados en `Docs/agents`: `AGENTS-000`, `AGENTS-001`, `AGENTS-002`, `AGENTS-003`, `AGENTS-004`, `AGENTS-006`, `AGENTS-009`, `AGENTS-012`, `AGENTS-013`, `AGENTS-014`.
 - Pendientes activos: `AGENTS-007`, `AGENTS-015`.

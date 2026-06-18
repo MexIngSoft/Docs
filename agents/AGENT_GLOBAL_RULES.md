@@ -117,7 +117,9 @@ Registrar:
 - decisiones;
 - informacion faltante;
 - pendientes reales;
-- limpieza o archivo aplicado.
+- limpieza aplicada. Los archivos `Docs/agents/AGENTS-*.md` nunca se eliminan,
+  nunca se mueven y nunca se reemplazan; limpiar/cerrar/quitar/archivar un
+  agent significa vaciar su contenido y conservar el archivo original.
 
 ## Cuando no se usan agents
 

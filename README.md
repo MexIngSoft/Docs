@@ -211,6 +211,11 @@ Proveedor actual:
 - No mezclar negocio con arquitectura tecnica.
 - No mezclar proveedor externo con modelo interno del ERP.
 - No borrar documentos fuente; mover a `_archive`.
+- Excepcion obligatoria: los archivos `Docs/agents/AGENTS-*.md` nunca se borran,
+  nunca se mueven y nunca se reemplazan por un archivo en `_archive`; cuando un
+  agent queda concluido, cualquier instruccion de limpiar, quitar, retirar,
+  cerrar o archivar significa vaciar su contenido y conservar el archivo
+  original en `Docs/agents`.
 - Usar `PENDIENTE_DE_DEFINIR` cuando falte informacion real.
 - Documentar tablas y campos publicados con nombres PascalCase estilo SQL Server.
 - Registrar decisiones en `02_projects/<proyecto>/decisions` si son del proyecto.
