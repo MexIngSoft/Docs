@@ -37,7 +37,7 @@
 | Core | `01_core_erp/architecture/00_general_architecture.md` | Arquitectura general | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/architecture/01_project_communication.md` | Comunicacion entre proyectos | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/architecture/02_api_gateway.md` | API Gateway | ACTIVE | P1 | Equipo documental |
-| Core | `01_core_erp/architecture/03_bff_strategy.md` | Estrategia BFF | ACTIVE | P1 | Equipo documental |
+| Core | `01_core_erp/architecture/03_bff_strategy.md` | Estrategia de adaptacion del Gateway General | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/architecture/04_security.md` | Seguridad | ACTIVE | P1 | Equipo documental |
 | Core | `01_core_erp/architecture/05_future_microservices_split.md` | Separacion futura de microservicios | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Core | `01_core_erp/architecture/06_general_system_diagram.md` | Diagrama general del sistema ERP | ACTIVE | P1 | Equipo documental |
@@ -249,7 +249,7 @@
 | Business | `02_projects/tecnotelec/decisions/adr_0003_supplier_catalog_strategy.md` | ADR 0003 - Estrategia Supplier y Catalog | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/tecnotelec/decisions/adr_0004_quote_to_order_flow.md` | ADR 0004 - Flujo Quote a Order | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/tecnotelec/decisions/adr_0005_rules_engine_strategy.md` | ADR 0005 - Estrategia Rules Engine | ACTIVE | P1 | Equipo documental |
-| Business | `02_projects/tecnotelec/decisions/adr_0006_project_api_boundary.md` | ADR 0006 - API propia del proyecto Tecno Telec | ACTIVE | P1 | Equipo documental |
+| Business | `02_projects/tecnotelec/decisions/adr_0006_project_api_boundary.md` | ADR 0006 - API especializada del proyecto Tecno Telec | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/tecnotelec/frontend/00_frontend_overview.md` | Frontend overview | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/tecnotelec/frontend/01_routes.md` | Rutas frontend | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/tecnotelec/frontend/02_layout.md` | Layout | ACTIVE | P1 | Equipo documental |
@@ -299,6 +299,7 @@
 | Business | `02_projects/tip-smart/README.md` | Tip Smart | FUTURE_OR_PENDING | P2 | Equipo documental |
 | Standards | `03_standards/database/sql-server-publication-standard.md` | Estandar de nombres SQL Server para tablas publicadas | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/documentation/README.md` | Estandares de documentacion | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/documentation/documentation-cleanup-standard.md` | Estandar de limpieza documental | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/documentation/frontmatter-spec.md` | Especificacion de front matter documental | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/documentation/naming-conventions.md` | Convenciones de nombres documentales | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/documentation/repository-structure.md` | Estandar de estructura del repositorio documental | ACTIVE | P1 | Equipo documental |

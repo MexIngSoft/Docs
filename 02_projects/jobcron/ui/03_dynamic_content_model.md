@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Preparar la maqueta para conectarse despues al gateway/BFF sin reescribir la navegacion ni la estructura de pantallas.
+Preparar la maqueta para conectarse despues al Gateway General sin reescribir la navegacion ni la estructura de pantallas.
 
 ## Fuente actual de datos
 
@@ -40,10 +40,10 @@ Cada pantalla debe poder recibir:
 
 ## API sugerida
 
-El frontend debe consumir solo el gateway/BFF del proyecto:
+El frontend debe consumir solo el Gateway General:
 
 ```text
-Frontend JobCron -> JobCron Gateway/BFF -> Core ERP APIs
+Frontend JobCron -> Gateway General -> Core ERP APIs
 ```
 
 Endpoints sugeridos:

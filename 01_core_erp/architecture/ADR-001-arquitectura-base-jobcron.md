@@ -39,7 +39,7 @@ Cliente
 
 - Docker por proyecto como infraestructura separada.
 - Gateway por proyecto.
-- BFF por proyecto.
+- Adaptador de frontend dedicado por proyecto.
 - Auth por proyecto.
 - Bases temporales embebidas para runtime.
 - APIs duplicadas.

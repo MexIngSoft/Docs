@@ -24,7 +24,7 @@ pero debe conservar separacion suficiente para operar como repositorio propio.
 
 ```text
 WEB.NJ.NEXT.TecnoTelec
-  -> tecnotelec-gateway-api
+  -> API.PY.DJANGO.Gateway
     -> tecnotelec-api
     -> auth-api
     -> catalog-api
@@ -36,8 +36,8 @@ WEB.NJ.NEXT.TecnoTelec
 Reglas:
 
 - El frontend no consume APIs core directamente.
-- El gateway adapta respuestas para la interfaz.
-- La API propia de Tecno Telec guarda reglas, tablas y procesos especificos del proyecto.
+- El Gateway General adapta respuestas para la interfaz.
+- La API especializada de Tecno Telec guarda reglas, tablas y procesos especificos del proyecto.
 - Las reglas reutilizables viven en APIs core.
 
 ## Estado antes de programar

@@ -18,7 +18,7 @@ Esta regla aplica a `Docker.DB.PG`, `Docker.API.PY`, `Docker.WEB.NJ` y
 | Carpeta | Responsabilidad |
 |---|---|
 | `Docker.DB.PG` | Bases de datos, schemas, volumenes, respaldos e inicializacion. |
-| `Docker.API.PY` | APIs Django, Gateways/BFF y corridas generales o individuales. |
+| `Docker.API.PY` | APIs Django, Auth, Gateway General y APIs compartidas/especializadas. |
 | `Docker.WEB.NJ` | Webs Next.js y corridas generales o individuales. |
 | `Docker.SW.Nginx` | Proxy, rutas internas, dominios locales y entrada general del sistema. |
 
@@ -192,10 +192,10 @@ Docs/03_standards/database/sql-server-publication-standard.md
 
 ## Red Docker oficial
 
-La red Docker oficial objetivo es:
+La red Docker vigente del workspace es:
 
 ```text
-jobcron_network
+crejo
 ```
 
 Debe ser compartida, estable y persistente para Webs, Gateways, APIs core, APIs
@@ -205,29 +205,29 @@ La red se declara como externa:
 
 ```yaml
 networks:
-  jobcron_network:
+  crejo:
     external: true
 ```
 
 Antes de levantar cualquier proyecto:
 
 ```powershell
-docker network create jobcron_network
+docker network create crejo
 ```
 
 Si ya existe, no debe recrearse ni eliminarse. La comunicacion interna debe usar
 nombres de servicio Docker y no `localhost` ni `127.0.0.1`.
 
-### Compatibilidad temporal
+### Migracion futura
 
-El entorno actual puede seguir usando la red local heredada `crejo` mientras se
-migra de forma coordinada. Durante esa transicion:
+`jobcron_network` es una migracion futura coordinada, no la red vigente. Durante
+esa transicion:
 
 - los compose existentes no deben cambiarse parcialmente;
 - Nginx, scripts, readmes y healthchecks deben migrarse en la misma fase;
 - no deben coexistir servicios duplicados por renombrar la red;
-- `jobcron_network` es el nombre objetivo para nuevos compose o refactors
-  Docker.
+- no se debe introducir `jobcron_network` en un documento o compose nuevo si el
+  resto del stack sigue declarando `crejo`.
 
 ## Servicios compartidos
 

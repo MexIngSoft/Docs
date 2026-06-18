@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Declarar que APIs y versiones consume el proyecto mediante su Gateway/BFF.
+Declarar que APIs y versiones consume el proyecto mediante el Gateway General.
 
 ## Matriz
 

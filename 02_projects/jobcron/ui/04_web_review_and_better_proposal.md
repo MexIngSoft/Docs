@@ -57,7 +57,7 @@ Resultado: build exitoso en `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron`.
 | Enfoque de producto | La web se entiende como consola ERP/SaaS operativa. Evita una pantalla de marketing y entra directo al trabajo administrativo. |
 | Navegacion | Existe un mapa amplio de modulos con grupos funcionales claros: Centro, Operacion ERP, Comercial, Backoffice, Control y Sistema. |
 | Implementacion admin | La maqueta tiene dashboard, sidebar persistente, header, metricas, tabla de jobs, tarjetas de modulos y rutas dinamicas para placeholders. |
-| Preparacion para API | El contenido mock esta centralizado en `lib/modules.ts`, lo cual facilita reemplazarlo despues por gateway/BFF. |
+| Preparacion para API | El contenido mock esta centralizado en `lib/modules.ts`, lo cual facilita reemplazarlo despues por Gateway General. |
 | Responsive | El CSS contempla desktop, tablet y mobile con tablas desplazables horizontalmente. |
 
 ## Riesgos o huecos
@@ -147,7 +147,7 @@ Mantener la base actual, porque ya compila y esta bien estructurada, pero clasif
 3. Dashboard admin mas centrado en jobs, colas, incidentes y dependencias.
 4. Pantalla `/procesos` con tabla especializada, filtros reales y detalle de ejecucion.
 5. Estados de carga, vacio y error antes de integrar API.
-6. Contratos BFF para dashboard, procesos, auditoria y navegacion por permisos.
+6. Contratos del Gateway General para dashboard, procesos, auditoria y navegacion por permisos.
 
 ## Veredicto
 

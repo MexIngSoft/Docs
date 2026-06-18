@@ -53,7 +53,7 @@ Docs/01_core_erp/erp/22_pricing_costing_future_map.md
 | `pricing-api` | Owner de precio final. | Calcular precio publico/especial, margen, impuesto y vigencia. | Descargar proveedor o mostrar pantallas. |
 | `cost-api` | Futuro motor de costos. | Calcular costo real/estimado, gastos asignados, financieros y marketplace. | Decidir precio comercial. |
 | `tecnotelec-api` | Configuracion propia del proyecto. | Definir politicas propias de Tecno Telec si no son reutilizables. | Calcular precios core. |
-| `tecnotelec-gateway-api` | BFF del frontend. | Pedir producto/precio a APIs internas y adaptar respuesta. | Guardar reglas de precio permanentes. |
+| `gateway-api` | Gateway General. | Pedir producto/precio a APIs internas y adaptar respuesta. | Guardar reglas de precio permanentes. |
 | `auth-api` | Identidad minima. | Identificar comprador publico/especial/admin. | Calcular descuentos. |
 | `rules-engine-api` | Fase posterior. | Evaluar reglas complejas. | Ser lista de precios. |
 | `logistics-api` | Costo de envio y entrega. | Cotizar envio, retorno o entrega cuando aplique. | Definir margen comercial. |
@@ -65,10 +65,10 @@ Docs/01_core_erp/erp/22_pricing_costing_future_map.md
 
 ```txt
 Frontend
-  -> tecnotelec-gateway-api
+  -> API.PY.DJANGO.Gateway
   -> catalog-api
   -> pricing-api
-  -> tecnotelec-gateway-api
+  -> API.PY.DJANGO.Gateway
   -> Frontend
 ```
 
@@ -95,7 +95,7 @@ El Gateway arma una respuesta de pantalla:
 
 ```txt
 Frontend
-  -> tecnotelec-gateway-api
+  -> API.PY.DJANGO.Gateway
   -> auth-api identifica comprador
   -> pricing-api calcula con price_list especial
   -> Frontend
@@ -117,7 +117,7 @@ Usar lista SPECIAL_BUYER o la lista asignada al cliente.
 
 ```txt
 Frontend cotizador
-  -> tecnotelec-gateway-api
+  -> API.PY.DJANGO.Gateway
   -> pricing-api /calculate
   -> quote-api o sales-api guarda snapshot
 ```

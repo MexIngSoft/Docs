@@ -23,6 +23,8 @@ Guardar reglas de trabajo, operacion, seguridad, pruebas y cierre de proyectos.
 - `global-governance.md`: gobierno global del ecosistema.
 - `documentation-first-workflow.md`: flujo para tareas sin agents, basado en indices y documentacion canonica.
 - `operations/standard-request-prompts.md`: prompts cortos estandar para pedir trabajo con agents, sin agents y modernizacion visual.
+- `documentation/documentation-cleanup-standard.md`: limpieza obligatoria de
+  contradicciones activas despues de cambios canonicos.
 
 ## Regla
 

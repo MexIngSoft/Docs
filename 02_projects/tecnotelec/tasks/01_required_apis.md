@@ -10,7 +10,7 @@
 | sales-api | SI | PARCIAL | Ordenes, pagos, ventas. | Ordenes, pagos, devoluciones. | ALTA |
 | logistics-api | NO | FALTA | Envios, costos, tracking. | Todos. | MEDIA |
 | rules-engine-api | NO | FALTA | Decisiones de negocio. | Todos. | ALTA |
-| tecnotelec-gateway-api | SI | DRAFT | Gateway/BFF web. | Conectar orquestacion real con Catalog, Pricing, TecnoTelec API y Quote/Sales. | ALTA |
+| gateway-api | SI | ACTIVO | Gateway General para webs. | Conectar orquestacion real con Catalog, Pricing, TecnoTelec API y Quote/Sales. | ALTA |
 | tecnotelec-api | SI | DRAFT | Procesos y tablas propias de Tecno Telec. | Conectar persistencia administrativa, permisos internos y contratos finales con Gateway. | ALTA |
 | projects-api | NO | FALTA | Cotizador consultivo. | Todos. | ALTA |
 | cart-api | NO | FALTA | Carrito web. | Todos. | MEDIA |

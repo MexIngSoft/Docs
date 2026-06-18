@@ -15,7 +15,9 @@ Definir como se crean, organizan, operan y escalan los proyectos web o mobile de
 
 ## Regla
 
-Todo frontend debe consumir una API intermedia del proyecto, normalmente gateway/BFF. Ningun frontend debe consumir directamente APIs core del ERP.
+Todo frontend debe consumir el Gateway General. Ningun frontend debe consumir
+directamente APIs core del ERP, APIs compartidas, APIs de proveedor ni bases de
+datos.
 
 Si el frontend requiere sesion, debe seguir:
 

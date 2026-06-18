@@ -332,7 +332,7 @@ El contrato real debe validarse contra `CustomTokenVerifyView` antes de consumir
 
 ## Relacion con Gateway
 
-`tecnotelec-gateway-api` debe usar Auth para:
+`API.PY.DJANGO.Gateway` debe usar Auth para:
 
 - Login.
 - Refresh.

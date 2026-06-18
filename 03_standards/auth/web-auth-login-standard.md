@@ -52,7 +52,7 @@ No debe encargarse de:
 - generar tokens manualmente;
 - consultar bases de datos o APIs core directamente.
 
-## Responsabilidad del Gateway/BFF
+## Responsabilidad del Gateway General
 
 Cada proyecto con login debe exponer endpoints de frontera:
 

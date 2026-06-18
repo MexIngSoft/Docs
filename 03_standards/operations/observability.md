@@ -78,7 +78,7 @@ Campos recomendados:
 ## Propagacion entre servicios
 
 - El primer punto de entrada crea `request_id` si el cliente no lo envia.
-- Gateway/BFF crea o conserva `correlation_id` y lo propaga a APIs internas.
+- Gateway General crea o conserva `correlation_id` y lo propaga a APIs internas.
 - Cada servicio registra ambos identificadores y los devuelve en errores
   normalizados cuando sea seguro.
 - Los reintentos conservan `correlation_id` y generan un `request_id` nuevo por

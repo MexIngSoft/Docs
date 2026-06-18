@@ -1,27 +1,21 @@
-# API Gateway
+# Gateway General
 
-## Nombre oficial generico
+## Nombre oficial
 
 ```text
-<project>-gateway-api
+API.PY.DJANGO.Gateway
 ```
 
 ## Objetivo
 
-Ser el punto unico de entrada para web, mobile o admin de un proyecto y actuar como API Gateway/BFF.
-
-Ejemplo Tecno Telec:
-
-```text
-tecnotelec-gateway-api
-```
+Ser el punto unico de entrada para webs, mobile o admin del ecosistema.
 
 ## Responsabilidades
 
 - Recibir solicitudes del frontend.
 - Validar autenticacion.
 - Orquestar llamadas a APIs internas.
-- Orquestar llamadas a la API propia del proyecto.
+- Orquestar llamadas a APIs especializadas de proyecto cuando existan.
 - Unificar respuestas.
 - Adaptar contratos internos a vistas web.
 - Centralizar manejo de errores para frontend.
@@ -49,7 +43,7 @@ tecnotelec-gateway-api
 - Rules Engine.
 - Projects.
 - Cart.
-- API propia del proyecto.
+- API especializada del proyecto, si aplica.
 
 ## Seguridad
 

@@ -15,7 +15,7 @@ DocuCore es el ecosistema documental del workspace comercial.
 
 DocuCore y `API.PY.DJANGO.Document` concentran capacidades reutilizables de
 OCR, clasificacion documental, segmentacion e indice. Proyectos como LexNova
-deben consumir estas capacidades por su propio Gateway/BFF y conservar en su
+deben consumir estas capacidades por el Gateway General y conservar en su
 dominio la relacion con casos, permisos, seguimiento y revision humana.
 
 Documento canonico:

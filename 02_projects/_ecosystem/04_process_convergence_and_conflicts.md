@@ -61,9 +61,9 @@ Antes de crear codigo, endpoint, tabla o integracion, debe responderse:
 | Pregunta | Respuesta esperada |
 |---|---|
 | Que empresa/proyecto lo necesita? | Nombre del proyecto y responsable. |
-| Es reusable por varias empresas? | Si: core ERP. No: API propia del proyecto. |
+| Es reusable por varias empresas? | Si: core ERP. No: API especializada del proyecto. |
 | Que modulo core toca? | Auth, Catalog, Supplier, Pricing, Inventory, Sales, etc. |
-| Que API de proyecto participa? | Ejemplo: `tecnotelec-api`, `tecnotelec-gateway-api`. |
+| Que API especializada participa? | Ejemplo: `tecnotelec-api`; el Gateway General enruta por `ApplicationCode`. |
 | Que datos comparte con otras empresas? | Cliente, catalogo, stock, precio, documentos, pagos, etc. |
 | Que datos deben aislarse? | Documentos sensibles, casos legales, permisos, datos fiscales. |
 | Que categorias puede mostrar? | Lista permitida y bloqueada. |
@@ -94,8 +94,8 @@ Debe definirse:
 
 Debe definirse:
 
-- Gateway/BFF del proyecto.
-- API propia del proyecto.
+- Gateway General.
+- API especializada del proyecto, si aplica.
 - Modulos core consumidos.
 - Roles y permisos.
 - Surtido publicado.
@@ -120,13 +120,13 @@ Debe definirse:
 - Que comparte con JobCron.
 - Que contradice con empresas existentes.
 - MVP y modulos requeridos.
-- Si necesita API propia o usa core.
+- Si necesita API especializada o usa core.
 
 ## Reglas de decision
 
 - Si el dato afecta a varios proyectos, va al core.
-- Si el dato existe solo por marca/canal, va a la API del proyecto.
-- Si solo cambia la forma de mostrar datos, va al Gateway/BFF.
+- Si el dato existe solo por marca/canal, va a la API especializada del proyecto.
+- Si solo cambia la forma de mostrar datos, lo adapta el Gateway General.
 - Si un producto puede dañar la percepcion de marca, se controla por `ChannelAssortment`.
 - Si un producto depende de compatibilidad, no se vende directo sin `ProductCompatibility`.
 - Si el proceso implica documentos legales, fiscales o licitaciones, debe existir aprobacion humana.

@@ -128,6 +128,7 @@
 - `03_standards/frontend/nextjs-runtime-recovery-standard.md`
 - `03_standards/frontend/undocumented-modernization-standard.md`
 - `03_standards/documentation/README.md`
+- `03_standards/documentation/documentation-cleanup-standard.md`
 - `03_standards/documentation/frontmatter-spec.md`
 - `03_standards/documentation/naming-conventions.md`
 - `03_standards/documentation/repository-structure.md`

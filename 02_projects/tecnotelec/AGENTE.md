@@ -36,19 +36,19 @@ El foco es vender soluciones tecnologicas, proyectos consultivos, cotizaciones, 
 | Orden de desarrollo | Realizado como base | `tasks/04_development_order.md` |
 | Alcance MVP | Realizado como base | `tasks/05_mvp_scope.md` |
 | Plan Pricing First | Realizado como base | `tasks/06_pricing_first_plan.md` |
-| ADR gateway | Aceptado | `decisions/adr_0001_api_gateway_name.md` |
+| ADR gateway | Reemplazado por Gateway General | `decisions/adr_0001_api_gateway_name.md` |
 | ADR ERP modular | Aceptado | `decisions/adr_0002_modular_erp_strategy.md` |
 | ADR catalogo proveedor | Aceptado | `decisions/adr_0003_supplier_catalog_strategy.md` |
 | ADR cotizacion a orden | Aceptado | `decisions/adr_0004_quote_to_order_flow.md` |
 | ADR rules engine | Aceptado | `decisions/adr_0005_rules_engine_strategy.md` |
-| ADR API propia Tecno Telec | Aceptado | `decisions/adr_0006_project_api_boundary.md` |
+| ADR API especializada Tecno Telec | Aceptado con actualizacion Gateway General | `decisions/adr_0006_project_api_boundary.md` |
 
 ## Pendiente principal
 
 | Pendiente | Prioridad | Documento base |
 | --- | --- | --- |
 | Confirmar alcance MVP | Alta | `tasks/00_pending_tasks.md` |
-| Conectar `tecnotelec-gateway-api` | Alta | `tasks/01_required_apis.md` |
+| Conectar Tecno Telec en `API.PY.DJANGO.Gateway` | Alta | `tasks/01_required_apis.md` |
 | Conectar `tecnotelec-api` | Alta | `tasks/01_required_apis.md` |
 | Crear o cerrar decision `quote-api` vs `sales-api` | Alta | `tasks/00_pending_tasks.md` |
 | Crear `rules-engine-api` | Alta | `tasks/01_required_apis.md` |
@@ -70,7 +70,7 @@ El foco es vender soluciones tecnologicas, proyectos consultivos, cotizaciones, 
 4. Completar `catalog-api`.
 5. Completar `pricing-api` empezando por listas `PUBLIC` y `SPECIAL_BUYER`.
 6. Conectar `tecnotelec-api` con persistencia y permisos internos.
-7. Conectar `tecnotelec-gateway-api` con `tecnotelec-api`.
+7. Conectar `API.PY.DJANGO.Gateway` con `tecnotelec-api`.
 8. Definir `quote-api` o integrar cotizacion inicial en `sales-api`.
 9. Crear `rules-engine-api` basico.
 10. Crear `WEB.NJ.NEXT.TecnoTelec` bajo el estandar frontend.
@@ -97,7 +97,7 @@ El foco es vender soluciones tecnologicas, proyectos consultivos, cotizaciones, 
 
 | API | Prioridad | Motivo |
 | --- | --- | --- |
-| `tecnotelec-gateway-api` | Alta | Existe como draft; falta conectar orquestacion real. |
+| `gateway-api` | Alta | Gateway General existente; falta conectar orquestacion real de Tecno Telec. |
 | `tecnotelec-api` | Alta | Existe como draft; falta conectar persistencia administrativa y contratos finales. |
 | `quote-api` | Alta | Cotizaciones y snapshots si se separa de Sales. |
 | `rules-engine-api` | Alta | Reglas configurables. |
@@ -144,7 +144,7 @@ Transversal MVP:
 ## Reglas de arquitectura
 
 - El frontend no debe consumir APIs core directamente.
-- El frontend debe pasar por `tecnotelec-gateway-api`.
+- El frontend debe pasar por `API.PY.DJANGO.Gateway`.
 - El frontend debe crearse como `WEB.NJ.NEXT.TecnoTelec`.
 - El Gateway orquesta precios, pero no calcula ni guarda reglas permanentes de precio.
 - La logica de precio vive en `pricing-api`.

@@ -31,7 +31,7 @@ Capacidades compartidas:
 - permisos;
 - observabilidad;
 - IA futura;
-- gateways/BFF;
+- Gateway General;
 - contratos API versionados.
 
 ## LexNova MVP
@@ -256,4 +256,3 @@ y no cambia el contrato de DocuCore o Fiscora.
 - `Docs/02_projects/fiscora/tasks/00_mvp_scope.md`
 - `Docs/02_projects/fiscora/tasks/01_pending_tasks.md`
 - `Docs/02_projects/_ecosystem/04_process_convergence_and_conflicts.md`
-

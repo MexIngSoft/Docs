@@ -12,11 +12,11 @@ Tecno Telec requiere vender soluciones y proyectos, no solo productos.
 
 Separar el ERP en modulos: Supplier, Catalog, Pricing, Inventory, Quote, Sales, Logistics, Projects, Rules Engine, Cart y POS.
 
-Tecno Telec debe usar una API intermedia y una API propia:
+Tecno Telec debe usar el Gateway General y una API especializada:
 
 ```text
 Web/Mobile Tecno Telec
-  -> tecnotelec-gateway-api
+  -> API.PY.DJANGO.Gateway
   -> tecnotelec-api
   -> APIs core ERP
 ```

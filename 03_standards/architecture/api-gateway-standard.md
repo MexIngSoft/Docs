@@ -1,4 +1,4 @@
-# Estandar API de proyecto y Gateway central
+# Estandar API especializada y Gateway General
 
 ## Objetivo
 
@@ -10,7 +10,7 @@ Cada proyecto con dominio propio debe tener frontera backend clara.
 ```text
 Frontend del proyecto
 -> API.PY.DJANGO.Gateway
--> API propia del proyecto
+-> API especializada del proyecto, si aplica
 -> APIs Core ERP / Shared Modules / Integraciones
 ```
 
@@ -27,14 +27,14 @@ Proyecto A -> Base de datos de Proyecto B
 | Capa | Responsabilidad |
 |---|---|
 | Frontend | UX, estado visual, validacion ligera, consumo del Gateway. |
-| Gateway central | Sesion, permisos de frontera, routing, normalizacion de errores y proxy seguro. |
-| API del proyecto | Reglas del dominio, persistencia propia, contratos publicables. |
+| Gateway General | Sesion, permisos de frontera, routing, normalizacion de errores y proxy seguro. |
+| API especializada | Reglas del dominio, persistencia propia, contratos publicables cuando apliquen. |
 | Core ERP | Capacidades reutilizables y datos compartidos controlados. |
 | Shared Module | Servicio especializado reusable, por ejemplo Document API o FeatureAvailability. |
 
-## Criterios para exigir API propia
+## Criterios para exigir API especializada
 
-Crear API propia si el proyecto tiene:
+Crear API especializada si el proyecto tiene:
 
 - datos propios;
 - permisos o roles propios;

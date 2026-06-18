@@ -1,22 +1,24 @@
-# ADR 0001 - Nombre del API Gateway
+# ADR 0001 - Nombre del Gateway General
 
 ## Estado
 
-Aceptado
+Reemplazado por estandar activo de Gateway General
 
 ## Contexto
 
 El frontend necesita un punto unico de entrada para consumir varias APIs internas.
+La decision historica nombraba un gateway exclusivo de Tecno Telec; el estandar
+vigente usa `API.PY.DJANGO.Gateway` para todos los frontends.
 
 ## Decision
 
 El gateway se documenta como:
 
 ```text
-tecnotelec-gateway-api
+API.PY.DJANGO.Gateway
 ```
 
-La API propia del proyecto se documenta como:
+La API especializada del proyecto se documenta como:
 
 ```text
 tecnotelec-api
@@ -24,7 +26,7 @@ tecnotelec-api
 
 ## Consecuencias
 
-- El frontend consume gateway.
-- Gateway actua como BFF.
-- Gateway puede consumir `tecnotelec-api` para procesos propios del proyecto.
+- El frontend consume Gateway General.
+- Gateway General adapta y enruta respuestas para la web.
+- Gateway General puede consumir `tecnotelec-api` para procesos propios del proyecto.
 - Las APIs internas mantienen contratos propios.

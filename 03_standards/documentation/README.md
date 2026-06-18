@@ -20,6 +20,7 @@ validation, and contribution.
 | `frontmatter-spec.md` | Required metadata for new documents. |
 | `naming-conventions.md` | File and folder naming rules. |
 | `repository-structure.md` | Canonical and platform-support folders. |
+| `documentation-cleanup-standard.md` | Cleanup rules after canonical decisions change. |
 
 ## Related Files
 

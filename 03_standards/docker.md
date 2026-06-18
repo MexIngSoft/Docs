@@ -29,12 +29,11 @@ Docs/03_standards/docker/jobcron-official-docker-architecture.md
 
 Ese documento define la separacion entre corridas `master`, corridas por
 proyecto, Dockerfiles base/especificos, variables `.env.master` y
-`.env.<proyecto>`, red compartida objetivo `jobcron_network`, reutilizacion de
-APIs compartidas y criterios para no duplicar contenedores.
+`.env.<proyecto>`, red compartida vigente `crejo`, reutilizacion de APIs
+compartidas y criterios para no duplicar contenedores.
 
-El entorno actual conserva compatibilidad con la red heredada `crejo` mientras
-la migracion a `jobcron_network` se haga de forma coordinada en compose,
-scripts, Nginx y documentacion operativa.
+`jobcron_network` queda como migracion futura coordinada. No debe mezclarse
+parcialmente con `crejo` en compose, scripts, Nginx ni documentacion operativa.
 
 El entorno local usa varios compose separados bajo el proyecto Docker `crejo`:
 
@@ -137,7 +136,7 @@ debe validar ni entregar solo el frontend. La validacion local debe cubrir toda
 la cadena documentada por el proyecto dentro del stack compartido:
 
 ```text
-DB -> Core APIs -> Project Domain API -> Gateway General -> Web
+DB -> Core APIs -> API especializada -> Gateway General -> Web
 ```
 
 Cada proyecto con esta forma debe tener un runbook propio en

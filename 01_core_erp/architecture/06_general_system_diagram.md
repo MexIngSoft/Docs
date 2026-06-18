@@ -7,7 +7,7 @@ Frontend / Canales
         |
 API.PY.DJANGO.Gateway
         |
-        +-- Project Domain API
+        +-- API especializada del proyecto
         |
         +-- Auth
         +-- Cart
@@ -73,6 +73,8 @@ Billing
 
 ## Regla
 
-Cada canal usa el Gateway central. Si el proyecto tiene procesos o tablas propias, tambien debe tener una API de dominio. Un Gateway propio solo se permite mediante ADR por aislamiento excepcional.
+Cada canal usa el Gateway General. Si el proyecto tiene procesos o tablas
+propias, tambien debe tener una API especializada. No se crean entradas
+dedicadas por proyecto como patron activo.
 
 El nucleo ERP debe conservar responsabilidades de dominio separadas.

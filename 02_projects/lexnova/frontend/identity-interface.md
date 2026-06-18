@@ -32,8 +32,9 @@ Uso:
 - La identidad debe reforzar seguridad, trazabilidad y evidencia.
 - No exponer terminos de arquitectura interna al cliente. La UI publica,
   dashboard, mensajes de error y textos comerciales no deben mencionar
-  `Gateway`, `BFF`, `Auth`, `API`, `endpoint`, `proxy`, puertos ni nombres de
-  repositorio. Esos conceptos se traducen a lenguaje de producto como sesion
+  nombres internos de arquitectura, `Auth`, `API`, `endpoint`, `proxy`, puertos
+  ni nombres de repositorio. Esos conceptos se traducen a lenguaje de producto
+  como sesion
   segura, servicio de acceso, cuenta, permisos, proceso interno o motor
   documental.
 

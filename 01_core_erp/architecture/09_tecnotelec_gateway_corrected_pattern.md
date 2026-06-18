@@ -1,22 +1,23 @@
-# Patron corregido TecnoTelec Gateway
+# Patron corregido TecnoTelec con Gateway General
 
 ## Regla canonica
 
 ```text
 Web Tecno Telec
-  -> TecnoTelec Gateway API
+  -> API.PY.DJANGO.Gateway
   -> Core APIs necesarias
   -> TecnoTelec API solo para configuracion propia
   -> JobCron administra todo
 ```
 
-La Web Tecno Telec no consume APIs internas directamente. El Gateway es BFF y punto unico de entrada para el frontend.
+La Web Tecno Telec no consume APIs internas directamente. El Gateway General es
+el punto unico de entrada para el frontend.
 
 ## Flujo de producto
 
 ```text
 Web
-  -> tecnotelec-gateway-api
+  -> API.PY.DJANGO.Gateway
     -> catalog-api
     -> pricing-api
     -> supplier-api
@@ -25,7 +26,7 @@ Web
     -> tecnotelec-api solo para configuracion propia
 ```
 
-## El Gateway debe hacer
+## El Gateway General debe hacer
 
 1. Recibir peticiones de la Web.
 2. Validar token si existe.
@@ -42,7 +43,7 @@ Web
 13. Manejar errores de Core APIs.
 14. Evitar que la Web conozca APIs internas.
 
-## El Gateway no debe hacer
+## El Gateway General no debe hacer
 
 1. Guardar catalogo completo.
 2. Guardar precios oficiales.

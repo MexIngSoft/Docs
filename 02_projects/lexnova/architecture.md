@@ -11,7 +11,7 @@ APIs core directamente.
 
 ## Audiencia y lenguaje
 
-`Gateway`, `BFF`, `Auth`, `API`, `proxy`, puertos y nombres de repositorio son
+`Gateway General`, `Auth`, `API`, `proxy`, puertos y nombres de repositorio son
 definiciones tecnicas para desarrollo, operacion y documentacion interna.
 
 No deben aparecer como lenguaje visible para cliente, usuario final, pantallas
@@ -20,7 +20,7 @@ de usuario deben traducirse a terminos de producto:
 
 | Termino tecnico interno | Lenguaje visible recomendado |
 |---|---|
-| Gateway/BFF | Servicio seguro de Lex Nova Tech |
+| Gateway General | Servicio seguro de Lex Nova Tech |
 | Auth | Cuenta, identidad o sesion |
 | API/endpoint/proxy | Servicio, conexion o proceso interno |
 | Gateway no disponible | No se pudo conectar con el servicio de acceso |
@@ -28,7 +28,7 @@ de usuario deben traducirse a terminos de producto:
 
 ## Regla principal
 
-LexNova debe usar gateway/BFF propio:
+LexNova debe usar el Gateway General:
 
 ```text
 WEB.NJ.NEXT.LexNova
@@ -59,7 +59,7 @@ WEB.NJ.NEXT.LexNova -> Core ERP APIs
 |---|---|
 | Web | `WEB.NJ.NEXT.LexNova` |
 | Gateway central | `API.PY.DJANGO.Gateway` |
-| Domain API | `API.PY.DJANGO.LexNova` |
+| API especializada | `API.PY.DJANGO.LexNova` |
 | Auth Core | `API.PY.DJANGO.Auth` |
 
 ## Responsabilidades del gateway

@@ -11,7 +11,7 @@ Tecno Telec es una plataforma empresarial de soluciones tecnologicas, telecomuni
 | Carpeta | Contenido |
 |---|---|
 | `auth` | Proceso documental de usuarios y roles del proyecto. |
-| `backend` | Contratos del Gateway/BFF para Web Tecno Telec. |
+| `backend` | Contratos del Gateway General para Web Tecno Telec. |
 | `business` | Identidad, objetivos, FODA, servicios y propuesta de valor. |
 | `cart` | Proceso futuro de carrito, pedido y compra. |
 | `catalog` | Procesos de catalogo publico y detalle de producto. |

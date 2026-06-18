@@ -4,7 +4,7 @@
 |---|---|---|
 | Identidad | Auth | Logica comercial o datos de proyecto. |
 | Entrada web | Gateway central | Persistencia y reglas permanentes de negocio. |
-| Producto | API propia del proyecto | Tablas internas de otros proyectos. |
+| Producto | API especializada del proyecto | Tablas internas de otros proyectos. |
 | Catalogo | Catalog | Stock, precio final o credenciales de proveedor. |
 | Existencias | Inventory | Catalogo externo bruto. |
 | Precios | Pricing | Compras o ventas. |

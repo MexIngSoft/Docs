@@ -1,8 +1,8 @@
-# ADR 0006 - API propia del proyecto Tecno Telec
+# ADR 0006 - API especializada del proyecto Tecno Telec
 
 ## Estado
 
-Aceptado
+Aceptado con actualizacion de Gateway General
 
 ## Contexto
 
@@ -14,17 +14,17 @@ Tecno Telec debe separar:
 
 ```text
 Web/Mobile Tecno Telec
-  -> tecnotelec-gateway-api
+  -> API.PY.DJANGO.Gateway
   -> tecnotelec-api
   -> APIs core ERP
 ```
 
 ## Responsabilidades
 
-`tecnotelec-gateway-api`:
+`API.PY.DJANGO.Gateway`:
 
 - Punto unico de entrada para web/mobile.
-- BFF para pantallas.
+- Adaptacion de respuestas para pantallas.
 - Orquestacion de llamadas.
 - Adaptacion de respuestas.
 
@@ -45,4 +45,3 @@ APIs core:
 - Tecno Telec puede crecer sin contaminar el nucleo ERP.
 - Las reglas reutilizables se promueven al core.
 - Las reglas especificas se mantienen en `tecnotelec-api`.
-

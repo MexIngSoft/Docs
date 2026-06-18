@@ -46,7 +46,7 @@ API.PY.DJANGO.Document
   -> PDF indexado opcional
 ```
 
-LexNova consume esta capacidad por su gateway:
+LexNova consume esta capacidad por el Gateway General:
 
 ```text
 WEB.NJ.NEXT.LexNova

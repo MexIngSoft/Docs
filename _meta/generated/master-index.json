@@ -136,8 +136,16 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "00_audit/reports/contradictions_repair_report.md",
+    "title": "Reporte de reparacion de contradicciones",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "01_core_erp/apis/00_api_index.md",
-    "title": "Indice de APIs",
+    "title": "Indice canonico de APIs",
     "domain": "core",
     "status": "unknown",
     "priority": "unknown",
@@ -280,6 +288,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "01_core_erp/apis/16_search_api.md",
+    "title": "Search API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "01_core_erp/apis/17_search_api.md",
     "title": "Search API",
     "domain": "core",
@@ -290,6 +306,22 @@
   {
     "path": "01_core_erp/apis/18_address_api.md",
     "title": "Address API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/api-responsibility-matrix.md",
+    "title": "Matriz API A Responsabilidad",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/api-status-matrix.md",
+    "title": "Matriz de estado de APIs",
     "domain": "core",
     "status": "unknown",
     "priority": "unknown",
@@ -313,7 +345,7 @@
   },
   {
     "path": "01_core_erp/architecture/02_api_gateway.md",
-    "title": "API Gateway",
+    "title": "Gateway General",
     "domain": "core",
     "status": "unknown",
     "priority": "unknown",
@@ -321,7 +353,7 @@
   },
   {
     "path": "01_core_erp/architecture/03_bff_strategy.md",
-    "title": "Estrategia BFF",
+    "title": "Estrategia de adaptacion del Gateway General",
     "domain": "core",
     "status": "unknown",
     "priority": "unknown",
@@ -369,7 +401,23 @@
   },
   {
     "path": "01_core_erp/architecture/09_tecnotelec_gateway_corrected_pattern.md",
-    "title": "Patron corregido TecnoTelec Gateway",
+    "title": "Patron corregido TecnoTelec con Gateway General",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/ADR-001-arquitectura-base-jobcron.md",
+    "title": "ADR-001 - Arquitectura base JobCron",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/docker-objective-matrix.md",
+    "title": "Matriz Docker Por Objetivo",
     "domain": "core",
     "status": "unknown",
     "priority": "unknown",
@@ -402,6 +450,14 @@
   {
     "path": "01_core_erp/architecture/events/event-payloads.md",
     "title": "Payloads de eventos",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/architecture/project-api-dependency-matrix.md",
+    "title": "Matriz Proyecto A APIs",
     "domain": "core",
     "status": "unknown",
     "priority": "unknown",
@@ -624,6 +680,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "01_core_erp/database/16_search_model.md",
+    "title": "Modelo De Datos Search",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "01_core_erp/database/17_sql_server_table_publication.md",
     "title": "Publicacion de nombres de tablas estilo SQL Server",
     "domain": "core",
@@ -784,6 +848,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "01_core_erp/erp/16_search_engine.md",
+    "title": "Search Engine Global",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "01_core_erp/erp/17_government_tender.md",
     "title": "Modelo de licitaciones publicas",
     "domain": "core",
@@ -874,6 +946,14 @@
   {
     "path": "01_core_erp/flows/02_customer_purchase_flow.md",
     "title": "Flujo de compra del cliente",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/flows/03_global_search_flow.md",
+    "title": "Flujo Global De Busqueda",
     "domain": "core",
     "status": "unknown",
     "priority": "unknown",
@@ -2097,7 +2177,7 @@
   },
   {
     "path": "02_projects/tecnotelec/decisions/adr_0001_api_gateway_name.md",
-    "title": "ADR 0001 - Nombre del API Gateway",
+    "title": "ADR 0001 - Nombre del Gateway General",
     "domain": "business",
     "status": "unknown",
     "priority": "unknown",
@@ -2137,7 +2217,7 @@
   },
   {
     "path": "02_projects/tecnotelec/decisions/adr_0006_project_api_boundary.md",
-    "title": "ADR 0006 - API propia del proyecto Tecno Telec",
+    "title": "ADR 0006 - API especializada del proyecto Tecno Telec",
     "domain": "business",
     "status": "unknown",
     "priority": "unknown",
@@ -2521,7 +2601,39 @@
   },
   {
     "path": "03_standards/architecture/api-gateway-standard.md",
-    "title": "Estandar API de proyecto y Gateway central",
+    "title": "Estandar API especializada y Gateway General",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/architecture/api-responsibility-map.md",
+    "title": "Mapa de responsabilidades API",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/architecture/feature-visibility-standard.md",
+    "title": "Estandar Feature Visibility",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/architecture/gateway-bff-standard.md",
+    "title": "Estandar Gateway central modular",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/architecture/source-of-truth.md",
+    "title": "Fuente de verdad arquitectonica",
     "domain": "standards",
     "status": "unknown",
     "priority": "unknown",
@@ -2544,8 +2656,24 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "03_standards/backend/search-implementation-standard.md",
+    "title": "Search Implementation Standard",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "03_standards/database/sql-server-publication-standard.md",
     "title": "Estandar de nombres SQL Server para tablas publicadas",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/docker/docker-compose-project-standard.md",
+    "title": "Estandar de compose del workspace",
     "domain": "standards",
     "status": "unknown",
     "priority": "unknown",
@@ -2568,12 +2696,28 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "03_standards/docker/project-docker-execution-documents.md",
+    "title": "Documentos de ejecucion Docker por proyecto",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "03_standards/docker.md",
     "title": "Docker local",
     "domain": "standards",
     "status": "unknown",
     "priority": "unknown",
     "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/documentation/documentation-cleanup-standard.md",
+    "title": "Documentation Cleanup Standard",
+    "domain": "standards",
+    "status": "active",
+    "priority": "p1",
+    "owner": "Equipo documental"
   },
   {
     "path": "03_standards/documentation/frontmatter-spec.md",
@@ -2778,6 +2922,14 @@
   {
     "path": "03_standards/operations/data-quality.md",
     "title": "Data Quality — Limpieza y normalización",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/definition-of-done.md",
+    "title": "Definition Of Done Del Ecosistema JobCron",
     "domain": "standards",
     "status": "unknown",
     "priority": "unknown",
@@ -3033,7 +3185,7 @@
   },
   {
     "path": "03_standards/testing/project-operational-validation.md",
-    "title": "Validacion operativa por proyecto",
+    "title": "Validacion operativa del workspace",
     "domain": "standards",
     "status": "unknown",
     "priority": "unknown",
@@ -3457,7 +3609,7 @@
   },
   {
     "path": "agents/AGENTS-006.md",
-    "title": "Regla global nueva",
+    "title": "PENDIENTE_DE_DEFINIR",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -3481,7 +3633,7 @@
   },
   {
     "path": "agents/AGENTS-009.md",
-    "title": "IMPLEMENTACIÓN COMPLETA REFAPART",
+    "title": "PENDIENTE_DE_DEFINIR",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -3505,7 +3657,7 @@
   },
   {
     "path": "agents/AGENTS-012.md",
-    "title": "Módulo ERP: Prospectos y Captación Manual",
+    "title": "PENDIENTE_DE_DEFINIR",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",

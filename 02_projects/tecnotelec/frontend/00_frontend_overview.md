@@ -22,9 +22,9 @@ La propuesta oficial queda documentada en `09_interface_proposal.md` y toma como
 
 ## Consume
 
-El frontend debe consumir solo `tecnotelec-gateway-api`.
+El frontend debe consumir solo `API.PY.DJANGO.Gateway`.
 
-`tecnotelec-gateway-api` puede consumir `tecnotelec-api` y las APIs core del ERP.
+`API.PY.DJANGO.Gateway` puede consumir `tecnotelec-api` y las APIs core del ERP.
 
 ## Proyecto recomendado
 

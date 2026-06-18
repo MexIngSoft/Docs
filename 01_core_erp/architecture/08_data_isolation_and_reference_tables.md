@@ -51,7 +51,7 @@ Cuando una API se mueva a base propia:
 | Inventory | `inventory-api` | API de disponibilidad/reserva. |
 | Sales | `sales-api` | API comercial y eventos. |
 | Projects | `projects-api` | API de proyecto/cotizador. |
-| Tecno Telec | `tecnotelec-api` | Gateway/BFF y contratos core. |
+| Tecno Telec | `tecnotelec-api` | Gateway General y contratos core. |
 
 ## Tablas referenciadas entre bases
 

@@ -172,7 +172,7 @@ Un frontend queda estandarizado cuando:
 - Tiene nombre canonico.
 - Tiene repositorio propio o puede separarse sin friccion.
 - Tiene `.env.local.example`.
-- Consume solo su gateway.
+- Consume solo el Gateway General.
 - Tiene rutas y layouts documentados.
 - Tiene README con arranque local.
 - Tiene reglas de UI, auth, permisos y errores documentadas.

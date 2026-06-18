@@ -556,7 +556,7 @@ Desktop:
 ## Recomendaciones futuras
 
 - Crear wireframes de baja fidelidad por ruta antes de programar.
-- Definir contratos JSON del `tecnotelec-gateway-api`.
+- Definir contratos JSON de Tecno Telec en `API.PY.DJANGO.Gateway`.
 - Validar 5 a 8 productos reales para probar catalogo, detalle y cotizador.
 - Preparar un set de imagenes reales o generadas para hero, categorias y servicios.
 - Convertir esta especificacion en tickets de componentes cuando inicie `WEB.NJ.NEXT.TecnoTelec`.

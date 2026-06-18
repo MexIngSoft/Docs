@@ -35,7 +35,7 @@ Hasta entonces:
 | `443` | Nginx local HTTPS futuro | Reservado; no publicado todavia. |
 | `5432` | PostgreSQL local | Solo `Docker.DB.PG`. |
 | `3000-3050` | Webs Next.js | Un puerto por frontend o diagnostico temporal. |
-| `8000-8050` | APIs Django/Gateway | Un puerto por API, Gateway o BFF. |
+| `8000-8050` | APIs Django/Gateway | Un puerto por API o Gateway General. |
 
 ## Puertos Web
 

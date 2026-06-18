@@ -97,16 +97,16 @@ SUPPLIER_DB_SCHEMA         -> DB_SCHEMA
 ## Red compartida
 
 Los contenedores agrupados deben participar en una red compartida del
-ecosistema. El nombre objetivo para nuevos compose y refactors Docker es:
+ecosistema. La red vigente del workspace es:
 
 ```txt
-jobcron_network
+crejo
 ```
 
-El entorno local heredado puede seguir usando `crejo` solo como compatibilidad
-temporal. No se deben crear redes aisladas por proyecto como regla general,
-porque APIs compartidas como Auth, Catalog, Supplier o Pricing deben poder ser
-reutilizadas por varias webs sin duplicar contenedores.
+`jobcron_network` queda reservada como migracion futura coordinada. No se deben
+crear redes aisladas por proyecto como regla general, porque APIs compartidas
+como Auth, Catalog, Supplier o Pricing deben poder ser reutilizadas por varias
+webs sin duplicar contenedores.
 
 ## `.env.local`
 

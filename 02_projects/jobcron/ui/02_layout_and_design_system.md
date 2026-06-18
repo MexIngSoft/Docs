@@ -13,7 +13,7 @@ No se plantea como landing page. La primera pantalla es el producto operativo.
 | Header superior | Marca, busqueda global, notificaciones, preferencias y ambiente. |
 | Sidebar | Mapa completo por grupos funcionales. |
 | Main content | Dashboard, tablas, metricas, formularios y placeholders dinamicos. |
-| Paneles de datos | Tablas y bloques operativos conectables a gateway/BFF. |
+| Paneles de datos | Tablas y bloques operativos conectables al Gateway General. |
 
 ## Dashboard
 

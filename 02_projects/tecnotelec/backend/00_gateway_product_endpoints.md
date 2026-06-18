@@ -2,7 +2,9 @@
 
 ## Regla
 
-La Web Tecno Telec consume solo `tecnotelec-gateway-api`. Estos endpoints son contratos publicos del Gateway; las APIs internas se consultan detras del Gateway.
+La Web Tecno Telec consume solo `API.PY.DJANGO.Gateway`. Estos endpoints son
+contratos publicos del Gateway General; las APIs internas se consultan detras
+del Gateway.
 
 ## Endpoints
 

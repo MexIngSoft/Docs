@@ -35,7 +35,7 @@ Gestiona y analiza casos legales.
 ## Documentos canonicos
 
 - `access-control.md`: identidad, roles, niveles, permisos y participacion por caso.
-- `architecture.md`: gateway/BFF obligatorio y limites entre web, Auth y APIs.
+- `architecture.md`: Gateway General obligatorio y limites entre web, Auth y APIs.
 - `auth-seed.md`: usuarios, perfiles, modulos y permisos iniciales en Auth.
 - `case-participants-access.md`: separacion User/Person/CaseParticipant,
   autorizaciones familiares, privacidad documental y auditoria de accesos.

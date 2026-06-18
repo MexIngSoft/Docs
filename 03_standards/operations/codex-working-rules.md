@@ -26,7 +26,7 @@ Las instrucciones amplias deben vivir en documentos especificos dentro de `Docs`
 | Cierre y estructura de APIs Django | `03_standards/operations/project-closure-standard.md` |
 | Separacion futura de APIs y bases | `01_core_erp/architecture/08_data_isolation_and_reference_tables.md` |
 | Tablas publicadas con nombres PascalCase estilo SQL Server | `03_standards/database/sql-server-publication-standard.md` |
-| Patron Gateway/API propia por proyecto | `01_core_erp/architecture/07_project_api_pattern.md` |
+| Patron Gateway General/API especializada | `01_core_erp/architecture/07_project_api_pattern.md` |
 | Plan operativo Tecno Telec | `02_projects/tecnotelec/AGENTE.md` |
 | Runbook operativo | `03_standards/operations/runbook.md` |
 

@@ -245,7 +245,7 @@ Copiar `.env.local.example` a `.env.local`.
 |---|---|
 | `NEXT_PUBLIC_APP_NAME` | Nombre visible. |
 | `NEXT_PUBLIC_HOST` | Host local. |
-| `NEXT_PUBLIC_GATEWAY_BASE_URL` | Gateway/BFF del proyecto. |
+| `NEXT_PUBLIC_GATEWAY_BASE_URL` | Gateway General. |
 | `NEXT_PUBLIC_ENVIRONMENT` | Ambiente local. |
 
 ## Desarrollo
@@ -260,7 +260,7 @@ npm run dev -- -p $webPort
 ## Pendientes
 
 - PENDIENTE_DE_DEFINIR: dominio visual.
-- PENDIENTE_DE_DEFINIR: Gateway/BFF real.
+- PENDIENTE_DE_DEFINIR: URL real del Gateway General.
 "@
 
         if (-not $SkipDockerCompose) {

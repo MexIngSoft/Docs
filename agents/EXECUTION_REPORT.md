@@ -10764,3 +10764,104 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 ### Limpieza de agent
 
 - `Docs/agents/AGENTS-000.md` se vacio y se conserva en su ruta original.
+
+---
+
+## Ejecucion 2026-06-18 - Reparacion de contradicciones activas Gateway/Docker
+
+### Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se repararon las contradicciones indicadas por el agent y residuos activos relacionados para que no vuelvan a guiar implementaciones con gateway dedicado por proyecto, BFF por proyecto o red Docker mixta. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables adicionales. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
+- `Docs/03_standards/docker/docker-compose-project-standard.md`
+- `Docs/03_standards/frontend/shared-docker-frontend-architecture.md`
+- `Docs/03_standards/frontend/README.md`
+- `Docs/03_standards/documentation/README.md`
+- `Docs/03_standards/architecture/api-gateway-standard.md`
+- `Docs/03_standards/gateway/central-gateway-standard.md`
+- `Docs/03_standards/auth/web-auth-login-standard.md`
+
+### Archivos modificados
+
+- `Docs/03_standards/documentation/documentation-cleanup-standard.md`
+- `Docs/03_standards/frontend/shared-docker-frontend-architecture.md`
+- `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
+- `Docs/03_standards/docker/grouped-containers-isolated-config.md`
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/frontend/README.md`
+- `Docs/03_standards/frontend/pre-development-checklist.md`
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+- `Docs/03_standards/auth/web-auth-login-standard.md`
+- `Docs/03_standards/architecture/api-gateway-standard.md`
+- `Docs/03_standards/architecture/api-responsibility-map.md`
+- `Docs/03_standards/operations/observability.md`
+- `Docs/03_standards/operations/local-port-registry.md`
+- `Docs/03_standards/operations/codex-working-rules.md`
+- `Docs/03_standards/operations/scripts/New-WorkspaceProject.ps1`
+- Documentos activos relacionados en `Docs/01_core_erp` y `Docs/02_projects`
+  donde quedaban referencias al patron anterior.
+- Indices: `Docs/README.md`, `Docs/_meta/navigation-map.md`,
+  `Docs/_meta/master-index.md`, `Docs/_meta/master-index.yaml`,
+  `Docs/_meta/generated/master-index.json`.
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Busqueda de frases obsoletas de gateway dedicado/BFF/API propia por proyecto en docs activos | OK: sin coincidencias activas. |
+| Busqueda de `crejo` y `jobcron_network` en estandares Docker/frontend | OK: ambas aparecen solo con relacion explicita: `crejo` vigente y `jobcron_network` migracion futura coordinada. |
+| `docker compose -p comercial_platform -f Docker.DB.PG\docker-compose.master.db.yml -f Docker.API.PY\docker-compose.master.api.yml -f Docker.WEB.NJ\docker-compose.master.web.yml -f Docker.SW.Nginx\docker-compose.master.nginx.yml config --quiet` | OK |
+| `python scripts/validate_frontmatter.py` | OK tecnico: 0 malformed, 0 incomplete; conserva warnings historicos por documentos sin front matter. |
+| `python scripts/build_master_index.py` | OK: regenero `_meta/generated/master-index.json`. |
+| `git -C Docs diff --check` | OK; solo warnings esperados de normalizacion LF/CRLF. |
+| Revision de `Docs/agents/AGENTS-*.md` | OK: todos los placeholders se conservaron y quedaron vacios. |
+
+### Faltantes reales
+
+- No queda faltante documental para los puntos del agent.
+- PENDIENTE_DE_DEFINIR: migracion futura coordinada de `crejo` a
+  `jobcron_network`, si el owner decide ejecutarla en otra fase.
+
+### Contradicciones detectadas
+
+- El agent identifico contradiccion entre Gateway General unico y documentos
+  activos que aun mencionaban gateway dedicado/BFF por proyecto.
+- El agent identifico contradiccion entre red vigente `crejo` y documentos que
+  trataban `jobcron_network` como objetivo parcial inmediato.
+- Prevalecio la documentacion canonica mas actual: Gateway General unico,
+  APIs especializadas solo cuando aplica, PostgreSQL oficial y `crejo` como red
+  vigente hasta migracion coordinada.
+
+### Decisiones documentadas
+
+- Se creo `Docs/03_standards/documentation/documentation-cleanup-standard.md`
+  para que cada cambio canonico incluya limpieza de documentos activos,
+  plantillas, scripts e indices.
+- Se retiro el lenguaje activo de gateway dedicado por proyecto en frontend,
+  Auth, observabilidad, Core ERP, LexNova, DocuCore, JobCron y Tecno Telec.
+- Se actualizo `New-WorkspaceProject.ps1` para que los proyectos nuevos
+  documenten Gateway General y no generen texto de gateway dedicado.
+- Se mantuvo `crejo` como red vigente y `jobcron_network` como migracion futura
+  coordinada, sin mezclar parcialmente.
+
+### Limpieza de agent
+
+- `Docs/agents/AGENTS-000.md` se vacia y se conserva en su ruta original.

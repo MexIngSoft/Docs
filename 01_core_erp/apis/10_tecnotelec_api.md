@@ -34,7 +34,8 @@ Puerto local Docker:
 
 ## Regla
 
-El frontend no debe consumir esta API directamente. El frontend debe pasar por `tecnotelec-gateway-api`.
+El frontend no debe consumir esta API directamente. El frontend debe pasar por
+`API.PY.DJANGO.Gateway`.
 
 ## Limites
 
