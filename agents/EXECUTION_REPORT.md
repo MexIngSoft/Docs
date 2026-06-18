@@ -11433,6 +11433,146 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 
 ---
 
+## Ejecucion 2026-06-18 - Optimizacion Codex y automatizacion documental
+
+### Agents ejecutados
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | El archivo contenia la instruccion rotulada como `AGENT-004-CODEX-DOCS-OPTIMIZER.md`. Se completo la capa de Context Packs, matriz API, reporte de contradicciones y automatizacion documental sin borrar archivos fuente. |
+| `AGENTS-001.md` | Completado | El archivo contenia la instruccion rotulada como `AGENTS-017.md`. Se agregaron `AGENTS.md`, estandares Codex, contract first, librerias compartidas, plantillas y script de validacion. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables adicionales. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/00_audit/codex-context-map.md`
+- `Docs/00_audit/document-ownership-map.md`
+- `Docs/01_core_erp/apis/reusable-api-contracts.md`
+- `Docs/03_standards/operations/codex-execution-standard.md`
+- `Docs/03_standards/operations/codex-anti-patterns.md`
+- `Docs/03_standards/README.md`
+- `Docs/01_core_erp/README.md`
+- `Docs/04_integrations/README.md`
+
+### Archivos creados
+
+- `Docs/AGENTS.md`
+- `Docs/.codex-context.yml`
+- `Docs/03_standards/operations/context-packs.md`
+- `Docs/00_audit/contradiction-resolution-report.md`
+- `Docs/01_core_erp/apis/api-decision-matrix.md`
+- `Docs/03_standards/codex/codex-minimal-reading-standard.md`
+- `Docs/03_standards/codex/codex-anti-vices-checklist.md`
+- `Docs/03_standards/architecture/reusable-api-decision-standard.md`
+- `Docs/03_standards/api/api-contract-first-standard.md`
+- `Docs/03_standards/architecture/shared-libraries-standard.md`
+- `Docs/templates/api-contract-template.md`
+- `Docs/templates/api-specialized-justification-template.md`
+- `Docs/templates/frontend-module-template.md`
+- `Docs/templates/etl-contract-template.md`
+- `Docs/scripts/validate-docs-rules.sh`
+
+### Archivos modificados
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/00_audit/codex-context-map.md`
+- `Docs/00_audit/document-ownership-map.md`
+- `Docs/01_core_erp/README.md`
+- `Docs/01_core_erp/apis/reusable-api-contracts.md`
+- `Docs/03_standards/README.md`
+- `Docs/03_standards/operations/codex-anti-patterns.md`
+- `Docs/04_integrations/README.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+
+### Documentos archivados
+
+- Ninguno. No se detecto documento activo que debiera moverse a `_archive` en
+  esta ejecucion.
+
+### Contradicciones encontradas
+
+- Los agents repetian tareas ya parcialmente cubiertas por ejecuciones
+  anteriores, pero pedian piezas nuevas concretas. Se ejecuto solo lo faltante.
+- La frase `Project API` se mantuvo solo como categoria conceptual y se
+  documento que no implica API obligatoria por proyecto.
+
+### Contradicciones reparadas
+
+- Se agrego `context-packs.md` como fuente canonica para lectura minima.
+- Se agrego `api-decision-matrix.md` para evitar APIs duplicadas.
+- Se agrego validacion documental automatizada para detectar frases prohibidas
+  como instruccion activa.
+
+### Contradicciones pendientes
+
+- PENDIENTE_DE_DEFINIR: completar documentos faltantes de proyectos e
+  integraciones solo cuando haya owner, MVP y contrato real.
+- PENDIENTE_DE_DEFINIR: endpoints reales de APIs reutilizables.
+
+### APIs reutilizables consolidadas
+
+- Auth
+- Gateway General
+- Catalog
+- Inventory
+- Pricing
+- Supplier
+- Procurement
+- Sales
+- Search
+- Document
+- Notification
+- FeatureVisibility
+- ETL
+- Fiscal
+- Address
+
+### Context Packs creados
+
+- CP-00 Preflight obligatorio
+- CP-01 Bug pequeno frontend
+- CP-02 Nueva pantalla frontend
+- CP-03 API reutilizable existente
+- CP-04 Nueva API
+- CP-05 Docker
+- CP-06 Integracion externa
+
+### Validaciones realizadas
+
+| Validacion | Resultado |
+|---|---|
+| Busqueda de frases prohibidas en docs activos | OK: las coincidencias restantes son reglas de prohibicion, marcas de obsoleto/rechazado/no usar o referencias historicas excluidas del alcance activo. |
+| Script `scripts/validate-docs-rules.sh` | No ejecutado por entorno: Bash/WSL no esta disponible y devolvio `execvpe(/bin/bash) failed: No such file or directory`. Se ejecuto la busqueda equivalente con `rg`. |
+| `python scripts/build_master_index.py` | OK: genero `_meta/generated/master-index.json` con 511 entradas. |
+| `python scripts/validate_frontmatter.py` | OK tecnico: 480 documentos sin front matter, 0 incomplete, 0 malformed. |
+| `git diff --check` | OK: solo advertencias esperadas LF/CRLF de Git en Windows. |
+| Verificacion de placeholders `AGENTS-*.md` | OK: `AGENTS-000.md` a `AGENTS-030.md` conservan el archivo y quedan en 0 bytes. |
+
+### Pendientes con PENDIENTE_DE_DEFINIR
+
+- Endpoints reales de APIs reutilizables.
+- Owners nominales por proyecto.
+- Contratos reales de proveedores externos.
+- Documentos `api-dependencies.md` de proyectos sin MVP cerrado.
+
+### Agents archivados o pendientes
+
+- No se archivo, movio ni elimino ningun archivo `AGENTS-*.md`.
+- `AGENTS-000.md` y `AGENTS-001.md` quedan cerrados vaciando su contenido y conservando los placeholders.
+- `AGENTS-002.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.
+
+---
+
 ## Ejecucion 2026-06-18 - Blindaje final contra APIs obligatorias por proyecto
 
 ### Agent ejecutado

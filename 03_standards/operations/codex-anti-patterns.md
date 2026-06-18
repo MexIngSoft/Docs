@@ -22,6 +22,12 @@ documentacion, APIs o infraestructura.
 | Implementar sin revisar contratos | Crea endpoints o datos falsos | Revisar APIs y estandares antes |
 | Crear endpoints sin registrar contrato | Rompe trazabilidad | Documentar contrato o usar `PENDIENTE_DE_DEFINIR` |
 | Leer todo el repo por defecto | Gasta contexto y aumenta errores | Usar Context Pack minimo |
+| Crear frontend sin revisar estandar UI | Duplica patrones visuales | Revisar `03_standards/frontend/` |
+| Usar mock si existe API real | Oculta integraciones rotas | Consumir Gateway General o documentar bloqueo |
+| Consumir proveedor externo desde frontend | Expone secretos y acopla UI a proveedor | Pasar por Gateway/API/integracion |
+| Cambiar arquitectura sin ADR | Pierde trazabilidad | Documentar decision antes del cambio |
+| Crear proyecto sin `api-dependencies.md` | Deja dependencias ambiguas | Crear documento o marcar `PENDIENTE_DE_DEFINIR` |
+| Crear proveedor externo sin `mappers.md` | Mezcla datos externos con ERP | Documentar mapper o `PENDIENTE_DE_DEFINIR` |
 
 ## Regla de bloqueo
 

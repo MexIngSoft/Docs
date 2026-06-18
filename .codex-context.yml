@@ -1,0 +1,53 @@
+version: 1
+
+default:
+  preflight:
+    - README.md
+    - 00_audit/codex-context-map.md
+    - 03_standards/operations/context-packs.md
+
+packs:
+  bug_frontend:
+    docs:
+      - 02_projects/{project}/frontend/
+      - 03_standards/frontend/
+      - 01_core_erp/apis/reusable-api-contracts.md
+
+  new_frontend_screen:
+    docs:
+      - 02_projects/{project}/frontend/
+      - 02_projects/{project}/business/
+      - 03_standards/frontend/
+      - 01_core_erp/apis/reusable-api-contracts.md
+
+  reusable_api:
+    docs:
+      - 01_core_erp/apis/
+      - 01_core_erp/database/
+      - 03_standards/backend/
+      - 03_standards/database/
+
+  new_api:
+    docs:
+      - 01_core_erp/apis/
+      - 01_core_erp/architecture/
+      - 01_core_erp/database/
+      - 03_standards/backend/
+      - 03_standards/database/
+
+  docker:
+    docs:
+      - 03_standards/docker/
+      - 03_standards/operations/
+
+  integration:
+    docs:
+      - 04_integrations/{provider}/
+      - 01_core_erp/apis/reusable-api-contracts.md
+      - 03_standards/security/
+      - 03_standards/operations/
+
+forbidden:
+  - _archive/
+  - deprecated/
+  - historical/

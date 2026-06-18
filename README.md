@@ -65,6 +65,29 @@ Docs/00_audit/reusable-api-map.md
 Docs/01_core_erp/apis/reusable-api-contracts.md
 Docs/03_standards/operations/codex-execution-standard.md
 Docs/03_standards/operations/codex-anti-patterns.md
+Docs/03_standards/operations/context-packs.md
+Docs/03_standards/codex/codex-minimal-reading-standard.md
+Docs/03_standards/codex/codex-anti-vices-checklist.md
+```
+
+## Optimizacion para Codex
+
+Documentos canonicos para reducir contexto y evitar decisiones repetidas:
+
+```text
+AGENTS.md
+.codex-context.yml
+Docs/03_standards/operations/context-packs.md
+Docs/03_standards/codex/codex-minimal-reading-standard.md
+Docs/03_standards/codex/codex-anti-vices-checklist.md
+Docs/03_standards/architecture/reusable-api-decision-standard.md
+Docs/03_standards/api/api-contract-first-standard.md
+Docs/03_standards/architecture/shared-libraries-standard.md
+Docs/01_core_erp/apis/api-decision-matrix.md
+Docs/templates/api-contract-template.md
+Docs/templates/api-specialized-justification-template.md
+Docs/templates/frontend-module-template.md
+Docs/templates/etl-contract-template.md
 ```
 
 Antes de ejecutar agents o iniciar una fase nueva, leer tambien:

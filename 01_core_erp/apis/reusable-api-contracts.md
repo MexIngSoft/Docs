@@ -11,6 +11,12 @@ Toda necesidad funcional debe mapearse primero a una API reutilizable. Una API
 especializada solo existe si la responsabilidad no encaja en una API compartida
 vigente.
 
+La matriz operativa para decidir API vive en:
+
+```text
+01_core_erp/apis/api-decision-matrix.md
+```
+
 ## APIs compartidas
 
 | API | Responsabilidad | Contrato esperado |
@@ -41,6 +47,10 @@ Se permite solo cuando hay:
 - formularios propios;
 - integraciones exclusivas;
 - estados internos que no deben reutilizarse globalmente.
+
+Nombre operativo aceptado: API especializada. El termino `Project API` solo se
+usa como categoria conceptual y nunca como obligacion de crear una API por
+proyecto.
 
 ## Gateway/BFF
 

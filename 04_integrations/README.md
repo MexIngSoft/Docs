@@ -14,6 +14,10 @@ Documentar proveedores externos, APIs externas y procesos ETL.
 
 Si el contenido depende de un proveedor externo, no pertenece al nucleo ERP. El nucleo define contratos internos; la integracion define como transformar datos externos hacia esos contratos.
 
+Cada integracion debe documentar mapper, sync, seguridad y errores cuando haya
+contrato real del proveedor. Si falta informacion, usar `PENDIENTE_DE_DEFINIR`;
+no inventar endpoints ni credenciales.
+
 ## Regla de publicacion
 
 Las integraciones descargan informacion. No deciden en que proyecto se muestra cada producto.

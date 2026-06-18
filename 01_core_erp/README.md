@@ -14,6 +14,18 @@ Esta carpeta contiene la documentacion reutilizable del ERP modular. No debe dep
 | `apis` | APIs internas y responsabilidades. |
 | `flows` | Flujos operativos reutilizables. |
 
+## APIs reutilizables
+
+Antes de crear o modificar una API, revisar:
+
+```text
+apis/00_api_index.md
+apis/reusable-api-contracts.md
+apis/api-decision-matrix.md
+```
+
+Si una API compartida cubre el caso, no se crea una API nueva.
+
 ## Documentos base incorporados
 
 | Fuente | Resultado canonico |

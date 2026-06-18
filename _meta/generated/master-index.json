@@ -144,6 +144,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "00_audit/contradiction-resolution-report.md",
+    "title": "Reporte de resolucion de contradicciones",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "00_audit/document-ownership-map.md",
     "title": "Mapa de propiedad documental",
     "domain": "audit",
@@ -330,6 +338,14 @@
   {
     "path": "01_core_erp/apis/18_address_api.md",
     "title": "Address API",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "01_core_erp/apis/api-decision-matrix.md",
+    "title": "Matriz de decision API",
     "domain": "core",
     "status": "unknown",
     "priority": "unknown",
@@ -2632,6 +2648,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "03_standards/api/api-contract-first-standard.md",
+    "title": "Estandar API contract first",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "03_standards/architecture/api-gateway-standard.md",
     "title": "Estandar API especializada y Gateway General",
     "domain": "standards",
@@ -2664,6 +2688,22 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "03_standards/architecture/reusable-api-decision-standard.md",
+    "title": "Estandar de decision de API reutilizable",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/architecture/shared-libraries-standard.md",
+    "title": "Estandar de librerias compartidas",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "03_standards/architecture/source-of-truth.md",
     "title": "Fuente de verdad arquitectonica",
     "domain": "standards",
@@ -2690,6 +2730,22 @@
   {
     "path": "03_standards/backend/search-implementation-standard.md",
     "title": "Search Implementation Standard",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/codex/codex-anti-vices-checklist.md",
+    "title": "Checklist anti-vicios Codex",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/codex/codex-minimal-reading-standard.md",
+    "title": "Estandar de lectura minima Codex",
     "domain": "standards",
     "status": "unknown",
     "priority": "unknown",
@@ -2962,6 +3018,14 @@
   {
     "path": "03_standards/operations/codex-working-rules.md",
     "title": "Reglas de trabajo para Codex",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/context-packs.md",
+    "title": "Context Packs oficiales para Codex",
     "domain": "standards",
     "status": "unknown",
     "priority": "unknown",
@@ -3872,6 +3936,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "AGENTS.md",
+    "title": "Instrucciones raiz para Codex",
+    "domain": "other",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "CHANGELOG.md",
     "title": "Changelog",
     "domain": "other",
@@ -3920,6 +3992,22 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "templates/api-contract-template.md",
+    "title": "Plantilla de contrato API",
+    "domain": "templates",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "templates/api-specialized-justification-template.md",
+    "title": "Plantilla de justificacion de API especializada",
+    "domain": "templates",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "templates/api-template.md",
     "title": "Titulo",
     "domain": "templates",
@@ -3944,6 +4032,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "templates/etl-contract-template.md",
+    "title": "Plantilla de contrato ETL",
+    "domain": "templates",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "templates/etl-template.md",
     "title": "ETL title",
     "domain": "integration",
@@ -3957,6 +4053,14 @@
     "domain": "templates",
     "status": "draft",
     "priority": "P2",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "templates/frontend-module-template.md",
+    "title": "Plantilla de modulo frontend",
+    "domain": "templates",
+    "status": "unknown",
+    "priority": "unknown",
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {

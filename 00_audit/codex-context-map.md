@@ -11,13 +11,21 @@ integracion externa.
 Codex no implementa hasta identificar primero el Context Pack minimo de la
 tarea.
 
+El catalogo canonico de Context Packs vive en:
+
+```text
+03_standards/operations/context-packs.md
+```
+
 ## Orden base de lectura
 
 1. `README.md`
-2. `_meta/active-work-index.md`
-3. `_meta/master-index.md`
-4. Documentos canonicos del dominio afectado.
-5. Estandares tecnicos aplicables.
+2. `03_standards/operations/context-packs.md`
+3. `00_audit/document-ownership-map.md`
+4. `_meta/active-work-index.md`
+5. `_meta/master-index.md`
+6. Documentos canonicos del dominio afectado.
+7. Estandares tecnicos aplicables.
 
 ## Context Pack minimo por tipo de tarea
 
@@ -29,6 +37,8 @@ tarea.
 | Docker | `README.md`, `03_standards/operations/git-repository-map.md`, `03_standards/docker.md`, `03_standards/docker/*`, compose y Dockerfiles reales del repo objetivo |
 | Proyecto especifico | `README.md`, `02_projects/<proyecto>/*`, `01_core_erp/apis/reusable-api-contracts.md`, estandares relacionados |
 | Agents | `README.md`, `agents/RUN_AGENTS_INSTRUCTIONS.md`, `agents/AGENT_GLOBAL_RULES.md`, `03_standards/operations/standard-request-prompts.md`, agent activo |
+
+Para detalle operativo usar `03_standards/operations/context-packs.md`.
 
 ## Documentos historicos o de baja prioridad
 
@@ -48,6 +58,9 @@ contradicciones:
 - No leer frontend si la tarea es puramente API o base de datos.
 - No leer Docker si no se modifican compose, Dockerfile, redes o variables.
 - No cargar archivos historicos como fuente vigente.
+- No implementar antes de seleccionar Context Pack.
+- No crear API nueva sin revisar `01_core_erp/apis/reusable-api-contracts.md`.
+- No crear Docker nuevo sin revisar el estandar Docker vigente.
 
 ## Validacion esperada
 

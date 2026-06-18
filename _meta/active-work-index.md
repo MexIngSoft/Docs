@@ -57,8 +57,12 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | `Docs/00_audit/codex-context-map.md` | Context Pack minimo por tipo de tarea para ahorrar contexto. |
 | `Docs/00_audit/reusable-api-map.md` | Mapa de necesidades funcionales contra APIs reutilizables. |
 | `Docs/01_core_erp/apis/reusable-api-contracts.md` | Contratos resumidos de APIs reutilizables. |
+| `Docs/01_core_erp/apis/api-decision-matrix.md` | Matriz para evitar APIs duplicadas. |
+| `Docs/03_standards/operations/context-packs.md` | Context Packs oficiales para Codex. |
 | `Docs/03_standards/operations/codex-execution-standard.md` | Flujo estandar para pedir y ejecutar tareas Codex. |
 | `Docs/03_standards/operations/codex-anti-patterns.md` | Vicios prohibidos para Codex. |
+| `Docs/03_standards/codex/codex-minimal-reading-standard.md` | Lectura minima obligatoria. |
+| `Docs/03_standards/codex/codex-anti-vices-checklist.md` | Checklist anti-vicios. |
 
 ## Ruta rapida por tipo de tarea
 
