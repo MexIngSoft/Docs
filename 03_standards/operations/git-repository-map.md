@@ -136,3 +136,70 @@ git config --global --add safe.directory C:/Users/cash1/source/repos/Workspace.C
 - Instalar o habilitar GitHub CLI (`gh`) si se quiere crear pull requests desde terminal.
 - PENDIENTE_DE_DEFINIR: confirmar si todos los repos tendran protecciones
   obligatorias de GitHub sobre `dev`, `pro` y `main`.
+
+## Ejecucion de unificacion de ramas 2026-06-18
+
+Tarea solicitada: unificar ramas para que cada repositorio conserve solo
+`dev`, `pro` y `main`.
+
+Documentacion leida antes de ejecutar:
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/master-index.yaml`
+- `Docs/_meta/navigation-map.md`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/03_standards/operations/git-environments-and-release-flow.md`
+- `Docs/03_standards/operations/github-branch-governance.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+
+Documentacion actualizada:
+
+- `Docs/03_standards/operations/git-environments-and-release-flow.md`
+- `Docs/03_standards/operations/github-branch-governance.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docs/03_standards/operations/codex-working-rules.md`
+
+Decision documentada:
+
+- Las unicas ramas persistentes permitidas son `dev`, `pro` y `main`.
+- Las ramas temporales no deben quedar publicadas ni vivas al cerrar tareas.
+- La comunicacion canonica queda: `dev -> pro -> main`.
+
+Resultado de ejecucion:
+
+| Resultado | Cantidad | Detalle |
+|---|---:|---|
+| Remotos normalizados | 28 | Quedaron con ramas remotas `dev`, `main`, `pro`. |
+| Repos locales sin remoto | 3 | `API.PY.DJANGO.LeadHunter`, `API.PY.DJANGO.Search`, `WEB.NJ.NEXT.LeadHunter`. |
+| Remotos inaccesibles | 3 | `API.PY.DJANGO.Address`, `API.PY.DJANGO.Gateway`, `API.PY.DJANGO.RefaPart`. |
+| Remotos con bloqueo pendiente | 1 | `WEB.NJ.NEXT.TecnoTelec` conserva `master` remoto porque GitHub reporta `master` como HEAD/default branch. |
+
+Validaciones ejecutadas:
+
+| Validacion | Resultado |
+|---|---|
+| `rg` sobre estandares operativos para referencias activas a ramas no permitidas | OK: no quedaron referencias activas en los documentos editados. |
+| `git -C Docs diff --check` | OK. |
+| Inventario de repos `.git` del workspace | OK: 34 repos detectados. |
+| `git status --short` por repo antes de unificar | OK: 34 repos limpios. |
+| Creacion/actualizacion local de `dev`, `pro`, `main` por repo | OK: 34 repos locales quedaron en `dev`, `main`, `pro`. |
+| Push de `dev`, `pro`, `main` a remotos accesibles | OK en 28 remotos accesibles; 2 usaron `--force-with-lease` por historial remoto no fast-forward (`WEB.NJ.NEXT.JobCron`, `Docs`). |
+| Eliminacion de ramas remotas no permitidas | OK salvo `WEB.NJ.NEXT.TecnoTelec/master`. |
+| `git status --short` final por repo | OK: 34 repos limpios. |
+
+Faltantes reales:
+
+- PENDIENTE_DE_DEFINIR: crear o corregir acceso remoto para
+  `API.PY.DJANGO.Address`, `API.PY.DJANGO.Gateway` y `API.PY.DJANGO.RefaPart`.
+- PENDIENTE_DE_DEFINIR: asignar `main`, `dev` o `pro` como default branch de
+  `WEB.NJ.NEXT.TecnoTelec` en GitHub y despues eliminar `master`.
+- PENDIENTE_DE_DEFINIR: asignar remotos si se publicaran
+  `API.PY.DJANGO.LeadHunter`, `API.PY.DJANGO.Search` y
+  `WEB.NJ.NEXT.LeadHunter`.
+
+Contradicciones detectadas y resueltas:
+
+- Los documentos operativos previos recomendaban ramas adicionales como parte
+  del flujo vivo. Se reemplazaron por el estandar unico `dev`, `pro`, `main`.
