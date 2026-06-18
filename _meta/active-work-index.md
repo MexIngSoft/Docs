@@ -46,7 +46,7 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | `Docs/03_standards/global-governance.md` | Gobierno del ecosistema y criterios para iniciar proyectos. |
 | `Docs/03_standards/frontend/ui-ux-standard.md` | Mobile first, mockups aprobados, UX por dominio y cierre UI. |
 | `Docs/03_standards/architecture/api-gateway-standard.md` | Regla Frontend -> Gateway -> API -> Core/Shared. |
-| `Docs/03_standards/auth/web-auth-login-standard.md` | Login web via Gateway/BFF y excepciones documentadas. |
+| `Docs/03_standards/auth/web-auth-login-standard.md` | Login web via Gateway General y excepciones documentadas. |
 | `Docs/03_standards/auth/auth-versioning-standard.md` | Versionado Auth y compatibilidad entre proyectos. |
 | `Docs/03_standards/gateway/central-gateway-standard.md` | Entrada unica versionada para frontends y registro de proyectos. |
 | `Docs/02_projects/_ecosystem/gateway-matrix.md` | Estado vigente y retiro de Gateways por proyecto. |

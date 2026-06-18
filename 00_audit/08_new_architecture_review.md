@@ -48,7 +48,7 @@ Web Tecno Telec
 
 ## Procesos repetidos
 
-No hay duplicidad grave. Existen varias referencias al mismo principio Gateway/BFF en arquitectura, frontend y decisiones. La version canonica corregida queda en `01_core_erp/architecture/09_tecnotelec_gateway_corrected_pattern.md`.
+No hay duplicidad grave. La version canonica corregida usa Gateway General y queda en `01_core_erp/architecture/09_tecnotelec_gateway_corrected_pattern.md`.
 
 ## Procesos contradictorios
 

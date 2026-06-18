@@ -192,42 +192,48 @@ Docs/03_standards/database/sql-server-publication-standard.md
 
 ## Red Docker oficial
 
-La red Docker vigente del workspace es:
+La red Docker oficial, vigente y obligatoria es:
 
 ```text
-crejo
+jobcron_network
 ```
 
-Debe ser compartida, estable y persistente para Webs, Gateways, APIs core, APIs
-de proyecto, bases de datos, Nginx y servicios auxiliares.
+Debe ser compartida, estable y persistente para:
+
+- Webs.
+- Gateway General.
+- APIs compartidas.
+- APIs especializadas.
+- Auth.
+- PostgreSQL.
+- Nginx.
+- Servicios auxiliares.
 
 La red se declara como externa:
 
 ```yaml
 networks:
-  crejo:
+  jobcron_network:
     external: true
 ```
 
 Antes de levantar cualquier proyecto:
 
 ```powershell
-docker network create crejo
+docker network create jobcron_network
 ```
 
 Si ya existe, no debe recrearse ni eliminarse. La comunicacion interna debe usar
-nombres de servicio Docker y no `localhost` ni `127.0.0.1`.
+nombres de servicio Docker.
 
-### Migracion futura
+Esta prohibido usar:
 
-`jobcron_network` es una migracion futura coordinada, no la red vigente. Durante
-esa transicion:
-
-- los compose existentes no deben cambiarse parcialmente;
-- Nginx, scripts, readmes y healthchecks deben migrarse en la misma fase;
-- no deben coexistir servicios duplicados por renombrar la red;
-- no se debe introducir `jobcron_network` en un documento o compose nuevo si el
-  resto del stack sigue declarando `crejo`.
+- `localhost` para comunicacion interna entre contenedores.
+- `127.0.0.1` para comunicacion interna entre contenedores.
+- `crejo` queda OBSOLETO / RECHAZADO / NO USAR.
+- redes por proyecto.
+- redes por frontend.
+- redes por API.
 
 ## Servicios compartidos
 

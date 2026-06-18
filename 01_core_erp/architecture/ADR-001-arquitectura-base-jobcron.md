@@ -37,10 +37,10 @@ Cliente
 
 ## Rechazado
 
-- Docker por proyecto como infraestructura separada.
-- Gateway por proyecto.
+- Infraestructura Docker dedicada por proyecto.
+- Entrada publica dedicada por proyecto.
 - Adaptador de frontend dedicado por proyecto.
-- Auth por proyecto.
+- Auth dedicado por proyecto.
 - Bases temporales embebidas para runtime.
 - APIs duplicadas.
 - Integraciones externas consumidas desde frontend.

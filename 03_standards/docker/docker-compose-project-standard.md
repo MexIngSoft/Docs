@@ -43,5 +43,18 @@ Si un proyecto revela un error transversal, se corrige el archivo comun,
 plantilla, script o variable compartida y se replica la correccion en los demas
 proyectos afectados.
 
-La red vigente es `crejo` por compatibilidad. `jobcron_network` permanece como
-migracion futura coordinada y no debe introducirse parcialmente.
+La red vigente, oficial y obligatoria es:
+
+```text
+jobcron_network
+```
+
+Todos los compose master, compose base y overlays deben usar
+`jobcron_network`.
+
+`crejo` queda OBSOLETO / RECHAZADO / NO USAR y no debe usarse en
+documentacion activa, compose nuevos, scripts nuevos ni refactors.
+
+Si un archivo Docker todavia usa `crejo`, debe corregirse a
+`jobcron_network` dentro de la misma fase. No se permite mantener doble red ni
+migracion parcial.

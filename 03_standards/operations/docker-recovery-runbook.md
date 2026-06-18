@@ -1,6 +1,7 @@
 # Runbook Docker local
 
-Este documento permite reconstruir el entorno Docker local `crejo` si se pierde configuracion o se cambia de equipo.
+Este documento permite reconstruir el entorno Docker local de Comercial Platform
+si se pierde configuracion o se cambia de equipo.
 
 La arquitectura Docker objetivo del ecosistema JobCron vive en:
 
@@ -8,18 +9,17 @@ La arquitectura Docker objetivo del ecosistema JobCron vive en:
 Docs/03_standards/docker/jobcron-official-docker-architecture.md
 ```
 
-Este runbook describe el estado operativo actual. La red heredada `crejo` se
-mantiene hasta migrar compose, scripts y Nginx de forma coordinada a
+Este runbook describe el estado operativo actual. La red oficial vigente es
 `jobcron_network`.
 
 ## Servicios
 
 | Carpeta | Servicio | Contenedor | Puerto host | Red |
 | --- | --- | --- | --- | --- |
-| `Docker.DB.PG` | PostgreSQL | `db-postgresql` | `127.0.0.1:5432` | `crejo` |
-| `Docker.API.PY` | APIs Django | `api-backend-python` | `8000-8050` reservado, `8000-8017` publicado hoy | `crejo` |
-| `Docker.WEB.NJ` | Next.js frontends | `web-frontend-node` | `3000-3050` reservado, `3000-3005` asignado hoy | `crejo` |
-| `Docker.SW.Nginx` | Proxy Nginx | `nginx` | `80` | `crejo` |
+| `Docker.DB.PG` | PostgreSQL | `db-postgresql` | `127.0.0.1:5432` | `jobcron_network` |
+| `Docker.API.PY` | APIs Django | `api-backend-python` | `8000-8050` reservado, `8000-8017` publicado hoy | `jobcron_network` |
+| `Docker.WEB.NJ` | Next.js frontends | `web-frontend-node` | `3000-3050` reservado, `3000-3005` asignado hoy | `jobcron_network` |
+| `Docker.SW.Nginx` | Proxy Nginx | `nginx` | `80` | `jobcron_network` |
 
 Registro canonico de puertos:
 
@@ -83,12 +83,12 @@ propio cuando exista.
 
 ## Red Docker
 
-En el estado actual, todos los compose heredados declaran:
+En el estado actual, todos los compose declaran:
 
 ```yaml
 networks:
   default:
-    name: crejo
+    name: jobcron_network
 ```
 
 Esto permite que Nginx resuelva:
@@ -98,7 +98,7 @@ web-frontend-node
 api-backend-python
 ```
 
-Para nuevos compose y refactors Docker, usar la red objetivo:
+Para nuevos compose y refactors Docker, usar la misma red oficial:
 
 ```yaml
 networks:
@@ -106,8 +106,7 @@ networks:
     external: true
 ```
 
-No migrar un compose aislado si Nginx, scripts y servicios dependientes siguen
-en `crejo`.
+No crear redes aisladas por proyecto, frontend o API.
 
 ## Variables de PostgreSQL
 
@@ -189,7 +188,7 @@ docker compose -f Docker.SW.Nginx\docker-compose.yml config
 Ver estado:
 
 ```powershell
-docker ps --filter "network=crejo"
+docker ps --filter "network=jobcron_network"
 ```
 
 Logs:
@@ -216,7 +215,7 @@ Despues levanta API, Web y Nginx en el orden recomendado.
 
 | Sintoma | Causa probable | Accion |
 | --- | --- | --- |
-| Nginx responde 502 | API o Web no estan arriba, o no estan en red `crejo`. | Revisa `docker ps --filter "network=crejo"` y logs de Nginx. |
+| Nginx responde 502 | API o Web no estan arriba, o no estan en red `jobcron_network`. | Revisa `docker ps --filter "network=jobcron_network"` y logs de Nginx. |
 | `host not found in upstream` | Cambio el nombre del contenedor destino. | Alinea `container_name` con `nginx.conf`. |
 | Frontend llama directo a `:8000` | `NEXT_PUBLIC_HOST` esta mal configurado. | Debe ser `http://localhost` cuando se usa Nginx. |
 | PostgreSQL pide variables | Falta `Docker.DB.PG/.env`. | Copia `.env.example` y cambia los secretos. |

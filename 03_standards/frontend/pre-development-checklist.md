@@ -10,7 +10,7 @@ Evitar iniciar una interfaz sin tener claros sus contratos, permisos, datos, rut
 |---|---|---|
 | Proyecto | Nombre canonico `WEB.NJ.NEXT.NombreProyecto`. | Definido |
 | Repositorio | Carpeta propia y repo Git propio o separable. | Definido |
-| Docker | Puerto, contenedor y red compartida vigente `crejo`; `jobcron_network` solo como migracion futura coordinada. | Definido |
+| Docker | Puerto, contenedor y red compartida vigente `jobcron_network`. | Definido |
 | Gateway | Gateway General. | Definido |
 | Project API | API especializada del proyecto si hay procesos/tablas especificas. | Definida |
 | Core APIs | APIs ERP reutilizables requeridas. | Inventariadas |

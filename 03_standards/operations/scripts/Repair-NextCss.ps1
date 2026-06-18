@@ -136,7 +136,7 @@ function Repair-DockerCss {
 
     if ($PSCmdlet.ShouldProcess("web-frontend-node:$ContainerPath/.next", "Stop container, remove Next cache and start container")) {
         docker stop web-frontend-node | Out-Null
-        docker run --rm --volumes-from web-frontend-node crejo-web-frontend-node sh -lc "find '$ContainerPath/.next' -mindepth 1 -maxdepth 1 -exec rm -rf {} +"
+        docker run --rm --volumes-from web-frontend-node comercial-platform-web-frontend-node sh -lc "find '$ContainerPath/.next' -mindepth 1 -maxdepth 1 -exec rm -rf {} +"
         docker start web-frontend-node | Out-Null
     }
 }

@@ -46,8 +46,8 @@ JobCron define la regla general de ejecucion Docker del ecosistema:
 La arquitectura debe soportar corrida completa por archivos `master` y corrida
 focalizada por proyecto web. Las APIs compartidas como Auth, Catalog, Supplier
 o Pricing no pertenecen a una web especifica y no deben duplicarse por proyecto.
-La red objetivo para nuevos compose es `jobcron_network`; la red local heredada
-`crejo` queda como compatibilidad hasta una migracion coordinada.
+La red oficial vigente para compose master, base y overlays es
+`jobcron_network`.
 
 ## Pendientes
 

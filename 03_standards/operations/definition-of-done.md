@@ -13,9 +13,9 @@ Un cambio solo puede considerarse terminado si cumple estos criterios.
 
 - No contradice `AGENTS-000`.
 - No contradice `ADR-001`.
-- No crea Gateway por proyecto.
-- No crea Docker por proyecto.
-- No crea Auth por proyecto.
+- No crea entrada publica dedicada por proyecto.
+- No crea infraestructura Docker dedicada por proyecto.
+- No crea Auth dedicado por proyecto.
 - No consume integraciones externas desde frontend.
 
 ## Backend
@@ -38,7 +38,7 @@ Un cambio solo puede considerarse terminado si cumple estos criterios.
 ## Docker
 
 - Usa Docker por objetivo.
-- Usa red compartida `crejo`.
+- Usa red compartida `jobcron_network`.
 - No crea infraestructura paralela.
 - `docker compose config` valida.
 
@@ -55,4 +55,6 @@ Debe ejecutarse al menos lo aplicable:
 
 ## Bloqueo
 
-No cerrar si hay contradicciones activas, documentacion pendiente, codigo sin validar, mocks falsos, Gateway por proyecto o Docker por proyecto.
+No cerrar si hay contradicciones activas, documentacion pendiente, codigo sin
+validar, mocks falsos, entrada publica dedicada por proyecto o infraestructura
+Docker dedicada por proyecto.

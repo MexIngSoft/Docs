@@ -2,7 +2,7 @@
 
 ## Regla Principal
 
-El ecosistema no usa un Docker por proyecto.
+El ecosistema no usa infraestructura Docker dedicada por proyecto.
 
 El ecosistema usa un Docker por objetivo.
 
@@ -26,7 +26,7 @@ Los compose enfocados solo seleccionan proyectos con `WEB_PROJECTS`.
 
 ## Red
 
-Todos los objetivos comparten la red Docker `crejo`.
+Todos los objetivos comparten la red Docker `jobcron_network`.
 
 ## Prohibido
 

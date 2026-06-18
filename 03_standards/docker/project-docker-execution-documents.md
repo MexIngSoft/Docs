@@ -1,4 +1,4 @@
-# Documentos de ejecucion Docker por proyecto
+# Documentos de seleccion Docker por aplicacion
 
 > Estado: base vigente.
 
@@ -75,7 +75,7 @@ Cada overlay auxiliar debe:
 - definir solo seleccion, variables o dependencias necesarias;
 - evitar duplicar servicios completos sin justificacion;
 - usar el Gateway General como entrada de frontend;
-- no crear Docker, Auth ni Gateway por proyecto.
+- no crear infraestructura Docker, Auth ni entrada publica dedicada por aplicacion.
 
 ## Faltantes reales
 

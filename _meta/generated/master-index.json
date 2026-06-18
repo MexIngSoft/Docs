@@ -2697,7 +2697,7 @@
   },
   {
     "path": "03_standards/docker/project-docker-execution-documents.md",
-    "title": "Documentos de ejecucion Docker por proyecto",
+    "title": "Documentos de seleccion Docker por aplicacion",
     "domain": "standards",
     "status": "unknown",
     "priority": "unknown",

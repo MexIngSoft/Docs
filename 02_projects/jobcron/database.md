@@ -3,8 +3,9 @@
 ## Regla
 
 Las tablas publicadas de JobCron usan nombres PascalCase estilo SQL Server y
-deben migrarse sobre PostgreSQL local mediante `Docker.DB.PG`. SQLite no es una
-base activa para desarrollo ni para validacion de migraciones, segun:
+deben migrarse sobre PostgreSQL local mediante `Docker.DB.PG`. Las bases
+embebidas de archivo no son runtime activo para desarrollo ni para validacion
+de migraciones, segun:
 
 ```text
 Docs/03_standards/database/sql-server-publication-standard.md

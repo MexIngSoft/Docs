@@ -10865,3 +10865,94 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 ### Limpieza de agent
 
 - `Docs/agents/AGENTS-000.md` se vacia y se conserva en su ruta original.
+
+---
+
+## Ejecucion 2026-06-18 - Correccion final de red Docker y Gateway General
+
+### Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se ejecuto la correccion final solicitada por el agent activo: `jobcron_network` queda como red Docker oficial vigente, `crejo` queda OBSOLETO / RECHAZADO / NO USAR, y no quedan instrucciones activas promoviendo gateway/BFF dedicado, Docker dedicado, Auth dedicado ni runtime SQLite. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables adicionales. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
+- `Docs/03_standards/docker/docker-compose-project-standard.md`
+- `Docs/03_standards/documentation/documentation-cleanup-standard.md`
+- `Docs/03_standards/frontend/shared-docker-frontend-architecture.md`
+- Compose y README activos de `Docker.DB.PG`, `Docker.API.PY`,
+  `Docker.WEB.NJ` y `Docker.SW.Nginx`.
+
+### Archivos modificados
+
+- `Docker.DB.PG/docker-compose.yml`
+- `Docker.DB.PG/README.md`
+- `Docker.DB.PG/docker/postgres/03_schemas.sql`
+- `Docker.API.PY/docker-compose.yml`
+- `Docker.API.PY/docker-compose.*.api.yml`
+- `Docker.API.PY/.env.example`
+- `Docker.API.PY/API.PY.DJANGO.Search/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart/config/settings.py`
+- `Docker.API.PY/README.docker.md`
+- `Docker.WEB.NJ/docker-compose*.yml`
+- `Docker.WEB.NJ/README.md`
+- `Docker.SW.Nginx/docker-compose.yml`
+- `Docker.SW.Nginx/README.md`
+- Documentacion activa relacionada en `Docs/00_audit`, `Docs/01_core_erp`,
+  `Docs/02_projects`, `Docs/03_standards` y `Docs/_meta`.
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `rg` de `gateway/BFF`, `Gateway/BFF`, `Gateways/BFF`, `Gateway por proyecto`, `BFF por proyecto`, `Docker por proyecto`, `Auth por proyecto`, `SQLite`, `db.sqlite3` excluyendo `_archive`, `agents/_archive`, `EXECUTION_REPORT.md` y el agent activo | OK: sin coincidencias activas. |
+| `rg` de `crejo` en Docker y Docs activos | OK: solo aparece como `OBSOLETO / RECHAZADO / NO USAR` en estandares o como termino de busqueda del cleanup. |
+| `rg` de `jobcron_network` | OK: aparece en compose, Docker docs y estandares como red oficial vigente. |
+| `docker compose -p comercial_platform -f Docker.DB.PG\docker-compose.master.db.yml -f Docker.API.PY\docker-compose.master.api.yml -f Docker.WEB.NJ\docker-compose.master.web.yml -f Docker.SW.Nginx\docker-compose.master.nginx.yml config --quiet` | OK |
+| `docker compose -p comercial_platform -f Docker.DB.PG\docker-compose.yml -f Docker.API.PY\docker-compose.yml -f Docker.WEB.NJ\docker-compose.yml -f Docker.SW.Nginx\docker-compose.yml config --quiet` | OK |
+| Config de overlays API/Web JobCron, RefaPart, TecnoTelec y LexNova | OK |
+| `python -m py_compile Docker.API.PY/API.PY.DJANGO.Search/config/settings.py Docker.API.PY/API.PY.DJANGO.RefaPart/config/settings.py` | OK |
+| `python scripts/build_master_index.py` | OK: regenero `_meta/generated/master-index.json`. |
+| `python scripts/validate_frontmatter.py` | OK tecnico: 0 malformed, 0 incomplete; conserva warnings historicos por documentos sin front matter. |
+| `git -C Docs diff --check` | OK; solo warnings esperados de normalizacion LF/CRLF. |
+| Revision de `Docs/agents/AGENTS-*.md` | OK: todos los placeholders se conservaron y quedaron vacios. |
+
+### Faltantes reales
+
+- No queda faltante documental para los puntos del agent.
+- PENDIENTE_DE_DEFINIR: si existen contenedores locales creados previamente con
+  la red obsoleta, deben recrearse manualmente en el entorno de quien los tenga
+  corriendo; no se eliminaron contenedores desde esta ejecucion.
+
+### Contradicciones detectadas
+
+- La documentacion canonica anterior mantenia `crejo` como red vigente y
+  `jobcron_network` como migracion futura. El agent activo corrige esa decision:
+  `jobcron_network` pasa a ser la red oficial vigente y `crejo` queda
+  OBSOLETO / RECHAZADO / NO USAR.
+- Habia overlays con runtime Search sobre base embebida de archivo. Se corrigio
+  a PostgreSQL y se agregaron schemas `Search` y `RefaPart`.
+
+### Decisiones documentadas
+
+- Red Docker oficial vigente: `jobcron_network`.
+- Proyecto Compose tecnico: `comercial_platform`.
+- Gateway General unico como punto de entrada.
+- `crejo` queda OBSOLETO / RECHAZADO / NO USAR.
+- Search y RefaPart usan PostgreSQL por defecto cuando no hay `DATABASE_URL`.
+
+### Limpieza de agent
+
+- `Docs/agents/AGENTS-000.md` se vacia y se conserva en su ruta original.

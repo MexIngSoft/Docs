@@ -44,23 +44,23 @@ Por costo inicial, varios frontends pueden correr como procesos separados dentro
 
 ## Red
 
-Todos los proyectos web deben usar la red Docker compartida vigente del
-ecosistema. En el estado actual esa red es:
+Todos los proyectos web deben usar la red Docker oficial del ecosistema:
 
 ```yaml
 networks:
-  crejo:
+  jobcron_network:
     external: true
 ```
 
 Esto permite que Nginx, Gateways y APIs compartidas resuelvan contenedores por
 nombre de servicio.
 
-`jobcron_network` queda como migracion futura coordinada. No debe introducirse
-parcialmente en nuevos compose, scripts, Nginx o healthchecks mientras el
-workspace operativo siga usando `crejo`.
-
 No se deben crear redes aisladas por frontend como regla general.
+No se permite usar `crejo` como red vigente; queda OBSOLETO / RECHAZADO /
+NO USAR.
+
+No existe adaptador de entrada publica dedicado por proyecto. Toda web debe
+consumir el Gateway General.
 
 ## Proxy reverso
 

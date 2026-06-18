@@ -320,7 +320,6 @@ __pycache__/
 *.py[cod]
 .env.local
 .env
-db.sqlite3
 .pytest_cache/
 "@
 

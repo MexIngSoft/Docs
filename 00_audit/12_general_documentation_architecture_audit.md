@@ -29,10 +29,10 @@ sin ejecutar reestructuras destructivas ni mover carpetas grandes.
 | Indices | Activo | Existen `master-index.md`, `master-index.yaml`, `navigation-map.md` y `_meta/generated/master-index.json`. |
 | Front matter | Parcial | Existe especificacion, pero la migracion masiva de documentos historicos queda pendiente. |
 | Estructura de proyectos | Parcial | La estructura canonica existe; no se fuerza migracion masiva a subcarpetas profundas para evitar romper referencias. |
-| Docker | Activo | Existe arquitectura oficial JobCron y compose por capas; la migracion completa de `crejo` a `jobcron_network` sigue pendiente. |
+| Docker | Activo | Existe arquitectura oficial JobCron y compose por capas; la migracion completa de `jobcron_network` a `jobcron_network` sigue pendiente. |
 | Observabilidad | Activo | `03_standards/operations/observability.md` define logs JSON, campos base, propagacion y seguridad. |
 | ETL | Activo | La plantilla ETL y el estandar de proveedores cubren fuente, destino, frecuencia, reintentos, checkpoint, rollback y observabilidad. |
-| Gateways | Activo | Existe patron Project Gateway/BFF; se refuerza Auth via Gateway en esta corrida. |
+| Gateways | Activo | El patron vigente usa Gateway General unico; se refuerza Auth via Gateway en esta corrida. |
 | Auth | Activo | Auth se documenta como infraestructura compartida; se agregan estandares de login/versionado. |
 | Web global | Parcial | Existen estandares Next.js y proyecto completo; falta homogeneizar todas las webs existentes. |
 | Seguridad | Activo parcial | Hay politicas base; MFA y rotacion avanzada siguen como pendientes. |
@@ -60,7 +60,7 @@ sin ejecutar reestructuras destructivas ni mover carpetas grandes.
 3. Aplicar gradualmente el estandar de observabilidad a cada API activa.
 4. Completar ERD y diccionarios por API activa.
 5. Completar mapa real publisher/subscriber de eventos.
-6. Planificar migracion coordinada de red `crejo` a `jobcron_network`, si se
+6. Planificar migracion coordinada de red `jobcron_network` a `jobcron_network`, si se
    decide ejecutarla.
 
 ## Resultado

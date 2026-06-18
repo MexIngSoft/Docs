@@ -29,13 +29,15 @@ Docs/03_standards/docker/jobcron-official-docker-architecture.md
 
 Ese documento define la separacion entre corridas `master`, corridas por
 proyecto, Dockerfiles base/especificos, variables `.env.master` y
-`.env.<proyecto>`, red compartida vigente `crejo`, reutilizacion de APIs
-compartidas y criterios para no duplicar contenedores.
+`.env.<proyecto>`, red compartida vigente `jobcron_network`, reutilizacion de
+APIs compartidas y criterios para no duplicar contenedores.
 
-`jobcron_network` queda como migracion futura coordinada. No debe mezclarse
-parcialmente con `crejo` en compose, scripts, Nginx ni documentacion operativa.
+La red Docker oficial, vigente y obligatoria es `jobcron_network`. La red
+`crejo` queda marcada como OBSOLETO / RECHAZADO / NO USAR y no debe usarse en
+documentacion activa, compose, scripts nuevos ni refactors.
 
-El entorno local usa varios compose separados bajo el proyecto Docker `crejo`:
+El entorno local usa varios compose separados bajo el proyecto Docker
+`comercial_platform` y la red externa compartida `jobcron_network`:
 
 - `Docker.DB.PG`: PostgreSQL local.
 - `Docker.API.PY`: APIs Django multiproyecto.

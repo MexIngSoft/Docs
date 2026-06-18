@@ -44,18 +44,22 @@ term list in the execution report for the current cleanup so this standard does
 not preserve deprecated phrases as active guidance. Example scopes:
 
 ```powershell
-rg -n "jobcron_network|crejo" Docs/03_standards/docker.md Docs/03_standards/docker Docs/03_standards/frontend
+rg -n "crejo|jobcron_network" Docs Docker.DB.PG Docker.API.PY Docker.WEB.NJ Docker.SW.Nginx
 ```
 
 The gateway cleanup search should return no active recommendation of deprecated
-per-project gateway patterns. The Docker network search may return both network
-names only when the
-relationship is explicit:
+per-project gateway patterns. The Docker network search must not return active
+instructions that use `crejo` as an accepted network.
+
+The only official Docker network is:
 
 ```text
-red vigente: crejo
-migracion futura coordinada: jobcron_network
+jobcron_network
 ```
+
+`crejo` may appear only as `OBSOLETO / RECHAZADO / NO USAR`, historical content
+in `Docs/_archive`, or in `Docs/agents/EXECUTION_REPORT.md` explaining that it
+was removed.
 
 ## Agent Cleanup
 

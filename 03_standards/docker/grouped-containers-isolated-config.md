@@ -100,13 +100,13 @@ Los contenedores agrupados deben participar en una red compartida del
 ecosistema. La red vigente del workspace es:
 
 ```txt
-crejo
+jobcron_network
 ```
 
-`jobcron_network` queda reservada como migracion futura coordinada. No se deben
-crear redes aisladas por proyecto como regla general, porque APIs compartidas
-como Auth, Catalog, Supplier o Pricing deben poder ser reutilizadas por varias
-webs sin duplicar contenedores.
+`jobcron_network` es la red oficial vigente. No se deben crear redes aisladas
+por proyecto como regla general, porque APIs compartidas como Auth, Catalog,
+Supplier o Pricing deben poder ser reutilizadas por varias webs sin duplicar
+contenedores.
 
 ## `.env.local`
 

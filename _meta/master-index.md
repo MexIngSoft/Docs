@@ -121,7 +121,7 @@
 | Business | `02_projects/_ecosystem/04_process_convergence_and_conflicts.md` | Procesos compartidos y contradicciones entre empresas | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/_ecosystem/05_lexnova_docucore_fiscora_mvp_alignment.md` | Alineacion MVP LexNova DocuCore Fiscora | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/_ecosystem/api-version-matrix.md` | Matriz de versiones API por proyecto | ACTIVE | P1 | Equipo documental |
-| Business | `02_projects/_templates/auth-migration-template.md` | Plantilla de migracion Auth por proyecto | ACTIVE | P2 | Equipo documental |
+| Business | `02_projects/_templates/auth-migration-template.md` | Plantilla de migracion Auth para aplicaciones | ACTIVE | P2 | Equipo documental |
 | Business | `02_projects/_templates/api-dependencies-template.md` | Plantilla de dependencias API por proyecto | ACTIVE | P2 | Equipo documental |
 | Business | `02_projects/buildora/README.md` | Buildora | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/clientix/README.md` | Clientix | FUTURE_OR_PENDING | P2 | Equipo documental |
@@ -306,7 +306,7 @@
 | Standards | `03_standards/docker.md` | Docker local | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/docker/grouped-containers-isolated-config.md` | Contenedores agrupados con configuracion aislada | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/docker/jobcron-official-docker-architecture.md` | Arquitectura Docker oficial JobCron | ACTIVE | P1 | Equipo documental |
-| Standards | `03_standards/docker/project-docker-execution-documents.md` | Documentos de ejecucion Docker por proyecto | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/docker/project-docker-execution-documents.md` | Documentos de seleccion Docker por aplicacion | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/documentation-maintenance-policy.md` | Politica de mantenimiento documental | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/documentation-pr-checklist.md` | Checklist PR documental | ARCHIVE_REFERENCE | P3 | Equipo documental |
 | Standards | `03_standards/frontend/02_placeholder_strategy.md` | Estrategia de placeholders frontend | ACTIVE | P1 | Equipo documental |
@@ -387,7 +387,7 @@
 | Standards | `03_standards/frontend/undocumented-modernization-standard.md` | Modernizacion visual cuando no hay documentacion especifica | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/documentation-first-workflow.md` | Flujo documentation-first para tareas sin agents | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/operations/standard-request-prompts.md` | Prompts estandar con agents, sin agents y modernizacion visual | ACTIVE | P1 | Equipo documental |
-| Standards | `03_standards/architecture/api-gateway-standard.md` | Estandar de API y Gateway por proyecto | ACTIVE | P1 | Equipo documental |
+| Standards | `03_standards/architecture/api-gateway-standard.md` | Estandar de API especializada y Gateway General | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/auth/web-auth-login-standard.md` | Estandar de login Auth para webs | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/auth/auth-versioning-standard.md` | Estandar de versionado Auth | ACTIVE | P1 | Equipo documental |
 | Standards | `03_standards/product/product-strategy.md` | Estrategia de producto y monetizacion | ACTIVE | P1 | Equipo documental |
