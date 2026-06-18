@@ -11572,6 +11572,155 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 
 ---
 
+## Ejecucion 2026-06-18 - Endurecimiento Codex y cierre documental REFAPART
+
+### Context Pack utilizado
+
+- `CP-00 - Preflight obligatorio`
+- Extension de tarea: `Agents`
+- `CP-07 - Proyecto completo` para REFAPART
+
+### Identificacion de alcance
+
+| Campo | Resultado |
+|---|---|
+| Tipo de tarea | Agents activos con estandares Codex/API y documentacion de proyecto |
+| Dominio afectado | `03_standards`, `01_core_erp/apis`, `templates`, `02_projects/refapart`, `agents` |
+| Proyecto afectado | REFAPART |
+| APIs afectadas | Ninguna API nueva; se revisaron Auth, Gateway General, Catalog, Inventory, Pricing, Supplier, Procurement, Sales, Search, Document, Notification, FeatureVisibility, ETL, Fiscal y Address como marco anti-duplicacion |
+
+### Agents ejecutados
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | No se crearon documentos duplicados; se endurecieron los estandares existentes de API Decision Record, presupuesto de cambio, diff documental y registros Gateway/UI/librerias. |
+| `AGENTS-001.md` | Parcial | Se completo la documentacion operativa faltante de REFAPART y se verifico existencia focalizada de Web/API. No se ejecuto implementacion runtime ni Docker por alcance documental y regla local de no levantar Docker por proyecto si no se modifico runtime. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/03_standards/documentation-first-workflow.md`
+- `Docs/00_audit/codex-context-map.md`
+- `Docs/03_standards/operations/context-packs.md`
+- `Docs/.codex-context.yml`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/03_standards/api/api-decision-record-standard.md`
+- `Docs/templates/api-decision-record-template.md`
+- `Docs/03_standards/codex/codex-change-budget-standard.md`
+- `Docs/03_standards/codex/codex-documentation-diff-standard.md`
+- `Docs/01_core_erp/apis/gateway-route-registry.md`
+- `Docs/01_core_erp/apis/endpoint-ui-consumption-matrix.md`
+- `Docs/03_standards/architecture/shared-library-registry.md`
+- `Docs/scripts/validate-docs-rules.sh`
+- `Docs/02_projects/refapart/README.md`
+- `Docs/02_projects/refapart/architecture.md`
+- `Docs/02_projects/refapart/api-contracts.md`
+- `Docs/02_projects/refapart/database.md`
+- `Docs/02_projects/refapart/frontend.md`
+- `Docs/02_projects/refapart/visual-identity.md`
+- `Docs/02_projects/refapart/local-runbook.md`
+- `Docs/02_projects/refapart/repositories.md`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart`
+
+### Archivos modificados
+
+- `Docs/01_core_erp/apis/gateway-route-registry.md`
+- `Docs/01_core_erp/apis/endpoint-ui-consumption-matrix.md`
+- `Docs/02_projects/refapart/README.md`
+- `Docs/02_projects/refapart/api-contracts.md`
+- `Docs/02_projects/refapart/database.md`
+- `Docs/02_projects/refapart/frontend.md`
+- `Docs/02_projects/refapart/local-runbook.md`
+- `Docs/02_projects/refapart/repositories.md`
+- `Docs/02_projects/refapart/admin/00_admin_overview.md`
+- `Docs/02_projects/refapart/admin/01_part_requests_panel.md`
+- `Docs/02_projects/refapart/admin/02_supplier_quotation_panel.md`
+- `Docs/02_projects/refapart/admin/03_supplier_management.md`
+- `Docs/02_projects/refapart/admin/04_orders_logistics_panel.md`
+- `Docs/02_projects/refapart/business/00_warranty_returns_policy.md`
+- `Docs/02_projects/refapart/business/01_supplier_authorization_policy.md`
+- `Docs/02_projects/refapart/business/02_payment_policy.md`
+- `Docs/02_projects/refapart/business/03_logistics_policy.md`
+- `Docs/02_projects/refapart/flows/00_customer_search_flow.md`
+- `Docs/02_projects/refapart/flows/01_unfulfilled_search_to_supplier_flow.md`
+- `Docs/02_projects/refapart/flows/02_quote_to_order_flow.md`
+- `Docs/02_projects/refapart/flows/03_order_to_logistics_flow.md`
+- `Docs/02_projects/refapart/security/00_permissions_matrix.md`
+- `Docs/02_projects/refapart/tasks/00_mvp_gap_report.md`
+- `Docs/02_projects/refapart/tasks/01_mvp_implementation_order.md`
+- `Docs/03_standards/api/api-decision-record-standard.md`
+- `Docs/03_standards/architecture/shared-library-registry.md`
+- `Docs/03_standards/codex/codex-change-budget-standard.md`
+- `Docs/03_standards/codex/codex-documentation-diff-standard.md`
+- `Docs/templates/api-decision-record-template.md`
+- `Docs/_meta/generated/master-index.json`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### APIs reutilizadas
+
+- No se creo ninguna API nueva.
+- REFAPART conserva flujo `Web -> Gateway General -> API.PY.DJANGO.RefaPart`.
+- Auth se mantiene para identidad y permisos.
+- Address se mantiene para catalogo geografico.
+- JobCron se mantiene como operacion interna, proveedores, logistica profunda y auditoria.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Verificacion focalizada de documentos REFAPART requeridos | OK: los documentos base existen; se crearon documentos faltantes de tasks/admin/flows/security/business. |
+| Verificacion focalizada de rutas tecnicas | OK: existen `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart`, `API.PY.DJANGO.Gateway`, `API.PY.DJANGO.RefaPart`, `API.PY.DJANGO.Refapart`, `API.PY.DJANGO.Auth` y `API.PY.DJANGO.Address`. |
+| Verificacion focalizada de Web REFAPART | OK: existen rutas cliente `mis-solicitudes`, `mis-cotizaciones`, `mis-pedidos`, `checkout`, `carrito` y rutas admin principales. |
+| Verificacion focalizada de API REFAPART | OK: existen modelos y endpoints principales para productos, busqueda, solicitudes, checkout, proveedores, cotizaciones, pedidos, logistica, auditoria y dashboard. |
+| `python scripts/build_master_index.py` | OK: genero `_meta/generated/master-index.json` con 540 entradas. |
+| `python scripts/validate_frontmatter.py` | OK tecnico: 506 documentos sin front matter historico, 0 incomplete, 0 malformed. |
+| `sh Docs/scripts/validate-docs-rules.sh` | No ejecutado por entorno: `sh` no esta disponible en PowerShell. |
+| Busqueda de frases prohibidas con PowerShell + `rg` | OK: no quedan instrucciones activas prohibidas. |
+| `git diff --check` | OK: solo advertencias esperadas LF/CRLF de Git en Windows. |
+| Verificacion de placeholders `AGENTS-*.md` | OK: `AGENTS-000.md` a `AGENTS-030.md` conservan archivo y quedan en 0 bytes. |
+
+### Contradicciones detectadas
+
+- `AGENTS-000.md` indica que los archivos de API Decision Record no existian; en esta ejecucion ya existian por commit previo. Se aplicaron solo endurecimientos faltantes.
+- `AGENTS-001.md` pide validar Docker focalizado, pero `local-runbook.md` ahora registra que si solo se modifica documentacion y no runtime, no se debe levantar Docker por proyecto. Prevalece esa regla para esta ejecucion documental.
+- `repositories.md` tenia `API.PY.DJANGO.Refapart` como pendiente, pero el workspace contiene `API.PY.DJANGO.RefaPart` y `API.PY.DJANGO.Refapart`. Se documento la convergencia de naming como pendiente antes de publicar.
+
+### Decisiones tomadas
+
+- REFAPART no se marco como 100% terminado porque no se ejecutaron pruebas runtime ni Docker.
+- Los documentos nuevos registran operacion y criterios de cierre sin afirmar datos productivos no probados.
+- Las rutas y modelos detectados por codigo se marcaron como `EXISTE_EN_CODIGO`, no como validacion productiva.
+
+### Pendientes reales
+
+- PENDIENTE_DE_DEFINIR: validacion runtime completa de Web/Gateway/Auth/Address/API REFAPART.
+- PENDIENTE_DE_DEFINIR: pasarela productiva de pagos.
+- PENDIENTE_DE_DEFINIR: proveedor logistico, SLA y cobertura.
+- PENDIENTE_DE_DEFINIR: contrato formal de proveedor.
+- PENDIENTE_DE_DEFINIR: remoto final de `API.PY.DJANGO.RefaPart`.
+- PENDIENTE_DE_DEFINIR: ejecutar `scripts/validate-docs-rules.sh` en entorno con `sh` disponible o por CI.
+
+### Riesgos detectados
+
+- Naming duplicado `RefaPart`/`Refapart` puede causar publicacion o compose ambiguo.
+- La existencia de codigo no garantiza que endpoints funcionen hasta ejecutar pruebas runtime.
+- El uso de `db.sqlite3` existe en la API REFAPART local; debe verificarse contra el estandar PostgreSQL antes de cierre productivo.
+
+### Agents archivados o pendientes
+
+- No se archivo, movio ni elimino ningun archivo `AGENTS-*.md`.
+- `AGENTS-000.md` y `AGENTS-001.md` quedan cerrados vaciando su contenido y conservando placeholders.
+- `AGENTS-002.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.
+
+---
+
 ## Ejecucion 2026-06-18 - Blindaje final contra APIs obligatorias por proyecto
 
 ### Agent ejecutado

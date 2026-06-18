@@ -14,6 +14,12 @@ como funcional completa.
 Toda pantalla funcional debe enlazar ruta Gateway registrada. Si no existe ruta
 Gateway, la pantalla no puede marcarse como funcional completa.
 
+Si una pantalla usa mock, debe decir explicitamente:
+
+```text
+MOCK_TEMPORAL: motivo y API pendiente.
+```
+
 ## Matriz
 
 | Proyecto | Modulo UI | Pantalla o ruta | Ruta Gateway | API reutilizable | Estado UI | Estado contrato |

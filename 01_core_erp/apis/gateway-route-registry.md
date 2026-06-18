@@ -12,6 +12,9 @@ el contrato API canonico correspondiente antes de implementarse.
 
 Toda ruta Gateway nueva debe enlazar contrato API o API Decision Record.
 
+No se permite registrar ruta Gateway hacia una API nueva si no existe API
+Decision Record aprobado.
+
 ## Registro
 
 | Frontend | Ruta Gateway | API destino | Permiso requerido | Request | Response | Estado |

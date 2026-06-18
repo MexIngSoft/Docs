@@ -63,6 +63,10 @@ npm run build
 docker compose config --quiet
 ```
 
+Para ejecuciones con agents, si solo se modifica documentacion y no compose,
+Dockerfile ni runtime REFAPART, no se debe levantar Docker por proyecto. Se
+debe registrar el motivo y validar la documentacion afectada.
+
 Validacion 2026-06-13:
 
 - `npm run build` paso en `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart`.

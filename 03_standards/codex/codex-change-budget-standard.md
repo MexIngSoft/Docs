@@ -27,7 +27,9 @@ Maximo:
 - 3 archivos leidos;
 - 2 archivos modificados;
 - sin cambios de arquitectura;
-- sin nuevas APIs.
+- sin nuevas APIs;
+- sin nuevos Docker;
+- sin nuevos estandares.
 
 ### Cambio mediano
 
@@ -36,7 +38,8 @@ Maximo:
 - 8 archivos leidos;
 - 5 archivos modificados;
 - sin crear infraestructura nueva;
-- sin cambiar ADRs salvo que sea requerido.
+- sin cambiar ADRs salvo que sea requerido;
+- sin crear APIs nuevas salvo que exista API Decision Record.
 
 ### Cambio grande
 
@@ -54,7 +57,8 @@ Si la tarea requiere mas archivos de los previstos:
 
 - detener;
 - registrar motivo;
-- ampliar presupuesto solo si el agent o la instruccion vigente lo permite.
+- ampliar presupuesto solo si el agent o la instruccion vigente lo permite;
+- no modificar archivos no relacionados.
 
 ## Prohibido
 

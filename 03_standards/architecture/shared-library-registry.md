@@ -12,7 +12,7 @@ Si falta evidencia real, se registra como `PENDIENTE_DE_DEFINIR`.
 
 Toda libreria compartida nueva debe registrar contrato estable, consumidores
 reales, logica que reemplaza y motivo para no dejar logica duplicada en
-proyectos.
+proyectos, ademas de la fecha o agent que la propuso.
 
 ## Registro
 

@@ -69,6 +69,15 @@ completa de proveedores al cliente.
 - `visual-identity.md`
 - `local-runbook.md`
 - `repositories.md`
+- `tasks/00_mvp_gap_report.md`
+- `tasks/01_mvp_implementation_order.md`
+- `admin/00_admin_overview.md`
+- `flows/00_customer_search_flow.md`
+- `security/00_permissions_matrix.md`
+- `business/00_warranty_returns_policy.md`
+- `business/01_supplier_authorization_policy.md`
+- `business/02_payment_policy.md`
+- `business/03_logistics_policy.md`
 
 ## Dependencias
 
@@ -92,3 +101,6 @@ completa de proveedores al cliente.
 - Definir pasarela de pago real.
 - Definir politica de garantia, devoluciones y proveedores autorizados.
 - Confirmar dominios finales.
+- Completar panel admin operativo: solicitudes, proveedores, cotizaciones,
+  pedidos, logistica, demanda y dashboard.
+- Conectar eventos productivos con JobCron.

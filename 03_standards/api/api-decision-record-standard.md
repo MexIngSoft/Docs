@@ -30,23 +30,26 @@ Antes de crear una API nueva responder:
 1. Que responsabilidad exacta tendra?
 2. Que API compartida se reviso primero?
 3. Por que Auth no cubre esto?
-4. Por que Catalog no cubre esto?
-5. Por que Inventory no cubre esto?
-6. Por que Pricing no cubre esto?
-7. Por que Supplier no cubre esto?
-8. Por que Procurement no cubre esto?
-9. Por que Sales no cubre esto?
-10. Por que Search no cubre esto?
-11. Por que Document no cubre esto?
-12. Por que Notification no cubre esto?
-13. Por que FeatureVisibility no cubre esto?
-14. Por que ETL no cubre esto?
-15. Que proyecto la consumira?
-16. Que rutas Gateway expondra?
-17. Que tablas o schemas requiere?
-18. Que permisos requiere?
-19. Que frontend la consumira?
-20. Que validacion Docker/PostgreSQL se ejecutara?
+4. Por que Gateway General no cubre esto?
+5. Por que Catalog no cubre esto?
+6. Por que Inventory no cubre esto?
+7. Por que Pricing no cubre esto?
+8. Por que Supplier no cubre esto?
+9. Por que Procurement no cubre esto?
+10. Por que Sales no cubre esto?
+11. Por que Search no cubre esto?
+12. Por que Document no cubre esto?
+13. Por que Notification no cubre esto?
+14. Por que FeatureVisibility no cubre esto?
+15. Por que ETL no cubre esto?
+16. Por que Fiscal no cubre esto?
+17. Por que Address no cubre esto?
+18. Que proyecto o modulo la consumira?
+19. Que rutas Gateway expondra?
+20. Que tablas o schemas requiere?
+21. Que permisos requiere?
+22. Que frontend la consumira?
+23. Que validacion Docker/PostgreSQL se ejecutara?
 
 ## Criterio de autorizacion
 

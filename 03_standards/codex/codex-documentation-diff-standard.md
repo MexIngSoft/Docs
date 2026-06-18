@@ -25,15 +25,16 @@ Debe identificar:
 - cambiar titulos o estructura si no aporta valor;
 - borrar contexto vigente;
 - conservar reglas contradictorias activas;
-- duplicar la misma regla en multiples documentos sin referencia canonica.
+- duplicar la misma regla en multiples documentos sin referencia canonica;
+- modificar documentos fuera del alcance.
 
-## Formato recomendado de cambio
+## Formato obligatorio por archivo
 
 Para cada archivo:
 
 - Archivo:
-- Buscar:
-- Reemplazar por:
+- Texto actual:
+- Texto nuevo:
 - Motivo:
 - Validacion:
 

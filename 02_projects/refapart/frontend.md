@@ -41,6 +41,35 @@ Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart
 | `/settings` | Preferencias privadas. |
 | `/403` | Acceso denegado. |
 
+## Rutas cliente requeridas para cierre operativo
+
+| Ruta | Uso | Estado |
+|---|---|---|
+| `/mis-solicitudes` | Solicitudes de piezas del cliente. | EXISTE_EN_CODIGO |
+| `/mis-cotizaciones` | Cotizaciones recibidas y estado. | EXISTE_EN_CODIGO |
+| `/mis-pedidos` | Pedidos creados desde cotizaciones aceptadas. | EXISTE_EN_CODIGO |
+| `/checkout` | Confirmacion de cotizacion/pedido manual. | EXISTE_EN_CODIGO |
+| `/carrito` | Carrito local para piezas publicables. | EXISTE_EN_CODIGO |
+
+## Rutas admin requeridas
+
+| Ruta | Uso | Documento |
+|---|---|---|
+| `/admin/refapart` | Dashboard operativo. | EXISTE_EN_CODIGO |
+| `/admin/refapart/part-requests` | Bandeja de solicitudes. | EXISTE_EN_CODIGO |
+| `/admin/refapart/part-requests/[id]` | Detalle operativo de solicitud. | EXISTE_EN_CODIGO |
+| `/admin/refapart/part-requests/[id]/suppliers` | Proveedores sugeridos/contactados. | PENDIENTE_DE_DEFINIR |
+| `/admin/refapart/part-requests/[id]/quote` | Generacion de cotizacion. | PENDIENTE_DE_DEFINIR |
+| `/admin/refapart/suppliers` | Gestion de proveedores. | EXISTE_EN_CODIGO |
+| `/admin/refapart/products` | Productos publicables. | EXISTE_EN_CODIGO |
+| `/admin/refapart/search-logs` | Logs de busqueda. | EXISTE_EN_CODIGO |
+| `/admin/refapart/demand` | Demanda no satisfecha. | EXISTE_EN_CODIGO |
+| `/admin/refapart/quotes` | Cotizaciones. | EXISTE_EN_CODIGO |
+| `/admin/refapart/orders` | Pedidos. | EXISTE_EN_CODIGO |
+| `/admin/refapart/logistics` | Logistica. | EXISTE_EN_CODIGO |
+| `/admin/refapart/audit` | Auditoria. | EXISTE_EN_CODIGO |
+| `/admin/refapart/settings` | Configuracion operativa. | PENDIENTE_DE_DEFINIR |
+
 ## Regla visual
 
 Debe parecer plataforma premium automotriz y de uso rapido, no una tienda

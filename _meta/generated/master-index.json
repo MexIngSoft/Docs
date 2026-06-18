@@ -2040,6 +2040,46 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "02_projects/refapart/admin/00_admin_overview.md",
+    "title": "REFAPART Admin Overview",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/admin/01_part_requests_panel.md",
+    "title": "REFAPART Part Requests Panel",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/admin/02_supplier_quotation_panel.md",
+    "title": "REFAPART Supplier Quotation Panel",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/admin/03_supplier_management.md",
+    "title": "REFAPART Supplier Management",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/admin/04_orders_logistics_panel.md",
+    "title": "REFAPART Orders And Logistics Panel",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "02_projects/refapart/api-contracts.md",
     "title": "Contratos API REFAPART",
     "domain": "business",
@@ -2072,8 +2112,72 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "02_projects/refapart/business/00_warranty_returns_policy.md",
+    "title": "REFAPART Warranty And Returns Policy",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/business/01_supplier_authorization_policy.md",
+    "title": "REFAPART Supplier Authorization Policy",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/business/02_payment_policy.md",
+    "title": "REFAPART Payment Policy",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/business/03_logistics_policy.md",
+    "title": "REFAPART Logistics Policy",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "02_projects/refapart/database.md",
     "title": "Base de datos REFAPART",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/flows/00_customer_search_flow.md",
+    "title": "REFAPART Customer Search Flow",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/flows/01_unfulfilled_search_to_supplier_flow.md",
+    "title": "REFAPART Unfulfilled Search To Supplier Flow",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/flows/02_quote_to_order_flow.md",
+    "title": "REFAPART Quote To Order Flow",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/flows/03_order_to_logistics_flow.md",
+    "title": "REFAPART Order To Logistics Flow",
     "domain": "business",
     "status": "unknown",
     "priority": "unknown",
@@ -2112,12 +2216,36 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "02_projects/refapart/security/00_permissions_matrix.md",
+    "title": "REFAPART Permissions Matrix",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "02_projects/refapart/security/auth-migration.md",
     "title": "Migracion Auth de REFAPART",
     "domain": "business",
     "status": "active",
     "priority": "p1",
     "owner": "Equipo REFAPART"
+  },
+  {
+    "path": "02_projects/refapart/tasks/00_mvp_gap_report.md",
+    "title": "REFAPART MVP Gap Report",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/tasks/01_mvp_implementation_order.md",
+    "title": "REFAPART MVP Implementation Order",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
     "path": "02_projects/refapart/visual-identity.md",

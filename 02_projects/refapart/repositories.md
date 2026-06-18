@@ -7,7 +7,8 @@
 | Web | `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart` | Creada dentro del orquestador web. |
 | Gateway central | `Docker.API.PY/API.PY.DJANGO.Gateway` | Principal; Auth versionado en puerto `8025`. |
 | Gateway retirado | `API.PY.DJANGO.RefaPart.Gateway` | Retirado del workspace; respaldo local documentado. |
-| API | `Docker.API.PY/API.PY.DJANGO.Refapart` | PENDIENTE_DE_DEFINIR. |
+| API canonica | `Docker.API.PY/API.PY.DJANGO.RefaPart` | Existe en workspace local. |
+| API variante historica/documentada | `Docker.API.PY/API.PY.DJANGO.Refapart` | Existe en workspace local; revisar convergencia de naming antes de publicar. |
 | Docker web | `Docker.WEB.NJ` | Orquesta puerto `3008`. |
 
 ## Repositorio propio
@@ -36,3 +37,6 @@ La ruta tecnica y remoto objetivo del proyecto web son
 `WEB.NJ.NEXT.RefaPart`. La web debe publicarse como repositorio propio y el
 orquestador `Docker.WEB.NJ` solo conserva Docker, mounts, puertos y scripts de
 arranque.
+
+PENDIENTE_DE_DEFINIR: remoto final de `API.PY.DJANGO.RefaPart` si debe quedar
+separado del orquestador `Docker.API.PY`.

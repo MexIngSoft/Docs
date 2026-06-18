@@ -19,6 +19,7 @@ NEXT_PUBLIC_GATEWAY_BASE_URL=http://localhost:8025/api/v1
 | `POST` | `/projects/REFAPART/search` | Buscar, normalizar errores y registrar demanda sin resultado. |
 | `GET` | `/projects/REFAPART/search/suggestions?q=` | Obtener sugerencias. |
 | `POST` | `/projects/REFAPART/requests` | Publicar solicitud de pieza. |
+| `POST` | `/projects/REFAPART/checkout` | Crear pedido manual desde pieza publicable. |
 
 ## Endpoints operativos implementados
 
@@ -32,6 +33,36 @@ NEXT_PUBLIC_GATEWAY_BASE_URL=http://localhost:8025/api/v1
 | `POST` | `/projects/REFAPART/admin/part-requests/{id}/order` | Crear pedido. |
 | `GET/POST` | `/projects/REFAPART/admin/suppliers` | Consultar o registrar proveedores. |
 | `GET` | `/projects/REFAPART/admin/dashboard` | Indicadores de demanda. |
+| `GET` | `/projects/REFAPART/admin/products` | Productos publicables. |
+| `GET` | `/projects/REFAPART/admin/search-logs` | Logs de busqueda. |
+| `GET` | `/projects/REFAPART/admin/quotes` | Cotizaciones. |
+| `GET` | `/projects/REFAPART/admin/orders` | Pedidos. |
+| `GET/PATCH` | `/projects/REFAPART/admin/logistics` | Logistica y tracking interno. |
+| `GET` | `/projects/REFAPART/admin/audit` | Auditoria operativa. |
+
+## Endpoints privados cliente requeridos
+
+| Metodo | Ruta | Uso | Estado |
+|---|---|---|---|
+| `GET` | `/projects/REFAPART/me/requests` | Solicitudes del cliente. | PENDIENTE |
+| `GET` | `/projects/REFAPART/me/quotes` | Cotizaciones del cliente. | PENDIENTE |
+| `GET` | `/projects/REFAPART/me/orders` | Pedidos del cliente. | PENDIENTE |
+| `GET` | `/projects/REFAPART/me/orders/{id}/tracking` | Tracking visible. | PENDIENTE |
+| `POST` | `/projects/REFAPART/quotes/{id}/accept` | Aceptar cotizacion. | PENDIENTE |
+| `POST` | `/projects/REFAPART/quotes/{id}/reject` | Rechazar cotizacion. | PENDIENTE |
+
+## Endpoints admin requeridos
+
+| Metodo | Ruta | Uso | Estado |
+|---|---|---|---|
+| `GET` | `/projects/REFAPART/admin/part-requests/{id}` | Detalle de solicitud. | IMPLEMENTADO_CON_GET_PATCH |
+| `PATCH` | `/projects/REFAPART/admin/part-requests/{id}` | Cambiar estado o asignacion. | IMPLEMENTADO_CON_GET_PATCH |
+| `POST` | `/projects/REFAPART/admin/part-requests/{id}/assign` | Asignar cotizador. | PENDIENTE |
+| `PATCH` | `/projects/REFAPART/admin/suppliers/{id}` | Actualizar proveedor. | PENDIENTE |
+| `GET` | `/projects/REFAPART/admin/search-logs` | Consultar logs de busqueda. | IMPLEMENTADO |
+| `GET` | `/projects/REFAPART/admin/demand` | Demanda no satisfecha. | PENDIENTE |
+| `GET` | `/projects/REFAPART/admin/orders` | Pedidos operativos. | IMPLEMENTADO |
+| `GET` | `/projects/REFAPART/admin/logistics` | Seguimiento logistico. | IMPLEMENTADO |
 
 ## Auth implementado
 
