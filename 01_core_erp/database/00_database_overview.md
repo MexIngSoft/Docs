@@ -4,9 +4,24 @@
 
 Documentar entidades, schemas y tablas reutilizables del nucleo ERP.
 
-## Base actual
+## Base oficial
 
-El entorno local actual usa la base disponible por Docker/Django para desarrollo.
+La base de datos oficial del ecosistema es PostgreSQL.
+
+PostgreSQL es obligatorio para:
+
+- desarrollo;
+- pruebas integradas;
+- staging;
+- produccion;
+- Docker local.
+
+Esta prohibido usar:
+
+- motores embebidos de archivo;
+- archivos locales de base de datos;
+- fallback local;
+- motores embebidos.
 
 Regla de publicacion: toda tabla publicable debe documentarse con nombres PascalCase estilo SQL Server.
 
@@ -16,30 +31,28 @@ Documento canonico:
 Docs/03_standards/database/sql-server-publication-standard.md
 ```
 
-Base exacta por ambiente productivo: `PENDIENTE_DE_DEFINIR`.
+Base principal recomendada:
+
+```text
+jobcron
+```
 
 ## Schemas principales
 
 - Auth.
-- Supplier.
 - Catalog.
-- Pricing.
 - Inventory.
+- Pricing.
+- Supplier.
 - Procurement.
 - Sales.
-
-## Schemas futuros
-
-- Quote.
-- Logistics.
-- Rules.
-- Projects.
-- Cart.
-- POS.
-- GovernmentTender.
-- Documents.
-- Billing.
-- Notifications.
+- Search.
+- Notification.
+- Document.
+- FeatureVisibility.
+- Refapart.
+- LexNova.
+- Fiscora.
 
 ## Modelos canonicos
 

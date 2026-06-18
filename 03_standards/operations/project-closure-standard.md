@@ -42,7 +42,8 @@ Reglas:
 
 - El prefijo debe ser siempre `API.PY.DJANGO`.
 - `NombreProyecto` debe escribirse en PascalCase.
-- No crear Gateways por proyecto sin ADR de excepcion aprobado.
+- Esta prohibido crear pasarelas dedicadas por proyecto.
+- No existe excepcion activa para pasarelas o capas intermedias dedicadas por proyecto.
 - El nombre debe representar el dominio principal, no una tecnologia, proveedor o tarea temporal.
 - El paquete de configuracion debe llamarse `config`.
 - `settings.py` debe vivir en `config/settings.py`.
@@ -199,7 +200,7 @@ En especial deben revisarse:
 - Secretos fuera del repositorio.
 - Variables sensibles documentadas con nombres, no valores reales.
 - Permisos revisados.
-- Si actua como Gateway/BFF, endpoints de sesion documentados y conectados
+- Si actua como Gateway General, endpoints de sesion documentados y conectados
   contra Auth por version declarada.
 - Si consume Auth, `ApplicationCode` / `X-Application-Code` documentado.
 - Endpoints internos protegidos.
@@ -255,3 +256,11 @@ Antes de marcar un proyecto como `closed`, validar:
 ## Regla de cierre
 
 Un proyecto no debe cerrarse solo porque el codigo compila. Debe cerrarse cuando otra persona pueda levantarlo, migrarlo, probarlo, operarlo y diagnosticarlo usando la documentacion del repositorio.
+
+No puede cerrarse ningun proyecto si crea, documenta o mantiene:
+
+- entrada publica fuera del Gateway General;
+- capa tecnica exclusiva que duplique responsabilidades del Gateway General;
+- Docker dedicado por proyecto;
+- motor embebido de archivo;
+- Auth dedicado por proyecto.

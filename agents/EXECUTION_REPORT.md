@@ -10689,3 +10689,78 @@ comercial_platform
 - `Docs/agents/AGENTS-005.md` vacio y conservado.
 - `Docs/agents/AGENTS-007.md` vacio y conservado.
 - `Docs/agents/AGENTS-015.md` ya estaba vacio y conservado.
+## Ejecucion 2026-06-18 - AGENTS-000 y publicacion solo dev
+
+### Instruccion recibida
+
+El owner indico que por el momento solo se debe subir a una rama: `dev`.
+
+### Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado con contradiccion resuelta | Se corrigieron contradicciones activas de arquitectura, base de datos, Fiscora y cierre de APIs. No se rellenaron `AGENTS-000.md` a `AGENTS-006.md` porque la documentacion canonica vigente ordena conservar agents completados como placeholders vacios. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios o ya limpiados; no habia tareas ejecutables adicionales. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/navigation-map.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docs/03_standards/operations/git-environments-and-release-flow.md`
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/docker/project-docker-execution-documents.md`
+- `Docs/01_core_erp/architecture/00_general_architecture.md`
+- `Docs/01_core_erp/architecture/07_project_api_pattern.md`
+- `Docs/01_core_erp/database/00_database_overview.md`
+- `Docs/02_projects/fiscora/architecture.md`
+- `Docs/03_standards/operations/project-closure-standard.md`
+
+### Archivos modificados
+
+- `Docs/README.md`
+- `Docs/01_core_erp/architecture/00_general_architecture.md`
+- `Docs/01_core_erp/architecture/07_project_api_pattern.md`
+- `Docs/01_core_erp/database/00_database_overview.md`
+- `Docs/02_projects/fiscora/architecture.md`
+- `Docs/03_standards/operations/project-closure-standard.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Busqueda local de frases contradictorias indicadas por `AGENTS-000.md` en documentos activos tocados | OK: sin coincidencias activas. |
+| `docker compose -p comercial_platform -f Docker.DB.PG\docker-compose.master.db.yml -f Docker.API.PY\docker-compose.master.api.yml -f Docker.WEB.NJ\docker-compose.master.web.yml -f Docker.SW.Nginx\docker-compose.master.nginx.yml config --quiet` | OK |
+| `git -C Docs diff --check` | OK |
+| Revision de `Docs/agents/AGENTS-*.md` | OK: todos los placeholders de agents estan vacios y conservados. |
+
+### Contradicciones detectadas
+
+- `AGENTS-000.md` exigia rellenar `AGENTS-000.md` a `AGENTS-006.md` y no cerrar
+  si estaban vacios. Esto contradice la regla canonica vigente: los agents
+  completados se limpian dejando el archivo original vacio.
+- Prevalecio la documentacion canonica y se limpio `AGENTS-000.md` al cerrar.
+
+### Decisiones documentadas
+
+- Publicacion de esta pasada: solo rama `dev`.
+- No se empuja a `main` ni `pro` en esta ejecucion.
+- PostgreSQL queda definido como base oficial del ecosistema.
+- Gateway General queda como punto unico de entrada; APIs especializadas solo
+  aplican cuando hay logica exclusiva.
+
+### Faltantes reales
+
+- PENDIENTE_DE_DEFINIR: promover estos cambios desde `dev` hacia `pro` y
+  `main` cuando el owner lo autorice.
+
+### Limpieza de agent
+
+- `Docs/agents/AGENTS-000.md` se vacio y se conserva en su ruta original.

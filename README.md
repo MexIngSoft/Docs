@@ -92,7 +92,13 @@ Va en `01_core_erp` todo lo que pueda reutilizarse para varios negocios:
 - Modelos de datos.
 - Flujos genericos.
 - APIs internas reutilizables.
-- Patron gateway/BFF + API propia por proyecto.
+- Patron Gateway General unico + APIs compartidas por responsabilidad + APIs especializadas solo si aplica.
+
+Reglas de arquitectura vigentes:
+
+- El ecosistema no utiliza pasarelas ni capas intermedias dedicadas por proyecto.
+- Todas las webs consumen el Gateway General.
+- Las APIs especializadas solo existen cuando contienen logica exclusiva del dominio.
 
 ## Que pertenece a un proyecto
 

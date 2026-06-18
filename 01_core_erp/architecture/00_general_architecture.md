@@ -9,9 +9,9 @@ Definir la arquitectura general del ERP modular y su uso por proyectos web, movi
 ```text
 Web/Mobile/Admin del proyecto
   -> API.PY.DJANGO.Gateway
-  -> Project Domain API opcional
-  -> Core ERP APIs
-  -> PostgreSQL por schemas de dominio
+  -> APIs compartidas
+  -> API especializada solo si aplica
+  -> PostgreSQL
 ```
 
 ## Patron por proyecto
@@ -21,11 +21,12 @@ Todo proyecto debe seguir el patron documentado en `07_project_api_pattern.md`.
 ```text
 Frontend del proyecto
   -> Gateway central modular
-  -> API propia del proyecto cuando tenga dominio propio
-  -> APIs core reutilizables
+  -> APIs compartidas reutilizables
+  -> API especializada solo si aplica y solo cuando exista logica exclusiva del dominio
 ```
 
 El frontend no debe consumir directamente APIs core.
+No debe crearse una API por proyecto como patron general.
 
 ## APIs internas
 

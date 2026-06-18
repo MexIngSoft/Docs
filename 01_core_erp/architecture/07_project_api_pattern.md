@@ -11,8 +11,8 @@ Todo proyecto debe separar tres capas:
 ```text
 Web/Mobile/Admin
   -> API.PY.DJANGO.Gateway
-  -> Project Domain API
-  -> Core ERP APIs
+  -> APIs compartidas
+  -> API especializada solo si aplica
 ```
 
 ## Capas
@@ -21,7 +21,7 @@ Web/Mobile/Admin
 |---|---|---|
 | Cliente web/mobile | Interfaz de usuario. | Web Tecno Telec, app movil futura. |
 | Gateway central | Punto unico de entrada versionado para pantallas y canales. | `API.PY.DJANGO.Gateway`. |
-| Project Domain API | Reglas, tablas y procesos propios del proyecto. | `tecnotelec-api`. |
+| API especializada | Reglas, tablas y procesos exclusivos del dominio cuando existan. | `tecnotelec-api`, solo si aplica. |
 | Core ERP APIs | Modulos reutilizables del ERP. | Auth, Catalog, Pricing, Sales, Projects, Logistics. |
 
 ## Regla principal
@@ -41,7 +41,7 @@ Debe:
 - Exponer endpoints de sesion propios del proyecto y llamar internamente a
   Auth.
 - Adaptar respuestas para pantallas.
-- Orquestar llamadas a `Project Domain API` y APIs core.
+- Orquestar llamadas a APIs compartidas y APIs especializadas cuando apliquen.
 - Centralizar errores de frontend.
 - Ocultar contratos internos del ERP.
 
@@ -54,9 +54,10 @@ No debe:
 - Exponer secretos, tokens internos o contratos de Auth directamente al
   navegador.
 
-## Project Domain API
+## API especializada
 
-Debe existir cuando el proyecto tenga requerimientos propios que no pertenecen al nucleo ERP.
+Debe existir solo cuando el proyecto tenga requerimientos exclusivos que no
+pertenecen al nucleo ERP ni a una API compartida.
 
 Puede contener:
 
@@ -108,7 +109,7 @@ Para el Gateway central:
 API.PY.DJANGO.Gateway
 ```
 
-Para API propia del proyecto:
+Para API especializada:
 
 ```text
 API.PY.DJANGO.NombreProyecto
@@ -123,8 +124,9 @@ API.PY.DJANGO.TecnoTelec
 
 Regla de creacion:
 
-- No crear Gateway propio por defecto. Una excepcion requiere ADR por aislamiento, regulacion, volumen, orquestacion o seguridad especial.
-- Si el proyecto tiene tablas, procesos, formularios, configuracion o reglas propias, crear tambien `API.PY.DJANGO.NombreProyecto`.
+- La entrada publica de frontend pasa unicamente por Gateway General.
+- Las APIs especializadas solo se crean cuando existe logica exclusiva del dominio.
+- Si el proyecto tiene tablas, procesos, formularios, configuracion o reglas exclusivas, crear tambien `API.PY.DJANGO.NombreProyecto`.
 - Si el proyecto solo consume APIs core sin datos propios, la API de dominio puede omitirse, pero la decision debe quedar documentada.
 - La API de proyecto y el frontend deben ser repositorios Git independientes.
 - El repositorio orquestador Docker debe ignorar `API.PY.DJANGO.*/` para no versionar APIs externas dentro del compose.
@@ -151,6 +153,7 @@ Web Tecno Telec
 
 Si una regla sirve para varios proyectos, vive en core.
 
-Si una regla solo existe por una empresa, marca, canal o vertical, vive en la API propia del proyecto.
+Si una regla solo existe por una empresa, marca, canal o vertical, vive en la API especializada.
 
-Si una respuesta solo acomoda datos para una pantalla, vive en gateway/BFF.
+Si una respuesta solo acomoda datos para una pantalla, debe resolverse en el
+Gateway General mediante agregacion o transformacion ligera.

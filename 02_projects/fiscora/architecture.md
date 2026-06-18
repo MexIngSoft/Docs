@@ -31,8 +31,9 @@ API.PY.DJANGO.Gateway
 
 ## Reglas
 
-- El frontend consume solo el gateway Fiscora.
-- El gateway normaliza errores, sesiones y permisos.
+- El frontend consume solo el Gateway General.
+- El Gateway General normaliza errores, sesiones y permisos.
+- Fiscora no tiene Gateway propio.
 - La API Fiscora administra experiencia comercial, planes, creditos y preferencias.
 - La API Fiscal administra CFDI, XML, SAT, jobs fiscales, paquetes, reportes y auditoria.
 - Document API procesa archivos, XML, render visual y PDF.
