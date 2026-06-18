@@ -83,6 +83,10 @@ Docs/03_standards/operations/context-packs.md
 Docs/03_standards/codex/codex-minimal-reading-standard.md
 Docs/03_standards/codex/codex-anti-vices-checklist.md
 Docs/03_standards/codex/codex-skills-standard.md
+Docs/03_standards/api/api-decision-record-standard.md
+Docs/templates/api-decision-record-template.md
+Docs/03_standards/codex/codex-change-budget-standard.md
+Docs/03_standards/codex/codex-documentation-diff-standard.md
 Docs/03_standards/architecture/reusable-api-decision-standard.md
 Docs/03_standards/api/api-contract-first-standard.md
 Docs/03_standards/architecture/shared-libraries-standard.md

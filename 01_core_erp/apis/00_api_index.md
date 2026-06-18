@@ -11,6 +11,7 @@ no por una idea documental.
 | `endpoint-ui-consumption-matrix.md` | Relacionar pantallas o modulos UI con endpoints Gateway para evitar mocks persistentes. |
 | `api-decision-matrix.md` | Decidir API reutilizable antes de evaluar API especializada. |
 | `reusable-api-contracts.md` | Mantener contratos resumidos y fronteras de APIs reutilizables. |
+| `../../03_standards/api/api-decision-record-standard.md` | Exigir decision documentada antes de crear API nueva o especializada. |
 
 ## Compartidas confirmadas
 

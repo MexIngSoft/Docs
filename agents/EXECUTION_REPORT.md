@@ -11431,7 +11431,6 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 - `AGENTS-000.md` y `AGENTS-001.md` quedan cerrados vaciando su contenido y conservando los placeholders.
 - `AGENTS-002.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.
 
----
 
 ## Ejecucion 2026-06-18 - Optimizacion Codex y automatizacion documental
 
@@ -11925,3 +11924,136 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 - No se archivo, movio ni elimino ningun archivo `AGENTS-*.md`.
 - `AGENTS-000.md` y `AGENTS-001.md` quedan cerrados vaciando su contenido y conservando los placeholders.
 - `AGENTS-002.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.
+
+---
+
+## Ejecucion 2026-06-18 - API Decision Record, presupuesto y diff documental
+
+### Context Pack usado
+
+- `CP-00 - Preflight obligatorio`
+- Extension de tarea: `Agents`
+- Motivo: las instrucciones activas viven en `Docs/agents/AGENTS-000.md` y
+  `Docs/agents/AGENTS-001.md`; el alcance real corresponde a estandares Codex,
+  estandares API, plantillas y registros operativos existentes.
+
+### Identificacion de alcance
+
+| Campo | Resultado |
+|---|---|
+| Tipo de tarea | Gobierno documental y estandares Codex/API |
+| Dominio afectado | `03_standards`, `templates`, `01_core_erp/apis`, `agents` |
+| Proyecto afectado | Ninguno |
+| APIs afectadas | Ninguna API runtime; aplica a decision previa de APIs nuevas o especializadas |
+
+### Agents ejecutados
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se ejecutaron solo faltantes reales: API Decision Record, presupuesto de cambio, diff documental, endurecimiento de registros, README, validacion documental y reporte. |
+| `AGENTS-001.md` | Completado | Contenia el mismo alcance con menor detalle; se consolido sin duplicar documentos ni repetir trabajo ya cubierto. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables adicionales. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/03_standards/documentation-first-workflow.md`
+- `Docs/00_audit/codex-context-map.md`
+- `Docs/03_standards/operations/context-packs.md`
+- `Docs/.codex-context.yml`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/templates/api-contract-template.md`
+- `Docs/scripts/validate-docs-rules.sh`
+- `Docs/01_core_erp/apis/gateway-route-registry.md`
+- `Docs/01_core_erp/apis/endpoint-ui-consumption-matrix.md`
+- `Docs/03_standards/architecture/shared-library-registry.md`
+- `Docs/01_core_erp/apis/00_api_index.md`
+- `Docs/03_standards/README.md`
+
+### Archivos creados
+
+- `Docs/03_standards/api/api-decision-record-standard.md`
+- `Docs/templates/api-decision-record-template.md`
+- `Docs/03_standards/codex/codex-change-budget-standard.md`
+- `Docs/03_standards/codex/codex-documentation-diff-standard.md`
+
+### Archivos modificados
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/generated/master-index.json`
+- `Docs/01_core_erp/apis/00_api_index.md`
+- `Docs/01_core_erp/apis/gateway-route-registry.md`
+- `Docs/01_core_erp/apis/endpoint-ui-consumption-matrix.md`
+- `Docs/03_standards/README.md`
+- `Docs/03_standards/architecture/shared-library-registry.md`
+- `Docs/templates/api-contract-template.md`
+- `Docs/scripts/validate-docs-rules.sh`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+
+### APIs reutilizadas
+
+- No se creo ninguna API.
+- Antes de permitir APIs nuevas queda obligatorio revisar Auth, Gateway
+  General, Catalog, Inventory, Pricing, Supplier, Procurement, Sales, Search,
+  Document, Notification, FeatureVisibility y ETL en el API Decision Record.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `python scripts/build_master_index.py` | OK: genero `_meta/generated/master-index.json` con 524 entradas. |
+| `python scripts/validate_frontmatter.py` | OK tecnico: 490 documentos sin front matter historico, 0 incomplete, 0 malformed. |
+| `sh Docs/scripts/validate-docs-rules.sh` | No ejecutado por entorno: `sh` no esta disponible en PowerShell (`El termino 'sh' no se reconoce...`). |
+| Busqueda de frases prohibidas con PowerShell + `rg` | OK: no quedan instrucciones activas prohibidas; se excluyeron `_archive`, `EXECUTION_REPORT.md` y agents. |
+| `git diff --check` | OK: solo advertencias esperadas LF/CRLF de Git en Windows. |
+| Verificacion de placeholders `AGENTS-*.md` | OK: `AGENTS-000.md` a `AGENTS-030.md` conservan el archivo y quedan en 0 bytes. |
+
+### Contradicciones detectadas
+
+- Los agents mencionan nombres `AGENTS-018.md` y `AGENTS-019.md`, pero las
+  instrucciones reales estan cargadas en `AGENTS-000.md` y `AGENTS-001.md`.
+  Prevalece el contenido activo por archivo real.
+- El agent pide ejecutar `sh Docs/scripts/validate-docs-rules.sh`; en este
+  repositorio la ejecucion local se realiza desde `Docs` como
+  `sh scripts/validate-docs-rules.sh` o desde el padre como
+  `sh Docs/scripts/validate-docs-rules.sh`, segun shell disponible.
+
+### Decisiones tomadas
+
+- No se duplicaron registros Gateway/UI/librerias porque ya existen; solo se
+  endurecieron con las reglas faltantes.
+- `api-contract-template.md` conserva sus secciones existentes y cambia
+  `Ruta Gateway` a tabla estructurada.
+- El API Decision Record queda como bloqueo documental previo, no como API ni
+  implementacion runtime.
+
+### Pendientes reales
+
+- PENDIENTE_DE_DEFINIR: contratos API reales que usen la plantilla de API
+  Decision Record.
+- PENDIENTE_DE_DEFINIR: rutas Gateway reales por proyecto/pantalla.
+- PENDIENTE_DE_DEFINIR: ejecutar `scripts/validate-docs-rules.sh` en entorno
+  con `sh` disponible o mediante GitHub Actions.
+
+### Riesgos detectados
+
+- Si Codex ignora el presupuesto de cambio, puede volver a leer o modificar mas
+  documentos de los necesarios.
+- Si no se llenan los registros Gateway/UI con endpoints reales, las plantillas
+  bloquean duplicacion pero no sustituyen la validacion runtime.
+
+### Agents archivados o pendientes
+
+- No se archivo, movio ni elimino ningun archivo `AGENTS-*.md`.
+- `AGENTS-000.md` y `AGENTS-001.md` quedan cerrados vaciando su contenido y conservando los placeholders.
+- `AGENTS-002.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.
+
+---

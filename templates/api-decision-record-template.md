@@ -1,0 +1,64 @@
+# API Decision Record
+
+## Estado
+
+PENDIENTE_DE_DEFINIR
+
+## API propuesta
+
+PENDIENTE_DE_DEFINIR
+
+## Proyecto o modulo consumidor
+
+PENDIENTE_DE_DEFINIR
+
+## Responsabilidad exacta
+
+PENDIENTE_DE_DEFINIR
+
+## APIs compartidas revisadas
+
+| API compartida | Cubre la responsabilidad? | Motivo |
+|---|---|---|
+| Auth | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR |
+| Gateway General | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR |
+| Catalog | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR |
+| Inventory | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR |
+| Pricing | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR |
+| Supplier | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR |
+| Procurement | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR |
+| Sales | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR |
+| Search | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR |
+| Document | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR |
+| Notification | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR |
+| FeatureVisibility | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR |
+| ETL | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR |
+
+## Justificacion anti-duplicacion
+
+PENDIENTE_DE_DEFINIR
+
+## Rutas Gateway requeridas
+
+| Ruta Gateway | Metodo | API destino | Permiso | Estado |
+|---|---|---|---|---|
+| PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR |
+
+## Datos / schemas requeridos
+
+PENDIENTE_DE_DEFINIR
+
+## Frontend consumidor
+
+PENDIENTE_DE_DEFINIR
+
+## Validacion requerida
+
+- Docker: PENDIENTE_DE_DEFINIR
+- PostgreSQL: PENDIENTE_DE_DEFINIR
+- Tests: PENDIENTE_DE_DEFINIR
+- Build frontend si aplica: PENDIENTE_DE_DEFINIR
+
+## Decision final
+
+PENDIENTE_DE_DEFINIR

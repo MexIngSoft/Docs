@@ -2704,6 +2704,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "03_standards/api/api-decision-record-standard.md",
+    "title": "API Decision Record Standard",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "03_standards/architecture/api-gateway-standard.md",
     "title": "Estandar API especializada y Gateway General",
     "domain": "standards",
@@ -2794,6 +2802,22 @@
   {
     "path": "03_standards/codex/codex-anti-vices-checklist.md",
     "title": "Checklist anti-vicios Codex",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/codex/codex-change-budget-standard.md",
+    "title": "Codex Change Budget Standard",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/codex/codex-documentation-diff-standard.md",
+    "title": "Codex Documentation Diff Standard",
     "domain": "standards",
     "status": "unknown",
     "priority": "unknown",
@@ -4066,6 +4090,14 @@
   {
     "path": "templates/api-contract-template.md",
     "title": "Plantilla de contrato API",
+    "domain": "templates",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "templates/api-decision-record-template.md",
+    "title": "API Decision Record",
     "domain": "templates",
     "status": "unknown",
     "priority": "unknown",

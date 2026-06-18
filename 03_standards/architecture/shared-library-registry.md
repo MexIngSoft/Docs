@@ -10,6 +10,10 @@ APIs y webs.
 Si una logica se repite en dos proyectos, se evalua como libreria compartida.
 Si falta evidencia real, se registra como `PENDIENTE_DE_DEFINIR`.
 
+Toda libreria compartida nueva debe registrar contrato estable, consumidores
+reales, logica que reemplaza y motivo para no dejar logica duplicada en
+proyectos.
+
 ## Registro
 
 | Libreria | Ruta | Existe / Falta | Responsabilidad | Quien la consume | Que NO debe duplicarse |

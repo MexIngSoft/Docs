@@ -11,6 +11,9 @@ Toda pantalla que consuma datos debe declarar que endpoint Gateway usa. Si la
 API real aun no existe, debe quedar como `PENDIENTE_DE_DEFINIR` y no mostrarse
 como funcional completa.
 
+Toda pantalla funcional debe enlazar ruta Gateway registrada. Si no existe ruta
+Gateway, la pantalla no puede marcarse como funcional completa.
+
 ## Matriz
 
 | Proyecto | Modulo UI | Pantalla o ruta | Ruta Gateway | API reutilizable | Estado UI | Estado contrato |

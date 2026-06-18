@@ -10,6 +10,8 @@ Gateway General.
 Toda ruta consumida por un frontend debe estar registrada aqui o documentada en
 el contrato API canonico correspondiente antes de implementarse.
 
+Toda ruta Gateway nueva debe enlazar contrato API o API Decision Record.
+
 ## Registro
 
 | Frontend | Ruta Gateway | API destino | Permiso requerido | Request | Response | Estado |

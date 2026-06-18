@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -eu
 
-pattern='crejo|Gateway por proyecto|BFF por proyecto|Docker por proyecto|Auth por proyecto|SQLite|db\.sqlite3|API propia por proyecto|Crear API especializada si'
+pattern='crejo|Gateway por proyecto|BFF por proyecto|Docker por proyecto|Auth por proyecto|SQLite|db\.sqlite3|API propia por proyecto|Crear API especializada si|API\.PY\.DJANGO\.NombreProyecto|Cada API Django debe vivir|su API de dominio'
 
 tmp_file="$(mktemp)"
 trap 'rm -f "$tmp_file"' EXIT

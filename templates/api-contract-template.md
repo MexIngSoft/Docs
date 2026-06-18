@@ -22,7 +22,9 @@ PENDIENTE_DE_DEFINIR
 
 ## Ruta Gateway
 
-PENDIENTE_DE_DEFINIR
+| Ruta Gateway | Metodo | API destino | Permiso | Estado |
+|---|---|---|---|---|
+| PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR |
 
 ## Permisos
 

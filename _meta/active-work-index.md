@@ -67,6 +67,9 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | `Docs/03_standards/codex/codex-minimal-reading-standard.md` | Lectura minima obligatoria. |
 | `Docs/03_standards/codex/codex-anti-vices-checklist.md` | Checklist anti-vicios. |
 | `Docs/03_standards/codex/codex-skills-standard.md` | Estandar de skills reutilizables para flujos Codex repetibles. |
+| `Docs/03_standards/api/api-decision-record-standard.md` | Bloqueo formal para APIs nuevas o especializadas sin decision documentada. |
+| `Docs/03_standards/codex/codex-change-budget-standard.md` | Presupuesto de lectura y modificacion para reducir cambios innecesarios. |
+| `Docs/03_standards/codex/codex-documentation-diff-standard.md` | Cambios documentales minimos, exactos y trazables. |
 | `Docs/03_standards/codex/codex-output-report-standard.md` | Estandar de salida obligatoria para cierres Codex. |
 | `Docs/03_standards/architecture/shared-library-registry.md` | Registro real de librerias compartidas y faltantes. |
 | `Docs/.codex/skills/reusable-api-decision/SKILL.md` | Skill para decidir API compartida o especializada solo si aplica. |
