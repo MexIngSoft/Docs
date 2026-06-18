@@ -52,6 +52,18 @@ Nombre operativo aceptado: API especializada. El termino `Project API` solo se
 usa como categoria conceptual y nunca como obligacion de crear una API por
 proyecto.
 
+## Comunicacion entre APIs
+
+La comunicacion interna debe pasar por contratos documentados, nunca por acceso
+directo a tablas ajenas. Si falta el contrato real, usar
+`PENDIENTE_DE_DEFINIR`.
+
+## Eventos
+
+Los eventos reutilizables deben documentar productor, consumidor, payload,
+version, idempotencia y manejo de error. Si el evento aun no existe, usar
+`PENDIENTE_DE_DEFINIR`.
+
 ## Gateway/BFF
 
 No se crea Gateway/BFF por proyecto. El Gateway General:

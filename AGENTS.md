@@ -5,10 +5,11 @@
 Antes de implementar, Codex debe leer:
 
 1. `README.md`
-2. `_meta/active-work-index.md`
-3. `agents/AGENT_GLOBAL_RULES.md`
-4. `00_audit/codex-context-map.md`
-5. `03_standards/operations/context-packs.md`
+2. `.codex-context.yml`
+3. `_meta/active-work-index.md`
+4. `agents/AGENT_GLOBAL_RULES.md`
+5. `00_audit/codex-context-map.md`
+6. `03_standards/operations/context-packs.md`
 
 ## Regla principal
 
@@ -25,6 +26,18 @@ Codex no implementa hasta identificar el Context Pack minimo de la tarea.
 - No usar `crejo`; la red oficial es `jobcron_network`.
 - No leer `_archive` como fuente activa.
 - No implementar endpoints sin contrato documentado o `PENDIENTE_DE_DEFINIR`.
+
+## Flujo obligatorio
+
+1. Leer README.
+2. Leer `.codex-context.yml`.
+3. Elegir Context Pack.
+4. Leer solo documentos del pack.
+5. Revisar APIs reutilizables.
+6. Implementar el alcance minimo.
+7. Validar.
+8. Actualizar documentacion e indices si aplica.
+9. Registrar resultado en `agents/EXECUTION_REPORT.md` cuando la tarea use agents.
 
 ## Agents
 

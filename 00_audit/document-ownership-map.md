@@ -21,6 +21,7 @@ historica.
 | `00_audit/codex-context-map.md` | Equipo documental | Auditoria | Canonico | Reduce contexto por tarea |
 | `00_audit/document-ownership-map.md` | Equipo documental | Auditoria | Canonico | Define duenos documentales |
 | `00_audit/reusable-api-map.md` | Equipo documental | Auditoria | Canonico | Mapea necesidades a APIs reutilizables |
+| `00_audit/reusable-api-audit.md` | Equipo documental | Auditoria | Canonico | Audita cobertura de APIs reutilizables |
 | `00_audit/contradiction-resolution-report.md` | Equipo documental | Auditoria | Canonico | Reporta contradicciones activas y decisiones |
 | `01_core_erp/apis/00_api_index.md` | Equipo Core ERP | Nucleo | Canonico | Lista de APIs vigentes |
 | `01_core_erp/apis/api-decision-matrix.md` | Equipo Core ERP | Nucleo | Canonico | Decide si una necesidad usa API existente |

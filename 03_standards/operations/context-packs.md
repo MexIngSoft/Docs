@@ -5,6 +5,7 @@
 Codex siempre debe leer primero:
 
 - `README.md`
+- `.codex-context.yml`
 - `00_audit/codex-context-map.md`
 - `03_standards/operations/context-packs.md`
 
@@ -118,3 +119,22 @@ Reglas:
 - crear sync;
 - crear logs;
 - crear manejo de errores.
+
+## CP-07 - Proyecto completo
+
+Usar para revisar o cerrar un proyecto completo sin mezclarlo con otros
+proyectos.
+
+Leer:
+
+- `README.md`
+- `02_projects/<project>/`
+- `01_core_erp/apis/reusable-api-contracts.md`
+- `01_core_erp/apis/api-decision-matrix.md`
+- `03_standards/`
+
+No leer:
+
+- `_archive`;
+- documentos historicos;
+- proyectos no relacionados, salvo dependencia explicita.

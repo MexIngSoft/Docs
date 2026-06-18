@@ -20,12 +20,13 @@ El catalogo canonico de Context Packs vive en:
 ## Orden base de lectura
 
 1. `README.md`
-2. `03_standards/operations/context-packs.md`
-3. `00_audit/document-ownership-map.md`
-4. `_meta/active-work-index.md`
-5. `_meta/master-index.md`
-6. Documentos canonicos del dominio afectado.
-7. Estandares tecnicos aplicables.
+2. `.codex-context.yml`
+3. `03_standards/operations/context-packs.md`
+4. `00_audit/document-ownership-map.md`
+5. `_meta/active-work-index.md`
+6. `_meta/master-index.md`
+7. Documentos canonicos del dominio afectado.
+8. Estandares tecnicos aplicables.
 
 ## Context Pack minimo por tipo de tarea
 
@@ -37,6 +38,7 @@ El catalogo canonico de Context Packs vive en:
 | Docker | `README.md`, `03_standards/operations/git-repository-map.md`, `03_standards/docker.md`, `03_standards/docker/*`, compose y Dockerfiles reales del repo objetivo |
 | Proyecto especifico | `README.md`, `02_projects/<proyecto>/*`, `01_core_erp/apis/reusable-api-contracts.md`, estandares relacionados |
 | Agents | `README.md`, `agents/RUN_AGENTS_INSTRUCTIONS.md`, `agents/AGENT_GLOBAL_RULES.md`, `03_standards/operations/standard-request-prompts.md`, agent activo |
+| Proyecto completo | `README.md`, `02_projects/<proyecto>/*`, `01_core_erp/apis/reusable-api-contracts.md`, `01_core_erp/apis/api-decision-matrix.md`, `03_standards/*` |
 
 Para detalle operativo usar `03_standards/operations/context-packs.md`.
 

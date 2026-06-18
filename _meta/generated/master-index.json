@@ -192,6 +192,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "00_audit/reusable-api-audit.md",
+    "title": "Auditoria de APIs reutilizables",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "00_audit/reusable-api-map.md",
     "title": "Mapa de APIs reutilizables",
     "domain": "audit",

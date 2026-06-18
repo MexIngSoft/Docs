@@ -62,6 +62,7 @@ Para reducir contexto y evitar duplicar APIs o documentacion, leer tambien:
 Docs/00_audit/codex-context-map.md
 Docs/00_audit/document-ownership-map.md
 Docs/00_audit/reusable-api-map.md
+Docs/00_audit/reusable-api-audit.md
 Docs/01_core_erp/apis/reusable-api-contracts.md
 Docs/03_standards/operations/codex-execution-standard.md
 Docs/03_standards/operations/codex-anti-patterns.md

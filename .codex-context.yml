@@ -3,6 +3,7 @@ version: 1
 default:
   preflight:
     - README.md
+    - .codex-context.yml
     - 00_audit/codex-context-map.md
     - 03_standards/operations/context-packs.md
 
@@ -46,6 +47,13 @@ packs:
       - 01_core_erp/apis/reusable-api-contracts.md
       - 03_standards/security/
       - 03_standards/operations/
+
+  full_project:
+    docs:
+      - 02_projects/{project}/
+      - 01_core_erp/apis/reusable-api-contracts.md
+      - 01_core_erp/apis/api-decision-matrix.md
+      - 03_standards/
 
 forbidden:
   - _archive/

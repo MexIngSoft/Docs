@@ -56,6 +56,7 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | `Docs/03_standards/operations/module-lifecycle-and-feature-flags.md` | Estados de desarrollo y visibilidad segura por proyecto, tenant y region. |
 | `Docs/00_audit/codex-context-map.md` | Context Pack minimo por tipo de tarea para ahorrar contexto. |
 | `Docs/00_audit/reusable-api-map.md` | Mapa de necesidades funcionales contra APIs reutilizables. |
+| `Docs/00_audit/reusable-api-audit.md` | Auditoria de cobertura y faltantes reales de APIs reutilizables. |
 | `Docs/01_core_erp/apis/reusable-api-contracts.md` | Contratos resumidos de APIs reutilizables. |
 | `Docs/01_core_erp/apis/api-decision-matrix.md` | Matriz para evitar APIs duplicadas. |
 | `Docs/03_standards/operations/context-packs.md` | Context Packs oficiales para Codex. |

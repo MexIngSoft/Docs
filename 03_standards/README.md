@@ -7,7 +7,7 @@ Guardar reglas de trabajo, operacion, seguridad, pruebas y cierre de proyectos.
 ## Contenido
 
 - `operations`: runbook, reglas Codex, recuperacion Docker, registro de puertos locales, flujo Git/entornos, observabilidad, ciclo de vida/feature flags, cierre, seguridad operativa y calidad.
-- `operations/context-packs.md`: Context Packs oficiales para reducir lectura innecesaria de Codex.
+- `operations/context-packs.md`: Context Packs oficiales para reducir lectura innecesaria de Codex, incluido proyecto completo.
 - `operations/codex-execution-standard.md`: flujo estandar de ejecucion Codex.
 - `operations/codex-anti-patterns.md`: anti-patrones prohibidos para Codex.
 - `codex`: estandares de lectura minima, skills reutilizables y checklist anti-vicios.

@@ -11718,3 +11718,100 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 - No se archivo, movio ni elimino ningun archivo `AGENTS-*.md`.
 - `AGENTS-000.md` queda cerrado vaciando su contenido y conservando el placeholder.
 - `AGENTS-001.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.
+
+---
+
+## Ejecucion 2026-06-18 - AGENT-004 Context Packs y auditoria API reusable
+
+### Context Pack usado
+
+- `CP-00 - Preflight obligatorio`
+- Extension de tarea: `Agents`
+- Motivo: la instruccion activa vive en `Docs/agents/AGENTS-000.md`; no aplica
+  leer frontend, API runtime, Docker real o integraciones salvo por documentos
+  canonicos mencionados por el agent.
+
+### Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | El archivo contenia una variante de `AGENT-004-CODEX-DOCS-OPTIMIZER.md`. Se ejecuto solo lo pendiente: auditoria de APIs reutilizables, `CP-07`, preflight con `.codex-context.yml`, pack `full_project` y enlaces canonicos. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables adicionales. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/03_standards/documentation-first-workflow.md`
+- `Docs/00_audit/codex-context-map.md`
+- `Docs/03_standards/operations/context-packs.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/.codex-context.yml`
+- `Docs/AGENTS.md`
+- `Docs/00_audit/document-ownership-map.md`
+- `Docs/01_core_erp/apis/api-decision-matrix.md`
+- `Docs/01_core_erp/apis/reusable-api-contracts.md`
+- `Docs/03_standards/operations/codex-anti-patterns.md`
+
+### Archivos creados
+
+- `Docs/00_audit/reusable-api-audit.md`
+
+### Archivos modificados
+
+- `Docs/.codex-context.yml`
+- `Docs/AGENTS.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/generated/master-index.json`
+- `Docs/00_audit/codex-context-map.md`
+- `Docs/00_audit/document-ownership-map.md`
+- `Docs/01_core_erp/apis/reusable-api-contracts.md`
+- `Docs/03_standards/README.md`
+- `Docs/03_standards/operations/context-packs.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Busqueda de frases prohibidas con filtro de instrucciones activas | OK: no quedan instrucciones activas prohibidas; las coincidencias restantes son prohibiciones, reglas anti-vicios, obsolescencia o limpieza. |
+| `bash scripts/validate-docs-rules.sh` | No ejecutado por entorno: Bash/WSL no esta disponible y devolvio `execvpe(/bin/bash) failed: No such file or directory`. Se ejecuto validacion equivalente con PowerShell + `rg`. |
+| `python scripts/build_master_index.py` | OK: genero `_meta/generated/master-index.json` con 516 entradas. |
+| `python scripts/validate_frontmatter.py` | OK tecnico: 482 documentos sin front matter historico, 0 incomplete, 0 malformed. |
+| `git diff --check` | OK: solo advertencias esperadas LF/CRLF de Git en Windows. |
+| Verificacion de placeholders `AGENTS-*.md` | OK: `AGENTS-000.md` a `AGENTS-030.md` conservan el archivo y quedan en 0 bytes. |
+
+### Faltantes reales
+
+- PENDIENTE_DE_DEFINIR: endpoints reales por cada API reutilizable.
+- PENDIENTE_DE_DEFINIR: consumidores reales por proyecto cuando cada MVP cierre
+  contrato.
+- PENDIENTE_DE_DEFINIR: ejecutar `scripts/validate-docs-rules.sh` en un entorno
+  con Bash disponible.
+
+### Contradicciones detectadas
+
+- El agent repite tareas ya completadas anteriormente (`AGENTS.md`,
+  `.codex-context.yml`, Context Packs base, matriz API y anti-patrones). Se
+  ejecuto solo lo faltante para no rehacer trabajo cerrado.
+- El agent menciona `Project API`; prevalece la documentacion canonica actual:
+  se usa `API especializada solo si aplica`, no API obligatoria por proyecto.
+
+### Decisiones documentadas
+
+- `.codex-context.yml` forma parte del preflight obligatorio.
+- `CP-07 - Proyecto completo` queda documentado como Context Pack oficial.
+- `00_audit/reusable-api-audit.md` registra cobertura y faltantes reales de APIs reutilizables.
+- La comunicacion entre APIs y eventos se documentan con contrato o
+  `PENDIENTE_DE_DEFINIR`, sin acceso directo a tablas ajenas.
+
+### Agents archivados o pendientes
+
+- No se archivo, movio ni elimino ningun archivo `AGENTS-*.md`.
+- `AGENTS-000.md` queda cerrado vaciando su contenido y conservando el placeholder.
+- `AGENTS-001.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.
