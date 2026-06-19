@@ -47,7 +47,7 @@ https://github.com/MexIngSoft/WEB.NJ.NEXT.MexIngSof.git
 Estado:
 
 ```text
-MVP_FUNCIONAL_EN_REPOSITORIO_WEB_LOCAL
+MVP_FUNCIONAL_EN_REPOSITORIO_WEB_DEV
 ```
 
 La pagina incluye productos desde Prisma, formulario de contacto, rutas Next.js
@@ -55,10 +55,8 @@ y panel admin basico para productos/leads. El runtime local canonico es
 `Docker.WEB.NJ` dentro del compose `comercial_platform`, red `jobcron_network`
 y puerto web `3009`.
 
-El remoto GitHub `MexIngSoft/WEB.NJ.NEXT.MexIngSof` no esta accesible desde esta
-maquina al 2026-06-18; GitHub responde `Repository not found`. Hasta que exista
-el remoto o se otorguen permisos, el push queda bloqueado y debe conservarse
-como `PENDIENTE_DE_DEFINIR`.
+El remoto GitHub `MexIngSoft/WEB.NJ.NEXT.MexIngSof` existe y tiene publicado
+`dev`. Por instruccion vigente no se publicaron `pro` ni `main`.
 
 ## Documentos
 
@@ -70,7 +68,5 @@ como `PENDIENTE_DE_DEFINIR`.
 ## Pendientes
 
 - Definir servicios y paquetes comerciales.
-- PENDIENTE_DE_DEFINIR: acceso o creacion del remoto
-  `MexIngSoft/WEB.NJ.NEXT.MexIngSof`.
 - PENDIENTE_DE_DEFINIR: dominio final de despliegue inicial.
 - PENDIENTE_DE_DEFINIR: Auth para panel admin.

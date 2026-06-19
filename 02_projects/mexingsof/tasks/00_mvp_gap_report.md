@@ -28,7 +28,7 @@ PARTIAL
 
 | Pendiente | Por que no avanza |
 |---|---|
-| Repositorio web oficial | PARCIAL: proyecto local creado en `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof`; remoto `MexIngSoft/WEB.NJ.NEXT.MexIngSof` no accesible (`Repository not found`). |
+| Repositorio web oficial | IMPLEMENTADO: `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof` publicado en `https://github.com/MexIngSoft/WEB.NJ.NEXT.MexIngSof.git` rama `dev`. |
 | Migracion Prisma real | PENDIENTE_DE_DEFINIR: falta PostgreSQL local/oficial `mexingsof`. |
 | Seed real ejecutado | Depende de migracion/base PostgreSQL disponible. |
 | Auth admin | PENDIENTE_DE_DEFINIR: debe integrarse via Gateway General/Auth, no Auth local. |
@@ -38,8 +38,8 @@ PARTIAL
 ## Riesgos
 
 - Los paneles admin no deben publicarse sin Auth.
-- El remoto GitHub de MexIngSof no esta accesible desde esta maquina; no se
-  debe reportar como push completado hasta resolver acceso o crear el repo.
+- El remoto GitHub de MexIngSof solo tiene `dev` por instruccion vigente; no se
+  publicaron `pro` ni `main`.
 - `npm audit` reporta 2 vulnerabilidades moderadas; no se aplico
   `npm audit fix --force` porque podria introducir cambios incompatibles.
 - La maqueta esta implementada como aproximacion visual; la verificacion

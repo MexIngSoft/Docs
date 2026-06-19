@@ -85,6 +85,4 @@ los demas proyectos web que usan `Docker.WEB.NJ`.
 ## Pendientes
 
 - PENDIENTE_DE_DEFINIR: URL y base PostgreSQL local/oficial.
-- PENDIENTE_DE_DEFINIR: acceso o creacion del remoto
-  `MexIngSoft/WEB.NJ.NEXT.MexIngSof`.
 - PENDIENTE_DE_DEFINIR: Auth para admin.

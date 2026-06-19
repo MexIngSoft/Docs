@@ -62,6 +62,5 @@ Lead:
 ## Pendientes
 
 - PENDIENTE_DE_DEFINIR: Auth/Gateway para admin.
-- PENDIENTE_DE_DEFINIR: acceso o creacion del remoto web oficial.
 - PENDIENTE_DE_DEFINIR: si los leads se integran a un CRM core futuro o quedan
   como tabla local de MexIngSof.

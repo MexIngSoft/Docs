@@ -50,7 +50,7 @@ Hasta entonces:
 | `3006` | Imagrafity | `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity` | Activo |
 | `3007` | LeadHunter | `Docker.WEB.NJ/WEB.NJ.NEXT.LeadHunter` | Activo |
 | `3008` | REFAPART | `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart` | Activo |
-| `3009` | MexIngSof | `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof` | Activo local; remoto GitHub pendiente de acceso |
+| `3009` | MexIngSof | `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof` | Activo; web publicada en `dev` |
 | `3010-3050` | Futuras webs | PENDIENTE_DE_DEFINIR | Reservado |
 
 ## Puertos API y Gateway

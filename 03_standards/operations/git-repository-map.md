@@ -15,13 +15,14 @@ Los commits y pushes se hacen por repositorio y por responsabilidad. No se debe 
 | Capa | Ruta local | Repositorio remoto | Estado de publicacion |
 |---|---|---|---|
 | Docker APIs | `Docker.API.PY` | `https://github.com/MexIngSoft/Docker.API.PY.git` | Separado |
+| API Address | `Docker.API.PY/API.PY.DJANGO.Address` | `https://github.com/MexIngSoft/API.PY.DJANGO.Address.git` | Requiere crear repo o habilitar acceso; GitHub responde `Repository not found` |
 | API Auth | `Docker.API.PY/API.PY.DJANGO.Auth` | `https://github.com/MexIngSoft/API.PY.DJANGO.Auth.git` | Separado |
 | API Catalog | `Docker.API.PY/API.PY.DJANGO.Catalog` | `https://github.com/MexIngSoft/API.PY.DJANGO.Catalog.git` | Separado |
 | API Customization | `Docker.API.PY/API.PY.DJANGO.Customization` | `https://github.com/MexIngSoft/API.PY.DJANGO.Customization.git` | Separado |
 | API Inventory | `Docker.API.PY/API.PY.DJANGO.Inventory` | `https://github.com/MexIngSoft/API.PY.DJANGO.Inventory.git` | Separado |
 | API LexNova | `Docker.API.PY/API.PY.DJANGO.LexNova` | `https://github.com/MexIngSoft/API.PY.DJANGO.LexNova.git` | Separado |
 | API Pricing | `Docker.API.PY/API.PY.DJANGO.Pricing` | `https://github.com/MexIngSoft/API.PY.DJANGO.Pricing.git` | Separado |
-| API Gateway central | `Docker.API.PY/API.PY.DJANGO.Gateway` | `https://github.com/MexIngSoft/API.PY.DJANGO.Gateway.git` | Local; remoto pendiente de verificar/publicar |
+| API Gateway central | `Docker.API.PY/API.PY.DJANGO.Gateway` | `https://github.com/MexIngSoft/API.PY.DJANGO.Gateway.git` | Requiere crear repo o habilitar acceso; GitHub responde `Repository not found` |
 | API Procurement | `Docker.API.PY/API.PY.DJANGO.Procurement` | `https://github.com/MexIngSoft/API.PY.DJANGO.Procurement.git` | Separado |
 | API Sales | `Docker.API.PY/API.PY.DJANGO.Sales` | `https://github.com/MexIngSoft/API.PY.DJANGO.Sales.git` | Separado |
 | API Supplier | `Docker.API.PY/API.PY.DJANGO.Supplier` | `https://github.com/MexIngSoft/API.PY.DJANGO.Supplier.git` | Separado |
@@ -32,6 +33,9 @@ Los commits y pushes se hacen por repositorio y por responsabilidad. No se debe 
 | API Fiscora | `Docker.API.PY/API.PY.DJANGO.Fiscora` | `https://github.com/MexIngSoft/API.PY.DJANGO.Fiscora.git` | Separado |
 | API JobCron | `Docker.API.PY/API.PY.DJANGO.JobCron` | `https://github.com/MexIngSoft/API.PY.DJANGO.JobCron.git` | Publicado en `dev`, `pro` y `main` |
 | API Imagrafity | `Docker.API.PY/API.PY.DJANGO.Imagrafity` | `https://github.com/MexIngSoft/API.PY.DJANGO.Imagrafity.git` | Publicado en `dev`, `pro` y `main` |
+| API LeadHunter | `Docker.API.PY/API.PY.DJANGO.LeadHunter` | PENDIENTE_DE_DEFINIR | Repo local sin remoto; requiere crear/asignar repo si se publicara |
+| API RefaPart | `Docker.API.PY/API.PY.DJANGO.RefaPart` | `https://github.com/MexIngSoft/API.PY.DJANGO.RefaPart.git` | Repo remoto existe, pero no tiene ramas publicadas; initial push bloqueado por cambio local sin revisar en `config/settings.py` |
+| API Search | `Docker.API.PY/API.PY.DJANGO.Search` | PENDIENTE_DE_DEFINIR | Repo local sin remoto; requiere crear/asignar repo si se publicara |
 | Docker PostgreSQL | `Docker.DB.PG` | `https://github.com/MexIngSoft/Docker.DB.PG.git` | Separado |
 | Docker Nginx | `Docker.SW.Nginx` | `https://github.com/1CASH1/Docker.SW.Nginx` | Separado |
 | Docker Web | `Docker.WEB.NJ` | `https://github.com/MexIngSoft/Docker.WEB.NJ.git` | Separado, requiere validar propiedad local |
@@ -39,8 +43,9 @@ Los commits y pushes se hacen por repositorio y por responsabilidad. No se debe 
 | Web Fiscora | `Docker.WEB.NJ/WEB.NJ.NEXT.Fiscora` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.Fiscora.git` | Separado |
 | Web Imagrafity | `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.Imagrafity.git` | Publicado en `dev`, `pro` y `main` |
 | Web JobCron | `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.JobCron.git` | Separado |
+| Web LeadHunter | `Docker.WEB.NJ/WEB.NJ.NEXT.LeadHunter` | PENDIENTE_DE_DEFINIR | Repo local sin remoto; requiere crear/asignar repo si se publicara |
 | Web LexNova | `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.LexNova.git` | Separado |
-| Web MexIngSof | `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.MexIngSof.git` | Local; remoto no accesible desde esta maquina (`Repository not found`) |
+| Web MexIngSof | `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.MexIngSof.git` | Publicado en `dev`; `pro` y `main` no publicados por instruccion vigente |
 | Web TecnoTelec | `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.TecnoTelec.git` | Separado |
 | Documentacion | `Docs` | `https://github.com/MexIngSoft/Docs.git` | Separado |
 
@@ -55,7 +60,7 @@ Se detectaron estas carpetas web:
 | Imagrafity | `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity` | Repo propio asignado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.Imagrafity.git` |
 | JobCron | `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron` | Repo propio detectado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.JobCron.git` |
 | LexNova | `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | Repo propio detectado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.LexNova.git` |
-| MexIngSof | `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof` | Repo local creado; remoto esperado no accesible: `https://github.com/MexIngSoft/WEB.NJ.NEXT.MexIngSof.git` |
+| MexIngSof | `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof` | Repo propio detectado y publicado en `dev`: `https://github.com/MexIngSoft/WEB.NJ.NEXT.MexIngSof.git` |
 | TecnoTelec | `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec` | Repo propio detectado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.TecnoTelec.git` |
 
 Si una web no tiene repo Git propio, antes de subirla como proyecto separado se debe restaurar o crear su `.git` propio y asignar su remoto. Mientras no exista `.git` por web, sus cambios viven dentro del repo contenedor que la incluya.
@@ -183,6 +188,34 @@ git config --global --add safe.directory C:/Users/cash1/source/repos/Workspace.C
 - Instalar o habilitar GitHub CLI (`gh`) si se quiere crear pull requests desde terminal.
 - PENDIENTE_DE_DEFINIR: confirmar si todos los repos tendran protecciones
   obligatorias de GitHub sobre `dev`, `pro` y `main`.
+
+## Revision de repositorios 2026-06-19
+
+Revision ejecutada con `git ls-remote` sobre las carpetas canonicas de
+`Docker.API.PY`, `Docker.WEB.NJ`, `Docker.DB.PG`, `Docker.SW.Nginx` y `Docs`.
+
+### Repos que requieren crear repo o habilitar acceso
+
+| Proyecto | Ruta local | Remoto esperado | Motivo |
+|---|---|---|---|
+| API Address | `Docker.API.PY/API.PY.DJANGO.Address` | `https://github.com/MexIngSoft/API.PY.DJANGO.Address.git` | GitHub responde `Repository not found`. |
+| API Gateway central | `Docker.API.PY/API.PY.DJANGO.Gateway` | `https://github.com/MexIngSoft/API.PY.DJANGO.Gateway.git` | GitHub responde `Repository not found`. |
+
+### Repos locales sin remoto asignado
+
+| Proyecto | Ruta local | Accion pendiente |
+|---|---|---|
+| API LeadHunter | `Docker.API.PY/API.PY.DJANGO.LeadHunter` | Crear/asignar remoto si se publicara como API activa. |
+| API Search | `Docker.API.PY/API.PY.DJANGO.Search` | Crear/asignar remoto si se publicara como API activa. |
+| Web LeadHunter | `Docker.WEB.NJ/WEB.NJ.NEXT.LeadHunter` | Crear/asignar remoto si se publicara como web activa. |
+
+### Repos existentes que no requieren creacion
+
+| Proyecto | Ruta local | Estado |
+|---|---|---|
+| Web MexIngSof | `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof` | Repo existe y `dev` fue publicado; `pro` y `main` quedan pendientes por instruccion vigente de subir solo a `dev`. |
+| API RefaPart | `Docker.API.PY/API.PY.DJANGO.RefaPart` | Repo existe, pero no tiene ramas; initial push queda bloqueado hasta revisar el cambio local no commiteado en `config/settings.py`. |
+| Web TecnoTelec | `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec` | Repo existe; conserva rama remota adicional `master` porque GitHub la mantiene como HEAD/default. |
 
 ## Ejecucion de unificacion de ramas 2026-06-18
 

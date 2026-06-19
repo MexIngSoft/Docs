@@ -2,7 +2,7 @@
 
 ## Estado
 
-MVP_FUNCIONAL_EN_REPOSITORIO_WEB_LOCAL
+MVP_FUNCIONAL_EN_REPOSITORIO_WEB_DEV
 
 ## Proyecto canonico
 
@@ -16,8 +16,8 @@ Repositorio esperado:
 https://github.com/MexIngSoft/WEB.NJ.NEXT.MexIngSof.git
 ```
 
-El remoto no esta accesible desde esta maquina al 2026-06-18; GitHub responde
-`Repository not found`.
+El remoto esta disponible y `dev` fue publicado. Por instruccion vigente no se
+publicaron `pro` ni `main`.
 
 ## Stack
 
@@ -86,7 +86,5 @@ retiran de ubicaciones activas. No deben usarse como runtime web.
 
 ## Pendientes
 
-- PENDIENTE_DE_DEFINIR: acceso o creacion del remoto
-  `MexIngSoft/WEB.NJ.NEXT.MexIngSof`.
 - PENDIENTE_DE_DEFINIR: integrar Auth via Gateway General para rutas admin.
 - PENDIENTE_DE_DEFINIR: datos reales de telefono, direccion y horario.
