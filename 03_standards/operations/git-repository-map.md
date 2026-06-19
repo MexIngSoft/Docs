@@ -35,7 +35,7 @@ Los commits y pushes se hacen por repositorio y por responsabilidad. No se debe 
 | API Imagrafity | `Docker.API.PY/API.PY.DJANGO.Imagrafity` | `https://github.com/MexIngSoft/API.PY.DJANGO.Imagrafity.git` | Publicado en `dev`, `pro` y `main` |
 | API LeadHunter | `Docker.API.PY/API.PY.DJANGO.LeadHunter` | PENDIENTE_DE_DEFINIR | Repo local sin remoto; requiere crear/asignar repo si se publicara |
 | API RefaPart | `Docker.API.PY/API.PY.DJANGO.RefaPart` | `https://github.com/MexIngSoft/API.PY.DJANGO.RefaPart.git` | Repo remoto existe, pero no tiene ramas publicadas; initial push bloqueado por cambio local sin revisar en `config/settings.py` |
-| API Search | `Docker.API.PY/API.PY.DJANGO.Search` | PENDIENTE_DE_DEFINIR | Repo local sin remoto; requiere crear/asignar repo si se publicara |
+| API Search | `Docker.API.PY/API.PY.DJANGO.Search` | `https://github.com/MexIngSoft/API.PY.DJANGO.Search.git` | Repo remoto asignado; publicar cambios en `dev` por instruccion vigente |
 | Docker PostgreSQL | `Docker.DB.PG` | `https://github.com/MexIngSoft/Docker.DB.PG.git` | Separado |
 | Docker Nginx | `Docker.SW.Nginx` | `https://github.com/1CASH1/Docker.SW.Nginx` | Separado |
 | Docker Web | `Docker.WEB.NJ` | `https://github.com/MexIngSoft/Docker.WEB.NJ.git` | Separado, requiere validar propiedad local |
@@ -206,7 +206,6 @@ Revision ejecutada con `git ls-remote` sobre las carpetas canonicas de
 | Proyecto | Ruta local | Accion pendiente |
 |---|---|---|
 | API LeadHunter | `Docker.API.PY/API.PY.DJANGO.LeadHunter` | Crear/asignar remoto si se publicara como API activa. |
-| API Search | `Docker.API.PY/API.PY.DJANGO.Search` | Crear/asignar remoto si se publicara como API activa. |
 | Web LeadHunter | `Docker.WEB.NJ/WEB.NJ.NEXT.LeadHunter` | Crear/asignar remoto si se publicara como web activa. |
 
 ### Repos existentes que no requieren creacion
@@ -214,6 +213,7 @@ Revision ejecutada con `git ls-remote` sobre las carpetas canonicas de
 | Proyecto | Ruta local | Estado |
 |---|---|---|
 | Web MexIngSof | `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof` | Repo existe y `dev` fue publicado; `pro` y `main` quedan pendientes por instruccion vigente de subir solo a `dev`. |
+| API Search | `Docker.API.PY/API.PY.DJANGO.Search` | Repo existe: `https://github.com/MexIngSoft/API.PY.DJANGO.Search.git`; publicar cambios en `dev` por instruccion vigente. |
 | API RefaPart | `Docker.API.PY/API.PY.DJANGO.RefaPart` | Repo existe, pero no tiene ramas; initial push queda bloqueado hasta revisar el cambio local no commiteado en `config/settings.py`. |
 | Web TecnoTelec | `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec` | Repo existe; conserva rama remota adicional `master` porque GitHub la mantiene como HEAD/default. |
 
@@ -252,7 +252,7 @@ Resultado de ejecucion:
 | Resultado | Cantidad | Detalle |
 |---|---:|---|
 | Remotos normalizados | 28 | Quedaron con ramas remotas `dev`, `main`, `pro`. |
-| Repos locales sin remoto | 3 | `API.PY.DJANGO.LeadHunter`, `API.PY.DJANGO.Search`, `WEB.NJ.NEXT.LeadHunter`. |
+| Repos locales sin remoto | 2 | `API.PY.DJANGO.LeadHunter`, `WEB.NJ.NEXT.LeadHunter`. `API.PY.DJANGO.Search` ya tiene remoto asignado. |
 | Remotos inaccesibles | 3 | `API.PY.DJANGO.Address`, `API.PY.DJANGO.Gateway`, `API.PY.DJANGO.RefaPart`. |
 | Remotos con bloqueo pendiente | 1 | `WEB.NJ.NEXT.TecnoTelec` conserva `master` remoto porque GitHub reporta `master` como HEAD/default branch. |
 
@@ -276,8 +276,7 @@ Faltantes reales:
 - PENDIENTE_DE_DEFINIR: asignar `main`, `dev` o `pro` como default branch de
   `WEB.NJ.NEXT.TecnoTelec` en GitHub y despues eliminar `master`.
 - PENDIENTE_DE_DEFINIR: asignar remotos si se publicaran
-  `API.PY.DJANGO.LeadHunter`, `API.PY.DJANGO.Search` y
-  `WEB.NJ.NEXT.LeadHunter`.
+  `API.PY.DJANGO.LeadHunter` y `WEB.NJ.NEXT.LeadHunter`.
 
 Contradicciones detectadas y resueltas:
 
@@ -317,7 +316,7 @@ Resultado de ejecucion:
 | Repos limpios antes de reescribir | 34 | No habia cambios sin commit. |
 | Repos reescritos localmente | 34 | Autor y committer quedaron en la identidad oficial. |
 | Remotos actualizados con force push | 28 | Ramas `dev`, `pro` y `main` publicadas con historia reescrita. |
-| Repos locales sin remoto | 3 | `API.PY.DJANGO.LeadHunter`, `API.PY.DJANGO.Search`, `WEB.NJ.NEXT.LeadHunter`. |
+| Repos locales sin remoto | 2 | `API.PY.DJANGO.LeadHunter`, `WEB.NJ.NEXT.LeadHunter`. `API.PY.DJANGO.Search` ya tiene remoto asignado. |
 | Remotos inaccesibles | 3 | `API.PY.DJANGO.Address`, `API.PY.DJANGO.Gateway`, `API.PY.DJANGO.RefaPart`. |
 | Ramas remotas adicionales | 1 | `WEB.NJ.NEXT.TecnoTelec/master` se reescribio con identidad oficial; GitHub no permitio borrarla porque sigue protegida/default. |
 
@@ -338,5 +337,4 @@ Faltantes reales:
 - PENDIENTE_DE_DEFINIR: asignar `main`, `dev` o `pro` como default branch de
   `WEB.NJ.NEXT.TecnoTelec` en GitHub y despues eliminar `master`.
 - PENDIENTE_DE_DEFINIR: asignar remotos si se publicaran
-  `API.PY.DJANGO.LeadHunter`, `API.PY.DJANGO.Search` y
-  `WEB.NJ.NEXT.LeadHunter`.
+  `API.PY.DJANGO.LeadHunter` y `WEB.NJ.NEXT.LeadHunter`.

@@ -93,6 +93,170 @@ queda vacio.
 
 ---
 
+## Ejecucion 2026-06-19 - Search API sync recovery
+
+### Context Pack utilizado
+
+`Search API / Core ERP / Backend Django / Database / Operations`
+
+### Identificacion de alcance
+
+| Campo | Resultado |
+|---|---|
+| Tipo de tarea | Desarrollo backend Django, sincronizacion Search, documentacion canonica y agents |
+| Dominio afectado | `01_core_erp/apis`, `01_core_erp/database`, `03_standards/backend`, `03_standards/operations` |
+| Proyecto afectado | `API.PY.DJANGO.Search` |
+| APIs afectadas | Search API |
+| Frontend afectado | Ninguno; las webs consumen Search por Gateway/API de proyecto |
+| Integracion afectada | Gateway General y APIs origen que publican documentos buscables |
+
+### Agents ejecutados
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Parcial | El agent corresponde a MexIngSof web y no al alcance Search. No se limpio porque conserva faltantes reales de QA/Auth/DB del flujo web. |
+| `AGENTS-001.md` | Completado | Se ejecuto la decision de Search como API compartida, no duplicada por web o Gateway. |
+| `AGENTS-002.md` | Completado | Se implemento y documento el contrato Search reutilizable para proyectos. |
+| `AGENTS-003.md` | Completado | Se valido el modelo actual y se elimino `AllowAny` por permiso interno. |
+| `AGENTS-004.md` | Completado | Se documento Search como capacidad compartida con endpoints canonicos y repositorio asignado. |
+| `AGENTS-005.md` | Completado | Se implementaron upsert idempotente, delete/restore/hard delete, bulk index/delete, reconcile, retry failed y sync status. |
+| `AGENTS-006.md` - `AGENTS-030.md` | No aplicable | Archivos vacios al inicio de esta ejecucion. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-002.md`
+- `Docs/agents/AGENTS-003.md`
+- `Docs/agents/AGENTS-004.md`
+- `Docs/agents/AGENTS-005.md`
+- `Docs/01_core_erp/apis/16_search_api.md`
+- `Docs/01_core_erp/database/18_search_model.md`
+- `Docs/01_core_erp/erp/25_search_engine.md`
+- `Docs/01_core_erp/flows/12_global_search_flow.md`
+- `Docs/03_standards/backend/search-implementation-standard.md`
+- `Docs/03_standards/operations/search-implementation-standard.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docs/03_standards/operations/scripts/New-WorkspaceProject.ps1`
+- `Docker.API.PY/API.PY.DJANGO.Search/README.md`
+- `Docker.API.PY/API.PY.DJANGO.Search/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Search/search/models.py`
+- `Docker.API.PY/API.PY.DJANGO.Search/search/views.py`
+- `Docker.API.PY/API.PY.DJANGO.Search/search/urls.py`
+- `Docker.API.PY/API.PY.DJANGO.Search/search/tests.py`
+
+### Archivos modificados
+
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/01_core_erp/apis/16_search_api.md`
+- `Docs/01_core_erp/database/18_search_model.md`
+- `Docs/03_standards/backend/search-implementation-standard.md`
+- `Docs/03_standards/operations/search-implementation-standard.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docker.API.PY/API.PY.DJANGO.Search/.env.local.example`
+- `Docker.API.PY/API.PY.DJANGO.Search/README.md`
+- `Docker.API.PY/API.PY.DJANGO.Search/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Search/search/models.py`
+- `Docker.API.PY/API.PY.DJANGO.Search/search/views.py`
+- `Docker.API.PY/API.PY.DJANGO.Search/search/urls.py`
+- `Docker.API.PY/API.PY.DJANGO.Search/search/services.py`
+- `Docker.API.PY/API.PY.DJANGO.Search/search/permissions.py`
+- `Docker.API.PY/API.PY.DJANGO.Search/search/tests.py`
+- `Docker.API.PY/API.PY.DJANGO.Search/search/migrations/0002_searchindexevent_searchsyncstatus_and_more.py`
+- `Docker.API.PY/API.PY.DJANGO.Search/search/management/__init__.py`
+- `Docker.API.PY/API.PY.DJANGO.Search/search/management/commands/__init__.py`
+- `Docker.API.PY/API.PY.DJANGO.Search/search/management/commands/reconcile_search_index.py`
+- `Docker.API.PY/API.PY.DJANGO.Search/search/management/commands/retry_failed_index_events.py`
+
+### APIs reutilizadas
+
+- Search API central reutilizable.
+- No se creo una API duplicada por proyecto.
+- El flujo queda: Web -> Gateway General -> API de proyecto -> Search API.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `python manage.py makemigrations search` con `DATABASE_URL=sqlite:///.../test.sqlite3` y `DEVELOPMENT_MODE=True` | OK: genero migracion `0002`. |
+| `python manage.py test search` con `DATABASE_URL=sqlite:///.../test.sqlite3` y `DEVELOPMENT_MODE=True` | OK: 5 tests ejecutados. |
+| `python manage.py check` con `DATABASE_URL=sqlite:///.../test.sqlite3` y `DEVELOPMENT_MODE=True` | OK: 0 issues. |
+| `python -m compileall search config` | OK. |
+| `git diff --check` en `API.PY.DJANGO.Search` | OK; solo advertencias esperadas LF/CRLF de Git en Windows. |
+| `git -C Docs diff --check` | OK; solo advertencias esperadas LF/CRLF de Git en Windows. |
+| `rg` de `AllowAny` activo fuera de `_archive` y reporte | OK: sin coincidencias activas. |
+
+### Resultado de validaciones
+
+- La suite cubre normalizacion/ranking/demanda, upsert idempotente, eventos
+  obsoletos, soft delete, restore, hard delete, reconcile, sync status y
+  errores parciales en bulk index.
+- La validacion uso SQLite local solo para tests por no existir conexion
+  PostgreSQL activa en el entorno de ejecucion. La configuracion runtime queda
+  preparada para PostgreSQL con schema `Search`.
+
+### Contradicciones detectadas
+
+- El reporte previo indicaba que `AGENTS-001.md` a `AGENTS-005.md` estaban
+  vacios, pero al iniciar esta ejecucion tenian contenido activo. Se ejecuto el
+  contenido real encontrado.
+- `AGENTS-005.md` exige recuperacion total de Search desde fuente. Se
+  implemento en Search el contrato y la conciliacion, pero cada API origen debe
+  exponer su export completo. Si una API origen no lo tiene, su proyecto debe
+  marcar `PENDIENTE_DE_DEFINIR`.
+- El mapa de repositorios marcaba Search sin remoto. El usuario definio
+  `https://github.com/MexIngSoft/API.PY.DJANGO.Search.git`; se actualizo el
+  mapa canonico.
+
+### Decisiones tomadas
+
+- `AllowAny` se reemplazo por `InternalSearchPermission` con
+  `SEARCH_INTERNAL_API_KEY` y header `X-Internal-Service-Key`.
+- El generador `New-WorkspaceProject.ps1` deja de crear APIs con `AllowAny` y
+  usa `IsAuthenticated` por defecto para evitar repetir el mismo riesgo en APIs
+  nuevas.
+- Search acepta errores parciales en bulk index y guarda eventos fallidos para
+  reintento automatico.
+- Los eventos atrasados se registran como `SKIPPED` y no sobrescriben datos
+  recientes.
+- El indice es reconstruible si la API origen entrega documentos completos.
+- Los agents completados se limpian vaciando contenido y conservando el archivo,
+  conforme a la regla vigente.
+
+### Pendientes reales
+
+- PENDIENTE_DE_DEFINIR: que cada API origen exponga el lote completo de sus
+  entidades indexables para `reconcile`.
+- PENDIENTE_DE_DEFINIR: configurar el secreto real `SEARCH_INTERNAL_API_KEY` en
+  Gateway/API origen y runtime Docker.
+- PENDIENTE_DE_DEFINIR: ejecutar validacion contra PostgreSQL real del stack
+  cuando el contenedor de base este disponible.
+- `AGENTS-000.md` queda pendiente por estar fuera del alcance Search y conservar
+  trabajo real de MexIngSof web.
+
+### Riesgos detectados
+
+- Si una API origen no envia `version` o `sourceUpdatedAt`, Search puede hacer
+  upsert idempotente, pero no puede distinguir todos los eventos atrasados.
+- Si `permissions` llega vacio para datos privados, Search no puede inferir
+  reglas de visibilidad sin inventar politica.
+- Si se usa `HARD_DELETE` sin respaldo origen, el documento solo se recupera
+  mediante reindex completo desde la fuente.
+
+### Agents limpiados, bloqueados o pendientes
+
+- Limpiar al cierre: `AGENTS-001.md`, `AGENTS-002.md`, `AGENTS-003.md`,
+  `AGENTS-004.md`, `AGENTS-005.md`.
+- Pendiente: `AGENTS-000.md`.
+- No aplicable: `AGENTS-006.md` a `AGENTS-030.md`.
+
+---
+
 ## Ejecucion 2026-06-18 - MexIngSof landing y cierre API cliente REFAPART
 
 ### Context Packs usados
