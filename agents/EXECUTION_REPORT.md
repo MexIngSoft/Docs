@@ -93,6 +93,160 @@ queda vacio.
 
 ---
 
+## Ejecucion 2026-06-19 - AGENTS-000 desarrollo dev productivo parcial
+
+### Context Pack utilizado
+
+`Cierre productivo multi-proyecto / Gateway General / MexIngSof / JobCron / REFAPART / Tecno Telec`
+
+### Identificacion de alcance
+
+| Campo | Resultado |
+|---|---|
+| Tipo de tarea | Desarrollo runtime y validacion de agents activos |
+| Dominio afectado | Webs Next.js, APIs Django, Gateway, Docs agents |
+| Proyecto afectado | MexIngSof, JobCron, REFAPART, Tecno Telec |
+| APIs afectadas | Gateway, JobCron, RefaPart, TecnoTelec, Search indirecta |
+| Frontend afectado | `WEB.NJ.NEXT.MexIngSof`, `WEB.NJ.NEXT.RefaPart`, `WEB.NJ.NEXT.TecnoTelec` |
+| Integracion afectada | MexIngSof lead -> Gateway -> JobCron |
+
+### Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Parcial | Se implemento el primer flujo productivo executable: MexIngSof envia leads via Gateway y JobCron los recibe como operaciones. Se validaron REFAPART y Tecno Telec existentes. No se limpia el agent porque quedan bloqueos reales y alcance runtime pendiente. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/02_projects/_ecosystem/06_productive_launch_plan.md`
+- `Docs/02_projects/mexingsof/productive-launch.md`
+- `Docs/02_projects/refapart/productive-launch.md`
+- `Docs/02_projects/tecnotelec/tasks/08_productive_launch_plan.md`
+- `Docs/02_projects/jobcron/productive-operations-roadmap.md`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof/app/api/contact/route.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof/app/components/ContactForm.tsx`
+- `Docker.API.PY/API.PY.DJANGO.JobCron/features/models.py`
+- `Docker.API.PY/API.PY.DJANGO.JobCron/features/views.py`
+- `Docker.API.PY/API.PY.DJANGO.JobCron/features/urls.py`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart/marketplace/models.py`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart/marketplace/views.py`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart/marketplace/urls.py`
+- `Docker.API.PY/API.PY.DJANGO.TecnoTelec/tecnotelec/models.py`
+- `Docker.API.PY/API.PY.DJANGO.TecnoTelec/tecnotelec/views.py`
+- `Docker.API.PY/API.PY.DJANGO.TecnoTelec/tecnotelec/serializers.py`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/config/project_registry.yaml`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/apps/project_router/views.py`
+
+### Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof/.env.example`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof/app/api/contact/route.ts`
+- `Docker.API.PY/API.PY.DJANGO.JobCron/features/views.py`
+- `Docker.API.PY/API.PY.DJANGO.JobCron/features/urls.py`
+- `Docker.API.PY/API.PY.DJANGO.JobCron/features/tests.py`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/.env.local.example`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/config/project_registry.yaml`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/tests/test_api_registry.py`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/tests/test_project_router.py`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### APIs reutilizadas
+
+- Se reutilizo JobCron API para leads MexIngSof; no se creo API propia MexIngSof.
+- Se reutilizo Gateway General como frontera web.
+- REFAPART API y TecnoTelec API ya tienen endpoints productivos parciales y no se duplicaron.
+
+### Commits y push
+
+| Repo | Rama | Commit | Push |
+|---|---|---|---|
+| `WEB.NJ.NEXT.MexIngSof` | `dev` | `63581c0 feat(mexingsof): route leads through gateway` | OK a `origin/dev` |
+| `API.PY.DJANGO.JobCron` | `dev` | `20b1aa5 feat(jobcron): add mexingsof lead operations` | OK a `origin/dev` |
+| `API.PY.DJANGO.Gateway` | `dev` local | `b1d06be feat(gateway): register mexingsof lead route` | Bloqueado: `Repository not found` en `https://github.com/MexIngSoft/API.PY.DJANGO.Gateway.git` |
+
+### Ramas integradas a dev
+
+- No se integraron ramas feature. Se cambiaron repos limpios a `dev` cuando existia `origin/dev`.
+- No se tocaron `main` ni `pro` para commits nuevos.
+- No se eliminaron ramas locales ni remotas.
+- Se configuro autor local `1CASH1 <1CASH1@users.noreply.github.com>` en los repos revisados antes de commitear.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.MexIngSof` | OK |
+| `npm run build` en `WEB.NJ.NEXT.MexIngSof` | OK |
+| `python manage.py check` en `API.PY.DJANGO.JobCron` | OK |
+| `python manage.py makemigrations --check --dry-run` en `API.PY.DJANGO.JobCron` | OK; no changes detected |
+| `python manage.py test` en `API.PY.DJANGO.JobCron` | Bloqueado por permisos PostgreSQL: `permission denied to create database` |
+| `python manage.py check` en `API.PY.DJANGO.Gateway` | OK |
+| `python manage.py test` en `API.PY.DJANGO.Gateway` | OK; 16 tests |
+| `python manage.py check` en `API.PY.DJANGO.RefaPart` | OK |
+| `python manage.py test` en `API.PY.DJANGO.RefaPart` | Bloqueado por entorno local: no resuelve host Docker `db-postgresql` fuera de Docker |
+| `python manage.py check` en `API.PY.DJANGO.TecnoTelec` | OK |
+| `python manage.py test` en `API.PY.DJANGO.TecnoTelec` | OK; 1 test |
+| `npm run lint` en `WEB.NJ.NEXT.RefaPart` | OK |
+| `npm run build` en `WEB.NJ.NEXT.RefaPart` | OK |
+| `npm run lint` en `WEB.NJ.NEXT.TecnoTelec` | OK con warnings existentes por uso de `<img>` |
+| `npm run build` en `WEB.NJ.NEXT.TecnoTelec` | OK con warnings existentes por uso de `<img>` |
+
+### Contradicciones detectadas
+
+- El agent pide cerrar todos los flujos productivos completos, pero la
+  documentacion canonica aun mantiene bloqueos reales: Auth real, permisos
+  seed, pagos REFAPART, politicas REFAPART, ChannelAssortment Tecno Telec y
+  decision JobCron SaaS/ERP interno.
+- Gateway es obligatorio para MexIngSof, pero el remoto `API.PY.DJANGO.Gateway`
+  no existe o no es accesible; el cambio queda commit local en `dev` y no pudo
+  publicarse.
+
+### Decisiones tomadas
+
+- MexIngSof no recibe API propia. La web conserva fallback local solo cuando no
+  existe `MEXINGSOF_LEADS_GATEWAY_URL`; produccion debe configurar Gateway.
+- JobCron almacena leads MexIngSof como `OperationalRecord` bajo
+  `project_key=mexingsof` y `module_key=mexingsof_leads` para no crear tabla
+  nueva sin contrato de CRM definitivo.
+- Gateway registra `MEXINGSOF` con route override `leads -> JobCron` para que
+  la web no conozca la ruta interna de JobCron.
+
+### Pendientes reales
+
+- PENDIENTE_DE_PUBLICAR: corregir remoto/acceso de `API.PY.DJANGO.Gateway` y
+  subir commit local `b1d06be` a `dev`.
+- PENDIENTE_DE_IMPLEMENTAR: Auth real para paneles internos.
+- PENDIENTE_DE_IMPLEMENTAR: Search outbox desde JobCron leads hacia Search.
+- PENDIENTE_DE_IMPLEMENTAR: panel JobCron web para visualizar leads MexIngSof.
+- PENDIENTE_DE_IMPLEMENTAR: subida de fotos REFAPART via Document API desde web.
+- PENDIENTE_DE_IMPLEMENTAR: ChannelAssortment/compatibilidad Tecno Telec.
+- PENDIENTE_DE_DEFINIR: pasarela de pago y politicas finales REFAPART.
+
+### Riesgos detectados
+
+- Sin publicar Gateway, MexIngSof no puede consumir `/api/v1/projects/MEXINGSOF/leads`
+  en ambientes compartidos aunque web y JobCron ya esten publicados.
+- Si se activa `MEXINGSOF_LEADS_GATEWAY_URL` sin Gateway disponible, la web
+  devolvera error normalizado 502 y no usara fallback local.
+- RefaPart API no pudo testearse fuera de Docker por host `db-postgresql`; debe
+  validarse dentro del compose oficial.
+
+### Agents limpiados, bloqueados o pendientes
+
+- `AGENTS-000.md` queda pendiente/parcial con contenido, porque no cumple
+  criterio de cierre completo y existen bloqueos reales.
+- `AGENTS-001.md` a `AGENTS-030.md` siguen vacios/sin instrucciones.
+
+---
+
 ## Ejecucion 2026-06-19 - Revision AGENTS-000 MexIngSof
 
 ### Context Pack utilizado
