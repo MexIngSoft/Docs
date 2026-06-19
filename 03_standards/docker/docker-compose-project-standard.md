@@ -62,6 +62,13 @@ web-frontend-node
 nginx
 ```
 
+La regla aplica a todos los archivos `docker-compose*.yml` del workspace:
+master, base, overlays por proyecto, aliases de compatibilidad y compose
+focalizados. Si un proyecto conserva mas de un compose activo para el mismo rol,
+todos deben heredar el mismo servicio oficial. REFAPART, por ejemplo, conserva
+`docker-compose.refapart.yml` y `docker-compose.refapart.web.yml`; ambos deben
+heredar `web-frontend-node` y no pueden declarar otro contenedor.
+
 Las imagenes Docker deben estar fijadas a version exacta en los Dockerfile y
 compose base. No se permite usar `latest` ni variables para elegir version de
 imagen en ejecucion productiva.

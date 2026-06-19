@@ -266,6 +266,11 @@ jobcron-db
 Los compose por proyecto pueden cambiar `API_PROJECTS`, `WEB_PROJECTS`,
 puertos o variables, pero no deben cambiar `container_name`.
 
+Esta regla aplica a todos los `docker-compose*.yml` de `Docker.DB.PG`,
+`Docker.API.PY`, `Docker.WEB.NJ` y `Docker.SW.Nginx`, sin excepciones por
+proyecto. Si existen dos compose activos para un mismo proyecto y rol, ambos
+deben heredar el contenedor oficial de su capa.
+
 ## Imagenes Docker exactas
 
 Para evitar diferencias entre desarrollo y produccion, no se permiten tags

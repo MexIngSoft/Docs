@@ -93,6 +93,56 @@ queda vacio.
 
 ---
 
+## Correccion 2026-06-19 - Alcance global de Compose y REFAPART
+
+### Motivo
+
+Se detecto que la normalizacion anterior habia corregido los Compose base y
+algunos overlays, pero no habia validado explicitamente todos los
+`docker-compose*.yml` del workspace. REFAPART conserva dos compose web activos:
+`Docker.WEB.NJ/docker-compose.refapart.yml` y
+`Docker.WEB.NJ/docker-compose.refapart.web.yml`.
+
+### Archivos modificados
+
+- `Docker.WEB.NJ/docker-compose.refapart.yml`
+- `Docker.API.PY/docker-compose.refapart.api.yml`
+- `Docker.API.PY/docker-compose.jobcron.api.yml`
+- `Docs/03_standards/docker/docker-compose-project-standard.md`
+- `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### Decisiones tomadas
+
+- `docker-compose.refapart.yml` ahora hereda `web-frontend-node` mediante
+  `extends` igual que `docker-compose.refapart.web.yml`.
+- Las URLs internas de APIs en los overlays RefaPart y JobCron pasan de
+  `127.0.0.1` a `api-multiproyecto` cuando representan comunicacion entre APIs.
+- El estandar Docker queda explicito: aplica a todos los `docker-compose*.yml`
+  del workspace, incluyendo master, base, overlays, aliases de compatibilidad y
+  compose focalizados.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Validacion individual de todos los `docker-compose*.yml` en `Docker.DB.PG`, `Docker.API.PY`, `Docker.WEB.NJ` y `Docker.SW.Nginx` | OK: 34 compose files. |
+| Busqueda de nombres prohibidos, `POSTGRES_VERSION` y SQLite en compose/Dockerfile | OK: sin coincidencias. |
+| Busqueda de `container_name:` en compose | OK: solo aparecen los cuatro contenedores oficiales (`db-postgresql`, `api-multiproyecto`, `web-frontend-node`, `nginx`). |
+| Busqueda de `127.0.0.1` en compose | OK con excepciones validas: bind local de PostgreSQL, `DJANGO_ALLOWED_HOSTS` y CORS local. |
+
+### Pendientes reales
+
+- PENDIENTE_DE_DEFINIR: ejecutar arranque completo Docker y endpoints cuando
+  existan secretos locales reales y el remoto Gateway este disponible.
+
+### Agents limpiados, bloqueados o pendientes
+
+- No se limpio `AGENTS-000.md` ni `AGENTS-001.md`; siguen parciales hasta la
+  validacion productiva integral.
+
+---
+
 ## Ejecucion 2026-06-19 - Agent 001 antes de Agent 000, fijacion exacta Docker
 
 ### Context Pack utilizado
