@@ -217,6 +217,14 @@ queda vacio.
 | Verificacion visual pixel-perfect en navegador | Requiere revision humana comparando contra `Docs/agents/MexIngSof.png`. |
 | REFAPART API tests contra PostgreSQL Docker | Host `db-postgresql` no resuelve fuera del entorno Docker local. |
 
+### Publicacion
+
+| Repositorio | Rama | Commit | Resultado |
+|---|---|---|---|
+| `Docs` | `dev` | `d84e23c` | Subido a `origin/dev`. |
+| `WEB.NJ.NEXT.RefaPart` | `dev` | `e13b18f` | Subido a `origin/dev`. |
+| `API.PY.DJANGO.RefaPart` | `dev` | `63dd37b` | Commit local creado; push bloqueado porque `https://github.com/MexIngSoft/API.PY.DJANGO.RefaPart.git` responde `Repository not found` y el conector GitHub no encontro repositorio instalado con `API.PY.DJANGO.RefaPart` ni `RefaPart`. |
+
 ### Contradicciones detectadas
 
 - El agent pide borrar imagenes innecesarias, pero la regla canonica indica no borrar fuentes; se copiaron assets necesarios a `public/brand` y se conservaron fuentes originales.
