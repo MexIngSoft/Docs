@@ -111,8 +111,8 @@ reenviara a Auth internamente.
 Nota local Docker: `Docker.WEB.NJ` comparte un contenedor para varias webs y
 puede tener `NEXT_PUBLIC_GATEWAY_BASE_URL` apuntando al gateway de otro
 proyecto. LexNova debe usar `NEXT_PUBLIC_LEXNOVA_GATEWAY_BASE_URL` para evitar
-que el navegador intente resolver hostnames internos de Docker como
-`api-backend-python`.
+que el navegador dependa de rutas internas no canonicas del contenedor
+`api-multiproyecto`.
 
 ## Flujo de sesion frontend
 

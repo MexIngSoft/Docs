@@ -37,10 +37,9 @@ docker compose -f docker-compose.yml -f docker-compose.refapart.yml up -d --no-b
 ```
 
 Este override usa `!override` para publicar solo `3008`, montar solo
-`WEB.NJ.NEXT.RefaPart` y forzar `WEB_PROJECTS=refapart`. Usa el contenedor
-`web-refapart-node` para no depender del nombre compartido `web-frontend-node`
-cuando el orquestador general de webs no se esta usando. Se usa cuando no se
-deben crear mounts, puertos ni procesos de otras webs.
+`WEB.NJ.NEXT.RefaPart` y forzar `WEB_PROJECTS=refapart`. Conserva el contenedor
+oficial `web-frontend-node`; los overrides focalizados no deben cambiar nombres
+de contenedor ni crear contenedores por proyecto.
 
 El Gateway principal existe en `Docker.API.PY/API.PY.DJANGO.Gateway`. El
 Gateway `API.PY.DJANGO.RefaPart.Gateway` fue retirado el 2026-06-14. La API de
@@ -94,7 +93,7 @@ Validacion focalizada posterior 2026-06-13:
 - Docker Desktop requirio reinicio para liberar reservas internas de nombres de
   contenedor despues de intentos interrumpidos.
 - `docker-compose.refapart.yml` paso `docker compose config --quiet`.
-- REFAPART quedo corriendo en `web-refapart-node`, saludable, publicando solo
+- REFAPART quedo corriendo en `web-frontend-node`, saludable, publicando solo
   `3008`.
 - `http://localhost:3008` respondio `200` y contiene `REFAPART`.
 - No quedaron contenedores API, DB ni Nginx activos para esta corrida.

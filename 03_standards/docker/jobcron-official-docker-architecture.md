@@ -237,37 +237,52 @@ Esta prohibido usar:
 
 ## Servicios compartidos
 
-No deben existir dos contenedores activos para la misma API compartida.
+La ejecucion oficial del workspace usa contenedores agrupados por capa, no un
+contenedor por API ni un contenedor por proyecto.
 
-Incorrecto:
+Contenedores operativos obligatorios:
+
+```text
+db-postgresql
+api-multiproyecto
+web-frontend-node
+nginx
+```
+
+No deben existir contenedores activos alternos como:
 
 ```text
 api-auth-tecnotelec
 api-auth-lexnova
 api-auth-jobcron
+api-refapart-python
+api-backend-python
+web-refapart-node
+web-mexingsof-node
+gateway-db
+jobcron-db
 ```
 
-Correcto:
+Los compose por proyecto pueden cambiar `API_PROJECTS`, `WEB_PROJECTS`,
+puertos o variables, pero no deben cambiar `container_name`.
 
-```text
-api-auth
-```
+## Imagenes Docker exactas
 
-Nombres estables sugeridos:
+Para evitar diferencias entre desarrollo y produccion, no se permiten tags
+flotantes como `latest`, `alpine`, `slim` sin version mayor/menor/parche, ni
+variables para versionar imagen base.
 
-```text
-api-auth
-api-catalog
-api-supplier
-api-pricing
-api-inventory
-api-sales
-api-procurement
-db-postgres
-nginx-jobcron
-```
+| Capa | Archivo | Imagen exacta obligatoria |
+|---|---|---|
+| DB | `Docker.DB.PG/docker-compose.yml` | `postgres:16.13` |
+| APIs | `Docker.API.PY/Dockerfile.api.base` | `python:3.10.19-slim-bookworm` |
+| APIs compatibilidad | `Docker.API.PY/Dockerfile` | `python:3.10.19-slim-bookworm` |
+| Webs | `Docker.WEB.NJ/Dockerfile.web.base` | `node:20.19.0-bookworm-slim` |
+| Webs compatibilidad | `Docker.WEB.NJ/Dockerfile` | `node:20.19.0-bookworm-slim` |
+| Nginx | `Docker.SW.Nginx/Dockerfile` | `nginx:1.24.0` |
 
-Los servicios propios de proyecto si pueden incluir el nombre del proyecto.
+Si se actualiza una imagen, se debe cambiar esta matriz y validar el stack
+completo. No se debe actualizar solo el Dockerfile o solo el compose.
 
 ## Actualizacion de APIs compartidas
 

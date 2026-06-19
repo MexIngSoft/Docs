@@ -17,7 +17,7 @@ Este runbook describe el estado operativo actual. La red oficial vigente es
 | Carpeta | Servicio | Contenedor | Puerto host | Red |
 | --- | --- | --- | --- | --- |
 | `Docker.DB.PG` | PostgreSQL | `db-postgresql` | `127.0.0.1:5432` | `jobcron_network` |
-| `Docker.API.PY` | APIs Django | `api-backend-python` | `8000-8050` reservado, `8000-8017` publicado hoy | `jobcron_network` |
+| `Docker.API.PY` | APIs Django | `api-multiproyecto` | `8000-8050` reservado, `8000-8017` publicado hoy | `jobcron_network` |
 | `Docker.WEB.NJ` | Next.js frontends | `web-frontend-node` | `3000-3050` reservado, `3000-3005` asignado hoy | `jobcron_network` |
 | `Docker.SW.Nginx` | Proxy Nginx | `nginx` | `80` | `jobcron_network` |
 
@@ -95,7 +95,7 @@ Esto permite que Nginx resuelva:
 
 ```txt
 web-frontend-node
-api-backend-python
+api-multiproyecto
 ```
 
 Para nuevos compose y refactors Docker, usar la misma red oficial:
@@ -128,7 +128,7 @@ Variables requeridas:
 
 | Variable | Uso |
 | --- | --- |
-| `POSTGRES_VERSION` | Version de imagen PostgreSQL. |
+| Imagen PostgreSQL | Fijada en Compose como `postgres:16.13`; no debe depender de variable para evitar diferencias entre desarrollo y produccion. |
 | `POSTGRES_PORT` | Puerto publicado en host. |
 | `POSTGRES_USER` | Usuario administrador inicial. |
 | `POSTGRES_DB` | Base administrativa inicial. |
@@ -171,7 +171,7 @@ Ese comando no debe dejar un segundo contenedor PostgreSQL permanente.
 | `http://localhost/api/mock/` | `web-frontend-node:3000` |
 | `http://tecnotelec.localhost/` | `web-frontend-node:3001` |
 | `http://lexnova.localhost/` | `web-frontend-node:3002` |
-| `/api` | `api-backend-python:8000` |
+| `/api` | `api-multiproyecto:8000` |
 | `/static/` | `/app/web/static/` dentro de Nginx |
 
 Si una API distinta a `auth` debe exponerse por Nginx, agrega una ruta dedicada en `Docker.SW.Nginx/nginx.conf`.

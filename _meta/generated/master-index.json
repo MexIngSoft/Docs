@@ -4017,7 +4017,7 @@
   },
   {
     "path": "agents/AGENTS-000.md",
-    "title": "INSTRUCCIÓN — CIERRE PRODUCTIVO DE MEXINGSOF, REFAPART, TECNO TELEC Y JOBCron",
+    "title": "INSTRUCCIÓN CODEX — CIERRE DEV PRODUCTIVO REFAPART, MEXINGSOF, TECNO TELEC Y JOBCron",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -4025,7 +4025,7 @@
   },
   {
     "path": "agents/AGENTS-001.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "INSTRUCCIÓN CODEX — NORMALIZACIÓN DOCKER OFICIAL Y BLOQUEO DE SQLITE",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",

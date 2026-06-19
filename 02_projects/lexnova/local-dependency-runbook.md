@@ -41,7 +41,7 @@ NEXT_PUBLIC_LEXNOVA_GATEWAY_BASE_URL=http://localhost:8025/api/v1/projects/LEXNO
 
 `NEXT_PUBLIC_GATEWAY_BASE_URL` puede existir por compatibilidad con otros
 frontends del contenedor compartido. LexNova no debe depender de esa variable si
-apunta a `api-backend-python`, `:8008` u otro gateway de proyecto.
+apunta a un gateway de otro proyecto o a un puerto distinto del Gateway central.
 
 Gateway:
 

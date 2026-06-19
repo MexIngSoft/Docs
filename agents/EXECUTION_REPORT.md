@@ -93,6 +93,165 @@ queda vacio.
 
 ---
 
+## Ejecucion 2026-06-19 - Agent 001 antes de Agent 000, fijacion exacta Docker
+
+### Context Pack utilizado
+
+`Context Pack: standards/docker + operations + project runtime`.
+
+### Identificacion de alcance
+
+| Campo | Resultado |
+|---|---|
+| Tipo de tarea | Normalizacion Docker productiva y reevaluacion de agents activos |
+| Dominio afectado | `03_standards`, Docker operativo, runbooks de proyecto |
+| Proyecto afectado | Ecosistema multiproyecto Comercial Platform |
+| APIs afectadas | Auth, Gateway, Catalog, Inventory, Pricing, Supplier, Procurement, Sales, RefaPart, TecnoTelec, JobCron por contenedor compartido |
+| Frontend afectado | Webs Next.js multiproyecto por contenedor compartido |
+| Integracion afectada | Ninguna externa directa |
+
+### Agents ejecutados
+
+| Agent | Orden real | Estado | Resultado |
+|---|---:|---|---|
+| `AGENTS-001.md` | 1 | Parcial | Se ejecutaron las tareas de normalizacion Docker aplicables: imagenes exactas, nombres oficiales y eliminacion de referencias activas a contenedores antiguos. No se limpio el agent porque aun requiere validacion operativa completa de arranque/migraciones dentro de Docker. |
+| `AGENTS-000.md` | 2 | Parcial | Se reevalua despues de `AGENTS-001.md`. Disminuyen bloqueos de Docker por nombres/versiones, pero siguen bloqueos productivos de repositorio Gateway remoto y validacion integral runtime. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
+- `Docs/03_standards/docker/docker-compose-project-standard.md`
+- `Docs/03_standards/operations/docker-recovery-runbook.md`
+- `Docs/03_standards/operations/scripts/Start-WorkspaceDocker.ps1`
+- `Docker.DB.PG/docker-compose.yml`
+- `Docker.DB.PG/docker-compose.master.db.yml`
+- `Docker.API.PY/Dockerfile`
+- `Docker.API.PY/Dockerfile.api.base`
+- `Docker.API.PY/docker-compose.yml`
+- `Docker.API.PY/docker-compose.master.api.yml`
+- `Docker.API.PY/docker-compose.refapart.api.yml`
+- `Docker.API.PY/.env.example`
+- `Docker.API.PY/start.sh`
+- `Docker.API.PY/README.docker.md`
+- `Docker.WEB.NJ/Dockerfile`
+- `Docker.WEB.NJ/Dockerfile.web.base`
+- `Docker.WEB.NJ/docker-compose.yml`
+- `Docker.WEB.NJ/docker-compose.master.web.yml`
+- `Docker.WEB.NJ/docker-compose.refapart.yml`
+- `Docker.WEB.NJ/docker-compose.refapart.web.yml`
+- `Docker.WEB.NJ/docker-compose.mexingsof.web.yml`
+- `Docker.SW.Nginx/Dockerfile`
+- `Docker.SW.Nginx/docker-compose.yml`
+- `Docker.SW.Nginx/nginx.conf`
+- `Docker.SW.Nginx/README.md`
+- `Docs/02_projects/refapart/local-runbook.md`
+- `Docs/02_projects/tecnotelec/00_initial_stage_readiness_review.md`
+- `Docs/02_projects/tecnotelec/frontend/20_manual_review_checklist_and_ports.md`
+- `Docs/02_projects/lexnova/local-dependency-runbook.md`
+- `Docs/02_projects/lexnova/architecture.md`
+
+### Archivos modificados
+
+- `Docker.DB.PG/docker-compose.yml`
+- `Docker.API.PY/Dockerfile`
+- `Docker.API.PY/Dockerfile.api.base`
+- `Docker.API.PY/docker-compose.yml`
+- `Docker.API.PY/docker-compose.refapart.api.yml`
+- `Docker.API.PY/.env.example`
+- `Docker.API.PY/start.sh`
+- `Docker.API.PY/README.docker.md`
+- `Docker.WEB.NJ/docker-compose.refapart.yml`
+- `Docker.WEB.NJ/docker-compose.refapart.web.yml`
+- `Docker.WEB.NJ/docker-compose.mexingsof.web.yml`
+- `Docker.SW.Nginx/nginx.conf`
+- `Docker.SW.Nginx/README.md`
+- `Docs/03_standards/docker.md`
+- `Docs/03_standards/docker/docker-compose-project-standard.md`
+- `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
+- `Docs/03_standards/operations/docker-recovery-runbook.md`
+- `Docs/03_standards/operations/scripts/Start-WorkspaceDocker.ps1`
+- `Docs/02_projects/refapart/local-runbook.md`
+- `Docs/02_projects/tecnotelec/00_initial_stage_readiness_review.md`
+- `Docs/02_projects/tecnotelec/frontend/20_manual_review_checklist_and_ports.md`
+- `Docs/02_projects/lexnova/local-dependency-runbook.md`
+- `Docs/02_projects/lexnova/architecture.md`
+- `Docs/_meta/generated/master-index.json`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### Imagenes Docker exactas definidas
+
+| Rol | Contenedor oficial | Imagen exacta |
+|---|---|---|
+| Base de datos | `db-postgresql` | `postgres:16.13` |
+| APIs Django | `api-multiproyecto` | `python:3.10.19-slim-bookworm` |
+| Webs Next.js | `web-frontend-node` | `node:20.19.0-bookworm-slim` |
+| Proxy | `nginx` | `nginx:1.24.0` |
+
+### APIs reutilizadas
+
+- No se creo API nueva.
+- Se conserva el contenedor API multiproyecto y las rutas existentes para Auth, Gateway y APIs core.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `docker compose -f Docker.DB.PG\docker-compose.yml config --quiet` | OK |
+| `docker compose -f Docker.API.PY\docker-compose.yml config --quiet` | OK |
+| `docker compose -f Docker.WEB.NJ\docker-compose.yml config --quiet` | OK |
+| `docker compose -f Docker.SW.Nginx\docker-compose.yml config --quiet` | OK |
+| `docker compose -f Docker.DB.PG\docker-compose.master.db.yml config --quiet` | OK |
+| `docker compose -f Docker.API.PY\docker-compose.master.api.yml config --quiet` | OK |
+| `docker compose -f Docker.WEB.NJ\docker-compose.master.web.yml config --quiet` | OK |
+| `rg "sqlite|sqlite3|db\.sqlite" Docker.API.PY Docker.DB.PG Docker.WEB.NJ Docker.SW.Nginx` | OK: sin coincidencias runtime en Docker. |
+| `rg "api-backend-python|api-refapart-python|web-refapart-node|web-mexingsof-node|gateway-db|jobcron-db|POSTGRES_VERSION" ...` | OK operativo: solo quedan coincidencias en historial del reporte, en el agent activo y en la lista de nombres prohibidos del estandar. |
+| `python scripts/build_master_index.py` | OK: genero `_meta/generated/master-index.json` con 555 entradas. |
+| `python scripts/validate_frontmatter.py` | OK tecnico: 521 documentos sin front matter historico, 0 incomplete, 0 malformed. |
+| `git diff --check` | OK tecnico: solo advertencias LF/CRLF esperadas en Windows. |
+
+### Contradicciones detectadas
+
+- `AGENTS-001.md` pide corregir contenedores antiguos y a la vez conserva esos nombres en su propio texto como lista de bloqueos/prohibiciones. Se preserva el agent activo; la correccion se aplica solo a runtime y documentacion canonica.
+- Reportes historicos mencionan `api-backend-python`; no se reescribe historial porque `EXECUTION_REPORT.md` debe conservar evidencia de ejecuciones anteriores.
+- El cierre anterior del reporte indicaba que `AGENTS-000.md` y `AGENTS-001.md` quedaron vacios, pero en el estado actual ambos tienen contenido activo. Prevalece el estado real del filesystem; no se limpian por estar parciales.
+
+### Decisiones tomadas
+
+- Las imagenes Docker quedan fijas sin `latest` ni variables de version para evitar diferencias entre desarrollo y produccion.
+- Los contenedores oficiales quedan como `db-postgresql`, `api-multiproyecto`, `web-frontend-node` y `nginx`.
+- Los overrides focalizados no deben cambiar `container_name`.
+- `POSTGRES_VERSION` deja de ser variable operativa documentada; PostgreSQL queda fijado como `postgres:16.13`.
+
+### Pendientes reales
+
+- PENDIENTE_DE_DEFINIR: ejecutar arranque integral Docker con DB, API, Web y Nginx y validar endpoints reales despues de confirmar secretos locales.
+- PENDIENTE_DE_DEFINIR: confirmar permisos `CREATEDB` y migraciones reales dentro de `api-multiproyecto` para todos los proyectos afectados.
+- PENDIENTE_DE_DEFINIR: publicar o corregir remoto de `API.PY.DJANGO.Gateway`; el remoto conocido devuelve `Repository not found`.
+- PENDIENTE_DE_DEFINIR: cerrar completamente `AGENTS-000.md` cuando Gateway remoto y validacion productiva integral queden resueltos.
+
+### Riesgos detectados
+
+- Si un compose externo aun usa `container_name` propio, puede recrear la misma falla de DNS interno.
+- Si produccion usa imagenes distintas a la matriz fijada, los builds pueden comportarse diferente.
+- Si se limpia un agent parcial, se perderia trazabilidad del bloqueo real.
+
+### Agents limpiados, bloqueados o pendientes
+
+- No se elimino, movio ni reemplazo ningun `AGENTS-*.md`.
+- No se vacio `AGENTS-001.md` porque queda parcial hasta validar arranque/migraciones/endpoints.
+- No se vacio `AGENTS-000.md` porque queda parcial por bloqueo de Gateway remoto y validacion productiva integral.
+- `AGENTS-002.md` a `AGENTS-030.md` no se ejecutaron en esta corrida porque la instruccion explicita pidio `AGENTS-001.md` y despues `AGENTS-000.md`.
+
+---
+
 ## Ejecucion 2026-06-19 - AGENTS-000 desarrollo dev productivo parcial
 
 ### Context Pack utilizado

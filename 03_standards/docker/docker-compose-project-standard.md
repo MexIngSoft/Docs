@@ -52,6 +52,20 @@ jobcron_network
 Todos los compose master, compose base y overlays deben usar
 `jobcron_network`.
 
+Los overlays por proyecto no deben cambiar `container_name`. Los nombres
+oficiales son:
+
+```text
+db-postgresql
+api-multiproyecto
+web-frontend-node
+nginx
+```
+
+Las imagenes Docker deben estar fijadas a version exacta en los Dockerfile y
+compose base. No se permite usar `latest` ni variables para elegir version de
+imagen en ejecucion productiva.
+
 `crejo` queda OBSOLETO / RECHAZADO / NO USAR y no debe usarse en
 documentacion activa, compose nuevos, scripts nuevos ni refactors.
 

@@ -165,7 +165,7 @@ function Test-TcpPort {
 
 function Get-ApiProcessPorts {
     try {
-        $output = docker exec api-backend-python sh -lc "python - <<'PY'
+        $output = docker exec api-multiproyecto sh -lc "python - <<'PY'
 import os, re
 ports = []
 for pid in sorted([p for p in os.listdir('/proc') if p.isdigit()], key=int):

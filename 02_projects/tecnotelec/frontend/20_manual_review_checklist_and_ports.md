@@ -24,7 +24,7 @@ http://localhost:3002
 Tecno Telec dentro de Docker debe consumir Gateway por red interna:
 
 ```text
-http://api-backend-python:8008
+http://api-multiproyecto:8025/api/v1/projects/TECNOTELEC
 ```
 
 Cuando se pruebe sin Docker, puede usarse:
@@ -106,7 +106,7 @@ Mitigacion implementada:
 
 - Timeout corto para llamadas al Gateway desde la web.
 - Timeout local recomendado: `1000 ms` para no bloquear la experiencia cuando Gateway no responde.
-- URL interna Docker para Gateway: `http://api-backend-python:8008`.
+- URL interna Docker para Gateway: `http://api-multiproyecto:8025/api/v1/projects/TECNOTELEC`.
 - Estados vacios en lugar de esperar indefinidamente o inventar contenido.
 - `next dev` se ejecuta con Turbopack en Docker para reducir la compilacion inicial de rutas.
 - El Gateway consulta Pricing, Inventory y Supplier en paralelo para evitar que el listado espere producto por producto.

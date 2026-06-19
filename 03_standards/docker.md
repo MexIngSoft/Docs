@@ -44,6 +44,20 @@ El entorno local usa varios compose separados bajo el proyecto Docker
 - `Docker.WEB.NJ`: frontend Next.js.
 - `Docker.SW.Nginx`: proxy local de entrada.
 
+Los contenedores operativos oficiales son:
+
+```text
+db-postgresql
+api-multiproyecto
+web-frontend-node
+nginx
+```
+
+Las imagenes base quedan fijadas con version exacta en
+`Docs/03_standards/docker/jobcron-official-docker-architecture.md`. No se deben
+usar tags flotantes ni variables como mecanismo principal de versionado de
+imagen.
+
 Por estrategia de costos, las APIs y webs pueden agruparse en contenedores multiproyecto. Esa agrupacion no permite compartir configuracion de proyecto. La regla oficial es:
 
 ```txt

@@ -28,7 +28,7 @@ La etapa inicial ya cubre la experiencia publica principal:
 |---|---|
 | Contenedor web | Activo en `web-frontend-node`, puertos `3000-3002`. |
 | Tecno Telec web | Activa en `http://localhost:3001`. |
-| Contenedor APIs | Activo y saludable en `api-backend-python`. |
+| Contenedor APIs | Activo y saludable en `api-multiproyecto`. |
 | Base PostgreSQL | Activa y saludable. |
 | Nginx | Activo y saludable. |
 | Worker SYSCOM | Activo, procesando categorias. |
