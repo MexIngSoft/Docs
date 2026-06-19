@@ -73,6 +73,24 @@ Las imagenes Docker deben estar fijadas a version exacta en los Dockerfile y
 compose base. No se permite usar `latest` ni variables para elegir version de
 imagen en ejecucion productiva.
 
+Los servicios con `build:` deben declarar tambien `image:` con nombre oficial y
+tag exacto. Sin `image:`, Docker Compose genera imagenes locales con nombres
+derivados del directorio y tag `latest`, lo cual queda prohibido. Los nombres
+oficiales de imagen runtime son:
+
+```text
+api-multiproyecto:3.10.19-slim-bookworm
+web-frontend-node:20.19.0-bookworm-slim
+nginx:1.24.0
+postgres:16.13
+```
+
+Para probar proyectos de forma focalizada no se crean contenedores alternos.
+Se mantiene el contenedor oficial de la capa y se seleccionan procesos con
+`API_PROJECTS` o `WEB_PROJECTS`. Si el contenedor ya esta corriendo, el cambio
+de seleccion requiere reiniciar el servicio oficial con la nueva variable; no
+requiere crear otro contenedor ni cambiar `container_name`.
+
 `crejo` queda OBSOLETO / RECHAZADO / NO USAR y no debe usarse en
 documentacion activa, compose nuevos, scripts nuevos ni refactors.
 

@@ -35,6 +35,48 @@ Ejecuta desde la raiz del workspace:
 powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\Start-WorkspaceDocker.ps1
 ```
 
+## Pruebas focalizadas por proyecto
+
+Cuando el equipo local no soporte levantar todos los procesos al mismo tiempo,
+se permite probar un proyecto a la vez sin crear contenedores alternos. La
+regla es mantener los contenedores oficiales y cambiar solo la seleccion de
+procesos:
+
+```text
+db-postgresql
+api-multiproyecto
+web-frontend-node
+nginx
+```
+
+Ejemplo API:
+
+```powershell
+$env:API_PROJECTS="auth gateway jobcron search"
+docker compose -f Docker.API.PY\docker-compose.yml up -d --no-build api-multiproyecto
+```
+
+Ejemplo Web:
+
+```powershell
+$env:WEB_PROJECTS="mexingsof"
+docker compose -f Docker.WEB.NJ\docker-compose.yml up -d --no-build web-frontend-node
+```
+
+Si se requiere cambiar `API_PROJECTS` o `WEB_PROJECTS`, se reinicia el servicio
+oficial con la nueva variable. No se debe crear otro `container_name`, no se
+deben crear imagenes con `latest` y no se deben conservar imagenes derivadas de
+directorios como `dockerapipy-*`, `dockerwebnj-*` o `crejo-*`.
+
+Imagenes runtime oficiales:
+
+```text
+postgres:16.13
+api-multiproyecto:3.10.19-slim-bookworm
+web-frontend-node:20.19.0-bookworm-slim
+nginx:1.24.0
+```
+
 Si necesitas liberar puertos reservados antes de arrancar:
 
 ```powershell

@@ -280,14 +280,22 @@ variables para versionar imagen base.
 | Capa | Archivo | Imagen exacta obligatoria |
 |---|---|---|
 | DB | `Docker.DB.PG/docker-compose.yml` | `postgres:16.13` |
-| APIs | `Docker.API.PY/Dockerfile.api.base` | `python:3.10.19-slim-bookworm` |
+| APIs runtime | `Docker.API.PY/docker-compose.yml` | `api-multiproyecto:3.10.19-slim-bookworm` |
+| APIs base | `Docker.API.PY/Dockerfile.api.base` | `python:3.10.19-slim-bookworm` |
 | APIs compatibilidad | `Docker.API.PY/Dockerfile` | `python:3.10.19-slim-bookworm` |
-| Webs | `Docker.WEB.NJ/Dockerfile.web.base` | `node:20.19.0-bookworm-slim` |
+| Webs runtime | `Docker.WEB.NJ/docker-compose.yml` | `web-frontend-node:20.19.0-bookworm-slim` |
+| Webs base | `Docker.WEB.NJ/Dockerfile.web.base` | `node:20.19.0-bookworm-slim` |
 | Webs compatibilidad | `Docker.WEB.NJ/Dockerfile` | `node:20.19.0-bookworm-slim` |
-| Nginx | `Docker.SW.Nginx/Dockerfile` | `nginx:1.24.0` |
+| Nginx runtime | `Docker.SW.Nginx/docker-compose.yml` | `nginx:1.24.0` |
+| Nginx base | `Docker.SW.Nginx/Dockerfile` | `nginx:1.24.0` |
 
 Si se actualiza una imagen, se debe cambiar esta matriz y validar el stack
 completo. No se debe actualizar solo el Dockerfile o solo el compose.
+
+Para pruebas focalizadas por proyecto se activan procesos dentro de los
+contenedores oficiales usando `API_PROJECTS` y `WEB_PROJECTS`. Bajar un
+proyecto significa dejar de ejecutar sus procesos en el contenedor oficial, no
+eliminar el contenedor ni crear un contenedor por proyecto.
 
 ## Actualizacion de APIs compartidas
 
