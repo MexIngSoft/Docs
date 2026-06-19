@@ -4232,14 +4232,6 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
-    "path": "agents/mexingsof-page/mexingsof-page/README.md",
-    "title": "MexIngSof Web",
-    "domain": "agents",
-    "status": "unknown",
-    "priority": "unknown",
-    "owner": "PENDIENTE_DE_DEFINIR"
-  },
-  {
     "path": "agents/RUN_AGENTS_INSTRUCTIONS.md",
     "title": "Instrucciones para correr agents",
     "domain": "agents",

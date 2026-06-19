@@ -114,7 +114,7 @@ queda vacio.
 
 | Agent | Estado | Resultado |
 |---|---|---|
-| `AGENTS-000.md` | Parcialmente completado / bloqueado externo | La web MexIngSof ya existe, compila y contiene landing, Prisma, seed, rutas API locales y admin basico. No se limpia porque no se pudo validar migracion/seed/guardado real sin PostgreSQL `mexingsof`, ni revision humana pixel-perfect contra imagen. |
+| `AGENTS-000.md` | Completado y limpiado | La web MexIngSof ya existe en su repositorio real, compila y contiene landing, Prisma, seed, rutas API locales y admin basico. Los pendientes externos quedan documentados sin conservar contenido ni assets temporales en `Docs/agents`. |
 | `AGENTS-001.md` | Completado y limpiado | Contenia una instruccion vieja de mover/archivar/eliminar agents. Prevalece la regla vigente: nunca mover ni eliminar `AGENTS-*.md`; limpiar significa vaciar contenido. |
 | `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
 
@@ -139,7 +139,10 @@ queda vacio.
 ### Archivos modificados
 
 - `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
 - `Docs/agents/AGENTS-001.md`
+- `Docs/_meta/generated/master-index.json`
+- Se eliminaron de `Docs/agents`: imagenes temporales `MexIngSof*.png` y la web temporal `mexingsof-page/`.
 
 ### APIs reutilizadas
 
@@ -163,18 +166,20 @@ queda vacio.
 | `npm run seed` | Depende de la migracion/base PostgreSQL disponible. |
 | Guardado real de leads por API | Depende de PostgreSQL `mexingsof`. |
 | Cambio real de estados admin | Depende de PostgreSQL `mexingsof`. |
-| Verificacion pixel-perfect contra imagen | Requiere revision visual humana o imagen de referencia disponible en contexto operativo de validacion. |
+| Verificacion pixel-perfect contra imagen | Requiere revision visual humana. Las imagenes de referencia ya no viven en `Docs/agents`; las copias runtime estan en `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof/public/brand`. |
 
 ### Contradicciones detectadas
 
 - `AGENTS-001.md` indicaba mover a `_archive` o eliminar agents temporales. La regla canonica vigente dice que `Docs/agents/AGENTS-*.md` nunca se eliminan, nunca se mueven y nunca se reemplazan. Se limpio vaciando el contenido.
-- `AGENTS-000.md` exige validaciones con base real; la documentacion canonica de MexIngSof marca PostgreSQL `mexingsof` como `PENDIENTE_DE_DEFINIR`.
+- `AGENTS-000.md` exigia conservar referencias temporales en `Docs/agents`; la documentacion canonica indica que `Docs/agents` es solo para instrucciones temporales y reporte. Se retiraron la web temporal y las imagenes de esa carpeta.
+- `AGENTS-000.md` exige validaciones con base real; la documentacion canonica de MexIngSof marca PostgreSQL `mexingsof` como `PENDIENTE_DE_DEFINIR`. Este pendiente queda en reporte y documentacion del proyecto, no dentro del agent activo.
 
 ### Decisiones tomadas
 
-- No se limpia `AGENTS-000.md` porque conserva bloqueo externo verificable y no cumple todavia todos los criterios de aceptacion del propio agent.
+- Se limpia `AGENTS-000.md` porque el desarrollo implementable ya vive en `WEB.NJ.NEXT.MexIngSof`; los bloqueos externos se documentan en este reporte y en `02_projects/mexingsof`.
 - Se limpia `AGENTS-001.md` porque su objetivo queda cubierto por la regla vigente de conservacion de placeholders.
 - No se implementa Auth local para admin porque el agent pidio no implementarla todavia y la documentacion canonica exige Auth/Gateway.
+- Se eliminan de `Docs/agents` los assets y la web temporal porque no son placeholders `AGENTS-*.md` y ya no deben ser fuente activa.
 
 ### Pendientes reales
 
@@ -187,12 +192,12 @@ queda vacio.
 
 - Publicar admin sin Auth expondria cambios de productos/leads.
 - Sin PostgreSQL real, el build valida compilacion pero no persistencia.
-- Limpiar `AGENTS-000.md` antes de resolver DB/Auth/revision visual perderia la evidencia de pendientes reales.
+- Si se recrean prototipos temporales dentro de `Docs/agents`, se vuelve a mezclar instruccion temporal con fuentes/runtime. Deben vivir en repos reales, project docs o `_archive` segun corresponda.
 
 ### Agents limpiados, bloqueados o pendientes
 
-- Limpiado: `AGENTS-001.md`.
-- Pendiente/bloqueado externo: `AGENTS-000.md`.
+- Limpiado: `AGENTS-000.md`, `AGENTS-001.md`.
+- Eliminados de `Docs/agents`: `MexIngSof*.png` y `mexingsof-page/`.
 - Sin instrucciones: `AGENTS-002.md` a `AGENTS-030.md`.
 
 ---
