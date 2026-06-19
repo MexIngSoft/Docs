@@ -3512,6 +3512,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "03_standards/operations/project-docker-dependency-map.md",
+    "title": "Mapa Docker de dependencias por proyecto",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "03_standards/operations/provider-integration-standard.md",
     "title": "Estandar para integrar proveedores",
     "domain": "standards",

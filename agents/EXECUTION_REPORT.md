@@ -12835,6 +12835,143 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 
 ---
 
+## Ejecucion 2026-06-19 - Agents activos 000, 001 y 002
+
+### Context Pack utilizado
+
+- Context Pack Docker/operaciones:
+  - `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
+  - `Docs/03_standards/docker/grouped-containers-isolated-config.md`
+  - `Docs/03_standards/docker/project-docker-execution-documents.md`
+  - `Docs/03_standards/operations/local-port-registry.md`
+  - `Docs/03_standards/operations/git-repository-map.md`
+- Context Pack APIs/Gateway:
+  - `Docs/01_core_erp/apis/00_api_index.md`
+  - `Docs/01_core_erp/architecture/07_project_api_pattern.md`
+  - `Docs/03_standards/architecture/api-gateway-standard.md`
+- Context Pack proyectos:
+  - `Docs/02_projects/mexingsof/README.md`
+  - `Docs/02_projects/mexingsof/frontend.md`
+  - `Docs/02_projects/mexingsof/api-contracts.md`
+  - `Docs/02_projects/mexingsof/local-runbook.md`
+  - `Docs/02_projects/refapart/README.md`
+  - `Docs/02_projects/refapart/architecture.md`
+  - `Docs/02_projects/refapart/frontend.md`
+  - `Docs/02_projects/refapart/api-contracts.md`
+  - `Docs/02_projects/refapart/database.md`
+  - `Docs/02_projects/refapart/local-runbook.md`
+  - `Docs/02_projects/tecnotelec/README.md`
+  - `Docs/02_projects/tecnotelec/local-runbook.md`
+  - `Docs/02_projects/tecnotelec/tasks/01_required_apis.md`
+  - `Docs/02_projects/tecnotelec/tasks/04_development_order.md`
+  - `Docs/02_projects/jobcron/README.md`
+  - `Docs/02_projects/jobcron/api-contracts.md`
+  - `Docs/02_projects/jobcron/local-runbook.md`
+  - `Docs/02_projects/jobcron/feature-availability.md`
+
+### Agents ejecutados
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Parcial | Se revisaron todas sus instrucciones activas. Se implemento la parte ejecutable de Docker por proyecto y se validaron REFAPART, MexIngSof, TecnoTelec y JobCron. No se marca completado porque contiene desarrollos de negocio/API sin contrato canonico final. |
+| `AGENTS-001.md` | Parcial | Se valido que no hay SQLite activo en `Docker.API.PY` y que PostgreSQL oficial esta levantado. Queda parcial por falta de datos/usuarios finales canonicos por proyecto. |
+| `AGENTS-002.md` | Completado operativo | Se crearon scripts start/stop/status/health por proyecto, mapa de dependencias Docker y enlaces desde estandares. |
+| `AGENTS-003.md` - `AGENTS-030.md` | No aplicable | Archivos vacios, sin tareas ejecutables. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-002.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/00_audit/10_development_gap_analysis.md`
+- `Docs/01_core_erp/apis/00_api_index.md`
+- `Docs/01_core_erp/architecture/07_project_api_pattern.md`
+- `Docs/03_standards/architecture/api-gateway-standard.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docs/02_projects/_ecosystem/04_process_convergence_and_conflicts.md`
+
+### Archivos modificados
+
+- `Docs/03_standards/operations/scripts/docker/projects/Invoke-WorkspaceProjectDocker.ps1`
+- `Docs/03_standards/operations/scripts/docker/projects/start-*.ps1`
+- `Docs/03_standards/operations/scripts/docker/projects/stop-*.ps1`
+- `Docs/03_standards/operations/scripts/docker/projects/status-all.ps1`
+- `Docs/03_standards/operations/scripts/docker/projects/healthcheck-all.ps1`
+- `Docs/03_standards/operations/scripts/docker/projects/clean-safe.ps1`
+- `Docs/03_standards/operations/project-docker-dependency-map.md`
+- `Docs/03_standards/docker/project-docker-execution-documents.md`
+- `Docs/03_standards/operations/local-port-registry.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### APIs reutilizadas
+
+- REFAPART: `auth`, `gateway`, `refapart`, `address`, `search`.
+- MexIngSof: `auth`, `gateway`, `jobcron`, `search`.
+- TecnoTelec: `auth`, `gateway`, `catalog`, `inventory`, `pricing`, `procurement`, `sales`, `supplier`, `tecnotelec`, `customization`, `search`.
+- JobCron: `auth`, `gateway`, `jobcron`, `leadhunter`, `search`.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Parser PowerShell para todos los scripts `Docs/03_standards/operations/scripts/docker/projects/*.ps1` | OK. |
+| `docker compose -p comercial_platform -f Docker.DB.PG/docker-compose.master.db.yml -f Docker.API.PY/docker-compose.master.api.yml -f Docker.WEB.NJ/docker-compose.master.web.yml -f Docker.SW.Nginx/docker-compose.master.nginx.yml config --quiet` | OK. |
+| `docker ps` | OK: solo contenedores oficiales `db-postgresql`, `api-multiproyecto`, `web-frontend-node`, `nginx`. |
+| `docker network inspect jobcron_network --format "network={{.Name}} containers={{len .Containers}}"` | OK: `jobcron_network` con 4 contenedores. |
+| `docker exec db-postgresql psql -U postgres -tAc "SELECT datname ..."` | OK: bases detectadas `auth`, `comercial`, `jobcron`, `lexnova`, `postgres`. |
+| `rg "sqlite|sqlite3|db.sqlite|SQLITE" Docker.API.PY ...` | OK: sin SQLite activo en configuraciones Python/env/compose revisadas. |
+| REFAPART `start-refapart.ps1` + health posterior | OK: Gateway HTTP 200, Web HTTP 200, APIs cargadas `auth gateway refapart address search`. |
+| MexIngSof `start-mexingsof.ps1` + health posterior | OK: Gateway HTTP 200, Web HTTP 200, APIs cargadas `auth gateway jobcron search`. Riesgo: warning Prisma/OpenSSL. |
+| TecnoTelec `start-tecnotelec.ps1` + health posterior | OK: Gateway HTTP 200, Web HTTP 200, APIs core reutilizadas cargadas. |
+| JobCron `start-jobcron.ps1` + health posterior | OK: Gateway HTTP 200, Web HTTP 200, APIs cargadas `auth gateway jobcron leadhunter search`. |
+| Imagrafity `start-imagrafity.ps1` + validacion IPv4 | OK: Web HTTP 200 en `127.0.0.1:3006`, Gateway HTTP 200. |
+| `healthcheck-all.ps1` | Parcial: el comando global excedio timeout local; se reemplazo por validaciones puntuales por proyecto. |
+
+### Contradicciones detectadas
+
+- Las instrucciones de agents piden completar desarrollos de negocio/API, pero la documentacion canonica mantiene `PENDIENTE_DE_DEFINIR` en integraciones finales de MexIngSof y en APIs/contratos futuros de TecnoTelec. Prevalece la documentacion canonica.
+- Algunas validaciones con `localhost` en Windows pueden colgar por resolucion local; se normalizaron scripts a `127.0.0.1` para validaciones locales.
+- `healthcheck-all.ps1` es util como inventario, pero probar todos los proyectos en una sola corrida puede exceder tiempos locales por instalacion/compilacion inicial de Next. La prueba canonica queda por proyecto.
+
+### Decisiones tomadas
+
+- El contenedor profesional y oficial para APIs sigue siendo `api-multiproyecto` con imagen `api-multiproyecto:3.10.19-slim-bookworm`.
+- El contenedor profesional y oficial para webs sigue siendo `web-frontend-node` con imagen `web-frontend-node:20.19.0-bookworm-slim`.
+- La base de datos oficial sigue siendo `db-postgresql` con imagen `postgres:16.13`.
+- Nginx oficial sigue siendo `nginx` con imagen `nginx:1.24.0`.
+- Se documentaron scripts por proyecto para activar/desactivar desarrollos sin borrar volumenes ni crear contenedores por proyecto.
+- Se usa `127.0.0.1` en healthchecks para evitar falsos negativos por resolucion `localhost`.
+
+### Pendientes reales
+
+- `AGENTS-000.md`: no puede limpiarse porque todavia contiene tareas de desarrollo que dependen de contratos y datos reales no definidos.
+- MexIngSof: `PENDIENTE_DE_DEFINIR` contrato final de Auth/CRM/JobCron y destino persistente real de leads; no se debe inventar una API nueva si Gateway/Search/JobCron cubren parte del caso.
+- TecnoTelec: `PENDIENTE_DE_DEFINIR` Quote API, Rules Engine, Projects API y ChannelAssortment; la documentacion los marca como faltantes/futuros y no hay contrato canonico suficiente para implementarlos sin inventar.
+- PostgreSQL: `PENDIENTE_DE_DEFINIR` usuarios/esquemas finales por proyecto fuera de las bases ya detectadas.
+- LeadHunter: `PENDIENTE_DE_DEFINIR` remote GitHub para repos locales sin remoto documentado.
+
+### Riesgos detectados
+
+- MexIngSof emite warning de Prisma/OpenSSL en el contenedor Node. No rompe la prueba actual, pero debe corregirse en imagen o Dockerfile antes de produccion si Prisma queda dentro del runtime.
+- Las primeras compilaciones Next pueden tardar mas que el primer healthcheck; la validacion debe considerar espera posterior antes de marcar fallo.
+- Completar `AGENTS-000.md` sin contratos canonicos podria crear APIs duplicadas o mezclar proyecto con core ERP.
+
+### Agents limpiados, bloqueados o pendientes
+
+- No se elimino ni movio ningun `Docs/agents/AGENTS-*.md`.
+- No se limpio `AGENTS-000.md`, `AGENTS-001.md` ni `AGENTS-002.md` porque los archivos tienen contenido activo en el workspace actual.
+- `AGENTS-002.md` queda completado operativamente, pero no se vacio para evitar borrar instrucciones mientras `AGENTS-000.md` y `AGENTS-001.md` siguen parciales.
+- `AGENTS-003.md` a `AGENTS-030.md` permanecen vacios.
+
+---
+
 ## Ejecucion 2026-06-18 - Endurecimiento Codex y cierre documental REFAPART
 
 ### Context Pack utilizado

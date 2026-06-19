@@ -45,6 +45,12 @@ docker compose -p comercial_platform -f Docker.DB.PG\docker-compose.master.db.ym
 
 ## Documentos y overlays por proyecto
 
+El mapa operativo de dependencias y scripts vive en:
+
+```text
+Docs/03_standards/operations/project-docker-dependency-map.md
+```
+
 | Proyecto | Runbook canonico | DB auxiliar | API auxiliar | Web auxiliar | Estado |
 |---|---|---|---|---|---|
 | DocuCore | `Docs/02_projects/docucore/local-runbook.md` | `Docker.DB.PG/docker-compose.docucore.db.yml` | `Docker.API.PY/docker-compose.docucore.api.yml` | `Docker.WEB.NJ/docker-compose.docucore.web.yml` | Definido |

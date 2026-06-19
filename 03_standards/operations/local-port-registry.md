@@ -245,6 +245,32 @@ Regla: una API puede responder `404` en `/` y estar correctamente cargada. Para
 validar disponibilidad se debe revisar proceso, puerto TCP y una ruta propia del
 servicio cuando exista.
 
+## Scripts Docker por proyecto
+
+Scripts:
+
+```text
+Docs/03_standards/operations/scripts/docker/projects
+```
+
+Estos scripts activan proyectos dentro de los contenedores oficiales
+`db-postgresql`, `api-multiproyecto`, `web-frontend-node` y `nginx`, usando
+`comercial_platform` y `jobcron_network`. No crean contenedores por proyecto y
+no ejecutan `docker volume prune`.
+
+Mapa de dependencias:
+
+```text
+Docs/03_standards/operations/project-docker-dependency-map.md
+```
+
+Ejemplo REFAPART:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\docker\projects\start-refapart.ps1 -Build
+powershell -NoProfile -ExecutionPolicy Bypass -File Docs\03_standards\operations\scripts\docker\projects\stop-refapart.ps1
+```
+
 ## Orden operativo recomendado
 
 1. Ejecutar `Start-WorkspaceDocker.ps1`.
