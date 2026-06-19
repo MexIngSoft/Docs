@@ -61,6 +61,8 @@ PARTIAL
 | Web admin | Rutas `admin/refapart`, `dashboard`, solicitudes, proveedores, quote, settings, productos, busquedas, demanda, cotizaciones, pedidos, logistica y auditoria. | EXISTE_EN_CODIGO |
 | API modelos | `Product`, `SearchQuery`, `PartRequest`, `Supplier`, `SupplierOffer`, `Quote`, `Order`, `SupplierMessage`, `LogisticsTask`, `AuditLog`. | EXISTE_EN_CODIGO |
 | API endpoints | Productos, busqueda, solicitudes, checkout, admin solicitudes, proveedores, productos, search logs, quotes, orders, logistics, audit y dashboard. | EXISTE_EN_CODIGO |
+| API cliente | Solicitudes, cotizaciones, pedidos, tracking visible y aceptar/rechazar cotizacion via Gateway. | EXISTE_EN_CODIGO |
+| API admin faltante | Asignacion de solicitud, actualizacion de proveedor y demanda no satisfecha. | EXISTE_EN_CODIGO |
 
 La evidencia anterior confirma existencia de codigo, no reemplaza pruebas
 runtime ni validacion Docker.
@@ -68,6 +70,8 @@ runtime ni validacion Docker.
 ## Validacion pendiente
 
 - PENDIENTE_DE_DEFINIR: validacion Docker completa con engine disponible.
-- PENDIENTE_DE_DEFINIR: pruebas runtime de Web, Gateway, Auth, Address y API REFAPART.
+- PENDIENTE_DE_DEFINIR: pruebas runtime integradas de Web, Gateway, Auth, Address y API REFAPART.
 - PENDIENTE_DE_DEFINIR: selector real de Address API en formularios cliente,
   checkout y proveedores.
+- PENDIENTE_DE_DEFINIR: PostgreSQL local accesible fuera de Docker para correr
+  tests sin `DATABASE_URL` temporal SQLite.

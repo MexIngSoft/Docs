@@ -44,12 +44,12 @@ NEXT_PUBLIC_GATEWAY_BASE_URL=http://localhost:8025/api/v1
 
 | Metodo | Ruta | Uso | Estado |
 |---|---|---|---|
-| `GET` | `/projects/REFAPART/me/requests` | Solicitudes del cliente. | PENDIENTE |
-| `GET` | `/projects/REFAPART/me/quotes` | Cotizaciones del cliente. | PENDIENTE |
-| `GET` | `/projects/REFAPART/me/orders` | Pedidos del cliente. | PENDIENTE |
-| `GET` | `/projects/REFAPART/me/orders/{id}/tracking` | Tracking visible. | PENDIENTE |
-| `POST` | `/projects/REFAPART/quotes/{id}/accept` | Aceptar cotizacion. | PENDIENTE |
-| `POST` | `/projects/REFAPART/quotes/{id}/reject` | Rechazar cotizacion. | PENDIENTE |
+| `GET` | `/projects/REFAPART/me/requests` | Solicitudes del cliente. | IMPLEMENTADO |
+| `GET` | `/projects/REFAPART/me/quotes` | Cotizaciones del cliente. | IMPLEMENTADO |
+| `GET` | `/projects/REFAPART/me/orders` | Pedidos del cliente. | IMPLEMENTADO |
+| `GET` | `/projects/REFAPART/me/orders/{id}/tracking` | Tracking visible. | IMPLEMENTADO |
+| `POST` | `/projects/REFAPART/quotes/{id}/accept` | Aceptar cotizacion. | IMPLEMENTADO |
+| `POST` | `/projects/REFAPART/quotes/{id}/reject` | Rechazar cotizacion. | IMPLEMENTADO |
 
 ## Endpoints admin requeridos
 
@@ -57,10 +57,10 @@ NEXT_PUBLIC_GATEWAY_BASE_URL=http://localhost:8025/api/v1
 |---|---|---|---|
 | `GET` | `/projects/REFAPART/admin/part-requests/{id}` | Detalle de solicitud. | IMPLEMENTADO_CON_GET_PATCH |
 | `PATCH` | `/projects/REFAPART/admin/part-requests/{id}` | Cambiar estado o asignacion. | IMPLEMENTADO_CON_GET_PATCH |
-| `POST` | `/projects/REFAPART/admin/part-requests/{id}/assign` | Asignar cotizador. | PENDIENTE |
-| `PATCH` | `/projects/REFAPART/admin/suppliers/{id}` | Actualizar proveedor. | PENDIENTE |
+| `POST` | `/projects/REFAPART/admin/part-requests/{id}/assign` | Asignar cotizador. | IMPLEMENTADO |
+| `PATCH` | `/projects/REFAPART/admin/suppliers/{id}` | Actualizar proveedor. | IMPLEMENTADO |
 | `GET` | `/projects/REFAPART/admin/search-logs` | Consultar logs de busqueda. | IMPLEMENTADO |
-| `GET` | `/projects/REFAPART/admin/demand` | Demanda no satisfecha. | PENDIENTE |
+| `GET` | `/projects/REFAPART/admin/demand` | Demanda no satisfecha. | IMPLEMENTADO |
 | `GET` | `/projects/REFAPART/admin/orders` | Pedidos operativos. | IMPLEMENTADO |
 | `GET` | `/projects/REFAPART/admin/logistics` | Seguimiento logistico. | IMPLEMENTADO |
 

@@ -1976,8 +1976,40 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "02_projects/mexingsof/api-contracts.md",
+    "title": "Contratos API MexIngSof",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/mexingsof/frontend.md",
+    "title": "Frontend MexIngSof",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/mexingsof/local-runbook.md",
+    "title": "Runbook local MexIngSof",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "02_projects/mexingsof/README.md",
     "title": "Mexingsof",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/mexingsof/tasks/00_mvp_gap_report.md",
+    "title": "MexIngSof MVP Gap Report",
     "domain": "business",
     "status": "unknown",
     "priority": "unknown",
@@ -4194,6 +4226,14 @@
   {
     "path": "agents/EXECUTION_REPORT.md",
     "title": "Ejecucion Agents - 2026-06-12 - Estructura documental de plataforma",
+    "domain": "agents",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "agents/mexingsof-page/mexingsof-page/README.md",
+    "title": "MexIngSof Web",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",

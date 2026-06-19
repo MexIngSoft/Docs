@@ -93,6 +93,168 @@ queda vacio.
 
 ---
 
+## Ejecucion 2026-06-18 - MexIngSof landing y cierre API cliente REFAPART
+
+### Context Packs usados
+
+- `Agents`: `AGENTS-000.md` activo con instruccion MexIngSof.
+- `CP-07 - Proyecto completo`: REFAPART y MexIngSof.
+- `CP-02 - Nueva pantalla frontend`: landing MexIngSof y admin basico.
+- `CP-03 - API reutilizable existente`: REFAPART API existente; no se creo API nueva.
+
+### Identificacion de alcance
+
+| Campo | Resultado |
+|---|---|
+| Tipo de tarea | Desarrollo web/API y documentacion canónica |
+| Dominio afectado | `02_projects/refapart`, `02_projects/mexingsof`, `agents` |
+| Proyecto afectado | REFAPART, MexIngSof |
+| APIs afectadas | REFAPART API existente, APIs Next.js locales MexIngSof |
+| Frontend afectado | `WEB.NJ.NEXT.RefaPart`, `Docs/agents/mexingsof-page/mexingsof-page` |
+| Integracion afectada | Address API documentada para REFAPART; Prisma/PostgreSQL para MexIngSof |
+
+### Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Parcial | Se desarrollo landing MexIngSof con Next.js/Prisma, APIs, seed, admin basico y documentacion. Queda parcial porque no hay PostgreSQL local/oficial para migrar/seed, no hay Auth admin, no existe repositorio web oficial y la equivalencia visual pixel-perfect requiere revision humana. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables adicionales. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/00_audit/codex-context-map.md`
+- `Docs/00_audit/10_development_gap_analysis.md`
+- `Docs/03_standards/operations/context-packs.md`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/03_standards/documentation-first-workflow.md`
+- `Docs/02_projects/refapart/README.md`
+- `Docs/02_projects/refapart/frontend.md`
+- `Docs/02_projects/refapart/api-contracts.md`
+- `Docs/02_projects/refapart/tasks/00_mvp_gap_report.md`
+- `Docs/02_projects/refapart/tasks/01_mvp_implementation_order.md`
+- `Docs/02_projects/mexingsof/README.md`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart/marketplace/views.py`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart/marketplace/urls.py`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart/marketplace/models.py`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/lib/api/refapart.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/mis-*`
+- `Docs/agents/mexingsof-page/mexingsof-page/*`
+
+### Archivos creados
+
+- `Docs/02_projects/mexingsof/frontend.md`
+- `Docs/02_projects/mexingsof/api-contracts.md`
+- `Docs/02_projects/mexingsof/local-runbook.md`
+- `Docs/02_projects/mexingsof/tasks/00_mvp_gap_report.md`
+- `Docs/agents/mexingsof-page/mexingsof-page/app/components/*`
+- `Docs/agents/mexingsof-page/mexingsof-page/app/admin/products/*`
+- `Docs/agents/mexingsof-page/mexingsof-page/app/admin/leads/*`
+- `Docs/agents/mexingsof-page/mexingsof-page/app/api/contact-leads/*`
+- `Docs/agents/mexingsof-page/mexingsof-page/app/api/products/[id]/route.ts`
+- `Docs/agents/mexingsof-page/mexingsof-page/public/brand/*`
+
+### Archivos modificados
+
+- `Docs/02_projects/mexingsof/README.md`
+- `Docs/02_projects/refapart/api-contracts.md`
+- `Docs/02_projects/refapart/tasks/00_mvp_gap_report.md`
+- `Docs/agents/mexingsof-page/mexingsof-page/package.json`
+- `Docs/agents/mexingsof-page/mexingsof-page/package-lock.json`
+- `Docs/agents/mexingsof-page/mexingsof-page/prisma/schema.prisma`
+- `Docs/agents/mexingsof-page/mexingsof-page/prisma/seed.ts`
+- `Docs/agents/mexingsof-page/mexingsof-page/app/page.tsx`
+- `Docs/agents/mexingsof-page/mexingsof-page/app/layout.tsx`
+- `Docs/agents/mexingsof-page/mexingsof-page/app/globals.css`
+- `Docs/agents/mexingsof-page/mexingsof-page/app/api/contact/route.ts`
+- `Docs/agents/mexingsof-page/mexingsof-page/app/api/products/route.ts`
+- `Docs/agents/mexingsof-page/mexingsof-page/README.md`
+- `Docs/agents/mexingsof-page/mexingsof-page/tsconfig.json`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart/marketplace/views.py`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart/marketplace/urls.py`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart/marketplace/tests.py`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/lib/api/refapart.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/mis-solicitudes/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/mis-cotizaciones/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/mis-pedidos/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/mis-pedidos/[id]/page.tsx`
+
+### APIs reutilizadas
+
+- REFAPART API existente: se completaron endpoints documentados sin crear API nueva.
+- Gateway General: la web REFAPART conserva consumo via cliente Gateway.
+- Address API: se mantiene como dependencia documentada; no se duplico catalogo de direcciones.
+- Auth API: pendiente para admin MexIngSof; no se creo Auth local.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm install` en MexIngSof page | OK; 2 vulnerabilidades moderadas reportadas por npm audit. |
+| `npm run prisma:generate` en MexIngSof page | OK; Prisma Client v6.19.3 generado. |
+| `npm run lint` en MexIngSof page | OK; `tsc --noEmit` sin errores. |
+| `npm run build` en MexIngSof page | OK; Next.js compila home, admin y APIs. |
+| `python manage.py check` en REFAPART API | OK. |
+| `python manage.py test marketplace` en REFAPART API con `DATABASE_URL` temporal SQLite | OK; 6 tests. |
+| `npm run build` en REFAPART web | OK; 37 rutas. |
+| `python scripts/build_master_index.py` en Docs | OK; genero `_meta/generated/master-index.json` con 551 entradas. |
+| `python scripts/validate_frontmatter.py` en Docs | OK tecnico; 517 documentos historicos sin front matter, 0 incomplete, 0 malformed. |
+| `git diff --check` en Docs | OK; solo advertencias LF/CRLF esperadas. |
+| `git diff --check` en REFAPART API | OK; solo advertencias LF/CRLF esperadas. |
+| `git diff --check` en REFAPART web | OK; solo advertencias LF/CRLF esperadas. |
+
+### Validaciones no ejecutadas
+
+| Validacion | Causa |
+|---|---|
+| `npx prisma migrate dev` MexIngSof | Falta PostgreSQL local/oficial `mexingsof`. |
+| `npm run seed` MexIngSof | Depende de migracion/base PostgreSQL disponible. |
+| Verificacion visual pixel-perfect en navegador | Requiere revision humana comparando contra `Docs/agents/MexIngSof.png`. |
+| REFAPART API tests contra PostgreSQL Docker | Host `db-postgresql` no resuelve fuera del entorno Docker local. |
+
+### Contradicciones detectadas
+
+- El agent pide borrar imagenes innecesarias, pero la regla canonica indica no borrar fuentes; se copiaron assets necesarios a `public/brand` y se conservaron fuentes originales.
+- El agent pide tarea terminada solo si hay migracion/seed/base real y visual pixel-perfect; falta infraestructura PostgreSQL y revision humana, por eso el agent queda parcial.
+- REFAPART tenia endpoints cliente documentados como pendientes aunque la API base ya contenia modelos suficientes; se implementaron sin crear API nueva.
+
+### Decisiones tomadas
+
+- MexIngSof no recibe API Django nueva; usa APIs Next.js locales para landing y leads hasta definir si CRM se vuelve core.
+- Panel admin MexIngSof queda `IMPLEMENTADO_SIN_AUTH` con TODO explicito para Gateway/Auth.
+- Prisma se fijo en v6.x porque `latest` instalo Prisma 7 y rompia el datasource documentado.
+- `npm run lint` de MexIngSof usa `tsc --noEmit` porque la version actual de Next no soporta `next lint` como antes.
+
+### Pendientes reales
+
+- PENDIENTE_DE_DEFINIR: repositorio web oficial MexIngSof.
+- PENDIENTE_DE_DEFINIR: PostgreSQL local/oficial `mexingsof`.
+- PENDIENTE_DE_DEFINIR: Auth/Gateway para admin MexIngSof.
+- PENDIENTE_DE_DEFINIR: datos reales de contacto MexIngSof.
+- PENDIENTE_DE_DEFINIR: visual QA humano contra la maqueta.
+- PENDIENTE_DE_DEFINIR: REFAPART Address selector real en checkout/cuenta/proveedores.
+- PENDIENTE_DE_DEFINIR: REFAPART Docker runtime integrado Web + Gateway + Auth + Address + API + DB.
+
+### Riesgos detectados
+
+- MexIngSof admin no debe publicarse sin Auth.
+- MexIngSof sigue viviendo bajo `Docs/agents`, no en repositorio runtime oficial.
+- `npm audit` reporta 2 vulnerabilidades moderadas; no se aplico `--force`.
+- REFAPART API depende de PostgreSQL en Docker; fuera de Docker requiere `DATABASE_URL` temporal para pruebas.
+
+### Agents limpiados, bloqueados o pendientes
+
+- No se archivo, movio ni elimino ningun archivo `AGENTS-*.md`.
+- `AGENTS-000.md` queda pendiente/parcial y conserva su contenido.
+- `AGENTS-001.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.
+
+---
+
 ## Ejecucion 2026-06-18 - PR checklist, REFAPART Address y estrategia de ecosistema
 
 ### Context Packs usados
