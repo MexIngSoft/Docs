@@ -95,6 +95,18 @@ NEXT_PUBLIC_GATEWAY_BASE_URL=http://localhost:8025/api/v1
 | `logistics.updated` | Actualizar tracking publico. |
 | `piece.not_found` | Informar que no se encontro opcion viable. |
 
+## Address API reutilizada
+
+REFAPART debe consumir direcciones mediante Gateway General hacia
+`API.PY.DJANGO.Address`. No debe crear catalogo propio de estados, municipios,
+asentamientos o codigos postales.
+
+Referencia del proyecto:
+
+```text
+integrations/00_address_api_usage.md
+```
+
 ## Errores
 
 El Gateway central debe normalizar errores sin exponer trazas internas:

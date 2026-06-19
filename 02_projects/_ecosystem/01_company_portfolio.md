@@ -13,8 +13,7 @@
 | Fiscora | `fiscora` | fiscora.com / fiscora.mx | MVP | Cerrar conexion real SAT, carga XML, PDF visual y monetizacion. |
 | Imagrafity | `imagrafity` | imagrafity.com / imagrafity.mx | BASE | Definir editor de personalizacion. |
 | Buildora | `buildora` | buildora.com / buildora.mx | BASE | Definir configurador de PCs. Antes: Escoge tu PC. |
-| REFAPART | `refapart` | PENDIENTE_DE_DEFINIR | ACTIVE | Desarrollar marketplace controlado de localizacion de refacciones. |
-| REFAPART | `refapart` | PENDIENTE_DE_DEFINIR | ACTIVE | Busqueda, abastecimiento, cotizacion y venta asistida de refacciones. |
+| REFAPART | `refapart` | refapart.mexingsof.com hasta justificar dominio propio | ACTIVE | Busqueda, abastecimiento, cotizacion y venta asistida de refacciones. |
 | Rutexa | `rutexa` | rutexa.com / rutexa.mx | BASE | Definir modulo logistico. |
 | Stockara | `stockara` | stockara.com / stockara.mx | BASE | Definir inventario/almacenes. |
 | Pagora | `pagora` | pagora.com / pagora.mx | BASE | Definir pagos y financiamiento. |

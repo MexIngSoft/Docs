@@ -78,3 +78,16 @@ Docs/02_projects/_ecosystem/05_lexnova_docucore_fiscora_mvp_alignment.md
 
 Ese documento debe revisarse antes de modificar capacidades compartidas de OCR,
 storage, gateways, permisos, auditoria, colas o contratos API versionados.
+
+## Estrategia de marcas e infraestructura
+
+La politica oficial de crecimiento gradual de marcas, dominios, subdominios e
+infraestructura vive en:
+
+```text
+Docs/02_projects/_ecosystem/02_brand_and_growth_strategy.md
+```
+
+Antes de proponer dominio propio, VPS propio o separacion de infraestructura,
+se debe justificar con criterios financieros, operativos, tecnicos y
+comerciales.

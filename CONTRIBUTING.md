@@ -45,6 +45,18 @@ For agents, also update:
 Docs/agents/EXECUTION_REPORT.md
 ```
 
+## Pull Requests
+
+Todo PR debe llenar `.github/pull_request_template.md`.
+
+No se acepta PR si deja vacios estos campos:
+
+- Context Pack usado.
+- Documentos leidos.
+- Validaciones ejecutadas.
+- APIs reutilizadas o justificacion de API especializada.
+- Pendientes reales.
+
 ## Commits
 
 Use short English messages and keep responsibilities separate by repository.

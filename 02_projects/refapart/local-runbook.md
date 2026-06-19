@@ -67,6 +67,13 @@ Para ejecuciones con agents, si solo se modifica documentacion y no compose,
 Dockerfile ni runtime REFAPART, no se debe levantar Docker por proyecto. Se
 debe registrar el motivo y validar la documentacion afectada.
 
+Si se modifica codigo web REFAPART, validar desde
+`Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart`:
+
+```powershell
+npm run build
+```
+
 Validacion 2026-06-13:
 
 - `npm run build` paso en `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart`.

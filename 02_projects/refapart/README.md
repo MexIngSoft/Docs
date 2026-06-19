@@ -78,6 +78,8 @@ completa de proveedores al cliente.
 - `business/01_supplier_authorization_policy.md`
 - `business/02_payment_policy.md`
 - `business/03_logistics_policy.md`
+- `integrations/00_address_api_usage.md`
+- `integrations/01_jobcron_events.md`
 
 ## Dependencias
 

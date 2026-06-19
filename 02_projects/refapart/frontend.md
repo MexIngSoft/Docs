@@ -50,16 +50,20 @@ Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart
 | `/mis-pedidos` | Pedidos creados desde cotizaciones aceptadas. | EXISTE_EN_CODIGO |
 | `/checkout` | Confirmacion de cotizacion/pedido manual. | EXISTE_EN_CODIGO |
 | `/carrito` | Carrito local para piezas publicables. | EXISTE_EN_CODIGO |
+| `/cuenta/direcciones` | Direcciones usando Address API. | EXISTE_EN_CODIGO |
+| `/cuenta/facturacion` | Preparacion fiscal futura. | EXISTE_EN_CODIGO |
+| `/mis-pedidos/[id]` | Detalle de pedido y tracking visible. | EXISTE_EN_CODIGO |
 
 ## Rutas admin requeridas
 
 | Ruta | Uso | Documento |
 |---|---|---|
 | `/admin/refapart` | Dashboard operativo. | EXISTE_EN_CODIGO |
+| `/admin/refapart/dashboard` | Alias de dashboard operativo. | EXISTE_EN_CODIGO |
 | `/admin/refapart/part-requests` | Bandeja de solicitudes. | EXISTE_EN_CODIGO |
 | `/admin/refapart/part-requests/[id]` | Detalle operativo de solicitud. | EXISTE_EN_CODIGO |
-| `/admin/refapart/part-requests/[id]/suppliers` | Proveedores sugeridos/contactados. | PENDIENTE_DE_DEFINIR |
-| `/admin/refapart/part-requests/[id]/quote` | Generacion de cotizacion. | PENDIENTE_DE_DEFINIR |
+| `/admin/refapart/part-requests/[id]/suppliers` | Proveedores sugeridos/contactados. | EXISTE_EN_CODIGO |
+| `/admin/refapart/part-requests/[id]/quote` | Generacion de cotizacion. | EXISTE_EN_CODIGO |
 | `/admin/refapart/suppliers` | Gestion de proveedores. | EXISTE_EN_CODIGO |
 | `/admin/refapart/products` | Productos publicables. | EXISTE_EN_CODIGO |
 | `/admin/refapart/search-logs` | Logs de busqueda. | EXISTE_EN_CODIGO |
@@ -68,7 +72,7 @@ Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart
 | `/admin/refapart/orders` | Pedidos. | EXISTE_EN_CODIGO |
 | `/admin/refapart/logistics` | Logistica. | EXISTE_EN_CODIGO |
 | `/admin/refapart/audit` | Auditoria. | EXISTE_EN_CODIGO |
-| `/admin/refapart/settings` | Configuracion operativa. | PENDIENTE_DE_DEFINIR |
+| `/admin/refapart/settings` | Configuracion operativa. | EXISTE_EN_CODIGO |
 
 ## Regla visual
 

@@ -68,6 +68,9 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | `Docs/03_standards/codex/codex-anti-vices-checklist.md` | Checklist anti-vicios. |
 | `Docs/03_standards/codex/codex-skills-standard.md` | Estandar de skills reutilizables para flujos Codex repetibles. |
 | `Docs/03_standards/api/api-decision-record-standard.md` | Bloqueo formal para APIs nuevas o especializadas sin decision documentada. |
+| `Docs/03_standards/api/address-api-standard.md` | Uso reutilizable de Address API para direcciones y catalogos geograficos. |
+| `Docs/03_standards/frontend/address-form-standard.md` | Formularios de direccion via Gateway General y Address API. |
+| `Docs/03_standards/backend/reusable-api-consumption-standard.md` | Consumo backend de APIs reutilizables sin duplicar responsabilidades. |
 | `Docs/03_standards/codex/codex-change-budget-standard.md` | Presupuesto de lectura y modificacion para reducir cambios innecesarios. |
 | `Docs/03_standards/codex/codex-documentation-diff-standard.md` | Cambios documentales minimos, exactos y trazables. |
 | `Docs/03_standards/codex/codex-output-report-standard.md` | Estandar de salida obligatoria para cierres Codex. |

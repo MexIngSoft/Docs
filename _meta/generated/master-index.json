@@ -24,8 +24,8 @@
     "owner": "Equipo documental"
   },
   {
-    "path": ".github/PULL_REQUEST_TEMPLATE.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "path": ".github/pull_request_template.md",
+    "title": "Pull Request Checklist",
     "domain": "other",
     "status": "unknown",
     "priority": "unknown",
@@ -1160,6 +1160,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "02_projects/_ecosystem/02_brand_and_growth_strategy.md",
+    "title": "Estrategia de marcas, dominios e infraestructura evolutiva",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "02_projects/_ecosystem/02_jobcron_shared_modules.md",
     "title": "Modulos compartidos JobCron",
     "domain": "business",
@@ -2192,6 +2200,22 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "02_projects/refapart/integrations/00_address_api_usage.md",
+    "title": "REFAPART Address API Usage",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/integrations/01_jobcron_events.md",
+    "title": "REFAPART JobCron Events",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "02_projects/refapart/local-runbook.md",
     "title": "Runbook local REFAPART",
     "domain": "business",
@@ -2824,6 +2848,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "03_standards/api/address-api-standard.md",
+    "title": "Address API Standard",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "03_standards/api/api-contract-first-standard.md",
     "title": "Estandar API contract first",
     "domain": "standards",
@@ -2914,6 +2946,14 @@
   {
     "path": "03_standards/auth/web-auth-login-standard.md",
     "title": "Estandar de login Auth para webs",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/backend/reusable-api-consumption-standard.md",
+    "title": "Reusable API Consumption Standard",
     "domain": "standards",
     "status": "unknown",
     "priority": "unknown",
@@ -3090,6 +3130,14 @@
   {
     "path": "03_standards/frontend/02_placeholder_strategy.md",
     "title": "Estrategia de placeholders frontend",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/frontend/address-form-standard.md",
+    "title": "Address Form Standard",
     "domain": "standards",
     "status": "unknown",
     "priority": "unknown",

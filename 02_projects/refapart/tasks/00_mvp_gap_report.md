@@ -57,8 +57,8 @@ PARTIAL
 
 | Area | Evidencia | Resultado |
 |---|---|---|
-| Web cliente | Rutas `mis-solicitudes`, `mis-cotizaciones`, `mis-pedidos`, `checkout` y `carrito`. | EXISTE_EN_CODIGO |
-| Web admin | Rutas `admin/refapart`, solicitudes, proveedores, productos, busquedas, demanda, cotizaciones, pedidos, logistica y auditoria. | EXISTE_EN_CODIGO |
+| Web cliente | Rutas `mis-solicitudes`, `mis-cotizaciones`, `mis-pedidos`, `mis-pedidos/[id]`, `checkout`, `carrito`, `cuenta/direcciones` y `cuenta/facturacion`. | EXISTE_EN_CODIGO |
+| Web admin | Rutas `admin/refapart`, `dashboard`, solicitudes, proveedores, quote, settings, productos, busquedas, demanda, cotizaciones, pedidos, logistica y auditoria. | EXISTE_EN_CODIGO |
 | API modelos | `Product`, `SearchQuery`, `PartRequest`, `Supplier`, `SupplierOffer`, `Quote`, `Order`, `SupplierMessage`, `LogisticsTask`, `AuditLog`. | EXISTE_EN_CODIGO |
 | API endpoints | Productos, busqueda, solicitudes, checkout, admin solicitudes, proveedores, productos, search logs, quotes, orders, logistics, audit y dashboard. | EXISTE_EN_CODIGO |
 
@@ -69,3 +69,5 @@ runtime ni validacion Docker.
 
 - PENDIENTE_DE_DEFINIR: validacion Docker completa con engine disponible.
 - PENDIENTE_DE_DEFINIR: pruebas runtime de Web, Gateway, Auth, Address y API REFAPART.
+- PENDIENTE_DE_DEFINIR: selector real de Address API en formularios cliente,
+  checkout y proveedores.

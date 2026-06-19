@@ -93,6 +93,155 @@ queda vacio.
 
 ---
 
+## Ejecucion 2026-06-18 - PR checklist, REFAPART Address y estrategia de ecosistema
+
+### Context Packs usados
+
+- `Agents`: ejecucion de `Docs/agents/AGENTS-*.md` en orden numerico.
+- `CP-07 - Proyecto completo`: REFAPART web, contratos, API reusable, frontend y runbook.
+- `03_standards` y `02_projects/_ecosystem`: estrategia de marca, dominios e infraestructura.
+
+### Identificacion de alcance
+
+| Campo | Resultado |
+|---|---|
+| Tipo de tarea | Documentacion canonica, frontend REFAPART, estrategia de ecosistema |
+| Dominio afectado | `03_standards`, `02_projects/refapart`, `02_projects/_ecosystem`, `.github`, `agents` |
+| Proyecto afectado | REFAPART |
+| APIs afectadas | Gateway General, Address API, Auth, REFAPART API, JobCron |
+| Frontend afectado | `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart` |
+| Integracion afectada | Address API y eventos JobCron documentados |
+
+### Agents ejecutados
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se amplio la plantilla de pull request, se agregaron reglas de PR en `CONTRIBUTING.md` y se enlazo desde el README. |
+| `AGENTS-001.md` | Parcial | Se documento el uso de Address API reutilizable, estandares frontend/backend, eventos JobCron y se agregaron rutas faltantes de REFAPART web con build OK. Quedan pendientes reales de integracion Address y validacion Docker completa. |
+| `AGENTS-002.md` | Completado | Se documento la estrategia oficial de marca, dominios e infraestructura de ecosistema sin mezclarla con un proyecto especifico. |
+| `AGENTS-003.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables adicionales. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-002.md`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/03_standards/global-governance.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+- `Docs/03_standards/architecture/api-gateway-standard.md`
+- `Docs/03_standards/auth/web-auth-login-standard.md`
+- `Docs/03_standards/project-completeness-standard.md`
+- `Docs/01_core_erp/architecture/07_project_api_pattern.md`
+- `Docs/02_projects/refapart/README.md`
+- `Docs/02_projects/refapart/frontend.md`
+- `Docs/02_projects/refapart/api-contracts.md`
+- `Docs/02_projects/refapart/local-runbook.md`
+- `Docs/02_projects/refapart/tasks/00_mvp_gap_report.md`
+- `Docs/02_projects/_ecosystem/00_ecosystem_overview.md`
+- `Docs/02_projects/_ecosystem/01_company_portfolio.md`
+- `Docs/02_projects/_ecosystem/03_development_strategy.md`
+- `Docker.API.PY/API.PY.DJANGO.Address/address/urls.py`
+- `Docker.API.PY/API.PY.DJANGO.Address/address/models.py`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/package.json`
+- Rutas existentes de `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app`
+
+### Archivos creados
+
+- `Docs/03_standards/api/address-api-standard.md`
+- `Docs/03_standards/frontend/address-form-standard.md`
+- `Docs/03_standards/backend/reusable-api-consumption-standard.md`
+- `Docs/02_projects/refapart/integrations/00_address_api_usage.md`
+- `Docs/02_projects/refapart/integrations/01_jobcron_events.md`
+- `Docs/02_projects/_ecosystem/02_brand_and_growth_strategy.md`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/cuenta/direcciones/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/cuenta/facturacion/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/mis-pedidos/[id]/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/admin/refapart/dashboard/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/admin/refapart/settings/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/admin/refapart/part-requests/[id]/suppliers/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/admin/refapart/part-requests/[id]/quote/page.tsx`
+
+### Archivos modificados
+
+- `Docs/.github/PULL_REQUEST_TEMPLATE.md`
+- `Docs/CONTRIBUTING.md`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/02_projects/_ecosystem/00_ecosystem_overview.md`
+- `Docs/02_projects/_ecosystem/01_company_portfolio.md`
+- `Docs/02_projects/refapart/README.md`
+- `Docs/02_projects/refapart/api-contracts.md`
+- `Docs/02_projects/refapart/frontend.md`
+- `Docs/02_projects/refapart/local-runbook.md`
+- `Docs/02_projects/refapart/tasks/00_mvp_gap_report.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-002.md`
+
+### APIs reutilizadas
+
+- Gateway General: entrada oficial para consumo web/API.
+- Address API: fuente reutilizable para paises, estados, municipios, calles y direcciones.
+- Auth API: identidad y sesiones via Gateway.
+- REFAPART API: dominio especializado existente de REFAPART.
+- JobCron: eventos operativos documentados para procesos asicronos.
+
+No se creo ninguna API nueva.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run build` en `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart` | OK; build Next.js exitoso con las rutas nuevas. |
+| `python scripts/build_master_index.py` | OK; genero `_meta/generated/master-index.json` con 546 entradas. |
+| `python scripts/validate_frontmatter.py` | OK tecnico; 512 documentos historicos sin front matter, 0 incomplete, 0 malformed. |
+| `sh scripts/validate-docs-rules.sh` | No ejecutado por entorno: PowerShell no reconoce `sh`. |
+| Busqueda equivalente con PowerShell + `rg` | OK revisado; las coincidencias activas son prohibiciones, reglas de obsolescencia o menciones de riesgo, no instrucciones vigentes para usar patrones rechazados. |
+| `git diff --check` en `Docs` | OK; solo advertencias esperadas LF/CRLF de Git en Windows. |
+| `git diff --check` en `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart` | OK. |
+
+### Contradicciones detectadas
+
+- `AGENTS-001.md` solicitaba `Docs/03_standards/apis/address-api-standard.md`, pero la ruta canonica vigente usa `03_standards/api`. Se creo `Docs/03_standards/api/address-api-standard.md`.
+- `AGENTS-001.md` solicitaba REFAPART web/API al 100%. Se completo documentacion y rutas web faltantes detectadas, pero no se marca completado total porque la integracion Address real y Docker runtime completo siguen pendientes.
+- Address API contiene `db.sqlite3` en el repositorio runtime inspeccionado; contradice el estandar actual de PostgreSQL obligatorio y queda como riesgo real.
+
+### Decisiones tomadas
+
+- La plantilla de PR queda como checklist obligatorio contra duplicacion de APIs, uso incorrecto de Gateway, Docker por proyecto, SQLite y mocks permanentes.
+- REFAPART debe reutilizar Address API mediante Gateway General; no se crea API de direccion dentro del proyecto.
+- La estrategia de marcas e infraestructura vive en `02_projects/_ecosystem`, no dentro de REFAPART.
+- La limpieza de agents se hara vaciando contenido y conservando los archivos originales.
+
+### Pendientes reales
+
+- PENDIENTE_DE_DEFINIR: exponer o documentar aliases faltantes en Address API para `postal-codes/{postalCode}`, `settlements?postalCode=`, `addresses/normalize` y `addresses/validate`.
+- PENDIENTE_DE_DEFINIR: conectar formularios reales de REFAPART a Address API en checkout, cuenta, proveedor y administracion.
+- PENDIENTE_DE_DEFINIR: validar Docker runtime completo de REFAPART con API, web y base de datos.
+- PENDIENTE_DE_DEFINIR: confirmar reemplazo de SQLite por PostgreSQL en Address API.
+
+### Riesgos detectados
+
+- Si Address API conserva SQLite, cualquier validacion productiva queda fuera de estandar.
+- Si las rutas Gateway no se llenan con endpoints reales, la UI puede compilar pero quedar incompleta funcionalmente.
+- El repositorio REFAPART web estaba en `main` al momento de crear archivos; los cambios se deben mover y publicar unicamente en `dev`.
+
+### Agents limpiados, bloqueados o pendientes
+
+- No se archivo, movio ni elimino ningun archivo `AGENTS-*.md`.
+- `AGENTS-000.md`, `AGENTS-001.md` y `AGENTS-002.md` quedan cerrados vaciando su contenido y conservando los placeholders.
+- `AGENTS-003.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.
+
+---
+
 # 2026-06-14 - Modularizacion del Gateway central
 
 ## Resultado por agent

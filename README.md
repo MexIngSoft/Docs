@@ -87,6 +87,7 @@ Docs/03_standards/api/api-decision-record-standard.md
 Docs/templates/api-decision-record-template.md
 Docs/03_standards/codex/codex-change-budget-standard.md
 Docs/03_standards/codex/codex-documentation-diff-standard.md
+Docs/.github/pull_request_template.md
 Docs/03_standards/architecture/reusable-api-decision-standard.md
 Docs/03_standards/api/api-contract-first-standard.md
 Docs/03_standards/architecture/shared-libraries-standard.md
