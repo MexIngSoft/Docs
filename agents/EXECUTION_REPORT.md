@@ -170,7 +170,7 @@ queda vacio.
 |---|---|---|---|
 | `WEB.NJ.NEXT.MexIngSof` | `dev` | `63581c0 feat(mexingsof): route leads through gateway` | OK a `origin/dev` |
 | `API.PY.DJANGO.JobCron` | `dev` | `20b1aa5 feat(jobcron): add mexingsof lead operations` | OK a `origin/dev` |
-| `API.PY.DJANGO.Gateway` | `dev` local | `b1d06be feat(gateway): register mexingsof lead route` | Bloqueado: `Repository not found` en `https://github.com/MexIngSoft/API.PY.DJANGO.Gateway.git` |
+| `API.PY.DJANGO.Gateway` | `dev` local | `7d20ae7 feat(gateway): register mexingsof lead route` | Bloqueado: `Repository not found` en `https://github.com/MexIngSoft/API.PY.DJANGO.Gateway.git` |
 
 ### Ramas integradas a dev
 
@@ -188,8 +188,9 @@ queda vacio.
 | `python manage.py check` en `API.PY.DJANGO.JobCron` | OK |
 | `python manage.py makemigrations --check --dry-run` en `API.PY.DJANGO.JobCron` | OK; no changes detected |
 | `python manage.py test` en `API.PY.DJANGO.JobCron` | Bloqueado por permisos PostgreSQL: `permission denied to create database` |
-| `python manage.py check` en `API.PY.DJANGO.Gateway` | OK |
-| `python manage.py test` en `API.PY.DJANGO.Gateway` | OK; 16 tests |
+| `rg -n "sqlite\|sqlite3\|db.sqlite" .` en `API.PY.DJANGO.Gateway` | OK; sin referencias activas a SQLite despues de correccion. |
+| `python manage.py check` en `API.PY.DJANGO.Gateway` | OK con PostgreSQL configurado por defecto. |
+| `python manage.py test` en `API.PY.DJANGO.Gateway` | Bloqueado despues de quitar SQLite: PostgreSQL local no acepta/dispone credenciales `gateway_user` y no puede crear DB de prueba. |
 | `python manage.py check` en `API.PY.DJANGO.RefaPart` | OK |
 | `python manage.py test` en `API.PY.DJANGO.RefaPart` | Bloqueado por entorno local: no resuelve host Docker `db-postgresql` fuera de Docker |
 | `python manage.py check` en `API.PY.DJANGO.TecnoTelec` | OK |
@@ -208,6 +209,10 @@ queda vacio.
 - Gateway es obligatorio para MexIngSof, pero el remoto `API.PY.DJANGO.Gateway`
   no existe o no es accesible; el cambio queda commit local en `dev` y no pudo
   publicarse.
+- La validacion inicial de Gateway habia pasado usando el default SQLite
+  heredado del repo. Eso contradice la regla vigente de PostgreSQL obligatorio;
+  se corrigio el default a PostgreSQL y la validacion de tests queda bloqueada
+  hasta tener DB PostgreSQL local/oficial.
 
 ### Decisiones tomadas
 
@@ -222,7 +227,9 @@ queda vacio.
 ### Pendientes reales
 
 - PENDIENTE_DE_PUBLICAR: corregir remoto/acceso de `API.PY.DJANGO.Gateway` y
-  subir commit local `b1d06be` a `dev`.
+  subir commit local `7d20ae7` a `dev`.
+- PENDIENTE_DE_DEFINIR: credenciales/base PostgreSQL `gateway` para ejecutar
+  tests de Gateway sin SQLite.
 - PENDIENTE_DE_IMPLEMENTAR: Auth real para paneles internos.
 - PENDIENTE_DE_IMPLEMENTAR: Search outbox desde JobCron leads hacia Search.
 - PENDIENTE_DE_IMPLEMENTAR: panel JobCron web para visualizar leads MexIngSof.
