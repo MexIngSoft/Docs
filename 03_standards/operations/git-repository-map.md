@@ -40,6 +40,7 @@ Los commits y pushes se hacen por repositorio y por responsabilidad. No se debe 
 | Web Imagrafity | `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.Imagrafity.git` | Publicado en `dev`, `pro` y `main` |
 | Web JobCron | `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.JobCron.git` | Separado |
 | Web LexNova | `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.LexNova.git` | Separado |
+| Web MexIngSof | `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.MexIngSof.git` | Local; remoto no accesible desde esta maquina (`Repository not found`) |
 | Web TecnoTelec | `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec` | `https://github.com/MexIngSoft/WEB.NJ.NEXT.TecnoTelec.git` | Separado |
 | Documentacion | `Docs` | `https://github.com/MexIngSoft/Docs.git` | Separado |
 
@@ -54,6 +55,7 @@ Se detectaron estas carpetas web:
 | Imagrafity | `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity` | Repo propio asignado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.Imagrafity.git` |
 | JobCron | `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron` | Repo propio detectado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.JobCron.git` |
 | LexNova | `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova` | Repo propio detectado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.LexNova.git` |
+| MexIngSof | `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof` | Repo local creado; remoto esperado no accesible: `https://github.com/MexIngSoft/WEB.NJ.NEXT.MexIngSof.git` |
 | TecnoTelec | `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec` | Repo propio detectado: `https://github.com/MexIngSoft/WEB.NJ.NEXT.TecnoTelec.git` |
 
 Si una web no tiene repo Git propio, antes de subirla como proyecto separado se debe restaurar o crear su `.git` propio y asignar su remoto. Mientras no exista `.git` por web, sus cambios viven dentro del repo contenedor que la incluya.
@@ -94,6 +96,7 @@ Ejemplos:
 | `WEB.NJ.NEXT.Fiscora` | `Add Fiscora animation preview` |
 | `WEB.NJ.NEXT.TecnoTelec` | `Improve public user experience` |
 | `WEB.NJ.NEXT.JobCron` | `Update JobCron dashboard experience` |
+| `WEB.NJ.NEXT.MexIngSof` | `Add MexIngSof corporate web MVP` |
 
 ## Reglas de seguridad
 

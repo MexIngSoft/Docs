@@ -32,22 +32,33 @@ Construye y mantiene ERP, APIs, apps, frontends, integraciones y automatizacione
 
 ## Web corporativa
 
-El agent activo 2026-06-18 entrego una landing Next.js funcional ubicada en:
+La web corporativa oficial debe vivir como proyecto Next.js independiente:
 
 ```text
-Docs/agents/mexingsof-page/mexingsof-page
+Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof
+```
+
+Repositorio esperado:
+
+```text
+https://github.com/MexIngSoft/WEB.NJ.NEXT.MexIngSof.git
 ```
 
 Estado:
 
 ```text
-MVP_FUNCIONAL_EN_AGENT_WORKSPACE
+MVP_FUNCIONAL_EN_REPOSITORIO_WEB_LOCAL
 ```
 
-La pagina incluye productos desde Prisma, formulario de contacto, APIs Next.js
-y panel admin basico para productos/leads. Falta promoverla a repositorio web
-oficial del ecosistema, por ejemplo `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof`,
-cuando se defina el runtime oficial.
+La pagina incluye productos desde Prisma, formulario de contacto, rutas Next.js
+y panel admin basico para productos/leads. El runtime local canonico es
+`Docker.WEB.NJ` dentro del compose `comercial_platform`, red `jobcron_network`
+y puerto web `3009`.
+
+El remoto GitHub `MexIngSoft/WEB.NJ.NEXT.MexIngSof` no esta accesible desde esta
+maquina al 2026-06-18; GitHub responde `Repository not found`. Hasta que exista
+el remoto o se otorguen permisos, el push queda bloqueado y debe conservarse
+como `PENDIENTE_DE_DEFINIR`.
 
 ## Documentos
 
@@ -59,6 +70,7 @@ cuando se defina el runtime oficial.
 ## Pendientes
 
 - Definir servicios y paquetes comerciales.
-- PENDIENTE_DE_DEFINIR: repositorio web oficial para MexIngSof.
+- PENDIENTE_DE_DEFINIR: acceso o creacion del remoto
+  `MexIngSoft/WEB.NJ.NEXT.MexIngSof`.
 - PENDIENTE_DE_DEFINIR: dominio final de despliegue inicial.
 - PENDIENTE_DE_DEFINIR: Auth para panel admin.

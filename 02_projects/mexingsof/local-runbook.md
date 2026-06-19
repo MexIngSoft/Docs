@@ -1,9 +1,9 @@
 # Runbook local MexIngSof
 
-## Proyecto actual
+## Proyecto canonico
 
 ```powershell
-cd Docs\agents\mexingsof-page\mexingsof-page
+cd Docker.WEB.NJ\WEB.NJ.NEXT.MexIngSof
 ```
 
 ## Instalacion
@@ -43,7 +43,7 @@ npm run dev
 Abrir:
 
 ```text
-http://localhost:3000
+http://localhost:3009
 ```
 
 ## Validacion
@@ -69,8 +69,22 @@ npm run build
 | `npx prisma migrate dev` | Falta PostgreSQL local configurado para `mexingsof`. |
 | `npm run seed` | Depende de migracion/base PostgreSQL disponible. |
 
+## Docker
+
+El proyecto se ejecuta en el Docker web compartido:
+
+```powershell
+docker compose -p comercial_platform -f Docker.WEB.NJ\docker-compose.mexingsof.web.yml config --quiet
+docker compose -p comercial_platform -f Docker.WEB.NJ\docker-compose.mexingsof.web.yml up -d --build
+```
+
+No se debe crear un Docker aislado para MexIngSof. Si al validar este proyecto
+se detecta un problema del patron compartido, la correccion debe evaluarse para
+los demas proyectos web que usan `Docker.WEB.NJ`.
+
 ## Pendientes
 
 - PENDIENTE_DE_DEFINIR: URL y base PostgreSQL local/oficial.
-- PENDIENTE_DE_DEFINIR: puerto canonico si se promueve a `Docker.WEB.NJ`.
+- PENDIENTE_DE_DEFINIR: acceso o creacion del remoto
+  `MexIngSoft/WEB.NJ.NEXT.MexIngSof`.
 - PENDIENTE_DE_DEFINIR: Auth para admin.

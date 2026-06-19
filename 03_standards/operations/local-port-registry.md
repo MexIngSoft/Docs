@@ -50,7 +50,8 @@ Hasta entonces:
 | `3006` | Imagrafity | `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity` | Activo |
 | `3007` | LeadHunter | `Docker.WEB.NJ/WEB.NJ.NEXT.LeadHunter` | Activo |
 | `3008` | REFAPART | `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart` | Activo |
-| `3009-3050` | Futuras webs | PENDIENTE_DE_DEFINIR | Reservado |
+| `3009` | MexIngSof | `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof` | Activo local; remoto GitHub pendiente de acceso |
+| `3010-3050` | Futuras webs | PENDIENTE_DE_DEFINIR | Reservado |
 
 ## Puertos API y Gateway
 
@@ -204,7 +205,7 @@ Este es el punto recomendado para levantar el workspace completo. Arranca los
 compose en orden, espera estabilizacion, valida contenedores, verifica que las
 APIs Django esten escuchando en `8000-8022`, valida rutas HTTP conocidas y
 comprueba las webs publicadas en `3000`, `3001`, `3002`, `3004`, `3005`,
-`3006`, `3007` y `3008`.
+`3006`, `3007`, `3008` y `3009`.
 
 El tiempo de espera por defecto es de `150` segundos porque Fiscora construye
 su export estatico fuera de Docker y el contenedor necesita margen para que las

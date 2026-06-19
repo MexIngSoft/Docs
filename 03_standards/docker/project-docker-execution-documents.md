@@ -53,6 +53,7 @@ docker compose -p comercial_platform -f Docker.DB.PG\docker-compose.master.db.ym
 | JobCron | `Docs/02_projects/jobcron/local-runbook.md` | `Docker.DB.PG/docker-compose.jobcron.db.yml` | `Docker.API.PY/docker-compose.jobcron.api.yml` | `Docker.WEB.NJ/docker-compose.jobcron.web.yml` | Definido |
 | LeadHunter | `Docs/02_projects/leadhunter/local-runbook.md` | `Docker.DB.PG/docker-compose.leadhunter.db.yml` | `Docker.API.PY/docker-compose.leadhunter.api.yml` | `Docker.WEB.NJ/docker-compose.leadhunter.web.yml` | Definido |
 | LexNova | `Docs/02_projects/lexnova/local-dependency-runbook.md` | `Docker.DB.PG/docker-compose.lexnova.db.yml` | `Docker.API.PY/docker-compose.lexnova.api.yml` | `Docker.WEB.NJ/docker-compose.lexnova.web.yml` | Definido |
+| MexIngSof | `Docs/02_projects/mexingsof/local-runbook.md` | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | `Docker.WEB.NJ/docker-compose.mexingsof.web.yml` | Parcial; web definida, DB/API pendientes |
 | REFAPART | `Docs/02_projects/refapart/local-runbook.md` | `Docker.DB.PG/docker-compose.refapart.db.yml` | `Docker.API.PY/docker-compose.refapart.api.yml` | `Docker.WEB.NJ/docker-compose.refapart.web.yml` | Definido |
 | TecnoTelec | `Docs/02_projects/tecnotelec/local-runbook.md` | `Docker.DB.PG/docker-compose.tecnotelec.db.yml` | `Docker.API.PY/docker-compose.tecnotelec.api.yml` | `Docker.WEB.NJ/docker-compose.tecnotelec.web.yml` | Definido |
 

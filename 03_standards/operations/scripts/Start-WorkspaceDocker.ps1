@@ -47,7 +47,9 @@ $webServices = @(
     @{ Name = "docucore"; Port = 3004; Url = "http://localhost:3004/" },
     @{ Name = "fiscora"; Port = 3005; Url = "http://localhost:3005/"; Static = $true },
     @{ Name = "imagrafity"; Port = 3006; Url = "http://localhost:3006/" },
-    @{ Name = "leadhunter"; Port = 3007; Url = "http://localhost:3007/prospectos" }
+    @{ Name = "leadhunter"; Port = 3007; Url = "http://localhost:3007/prospectos" },
+    @{ Name = "refapart"; Port = 3008; Url = "http://localhost:3008/" },
+    @{ Name = "mexingsof"; Port = 3009; Url = "http://localhost:3009/" }
 )
 
 function Write-Step {
