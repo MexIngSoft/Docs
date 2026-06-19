@@ -18,7 +18,7 @@ Este runbook describe el estado operativo actual. La red oficial vigente es
 | --- | --- | --- | --- | --- |
 | `Docker.DB.PG` | PostgreSQL | `db-postgresql` | `127.0.0.1:5432` | `jobcron_network` |
 | `Docker.API.PY` | APIs Django | `api-multiproyecto` | `8000-8050` reservado, `8000-8017` publicado hoy | `jobcron_network` |
-| `Docker.WEB.NJ` | Next.js frontends | `web-frontend-node` | `3000-3050` reservado, `3000-3005` asignado hoy | `jobcron_network` |
+| `Docker.WEB.NJ` | Next.js frontends | `web-frontend-node` | `3000-3050` reservado, `3000-3009` asignado hoy | `jobcron_network` |
 | `Docker.SW.Nginx` | Proxy Nginx | `nginx` | `80` | `jobcron_network` |
 
 Registro canonico de puertos:
@@ -252,6 +252,29 @@ docker compose -f Docker.DB.PG\docker-compose.yml up -d
 ```
 
 Despues levanta API, Web y Nginx en el orden recomendado.
+
+## Limpieza segura
+
+La limpieza Docker debe conservar datos de PostgreSQL salvo autorizacion
+explicita para borrar volumenes.
+
+Comandos permitidos:
+
+```powershell
+docker compose -p comercial_platform down --remove-orphans
+docker container prune
+docker image prune
+docker network prune
+```
+
+Comando prohibido salvo autorizacion explicita:
+
+```powershell
+docker volume prune
+```
+
+No borrar volumenes con datos de negocio ni ejecutar limpiezas globales que
+eliminen informacion productiva o local necesaria para validaciones.
 
 ## Problemas comunes
 

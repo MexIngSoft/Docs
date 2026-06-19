@@ -93,6 +93,153 @@ queda vacio.
 
 ---
 
+## Ejecucion 2026-06-19 - AGENTS-002 Docker oficial Comercial Platform
+
+### Context Pack usado
+
+- `CP-00 - Preflight obligatorio`
+- Context Pack Docker / operaciones:
+  - `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
+  - `Docs/03_standards/docker/grouped-containers-isolated-config.md`
+  - `Docs/03_standards/docker/project-docker-execution-documents.md`
+  - `Docs/03_standards/docker/docker-compose-project-standard.md`
+  - `Docs/03_standards/operations/docker-recovery-runbook.md`
+
+### Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-002.md` | Completado | Se corrigio Docker para usar el stack `comercial_platform`, red `jobcron_network`, imagenes exactas, contenedores oficiales y limpieza segura sin borrar volumenes. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-002.md`
+- `Docs/03_standards/documentation-first-workflow.md`
+- `Docs/03_standards/operations/standard-request-prompts.md`
+- `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
+- `Docs/03_standards/docker/grouped-containers-isolated-config.md`
+- `Docs/03_standards/docker/project-docker-execution-documents.md`
+- `Docs/03_standards/docker/docker-compose-project-standard.md`
+- `Docs/03_standards/operations/docker-recovery-runbook.md`
+- `Docker.API.PY/start.sh`
+- `Docker.WEB.NJ/start.sh`
+- `Docker.WEB.NJ/README.md`
+- `Docker.WEB.NJ/docker-compose.yml`
+
+### Archivos modificados
+
+- `Docker.DB.PG/docker-compose.master.db.yml`
+- `Docker.API.PY/docker-compose.master.api.yml`
+- `Docker.API.PY/start.sh`
+- `Docker.WEB.NJ/Dockerfile.web.base`
+- `Docker.WEB.NJ/docker-compose.yml`
+- `Docker.WEB.NJ/docker-compose.master.web.yml`
+- `Docker.WEB.NJ/start.sh`
+- `Docker.WEB.NJ/README.md`
+- `Docker.SW.Nginx/Dockerfile`
+- `Docker.SW.Nginx/docker-compose.master.nginx.yml`
+- `Docs/03_standards/docker/docker-compose-project-standard.md`
+- `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
+- `Docs/03_standards/operations/docker-recovery-runbook.md`
+- `Docs/_meta/generated/master-index.json`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-002.md`
+
+### APIs reutilizadas
+
+- No se creo ninguna API nueva.
+- Docker reutiliza las APIs existentes dentro de `api-multiproyecto`.
+- Gateway General queda como entrada validada en `http://localhost:8025/health/`.
+
+### Cambios aplicados
+
+- Los compose master ahora extienden los compose base y conservan los cuatro
+  servicios oficiales en un solo proyecto Docker Compose.
+- Se agrego `volumes: postgres:` al master DB porque `extends` no importa
+  volumenes top-level desde el compose base.
+- Se corrigieron defaults internos del Gateway y JobCron para comunicacion
+  entre contenedores usando `api-multiproyecto`, no `127.0.0.1`.
+- `web-frontend-node` conserva imagen exacta
+  `web-frontend-node:20.19.0-bookworm-slim`, pero por defecto activa solo
+  `jobcron`; las demas webs se activan con `WEB_PROJECTS` u overlays dentro del
+  mismo contenedor oficial.
+- Se documento que master levanta infraestructura oficial y que los procesos
+  internos se seleccionan con `API_PROJECTS` y `WEB_PROJECTS` para evitar
+  saturacion local.
+- Se agrego limpieza segura y se prohibio `docker volume prune` salvo
+  autorizacion explicita.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `docker compose -p comercial_platform ... config --services` | OK: `api-multiproyecto`, `db-postgresql`, `nginx`, `web-frontend-node`. |
+| `docker compose -p comercial_platform ... config --quiet` | OK. |
+| `docker compose -p comercial_platform ... up -d --build` | OK: stack levantado con los cuatro contenedores oficiales. |
+| `docker compose -p comercial_platform ... ps` | OK: los cuatro servicios quedan `healthy`. |
+| `docker ps -a` | OK: solo contenedores oficiales activos: `db-postgresql`, `api-multiproyecto`, `web-frontend-node`, `nginx`. |
+| `docker images` | OK: imagenes exactas `postgres:16.13`, `api-multiproyecto:3.10.19-slim-bookworm`, `web-frontend-node:20.19.0-bookworm-slim`, `nginx:1.24.0`. |
+| `docker image prune -f` | OK: no quedan imagenes dangling despues de la limpieza final. |
+| `docker network inspect jobcron_network` | OK: red `bridge` con 4 contenedores conectados. |
+| `Invoke-WebRequest http://localhost:3000/` | OK: 200. |
+| `Invoke-WebRequest http://localhost:8025/health/` | OK: 200. |
+| `Invoke-WebRequest http://localhost/` | OK: 200. |
+| `Invoke-WebRequest http://localhost:8000/health/` | No aplica a criterio Docker: Auth responde 404 en esa ruta; el contenedor `api-multiproyecto` y Gateway estan healthy. |
+| `python Docs/scripts/build_master_index.py` | OK: genero `_meta/generated/master-index.json` con 555 entradas. |
+| `python Docs/scripts/validate_frontmatter.py` | OK tecnico: 521 documentos historicos sin front matter, 0 incomplete, 0 malformed. |
+| `git diff --check` | OK: solo advertencias LF/CRLF esperadas en Windows. |
+
+### Contradicciones detectadas
+
+- La documentacion anterior decia `Master = corre todo`, pero tambien ordenaba
+  pruebas focalizadas con `API_PROJECTS` y `WEB_PROJECTS`. Levantar todas las
+  webs provoco `ENOMEM` en Docker Desktop. Se resolvio dejando master como
+  infraestructura oficial y seleccion de procesos por variable dentro de los
+  contenedores oficiales.
+- `localhost` y `127.0.0.1` siguen permitidos para navegador, healthchecks
+  locales y puertos publicados al host; siguen prohibidos para comunicacion
+  interna entre contenedores.
+
+### Decisiones tomadas
+
+- Se uso `extends` en master en lugar de `include`, porque varios `include`
+  top-level terminaban dejando visible solo una parte del stack al combinar
+  archivos.
+- Se limpio el contenedor heredado `dockerapipy` de `api-multiproyecto` porque
+  bloqueaba el nombre oficial dentro de `comercial_platform`.
+- Se retiraron contenedores Nginx temporales creados por un reemplazo fallido
+  de Docker Compose; no se borraron volumenes.
+- Se reinicio Docker Desktop/WSL porque el daemon dejo de responder tras la
+  saturacion inicial de todas las webs. No se ejecuto `docker volume prune`.
+
+### Pendientes reales
+
+- PENDIENTE_DE_DEFINIR: decidir si el health endpoint publico de Auth debe ser
+  `/health/`, `/api/health/` u otra ruta canonica; Docker ya valida salud del
+  contenedor y Gateway.
+
+### Riesgos detectados
+
+- Activar demasiadas webs simultaneas con `WEB_PROJECTS` puede volver a agotar
+  memoria local. La ruta recomendada es probar uno o pocos proyectos dentro del
+  contenedor oficial `web-frontend-node`.
+- Docker Desktop puede conservar contenedores a medio reemplazar si se corta un
+  `up --build`; la limpieza segura queda documentada y no incluye volumenes.
+
+### Agents limpiados, bloqueados o pendientes
+
+- `AGENTS-002.md` queda completado y se limpia vaciando su contenido sin borrar
+  ni mover el archivo.
+- No se ejecutaron ni modificaron otros agents por instruccion explicita del
+  usuario.
+
+---
+
 ## Correccion 2026-06-19 - Alcance global de Compose y REFAPART
 
 ### Motivo

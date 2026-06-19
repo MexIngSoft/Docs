@@ -28,8 +28,15 @@ Docker.WEB.NJ/docker-compose.<proyecto>.web.yml
 Docker.DB.PG/docker-compose.yml
 ```
 
-Los archivos master son la entrada canonica para correr todo el workspace en un
-mismo proyecto Docker Compose. Cada overlay define `API_PROJECTS` o
+Los archivos master son la entrada canonica para levantar la infraestructura
+compartida del workspace en un mismo proyecto Docker Compose. No deben crear
+contenedores alternos por proyecto. La seleccion de procesos activos dentro de
+`api-multiproyecto` y `web-frontend-node` se controla con `API_PROJECTS` y
+`WEB_PROJECTS` para evitar saturar el equipo local.
+
+El valor por defecto de `WEB_PROJECTS` debe ser un conjunto minimo y estable.
+Las webs adicionales se activan con overlays o variables de entorno sin cambiar
+`container_name`, `image` ni red. Cada overlay define `API_PROJECTS` o
 `WEB_PROJECTS`, puertos, dependencias y variables necesarias, pero no debe ser
 usado como ruta principal de validacion operativa.
 
@@ -88,8 +95,8 @@ postgres:16.13
 Para probar proyectos de forma focalizada no se crean contenedores alternos.
 Se mantiene el contenedor oficial de la capa y se seleccionan procesos con
 `API_PROJECTS` o `WEB_PROJECTS`. Si el contenedor ya esta corriendo, el cambio
-de seleccion requiere reiniciar el servicio oficial con la nueva variable; no
-requiere crear otro contenedor ni cambiar `container_name`.
+de seleccion requiere recrear el servicio oficial con la nueva variable; no
+requiere cambiar `container_name`, usar otra imagen ni crear otro contenedor.
 
 `crejo` queda OBSOLETO / RECHAZADO / NO USAR y no debe usarse en
 documentacion activa, compose nuevos, scripts nuevos ni refactors.

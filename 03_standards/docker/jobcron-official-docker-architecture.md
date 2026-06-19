@@ -6,7 +6,8 @@ La arquitectura Docker oficial del ecosistema JobCron debe permitir dos formas
 de ejecucion sin cambiar archivos generales por necesidades de un solo
 proyecto:
 
-1. Ejecutar todo el ecosistema completo como ruta oficial.
+1. Levantar la infraestructura compartida oficial con los contenedores
+   canonicos.
 2. Conservar overlays por proyecto solo como archivos auxiliares de seleccion
    o compatibilidad, no como ciclo principal de validacion.
 
@@ -24,7 +25,8 @@ Esta regla aplica a `Docker.DB.PG`, `Docker.API.PY`, `Docker.WEB.NJ` y
 
 ## Composes master
 
-Los archivos master representan la corrida completa del ecosistema:
+Los archivos master representan la corrida canonica de infraestructura del
+ecosistema:
 
 ```text
 Docker.DB.PG/docker-compose.master.db.yml
@@ -34,7 +36,10 @@ Docker.SW.Nginx/docker-compose.master.nginx.yml
 ```
 
 Los compose master pueden incluir o extender los compose base de cada carpeta,
-pero deben existir como ubicacion canonica para correr todo.
+pero deben existir como ubicacion canonica para levantar los contenedores
+oficiales. La cantidad de procesos internos activos se controla con
+`API_PROJECTS` y `WEB_PROJECTS`; no se deben arrancar todas las webs por defecto
+si eso satura el equipo local.
 
 El stack compartido se llama:
 
@@ -295,7 +300,9 @@ completo. No se debe actualizar solo el Dockerfile o solo el compose.
 Para pruebas focalizadas por proyecto se activan procesos dentro de los
 contenedores oficiales usando `API_PROJECTS` y `WEB_PROJECTS`. Bajar un
 proyecto significa dejar de ejecutar sus procesos en el contenedor oficial, no
-eliminar el contenedor ni crear un contenedor por proyecto.
+crear un contenedor por proyecto ni cambiar los nombres oficiales. Cuando la
+seleccion cambia, se recrea solo el servicio oficial afectado con la nueva
+variable y se conserva la red, imagen versionada y volumenes.
 
 ## Actualizacion de APIs compartidas
 
@@ -366,7 +373,7 @@ commercial
 ## Regla final
 
 ```text
-Master = corre todo.
+Master = levanta infraestructura oficial.
 Proyecto = seleccion auxiliar, no validacion operativa aislada.
 API = corre una API individual.
 DB = administra bases y schemas.
