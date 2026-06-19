@@ -93,6 +93,110 @@ queda vacio.
 
 ---
 
+## Ejecucion 2026-06-19 - Revision AGENTS-000 MexIngSof
+
+### Context Pack utilizado
+
+`Proyecto MexIngSof / Frontend Next.js / Docker Web compartido / Agents`
+
+### Identificacion de alcance
+
+| Campo | Resultado |
+|---|---|
+| Tipo de tarea | Revision y cierre de agent activo |
+| Dominio afectado | `02_projects/mexingsof`, `03_standards/frontend`, `03_standards/docker`, `agents` |
+| Proyecto afectado | MexIngSof |
+| APIs afectadas | Rutas locales Next.js del MVP; no API Django nueva |
+| Frontend afectado | `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof` |
+| Integracion afectada | PostgreSQL/Auth/Gateway pendientes de definicion real |
+
+### Agents ejecutados
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Parcialmente completado / bloqueado externo | La web MexIngSof ya existe, compila y contiene landing, Prisma, seed, rutas API locales y admin basico. No se limpia porque no se pudo validar migracion/seed/guardado real sin PostgreSQL `mexingsof`, ni revision humana pixel-perfect contra imagen. |
+| `AGENTS-001.md` | Completado y limpiado | Contenia una instruccion vieja de mover/archivar/eliminar agents. Prevalece la regla vigente: nunca mover ni eliminar `AGENTS-*.md`; limpiar significa vaciar contenido. |
+| `AGENTS-002.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/02_projects/mexingsof/README.md`
+- `Docs/02_projects/mexingsof/frontend.md`
+- `Docs/02_projects/mexingsof/api-contracts.md`
+- `Docs/02_projects/mexingsof/local-runbook.md`
+- `Docs/02_projects/mexingsof/tasks/00_mvp_gap_report.md`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof/package.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof/prisma/schema.prisma`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof/prisma/seed.ts`
+
+### Archivos modificados
+
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-001.md`
+
+### APIs reutilizadas
+
+- No se creo API Django nueva.
+- MexIngSof mantiene rutas locales Next.js para el MVP corporativo.
+- Si requiere APIs permanentes, debe pasar por Gateway General y APIs Python/Django segun contrato canonico.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run prisma:generate` en `WEB.NJ.NEXT.MexIngSof` | OK; Prisma Client v6.19.3 generado. Prisma advierte que `package.json#prisma` sera deprecado en Prisma 7. |
+| `npm run lint` en `WEB.NJ.NEXT.MexIngSof` | OK; `tsc --noEmit` sin errores. |
+| `npm run build` en `WEB.NJ.NEXT.MexIngSof` | OK; Next.js compilo landing, admin y rutas API. |
+
+### Validaciones no ejecutadas
+
+| Validacion | Causa exacta |
+|---|---|
+| `npx prisma migrate dev` | PENDIENTE_DE_DEFINIR: no existe conexion PostgreSQL local/oficial `mexingsof` configurada. |
+| `npm run seed` | Depende de la migracion/base PostgreSQL disponible. |
+| Guardado real de leads por API | Depende de PostgreSQL `mexingsof`. |
+| Cambio real de estados admin | Depende de PostgreSQL `mexingsof`. |
+| Verificacion pixel-perfect contra imagen | Requiere revision visual humana o imagen de referencia disponible en contexto operativo de validacion. |
+
+### Contradicciones detectadas
+
+- `AGENTS-001.md` indicaba mover a `_archive` o eliminar agents temporales. La regla canonica vigente dice que `Docs/agents/AGENTS-*.md` nunca se eliminan, nunca se mueven y nunca se reemplazan. Se limpio vaciando el contenido.
+- `AGENTS-000.md` exige validaciones con base real; la documentacion canonica de MexIngSof marca PostgreSQL `mexingsof` como `PENDIENTE_DE_DEFINIR`.
+
+### Decisiones tomadas
+
+- No se limpia `AGENTS-000.md` porque conserva bloqueo externo verificable y no cumple todavia todos los criterios de aceptacion del propio agent.
+- Se limpia `AGENTS-001.md` porque su objetivo queda cubierto por la regla vigente de conservacion de placeholders.
+- No se implementa Auth local para admin porque el agent pidio no implementarla todavia y la documentacion canonica exige Auth/Gateway.
+
+### Pendientes reales
+
+- PENDIENTE_DE_DEFINIR: PostgreSQL local/oficial `mexingsof` para migracion, seed y pruebas de persistencia.
+- PENDIENTE_DE_DEFINIR: Auth via Gateway General para `/admin/products` y `/admin/leads`.
+- PENDIENTE_DE_DEFINIR: telefono, ubicacion, horario y dominio final de despliegue.
+- PENDIENTE_DE_DEFINIR: revision humana pixel-perfect contra la imagen de referencia.
+
+### Riesgos detectados
+
+- Publicar admin sin Auth expondria cambios de productos/leads.
+- Sin PostgreSQL real, el build valida compilacion pero no persistencia.
+- Limpiar `AGENTS-000.md` antes de resolver DB/Auth/revision visual perderia la evidencia de pendientes reales.
+
+### Agents limpiados, bloqueados o pendientes
+
+- Limpiado: `AGENTS-001.md`.
+- Pendiente/bloqueado externo: `AGENTS-000.md`.
+- Sin instrucciones: `AGENTS-002.md` a `AGENTS-030.md`.
+
+---
+
 ## Ejecucion 2026-06-19 - Search API sync recovery
 
 ### Context Pack utilizado
