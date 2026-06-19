@@ -51,6 +51,7 @@ Checklist previo a programar:
 
 ```txt
 tasks/07_pre_development_checklist.md
+tasks/08_productive_launch_plan.md
 ```
 
 ## Regla

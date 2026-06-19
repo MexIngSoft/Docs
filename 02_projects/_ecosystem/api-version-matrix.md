@@ -14,9 +14,10 @@ evitar migraciones que rompan sistemas activos.
 | Fiscora | `WEB.NJ.NEXT.Fiscora` | `API.PY.DJANGO.Gateway` | Auth v1 | Fiscal API, Fiscora API | Activo | Proyecto registrado como `FISCORA`. |
 | Imagrafity | `WEB.NJ.NEXT.Imagrafity` | `API.PY.DJANGO.Gateway` | Auth v1 | Imagrafity API | Activo | Proyecto registrado como `IMAGRAFITY`. |
 | LeadHunter | `WEB.NJ.NEXT.LeadHunter` | `API.PY.DJANGO.Gateway` | Auth v1 | LeadHunter API | Activo | Proyecto registrado como `LEADHUNTER`. |
+| MexIngSof | `WEB.NJ.NEXT.MexIngSof` | `API.PY.DJANGO.Gateway` | Auth v1 | JobCron API, Sales/CRM PENDIENTE_DE_DEFINIR | Parcial | Web MVP existe; produccion de leads requiere Gateway/JobCron. |
 | TecnoTelec | `WEB.NJ.NEXT.TecnoTelec` | `API.PY.DJANGO.Gateway` | Auth v1 | Catalog, Pricing, Sales, Supplier, Inventory | Activo | Proyecto registrado como `TECNOTELEC`. |
-| REFAPART | `WEB.NJ.NEXT.RefaPart` | `API.PY.DJANGO.Gateway` | Auth v1 | Auth; API comercial pendiente | Activo | Login, registro, refresh, me y permisos por Gateway central. |
-| JobCron | `WEB.NJ.NEXT.JobCron` | `API.PY.DJANGO.Gateway` | Auth v1 | JobCron API, Auth, Core APIs | Activo | Centro operativo; requiere matriz fina por modulo administrativo. |
+| REFAPART | `WEB.NJ.NEXT.RefaPart` | `API.PY.DJANGO.Gateway` | Auth v1 | REFAPART API, Catalog, Supplier, Pricing, Sales, Address, Search, Inventory, Document | Parcial | Login, catalogo, demanda, cotizacion y pedidos por Gateway central; faltan permisos/eventos/cierre operativo. |
+| JobCron | `WEB.NJ.NEXT.JobCron` | `API.PY.DJANGO.Gateway` | Auth v1 | JobCron API, Auth, Catalog, Pricing, Sales, Inventory, Document, Search | Parcial | Centro operativo; FeatureAvailability parcial y modulos productivos pendientes. |
 
 ## Reglas
 

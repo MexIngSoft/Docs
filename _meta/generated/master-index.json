@@ -1208,6 +1208,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "02_projects/_ecosystem/06_productive_launch_plan.md",
+    "title": "Plan de cierre productivo MexIngSof, REFAPART, Tecno Telec y JobCron",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "02_projects/_ecosystem/api-version-matrix.md",
     "title": "Matriz de versiones API por proyecto",
     "domain": "business",
@@ -1744,6 +1752,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "02_projects/jobcron/productive-operations-roadmap.md",
+    "title": "Roadmap operativo productivo JobCron",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "02_projects/jobcron/README.md",
     "title": "JobCron",
     "domain": "business",
@@ -2000,6 +2016,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "02_projects/mexingsof/productive-launch.md",
+    "title": "Cierre productivo MexIngSof",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "02_projects/mexingsof/README.md",
     "title": "Mexingsof",
     "domain": "business",
@@ -2250,6 +2274,14 @@
   {
     "path": "02_projects/refapart/local-runbook.md",
     "title": "Runbook local REFAPART",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/productive-launch.md",
+    "title": "Cierre productivo REFAPART",
     "domain": "business",
     "status": "unknown",
     "priority": "unknown",
@@ -2858,6 +2890,14 @@
   {
     "path": "02_projects/tecnotelec/tasks/07_pre_development_checklist.md",
     "title": "Checklist previo a programar Tecno Telec",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/tecnotelec/tasks/08_productive_launch_plan.md",
+    "title": "Plan productivo Tecno Telec",
     "domain": "business",
     "status": "unknown",
     "priority": "unknown",
@@ -3977,7 +4017,7 @@
   },
   {
     "path": "agents/AGENTS-000.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "INSTRUCCIÓN — CIERRE PRODUCTIVO DE MEXINGSOF, REFAPART, TECNO TELEC Y JOBCron",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",

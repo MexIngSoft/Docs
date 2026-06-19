@@ -202,6 +202,160 @@ queda vacio.
 
 ---
 
+## Ejecucion 2026-06-19 - AGENTS-000 cierre productivo multi-proyecto
+
+### Context Pack utilizado
+
+`Ecosistema / MexIngSof / REFAPART / Tecno Telec / JobCron / Gateway General / APIs reutilizables`
+
+### Identificacion de alcance
+
+| Campo | Resultado |
+|---|---|
+| Tipo de tarea | Desarrollo documental canonico y cierre productivo por proyecto |
+| Dominio afectado | `02_projects`, `01_core_erp/apis`, `03_standards/gateway` |
+| Proyecto afectado | MexIngSof, REFAPART, Tecno Telec, JobCron |
+| APIs afectadas | Gateway, Auth, JobCron, Catalog, Supplier, Pricing, Sales, Address, Search, Inventory, Document |
+| Frontend afectado | `WEB.NJ.NEXT.MexIngSof`, `WEB.NJ.NEXT.RefaPart`, `WEB.NJ.NEXT.TecnoTelec`, `WEB.NJ.NEXT.JobCron` |
+| Integracion afectada | Search/outbox, eventos JobCron, proveedores y datos operativos |
+
+### Agent ejecutado
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado documentalmente y limpiado | Se transformo el contenido activo en documentacion canonica por ecosistema y por proyecto. Los desarrollos runtime quedan pendientes donde dependen de Auth, Gateway, seeds reales, pasarela de pago o politicas externas. |
+| `AGENTS-001.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios; no habia tareas ejecutables. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/00_audit/10_development_gap_analysis.md`
+- `Docs/01_core_erp/apis/00_api_index.md`
+- `Docs/01_core_erp/apis/reusable-api-contracts.md`
+- `Docs/01_core_erp/architecture/07_project_api_pattern.md`
+- `Docs/03_standards/architecture/api-gateway-standard.md`
+- `Docs/03_standards/gateway/central-gateway-standard.md`
+- `Docs/01_core_erp/apis/gateway-route-registry.md`
+- `Docs/02_projects/_ecosystem/api-version-matrix.md`
+- `Docs/02_projects/_ecosystem/gateway-matrix.md`
+- `Docs/02_projects/_ecosystem/04_process_convergence_and_conflicts.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docs/03_standards/project-completeness-standard.md`
+- `Docs/02_projects/mexingsof/README.md`
+- `Docs/02_projects/mexingsof/api-contracts.md`
+- `Docs/02_projects/mexingsof/frontend.md`
+- `Docs/02_projects/mexingsof/local-runbook.md`
+- `Docs/02_projects/mexingsof/tasks/00_mvp_gap_report.md`
+- `Docs/02_projects/refapart/README.md`
+- `Docs/02_projects/refapart/architecture.md`
+- `Docs/02_projects/refapart/api-contracts.md`
+- `Docs/02_projects/refapart/tasks/00_mvp_gap_report.md`
+- `Docs/02_projects/refapart/tasks/01_mvp_implementation_order.md`
+- `Docs/02_projects/refapart/security/00_permissions_matrix.md`
+- `Docs/02_projects/refapart/integrations/01_jobcron_events.md`
+- `Docs/02_projects/tecnotelec/README.md`
+- `Docs/02_projects/tecnotelec/tasks/00_pending_tasks.md`
+- `Docs/02_projects/tecnotelec/tasks/01_required_apis.md`
+- `Docs/02_projects/tecnotelec/tasks/04_development_order.md`
+- `Docs/02_projects/tecnotelec/tasks/05_mvp_scope.md`
+- `Docs/02_projects/tecnotelec/catalog/00_public_catalog_process.md`
+- `Docs/02_projects/tecnotelec/quotes/01_quote_mvp_sales_decision.md`
+- `Docs/02_projects/tecnotelec/backend/00_gateway_product_endpoints.md`
+- `Docs/02_projects/jobcron/README.md`
+- `Docs/02_projects/jobcron/01_tecnotelec_admin_process.md`
+- `Docs/02_projects/jobcron/operational-admin-center.md`
+- `Docs/02_projects/jobcron/api-contracts.md`
+- `Docs/02_projects/jobcron/database.md`
+- `Docs/02_projects/jobcron/feature-availability.md`
+
+### Archivos modificados
+
+- `Docs/02_projects/_ecosystem/06_productive_launch_plan.md`
+- `Docs/02_projects/_ecosystem/api-version-matrix.md`
+- `Docs/02_projects/_ecosystem/gateway-matrix.md`
+- `Docs/01_core_erp/apis/gateway-route-registry.md`
+- `Docs/02_projects/mexingsof/productive-launch.md`
+- `Docs/02_projects/mexingsof/README.md`
+- `Docs/02_projects/refapart/productive-launch.md`
+- `Docs/02_projects/refapart/README.md`
+- `Docs/02_projects/tecnotelec/tasks/08_productive_launch_plan.md`
+- `Docs/02_projects/tecnotelec/README.md`
+- `Docs/02_projects/jobcron/productive-operations-roadmap.md`
+- `Docs/02_projects/jobcron/README.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/_meta/generated/master-index.json`
+
+### APIs reutilizadas
+
+- Gateway General como unico punto de entrada frontend.
+- Auth v1 para roles/permisos.
+- JobCron API para administracion operativa y leads MexIngSof.
+- REFAPART API para dominio de refacciones.
+- TecnoTelec API para soluciones y reglas propias.
+- Catalog, Supplier, Pricing, Sales, Address, Inventory, Document y Search como APIs core/shared reutilizables.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `python scripts/build_master_index.py` | OK; genero `_meta/generated/master-index.json` con 555 entradas. |
+| `python scripts/validate_frontmatter.py` | OK; 0 incompletos y 0 mal formados. Mantiene 521 advertencias historicas por documentos sin front matter. |
+| `git diff --check` | OK; solo advertencias de normalizacion LF/CRLF del working copy. |
+
+### Contradicciones detectadas
+
+- El agent exige desarrollo productivo completo, pero la documentacion canonica
+  mantiene dependencias reales sin definir: Auth/roles seed, pasarela de pago,
+  politicas REFAPART, ChannelAssortment Tecno Telec y decision SaaS/ERP de
+  JobCron. Prevalece la regla de no inventar documentacion oficial ni datos
+  externos.
+- MexIngSof tiene rutas Next.js MVP para productos/leads, pero el estandar
+  productivo exige Gateway/JobCron. Se documento la transicion sin declarar el
+  MVP como contrato final.
+
+### Decisiones tomadas
+
+- Se creo un plan productivo de ecosistema para evitar duplicar contratos entre
+  proyectos.
+- Se agregaron cierres productivos por proyecto solo donde faltaba documento
+  canonico equivalente.
+- Se actualizaron matrices existentes en lugar de crear matrices paralelas.
+- Search queda como API reutilizable alimentada por outbox/reconciliacion y no
+  como consumo directo de frontend.
+
+### Pendientes reales
+
+- PENDIENTE_DE_IMPLEMENTAR: Gateway/JobCron productivo para leads MexIngSof.
+- PENDIENTE_DE_DEFINIR: si servicios MexIngSof viven en JobCron API o Catalog API.
+- PENDIENTE_DE_DEFINIR: pasarela de pago REFAPART.
+- PENDIENTE_DE_DEFINIR: politicas finales REFAPART de garantia, devolucion,
+  proveedores y logistica.
+- PENDIENTE_DE_IMPLEMENTAR: roles/permisos seed REFAPART, Tecno Telec,
+  MexIngSof y JobCron en Auth.
+- PENDIENTE_DE_IMPLEMENTAR: ChannelAssortment y reglas de compatibilidad para
+  Tecno Telec.
+- PENDIENTE_DE_DEFINIR: JobCron como SaaS publico, ERP interno o ambos.
+
+### Riesgos detectados
+
+- Exponer admins sin Auth real.
+- Publicar productos Tecno Telec sin reglas de surtido o compatibilidad.
+- Operar REFAPART sin politicas de pago/garantia/logistica.
+- Declarar Search como completo sin reconciliacion por origen.
+
+### Agents limpiados, bloqueados o pendientes
+
+- Limpiado: `AGENTS-000.md` una vez documentado el cierre productivo.
+- Sin instrucciones: `AGENTS-001.md` a `AGENTS-030.md`.
+
+---
+
 ## Ejecucion 2026-06-19 - Search API sync recovery
 
 ### Context Pack utilizado

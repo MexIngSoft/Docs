@@ -66,6 +66,7 @@ completa de proveedores al cliente.
 - `api-contracts.md`
 - `database.md`
 - `frontend.md`
+- `productive-launch.md`
 - `visual-identity.md`
 - `local-runbook.md`
 - `repositories.md`
