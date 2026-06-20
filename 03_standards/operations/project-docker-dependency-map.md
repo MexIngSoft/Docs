@@ -79,7 +79,7 @@ stop-<proyecto>.ps1
 
 | Capa | Check |
 |---|---|
-| Gateway | `http://localhost:8025/health/` |
+| Gateway | `http://127.0.0.1:8025/health/` |
 | Web | URL del puerto canonico del proyecto. |
 | Docker | `docker compose -p comercial_platform ps` |
 | Red | `docker network inspect jobcron_network` |

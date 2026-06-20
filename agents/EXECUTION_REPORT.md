@@ -93,6 +93,159 @@ queda vacio.
 
 ---
 
+## Ejecucion 2026-06-20 - Agents activos 000, 001, 002 y 003
+
+### Context Pack utilizado
+
+- Preflight:
+  - `Docs/README.md`
+  - `Docs/_meta/master-index.md`
+  - `Docs/_meta/active-work-index.md`
+  - `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+  - `Docs/agents/AGENT_GLOBAL_RULES.md`
+- Docker/operaciones:
+  - `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
+  - `Docs/03_standards/docker/grouped-containers-isolated-config.md`
+  - `Docs/03_standards/operations/project-docker-dependency-map.md`
+  - `Docs/03_standards/operations/local-port-registry.md`
+- APIs/Gateway/PostgreSQL:
+  - `Docs/01_core_erp/apis/00_api_index.md`
+  - `Docs/01_core_erp/architecture/07_project_api_pattern.md`
+  - `Docs/03_standards/architecture/api-gateway-standard.md`
+
+### Agents ejecutados
+
+| Agent | Estado | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado para clasificacion | Se clasificaron pendientes desarrollables y bloqueos reales sin crear APIs, modelos ni schemas nuevos. |
+| `AGENTS-001.md` | Completado documental/validado | Se audito PostgreSQL, usuarios, schemas, migraciones y SQLite; se creo documento canonico PostgreSQL. |
+| `AGENTS-002.md` | Completado operativo | Se validaron stack, scripts y nueve proyectos por Docker oficial. |
+| `AGENTS-003.md` | Completado documental/operativo | Se creo inventario operativo por proyecto y se alineo mapa de dependencias/puertos. |
+| `AGENTS-004.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+### Archivos leidos
+
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-002.md`
+- `Docs/agents/AGENTS-003.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/03_standards/operations/project-docker-dependency-map.md`
+- `Docs/03_standards/operations/local-port-registry.md`
+- Documentacion canonica de proyectos indicada por `active-work-index.md`.
+
+### Archivos modificados
+
+- `Docs/03_standards/database/postgresql-project-users-and-schemas.md`
+- `Docs/_meta/project-operational-inventory.md`
+- `Docs/03_standards/operations/project-docker-dependency-map.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### APIs reutilizadas
+
+- DocuCore: `auth`, `gateway`, `document`, `docucore`.
+- Fiscora: `auth`, `gateway`, `document`, `fiscora`, `fiscal`.
+- Imagrafity: `auth`, `gateway`, `imagrafity`.
+- JobCron: `auth`, `gateway`, `jobcron`, `leadhunter`, `search`.
+- LeadHunter: `auth`, `gateway`, `leadhunter`.
+- LexNova: `auth`, `gateway`, `lexnova`, `document`.
+- MexIngSof: `auth`, `gateway`, `jobcron`, `search`.
+- REFAPART: `auth`, `gateway`, `refapart`, `address`, `search`.
+- TecnoTelec: `auth`, `gateway`, `catalog`, `inventory`, `pricing`, `procurement`, `sales`, `supplier`, `tecnotelec`, `customization`, `search`.
+
+### Clasificacion de pendientes
+
+| Proyecto | Pendiente | Estado | Motivo | Documento requerido | Accion siguiente |
+|---|---|---|---|---|---|
+| MexIngSof | Leads/CRM/Auth/DB final | BLOQUEADO POR FALTA DE CONTRATO | La documentacion no define destino persistente final ni contrato CRM/Auth | Contrato leads/CRM/Auth/DB | Definir contrato antes de cambiar runtime. |
+| REFAPART | Flujo MVP solicitud/cotizacion/proveedor | YA IMPLEMENTADO OPERATIVO | Web y Gateway validan HTTP 200 con APIs requeridas | Ninguno para operacion actual | Mantener; no crear marketplace/pagos/logistica completa fuera de MVP. |
+| TecnoTelec | Catalogo/inventario/precios basicos | YA IMPLEMENTADO OPERATIVO | Web y Gateway validan HTTP 200 con APIs core reutilizables | Ninguno para operacion actual | Mantener consumo por Gateway. |
+| TecnoTelec | Quote API separada, Rules Engine, Projects API, ChannelAssortment | BLOQUEADO POR FALTA DE CONTRATO | Documentacion los mantiene como futuros/faltantes | Contratos API especificos | No crear APIs hasta cerrar contratos. |
+| JobCron | Lead/prospect basico | IMPLEMENTABLE AHORA | API `jobcron` y `leadhunter` levantan dentro del stack | Contrato funcional si se amplian campos | Mantener MVP, no crear CRM completo. |
+| LeadHunter | Schema/remoto final | REQUIERE DOCUMENTO CANONICO | Operacion valida, pero publicacion y DB final no estan cerradas | Repositorios/schema LeadHunter | Definir remoto y schema. |
+
+### PostgreSQL
+
+| Validacion | Resultado |
+|---|---|
+| Contenedor | `db-postgresql` healthy en `jobcron_network`. |
+| Imagen | `postgres:16.13`. |
+| Bases | `auth`, `comercial`, `jobcron`, `lexnova`, `postgres`. |
+| Usuarios app | `auth_user`, `comercial_user`, `jobcron_user`, `lexnova_user`. |
+| Usuario admin | `postgres`; reservado para administracion local. |
+| Schemas | Documentados en `Docs/03_standards/database/postgresql-project-users-and-schemas.md`. |
+| SQLite activo | No detectado por `rg` en `Docker.API.PY` para Python/env/compose. |
+| Migraciones | Inventariadas por carpetas `migrations`; hay apps con 0 migraciones que quedan sin inventar modelos. |
+
+### Validaciones Docker/proyectos
+
+| Proyecto | Web | Gateway | Resultado |
+|---|---|---|---|
+| DocuCore | HTTP 200 | HTTP 200 | OK |
+| Fiscora | HTTP 200 | HTTP 200 | OK |
+| Imagrafity | HTTP 200 | HTTP 200 | OK |
+| JobCron | HTTP 200 | HTTP 200 | OK |
+| LeadHunter | HTTP 200 `/prospectos` | HTTP 200 | OK operativo |
+| LexNova | HTTP 200 `/auth/login` | HTTP 200 | OK |
+| MexIngSof | HTTP 200 | HTTP 200 | OK operativo |
+| REFAPART | HTTP 200 | HTTP 200 | OK |
+| TecnoTelec | HTTP 200 | HTTP 200 | OK operativo |
+
+### Otras validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Parser PowerShell de scripts Docker | OK. |
+| `docker compose -p comercial_platform ... config --quiet` | OK. |
+| `docker network inspect jobcron_network` | OK: 4 contenedores oficiales. |
+| `python scripts/build_master_index.py` | OK: genero `_meta/generated/master-index.json` con 558 entradas. |
+| `python scripts/validate_frontmatter.py` | OK tecnico: 524 documentos sin front matter historico, 0 incomplete, 0 malformed. |
+| `git diff --check` | OK despues de limpiar agents completados; solo advertencias LF/CRLF esperadas en Windows. |
+
+### Contradicciones detectadas
+
+- Agents anteriores habian quedado reportados como limpios, pero los archivos
+  `AGENTS-000.md`, `AGENTS-001.md`, `AGENTS-002.md` y `AGENTS-003.md` tienen
+  contenido activo en el workspace actual. Se ejecuta el contenido real actual.
+- `localhost` puede dar falsos negativos en Windows; las validaciones locales
+  se normalizan a `127.0.0.1`.
+
+### Decisiones tomadas
+
+- No se creo ninguna API nueva.
+- No se creo ninguna base, usuario ni schema nuevo.
+- Se limpiaron `AGENTS-000.md`, `AGENTS-001.md`, `AGENTS-002.md` y
+  `AGENTS-003.md` vaciando su contenido y conservando los archivos originales.
+- Se agrego documento canonico PostgreSQL porque no existia y era pedido por
+  `AGENTS-001.md`.
+- Se agrego inventario operativo porque no existia y era pedido por
+  `AGENTS-003.md`.
+
+### Pendientes reales
+
+- MexIngSof: contrato final leads/CRM/Auth/DB.
+- TecnoTelec: contratos Quote API, Rules Engine, Projects API y ChannelAssortment.
+- LeadHunter: remoto Git y schema canonico.
+- REFAPART/Address: confirmar si Address requiere schema propio.
+- DocuCore: crear `local-runbook.md` dedicado si se exige uniformidad exacta.
+
+### Riesgos detectados
+
+- Primera compilacion Next puede tardar mas que el primer healthcheck; esperar
+  arranque real antes de marcar fallo.
+- Crear APIs futuras sin contratos duplicaria responsabilidades ya cubiertas por
+  APIs core reutilizables.
+
+### Agents limpiados, bloqueados o pendientes
+
+- No se elimino ni movio ningun `Docs/agents/AGENTS-*.md`.
+- `AGENTS-000.md`, `AGENTS-001.md`, `AGENTS-002.md` y `AGENTS-003.md` quedan
+  cerrados y limpios en 0 bytes.
+- `AGENTS-004.md` a `AGENTS-030.md` permanecen vacios.
+
+---
+
 ## Ejecucion 2026-06-19 - AGENTS-002 Docker oficial Comercial Platform
 
 ### Context Pack usado

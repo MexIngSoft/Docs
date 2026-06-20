@@ -65,6 +65,8 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | `Docs/03_standards/operations/codex-execution-standard.md` | Flujo estandar para pedir y ejecutar tareas Codex. |
 | `Docs/03_standards/operations/codex-anti-patterns.md` | Vicios prohibidos para Codex. |
 | `Docs/03_standards/operations/project-docker-dependency-map.md` | Mapa Docker de dependencias y scripts por proyecto. |
+| `Docs/_meta/project-operational-inventory.md` | Inventario operativo minimo por proyecto, scripts, puertos, bloqueos y pruebas. |
+| `Docs/03_standards/database/postgresql-project-users-and-schemas.md` | Reglas y estado PostgreSQL de bases, usuarios, schemas y migraciones por proyecto. |
 | `Docs/03_standards/codex/codex-minimal-reading-standard.md` | Lectura minima obligatoria. |
 | `Docs/03_standards/codex/codex-anti-vices-checklist.md` | Checklist anti-vicios. |
 | `Docs/03_standards/codex/codex-skills-standard.md` | Estandar de skills reutilizables para flujos Codex repetibles. |

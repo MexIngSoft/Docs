@@ -3088,6 +3088,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "03_standards/database/postgresql-project-users-and-schemas.md",
+    "title": "PostgreSQL por proyecto, usuarios y schemas",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "03_standards/database/sql-server-publication-standard.md",
     "title": "Estandar de nombres SQL Server para tablas publicadas",
     "domain": "standards",
@@ -3992,6 +4000,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "_meta/project-operational-inventory.md",
+    "title": "Inventario operativo por proyecto",
+    "domain": "meta",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "_meta/project-runtime-readiness-report.md",
     "title": "Project runtime readiness report",
     "domain": "meta",
@@ -4025,7 +4041,7 @@
   },
   {
     "path": "agents/AGENTS-000.md",
-    "title": "INSTRUCCIÓN CODEX — CIERRE DEV PRODUCTIVO REFAPART, MEXINGSOF, TECNO TELEC Y JOBCron",
+    "title": "PENDIENTE_DE_DEFINIR",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -4033,7 +4049,7 @@
   },
   {
     "path": "agents/AGENTS-001.md",
-    "title": "INSTRUCCIÓN CODEX — NORMALIZACIÓN DOCKER OFICIAL Y BLOQUEO DE SQLITE",
+    "title": "PENDIENTE_DE_DEFINIR",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
