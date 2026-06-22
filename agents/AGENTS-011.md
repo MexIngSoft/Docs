@@ -1,24 +1,94 @@
-Sí. Para hacerlo bien y no rehacer después, el producto debe quedar como **una app de presencia digital + agencia asistida**, no como simple publicador.
+# INSTRUCCIÓN PARA CODEX — OPTIMIZAR AGENTS-011
 
-# Decisión base
+Trabaja únicamente en la rama `dev`.
 
-Nombre funcional recomendado:
+No ejecutes todos los agents.
+No implementes código.
+No modifiques otros `AGENTS-*.md`.
+
+Optimiza únicamente:
+
+`Docs/agents/AGENTS-011.md`
+
+---
+
+# AGENTS-011 — ContentHub y Publishing API
+
+## Objetivo
+
+Optimizar `AGENTS-011.md` para documentar **ContentHub** como app de presencia digital + agencia asistida, y `Publishing` como motor reutilizable de publicación, sin perder la intención original ni duplicar APIs existentes.
+
+## Alcance
+
+Puede tocar:
+
+* `Docs/agents/AGENTS-011.md`
+
+Debe revisar:
+
+* separación entre `ContentHub` y `Publishing`;
+* uso obligatorio de `API.PY.DJANGO.Gateway`;
+* consumo de APIs reutilizables;
+* módulos web;
+* contratos conceptuales;
+* datos requeridos de empresas y productos;
+* documentos canónicos futuros;
+* reporte de ejecución.
+
+Debe dejar:
+
+* agente más claro;
+* lectura mínima;
+* tareas verificables;
+* validaciones;
+* criterio de cierre;
+* reporte en `Docs/agents/EXECUTION_REPORT.md`.
+
+## Lectura mínima obligatoria
+
+* `Docs/README.md`
+* `Docs/_meta/active-work-index.md`
+* `Docs/agents/AGENT_GLOBAL_RULES.md`
+* `Docs/agents/EXECUTION_REPORT.md`
+* `Docs/03_standards/architecture/api-gateway-standard.md`
+* `Docs/03_standards/frontend/nextjs-project-standard.md`
+* `Docs/03_standards/product/module-catalog.md`
+* `Docs/01_core_erp/apis/00_api_index.md`
+* `Docs/01_core_erp/apis/reusable-api-contracts.md`
+* `Docs/03_standards/codex/codex-output-report-standard.md`
+* `Docs/agents/AGENTS-011.md`
+
+## Fuera de alcance
+
+* No ejecutar otros agents.
+* No implementar frontend.
+* No implementar backend.
+* No crear Gateway propio.
+* No crear Auth propio.
+* No crear APIs nuevas sin contrato.
+* No crear schemas, modelos ni migraciones sin decisión documentada.
+* No conectar redes sociales reales sin contrato, tokens, permisos y política documentada.
+* No modificar `main` ni `pro`.
+* No leer todo `Docs`.
+* No tocar proyectos no relacionados.
+* No duplicar Auth, Catalog, Pricing, Inventory, Sales, Document, Address, Fiscal, Notification ni ETL.
+
+## Clasificación documental obligatoria
+
+Clasificar así:
 
 ```text
-ContentHub
+ContentHub = Independent Product / app de presencia digital + agencia asistida
+Publishing = Shared Module / motor reutilizable de publicación
+WEB.NJ.NEXT.ContentHub = frontend oficial
+API.PY.DJANGO.ContentHub = API propia del producto, solo para lógica de agencia y workspace
+API.PY.DJANGO.Publishing = API reutilizable para publicación multicanal
+API.PY.DJANGO.Gateway = entrada única del frontend
 ```
 
-Repositorios:
+No crear gateway por proyecto.
 
-```text
-WEB.NJ.NEXT.ContentHub
-API.PY.DJANGO.ContentHub
-API.PY.DJANGO.Publishing
-```
-
-No crear Gateway propia. Docs ya establece que el frontend debe ir por `API.PY.DJANGO.Gateway` y no por gateways por proyecto . También dice que no se debe crear Gateway propio por defecto salvo excepción documentada .
-
-# Flujo correcto
+Flujo obligatorio:
 
 ```text
 WEB.NJ.NEXT.ContentHub
@@ -32,15 +102,26 @@ API.PY.DJANGO.Publishing
 Auth / Catalog / Pricing / Inventory / Sales / Document / Address / Fiscal
 ```
 
-Docs confirma que `Gateway`, `Auth`, `Catalog`, `Inventory`, `Pricing`, `Sales`, `Document`, `Fiscal` y `Address` ya están activas .
+## Tareas
 
-# Qué APIs se necesitan
+1. Reescribir `AGENTS-011.md` conservando toda la intención actual:
 
-## 1. `API.PY.DJANGO.Publishing`
+   * ContentHub como app de presencia digital;
+   * modo autoservicio;
+   * modo asistido;
+   * modo administrado;
+   * agencia asistida;
+   * publicación de productos;
+   * campañas;
+   * calendario editorial;
+   * solicitudes de diseño/foto/video;
+   * panel de agencia;
+   * soporte;
+   * planes comerciales.
 
-Motor reutilizable de publicación.
+2. Separar responsabilidades:
 
-Debe manejar:
+`API.PY.DJANGO.Publishing` debe manejar:
 
 ```text
 social_accounts
@@ -61,24 +142,27 @@ approval_status
 Responsabilidad:
 
 ```text
-Conectar canales
-Guardar tokens
-Programar publicaciones
-Publicar ahora
-Reintentar errores
-Guardar historial
-Registrar resultado por red social
+conectar canales
+guardar tokens
+programar publicaciones
+publicar ahora
+reintentar errores
+guardar historial
+registrar resultado por red social
 ```
 
-No debe manejar campañas, clientes de agencia ni planes comerciales.
+No debe manejar:
 
----
+```text
+campañas de agencia
+clientes de agencia
+planes comerciales
+workspaces comerciales
+solicitudes creativas
+soporte
+```
 
-## 2. `API.PY.DJANGO.ContentHub`
-
-API propia del producto.
-
-Debe manejar:
+3. Definir responsabilidades de `API.PY.DJANGO.ContentHub`:
 
 ```text
 workspaces
@@ -98,39 +182,36 @@ support_tickets
 Responsabilidad:
 
 ```text
-Modo autoservicio
-Modo asistido
-Modo administrado
-Solicitudes de diseño/foto/video
-Campañas
-Calendario editorial
-Relación cliente-agencia
+modo autoservicio
+modo asistido
+modo administrado
+campañas
+calendario editorial
+relación cliente-agencia
+solicitudes de diseño/foto/video
+gestión de empresas cliente
 ```
 
----
-
-## 3. `API.PY.DJANGO.Gateway`
-
-Ya existe y debe exponer rutas para la web:
+4. Documentar módulos web:
 
 ```text
-/contenthub/session
-/contenthub/workspaces
-/contenthub/companies
-/contenthub/products
-/contenthub/media
-/contenthub/posts
-/contenthub/schedules
-/contenthub/campaigns
-/contenthub/requests
-/contenthub/agency
+Landing pública
+Registro/login
+Onboarding de empresa
+Conexión de redes sociales
+Biblioteca de contenido
+Productos importados desde empresas
+Crear publicación
+Auto-publicar producto
+Calendario
+Campañas
+Solicitar diseño/foto/video
+Panel de agencia
+Soporte
+Planes: autoservicio, asistido, administrado
 ```
 
-El frontend no debe consumir APIs internas directamente; Docs lo prohíbe y exige `Frontend -> API.PY.DJANGO.Gateway -> Project API + Core ERP APIs` .
-
-# Datos que debe consumir de empresas y productos
-
-Para autopublicar productos de TecnoTelec, RefaPart, Imagrafity u otras empresas, ContentHub necesita leer:
+5. Documentar datos que ContentHub debe leer de empresas y productos:
 
 ```text
 company_id
@@ -156,79 +237,95 @@ campaign_tags
 publishable_status
 ```
 
-De dónde sale:
+Origen:
 
 ```text
-Auth        → usuarios, permisos, empresa
-Catalog     → productos, categorías, marcas
-Pricing     → precios publicables
-Inventory   → disponibilidad
-Document    → imágenes, videos, archivos
-Sales       → promociones/ofertas futuras
-Address     → sucursales/ubicaciones
-Fiscal      → datos fiscales si después se factura el servicio
+Auth → usuarios, permisos, empresa
+Catalog → productos, categorías, marcas
+Pricing → precios publicables
+Inventory → disponibilidad
+Document → imágenes, videos, archivos
+Sales → promociones/ofertas futuras
+Address → sucursales/ubicaciones
+Fiscal → datos fiscales si después se factura el servicio
 ```
 
-# Módulos de la web
+6. Documentar rutas Gateway conceptuales, sin marcarlas como activas:
 
 ```text
-1. Landing pública
-2. Registro/login
-3. Onboarding de empresa
-4. Conexión de redes sociales
-5. Biblioteca de contenido
-6. Productos importados desde empresas
-7. Crear publicación
-8. Auto-publicar producto
-9. Calendario
-10. Campañas
-11. Solicitar diseño/foto/video
-12. Panel de agencia
-13. Soporte
-14. Planes: autoservicio, asistido, administrado
+/contenthub/session
+/contenthub/workspaces
+/contenthub/companies
+/contenthub/products
+/contenthub/media
+/contenthub/posts
+/contenthub/schedules
+/contenthub/campaigns
+/contenthub/requests
+/contenthub/agency
 ```
 
-La web debe llamarse bajo el estándar:
+7. Documentar endpoints conceptuales de ContentHub:
 
 ```text
-WEB.NJ.NEXT.ContentHub
+POST /contenthub/workspaces
+GET /contenthub/workspaces
+POST /contenthub/companies
+GET /contenthub/companies
+POST /contenthub/campaigns
+GET /contenthub/campaigns
+POST /contenthub/content-requests
+GET /contenthub/content-requests
+POST /contenthub/creative-tasks
+GET /contenthub/agency/dashboard
+POST /contenthub/support-tickets
 ```
 
-porque Docs exige `WEB.NJ.NEXT.NombreProyecto` para proyectos Next.js  y repositorio independiente para cada frontend .
-
-# Dónde documentarlo en Docs
-
-Crear:
+8. Documentar endpoints conceptuales de Publishing:
 
 ```text
-02_projects/contenthub/00_overview.md
-02_projects/contenthub/01_product_scope.md
-02_projects/contenthub/02_user_flows.md
-02_projects/contenthub/03_modules.md
-02_projects/contenthub/04_data_requirements.md
-02_projects/contenthub/05_api_contracts.md
-02_projects/contenthub/06_mvp_checklist.md
+POST /publishing/accounts/connect
+GET /publishing/accounts
+POST /publishing/posts
+GET /publishing/posts
+POST /publishing/posts/{id}/publish-now
+POST /publishing/posts/{id}/schedule
+GET /publishing/schedules
+GET /publishing/queue
+GET /publishing/logs
+POST /publishing/templates
+GET /publishing/templates
 ```
 
-Crear en core:
+9. Documentar archivos canónicos futuros:
 
 ```text
-01_core_erp/apis/publishing-api.md
-01_core_erp/erp/25_publishing_model.md
+Docs/02_projects/contenthub/00_overview.md
+Docs/02_projects/contenthub/01_product_scope.md
+Docs/02_projects/contenthub/02_user_flows.md
+Docs/02_projects/contenthub/03_modules.md
+Docs/02_projects/contenthub/04_data_requirements.md
+Docs/02_projects/contenthub/05_api_contracts.md
+Docs/02_projects/contenthub/06_mvp_checklist.md
 ```
 
-Actualizar:
+Crear en Core solo si aplica y queda justificado:
 
 ```text
-01_core_erp/apis/00_api_index.md
-01_core_erp/erp/01_modules.md
-02_projects/_ecosystem/00_ecosystem_overview.md
-03_standards/operations/git-repository-map.md
+Docs/01_core_erp/apis/publishing-api.md
+Docs/01_core_erp/erp/25_publishing_model.md
 ```
 
-# MVP para arrancar
+Actualizar solo si aplica:
 
-Primera entrega:
+```text
+Docs/01_core_erp/apis/00_api_index.md
+Docs/01_core_erp/erp/01_modules.md
+Docs/02_projects/_ecosystem/00_ecosystem_overview.md
+Docs/03_standards/operations/git-repository-map.md
+```
+
+10. Documentar MVP inicial:
 
 ```text
 Login
@@ -244,4 +341,88 @@ Estado publicado/error
 Solicitud de ayuda: diseño/foto/video
 ```
 
-Con eso ya puedes atraer clientes con la app y luego convertirlos a servicio administrado.
+11. Actualizar `Docs/agents/EXECUTION_REPORT.md` registrando:
+
+* agent revisado;
+* documentos leídos;
+* Context Pack usado;
+* cambios realizados;
+* validaciones;
+* pendientes reales;
+* bloqueos;
+* decisiones documentales;
+* APIs reutilizadas;
+* APIs no creadas y motivo.
+
+## Validaciones
+
+Ejecutar solo validaciones documentales aplicables:
+
+* validar que solo se modificó `Docs/agents/AGENTS-011.md`;
+* validar que no se modificaron otros agents;
+* validar que no se creó Gateway propio;
+* validar que no se creó Auth propio;
+* validar que no se crearon migraciones;
+* validar que `ContentHub` no duplica `Publishing`;
+* validar que `Publishing` no maneja clientes, campañas comerciales ni planes de agencia;
+* validar que todo frontend consume únicamente `API.PY.DJANGO.Gateway`;
+* validar que las APIs conceptuales no se marcan como activas sin evidencia;
+* validar rutas y enlaces modificados;
+* registrar documentos leídos;
+* ejecutar `git diff --check` si el entorno lo permite.
+
+No declarar validaciones no ejecutadas.
+
+Si una validación no puede ejecutarse, registrar causa exacta.
+
+## Reporte obligatorio
+
+Actualizar:
+
+`Docs/agents/EXECUTION_REPORT.md`
+
+Debe registrar:
+
+* `AGENTS-011.md`;
+* documentos leídos;
+* Context Pack elegido;
+* documentos fuera de alcance;
+* cambios realizados;
+* validaciones ejecutadas;
+* resultado de validaciones;
+* pendientes reales con `PENDIENTE_DE_DEFINIR`;
+* bloqueos;
+* decisiones documentales;
+* estado final del agent.
+
+## Criterio de cierre
+
+El agent queda listo solo si:
+
+* la instrucción es más clara y ejecutable;
+* no pierde ninguna decisión del agente actual;
+* conserva ContentHub como app de presencia digital + agencia asistida;
+* conserva Publishing como motor reutilizable;
+* no crea Gateway propio;
+* no duplica APIs reutilizables;
+* define lectura mínima;
+* define alcance;
+* define fuera de alcance;
+* define tareas verificables;
+* define validaciones;
+* define dónde reportar;
+* deja trazabilidad en `EXECUTION_REPORT.md`.
+
+## Reglas finales
+
+Si `AGENTS-011.md` está vacío, no inventar tareas; dejarlo como `Sin instrucciones`.
+
+Si el agent ya fue ejecutado y no hay cambios nuevos, documentar que está cerrado.
+
+Si falta información esencial, marcar `Bloqueado` y dejar preguntas concretas.
+
+No eliminar, mover ni renombrar `Docs/agents/AGENTS-011.md`.
+
+No limpiar el contenido del agent.
+
+Esta tarea solo optimiza la instrucción del agent; no ejecuta ContentHub ni crea su implementación.

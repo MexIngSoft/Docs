@@ -1,50 +1,136 @@
-Sí. La instrucción completa para Codex debe quedar así:
+Trabaja únicamente en la rama `dev`.
 
-TAREA PARA CODEX — ESTANDARIZAR ARQUITECTURA DE PAGOS, POS, SALES Y FISCAL
+Optimiza exclusivamente:
 
-REPOSITORIO:
-[https://github.com/MexIngSoft/Docs.git](https://github.com/MexIngSoft/Docs.git)
+`Docs/agents/AGENTS-002.md`
 
-OBJETIVO:
-Documentar correctamente la arquitectura futura de pagos del ecosistema MexIngSof, evitando que Sales absorba responsabilidades técnicas de cobro que después obliguen a migraciones costosas.
+No ejecutes este agent.
+No ejecutes otros agents.
+No modifiques otros `AGENTS-*.md`.
+No borres, muevas ni renombres `Docs/agents/AGENTS-002.md`.
+No limpies el contenido del agent; esta tarea solo consiste en optimizar su instrucción conservando toda la información vigente.
 
-LECTURA OBLIGATORIA:
+# AGENTS-002 — Arquitectura Payments, POS, Sales y Fiscal
 
-1. Docs/README.md
-2. Docs/_meta/active-work-index.md
-3. Docs/03_standards/documentation-first-workflow.md
-4. Docs/04_integrations/README.md
-5. Docs/01_core_erp/apis/00_api_index.md
-6. Docs/01_core_erp/apis/11_pos_api.md
-7. Docs/01_core_erp/erp/08_pos_model.md
-8. Docs/01_core_erp/erp/12_billing_returns.md
+## Objetivo
 
-CONTEXTO DOCUMENTAL ACTUAL:
+Reescribir `Docs/agents/AGENTS-002.md` para que documente de forma más clara, concisa y ejecutable la separación futura entre Sales, Payments, POS, Fiscal/Billing, Accounting e integraciones de pago, sin perder ninguna decisión ya contenida en el agent actual.
 
-* Sales está ACTIVA y hoy contiene “cotización MVP, órdenes, pagos y estado comercial”.
-* POS API está PENDIENTE_DE_DEFINIR.
-* Billing API independiente está PENDIENTE_DE_DEFINIR.
-* El índice indica que una API solo existe si tiene repositorio ejecutable, migraciones y contrato.
-* Las integraciones externas no pertenecen al núcleo ERP; el núcleo define contratos internos y la integración transforma datos externos hacia esos contratos.
+El resultado debe mantener toda la intención original: evitar que Sales, POS, Refapart, DocuCore, LexNova, Fiscora, JobCron o saTwi integren directamente proveedores de pago.
 
-DECISIÓN ARQUITECTÓNICA:
-Separar responsabilidades así:
+## Alcance
 
-Sales = verdad comercial.
-Payments = verdad técnica y financiera del cobro.
-POS = operación física de caja, tickets, sesiones y cortes.
-Fiscal/Billing = verdad fiscal, CFDI, cancelaciones, notas de crédito y datos fiscales.
-Accounting = contabilidad futura.
+Puedes modificar únicamente:
 
-REGLA PRINCIPAL:
+* `Docs/agents/AGENTS-002.md`
+* `Docs/agents/EXECUTION_REPORT.md`, solo para registrar esta optimización
+
+Debes revisar:
+
+* La documentación base obligatoria
+* El agent actual completo
+* El índice activo
+* La documentación canónica relacionada con Core ERP, POS, Sales, Fiscal/Billing e integraciones
+
+Debes dejar:
+
+* Un `AGENTS-002.md` más corto, ordenado, ejecutable y verificable
+* Una instrucción que conserve todas las decisiones actuales
+* Un reporte en `EXECUTION_REPORT.md` con documentos leídos, cambios, validaciones, pendientes y bloqueos
+
+## Lectura mínima obligatoria
+
+Leer antes de editar:
+
+* `Docs/README.md`
+* `Docs/_meta/active-work-index.md`
+* `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+* `Docs/agents/AGENT_GLOBAL_RULES.md`
+* `Docs/agents/EXECUTION_REPORT.md`
+* `Docs/03_standards/operations/standard-request-prompts.md`
+* `Docs/03_standards/codex/codex-minimal-reading-standard.md`
+* `Docs/03_standards/codex/codex-change-budget-standard.md`
+* `Docs/03_standards/codex/codex-documentation-diff-standard.md`
+* `Docs/03_standards/codex/codex-output-report-standard.md`
+
+Después, por tratarse de arquitectura de pagos, POS, Sales, Fiscal/Billing e integraciones, leer solo estos documentos canónicos:
+
+* `Docs/01_core_erp/apis/00_api_index.md`
+* `Docs/01_core_erp/apis/11_pos_api.md`
+* `Docs/01_core_erp/erp/08_pos_model.md`
+* `Docs/01_core_erp/erp/12_billing_returns.md`
+* `Docs/04_integrations/README.md`
+
+No leer todo `Docs`.
+
+## Context Pack
+
+Usar el Context Pack mínimo correspondiente a:
+
+* Core ERP
+* APIs reutilizables
+* POS
+* Sales
+* Fiscal/Billing
+* Integraciones externas
+* Agents
+
+Si se requiere leer otro documento, justificarlo en `EXECUTION_REPORT.md` antes de usarlo como fuente.
+
+## Fuera de alcance
+
+No ejecutar `AGENTS-002.md`.
+
+No ejecutar otros agents.
+
+No implementar código.
+
+No crear APIs reales.
+
+No crear repositorios.
+
+No crear migraciones.
+
+No crear modelos productivos.
+
+No crear schemas ejecutables.
+
+No activar `Payments API`.
+
+No declarar `POS API` o `Billing API independiente` como activas si siguen sin contrato, persistencia, seguridad, compose y pruebas.
+
+No modificar `main` ni `pro`.
+
+No usar `_archive/` ni `agents/_archive/` como fuente vigente, salvo trazabilidad explícita.
+
+No tocar proyectos no relacionados.
+
+No duplicar reglas globales ya definidas en `AGENT_GLOBAL_RULES.md`.
+
+## Decisión arquitectónica que debe conservarse
+
+Mantener explícitamente esta separación:
+
+* `Sales`: verdad comercial.
+* `Payments`: verdad técnica y financiera del cobro.
+* `POS`: operación física de caja, tickets, sesiones y cortes.
+* `Fiscal/Billing`: verdad fiscal, CFDI, cancelaciones, notas de crédito y datos fiscales.
+* `Accounting`: contabilidad futura.
+* `Integrations`: proveedores externos, credenciales, endpoints, webhooks, límites y mapeos.
+
+Regla principal:
+
 Ningún proyecto debe cobrar directamente contra Openpay, Mercado Pago, Clip, Stripe, BBVA, Banorte o Santander.
 
-Todos deben solicitar cobros mediante contrato interno de Payments.
+Todo proyecto debe solicitar cobros mediante un contrato interno futuro de `Payments`.
 
-Payments API debe documentarse como:
-PENDIENTE_DE_DISEÑO_PRIORITARIO
+## Estado obligatorio de Payments
 
-No marcar Payments API como ACTIVA hasta que exista:
+Documentar `Payments API` como:
+
+`PENDIENTE_DE_DISEÑO_PRIORITARIO`
+
+No marcarla como ACTIVA hasta que exista:
 
 1. Repositorio ejecutable.
 2. Contrato OpenAPI o equivalente.
@@ -54,350 +140,152 @@ No marcar Payments API como ACTIVA hasta que exista:
 6. Pruebas aprobadas.
 7. Webhooks validados.
 
-DOCUMENTO NUEVO A CREAR:
-Docs/01_core_erp/architecture/adr-payments-provider-strategy.md
+## Tareas
 
-CONTENIDO DEL ADR:
+1. Reescribir el agent para que abra con objetivo, alcance, lectura mínima, fuera de alcance, tareas, validaciones, reporte y criterio de cierre.
 
-1. Sales no debe conservar el detalle técnico de pagos.
-2. Sales solo puede conservar resumen comercial:
+2. Conservar todas las decisiones actuales del agent, pero reorganizadas y sin repetir reglas globales.
 
-   * payment_status
-   * total_paid
-   * balance_due
-   * payment_summary
-   * last_payment_at
-3. Payments debe conservar:
+3. Mantener la creación documental futura de:
 
-   * intentos de pago
-   * transacciones
-   * proveedor
-   * terminal
-   * autorizaciones
-   * MSI
-   * webhooks
-   * reembolsos
-   * conciliación
-   * contracargos
-4. POS no decide proveedor de pago.
-5. POS no debe guardar webhooks crudos ni datos técnicos del adquirente.
-6. POS crea ticket, solicita cobro y espera confirmación.
-7. Billing/Fiscal no cobra.
-8. Billing/Fiscal factura solo cuando existan datos fiscales completos.
-9. Cobro aprobado no equivale automáticamente a CFDI emitido.
-10. Integraciones externas viven en Docs/04_integrations.
+   * `Docs/01_core_erp/architecture/adr-payments-provider-strategy.md`
+   * `Docs/01_core_erp/apis/payments_api_future.md`
+   * `Docs/04_integrations/openpay/README.md`
+   * `Docs/04_integrations/mercado-pago-point/README.md`
+   * `Docs/04_integrations/clip/README.md`
+   * `Docs/04_integrations/stripe-terminal/README.md`
+   * `Docs/04_integrations/bbva-terminal-futuro/README.md`
 
-ACTUALIZAR:
-Docs/01_core_erp/apis/00_api_index.md
+4. Mantener la actualización futura de:
 
-Agregar en capacidades derivadas:
+   * `Docs/01_core_erp/apis/00_api_index.md`
+   * `Docs/01_core_erp/apis/11_pos_api.md`
+   * `Docs/01_core_erp/erp/08_pos_model.md`
+   * `Docs/01_core_erp/erp/12_billing_returns.md`
+   * `Docs/04_integrations/README.md`
 
-Payments API | PENDIENTE_DE_DISEÑO_PRIORITARIO | Orquestación futura de pagos, proveedores, terminales, webhooks, MSI, reembolsos, contracargos y conciliación.
+5. Reordenar el contenido por responsabilidades:
 
-Agregar nota:
-Sales conserva pagos solo como resumen comercial mientras Payments API no exista como servicio activo. No debe crecer como procesador técnico de pagos.
+   * Sales
+   * Payments
+   * POS
+   * Fiscal/Billing
+   * Integrations
+   * Proyectos consumidores
+   * Reglas de no duplicación
+   * Validaciones
+   * Cierre
 
-ACTUALIZAR:
-Docs/01_core_erp/apis/11_pos_api.md
+6. Convertir instrucciones largas en tareas verificables.
 
-Modificar responsabilidad actual “Registrar pagos de mostrador” para aclarar:
+7. Marcar como diseño futuro todo lo que no tenga contrato real.
 
-* POS registra la intención operativa de pago.
-* POS solicita cobro a Payments.
-* POS marca ticket como pagado solo después de confirmación.
-* POS conserva caja, ticket, sesión y corte.
-* POS no integra proveedores externos directamente.
+8. Evitar que el agent ordene implementación directa de proveedores.
 
-Endpoints sugeridos futuros:
-POST /api/pos/tickets/{ticket_id}/payment-intents
-POST /api/pos/tickets/{ticket_id}/confirm-payment
-GET /api/pos/tickets/{ticket_id}/payment-status
+9. Evitar que el agent cree APIs activas ficticias.
 
-No implementar si POS API aún no existe. Solo documentar como diseño futuro.
+10. Preservar los proyectos afectados y sus reglas:
 
-ACTUALIZAR:
-Docs/01_core_erp/erp/08_pos_model.md
+* Refapart usa Payments para pagos web; no Openpay directo.
+* Universal POS usa Payments para terminal física; no Mercado Pago Point directo desde POS.
+* DocuCore usa Payments para pagos web y suscripciones futuras.
+* LexNova usa Payments para pagos web y suscripciones futuras.
+* Fiscora/Fiscal no cobra; solo factura o genera procesos fiscales.
+* JobCron administra configuración futura de proveedores, disponibilidad por proyecto y feature flags.
+* saTwi usa Payments para pagos recurrentes, terminales o links futuros.
 
-Agregar regla:
-Una venta POS pagada debe terminar registrada en SalesOrder, pero el detalle técnico del cobro debe vivir en Payments.
+## Contenido mínimo que debe quedar en el agent
 
-Actualizar POSTicket:
+El agent optimizado debe conservar estas reglas:
 
-* Id
-* POSSessionId
-* SalesOrderId
-* TicketNumber
-* Total
-* PaymentStatus
-* PaymentSummary
-* Status
+### Sales
 
-No agregar aquí:
+Sales solo puede guardar resumen comercial:
 
-* ProviderTransactionId
-* AuthorizationCode
-* TerminalId
-* WebhookPayload
-* RawProviderResponse
-* ConciliationBatch
+* `payment_status`
+* `total_paid`
+* `balance_due`
+* `payment_summary`
+* `last_payment_at`
 
-Eso pertenece a Payments.
+Sales no debe guardar detalle técnico del adquirente.
 
-Agregar flujo canónico POS:
+### Payments
 
-1. Abrir sesión de caja.
-2. Crear ticket.
-3. Agregar productos.
-4. Calcular precios con Pricing.
-5. Validar inventario con Inventory.
-6. Crear SalesOrder preliminar o vinculación comercial.
-7. Solicitar PaymentIntent a Payments.
-8. Payments envía cobro a proveedor/terminal.
-9. Payments recibe webhook o consulta estado.
-10. POS recibe confirmación.
-11. POS marca ticket pagado.
-12. Sales actualiza estado comercial.
-13. Billing/Fiscal factura solo si aplica.
+Payments debe guardar:
 
-CREAR DISEÑO FUTURO:
-Docs/01_core_erp/apis/payments_api_future.md
+* intentos de pago
+* transacciones
+* proveedor
+* terminal
+* autorizaciones
+* MSI
+* webhooks
+* reembolsos
+* conciliación
+* contracargos
 
-Estado:
-PENDIENTE_DE_DISEÑO_PRIORITARIO
+### POS
 
-Responsabilidades:
+POS no decide proveedor de pago.
 
-1. Crear PaymentIntent.
-2. Registrar PaymentTransaction.
-3. Administrar proveedores.
-4. Administrar terminales.
-5. Recibir webhooks.
-6. Normalizar estados.
-7. Procesar reembolsos.
-8. Registrar MSI.
-9. Registrar contracargos.
-10. Conciliar pagos.
-11. Exponer resumen hacia Sales y POS.
+POS no guarda webhooks crudos.
 
-Entidades:
-PaymentProvider
+POS no guarda respuestas técnicas completas del adquirente.
 
-* Id
-* Code
-* Name
-* Type: WEB | TERMINAL | SPEI | QR | CASH | LINK
-* Status
-* SandboxEnabled
-* CreatedAt
+POS crea ticket, solicita cobro y espera confirmación.
 
-PaymentIntent
+POS conserva caja, ticket, sesión y corte.
 
-* Id
-* SourceType: POS | WEB | LINK | QR | SPEI | SUBSCRIPTION
-* SourceId
-* CustomerId
-* SalesOrderId
-* Amount
-* Currency
-* ProviderCode
-* ProviderOrderId
-* Status
-* RequestedAt
-* ExpiresAt
-* PaidAt
-* CancelledAt
-* FailureReason
+### Fiscal/Billing
 
-PaymentTransaction
+Fiscal/Billing no cobra.
 
-* Id
-* PaymentIntentId
-* ProviderTransactionId
-* AuthorizationCode
-* Amount
-* Currency
-* CardBrand
-* Last4
-* Installments
-* MsiApplied
-* Status
-* RawProviderStatus
-* CreatedAt
+Fiscal/Billing factura solo con datos fiscales completos.
 
-PaymentTerminal
+Un cobro aprobado no equivale automáticamente a CFDI emitido.
 
-* Id
-* ProviderCode
-* ExternalTerminalId
-* BranchId
-* CashRegisterId
-* Status
-* LastSyncAt
+Si existe reembolso con CFDI emitido, documentar cancelación, nota de crédito o procedimiento fiscal aplicable.
 
-PaymentWebhook
+### Integrations
 
-* Id
-* ProviderCode
-* EventType
-* ExternalEventId
-* PaymentIntentId
-* ReceivedAt
-* ProcessedAt
-* Status
-* ErrorMessage
-* PayloadHash
+Las integraciones externas viven en `Docs/04_integrations`.
 
-PaymentRefund
+Las integraciones documentan proveedor externo, credenciales, endpoints, webhooks, límites y mapeos.
 
-* Id
-* PaymentTransactionId
-* SalesOrderId
-* Amount
-* Reason
-* ProviderRefundId
-* Status
-* RequestedAt
-* CompletedAt
+Las integraciones no definen el modelo interno del ERP.
 
-PaymentReconciliation
+Si falta información real del proveedor, usar `PENDIENTE_DE_DEFINIR`.
 
-* Id
-* ProviderCode
-* PeriodStart
-* PeriodEnd
-* ExpectedAmount
-* SettledAmount
-* Difference
-* Status
+## Entidades futuras de Payments que deben conservarse
+
+Mantener en `payments_api_future.md` como diseño futuro:
+
+* `PaymentProvider`
+* `PaymentIntent`
+* `PaymentTransaction`
+* `PaymentTerminal`
+* `PaymentWebhook`
+* `PaymentRefund`
+* `PaymentReconciliation`
 
 Estados estándar:
-PAYMENT_CREATED
-PAYMENT_PENDING
-PAYMENT_REQUIRES_ACTION
-PAYMENT_APPROVED
-PAYMENT_REJECTED
-PAYMENT_CANCELLED
-PAYMENT_EXPIRED
-PAYMENT_REFUNDED
-PAYMENT_PARTIALLY_REFUNDED
-PAYMENT_CHARGEBACK
-PAYMENT_RECONCILED
 
-ACTUALIZAR:
-Docs/01_core_erp/erp/12_billing_returns.md
+* `PAYMENT_CREATED`
+* `PAYMENT_PENDING`
+* `PAYMENT_REQUIRES_ACTION`
+* `PAYMENT_APPROVED`
+* `PAYMENT_REJECTED`
+* `PAYMENT_CANCELLED`
+* `PAYMENT_EXPIRED`
+* `PAYMENT_REFUNDED`
+* `PAYMENT_PARTIALLY_REFUNDED`
+* `PAYMENT_CHARGEBACK`
+* `PAYMENT_RECONCILED`
 
-Agregar:
+## Reglas de no duplicación
 
-1. Un pago aprobado no equivale automáticamente a factura.
-2. Billing/Fiscal requiere RFC, razón social, régimen fiscal, uso CFDI, código postal fiscal, método de pago y forma de pago.
-3. Si hay reembolso con CFDI emitido, debe contemplarse cancelación, nota de crédito o procedimiento fiscal aplicable.
-4. Devolución no debe modificar precio histórico de la venta.
-5. Sales conserva relación comercial de devolución.
-6. Payments conserva reembolso técnico.
-7. Billing/Fiscal conserva efecto fiscal.
-
-ACTUALIZAR:
-Docs/04_integrations/README.md
-
-Agregar:
-
-* openpay
-* mercado-pago-point
-* clip
-* stripe-terminal
-* bbva-terminal-futuro
-
-Regla:
-La integración documenta proveedor externo, credenciales, endpoints, webhooks, límites y mapeos. No define el modelo interno del ERP.
-
-CREAR:
-Docs/04_integrations/openpay/README.md
-
-Contenido:
-
-* Proveedor recomendado inicial para pagos web.
-* Uso: e-commerce, SaaS, MSI, tarjeta, SPEI, checkout profesional.
-* No debe integrarse directamente en Refapart, DocuCore, LexNova, Fiscora, POS o ERP.
-* Debe conectarse mediante Payments.
-* Estado: PROVEEDOR_WEB_RECOMENDADO.
-* Cuotas, comisiones y condiciones deben verificarse antes de producción.
-
-CREAR:
-Docs/04_integrations/mercado-pago-point/README.md
-
-Contenido:
-
-* Proveedor inicial recomendado para terminal física.
-* Uso: Universal POS.
-* Flujo:
-  POS → Payments → Mercado Pago Point → terminal → confirmación → POS/Sales.
-* Advertencia:
-  La terminal conserva marca Mercado Pago. No es terminal personalizada MexIngSof.
-* Deben probarse:
-  aprobación, rechazo, cancelación, expiración, reembolso, pérdida de conexión y duplicidad de webhook.
-* Estado: PROVEEDOR_TERMINAL_INICIAL.
-
-CREAR:
-Docs/04_integrations/clip/README.md
-
-Contenido:
-
-* Proveedor presencial futuro.
-* No implementar hasta validar contrato, SDK/API, webhooks y compatibilidad con Universal POS.
-* Estado: FUTURO_VALIDAR.
-
-CREAR:
-Docs/04_integrations/stripe-terminal/README.md
-
-Contenido:
-
-* Proveedor técnicamente fuerte para POS.
-* No implementar hasta confirmar disponibilidad real de lectores físicos en México y condiciones comerciales.
-* Estado: FUTURO_VALIDAR.
-
-CREAR:
-Docs/04_integrations/bbva-terminal-futuro/README.md
-
-Contenido:
-
-* No asumir integración abierta de terminal BBVA tradicional.
-* Openpay puede cubrir pagos web, pero no garantiza terminal física personalizada.
-* Terminal directa BBVA queda sujeta a contrato empresarial/adquirente.
-* Estado: FUTURO_NEGOCIACION.
-
-PROYECTOS AFECTADOS:
-Refapart:
-
-* Debe usar Payments para pagos web.
-* No integrar Openpay directo.
-
-Universal POS:
-
-* Debe usar Payments para terminal física.
-* No integrar Mercado Pago Point directo desde POS.
-
-DocuCore:
-
-* Debe usar Payments para pagos web y suscripciones futuras.
-
-LexNova:
-
-* Debe usar Payments para pagos web y suscripciones futuras.
-
-Fiscora/Fiscal:
-
-* No cobra.
-* Solo factura o genera procesos fiscales.
-
-JobCron:
-
-* Debe administrar configuración futura de proveedores, disponibilidad por proyecto y feature flags.
-
-saTwi:
-
-* Debe usar Payments para pagos recurrentes, terminal o links futuros.
-
-REGLAS DE NO DUPLICACIÓN:
+Mantener estas reglas:
 
 1. No crear pagos por proyecto.
 2. No meter lógica de Openpay dentro de Refapart.
@@ -406,28 +294,75 @@ REGLAS DE NO DUPLICACIÓN:
 5. No meter webhooks dentro de POS.
 6. No meter CFDI dentro de Payments.
 7. No declarar Payments API como ACTIVA.
-8. No duplicar responsabilidades ya existentes de Sales, POS o Fiscal.
+8. No duplicar responsabilidades existentes de Sales, POS o Fiscal.
 9. No crear documentación paralela si ya existe documento canónico.
 10. Si un documento ya contiene el tema, actualizarlo en lugar de crear otro.
 
-CRITERIO DE CIERRE:
+## Validaciones
 
-1. ADR creado.
-2. Payments API Future creado.
-3. API index actualizado.
-4. POS API actualizado.
-5. POS model actualizado.
-6. Billing/returns actualizado.
-7. Integrations README actualizado.
-8. Integraciones de proveedores creadas.
-9. Sin APIs activas ficticias.
-10. Sin duplicación documental.
-11. Reportar documentos revisados.
-12. Reportar documentos modificados.
-13. Reportar decisiones tomadas.
-14. Reportar pendientes reales.
-15. Dejar git status limpio si se hacen cambios.
+Validar:
 
-La parte más importante es esta: **Sales puede guardar el resumen del pago, pero Payments debe nacer como frontera técnica desde el diseño**. Eso respeta el índice actual, donde Sales está activa pero las APIs nuevas solo deben activarse cuando tengan contrato, persistencia, seguridad, compose y pruebas aprobadas. ([raw.githubusercontent.com][1])
+* Que `AGENTS-002.md` conserva toda la información vigente.
+* Que no duplica reglas globales de `AGENT_GLOBAL_RULES.md`.
+* Que no ordena ejecutar otros agents.
+* Que no ordena leer todo `Docs`.
+* Que no usa `_archive/` como fuente vigente.
+* Que no declara APIs pendientes como activas.
+* Que las rutas documentales indicadas existen o quedan claramente como documentos a crear.
+* Que las decisiones de pagos quedan clasificadas en Core ERP o Integrations según corresponda.
+* Que las referencias a proyectos afectados no se eliminan.
+* Que `EXECUTION_REPORT.md` queda actualizado.
 
-[1]: https://raw.githubusercontent.com/MexIngSoft/Docs/main/01_core_erp/apis/00_api_index.md "raw.githubusercontent.com"
+Si existen scripts documentales disponibles, ejecutar el check correspondiente.
+
+Si no se pueden ejecutar validaciones, registrar la causa exacta.
+
+## Reporte obligatorio
+
+Actualizar:
+
+`Docs/agents/EXECUTION_REPORT.md`
+
+Registrar:
+
+* agent revisado: `AGENTS-002.md`
+* documentos leídos
+* Context Pack usado
+* cambios realizados
+* validaciones ejecutadas
+* resultado de validaciones
+* pendientes reales
+* bloqueos
+* decisiones documentales
+* documentos fuera de alcance
+* APIs reutilizadas
+* APIs no creadas y motivo
+
+## Criterio de cierre
+
+El agent queda listo solo si:
+
+* conserva todas las decisiones actuales
+* queda más conciso
+* no duplica reglas globales
+* tiene lectura mínima
+* tiene alcance claro
+* tiene tareas verificables
+* separa Core ERP de Integrations
+* no activa APIs ficticias
+* mantiene Payments como diseño futuro prioritario
+* define validaciones
+* define reporte obligatorio
+* deja claro qué queda fuera de alcance
+
+## Reglas finales
+
+Si el agent estuviera vacío, no inventar tareas; dejarlo como `Sin instrucciones`.
+
+Si el agent ya fue ejecutado y no hay cambios nuevos, documentar que está cerrado.
+
+Si falta información esencial, marcar `Bloqueado` y dejar preguntas concretas.
+
+No eliminar, mover ni renombrar `Docs/agents/AGENTS-002.md`.
+
+No limpiar el contenido del agent, porque esta tarea es solo optimizar su instrucción, no ejecutarlo.

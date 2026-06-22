@@ -1,409 +1,277 @@
-Sí, ese objetivo está correcto: **EscogeTuPC no debe ser una tienda normal**, debe ser un **motor de armado inteligente basado en inventario real**.
+# INSTRUCCIÓN PARA CODEX — OPTIMIZAR AGENTS-009
 
-La arquitectura debe quedar así:
+Trabaja únicamente en la rama `dev`.
 
-# 1. El usuario puede iniciar por cualquier componente
+No ejecutes todos los agents.
 
-Ejemplos:
+No implementes código.
 
-* “Quiero 8 GB de RAM”
-* “Quiero Ryzen 5”
-* “Quiero tarjeta madre AM5”
-* “Quiero una PC barata”
-* “Quiero una PC gamer”
-* “Quiero SSD de 1 TB”
+No modifiques otros archivos `AGENTS-*.md`.
 
-Entonces el sistema no arma desde una plantilla fija, sino desde una **restricción inicial**.
+Optimiza únicamente:
+
+`Docs/agents/AGENTS-009.md`
+
+---
+
+# Resumen del agente actual
+
+`AGENTS-009.md` documenta **EscogeTuPC / Buildora**.
+
+El producto no debe ser una tienda normal, sino un **motor inteligente de armado de PCs** basado en:
+
+* intención inicial del usuario;
+* inventario real;
+* compatibilidad técnica;
+* comparación de proveedores;
+* sustitución de piezas agotadas;
+* cálculo real de precio final;
+* cotización auditable.
+
+El usuario puede iniciar desde cualquier restricción:
+
+* RAM;
+* procesador;
+* motherboard;
+* SSD;
+* presupuesto;
+* uso gamer;
+* PC económica;
+* componente específico.
+
+El sistema debe completar la configuración compatible sin romper reglas técnicas.
+
+---
+
+# AGENTS-009 — Buildora / EscogeTuPC
+
+## Objetivo
+
+Optimizar la instrucción documental de Buildora / EscogeTuPC como configurador inteligente de PCs basado en inventario real, compatibilidad técnica, proveedores y precio final calculado, sin duplicar APIs reutilizables.
+
+## Alcance
+
+Puede tocar:
+
+* `Docs/agents/AGENTS-009.md`
+
+Debe revisar:
+
+* APIs reutilizables vigentes;
+* frontera Gateway;
+* catálogo de módulos;
+* reglas de producto;
+* inventario/proveedores/precios;
+* compatibilidad técnica;
+* reporte de ejecución.
+
+Debe dejar:
+
+* instrucción optimizada;
+* alcance claro;
+* tareas verificables;
+* validaciones;
+* criterio de cierre;
+* reporte en `Docs/agents/EXECUTION_REPORT.md`.
+
+## Lectura mínima obligatoria
+
+* `Docs/README.md`
+* `Docs/_meta/active-work-index.md`
+* `Docs/agents/AGENT_GLOBAL_RULES.md`
+* `Docs/agents/EXECUTION_REPORT.md`
+* `Docs/03_standards/architecture/api-gateway-standard.md`
+* `Docs/03_standards/product/product-strategy.md`
+* `Docs/03_standards/product/module-catalog.md`
+* `Docs/01_core_erp/apis/00_api_index.md`
+* `Docs/01_core_erp/apis/reusable-api-contracts.md`
+* `Docs/03_standards/codex/codex-output-report-standard.md`
+* `Docs/agents/AGENTS-009.md`
+
+## Fuera de alcance
+
+* No ejecutar otros agents.
+* No implementar software.
+* No crear APIs nuevas sin contrato.
+* No crear schemas, modelos ni migraciones sin decisión documentada.
+* No modificar `main` ni `pro`.
+* No leer todo `Docs`.
+* No tocar proyectos no relacionados.
+* No duplicar `Catalog`, `Supplier`, `Inventory`, `Pricing`, `Sales`, `Address` ni `Gateway`.
+* No guardar catálogo, precios, stock o proveedores dentro de Buildora.
+* No marcar `API.PY.DJANGO.Buildora` como activa sin contrato, repo, migraciones, compose, seguridad y pruebas.
+
+## Clasificación documental obligatoria
+
+Clasificar así:
 
 ```text
-Usuario elige condición inicial
+EscogeTuPC / Buildora = Independent Product / Configurador inteligente de hardware
+Build Engine = API especializada solo si aplica
+Compatibility Rules = Catalog.ProductCompatibilityRules o futura Rules API
+Catalog = productos internos normalizados
+Supplier = proveedores, SKU externo, precio, stock externo, RawData
+Inventory = stock propio
+Pricing = precio final, margen, impuestos y snapshots
+Sales = cotización congelada
+Gateway = entrada única desde frontend
+```
+
+## Tareas
+
+1. Reescribir `AGENTS-009.md` preservando toda la intención actual:
+
+   * armado inteligente;
+   * inicio desde cualquier componente;
+   * inventario real;
+   * proveedores Syscom, CT Internacional y DC Mayorista;
+   * producto interno único;
+   * normalización técnica;
+   * compatibilidad;
+   * sustitución;
+   * precio final;
+   * cotización.
+
+2. Definir el flujo correcto:
+
+```text
+Usuario indica restricción inicial
 ↓
-Motor busca componentes compatibles
+Gateway recibe solicitud
 ↓
-Valida stock real
+Buildora interpreta intención
 ↓
-Calcula precio por proveedor
+Catalog entrega producto interno y atributos
 ↓
-Elige mejor combinación
+Supplier entrega SKU, precio y stock por proveedor
 ↓
-Ofrece sustitutos si algo se agota
-```
-
-# 2. Cada producto debe tener 3 capas de datos
-
-## A) Datos comerciales
-
-```text
-Proveedor
-SKU proveedor
-Precio
-Stock
-Moneda
-Costo de envío
-Tiempo de entrega
-Garantía
-```
-
-## B) Datos técnicos normalizados
-
-```text
-Socket
-Tipo de RAM
-Capacidad RAM
-Factor de forma
-Potencia
-Conectores
-Compatibilidades
-Consumo
-Dimensiones
-```
-
-## C) Datos de relación
-
-```text
-Este procesador usa este socket
-Esta tarjeta madre acepta esta RAM
-Este gabinete acepta esta motherboard
-Esta fuente soporta esta GPU
-Este disipador soporta este socket
-```
-
-# 3. No debes pensar en “productos”, sino en “opciones compatibles”
-
-Ejemplo:
-
-El usuario dice:
-
-> Quiero 8 GB de RAM.
-
-El sistema debe buscar:
-
-```text
-RAM DDR4 8GB
-RAM DDR5 8GB
-```
-
-Pero todavía no puede decidir hasta saber con qué motherboard y procesador va.
-
-Entonces debe generar rutas:
-
-```text
-Ruta 1:
-RAM DDR4 8GB
-Motherboard DDR4
-Procesador compatible
-Fuente compatible
-Gabinete compatible
-
-Ruta 2:
-RAM DDR5 8GB
-Motherboard DDR5
-Procesador compatible
-Fuente compatible
-Gabinete compatible
-```
-
-Luego compara precio, stock y disponibilidad.
-
-# 4. Debe existir un motor de sustitución
-
-Si una tarjeta madre se agota:
-
-```text
-Producto agotado:
-ASUS B550M-K
-
-Buscar sustituto:
-- Misma categoría: motherboard
-- Mismo socket: AM4
-- Mismo tipo RAM: DDR4
-- Factor compatible: micro ATX o ATX
-- Precio similar
-- Stock disponible
-```
-
-Y el sistema reemplaza sin romper la PC.
-
-# 5. Tabla clave: inventario por proveedor
-
-```text
-supplier_inventory
-```
-
-| producto interno | proveedor | sku proveedor | precio | stock | envío | entrega |
-| ---------------- | --------- | ------------- | ------ | ----- | ----- | ------- |
-| Ryzen 5 5600G    | Syscom    | X1            | 1850   | 5     | 120   | 2 días  |
-| Ryzen 5 5600G    | CT        | Y2            | 1790   | 2     | 180   | 3 días  |
-| Ryzen 5 5600G    | DC        | Z3            | 1900   | 10    | 90    | 1 día   |
-
-Así puedes decidir de dónde conviene traer cada pieza.
-
-# 6. Cálculo real del equipo
-
-El precio final no debe ser solo suma de productos.
-
-Debe calcular:
-
-```text
-Costo componentes
-+ Envío por proveedor
-+ Comisión pago
-+ Margen de ganancia
-+ IVA si aplica
-+ Empaque
-+ Mano de obra armado
-+ Garantía/soporte
-= Precio final
-```
-
-# 7. Arquitectura recomendada
-
-```text
-API Products
-Guarda productos base
-
-API Suppliers
-Guarda Syscom, CT, DC
-
-API Specs
-Normaliza fichas técnicas
-
-API Inventory
-Actualiza precios y stock
-
-API Compatibility
-Valida si las piezas pueden trabajar juntas
-
-API Build Engine
-Arma la PC
-
-API Pricing
-Calcula costo total
-
-API Substitution
-Busca reemplazos cuando algo se agota
-```
-
-# 8. Lo más importante
-
-La base de datos debe tener un **producto interno único**, aunque venga de varios proveedores.
-
-Ejemplo:
-
-```text
-Producto interno:
-AMD Ryzen 5 5600G
-
-Proveedor Syscom:
-SKU 123
-
-Proveedor CT:
-SKU 987
-
-Proveedor DC:
-SKU ABC
-```
-
-Así el sistema sabe que es el mismo producto aunque cada proveedor lo escriba diferente.
-
-# 9. Flujo ideal
-
-```text
-Usuario pide: PC con 8 GB de RAM
+Inventory entrega stock propio si existe
 ↓
-El sistema genera posibles configuraciones
+Compatibility valida reglas técnicas
 ↓
-Valida compatibilidad
+Pricing calcula precio final
 ↓
-Valida stock en Syscom, CT y DC
+Sales guarda cotización congelada
 ↓
-Calcula costo por proveedor
-↓
-Elige la combinación más conveniente
-↓
-Muestra:
-- Opción económica
-- Opción equilibrada
-- Opción recomendada
-- Opción con mejor entrega
+Buildora entrega opciones recomendadas
 ```
 
-# 10. Conclusión
-
-Sí: necesitas una arquitectura tipo **configurador inteligente de hardware**, no solo catálogo.
-
-La pieza central debe ser:
+3. Documentar que cada producto requiere tres capas:
 
 ```text
-Motor de compatibilidad + motor de inventario + motor de sustitución + motor de precios
+Datos comerciales:
+- proveedor
+- SKU proveedor
+- precio
+- stock
+- moneda
+- envío
+- entrega
+- garantía
+
+Datos técnicos normalizados:
+- socket
+- tipo RAM
+- capacidad RAM
+- factor de forma
+- potencia
+- conectores
+- compatibilidades
+- consumo
+- dimensiones
+
+Datos de relación:
+- CPU compatible con socket
+- motherboard compatible con RAM
+- gabinete compatible con motherboard
+- fuente compatible con GPU
+- disipador compatible con socket
 ```
 
-Eso permitirá que el cliente empiece por cualquier componente y el sistema complete el equipo sin equivocarse.
-
-
-
-Sí, Hugo. Revisé la documentación y la arquitectura correcta es esta:
-
-# Decisión principal
-
-**EscogeTuPC / Buildora no debe guardar todo en una sola tabla.**
-Debe apoyarse en las APIs reutilizables ya existentes: **Catalog, Supplier, Inventory, Pricing, Sales, Address, Gateway y Rules/ProductCompatibility**. La documentación confirma que Catalog, Inventory, Pricing, Supplier, Sales, Document, Fiscal y Address ya están como APIs compartidas activas.
-
-La regla de tus Docs es clara: **no crear una API nueva si una API compartida ya cubre la responsabilidad**.
-
-# Dónde debe vivir cada cosa
-
-| Información                        | Dónde vive                                               |
-| ---------------------------------- | -------------------------------------------------------- |
-| Producto interno normalizado       | `Catalog`                                                |
-| Categoría, marca, modelo           | `Catalog`                                                |
-| Ficha técnica estructurada         | `Catalog.ProductAttributes`                              |
-| Datos crudos de Syscom, CT y DC    | `Supplier.RawData`                                       |
-| SKU, precio y stock por proveedor  | `Supplier`                                               |
-| Stock propio si compras inventario | `Inventory`                                              |
-| Precio final al cliente            | `Pricing`                                                |
-| Cotización congelada               | `Sales / Quote`                                          |
-| Compatibilidad técnica             | `Catalog.ProductCompatibilityRules` o futura `Rules API` |
-| Armador de PC                      | API especializada `Buildora/EscogeTuPC`                  |
-| Entrada desde la web               | `Gateway General`                                        |
-
-# Tablas base que ya están documentadas
-
-## Catalog
-
-Ya existe como responsable de productos internos, categorías, marcas e imágenes.
-
-Debe ampliarse con:
+4. Documentar APIs reutilizadas:
 
 ```text
-Catalog.Product
-Catalog.Category
-Catalog.Brand
-Catalog.ProductImage
-Catalog.ProductAttribute
-Catalog.ProductAttributeDefinitions
-Catalog.ProductCompatibilityRules
-Catalog.ProductCompatibilityChecks
+Catalog:
+- producto interno
+- categoría
+- marca
+- modelo
+- imágenes
+- atributos técnicos
+- reglas de compatibilidad
+- equivalencias
+
+Supplier:
+- proveedor
+- SKU externo
+- precio externo
+- stock externo
+- RawData
+- sync logs
+- mappers
+
+Inventory:
+- stock propio
+- almacenes
+- movimientos
+
+Pricing:
+- margen
+- impuestos
+- comisiones
+- envío
+- mano de obra
+- garantía
+- snapshot de precio final
+
+Sales:
+- cotización
+- vigencia
+- estado comercial
+- congelamiento de propuesta
+
+Address:
+- dirección del cliente
+- entrega
+
+Gateway:
+- entrada única desde frontend
 ```
 
-La documentación ya confirma estas tablas para compatibilidad:
-
-## Supplier
-
-Ya contempla:
-
-```text
-Supplier
-SupplierProvider
-SupplierProduct
-SupplierCategory
-SupplierBrand
-SupplierStock
-SupplierPrice
-SupplierSyncLog
-RawData
-```
-
-Esto sirve para guardar Syscom, CT Internacional y DC Mayorista sin contaminar el catálogo interno.
-
-## Pricing
-
-Pricing debe calcular precio final, margen, impuestos, tipo de cambio y snapshot auditable.
-
-## Compatibilidad
-
-La documentación ya menciona explícitamente Escoge tu PC / Buildora y dice que la compatibilidad no debe vivir como texto libre, sino como atributos y reglas consultables.
-
-# Tablas nuevas que hacen falta
-
-Estas son las que yo agregaría:
-
-```text
-Catalog.ProductAttributeDefinition
-Catalog.ProductAttributeValue
-Catalog.ProductAttributeUnit
-Catalog.ProductAttributeOption
-Catalog.ProductCompatibilityRule
-Catalog.ProductCompatibilityCheck
-Catalog.ProductSubstitutionRule
-Catalog.ProductEquivalence
-Catalog.ProductNormalizationCandidate
-Supplier.SupplierRawData
-Supplier.SupplierProductMapping
-Supplier.SupplierDatasheet
-Supplier.SupplierSyncLog
-Pricing.BuildPriceSimulation
-Sales.BuildQuoteSnapshot
-Buildora.BuildIntent
-Buildora.BuildSession
-Buildora.BuildRequirement
-Buildora.BuildCandidate
-Buildora.BuildCandidateItem
-Buildora.BuildValidationResult
-```
-
-# API nueva necesaria
-
-Sí necesitas una API especializada, pero **solo para la lógica exclusiva del armado de PC**:
+5. Definir que la única API especializada posible es:
 
 ```text
 API.PY.DJANGO.Buildora
 ```
 
-Responsabilidad:
+Responsabilidad exclusiva:
 
 ```text
-- Recibir intención del usuario.
-- Armar combinaciones compatibles.
-- Pedir productos a Catalog.
-- Pedir stock/costo a Supplier.
-- Pedir precio final a Pricing.
-- Validar reglas de compatibilidad.
-- Sustituir componentes agotados.
-- Generar propuesta final.
+- recibir intención del usuario;
+- generar rutas de armado;
+- consultar APIs reutilizables;
+- validar compatibilidad;
+- comparar proveedores;
+- sustituir piezas agotadas;
+- generar opciones finales;
+- explicar por qué una configuración es válida;
+- entregar cotización preliminar a Sales.
 ```
 
-No debe guardar catálogo, precios, stock ni proveedores.
-
-# Proveedores existentes
-
-Tus Docs ya reconocen estos proveedores:
+No debe guardar:
 
 ```text
-syscom
-ct-internacional
-dc-mayorista
+- catálogo;
+- proveedores;
+- precios;
+- stock;
+- direcciones;
+- ventas;
+- pagos;
+- facturación.
 ```
 
-También indican que cada integración debe documentar mapper, sync, seguridad y errores, y que si falta información real se use `PENDIENTE_DE_DEFINIR`, no inventar endpoints ni credenciales.
-
-# Flujo correcto de datos
-
-```text
-Syscom / CT / DC
-↓
-Supplier.RawData
-↓
-SupplierProduct / SupplierPrice / SupplierStock
-↓
-Mapper normaliza
-↓
-Catalog.Product + ProductAttributes
-↓
-CompatibilityRules
-↓
-Buildora arma PC
-↓
-Pricing calcula precio final
-↓
-Sales guarda cotización
-```
-
-El flujo de proveedor ya está documentado así: sync descarga, guarda RawData y logs; publish transforma hacia Catalog/Pricing.
-
-# Lo más importante
-
-Para que no se equivoque, cada producto debe tener estado de calidad:
+6. Documentar estados mínimos de calidad:
 
 ```text
 READY_FOR_AUTO_BUILD
@@ -411,24 +279,196 @@ REQUIRES_REVIEW
 INCOMPLETE_DATASHEET
 CONFLICT_BETWEEN_SUPPLIERS
 NOT_COMPATIBLE
+OUT_OF_STOCK
+PRICE_CHANGED
 ```
 
-La documentación ya marca esta regla: si faltan atributos suficientes, no debe venderse como compatible automáticamente; debe quedar como `REQUIRES_REVIEW`.
+Si faltan atributos técnicos suficientes, el producto no puede usarse en armado automático y debe quedar como `REQUIRES_REVIEW`.
 
-# Conclusión
-
-La arquitectura correcta es:
+7. Documentar tablas conceptuales sin crear migraciones:
 
 ```text
-Frontend EscogeTuPC
-↓
-Gateway General
-↓
-Buildora API
-↓
-Catalog + Supplier + Pricing + Inventory + Sales + Rules
-↓
-PostgreSQL schema por módulo
+Buildora.BuildIntent
+Buildora.BuildSession
+Buildora.BuildRequirement
+Buildora.BuildCandidate
+Buildora.BuildCandidateItem
+Buildora.BuildValidationResult
+Buildora.BuildRecommendation
+Buildora.BuildExplanation
+Buildora.BuildQuoteRequest
+Buildora.BuildSubstitutionLog
 ```
 
-No necesitas rehacer todo. Necesitas **ampliar Catalog, Supplier, Pricing y ProductCompatibility**, y crear solo una API especializada para el configurador inteligente.
+Tablas que deben vivir fuera de Buildora:
+
+```text
+Catalog.Product
+Catalog.Category
+Catalog.Brand
+Catalog.ProductImage
+Catalog.ProductAttribute
+Catalog.ProductAttributeDefinition
+Catalog.ProductCompatibilityRule
+Catalog.ProductCompatibilityCheck
+Catalog.ProductSubstitutionRule
+Catalog.ProductEquivalence
+Catalog.ProductNormalizationCandidate
+
+Supplier.SupplierProvider
+Supplier.SupplierProduct
+Supplier.SupplierStock
+Supplier.SupplierPrice
+Supplier.SupplierRawData
+Supplier.SupplierProductMapping
+Supplier.SupplierDatasheet
+Supplier.SupplierSyncLog
+
+Pricing.BuildPriceSimulation
+Sales.BuildQuoteSnapshot
+```
+
+8. Documentar endpoints conceptuales sin marcarlos como activos:
+
+```text
+POST /buildora/intents
+POST /buildora/sessions
+POST /buildora/builds/generate
+POST /buildora/builds/validate
+POST /buildora/builds/substitute
+POST /buildora/builds/price
+POST /buildora/builds/quote
+GET /buildora/builds/{id}
+GET /buildora/builds/{id}/explanation
+```
+
+9. Definir validaciones de compatibilidad:
+
+```text
+CPU ↔ Motherboard socket
+Motherboard ↔ RAM type
+Motherboard ↔ Form factor
+Motherboard ↔ Storage interface
+GPU ↔ PSU watts
+GPU ↔ Case dimensions
+Cooler ↔ CPU socket
+Cooler ↔ Case clearance
+PSU ↔ Connectors
+Case ↔ Motherboard form factor
+Case ↔ GPU length
+```
+
+10. Definir cálculo de precio final:
+
+```text
+Costo componentes
++ envío por proveedor
++ comisión de pago
++ margen
++ IVA si aplica
++ empaque
++ mano de obra de armado
++ garantía / soporte
+= precio final
+```
+
+11. Definir salidas del configurador:
+
+```text
+Opción económica
+Opción equilibrada
+Opción recomendada
+Opción mejor entrega
+Opción mejor upgrade futuro
+Opción requiere revisión
+```
+
+12. Actualizar `Docs/agents/EXECUTION_REPORT.md` registrando:
+
+* agent revisado;
+* documentos leídos;
+* Context Pack usado;
+* cambios realizados;
+* validaciones;
+* pendientes reales;
+* bloqueos;
+* decisiones documentales;
+* APIs reutilizadas;
+* APIs no creadas y motivo.
+
+## Validaciones
+
+Ejecutar solo validaciones documentales aplicables:
+
+* validar que solo se modificó `Docs/agents/AGENTS-009.md`;
+* validar que no se modificaron otros agents;
+* validar que no se creó API nueva;
+* validar que no se crearon migraciones;
+* validar que Buildora no duplica Catalog/Supplier/Inventory/Pricing/Sales/Address/Gateway;
+* validar que todo frontend pasa por Gateway;
+* validar que `API.PY.DJANGO.Buildora` queda como conceptual si no existe contrato real;
+* validar que las tablas son conceptuales y no migraciones;
+* validar rutas y enlaces modificados;
+* registrar documentos leídos;
+* ejecutar `git diff --check` si el entorno lo permite.
+
+No declarar validaciones no ejecutadas.
+
+Si una validación no puede ejecutarse, registrar causa exacta.
+
+## Reporte obligatorio
+
+Actualizar:
+
+`Docs/agents/EXECUTION_REPORT.md`
+
+Debe registrar:
+
+* `AGENTS-009.md`;
+* documentos leídos;
+* Context Pack elegido;
+* documentos fuera de alcance;
+* cambios realizados;
+* APIs reutilizadas;
+* APIs no creadas y motivo;
+* validaciones ejecutadas;
+* resultado de validaciones;
+* pendientes reales con `PENDIENTE_DE_DEFINIR`;
+* bloqueos;
+* decisiones documentales;
+* estado final del agent.
+
+## Criterio de cierre
+
+El agent queda listo solo si:
+
+* la instrucción es más clara y ejecutable;
+* no pierde ninguna decisión del agente actual;
+* conserva EscogeTuPC / Buildora como configurador inteligente;
+* no lo convierte en tienda genérica;
+* no duplica APIs reutilizables;
+* mantiene producto interno único;
+* mantiene inventario por proveedor;
+* mantiene compatibilidad técnica;
+* mantiene sustitución automática;
+* mantiene cálculo real de precio final;
+* define lectura mínima;
+* define alcance;
+* define fuera de alcance;
+* define tareas verificables;
+* define validaciones;
+* define dónde reportar.
+
+## Reglas finales
+
+Si `AGENTS-009.md` está vacío, no inventar tareas; dejarlo como `Sin instrucciones`.
+
+Si el agent ya fue ejecutado y no hay cambios nuevos, documentar que está cerrado.
+
+Si falta información esencial, marcar `Bloqueado` y dejar preguntas concretas.
+
+No eliminar, mover ni renombrar `Docs/agents/AGENTS-009.md`.
+
+No limpiar el contenido del agent.
+
+Esta tarea solo optimiza la instrucción del agent; no ejecuta Buildora ni crea su implementación.

@@ -1,515 +1,231 @@
-Aquí tienes la instrucción completa para pegarla en Codex:
+Trabaja en la rama `dev`.
 
-```text
-OBJETIVO
+Optimiza únicamente:
 
-Actualizar la documentación del repositorio:
+`Docs/agents/AGENTS-003.md`
 
-https://github.com/MexIngSoft/Docs.git
+No ejecutes el agent.
+No ejecutes otros agents.
+No modifiques otros `AGENTS-*.md`.
+No elimines, muevas ni renombres `Docs/agents/AGENTS-003.md`.
+No limpies el contenido del agent; esta tarea solo optimiza su instrucción.
 
-para reflejar una arquitectura más estable y reutilizable donde:
-
-1. Image API sea una API técnica compartida.
-2. Document API sea una API documental/ETL que orquesta Image API.
-3. DocuCore sea producto comercial y escaparate técnico, no el dueño global del OCR.
-4. LeadHunter quede documentado como módulo interno de JobCron, no como producto independiente.
-5. Se evite duplicar OCR, limpieza de imagen, previews y procesamiento visual en DocuCore, Fiscora, LexNova, Refapart u otros proyectos.
-
-PRE-FLIGHT OBLIGATORIO
-
-Antes de modificar archivos:
-
-1. Leer:
-   - README.md
-   - _meta/active-work-index.md
-   - agents/AGENT_GLOBAL_RULES.md
-   - 03_standards/operations/standard-request-prompts.md
-   - 03_standards/documentation-first-workflow.md
-
-2. Leer únicamente el contexto necesario:
-   - 01_core_erp/apis/00_api_index.md
-   - 01_core_erp/apis/15_documents_api.md
-   - 02_projects/docucore/mvp-roadmap.md
-   - 02_projects/docucore/api-contracts.md
-   - 02_projects/docucore/document-intelligence.md
-   - 02_projects/_ecosystem/05_lexnova_docucore_fiscora_mvp_alignment.md
-   - 02_projects/_ecosystem/api-version-matrix.md
-   - 03_standards/product/module-catalog.md
-
-3. No leer todo el repositorio salvo que sea indispensable.
-4. No duplicar documentación existente.
-5. No inventar APIs como activas si no tienen contrato, persistencia, compose y pruebas.
-6. Si una capacidad aún no existe, marcarla como PENDIENTE_DE_DEFINIR, PLANNED o DOCUMENTADO, según corresponda.
-
-CAMBIO ARQUITECTÓNICO CANÓNICO
-
-Establecer esta separación:
-
-API.PY.Image
-
-Responsabilidad:
-- Procesamiento visual.
-- Normalización de imágenes.
-- OCR visual.
-- Corrección de perspectiva.
-- Rotación.
-- Deskew.
-- Limpieza.
-- Contraste.
-- Recorte.
-- Conversión de formatos.
-- Generación de previews visuales.
-- Extracción OCR TXT/JSON/HOCR cuando exista motor real.
-
-No debe decidir:
-- Si el documento es factura, contrato, ticket, evidencia, expediente o CFDI.
-- Clasificación de negocio.
-- Reglas jurídicas, fiscales, comerciales o contables.
-- Relación con clientes, ventas, casos, proyectos o facturas.
-
-API.PY.Document
-
-Responsabilidad:
-- Metadatos documentales.
-- Storage privado.
-- Versiones.
-- Relación con contextos.
-- Procesamiento documental.
-- Clasificación documental.
-- Segmentación.
-- Índices.
-- ETL documental.
-- Orquestación de Image API cuando el archivo requiera OCR, limpieza, preview visual o procesamiento de imagen.
-
-No debe implementar motores propios de OCR/imagen.
-Debe consumir Image API para todo procesamiento visual.
-
-DocuCore
-
-Responsabilidad:
-- Producto comercial.
-- Workspace.
-- Catálogo de herramientas.
-- UX de conversión documental.
-- Jobs.
-- Historial.
-- Descargas.
-- Créditos.
-- Límites.
-- Planes.
-- Escaparate técnico de ETL documental de MexIngSof.
-
-No debe ser la fuente técnica global del OCR.
-No debe contener lógica visual duplicada que corresponda a Image API.
-
-ARQUITECTURA OBJETIVO
-
-Documentar el flujo así:
-
-Frontend / App
-→ Gateway
-→ API de producto
-→ Document API
-→ Image API
-→ Motor OCR / limpieza / rotación / deskew / previews
-
-Ejemplos:
-
-DocuCore
-→ Document API
-→ Image API
-
-Fiscora
-→ Document API
-→ Image API
-
-LexNova
-→ Document API
-→ Image API
-
-Refapart, cuando procese fotos:
-→ Image API directamente si es análisis visual de refacción
-o
-→ Document API → Image API si la foto representa un documento.
-
-ARCHIVOS A CREAR
-
-1. Crear:
-
-01_core_erp/apis/17_image_api.md
-
-Contenido mínimo:
-
-# Image API
+# AGENTS-003 — Separación Image API, Document API y DocuCore
 
 ## Objetivo
-Centralizar el procesamiento visual reutilizable para todo el ecosistema MexIngSof/JobCron, evitando que DocuCore, Document API, Fiscora, LexNova, Refapart u otros proyectos mantengan motores propios de OCR, limpieza o preview.
 
-## Responsabilidades
-- Validar imágenes.
-- Normalizar formatos visuales.
-- Convertir JPG, PNG, WEBP, TIFF, HEIC cuando aplique.
-- Limpiar imágenes.
-- Corregir orientación.
-- Rotar.
-- Deskew.
-- Corregir perspectiva.
-- Recortar documento.
-- Generar previews.
-- Generar thumbnails.
-- Ejecutar OCR visual.
-- Entregar texto plano, JSON estructurado y formatos OCR avanzados cuando existan motores productivos.
-- Emitir métricas técnicas de ejecución hacia Execution Resource Manager cuando aplique.
+Reescribir `Docs/agents/AGENTS-003.md` para que documente de forma concisa, ejecutable y verificable la separación entre Image API, Document API y DocuCore, sin perder ninguna decisión vigente del agent actual.
+
+La optimización debe conservar toda la intención original: Image API como API técnica visual compartida, Document API como orquestador documental/ETL, DocuCore como producto comercial/UX, LeadHunter como módulo interno de JobCron y prohibición de OCR duplicado por proyecto.
+
+## Alcance
+
+Sí puede tocar:
+
+* `Docs/agents/AGENTS-003.md`
+* `Docs/agents/EXECUTION_REPORT.md`, solo para registrar la optimización realizada
+
+Sí debe revisar:
+
+* Documentos base obligatorios
+* Context Pack mínimo según `Docs/_meta/active-work-index.md`
+* Documentación canónica relacionada con:
+
+  * Core APIs
+  * Document API
+  * DocuCore
+  * Ecosistema LexNova / Fiscora / DocuCore
+  * Catálogo de módulos
+  * ADR/API decision records si aplica
+
+Entregable:
+
+* `AGENTS-003.md` reescrito con estructura clara, lectura mínima, tareas verificables, validaciones y criterio de cierre.
+* Registro en `EXECUTION_REPORT.md`.
+
+## Lectura mínima obligatoria
+
+Leer primero:
+
+* `Docs/README.md`
+* `Docs/_meta/active-work-index.md`
+* `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+* `Docs/agents/AGENT_GLOBAL_RULES.md`
+* `Docs/agents/EXECUTION_REPORT.md`
+* `Docs/03_standards/operations/standard-request-prompts.md`
+* `Docs/03_standards/codex/codex-minimal-reading-standard.md`
+* `Docs/03_standards/codex/codex-change-budget-standard.md`
+* `Docs/03_standards/codex/codex-documentation-diff-standard.md`
+* `Docs/03_standards/codex/codex-output-report-standard.md`
+
+Después leer únicamente el Context Pack mínimo relacionado con el agent.
+
+Documentos canónicos esperados, salvo que el índice indique otros más vigentes:
+
+* `Docs/01_core_erp/apis/00_api_index.md`
+* `Docs/01_core_erp/apis/15_documents_api.md`
+* `Docs/02_projects/docucore/README.md`
+* `Docs/02_projects/docucore/mvp-roadmap.md`
+* `Docs/02_projects/docucore/api-contracts.md`
+* `Docs/02_projects/docucore/document-intelligence.md`
+* `Docs/02_projects/_ecosystem/05_lexnova_docucore_fiscora_mvp_alignment.md`
+* `Docs/02_projects/_ecosystem/api-version-matrix.md`
+* `Docs/03_standards/product/module-catalog.md`
+
+Si algún documento no existe, registrar la ruta faltante como bloqueo o pendiente real.
+No sustituirlo con `_archive/` salvo trazabilidad.
 
 ## Fuera de alcance
-- Clasificación documental de negocio.
-- Reglas fiscales.
-- Reglas jurídicas.
-- Reglas comerciales.
-- Relación con clientes, casos, ventas o facturas.
-- Decisiones finales de negocio.
-- Storage documental definitivo.
-
-## Consumidores
-- Document API.
-- DocuCore.
-- Fiscora.
-- LexNova.
-- Refapart cuando procese fotos no documentales.
-- Otros proyectos que requieran procesamiento visual.
-
-## Endpoints objetivo
-
-POST /api/image/validate
-POST /api/image/normalize
-POST /api/image/clean
-POST /api/image/rotate
-POST /api/image/deskew
-POST /api/image/crop-document
-POST /api/image/convert
-POST /api/image/preview
-POST /api/image/thumbnail
-POST /api/image/ocr
-GET /api/image/jobs/{job_id}
-
-## Estados
-
-PENDING
-PROCESSING
-COMPLETED
-FAILED
-CANCELLED
-PARTIAL_COMPLETED
-
-## Contrato base de respuesta
-
-{
-  "job_id": "uuid",
-  "source_file_id": "uuid",
-  "status": "COMPLETED",
-  "operation": "ocr",
-  "artifacts": [],
-  "metadata": {
-    "width": 0,
-    "height": 0,
-    "mime_type": "image/webp",
-    "orientation": "portrait",
-    "pages": 1
-  },
-  "ocr": {
-    "text": "",
-    "confidence": null,
-    "blocks": []
-  },
-  "errors": []
-}
-
-## Reglas
-- Image API no debe conocer reglas de negocio.
-- Image API no debe decidir tipos documentales.
-- Image API no debe reemplazar Document API.
-- Image API puede trabajar de forma síncrona en MVP, pero debe dejar contrato preparado para jobs asíncronos.
-- Ninguna herramienta visual debe publicarse como enabled si devuelve mock, placeholder o queued-for-engine.
-- Si el motor real no existe, documentar como PLANNED.
 
-ARCHIVOS A MODIFICAR
+* No ejecutar otros agents.
+* No ejecutar el contenido funcional de `AGENTS-003.md`.
+* No crear APIs nuevas en código.
+* No crear schemas, modelos o migraciones.
+* No modificar main/pro.
+* No leer todo `Docs`.
+* No tocar proyectos no relacionados.
+* No crear contratos nuevos si solo se está optimizando la instrucción.
+* No marcar Image API como ACTIVA si no existe implementación, contrato, compose, persistencia y pruebas.
+* No convertir DocuCore en dueño global del OCR.
+* No convertir Document API en motor visual.
+* No convertir LeadHunter en producto independiente.
+* No borrar decisiones previas; si algo se reemplaza, marcarlo como superseded o pendiente según aplique.
+
+## Tareas
+
+1. Analizar el contenido actual de `AGENTS-003.md` y extraer todas sus decisiones sin perder información:
+
+   * Image API centraliza procesamiento visual.
+   * Document API orquesta procesamiento documental y consume Image API.
+   * DocuCore es producto comercial, workspace y escaparate técnico.
+   * OCR, limpieza, previews, thumbnails, deskew, rotación, recorte y conversión visual pertenecen a Image API.
+   * Clasificación documental, storage, metadatos, versiones, artefactos, índices y ETL documental pertenecen a Document API.
+   * La decisión de negocio pertenece al producto consumidor.
+   * LeadHunter queda como módulo interno de JobCron.
+   * Fiscora, LexNova, DocuCore y Refapart deben consumir capacidades compartidas sin duplicar OCR.
+
+2. Reescribir `AGENTS-003.md` con estructura operativa:
+
+   * Objetivo
+   * Alcance
+   * Lectura mínima obligatoria
+   * Fuera de alcance
+   * Tareas
+   * Validaciones
+   * Reporte obligatorio
+   * Criterio de cierre
+
+3. Convertir la instrucción larga actual en tareas verificables:
+
+   * Crear o actualizar documentación de Image API solo si corresponde.
+   * Actualizar índice de APIs solo si la documentación canónica lo requiere.
+   * Ajustar Document API para declarar dependencia de Image API.
+   * Ajustar DocuCore para quedar como UX/producto, no motor OCR.
+   * Ajustar documentos de ecosistema para LexNova, Fiscora, DocuCore y Refapart.
+   * Ajustar catálogo de módulos para LeadHunter como módulo interno.
+   * Crear ADR solo si el estándar documental confirma ruta y necesidad.
+
+4. Reducir duplicidad:
+
+   * No repetir reglas globales ya cubiertas por `AGENT_GLOBAL_RULES.md`.
+   * No repetir estándares Codex completos.
+   * No repetir prompts largos de `standard-request-prompts.md`.
+   * Mantener referencias a documentos canónicos en vez de copiar su contenido.
+
+5. Aplicar presupuesto de cambio:
+
+   * Mantener la optimización enfocada en el agent.
+   * No ampliar alcance sin justificación.
+   * Si se requiere modificar más documentos para cerrar contradicciones, registrar bloqueo y no ejecutar cambios funcionales fuera de esta tarea.
+
+6. Validar que la versión optimizada no pierda información del agent original:
+
+   * Responsabilidades de Image API.
+   * Responsabilidades de Document API.
+   * Responsabilidades de DocuCore.
+   * Flujo objetivo:
+     `Frontend/App → Gateway → API de producto → Document API → Image API → motor OCR/limpieza/previews`
+   * Endpoints objetivo de Image API como planeados/documentados, no activos si no hay implementación real.
+   * Estados de jobs:
+     `PENDING`, `PROCESSING`, `COMPLETED`, `FAILED`, `CANCELLED`, `PARTIAL_COMPLETED`
+   * Contrato base de respuesta con `job_id`, `source_file_id`, `status`, `operation`, `artifacts`, `metadata`, `ocr` y `errors`.
+   * Reglas para no publicar herramientas como enabled si devuelven mock o placeholder.
+   * LeadHunter como módulo interno de JobCron.
+
+## Validaciones
+
+Ejecutar solo validaciones aplicables al cambio documental:
+
+* Verificar que `Docs/agents/AGENTS-003.md` exista.
+* Verificar que no se hayan modificado otros `AGENTS-*.md`.
+* Verificar rutas/enlaces mencionados en el agent.
+* Buscar contradicciones activas sobre:
+
+  * OCR
+  * Image API
+  * Document API
+  * DocuCore
+  * Document Intelligence
+  * LeadHunter
+  * Independent Product Module
+* Confirmar que el agent optimizado no ordena leer todo `Docs`.
+* Confirmar que el agent optimizado no duplica reglas globales.
+* Confirmar que el agent optimizado mantiene tareas verificables.
+* Confirmar que `EXECUTION_REPORT.md` fue actualizado.
+
+Si existe script documental disponible, ejecutar:
+
+* `bash scripts/validate-docs-rules.sh`
+
+Si no existe o falla por entorno, registrar la causa exacta.
 
-1. Modificar:
+## Reporte obligatorio
 
-01_core_erp/apis/00_api_index.md
+Actualizar:
 
-Agregar Image API en APIs compartidas.
+`Docs/agents/EXECUTION_REPORT.md`
 
-Debe quedar con estado prudente:
-- Si no existe implementación ejecutable: DOCUMENTADA o PENDIENTE_DE_DEFINIR.
-- Si ya existe repositorio, contrato, compose, migraciones y pruebas: ACTIVA.
+Registrar:
 
-Responsabilidad sugerida:
-"Procesamiento visual compartido: OCR visual, limpieza, normalización, conversión, previews y thumbnails."
+* Agent revisado: `AGENTS-003.md`
+* Rama: `dev`
+* Documentos leídos
+* Context Pack elegido
+* Documentos fuera de alcance
+* Cambios realizados
+* Validaciones ejecutadas
+* Resultado de validaciones
+* Pendientes reales
+* Bloqueos
+* Decisiones documentales
+* APIs reutilizadas
+* APIs no creadas y motivo
 
-No marcar como producto.
+## Criterio de cierre
 
-2. Modificar:
+El agent queda optimizado solo si:
 
-01_core_erp/apis/15_documents_api.md
+* Es más corto y ejecutable que la versión original.
+* No pierde ninguna decisión vigente.
+* No duplica reglas globales.
+* Usa lectura mínima.
+* Tiene alcance claro.
+* Tiene tareas concretas y verificables.
+* Define qué queda fuera.
+* Define validaciones reales.
+* Define dónde reportar.
+* Mantiene Image API como API técnica visual compartida.
+* Mantiene Document API como orquestador documental/ETL.
+* Mantiene DocuCore como producto comercial/UX.
+* Mantiene LeadHunter como módulo interno de JobCron.
+* No marca capacidades como activas si no están implementadas y validadas.
 
-Reemplazar la frase actual:
+## Reglas finales
 
-"Procesar OCR, extraccion de texto, clasificacion, segmentacion e indice documental cuando el proyecto consumidor lo solicite."
+Si el agent está vacío, no inventes tareas; déjalo como `Sin instrucciones`.
 
-Por una separación más clara:
+Si el agent ya fue ejecutado y no hay cambios nuevos, documenta que está cerrado.
 
-- Orquestar OCR y procesamiento visual mediante Image API cuando el archivo lo requiera.
-- Conservar extracción documental, clasificación, segmentación e índice documental.
-- No implementar motores propios de OCR, limpieza de imagen, deskew, rotación, recorte o previews visuales.
-- La decisión de negocio sigue perteneciendo al módulo consumidor.
+Si falta información esencial, marca `Bloqueado` y deja preguntas concretas.
 
-Agregar sección:
-
-## Dependencia con Image API
-
-Document API debe consumir Image API para:
-- OCR de imágenes.
-- OCR de PDFs escaneados.
-- Previews visuales.
-- Thumbnails.
-- Limpieza visual.
-- Rotación.
-- Deskew.
-- Corrección de perspectiva.
-- Normalización de imagen.
-
-3. Modificar:
-
-02_projects/docucore/mvp-roadmap.md
-
-Cambiar el entendimiento de OCR, image-clean, image-pdf, previews y herramientas visuales.
-
-Debe quedar:
-
-- DocuCore conserva el catálogo y experiencia del usuario.
-- Las capacidades visuales deben ejecutarse por Image API.
-- Document API conserva storage, documentos, artefactos, jobs documentales y relación con contextos.
-- DocuCore API conserva catálogo, planes, límites, configuración comercial y experiencia de producto.
-
-Actualizar herramientas:
-
-- image-clean → herramienta DocuCore visible, ejecutada por Image API.
-- ocr-image → herramienta DocuCore visible, ejecutada por Image API.
-- image-pdf → puede usar Image API para normalización visual y Document API para artefacto documental.
-- preview image/pdf → Gateway/Document API orquesta, Image API genera representación visual.
-
-Actualizar orden de desarrollo:
-
-1. Crear contrato Image API.
-2. Ajustar Document API para orquestar Image API.
-3. Migrar herramientas visuales de DocuCore a consumo de Image API.
-4. Mantener DocuCore como UX/producto.
-5. Después completar OCR productivo.
-
-4. Modificar:
-
-02_projects/docucore/api-contracts.md
-
-Actualizar secciones:
-
-- Preview
-- Preview progresivo por página
-- Document Intelligence
-- Process
-
-Regla nueva:
-
-Todo endpoint de Gateway puede mantenerse igual para el frontend, pero internamente debe enrutar así:
-
-Frontend
-→ Gateway
-→ DocuCore API / Document API
-→ Image API cuando aplique.
-
-No romper contratos frontend salvo que sea necesario.
-
-Agregar nota:
-
-Los endpoints públicos de DocuCore/Gateway no exponen directamente Image API al usuario final en MVP. Image API es una dependencia interna compartida.
-
-Modificar Document Intelligence:
-
-- POST /api/gateway/process/ocr/
-- POST /api/gateway/process/ocr-image/
-
-deben documentarse como operaciones orquestadas por Document API y ejecutadas visualmente por Image API.
-
-5. Modificar:
-
-02_projects/docucore/document-intelligence.md
-
-Agregar que Document Intelligence no es el motor OCR.
-
-Debe quedar:
-
-- OCR visual pertenece a Image API.
-- Clasificación, segmentación, índice y estructura documental pertenecen a Document Intelligence/Document API.
-- DocuCore expone estas capacidades como producto.
-- LexNova y Fiscora consumen resultado documental, no clases internas de DocuCore.
-
-6. Modificar:
-
-02_projects/_ecosystem/05_lexnova_docucore_fiscora_mvp_alignment.md
-
-Actualizar alineación:
-
-Antes:
-- DocuCore/Document API concentran OCR/storage/colas.
-
-Después:
-- Image API concentra OCR visual y procesamiento de imagen.
-- Document API concentra storage, metadatos, documentos, índices y ETL documental.
-- DocuCore ofrece producto y workspace.
-- LexNova consume documentos e índices.
-- Fiscora consume documentos fiscales, XML, PDF y extracción estructurada.
-
-Agregar regla:
-Ningún producto debe implementar OCR propio si Image API puede resolverlo.
-
-7. Modificar:
-
-02_projects/_ecosystem/api-version-matrix.md
-
-Agregar Image API como dependencia de:
-
-- DocuCore
-- Document API
-- Fiscora
-- LexNova
-- Refapart, solo para fotos no documentales o análisis visual futuro
-- Imagrafity, si usa procesamiento visual
-- JobCron, solo como API compartida técnica
-
-Estado sugerido:
-- Image API v0.1 DOCUMENTADA/PENDIENTE_DE_IMPLEMENTAR
-- Document API debe declarar dependencia opcional/obligatoria según flujo.
-
-8. Modificar:
-
-03_standards/product/module-catalog.md
-
-Corregir LeadHunter.
-
-Reemplazar:
-
-LeadHunter Prospecting | Independent Product Module | 02_projects/leadhunter | Activo
-
-Por:
-
-LeadHunter Prospecting | Internal JobCron Module | 02_projects/jobcron o ruta documental real de JobCron | Activo interno
-
-Agregar regla:
-LeadHunter no se libera como producto independiente salvo ADR posterior. Su función inicial es prospección interna, enriquecimiento comercial y captación para MexIngSof, Refapart, POS, Fiscora y otros productos.
-
-Agregar Image Processing / Image API al catálogo como:
-
-Image Processing | Shared Technical API | 01_core_erp/apis/17_image_api.md | Documentado/Pendiente
-
-9. Crear ADR
-
-Crear archivo en la ruta estándar de ADR si existe. Si no existe, crear en:
-
-03_standards/architecture/adr/ADR-YYYYMMDD-image-api-document-api-separation.md
-
-Usar fecha real del sistema.
-
-Contenido:
-
-# ADR: Separación de Image API y Document API
-
-## Estado
-Aceptado / Documentado
-
-## Contexto
-Los documentos del ecosistema pueden llegar como PDF digital, PDF escaneado, foto, imagen, XML, Word, Excel, CSV o ZIP. Si cada producto implementa OCR y limpieza visual, se duplican motores y se incrementa el costo de mantenimiento.
-
-## Decisión
-Crear Image API como API técnica compartida para procesamiento visual y mantener Document API como orquestador documental/ETL.
-
-## Consecuencias positivas
-- Menos duplicación.
-- OCR centralizado.
-- Cambio de motor OCR sin reescribir productos.
-- Mejor escalabilidad.
-- DocuCore puede vender ETL documental sin acoplarse al motor visual.
-- LexNova, Fiscora y Refapart pueden reutilizar capacidades.
-
-## Consecuencias negativas
-- Una API adicional que versionar.
-- Más coordinación entre Gateway, Document API e Image API.
-- Necesidad de contratos claros para jobs y artefactos.
-
-## Reglas
-- OCR visual vive en Image API.
-- Clasificación documental vive en Document API.
-- Decisión de negocio vive en el producto consumidor.
-- DocuCore es producto, no motor global.
-- No duplicar OCR por proyecto.
-
-VALIDACIONES OBLIGATORIAS
-
-Después de modificar:
-
-1. Buscar menciones de:
-   - OCR
-   - image-clean
-   - ocr-image
-   - preview image
-   - Document Intelligence
-   - LeadHunter
-   - Independent Product Module
-
-2. Confirmar que no quede documentación diciendo que:
-   - DocuCore es dueño global del OCR.
-   - Document API implementa directamente motores visuales.
-   - LeadHunter es producto independiente.
-   - Cada proyecto puede tener su propio OCR.
-
-3. Confirmar que:
-   - Image API aparece en índice de APIs.
-   - Document API declara dependencia de Image API.
-   - DocuCore queda como producto comercial/UX.
-   - Fiscora y LexNova quedan como consumidores de Document API.
-   - Refapart solo consume Image API directamente cuando el input sea foto no documental.
-
-4. Mantener compatibilidad con Gateway:
-   - No cambiar endpoints públicos del frontend salvo que esté justificado.
-   - Si se propone cambio de endpoint, documentarlo como breaking change pendiente, no aplicarlo silenciosamente.
-
-5. No marcar herramientas como enabled si no hay motor real.
-6. No crear documentación duplicada.
-7. No borrar historial ni decisiones previas; reemplazar con nota de superseded cuando aplique.
-
-ENTREGABLES
-
-Al terminar, entregar:
-
-1. Lista de archivos modificados.
-2. Lista de archivos creados.
-3. Resumen de decisiones.
-4. Riesgos pendientes.
-5. Checklist de validación.
-6. Git status limpio o explicación de pendientes.
-7. Commit sugerido:
-
-docs: define Image API and separate visual processing from Document API
-
-CRITERIO DE ÉXITO
-
-La documentación debe dejar claro que:
-
-- Image API procesa imágenes.
-- Document API procesa documentos y orquesta Image API.
-- DocuCore vende experiencia documental y ETL.
-- Fiscora, LexNova y otros productos consumen capacidades compartidas.
-- LeadHunter es módulo interno de JobCron.
-- No habrá OCR duplicado por proyecto.
-```
-
-Esto deja a Codex con una ruta bastante cerrada y evita que mezcle otra vez **DocuCore**, **Document API** e **Image API** como si fueran lo mismo.
+No limpies `AGENTS-003.md` después de optimizarlo, porque esta tarea no ejecuta el agent; solo mejora su instrucción.

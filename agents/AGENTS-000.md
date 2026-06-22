@@ -1,68 +1,290 @@
-Sí: **ya tienes una base aceptable para trabajar**. La documentación ahora deja inventario operativo, scripts, puertos, pruebas y bloqueos reales por proyecto. El inventario confirma los 4 contenedores oficiales, la ruta de scripts y qué proyectos están listos/parciales. ([GitHub][1])
+# AGENTS-000 — Gobernanza Documental y Consistencia Global
 
-Lo que sigue no es crear más agentes grandes. Lo correcto es trabajar por **mini-fases**:
+## Objetivo
 
-1. **Cerrar bloqueos pequeños de documentación**
+Garantizar que toda modificación documental realizada en el repositorio mantenga consistencia arquitectónica, reutilización de componentes, alineación con la documentación canónica y cumplimiento de los estándares definidos en Docs.
 
-   * Crear `local-runbook.md` de DocuCore.
-   * Confirmar si Address necesita schema propio para REFAPART.
-   * Definir remoto Git y schema de LeadHunter.
-   * Unificar nombres de runbooks si quieren exactitud total.
+Este agent no implementa funcionalidades.
 
-2. **Elegir el primer proyecto comercial a desarrollar**
-   Yo empezaría por **REFAPART**, porque está marcado como “LISTO PARA TRABAJAR” y solo tiene pendiente confirmar Address. ([GitHub][1])
+Este agent valida, corrige y optimiza documentación.
 
-3. **Crear contratos antes de código**
-   Para cada módulo nuevo, primero contrato:
+---
 
-   * endpoint Gateway;
-   * modelo de datos;
-   * base/schema;
-   * flujo UI;
-   * validaciones;
-   * pruebas.
+## Alcance
 
-4. **No tocar todavía lo bloqueado**
-   MexIngSof leads/CRM/Auth/DB, TecnoTelec Quote/Rules/Projects/ChannelAssortment y LeadHunter DB/remoto siguen parciales; no conviene implementarlos sin contrato. ([GitHub][1])
+Puede:
 
-Instrucción recomendada para Codex ahora:
+* Revisar documentación existente.
+* Detectar contradicciones documentales.
+* Detectar duplicidad de APIs.
+* Detectar duplicidad de módulos.
+* Detectar duplicidad de procesos.
+* Detectar documentación obsoleta.
+* Detectar documentación fuera de estándares.
 
-```text
-Trabaja en dev.
+Debe:
 
-Objetivo:
-Cerrar los faltantes operativos menores antes de iniciar desarrollo funcional.
+* Identificar documentación canónica.
+* Identificar Context Pack mínimo.
+* Validar dependencias documentales.
+* Verificar alineación con arquitectura vigente.
+* Registrar hallazgos.
 
-Leer:
-Docs/README.md
-Docs/_meta/active-work-index.md
-Docs/_meta/project-operational-inventory.md
+Debe dejar:
+
+* Actualización documental.
+* Reporte de ejecución.
+* Lista de inconsistencias encontradas.
+* Lista de documentos revisados.
+
+---
+
+## Lectura mínima obligatoria
+
+### Base obligatoria
+
+* Docs/README.md
+* Docs/_meta/active-work-index.md
+* Docs/agents/RUN_AGENTS_INSTRUCTIONS.md
+* Docs/agents/AGENT_GLOBAL_RULES.md
+* Docs/agents/EXECUTION_REPORT.md
+
+### Estándares Codex
+
+* Docs/03_standards/operations/standard-request-prompts.md
+* Docs/03_standards/codex/codex-minimal-reading-standard.md
+* Docs/03_standards/codex/codex-change-budget-standard.md
+* Docs/03_standards/codex/codex-documentation-diff-standard.md
+* Docs/03_standards/codex/codex-output-report-standard.md
+
+### Solo documentación relacionada con el dominio afectado
+
+No leer documentación no relacionada.
+
+No leer todo el repositorio.
+
+---
+
+## Fuera de alcance
+
+No ejecutar otros agents.
+
+No crear APIs nuevas.
+
+No crear módulos nuevos.
+
+No crear bases de datos nuevas.
+
+No crear migraciones.
+
+No crear tablas.
+
+No modificar ramas main.
+
+No modificar ramas pro.
+
+No realizar implementaciones técnicas.
+
+No modificar proyectos no relacionados.
+
+No utilizar documentación archivada como fuente principal.
+
+No usar:
+
+* _archive/
+* agents/_archive/
+
+salvo trazabilidad histórica.
+
+---
+
+## Reglas de Arquitectura
+
+Antes de aceptar cualquier cambio documental validar:
+
+### APIs reutilizables
+
+Verificar si ya existe:
+
+* Address API
+* Customer API
+* Authentication API
+* Notification API
+* Billing API
+* Catalog API
+* Search API
+* Files API
+* Document API
+
+Si existe una API reutilizable:
+
+NO documentar una nueva.
+
+Debe reutilizarse la existente.
+
+---
+
+### Componentes reutilizables
+
+Validar reutilización de:
+
+* Direcciones.
+* Clientes.
+* Usuarios.
+* Permisos.
+* Facturación.
+* Catálogos.
+* Archivos.
+* Notificaciones.
+* Búsquedas.
+
+---
+
+### Arquitectura Multi-Proyecto
+
+Validar compatibilidad con:
+
+* MexIngSof
+* Refapart
+* Universal POS
+* DocuCore
+* Lex Nova
+* JobCron
+* Sales
+* SATWI
+
+Evitar soluciones exclusivas para un proyecto cuando deban ser compartidas.
+
+---
+
+## Tareas
+
+### 1. Identificar dominio afectado
+
+Determinar:
+
+* Proyecto.
+* Módulo.
+* API.
+* Integración.
+* Estándar.
+
+---
+
+### 2. Seleccionar Context Pack mínimo
+
+Utilizar únicamente el Context Pack requerido.
+
+No ampliar contexto innecesariamente.
+
+---
+
+### 3. Revisar documentación canónica
+
+Identificar:
+
+* Fuente principal.
+* Fuente secundaria.
+* Dependencias.
+
+---
+
+### 4. Detectar inconsistencias
+
+Buscar:
+
+* APIs duplicadas.
+* Procesos duplicados.
+* Contradicciones.
+* Dependencias rotas.
+* Referencias inválidas.
+* Decisiones obsoletas.
+
+---
+
+### 5. Optimizar documentación
+
+Reducir:
+
+* Ambigüedad.
+* Repeticiones.
+* Instrucciones vagas.
+
+Incrementar:
+
+* Trazabilidad.
+* Claridad.
+* Ejecutabilidad.
+* Verificabilidad.
+
+---
+
+### 6. Registrar resultados
+
+Actualizar:
+
 Docs/agents/EXECUTION_REPORT.md
-Docs/03_standards/database/postgresql-project-users-and-schemas.md
-Docs/03_standards/operations/project-docker-dependency-map.md
 
-Tareas:
-1. Crear local-runbook.md dedicado para DocuCore.
-2. Confirmar documentalmente si Address requiere schema propio para REFAPART.
-3. Definir si LeadHunter tendrá repo remoto propio o quedará integrado en JobCron.
-4. Definir schema canónico de LeadHunter solo si sigue como módulo activo.
-5. Normalizar nombres de runbooks por proyecto si no rompe referencias.
-6. Actualizar project-operational-inventory.md.
-7. Actualizar active-work-index.md si cambia alguna ruta.
-8. Actualizar EXECUTION_REPORT.md.
-9. No implementar funcionalidad nueva.
-10. No crear APIs nuevas.
-11. No crear schemas nuevos sin contrato.
-12. No tocar main ni pro.
+---
 
-Criterio de cierre:
-- DocuCore tiene runbook local.
-- Address queda decidido o marcado PENDIENTE_DE_DEFINIR con motivo.
-- LeadHunter queda decidido: integrado a JobCron o repo propio.
-- Inventario operativo queda actualizado.
-- git status limpio.
-```
+## Validaciones
 
-Después de eso, ya conviene hacer el **primer agent funcional de REFAPART MVP**.
+Validar:
 
-[1]: https://raw.githubusercontent.com/MexIngSoft/Docs/dev/_meta/project-operational-inventory.md "raw.githubusercontent.com"
+* Rutas existentes.
+* Referencias existentes.
+* Enlaces internos.
+* Documentación canónica.
+* Consistencia entre proyectos.
+
+Verificar:
+
+* No se crean APIs duplicadas.
+* No se crean módulos paralelos.
+* No se contradicen estándares.
+
+Registrar documentos revisados.
+
+---
+
+## Reporte Obligatorio
+
+Registrar:
+
+* Agent ejecutado.
+* Fecha.
+* Rama utilizada.
+* Context Pack utilizado.
+* Documentos leídos.
+* Hallazgos.
+* Cambios realizados.
+* Validaciones ejecutadas.
+* Pendientes reales.
+* Bloqueos.
+* Decisiones documentales.
+
+---
+
+## Criterio de Cierre
+
+El agent se considera completado únicamente cuando:
+
+* Existe documentación canónica identificada.
+* No existen contradicciones documentales detectadas.
+* No se crean APIs duplicadas.
+* No se crean módulos duplicados.
+* El alcance está claramente definido.
+* Los documentos revisados están registrados.
+* El EXECUTION_REPORT fue actualizado.
+
+Si falta información:
+
+Estado = BLOQUEADO.
+
+Registrar preguntas concretas.
+
+Si ya fue ejecutado y no existen cambios:
+
+Estado = CERRADO.
+
+Documentar evidencia.

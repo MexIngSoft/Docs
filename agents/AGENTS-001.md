@@ -1,221 +1,305 @@
-Sí, ahí hace falta un **agent de reparación de scripts**, porque el repo sí tiene los scripts en `Docs/03_standards/operations/scripts/docker/projects/`, incluyendo `Invoke-WorkspaceProjectDocker.ps1`, `start-*`, `stop-*`, `status-all` y `healthcheck-all`. ([GitHub][1])
+# AGENTS-001 — Reparación y Validación de Scripts Docker por Proyecto
 
-Copia este agente como el siguiente activo:
+## Objetivo
 
-```md
-# AGENTS-004.md
+Optimizar los scripts Docker por proyecto para que cada `start`, `stop`, `status` y `healthcheck` active, detenga y valide únicamente los servicios esperados, usando el stack compartido oficial y comprobando URLs reales, puertos, Gateway y Nginx.
 
-# REPARACIÓN DE SCRIPTS DOCKER POR PROYECTO
+## Alcance
 
-## OBJETIVO
+Puede tocar:
 
-Corregir los scripts Docker para que cada proyecto levante, apague y valide exactamente sus servicios esperados, sin cargar proyectos equivocados, sin dejar webs invisibles y sin depender de orden aleatorio de ejecución.
+* `Docs/agents/AGENTS-001.md`
+* `Docs/agents/EXECUTION_REPORT.md`
+* `Docs/03_standards/operations/scripts/docker/projects/`
+* `Docs/03_standards/operations/project-docker-dependency-map.md`
+* `Docs/03_standards/operations/local-port-registry.md`
+* `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
 
-## PROBLEMA
+Debe revisar:
 
-Los scripts existen, pero al ejecutarlos:
+* Scripts globales: `start-all.ps1`, `stop-all.ps1`, `status-all.ps1`, `healthcheck-all.ps1`, `clean-safe.ps1`
+* Script común: `Invoke-WorkspaceProjectDocker.ps1`
+* Scripts por proyecto: `start-*.ps1` y `stop-*.ps1`
 
-- siempre cargan solo ciertas APIs y webs;
-- algunos proyectos no cargan aunque el script dice que sí;
-- las webs levantadas no se ven en navegador;
-- la ejecución aleatoria de scripts deja estados inconsistentes;
-- puede haber mala relación entre script, puerto, Nginx, Gateway y dependencia real.
+Debe dejar:
 
-## LECTURA OBLIGATORIA
+* Scripts idempotentes.
+* Validación real por URL.
+* Matriz documentada de comportamiento por proyecto.
+* Reporte actualizado en `Docs/agents/EXECUTION_REPORT.md`.
 
-Leer antes de tocar código:
+## Lectura mínima obligatoria
 
-- Docs/README.md
-- Docs/_meta/active-work-index.md
-- Docs/_meta/project-operational-inventory.md
-- Docs/03_standards/operations/project-docker-dependency-map.md
-- Docs/03_standards/operations/local-port-registry.md
-- Docs/03_standards/operations/scripts/docker/projects/
-- Docs/03_standards/docker/jobcron-official-docker-architecture.md
-- Docs/agents/EXECUTION_REPORT.md
+* `Docs/README.md`
+* `Docs/_meta/active-work-index.md`
+* `Docs/agents/AGENT_GLOBAL_RULES.md`
+* `Docs/agents/EXECUTION_REPORT.md`
+* `Docs/03_standards/operations/standard-request-prompts.md`
+* `Docs/03_standards/codex/codex-minimal-reading-standard.md`
+* `Docs/03_standards/codex/codex-change-budget-standard.md`
+* `Docs/03_standards/codex/codex-documentation-diff-standard.md`
+* `Docs/03_standards/codex/codex-output-report-standard.md`
+* `Docs/03_standards/operations/project-docker-dependency-map.md`
+* `Docs/03_standards/operations/local-port-registry.md`
+* `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
 
-## REGLAS
+## Context Pack
 
-1. Trabajar solo en rama dev.
-2. No crear contenedores nuevos fuera del estándar.
-3. No crear imágenes nuevas sin tag.
-4. No duplicar PostgreSQL, Gateway, Nginx ni contenedor web.
-5. No usar docker volume prune.
-6. No inventar puertos.
-7. No asumir que un script funcionó solo porque el contenedor está healthy.
-8. Cada script debe validar la URL real de la web y Gateway.
-9. Cada script debe fallar claramente si la web no carga.
-10. Cada script debe ser idempotente: si algo ya está arriba, no debe romperse.
+Usar el Context Pack mínimo relacionado con:
 
-## TAREA 1 — INVENTARIO REAL DE SCRIPTS
+* `Agents`
+* `Docker`
+* `Operations`
+* `Frontend runtime`
+* `Gateway`
+
+No leer todo `Docs`.
+
+No usar `_archive/` ni `agents/_archive/` como fuente vigente, salvo trazabilidad.
+
+## Arquitectura Docker obligatoria
+
+Trabajar sobre el stack oficial:
+
+* Stack: `comercial_platform`
+* Red: `jobcron_network`
+* PostgreSQL: `db-postgresql`
+* APIs Django: `api-multiproyecto`
+* Webs Next.js: `web-frontend-node`
+* Proxy: `nginx`
+
+No crear contenedores alternos.
+
+No crear redes por proyecto.
+
+No duplicar PostgreSQL, Gateway, Nginx ni contenedores web.
+
+No usar `docker volume prune`.
+
+## Proyectos a validar
+
+Validar scripts para:
+
+* JobCron — puerto `3000`
+* TecnoTelec — puerto `3001`
+* LexNova — puerto `3002`
+* DocuCore — puerto `3004`
+* Fiscora — puerto `3005`
+* Imagrafity — puerto `3006`
+* LeadHunter — puerto `3007`
+* REFAPART — puerto `3008`
+* MexIngSof — puerto `3009`
+
+Gateway central:
+
+* `http://127.0.0.1:8025/health/`
+
+## Fuera de alcance
+
+No ejecutar otros agents.
+
+No modificar `main` ni `pro`.
+
+No crear APIs nuevas.
+
+No crear schemas, modelos o migraciones.
+
+No cambiar puertos sin actualizar el registro canónico.
+
+No crear Docker nuevo fuera del estándar.
+
+No modificar proyectos no relacionados.
+
+No cerrar el agent solo porque Docker diga `healthy`.
+
+## Tareas
+
+### 1. Corregir identidad del agent
+
+El archivo es:
+
+`Docs/agents/AGENTS-001.md`
+
+No debe referirse a sí mismo como `AGENTS-004.md`.
+
+Actualizar el título y contenido para que el agente sea AGENTS-001.
+
+### 2. Inventariar scripts reales
 
 Revisar todos los scripts en:
 
-Docs/03_standards/operations/scripts/docker/projects/
+`Docs/03_standards/operations/scripts/docker/projects/`
 
-Validar:
+Documentar qué hace realmente cada uno:
 
-- start-all.ps1
-- stop-all.ps1
-- status-all.ps1
-- healthcheck-all.ps1
-- clean-safe.ps1
-- Invoke-WorkspaceProjectDocker.ps1
-- start/stop por cada proyecto
+* `start-all.ps1`
+* `stop-all.ps1`
+* `status-all.ps1`
+* `healthcheck-all.ps1`
+* `clean-safe.ps1`
+* `Invoke-WorkspaceProjectDocker.ps1`
+* `start-*.ps1`
+* `stop-*.ps1`
 
-Documentar qué hace cada uno realmente.
-
-## TAREA 2 — DEFINIR COMPORTAMIENTO ESPERADO
+### 3. Crear o actualizar matriz de comportamiento
 
 Crear o actualizar:
 
-Docs/03_standards/operations/project-script-behavior-matrix.md
+`Docs/03_standards/operations/project-script-behavior-matrix.md`
 
-Debe contener:
+Debe incluir:
 
-| Script | Proyecto | Debe levantar | Debe conservar | Debe apagar | URL Web esperada | URL Gateway esperada | Resultado esperado |
-|---|---|---|---|---|---|---|---|
+| Script | Proyecto | Debe levantar | Debe conservar | Debe apagar | Puerto web | URL Web | URL Gateway | Resultado esperado |
+| ------ | -------- | ------------- | -------------- | ----------- | ---------: | ------- | ----------- | ------------------ |
 
-Cada proyecto debe tener una fila para start y stop.
+Cada proyecto debe tener fila para `start` y `stop`.
 
-## TAREA 3 — CORREGIR START
+### 4. Corregir scripts `start-*`
 
-Cada start-*.ps1 debe:
+Cada `start-*.ps1` debe:
 
-1. Levantar baseline oficial si falta:
-   - db-postgresql
-   - api-multiproyecto
-   - web-frontend-node
-   - nginx
+1. Levantar baseline oficial si falta.
+2. Activar solo el proyecto solicitado.
+3. No activar otra web como principal.
+4. Validar puerto según `local-port-registry.md`.
+5. Validar ruta Nginx si aplica.
+6. Validar Gateway central.
+7. Probar URL real con `Invoke-WebRequest`.
+8. Mostrar:
 
-2. Activar/configurar solo el proyecto solicitado.
-3. No activar otra web como proyecto principal.
-4. Confirmar puerto correcto según local-port-registry.md.
-5. Confirmar ruta Nginx correcta.
-6. Confirmar Gateway correcto.
-7. Probar URL real con Invoke-WebRequest.
-8. Mostrar al final:
+   * proyecto;
+   * puerto;
+   * URL web;
+   * URL Gateway;
+   * contenedores usados;
+   * estado HTTP;
+   * comando para apagar.
 
-- proyecto;
-- puerto;
-- URL web;
-- URL Gateway;
-- contenedores usados;
-- estado HTTP;
-- comando para apagar.
+### 5. Corregir scripts `stop-*`
 
-## TAREA 4 — CORREGIR STOP
+Cada `stop-*.ps1` debe:
 
-Cada stop-*.ps1 debe:
-
-1. Apagar solo la web/proceso del proyecto solicitado.
-2. No apagar baseline compartido si otro proyecto lo necesita.
-3. No apagar db-postgresql salvo stop-all.
-4. No apagar api-multiproyecto salvo stop-all.
-5. No apagar nginx salvo stop-all.
-6. Confirmar que la URL del proyecto ya no responda, excepto si comparte host/ruta con otro proyecto.
+1. Apagar solo el proyecto solicitado.
+2. No apagar PostgreSQL compartido.
+3. No apagar Gateway compartido.
+4. No apagar Nginx salvo `stop-all`.
+5. No apagar `api-multiproyecto` salvo que corresponda por `stop-all`.
+6. Confirmar que la URL del proyecto dejó de responder.
 7. Mostrar servicios conservados.
 
-## TAREA 5 — CORREGIR HEALTHCHECK
+### 6. Corregir `healthcheck-all.ps1`
 
-healthcheck-all.ps1 debe validar:
+Debe validar:
 
-- contenedores Docker;
-- URL web por proyecto;
-- URL Gateway por proyecto;
-- HTTP status;
-- puerto esperado;
-- ruta esperada;
-- error visible si no carga.
+* contenedores Docker;
+* red Docker;
+* puerto esperado;
+* URL web por proyecto;
+* Gateway central;
+* HTTP status;
+* errores visibles.
 
 No debe reportar OK si solo Docker está healthy pero la web no abre.
 
-## TAREA 6 — PRUEBA ALEATORIA
+### 7. Crear prueba aleatoria de scripts
 
-Crear script:
+Crear:
 
-test-random-project-scripts.ps1
+`Docs/03_standards/operations/scripts/docker/projects/test-random-project-scripts.ps1`
 
-Debe ejecutar una secuencia aleatoria de start/stop/status/healthcheck por proyecto.
+Debe ejecutar secuencias aleatorias como:
 
-Ejemplo:
+1. `start-refapart`
+2. `start-jobcron`
+3. `stop-refapart`
+4. `start-lexnova`
+5. `healthcheck-all`
+6. `stop-jobcron`
+7. `start-tecnotelec`
+8. `status-all`
 
-1. start-refapart
-2. start-jobcron
-3. stop-refapart
-4. start-lexnova
-5. healthcheck-all
-6. stop-jobcron
-7. start-tecnotelec
-8. status-all
+Debe validar:
 
-Debe validar que:
+* que no carguen proyectos equivocados;
+* que no se apaguen dependencias compartidas necesarias;
+* que cada web responda en su URL;
+* que no queden estados inconsistentes;
+* que no aparezcan contenedores fuera del estándar.
 
-- no se carguen proyectos equivocados;
-- no se apaguen dependencias compartidas necesarias;
-- cada web responda en su URL;
-- no queden estados inconsistentes;
-- no aparezcan contenedores fuera del estándar.
-
-## TAREA 7 — VALIDAR WEBS QUE “NO SE VEN”
+### 8. Validar webs que no se ven
 
 Para cada proyecto validar:
 
-- DocuCore
-- Fiscora
-- Imagrafity
-- JobCron
-- LeadHunter
-- LexNova
-- MexIngSof
-- REFAPART
-- TecnoTelec
+* URL local documentada.
+* Puerto correcto.
+* Ruta Nginx.
+* Ruta Next.js.
+* Bind en `0.0.0.0` si aplica.
+* Variables `NEXT_PUBLIC_*`.
+* Gateway URL.
+* Errores JS/runtime.
+* Logs de `web-frontend-node`.
+* Logs de `nginx`.
 
-Validar:
+## Validaciones
 
-1. URL local documentada.
-2. Puerto correcto.
-3. Ruta Nginx.
-4. Ruta Next.js.
-5. bind en 0.0.0.0 si aplica.
-6. variables NEXT_PUBLIC_*.
-7. Gateway URL.
-8. errores JS/runtime.
-9. logs de web-frontend-node.
-10. logs de nginx.
+Ejecutar según disponibilidad del entorno:
 
-## TAREA 8 — REPORTE
+* Parser PowerShell para scripts `.ps1`.
+* `docker compose -p comercial_platform ps`.
+* `docker network inspect jobcron_network`.
+* `Invoke-WebRequest` por URL web.
+* `Invoke-WebRequest http://127.0.0.1:8025/health/`.
+* `healthcheck-all.ps1`.
+* `test-random-project-scripts.ps1`.
+
+Si Docker Desktop no está disponible, no marcar como completado: registrar bloqueo exacto.
+
+## Reporte obligatorio
 
 Actualizar:
 
-Docs/agents/EXECUTION_REPORT.md
+`Docs/agents/EXECUTION_REPORT.md`
 
-Incluir:
+Debe registrar:
 
-- scripts corregidos;
-- matriz de comportamiento creada;
-- proyectos probados;
-- secuencia aleatoria ejecutada;
-- URLs que cargan;
-- URLs que fallan;
-- causa real de cada falla;
-- correcciones aplicadas;
-- pendientes reales.
+* agent revisado;
+* documentos leídos;
+* Context Pack usado;
+* scripts corregidos;
+* matriz creada o actualizada;
+* proyectos probados;
+* secuencia aleatoria ejecutada;
+* URLs que cargan;
+* URLs que fallan;
+* causa real de cada falla;
+* validaciones ejecutadas;
+* pendientes reales;
+* bloqueos;
+* decisiones documentales.
 
-## CRITERIO DE CIERRE
+## Criterio de cierre
 
-No cerrar este agent hasta que:
+El agent queda cerrado solo si:
 
-1. Cada start levante el proyecto correcto.
-2. Cada stop apague solo lo correcto.
-3. healthcheck-all valide URLs reales, no solo contenedores.
-4. test-random-project-scripts.ps1 pase sin estados inconsistentes.
-5. Las webs documentadas carguen en navegador o quede causa exacta.
-6. No se creen contenedores fuera del baseline.
-7. EXECUTION_REPORT.md quede actualizado.
-```
+* ya no se identifica como `AGENTS-004`;
+* cada `start-*` levanta el proyecto correcto;
+* cada `stop-*` apaga solo lo correcto;
+* `healthcheck-all` valida URLs reales;
+* la prueba aleatoria no deja estados inconsistentes;
+* las webs documentadas cargan o queda causa exacta;
+* no se crean contenedores fuera del baseline;
+* no se crean APIs nuevas;
+* `EXECUTION_REPORT.md` queda actualizado.
 
-La falla principal es que el “healthy” de Docker no prueba que la web correcta se vea; por eso el agent debe obligar a validar **URL real + puerto + Gateway + Nginx**, no solo contenedores.
+Si falta información esencial:
 
-[1]: https://github.com/MexIngSoft/Docs/tree/dev/03_standards/operations/scripts/docker/projects "Docs/03_standards/operations/scripts/docker/projects at dev · MexIngSoft/Docs · GitHub"
- 
+Estado = `BLOQUEADO`.
+
+Si el agent ya fue ejecutado y no hay cambios nuevos:
+
+Estado = `CERRADO`.
+
+Si el agent está vacío:
+
+Dejar como `Sin instrucciones`.
