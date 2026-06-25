@@ -307,6 +307,82 @@ queda vacio.
 
 ---
 
+## Validacion Docker 2026-06-24 - scripts globales y REFAPART activo
+
+### Contexto
+
+Validacion solicitada despues de levantar Docker Desktop. Se verificaron los
+scripts globales y al final se dejo activo REFAPART con sus dependencias.
+
+### Scripts validados
+
+| Script | Resultado |
+|---|---|
+| Parser de todos los `.ps1` en `Docs/03_standards/operations/scripts/docker/projects` | OK. |
+| `start-all.ps1` | OK: levanto stack `comercial_platform` con contenedores oficiales. |
+| `status-all.ps1` | OK: mostro `db-postgresql`, `api-multiproyecto`, `web-frontend-node`, `nginx` y red `jobcron_network`. |
+| `healthcheck-all.ps1` | OK como script despues de correccion; ya no aborta al primer `curl exit 52`. |
+| `stop-all.ps1` | OK: detuvo API/Web/Nginx y conservo PostgreSQL. |
+| `start-refapart.ps1` | OK: dejo activo REFAPART con `auth gateway refapart address search`. |
+
+### Correccion aplicada
+
+Archivo:
+
+```text
+Docs/03_standards/operations/scripts/docker/projects/Invoke-WorkspaceProjectDocker.ps1
+```
+
+Motivo:
+
+```text
+healthcheck-all.ps1 se detenia al primer error de curl porque PowerShell trataba
+la salida de error nativa como error terminante.
+```
+
+Decision:
+
+```text
+Test-Http ahora captura el exit code de curl y devuelve ERROR curl exit ...
+sin detener toda la corrida.
+```
+
+### Resultados de healthcheck global
+
+| Proyecto | Gateway | Web |
+|---|---|---|
+| JobCron | OK HTTP 200 | OK HTTP 200 |
+| TecnoTelec | OK HTTP 200 | ERROR curl exit 52 HTTP 000 |
+| LexNova | OK HTTP 200 | ERROR curl exit 52 HTTP 000 |
+| DocuCore | OK HTTP 200 | ERROR curl exit 52 HTTP 000 |
+| Fiscora | OK HTTP 200 | ERROR curl exit 52 HTTP 000 |
+| Imagrafity | OK HTTP 200 | ERROR curl exit 52 HTTP 000 |
+| LeadHunter | OK HTTP 200 | ERROR curl exit 52 HTTP 000 |
+| REFAPART | OK HTTP 200 | ERROR curl exit 52 HTTP 000 durante `start-all`; OK HTTP 200 despues de `start-refapart.ps1`. |
+| MexIngSof | OK HTTP 200 | ERROR curl exit 52 HTTP 000 |
+
+### REFAPART dejado activo
+
+| Recurso | Resultado |
+|---|---|
+| Stack | `comercial_platform` |
+| Red | `jobcron_network` con 4 contenedores |
+| DB | `db-postgresql` / `postgres:16.13` / healthy |
+| API | `api-multiproyecto` / `api-multiproyecto:3.10.19-slim-bookworm` / healthy |
+| Web | `web-frontend-node` / `web-frontend-node:20.19.0-bookworm-slim` / healthy |
+| Nginx | `nginx` / `nginx:1.24.0` / healthy |
+| Gateway | `http://127.0.0.1:8025/health/` => HTTP 200 |
+| REFAPART Web | `http://127.0.0.1:3008/` => HTTP 200 |
+
+### Pendientes reales
+
+- Investigar por proyecto por que las webs distintas a JobCron responden
+  `curl exit 52 HTTP 000` bajo `start-all`.
+- REFAPART no queda bloqueado para prueba focalizada porque `start-refapart.ps1`
+  lo dejo en HTTP 200.
+
+---
+
 ## Ejecucion 2026-06-20 - Agents activos 000, 001, 002 y 003
 
 ### Context Pack utilizado

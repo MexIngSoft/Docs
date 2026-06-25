@@ -146,14 +146,23 @@ function Test-Http {
 
     $curl = Get-Command curl.exe -ErrorAction SilentlyContinue
     if ($curl) {
-        $statusCode = & $curl.Source -sS -o NUL -w "%{http_code}" --max-time 60 $Url 2>$null
-        if ($LASTEXITCODE -eq 0 -and $statusCode -match "^[0-9]{3}$") {
+        $previousErrorActionPreference = $ErrorActionPreference
+        $ErrorActionPreference = "Continue"
+        try {
+            $statusCode = & $curl.Source -sS -o NUL -w "%{http_code}" --max-time 60 $Url 2>$null
+            $exitCode = $LASTEXITCODE
+        }
+        finally {
+            $ErrorActionPreference = $previousErrorActionPreference
+        }
+
+        if ($exitCode -eq 0 -and $statusCode -match "^[0-9]{3}$") {
             if ($statusCode -ge 200 -and $statusCode -lt 400) {
                 return "OK HTTP $statusCode"
             }
             return "ERROR HTTP $statusCode"
         }
-        return "ERROR curl exit $LASTEXITCODE HTTP $statusCode"
+        return "ERROR curl exit $exitCode HTTP $statusCode"
     }
 
     try {
