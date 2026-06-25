@@ -39,6 +39,13 @@ Comandos globales:
 | `status-all.ps1` | Muestra contenedores, imagenes y red. |
 | `healthcheck-all.ps1` | Valida URLs de proyectos registrados. |
 | `clean-safe.ps1` | Limpieza segura sin borrar volumenes. |
+| `test-random-project-scripts.ps1` | Valida una seleccion aleatoria de proyectos sin crear contenedores ni redes por proyecto. |
+
+Matriz canonica de comportamiento:
+
+```text
+Docs/03_standards/operations/project-script-behavior-matrix.md
+```
 
 Cada proyecto tiene:
 

@@ -93,6 +93,220 @@ queda vacio.
 
 ---
 
+## Ejecucion 2026-06-24 - AGENTS-013 ejecucion selectiva
+
+### Context Pack utilizado
+
+- `Docs/_meta/active-work-index.md`: ruta de agents activos, brechas de
+  desarrollo, APIs reutilizables, Docker JobCron y documentos canonicos
+  relacionados.
+
+### Identificacion de alcance
+
+| Campo | Resultado |
+|---|---|
+| Tipo de tarea | Ejecucion selectiva de agents, auditoria de APIs, Docker scripts y optimizacion documental |
+| Dominio afectado | `00_audit`, `01_core_erp/apis`, `02_projects`, `03_standards/operations`, `agents` |
+| Proyecto afectado | JobCron, REFAPART, TecnoTelec, MexIngSof, DocuCore, LexNova, Fiscora, LeadHunter |
+| APIs afectadas | Auth, Gateway, Catalog, Inventory, Pricing, Procurement, Sales, Supplier, Document, Fiscal, Address, Search, JobCron, REFAPART, TecnoTelec, MexIngSof pendiente |
+| Frontend afectado | Ninguno en runtime; solo documentacion de dependencias web |
+| Integracion afectada | Docker JobCron, Gateway General, Search sync/recovery documental |
+
+### Agents ejecutados
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-013.md` | Completado y limpiado | Se uso como selector de ejecucion. Determino ejecutar `000`, `001`, `004` y `012`; evaluar `002`, `005`, `006`; omitir `003`, `007`, `008`, `009`, `010`, `011`; registrar `014`-`030` como sin instrucciones. |
+| `AGENTS-000.md` | Completado y limpiado | Gobierno documental ejecutado sin crear APIs ni codigo. Se verifico que los nuevos documentos quedaran en dominios correctos y sin reemplazar documentos canonicos equivalentes. |
+| `AGENTS-001.md` | Completado y limpiado | Se creo la matriz de comportamiento de scripts Docker por proyecto y el test aleatorio de scripts usando el stack `comercial_platform` y la red `jobcron_network`. |
+| `AGENTS-004.md` | Completado parcial sin limpieza | Se optimizo la instruccion de MexIngSof Software Control. No se limpio porque el propio agent ordena conservar su contenido para desarrollo posterior. |
+| `AGENTS-012.md` | Completado y limpiado | Se creo la auditoria maestra de APIs y dominios para JobCron. No se implemento codigo porque el agent lo prohibe. |
+
+### Agents evaluados no ejecutados
+
+| Agent | Estado | Motivo |
+|---|---|---|
+| `AGENTS-002.md` | Evaluado, pendiente | Payments/POS/Sales/Fiscal no es desbloqueo directo de esta salida selectiva hasta que exista contrato canonico Payment/Billing. |
+| `AGENTS-005.md` | Evaluado, pendiente | UniversalPOS Core Gap no bloquea el cierre documental de JobCron/REFAPART/TecnoTelec/MexIngSof de esta ejecucion. |
+| `AGENTS-006.md` | Evaluado, pendiente | POS sobre JobCron Core depende de decisiones Payment/Billing/POS pendientes. |
+
+### Agents omitidos por instruccion de `AGENTS-013.md`
+
+| Agent | Estado | Motivo |
+|---|---|---|
+| `AGENTS-003.md` | Omitido | DocuCore/Image/Document no fue dependencia directa probada para salida comercial inicial. |
+| `AGENTS-007.md` | Omitido | Radar Empresarial no fue dependencia directa. |
+| `AGENTS-008.md` | Omitido | Network Control/SatWi no fue dependencia directa. |
+| `AGENTS-009.md` | Omitido | Buildora/EscogeTuPC no fue dependencia directa. |
+| `AGENTS-010.md` | Omitido | Innovation Engines Repair no fue dependencia directa. |
+| `AGENTS-011.md` | Omitido | ContentHub/Publishing no fue dependencia directa. |
+| `AGENTS-014.md` - `AGENTS-030.md` | Sin instrucciones | Archivos vacios. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-002.md`
+- `Docs/agents/AGENTS-003.md`
+- `Docs/agents/AGENTS-004.md`
+- `Docs/agents/AGENTS-005.md`
+- `Docs/agents/AGENTS-006.md`
+- `Docs/agents/AGENTS-007.md`
+- `Docs/agents/AGENTS-008.md`
+- `Docs/agents/AGENTS-009.md`
+- `Docs/agents/AGENTS-010.md`
+- `Docs/agents/AGENTS-011.md`
+- `Docs/agents/AGENTS-012.md`
+- `Docs/agents/AGENTS-013.md`
+- `Docs/00_audit/10_development_gap_analysis.md`
+- `Docs/00_audit/reusable-api-map.md`
+- `Docs/00_audit/reusable-api-audit.md`
+- `Docs/01_core_erp/apis/00_api_index.md`
+- `Docs/01_core_erp/apis/reusable-api-contracts.md`
+- `Docs/01_core_erp/apis/api-decision-matrix.md`
+- `Docs/01_core_erp/apis/gateway-route-registry.md`
+- `Docs/01_core_erp/apis/endpoint-ui-consumption-matrix.md`
+- `Docs/02_projects/jobcron/README.md`
+- `Docs/02_projects/refapart/README.md`
+- `Docs/02_projects/refapart/api-contracts.md`
+- `Docs/02_projects/tecnotelec/README.md`
+- `Docs/02_projects/tecnotelec/tasks/01_required_apis.md`
+- `Docs/02_projects/docucore/README.md`
+- `Docs/02_projects/lexnova/README.md`
+- `Docs/02_projects/leadhunter/README.md`
+- `Docs/02_projects/fiscora/README.md`
+- `Docs/02_projects/mexingsof/README.md`
+- `Docs/02_projects/_ecosystem/00_ecosystem_overview.md`
+- `Docs/02_projects/_ecosystem/api-version-matrix.md`
+- `Docs/03_standards/product/module-catalog.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docs/03_standards/operations/project-docker-dependency-map.md`
+- `Docs/03_standards/operations/local-port-registry.md`
+- `Docs/03_standards/docker/jobcron-official-docker-architecture.md`
+- `Docs/03_standards/operations/scripts/docker/projects/Invoke-WorkspaceProjectDocker.ps1`
+- `Docs/03_standards/operations/scripts/docker/projects/healthcheck-all.ps1`
+- `Docs/03_standards/operations/scripts/docker/projects/status-all.ps1`
+
+### Archivos modificados
+
+- `Docs/_meta/active-work-index.md`
+- `Docs/00_audit/jobcron-api-domain-master-audit.md`
+- `Docs/03_standards/operations/project-docker-dependency-map.md`
+- `Docs/03_standards/operations/project-script-behavior-matrix.md`
+- `Docs/03_standards/operations/scripts/docker/projects/test-random-project-scripts.ps1`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-004.md`
+- `Docs/agents/AGENTS-012.md`
+- `Docs/agents/AGENTS-013.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### APIs reutilizadas
+
+- Auth.
+- Gateway General.
+- Catalog.
+- Inventory.
+- Pricing.
+- Procurement.
+- Sales.
+- Supplier.
+- Document.
+- Fiscal.
+- Address.
+- Search.
+- JobCron API.
+
+### APIs descartadas por duplicidad
+
+- Auth por proyecto.
+- Gateway por proyecto.
+- Catalogos locales de direcciones para REFAPART.
+- Proveedores por proyecto fuera de Supplier API.
+- Documentos por LexNova/Fiscora fuera de Document API.
+- CFDI dentro de Fiscora producto fuera de Fiscal API.
+- Busqueda local persistente por web fuera de Search API.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `python scripts/build_master_index.py` | OK: genero `_meta/generated/master-index.json` con 560 entradas. |
+| `python scripts/validate_frontmatter.py` | OK tecnico con advertencias historicas: 526 documentos sin front matter, 0 incomplete, 0 malformed. |
+| Validacion de rutas documentales tocadas | OK: existen los documentos nuevos y rutas actualizadas. |
+| Parser PowerShell de `test-random-project-scripts.ps1` | OK despues de corregir referencias `${project}`. |
+| `test-random-project-scripts.ps1 -MaxProjects 3` | OK en modo documental: selecciono proyectos y valido existencia de scripts sin tocar contenedores. |
+| `docker compose -p comercial_platform -f Docker.DB.PG/docker-compose.master.db.yml -f Docker.API.PY/docker-compose.master.api.yml -f Docker.WEB.NJ/docker-compose.master.web.yml -f Docker.SW.Nginx/docker-compose.master.nginx.yml config --quiet` | OK: configuracion compose valida. |
+| `test-random-project-scripts.ps1 -Projects jobcron -MaxProjects 1 -WaitSeconds 10 -Execute` | FALLA por entorno: Docker Desktop no esta levantado (`dockerDesktopLinuxEngine` no existe). |
+| `git diff --check` | OK con advertencias LF/CRLF normales de Git en Windows. |
+
+### Contradicciones detectadas
+
+- `AGENTS-013.md` pide ejecutar `AGENTS-004.md`, pero `AGENTS-004.md` indica
+  no ejecutar funcionalidad ni limpiar su contenido. Prevalece la instruccion
+  especifica de `AGENTS-004.md`; se optimizo y se conserva activo.
+- Reportes historicos indicaban que `AGENTS-000.md` a `AGENTS-030.md` estaban
+  vacios, pero el estado real al inicio de esta ejecucion tenia contenido en
+  `AGENTS-000.md` a `AGENTS-013.md`. Prevalece el estado real del workspace.
+
+### Decisiones tomadas
+
+- Search queda documentado como indice derivado reconstruible, no fuente
+  primaria.
+- No se crean APIs nuevas desde esta ejecucion.
+- Payment, Billing, Customer, Quote, Notification, Event/Search sync y
+  Logistics quedan como pendientes reales de contrato.
+- El test aleatorio Docker queda en modo documental por defecto y requiere
+  `-Execute` para activar start/health/stop.
+- Los scripts Docker siguen usando `comercial_platform`, `jobcron_network`,
+  `api-multiproyecto`, `web-frontend-node`, `db-postgresql` y `nginx`.
+
+### Pendientes reales y desbloqueo requerido
+
+| Pendiente | Que se necesita para desbloquear |
+|---|---|
+| Customer API | Contrato canonico y ownership entre JobCron/core. |
+| Quote API | Contrato de cotizacion, snapshot, estados y relacion con Sales. |
+| Payment API | Proveedor/pasarela, modelo de transaccion y politica de conciliacion. |
+| Billing API | Separacion formal contra Fiscal API y Sales API. |
+| Notification API | Canales, plantillas, permisos y auditoria. |
+| Event/Search sync | Envelope de evento, reintentos, backfill e idempotencia. |
+| MexIngSof API | Confirmar si JobCron cubre Software Control o si requiere API propia. |
+
+### Riesgos detectados
+
+- Reabrir agents evaluados sin contratos Payment/Billing/POS puede inducir APIs
+  duplicadas.
+- Desarrollar webs comerciales antes de cerrar Gateway/API contracts puede dejar
+  mocks persistentes.
+- Ejecutar `test-random-project-scripts.ps1 -Execute` en todos los proyectos
+  consume recursos; usar seleccion acotada si el equipo local esta limitado.
+- La validacion runtime Docker queda bloqueada si Docker Desktop no esta
+  levantado.
+
+### Bloqueos
+
+| Bloqueo | Causa exacta | Necesario para desbloquear |
+|---|---|---|
+| Prueba runtime Docker con `-Execute` | Docker Desktop no expone `dockerDesktopLinuxEngine`. | Abrir Docker Desktop o levantar el daemon Docker y repetir `test-random-project-scripts.ps1 -Projects jobcron -MaxProjects 1 -WaitSeconds 10 -Execute`. |
+
+### Agents limpiados, parciales, bloqueados o pendientes
+
+- Limpiados: `AGENTS-000.md`, `AGENTS-001.md`, `AGENTS-012.md`, `AGENTS-013.md`.
+- Parcial activo: `AGENTS-004.md`.
+- Pendientes evaluados: `AGENTS-002.md`, `AGENTS-005.md`, `AGENTS-006.md`.
+- Omitidos por alcance: `AGENTS-003.md`, `AGENTS-007.md`, `AGENTS-008.md`,
+  `AGENTS-009.md`, `AGENTS-010.md`, `AGENTS-011.md`.
+- Sin instrucciones: `AGENTS-014.md` a `AGENTS-030.md`.
+
+---
+
 ## Ejecucion 2026-06-20 - Agents activos 000, 001, 002 y 003
 
 ### Context Pack utilizado

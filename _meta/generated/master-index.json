@@ -184,6 +184,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "00_audit/jobcron-api-domain-master-audit.md",
+    "title": "Auditoria maestra de APIs y dominios para JobCron",
+    "domain": "audit",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "00_audit/reports/contradictions_repair_report.md",
     "title": "Reporte de reparacion de contradicciones",
     "domain": "audit",
@@ -3528,6 +3536,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "03_standards/operations/project-script-behavior-matrix.md",
+    "title": "Matriz de comportamiento de scripts Docker por proyecto",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "03_standards/operations/provider-integration-standard.md",
     "title": "Estandar para integrar proveedores",
     "domain": "standards",
@@ -4057,7 +4073,7 @@
   },
   {
     "path": "agents/AGENTS-002.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "AGENTS-002 — Arquitectura Payments, POS, Sales y Fiscal",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -4065,7 +4081,7 @@
   },
   {
     "path": "agents/AGENTS-003.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "AGENTS-003 — Separación Image API, Document API y DocuCore",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -4073,7 +4089,7 @@
   },
   {
     "path": "agents/AGENTS-004.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "AGENTS-004 - MexIngSof Software Control",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -4081,7 +4097,7 @@
   },
   {
     "path": "agents/AGENTS-005.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "AGENTS-005 — UniversalPOS Core Gap",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -4089,7 +4105,7 @@
   },
   {
     "path": "agents/AGENTS-006.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "AGENTS-006 — Universal POS sobre JobCron Core",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -4097,7 +4113,7 @@
   },
   {
     "path": "agents/AGENTS-007.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "INSTRUCCIÓN PARA CODEX — OPTIMIZAR AGENTS-007",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -4105,7 +4121,7 @@
   },
   {
     "path": "agents/AGENTS-008.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "INSTRUCCIÓN PARA CODEX — OPTIMIZAR AGENTS-008",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -4113,7 +4129,7 @@
   },
   {
     "path": "agents/AGENTS-009.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "INSTRUCCIÓN PARA CODEX — OPTIMIZAR AGENTS-009",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -4121,7 +4137,7 @@
   },
   {
     "path": "agents/AGENTS-010.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "INSTRUCCIÓN PARA CODEX — OPTIMIZAR AGENTS-010",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -4129,7 +4145,7 @@
   },
   {
     "path": "agents/AGENTS-011.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "INSTRUCCIÓN PARA CODEX — OPTIMIZAR AGENTS-011",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",

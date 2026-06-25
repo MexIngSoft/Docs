@@ -1,232 +1,299 @@
-Trabaja en la rama `dev`.
+# AGENTS-004 - MexIngSof Software Control
 
-Objetivo: optimizar únicamente `Docs/agents/AGENTS-004.md` sin ejecutar el agent, sin borrar información vigente y sin modificar otros agents.
+## Estado
 
-No ejecutes todos los agents.
-No modifiques otros `AGENTS-*.md`.
-No elimines, muevas ni renombres `Docs/agents/AGENTS-004.md`.
-
-Antes de editar, lee únicamente:
-
-* `Docs/README.md`
-* `Docs/_meta/active-work-index.md`
-* `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
-* `Docs/agents/AGENT_GLOBAL_RULES.md`
-* `Docs/agents/EXECUTION_REPORT.md`
-* `Docs/03_standards/operations/standard-request-prompts.md`
-* `Docs/03_standards/codex/codex-minimal-reading-standard.md`
-* `Docs/03_standards/codex/codex-change-budget-standard.md`
-* `Docs/03_standards/codex/codex-documentation-diff-standard.md`
-* `Docs/03_standards/codex/codex-output-report-standard.md`
-
-Después abre completo:
-
-* `Docs/agents/AGENTS-004.md`
-
-Detecta que el agent corresponde a:
-
-* Proyecto: `MexIngSof`
-* Dominio: consola interna de administración técnica del ecosistema
-* Módulo: control de software, APIs, despliegues, ambientes, clientes por software, usuarios por plataforma, health checks e incidentes
-* API: posible `API.PY.DJANGO.MexIngSof`, solo como `PENDIENTE_DE_DEFINIR`, nunca como activa si no existe repo ejecutable, contrato y migraciones
-
-Con base en `Docs/_meta/active-work-index.md`, selecciona el Context Pack mínimo para modificar proyecto/documentación. No leas todo `Docs`.
-
-Lectura canónica específica para este agent:
-
-* `Docs/02_projects/mexingsof/README.md`
-* `Docs/02_projects/_ecosystem/00_ecosystem_overview.md`
-* `Docs/02_projects/_ecosystem/api-version-matrix.md`
-* `Docs/01_core_erp/apis/00_api_index.md`
-* `Docs/03_standards/product/module-catalog.md`
-* `Docs/03_standards/operations/git-repository-map.md`
-
-No uses `_archive/` ni `agents/_archive/` como fuente vigente, salvo trazabilidad.
-
-Revisa `Docs/agents/EXECUTION_REPORT.md` para confirmar si `AGENTS-004.md` ya fue ejecutado, quedó vacío, fue marcado como sin instrucciones o tiene trabajo nuevo pendiente.
-
-Evalúa si el contenido actual de `AGENTS-004.md`:
-
-* repite reglas globales ya cubiertas por `AGENT_GLOBAL_RULES.md`;
-* pide leer demasiados documentos;
-* mezcla MexIngSof con JobCron sin frontera clara;
-* convierte MexIngSof en ERP, CRM, POS, facturación o ventas cuando eso pertenece a JobCron u otros módulos;
-* crea una API de MexIngSof como activa sin contrato;
-* duplica APIs reutilizables como Auth, Gateway, JobCron, Sales, Address o Search;
-* propone tablas sin marcar datos faltantes como `PENDIENTE_DE_DEFINIR`;
-* contiene tareas vagas, largas o no verificables;
-* contiene decisiones que deberían ir en `01_core_erp`, `02_projects`, `03_standards` o `04_integrations`.
-
-Reescribe únicamente `Docs/agents/AGENTS-004.md` con esta estructura:
-
-# AGENTS-004 — MexIngSof Software Control
+ACTIVE
 
 ## Objetivo
 
-Optimizar la documentación de MexIngSof como consola interna de administración técnica del ecosistema, sin convertirla en ERP ni duplicar JobCron. Debe dejar claro qué administra MexIngSof: software, APIs, webs, repositorios, despliegues, ambientes, health checks e incidentes.
+Definir la instruccion operativa para MexIngSof Software Control como consola tecnica interna de control de software del ecosistema MexIngSoft.
+
+MexIngSof Software Control debe administrar, auditar y visualizar software, APIs, webs, repositorios, despliegues, ambientes, accesos por cliente, usuarios por plataforma, health checks e incidentes.
 
 ## Alcance
 
-Puede actualizar únicamente documentación relacionada con MexIngSof y su registro dentro del ecosistema.
+Incluye:
 
-Debe revisar la documentación canónica de MexIngSof, ecosistema, APIs, módulos y repositorios.
+- Inventario de productos de software.
+- Inventario de APIs y webs por producto.
+- Repositorios Git asociados.
+- Ambientes y despliegues.
+- Estado operativo y health checks.
+- Relacion cliente-software.
+- Usuarios por plataforma y permisos operativos.
+- Incidentes tecnicos.
+- Dependencias entre software, APIs, webs y servicios compartidos.
 
-Debe dejar una instrucción ejecutable, corta, verificable y alineada con Gateway/Auth/APIs reutilizables.
+No incluye:
 
-## Lectura mínima obligatoria
+- ERP central.
+- CRM comercial.
+- POS.
+- Facturacion.
+- Ventas.
+- Billing.
+- Reemplazo de JobCron.
+- Reemplazo de Gateway General.
+- Reemplazo de APIs core o compartidas.
 
-* `Docs/README.md`
-* `Docs/_meta/active-work-index.md`
-* `Docs/agents/AGENT_GLOBAL_RULES.md`
-* `Docs/agents/EXECUTION_REPORT.md`
-* `Docs/02_projects/mexingsof/README.md`
-* `Docs/02_projects/_ecosystem/00_ecosystem_overview.md`
-* `Docs/02_projects/_ecosystem/api-version-matrix.md`
-* `Docs/01_core_erp/apis/00_api_index.md`
-* `Docs/03_standards/product/module-catalog.md`
-* `Docs/03_standards/operations/git-repository-map.md`
+## Proyecto afectado
 
-## Fuera de alcance
+```text
+Docs/02_projects/mexingsof/
+```
 
-* No ejecutar otros agents.
-* No limpiar, borrar, mover ni renombrar `AGENTS-004.md`.
-* No modificar `main` ni `pro`.
-* No leer todo `Docs`.
-* No crear APIs nuevas como activas.
-* No crear schemas, modelos ni migraciones sin contrato documentado.
-* No mover responsabilidades de JobCron a MexIngSof.
-* No meter facturación, POS, inventario físico, ventas o CRM operativo dentro de MexIngSof si pertenecen a JobCron u otra API reutilizable.
-* No guardar tokens, passwords, secretos ni variables reales.
-* No hacer que el frontend consuma APIs core directo; debe usar Gateway General.
+## Frontend afectado
 
-## Tareas
+```text
+WEB.NJ.NEXT.MexIngSof
+```
 
-1. Normalizar el objetivo de `AGENTS-004.md` para que MexIngSof quede definido como consola técnica interna del ecosistema, no como ERP ni sustituto de JobCron.
+## API afectada
 
-2. Conservar y ordenar toda la información vigente del agent actual sobre:
+```text
+API.PY.DJANGO.MexIngSof = PENDIENTE_DE_DEFINIR
+```
 
-   * inventario de software;
-   * APIs;
-   * webs;
-   * repositorios;
-   * despliegues;
-   * ambientes;
-   * clientes por software;
-   * usuarios por plataforma;
-   * health checks;
-   * incidentes técnicos.
+Mientras la API propia no exista como contrato canonico, MexIngSof debe reutilizar:
 
-3. Revisar si deben existir o actualizarse estos documentos, sin inventar datos:
+- Gateway General.
+- Auth.
+- JobCron API cuando el dato pertenezca al control central del ecosistema.
+- Search cuando se requiera busqueda transversal ya documentada.
 
-   * `Docs/02_projects/mexingsof/software-control-platform.md`
-   * `Docs/02_projects/mexingsof/api-contracts.md`
-   * `Docs/02_projects/mexingsof/database.md`
-   * `Docs/02_projects/mexingsof/tasks/01_software_control_mvp.md`
+## Documentacion canonica a leer
 
-4. Si se documenta `API.PY.DJANGO.MexIngSof`, marcarla únicamente como `PENDIENTE_DE_DEFINIR` hasta confirmar:
+Antes de ejecutar desarrollo derivado de este agent, leer:
 
-   * repositorio ejecutable;
-   * contrato API;
-   * migraciones;
-   * compose/configuración;
-   * pruebas mínimas.
+```text
+Docs/README.md
+Docs/_meta/active-work-index.md
+Docs/02_projects/mexingsof/README.md
+Docs/02_projects/_ecosystem/00_ecosystem_overview.md
+Docs/02_projects/_ecosystem/api-version-matrix.md
+Docs/01_core_erp/apis/00_api_index.md
+Docs/03_standards/product/module-catalog.md
+Docs/03_standards/operations/git-repository-map.md
+```
 
-5. Mantener como endpoints MVP sugeridos, sin marcarlos activos si no existe contrato:
+Si existe documentacion especifica nueva para MexIngSof Software Control, debe prevalecer sobre esta instruccion y registrarse en el reporte.
 
-   * `/software/`
-   * `/apis/`
-   * `/deployments/`
-   * `/client-software/`
-   * `/platform-users/`
-   * `/health-checks/`
-   * `/incidents/`
+## Modelo funcional MVP
 
-6. Mantener como tablas sugeridas, no implementadas, usando nombres PascalCase:
+### Software
 
-   * `SoftwareProduct`
-   * `SoftwareApi`
-   * `SoftwareDeployment`
-   * `ClientSoftwareAccess`
-   * `PlatformUserAccess`
-   * `HealthCheckLog`
-   * `IncidentLog`
+Registrar productos internos o comerciales del ecosistema.
 
-7. Actualizar o validar `Docs/02_projects/_ecosystem/api-version-matrix.md` solo si falta MexIngSof o si contradice la documentación vigente:
+Entidad sugerida:
 
-   * Frontend: `WEB.NJ.NEXT.MexIngSof`
-   * Gateway: `API.PY.DJANGO.Gateway`
-   * Auth: `Auth v1`
-   * APIs reutilizadas: JobCron, Auth, Gateway y las que estén documentadas
-   * API propia: solo `PENDIENTE_DE_DEFINIR` si no está confirmada
+```text
+SoftwareProduct
+```
 
-8. Actualizar o validar `Docs/03_standards/product/module-catalog.md` solo si falta el módulo:
+Campos minimos sugeridos:
 
-   * `MexIngSof Software Control`
-   * Tipo: `Independent Product Module / Internal Technical Platform`
-   * Owner documental: `02_projects/mexingsof`
-   * Estado: `Documentado` o `PENDIENTE_DE_DEFINIR`, según evidencia real
+- Code.
+- Name.
+- Type.
+- Status.
+- OwnerArea.
+- PrimaryRepository.
+- DefaultEnvironment.
+- Notes.
 
-9. Usar `PENDIENTE_DE_DEFINIR` para cualquier URL, puerto, dominio, rama, servidor, contrato, tabla, endpoint o estado no comprobado.
+### APIs
 
-10. Eliminar duplicidad de reglas globales y dejar referencias a los documentos canónicos en vez de repetirlos.
+Registrar APIs disponibles por producto o compartidas.
 
-## Validaciones
+Entidad sugerida:
 
-* Validar que todos los documentos citados existan.
-* Validar que no se hayan usado documentos de `_archive/` como fuente vigente.
-* Validar que MexIngSof no duplique responsabilidades de JobCron.
-* Validar que ninguna API nueva quede marcada como activa sin contrato.
-* Validar rutas y enlaces modificados.
-* Ejecutar validación documental disponible si existe.
-* Si una validación no puede ejecutarse, registrar la causa exacta.
+```text
+SoftwareApi
+```
 
-## Reporte obligatorio
+Campos minimos sugeridos:
 
-Actualizar:
+- SoftwareProductId.
+- ApiCode.
+- ApiName.
+- BasePath.
+- GatewayRoute.
+- Repository.
+- Status.
+- Version.
+- HealthUrl.
 
-* `Docs/agents/EXECUTION_REPORT.md`
+### Webs
 
-Debe registrar:
+Registrar frontends y puertos/documentacion de ejecucion.
 
-* agent revisado: `AGENTS-004.md`;
-* Context Pack usado;
-* documentos leídos;
-* documentos fuera de alcance;
-* cambios realizados;
-* archivos modificados;
-* validaciones ejecutadas;
-* resultado de validaciones;
-* APIs reutilizadas;
-* APIs no creadas y motivo;
-* pendientes reales;
-* bloqueos;
-* decisiones documentales.
+Entidad sugerida:
 
-## Criterio de cierre
+```text
+SoftwareWeb
+```
 
-`AGENTS-004.md` queda listo solo si:
+Campos minimos sugeridos:
 
-* conserva toda la información vigente del agent original;
-* agrega claridad sin inventar datos;
-* es más corto y ejecutable;
-* no duplica reglas globales;
-* tiene lectura mínima;
-* tiene alcance claro;
-* tiene tareas verificables;
-* define qué queda fuera;
-* define validaciones;
-* define dónde reportar;
-* no marca MexIngSof API como activa sin evidencia;
-* no convierte MexIngSof en ERP ni reemplazo de JobCron.
+- SoftwareProductId.
+- WebCode.
+- WebName.
+- Repository.
+- LocalUrl.
+- PublicDomain.
+- Status.
+- Environment.
 
-## Reglas finales
+### Deployments
 
-Si `AGENTS-004.md` está vacío, no inventes tareas; déjalo como `Sin instrucciones`.
+Registrar despliegues por ambiente.
 
-Si `AGENTS-004.md` ya fue ejecutado y no hay cambios nuevos, documenta que está cerrado.
+Entidad sugerida:
 
-Si falta información esencial, marca `Bloqueado` y deja preguntas concretas.
+```text
+SoftwareDeployment
+```
 
-No elimines, muevas ni renombres `Docs/agents/AGENTS-004.md`.
+Campos minimos sugeridos:
 
-No limpies el contenido del agent, porque esta tarea es solo optimizar su instrucción, no ejecutarlo.
+- SoftwareProductId.
+- Environment.
+- DockerStack.
+- ContainerName.
+- ImageName.
+- ImageVersion.
+- Branch.
+- CommitSha.
+- DeployedAt.
+- Status.
+
+### Cliente-software
+
+Registrar que cliente tiene acceso a que software.
+
+Entidad sugerida:
+
+```text
+ClientSoftwareAccess
+```
+
+Campos minimos sugeridos:
+
+- ClientId.
+- SoftwareProductId.
+- Plan.
+- Status.
+- StartsAt.
+- EndsAt.
+- Notes.
+
+### Usuarios por plataforma
+
+Registrar usuarios operativos por plataforma sin duplicar Auth.
+
+Entidad sugerida:
+
+```text
+PlatformUserAccess
+```
+
+Campos minimos sugeridos:
+
+- AuthUserId.
+- SoftwareProductId.
+- ClientId.
+- Role.
+- Status.
+- GrantedAt.
+- RevokedAt.
+
+### Health checks
+
+Registrar resultados de salud por API, web o servicio.
+
+Entidad sugerida:
+
+```text
+HealthCheckLog
+```
+
+Campos minimos sugeridos:
+
+- TargetType.
+- TargetCode.
+- Url.
+- StatusCode.
+- IsHealthy.
+- ResponseTimeMs.
+- CheckedAt.
+- ErrorMessage.
+
+### Incidentes
+
+Registrar incidentes tecnicos por producto, API, web o despliegue.
+
+Entidad sugerida:
+
+```text
+IncidentLog
+```
+
+Campos minimos sugeridos:
+
+- Severity.
+- Status.
+- SoftwareProductId.
+- TargetType.
+- TargetCode.
+- Summary.
+- Description.
+- OpenedAt.
+- ClosedAt.
+- Owner.
+
+## Endpoints MVP sugeridos
+
+Estos endpoints no deben crearse si una API core, shared, Gateway o JobCron ya cubre el caso.
+
+```text
+/software/
+/apis/
+/webs/
+/deployments/
+/client-software/
+/platform-users/
+/health-checks/
+/incidents/
+```
+
+## Reglas obligatorias
+
+- No mezclar MexIngSof Software Control con ERP central.
+- No duplicar Auth.
+- No duplicar Gateway General.
+- No duplicar Search.
+- No crear API propia si JobCron o una API reutilizable cubre el dato.
+- No crear tablas definitivas sin contrato canonico aprobado.
+- Si falta definicion real, usar `PENDIENTE_DE_DEFINIR`.
+- Documentar decisiones nuevas en `Docs/02_projects/mexingsof/`.
+- Si se detecta impacto transversal, documentarlo en estandares o audit, no dentro del documento de proyecto.
+
+## Validacion requerida
+
+Si solo se optimiza esta instruccion:
+
+- Validar existencia de rutas documentales citadas.
+- Actualizar `Docs/agents/EXECUTION_REPORT.md`.
+- No limpiar este archivo.
+
+Si se ejecuta desarrollo derivado en una fase posterior:
+
+- Web: `npm run lint`, `npm run build` y pruebas disponibles.
+- API Django: `python manage.py check`, compilacion Python y migraciones si aplica.
+- Docker: `docker compose config --quiet` si cambia infraestructura.
+
+## Cierre
+
+Este agent queda listo cuando su instruccion sea clara, no contradictoria y no mezcle MexIngSof con responsabilidades de JobCron, ERP, POS, Billing, CRM o integraciones externas.
+
+No limpiar este agent por esta optimizacion; su contenido debe conservarse para una ejecucion posterior de desarrollo.

@@ -57,6 +57,7 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | `Docs/00_audit/codex-context-map.md` | Context Pack minimo por tipo de tarea para ahorrar contexto. |
 | `Docs/00_audit/reusable-api-map.md` | Mapa de necesidades funcionales contra APIs reutilizables. |
 | `Docs/00_audit/reusable-api-audit.md` | Auditoria de cobertura y faltantes reales de APIs reutilizables. |
+| `Docs/00_audit/jobcron-api-domain-master-audit.md` | Auditoria maestra de dominios, APIs actuales, APIs faltantes y riesgos de duplicidad sobre JobCron. |
 | `Docs/01_core_erp/apis/reusable-api-contracts.md` | Contratos resumidos de APIs reutilizables. |
 | `Docs/01_core_erp/apis/api-decision-matrix.md` | Matriz para evitar APIs duplicadas. |
 | `Docs/01_core_erp/apis/gateway-route-registry.md` | Registro de rutas Gateway para evitar rutas inventadas o consumo directo de APIs. |
@@ -65,6 +66,7 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | `Docs/03_standards/operations/codex-execution-standard.md` | Flujo estandar para pedir y ejecutar tareas Codex. |
 | `Docs/03_standards/operations/codex-anti-patterns.md` | Vicios prohibidos para Codex. |
 | `Docs/03_standards/operations/project-docker-dependency-map.md` | Mapa Docker de dependencias y scripts por proyecto. |
+| `Docs/03_standards/operations/project-script-behavior-matrix.md` | Matriz de comportamiento permitido para scripts Docker por proyecto. |
 | `Docs/_meta/project-operational-inventory.md` | Inventario operativo minimo por proyecto, scripts, puertos, bloqueos y pruebas. |
 | `Docs/03_standards/database/postgresql-project-users-and-schemas.md` | Reglas y estado PostgreSQL de bases, usuarios, schemas y migraciones por proyecto. |
 | `Docs/03_standards/codex/codex-minimal-reading-standard.md` | Lectura minima obligatoria. |
