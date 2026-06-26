@@ -65,6 +65,7 @@ GET  /api/auth/me/permissions/
 POST /api/auth/register/
 POST /api/auth/password/reset/
 POST /api/auth/password/reset/confirm/
+POST /api/auth/password/change/
 ```
 
 El Gateway adapta nombres, errores y permisos para la web. La autoridad real de
@@ -83,6 +84,9 @@ DOCUCORE
 REFAPART
 IMAGRAFITY
 JOBCRON
+FISCORA
+LEADHUNTER
+MEXINGSOF
 ```
 
 Las llamadas de sesion o permisos deben poder recibir:

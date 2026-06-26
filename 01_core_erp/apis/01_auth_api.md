@@ -124,6 +124,15 @@ User:
 
 - `"Auth"."UserAccounts"`.
 
+Trazabilidad por aplicacion:
+
+- `"Auth"."UserAccounts"."ApplicationId"` identifica la aplicacion/web donde
+  se registro el usuario.
+- La referencia operativa se resuelve contra `"Auth"."Applications"."Id"`.
+- El codigo visible de proyecto se obtiene en `"Auth"."Applications"."Code"`.
+- Procedimiento y comando operativo:
+  `Docs/01_core_erp/auth/user-application-traceability.md`.
+
 Access:
 
 - `"Auth"."Modules"`.
@@ -206,6 +215,34 @@ ApplicationId + ActionCode + LanguageCode + Channel
 ```
 
 `EmailDeliveryLogs` registra envios exitosos o fallidos.
+
+La trazabilidad fina, reintentos, diagnostico por ambiente, errores SES,
+mensajes seguros de produccion y logs detallados quedan regidos por:
+
+```text
+Docs/03_standards/auth/auth-email-delivery-diagnostics-standard.md
+```
+
+Ruta publica canonica para reenvio via Gateway General:
+
+```http
+POST /api/v1/auth/email/verification/resend/
+```
+
+Alias compatible permitido en Gateway:
+
+```http
+POST /auth/email/resend-verification
+```
+
+Ruta backend reutilizable Auth/Djoser:
+
+```http
+POST /api/users/resend_activation/
+```
+
+No se debe crear API de reenvio por proyecto ni consumir Auth directo desde
+webs.
 
 Consulta operativa:
 

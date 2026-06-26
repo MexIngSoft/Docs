@@ -18,7 +18,9 @@ Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart
 - React.
 - TypeScript.
 - App Router.
-- CSS propio del proyecto.
+- Tailwind CSS como estandar visual principal.
+- CSS propio minimo para variables globales, resets, estilos base y
+  compatibilidad temporal durante la migracion por pantallas.
 - `lucide-react` para iconografia.
 
 ## Rutas MVP
@@ -36,6 +38,10 @@ Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart
 | `/register` | Registro de cliente. |
 | `/forgot-password` | Solicitud de recuperacion. |
 | `/reset-password` | Confirmacion de nueva contrasena. |
+| `/change-password` | Cambio de contrasena autenticado. |
+| `/verify-email` | Verificacion de correo con uid/token via Gateway. |
+| `/auth/success` | Resultado Auth exitoso. |
+| `/auth/error` | Resultado Auth con error recuperable. |
 | `/dashboard` | Resumen privado de actividad. |
 | `/profile` | Perfil de usuario autenticado. |
 | `/settings` | Preferencias privadas. |
@@ -107,6 +113,45 @@ public/brand/refapart-logo-usage-guide.png
 Los assets anteriores `refapart-logo-usage-dark.png` y
 `refapart-logo-usage-transparent.png` fueron retirados del proyecto web para no
 mezclar identidades visuales.
+
+## Tailwind CSS
+
+REFAPART adopta Tailwind CSS para nuevas interfaces y migraciones visuales. La
+configuracion debe vivir en:
+
+```text
+Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/tailwind.config.js
+Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/postcss.config.js
+Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/globals.css
+```
+
+Reglas especificas:
+
+- Los tokens Tailwind deben resolver contra las variables CSS de identidad
+  REFAPART.
+- La Home publica es la primera pantalla migrada al nuevo estandar.
+- Las rutas admin y privadas se migran por modulo, sin eliminar CSS legacy que
+  aun este en uso.
+- No se cambia consumo de APIs: todo sigue pasando por Gateway central.
+
+## Sistema Auth UI
+
+Las rutas Auth usan un sistema visual compartido en:
+
+```text
+Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/components/AuthUi.tsx
+Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/public/images/auth-road.svg
+```
+
+Reglas:
+
+- Registro no redirige silenciosamente despues de crear cuenta.
+- Registro muestra confirmacion de cuenta creada y correo de verificacion.
+- Errores de red/Auth usan mensajes accionables, no `Failed to fetch` crudo.
+- Reenvio de verificacion queda inactivo hasta existir endpoint Gateway.
+- Todas las llamadas Auth pasan por Gateway central.
+- Los textos publicos no exponen proveedor final, proveedor tecnico ni
+  operacion interna.
 
 ## Backend
 
