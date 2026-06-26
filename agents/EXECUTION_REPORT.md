@@ -55,6 +55,8 @@
 | Docker API `docker compose config --quiet` | OK. |
 | Docker Web `docker compose config --quiet` | OK. |
 | Docker DB `docker compose config --quiet` | OK. |
+| `git push origin dev` | OK en repos con remoto disponible, excepto `API.PY.DJANGO.Address` por `Repository not found`; LeadHunter API/Web no tienen `origin`. |
+| `git push origin feature/general-integration-dev` | OK en repos con remoto disponible, excepto `API.PY.DJANGO.Address` por `Repository not found`; LeadHunter API/Web no tienen `origin`. |
 
 ### Contradicciones detectadas
 
@@ -72,6 +74,7 @@
 - Corregir remoto/permisos de `API.PY.DJANGO.Address`.
 - Configurar remoto para `API.PY.DJANGO.LeadHunter` si debe publicarse.
 - Configurar remoto para `WEB.NJ.NEXT.LeadHunter` si debe publicarse.
+- Confirmar si `Docker.SW.Nginx` debe seguir publicando en `1CASH1` o migrarse a `MexIngSoft`.
 - Revisar si se desea eliminar ramas `backup/*` despues de confirmar publicacion.
 
 ### Riesgos detectados
