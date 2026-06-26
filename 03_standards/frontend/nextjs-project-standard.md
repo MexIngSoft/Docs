@@ -165,6 +165,38 @@ Docs/03_standards/auth/web-auth-login-standard.md
 - Componentes de marca viven en el proyecto.
 - El frontend debe priorizar flujos reales antes que landing pages decorativas.
 
+## Estilos y Tailwind CSS
+
+Tailwind CSS queda adoptado como estandar visual recomendado para webs Next.js
+modernas del ecosistema cuando el producto sea marketplace, SaaS, ERP,
+dashboard, e-commerce tecnico o interfaz operativa con crecimiento visual alto.
+
+Base recomendada:
+
+```text
+tailwindcss: 3.4.18
+postcss: 8.5.6
+autoprefixer: 10.4.22
+@tailwindcss/forms: 0.5.10
+@tailwindcss/typography: 0.5.19
+@tailwindcss/aspect-ratio: 0.4.2
+tailwind-merge: 3.3.1
+```
+
+Reglas:
+
+- La migracion se hace por pantallas, no con refactor masivo ciego.
+- `tailwind.config.js` debe mapear tokens del proyecto a variables CSS
+  existentes cuando sea posible.
+- `app/globals.css` conserva variables, resets minimos y estilos base
+  compatibles con pantallas todavia no migradas.
+- CSS propio queda permitido para variables globales, resets, estilos base,
+  compatibilidad temporal y casos especiales no cubiertos por utilidades.
+- Las nuevas interfaces deben preferir utilidades Tailwind y componentes
+  extraidos en `components` o `features`.
+- No se debe instalar Tailwind en APIs ni usarlo como excusa para cambiar
+  contratos, rutas, Gateway, Auth o reglas de negocio.
+
 ## Criterio de cierre
 
 Un frontend queda estandarizado cuando:
@@ -176,5 +208,6 @@ Un frontend queda estandarizado cuando:
 - Tiene rutas y layouts documentados.
 - Tiene README con arranque local.
 - Tiene reglas de UI, auth, permisos y errores documentadas.
+- Tiene Tailwind configurado o una excepcion documentada con causa real.
 - Si usa Auth, esta registrado en
   `Docs/02_projects/_ecosystem/api-version-matrix.md`.

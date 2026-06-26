@@ -51,5 +51,18 @@ Uso esperado:
 
 - Accion primaria siempre visible en mobile.
 - Busqueda principal en primer viewport.
-- Badges claros: `Proveedor verificado`, `Disponible`, `Garantia`, `Envio`.
+- Badges claros: `Disponible`, `Garantia`, `Envio`, `Revisado por REFAPART`.
 - No mostrar proveedor final ni telefono externo al cliente.
+- Las pantallas Auth usan fondo automotriz oscuro, tarjeta blanca, logo
+  REFAPART y CTA rojo para mantenerse alineadas con la Home premium.
+
+## Implementacion visual
+
+- Tailwind CSS es la base recomendada para nuevas pantallas REFAPART.
+- Los colores de Tailwind deben mapearse a la paleta documentada en este
+  archivo.
+- CSS global propio se limita a variables, resets, tipografia base,
+  compatibilidad temporal y casos visuales que Tailwind no cubra de forma
+  clara.
+- La migracion visual se hace por pantalla y debe validar responsive, build y
+  lint antes de considerar una vista cerrada.
