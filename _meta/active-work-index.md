@@ -48,6 +48,7 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | `Docs/03_standards/frontend/ui-ux-standard.md` | Mobile first, mockups aprobados, UX por dominio y cierre UI. |
 | `Docs/03_standards/architecture/api-gateway-standard.md` | Regla Frontend -> Gateway -> API -> Core/Shared. |
 | `Docs/03_standards/auth/web-auth-login-standard.md` | Login web via Gateway General y excepciones documentadas. |
+| `Docs/03_standards/auth/auth-email-delivery-diagnostics-standard.md` | Correos Auth, reenvio, SES, errores dev/prod, logs y reintentos. |
 | `Docs/03_standards/auth/auth-versioning-standard.md` | Versionado Auth y compatibilidad entre proyectos. |
 | `Docs/03_standards/gateway/central-gateway-standard.md` | Entrada unica versionada para frontends y registro de proyectos. |
 | `Docs/02_projects/_ecosystem/gateway-matrix.md` | Estado vigente y retiro de Gateways por proyecto. |
@@ -67,6 +68,7 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | `Docs/03_standards/operations/codex-anti-patterns.md` | Vicios prohibidos para Codex. |
 | `Docs/03_standards/operations/project-docker-dependency-map.md` | Mapa Docker de dependencias y scripts por proyecto. |
 | `Docs/03_standards/operations/project-script-behavior-matrix.md` | Matriz de comportamiento permitido para scripts Docker por proyecto. |
+| `Docs/03_standards/operations/scripts/database/README.md` | Scripts operativos documentados para consultas PostgreSQL sin guardar passwords. |
 | `Docs/_meta/project-operational-inventory.md` | Inventario operativo minimo por proyecto, scripts, puertos, bloqueos y pruebas. |
 | `Docs/03_standards/database/postgresql-project-users-and-schemas.md` | Reglas y estado PostgreSQL de bases, usuarios, schemas y migraciones por proyecto. |
 | `Docs/03_standards/codex/codex-minimal-reading-standard.md` | Lectura minima obligatoria. |

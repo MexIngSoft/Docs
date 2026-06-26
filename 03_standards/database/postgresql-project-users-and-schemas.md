@@ -112,6 +112,29 @@ docker exec db-postgresql psql -U postgres -d comercial -tAc "SELECT schema_name
 rg -n "sqlite|sqlite3|db.sqlite|SQLITE" Docker.API.PY -g "*.py" -g "*.env*" -g "*.yml" -g "*.yaml"
 ```
 
+## Scripts operativos documentados
+
+Los scripts reutilizables de consulta PostgreSQL viven en:
+
+```text
+Docs/03_standards/operations/scripts/database/
+```
+
+Scripts Auth disponibles:
+
+```text
+Docs/03_standards/operations/scripts/database/queries/auth/list-users-by-application.sql
+Docs/03_standards/operations/scripts/database/queries/auth/delete-users-by-id.sql
+```
+
+Regla:
+
+- `list-users-by-application.sql` es solo lectura.
+- `delete-users-by-id.sql` es plantilla administrativa y no debe ejecutarse sin
+  reemplazar IDs placeholder, validar alcance y preferir antes el comando
+  Django documentado en
+  `Docs/01_core_erp/auth/user-application-traceability.md`.
+
 ## Pendientes
 
 - `PENDIENTE_DE_DEFINIR`: contrato final de DB/schema/usuario para MexIngSof.

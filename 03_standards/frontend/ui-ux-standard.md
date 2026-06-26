@@ -18,6 +18,8 @@ profesionales, responsivas y coherentes con su dominio.
 - Usar componentes de dominio: tablas para datos, toolbars para herramientas,
   previews para documentos, configuradores para personalizacion y dashboards
   para operacion.
+- En webs Next.js modernas, usar Tailwind CSS como base de implementacion
+  visual cuando no exista una excepcion documentada.
 
 ## Regla de mockup aprobado
 
@@ -78,6 +80,8 @@ La desviacion debe documentarse en el reporte de ejecucion.
 - Los textos caben en mobile.
 - Las acciones deshabilitadas explican por que.
 - La funcionalidad visible coincide con backend o roadmap marcado.
+- La pantalla nueva usa tokens visuales del proyecto y clases Tailwind o
+  componentes migrados sin romper pantallas legacy.
 
 ## Pantallas no documentadas
 

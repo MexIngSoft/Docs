@@ -1,5 +1,1201 @@
 # Ejecucion Agents - 2026-06-12 - Estructura documental de plataforma
 
+---
+
+## Ejecucion 2026-06-26 - AGENTS-000, 001, 012 y 013 - Auth/REFAPART/SES/Trading
+
+### Context Pack utilizado
+
+- `03_standards/auth`
+- `03_standards/frontend`
+- `03_standards/docker`
+- `03_standards/operations`
+- `01_core_erp/apis`
+- `02_projects/refapart`
+- `04_integrations`
+
+### Agents ejecutados
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Parcial | Se ejecuto el bloque REFAPART/Auth/Gateway pendiente: Gateway server-side usa URL interna Docker, browser usa URL publica, REFAPART carga productos por Gateway sin 502, Auth Applications contiene 8 webs activas y se documentaron rutas/errores. No se limpia porque conserva tareas amplias de todas las webs y validacion visual/manual pendiente. |
+| `AGENTS-001.md` | Parcial | Se aplico desarrollo REFAPART Auth/UI: pantallas Auth reutilizables, manejo de error tecnico solo en desarrollo, mensajes seguros, reenvio con cooldown de 60 segundos, productos/migraciones REFAPART corregidas y build/lint OK. No se limpia porque falta comparacion visual final contra maqueta aprobada y prueba real de correo SES. |
+| `AGENTS-012.md` | Parcial | SES quedo cargado en desarrollo para `AUTH` y 8 webs, `api-multiproyecto` fue recargado, resolver Auth confirma `provider=ses` y `complete=True`, y el reporte SES fue actualizado sin exponer secretos. No se limpia porque falta prueba externa controlada de envio real, secretos productivos fuera de Git y definicion de cambio de email/SNS si aplica. |
+| `AGENTS-013.md` | Bloqueado | El agent describe arquitectura Trading/MetaTrader5, pero no existe proyecto, repositorio local ni documentacion canonica ejecutable asociada en este workspace. No se implementa proyecto fantasma. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-012.md`
+- `Docs/agents/AGENTS-013.md`
+- `Docs/00_audit/10_development_gap_analysis.md`
+- `Docs/01_core_erp/apis/01_auth_api.md`
+- `Docs/01_core_erp/apis/14_notifications_api.md`
+- `Docs/03_standards/auth/auth-frontend-error-handling-standard.md`
+- `Docs/03_standards/auth/auth-email-notification-standard.md`
+- `Docs/03_standards/auth/auth-email-delivery-diagnostics-standard.md`
+- `Docs/02_projects/refapart/security/auth-ui-audit.md`
+- `Docs/reports/auth-email-ses-djoser-audit.md`
+
+### Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/lib/api/gateway-client.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/components/AuthUi.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/.env.local.example`
+- `Docker.WEB.NJ/docker-compose.yml`
+- `Docker.WEB.NJ/docker-compose.refapart.web.yml`
+- `Docker.WEB.NJ/docker-compose.refapart.yml`
+- `Docs/03_standards/auth/auth-frontend-error-handling-standard.md`
+- `Docs/02_projects/refapart/security/auth-ui-audit.md`
+- `Docs/reports/auth-email-ses-djoser-audit.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### APIs reutilizadas
+
+- Gateway General: `/api/v1/auth/*` y `/api/v1/projects/REFAPART/*`.
+- Auth API central con `ApplicationCode`.
+- REFAPART API existente, sin crear API duplicada.
+- Djoser para registro, activacion, reenvio, login y password reset/change.
+
+### APIs descartadas por duplicidad
+
+- No se creo Auth por web.
+- No se creo Gateway dedicado para REFAPART.
+- No se creo API Trading/MT5 por ausencia de proyecto canonico y repo local.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `docker exec api-multiproyecto ... auth check` | OK |
+| `docker exec api-multiproyecto ... gateway check` | OK |
+| `docker exec api-multiproyecto ... refapart check` | OK |
+| `docker exec api-multiproyecto ... auth test auth.tests.test_email_settings` | OK: 3 tests. |
+| `docker exec api-multiproyecto ... gateway test tests.test_refapart_contract tests.test_auth_proxy tests.test_rate_limit tests.test_project_router` | OK: 14 tests. |
+| `docker exec api-multiproyecto ... refapart test marketplace.tests --keepdb` | OK: 6 tests. |
+| `docker exec api-multiproyecto ... refapart migrate` | OK: migraciones marketplace aplicadas. |
+| `GET http://127.0.0.1:8025/api/v1/projects/REFAPART/products` con `X-Application-Code: REFAPART` | OK HTTP 200 con productos. |
+| `GET http://127.0.0.1:3008/` | OK HTTP 200. |
+| `GET http://127.0.0.1:3008/register` | OK HTTP 200. |
+| `npm run lint` en `WEB.NJ.NEXT.RefaPart` | OK. |
+| `npm run build` en `WEB.NJ.NEXT.RefaPart` | OK. |
+| `docker compose -f docker-compose.yml -f docker-compose.refapart.web.yml config --quiet` | OK. |
+| Verificacion Auth Applications para 8 webs | OK: `REFAPART`, `MEXINGSOF`, `LEXNOVA`, `JOBCRON`, `DOCUCORE`, `FISCORA`, `IMAGRAFITY`, `TECNOTELEC` activas. |
+| Verificacion SES por resolver Auth | OK: `AUTH` y 8 webs con `provider=ses` y `complete=True`. |
+
+### Contradicciones detectadas
+
+- `AGENTS-013.md` pide ejecutar desarrollo Trading/MT5, pero el workspace no contiene proyecto ni documentacion canonica ejecutable para ese dominio.
+- Los agents piden cierre total de correo, pero la prueba externa de envio SES y secretos productivos no deben documentarse ni simularse desde Git.
+
+### Decisiones tomadas
+
+- REFAPART en SSR usa `GATEWAY_INTERNAL_BASE_URL=http://api-multiproyecto:8025/api/v1`; en navegador usa `NEXT_PUBLIC_GATEWAY_BASE_URL`.
+- El mensaje tecnico de Gateway solo se muestra/loguea con modo desarrollo; produccion conserva mensaje seguro.
+- El reenvio de correo en UI se limita con cooldown de 60 segundos para evitar reintentos repetidos.
+- LeadHunter no se cuenta como proyecto web independiente; se validan 8 webs segun la decision vigente del usuario.
+
+### Pendientes reales
+
+- Prueba externa SES real con correo verificado, sin imprimir secretos.
+- Secretos productivos por gestor de secretos/entorno fuera de Git.
+- Definir si el flujo de cambio de email entra al MVP.
+- Definir SNS/webhook SES para `DELIVERED`, `BOUNCED` y `COMPLAINED`.
+- Para `AGENTS-013.md`: entregar repo/proyecto local Trading/MT5 y documentacion canonica aprobada.
+
+### Riesgos detectados
+
+- Si se borra `GATEWAY_INTERNAL_BASE_URL` del contenedor web, SSR volvera a fallar contra `localhost` desde Docker.
+- Si las migraciones REFAPART no se aplican en un entorno nuevo, productos devolvera error por tablas inexistentes.
+- SES puede fallar por sandbox, dominio no verificado, DKIM/SPF/Return Path o cuotas aunque las variables esten completas.
+
+### Agents completados, limpiados, parciales y bloqueados
+
+- Completados: ninguno en esta corrida.
+- Limpiados: ninguno; no se limpian agents parciales o bloqueados.
+- Parciales: `AGENTS-000.md`, `AGENTS-001.md`, `AGENTS-012.md`.
+- Bloqueados: `AGENTS-013.md`.
+- Sin instrucciones: ninguno de los cuatro seleccionados.
+
+---
+
+## Ejecucion 2026-06-25 - AGENTS-012 - Auditoria SES/Djoser y normalizacion email
+
+### Context Pack utilizado
+
+- `03_standards/auth`
+- `03_standards/operations`
+- `01_core_erp/apis`
+- `02_projects/refapart`
+- `02_projects/lexnova`
+
+### Agent ejecutado
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-012.md` | Parcial / bloqueado por SES real | Se audito LexNova/Auth/SES/Djoser, se normalizaron variables email por proyecto, se implemento resolver central de email Auth, se aplico la migracion de logs y se genero reporte. No se limpia el agent porque no existen credenciales SES reales ni flujo UI de cambio de email para cerrar todos los criterios de aceptacion. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-012.md`
+- `Docs/03_standards/auth/auth-email-delivery-diagnostics-standard.md`
+- `Docs/03_standards/auth/auth-email-notification-standard.md`
+- `Docker.API.PY/API.PY.DJANGO.Auth/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/auth/custom_email.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/access/models.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/access/admin.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/requirements.txt`
+- `Docker.API.PY/API.PY.DJANGO.Auth/.env.local.example`
+- `Docker.API.PY/API.PY.DJANGO.LexNova/.env.local.example`
+- `Docker.API.PY/.env`
+- `Docker.API.PY/.env.example`
+- `Docker.API.PY/docker-compose.yml`
+- `Docker.API.PY/docker-compose.lexnova.api.yml`
+- `Docker.API.PY/docker-compose.refapart.api.yml`
+- `Docker.API.PY/start.sh`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/register/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/login/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/verify-email/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/forgot-password/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/reset-password/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/change-password/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/auth/success/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/auth/error/page.tsx`
+
+### Archivos modificados
+
+- `Docker.API.PY/API.PY.DJANGO.Auth/auth/email_settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/auth/tests/__init__.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/auth/tests/test_email_settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/auth/custom_email.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/.env.local.example`
+- `Docker.API.PY/API.PY.DJANGO.LexNova/.env.local.example`
+- `Docker.API.PY/.env.example`
+- `Docs/reports/auth-email-ses-djoser-audit.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### APIs reutilizadas
+
+- Auth API central.
+- Gateway General.
+- Djoser para registro, activacion, reenvio, reset y cambio de password.
+- Tabla `"Auth"."EmailDeliveryLogs"` ya ampliada por migracion `0019`.
+
+### APIs descartadas por duplicidad
+
+- No se creo Auth por proyecto.
+- No se creo servicio SES por proyecto.
+- No se creo Gateway/BFF dedicado para LexNova ni REFAPART.
+
+### Desarrollo realizado
+
+- Se creo `auth/email_settings.py` con `get_email_settings(project_code)`.
+- Se conecto Auth settings al resolver central.
+- Se agrego falla explicita en produccion si email/SES no esta completo.
+- Se mantiene fallback seguro de consola solo en desarrollo.
+- Se agregaron variables `AUTH_*` y variables por proyecto en `.env.example`.
+- Se agregaron variables por proyecto en `API.PY.DJANGO.Auth/.env.local.example`.
+- Se agrego bloque `LEXNOVA_*` en `API.PY.DJANGO.LexNova/.env.local.example`.
+- Se agregaron pruebas unitarias para el resolver de email.
+- Se creo `Docs/reports/auth-email-ses-djoser-audit.md`.
+- Se aplico la migracion `access.0019_emaildeliverylogs_diagnostics` en PostgreSQL local.
+- Se otorgo permiso `CREATEDB` a roles locales de desarrollo necesarios para tests Gateway, sin imprimir contrasenas.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `docker exec api-multiproyecto ... auth python manage.py check` | OK |
+| `docker exec api-multiproyecto ... gateway python manage.py check` | OK |
+| `python -m py_compile` en Auth dentro de Docker | OK |
+| `python -m py_compile` en Gateway dentro de Docker | OK |
+| `sh start.sh manage auth migrate --plan` | OK: plan mostraba `access.0019_emaildeliverylogs_diagnostics`. |
+| `sh start.sh manage auth migrate` | OK: `access.0019_emaildeliverylogs_diagnostics` aplicada. |
+| `sh start.sh manage auth migrate --check` | OK |
+| `sh start.sh manage auth makemigrations --check --dry-run` | OK: no changes detected. |
+| `sh start.sh manage auth test auth.tests.test_email_settings` | OK: 3 tests. |
+| `sh start.sh manage gateway test tests.test_refapart_contract` | OK: 5 tests. |
+| `npm run lint` en REFAPART | OK |
+| `npm run build` en REFAPART | OK |
+| Reinicio `api-multiproyecto` | OK |
+| Health Gateway `GET /health/` | OK HTTP 200 |
+| `POST /api/v1/auth/email/verification/resend/` | Ruta viva; responde 400 esperado para correo inexistente de desarrollo y entrega `X-Correlation-ID`. |
+| `POST /auth/email/resend-verification` | Alias vivo; responde 400 esperado para correo inexistente de desarrollo y entrega `X-Correlation-ID`. |
+
+### Contradicciones detectadas
+
+- El agent pedia usar LexNova como fuente temporal de SES, pero al inicio de la auditoria LexNova no tenia variables SES reales en `.env.local.example`, `.env` ni contenedor. Decision: no inventar secretos; crear variables propias por proyecto. En la corrida posterior del 2026-06-26 las variables quedaron cargadas en desarrollo local para `AUTH` y 8 webs, sin exponer valores.
+- El agent pide cerrar SES real, pero no existen credenciales/dominio verificables. Decision: cerrar desarrollo estructural y dejar bloqueo real documentado.
+
+### Decisiones tomadas
+
+- Las variables por proyecto existen aunque apunten temporalmente a los mismos valores en desarrollo.
+- Auth resuelve primero variables del proyecto, luego `AUTH_*`, luego legacy `AWS_SES_*`, luego consola solo en desarrollo.
+- En produccion, Auth no cae a consola ni silent fail si falta configuracion.
+- No se imprimieron secretos completos en reportes ni salida final.
+
+### Pendientes reales
+
+- Cargar credenciales SES reales fuera de Git:
+  `AUTH_AWS_SES_ACCESS_KEY_ID`, `AUTH_AWS_SES_SECRET_ACCESS_KEY`,
+  `AUTH_AWS_SES_REGION_NAME`, `AUTH_AWS_SES_FROM_EMAIL` o sus equivalentes por
+  proyecto.
+- Definir si REFAPART, LEXNOVA y demas proyectos usaran mismas credenciales
+  temporales copiadas en variables independientes o credenciales propias.
+- Validar SES real: dominio, DKIM, SPF, Return Path, region, cuotas y sandbox.
+- Implementar o definir flujo UI de cambio de email si queda dentro del MVP.
+- Implementar SNS/webhook SES para estados `DELIVERED`, `BOUNCED` y
+  `COMPLAINED`.
+- Implementar worker/cron/Celery para reintentos automaticos fuera del request
+  web si se exige operacion automatica completa.
+
+### Riesgos detectados
+
+- Si produccion no configura SES, Auth fallara explicitamente al arrancar; esto es deseado por estandar, pero debe prepararse antes de deploy.
+- Si se copian credenciales LexNova en proyectos sin separar variables, se recrea dependencia rigida; por eso se dejaron nombres por proyecto.
+- La ruta de reenvio no debe filtrar si el correo existe; la UI debe conservar mensaje seguro.
+
+### Agents completados, limpiados, parciales y bloqueados
+
+- Completados: ninguno en esta corrida.
+- Limpiados: ninguno; `AGENTS-012.md` conserva contenido porque sigue parcial/bloqueado por SES real y cambio de email.
+- Parciales: `AGENTS-012.md`.
+- Bloqueados: `AGENTS-012.md` por falta de credenciales SES reales/verificacion externa y definicion de cambio de email.
+- Sin instrucciones: no aplica.
+
+---
+
+## Ejecucion 2026-06-25 - AGENTS-012 - Desarrollo runtime REFAPART/Auth/Gateway
+
+### Context Pack utilizado
+
+- `03_standards/auth`
+- `03_standards/operations`
+- `01_core_erp/apis`
+- `02_projects/refapart/security`
+- `02_projects/refapart/frontend`
+
+### Agent ejecutado
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-012.md` | Completado, ya limpio | El agent ya estaba vacio por cierre documental anterior. Se desarrollo el runtime pendiente documentado para REFAPART/Auth/Gateway sin reactivar ni modificar el contenido del agent. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/03_standards/auth/auth-email-delivery-diagnostics-standard.md`
+- `Docs/03_standards/auth/auth-email-notification-standard.md`
+- `Docs/03_standards/auth/auth-frontend-error-handling-standard.md`
+- `Docs/03_standards/auth/auth-feedback-standard.md`
+- `Docs/01_core_erp/apis/01_auth_api.md`
+- `Docs/01_core_erp/apis/14_notifications_api.md`
+- `Docs/02_projects/refapart/security/auth-ui-audit.md`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/routes/auth_urls.py`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/config/urls.py`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/clients/auth_client.py`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/apps/auth_proxy/views.py`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/clients/base_client.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/access/models.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/access/admin.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/auth/custom_email.py`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/lib/api/gateway-client.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/services/auth-service.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/components/AuthUi.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/register/page.tsx`
+
+### Archivos modificados
+
+- `Docker.API.PY/API.PY.DJANGO.Gateway/clients/auth_client.py`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/config/urls.py`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/routes/auth_urls.py`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/routes/auth_resend_alias_urls.py`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/tests/test_refapart_contract.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/access/models.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/access/admin.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/access/migrations/0019_emaildeliverylogs_diagnostics.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/auth/custom_email.py`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/lib/api/gateway-client.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/services/auth-service.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/components/AuthUi.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/register/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/globals.css`
+- `Docs/02_projects/refapart/security/auth-ui-audit.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### APIs reutilizadas
+
+- Gateway General.
+- Auth API/Djoser `POST /api/users/activation/`.
+- Auth API/Djoser `POST /api/users/resend_activation/`.
+- Tabla existente `"Auth"."EmailDeliveryLogs"`.
+
+### APIs descartadas por duplicidad
+
+- No se creo API Auth nueva para REFAPART.
+- No se creo endpoint frontend propio.
+- No se autorizo consumo directo de Auth desde RefaPart.
+
+### Desarrollo realizado
+
+- Gateway expone `POST /api/v1/auth/activate/`.
+- Gateway expone `POST /api/v1/auth/email/verification/resend/`.
+- Gateway conserva alias compatible `POST /auth/email/resend-verification`.
+- RefaPart consume reenvio desde `features/auth/services/auth-service.ts`.
+- RefaPart muestra boton real `Reenviar correo` despues del registro.
+- RefaPart detecta Gmail, Outlook/Hotmail/Live, Yahoo, iCloud y Proton; dominios desconocidos usan mensaje generico sin inventar proveedor.
+- RefaPart separa errores de desarrollo y produccion: produccion no muestra Docker, CORS, Gateway interno ni Auth interno.
+- Auth amplio `EmailDeliveryLogs` con proveedor, request/correlation id, error code, payload sanitizado, retry metadata y timestamps.
+- Auth registra log `PROCESSING` antes de enviar y actualiza a `SENT` o `FAILED`.
+- Auth clasifica errores comunes SES/SMTP en codigos operativos.
+- Admin Auth permite filtrar/buscar diagnosticos por proveedor, estado, error code, provider ids y correlation id.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `python manage.py check` en Gateway | OK |
+| `python -m py_compile` en Auth | OK |
+| `python -m py_compile` en Gateway | OK |
+| `python manage.py check` en Auth con `DATABASE_URL` temporal | OK |
+| `python manage.py makemigrations --check --dry-run` en Auth | OK: no changes detected; aviso por credenciales locales PostgreSQL invalidas al revisar historial. |
+| `python manage.py makemigrations --check --dry-run` en Gateway | OK: no changes detected; aviso por credenciales locales PostgreSQL invalidas al revisar historial. |
+| Resolver URLs Gateway por Django | OK: `/api/v1/auth/activate/`, `/api/v1/auth/email/verification/resend/` y `/auth/email/resend-verification` resuelven a las acciones correctas. |
+| `npm run lint` en `WEB.NJ.NEXT.RefaPart` | OK |
+| `npm run build` en `WEB.NJ.NEXT.RefaPart` | OK |
+| `python manage.py test tests.test_refapart_contract` en Gateway | Bloqueado por PostgreSQL local: password authentication failed para `gateway_user` y no se pudo crear base de test. |
+| `python manage.py migrate --plan` en Auth | Bloqueado por PostgreSQL local: password authentication failed para usuario `auth`. |
+
+### Contradicciones detectadas
+
+- El cierre documental anterior marcaba AGENTS-012 completado, pero dejaba pendientes runtime. Se ejecuto el desarrollo solicitado sin reactivar el agent ni escribir instrucciones nuevas en `AGENTS-012.md`.
+- El estandar pide logs y errores detallados, pero produccion no debe mostrarlos. Se implemento detalle en logs/dev y mensajes seguros en UI productiva.
+
+### Decisiones tomadas
+
+- El endpoint publico de reenvio queda en Gateway; Auth/Djoser se mantiene como backend reutilizado.
+- El alias `/auth/email/resend-verification` existe solo como compatibilidad documentada.
+- Los payloads de proveedor se guardan sanitizados; no se guardan secretos, tokens ni passwords.
+- La UI de RefaPart no afirma entrega final SES; solo informa solicitud enviada o reenvio solicitado.
+
+### Pendientes reales
+
+- Ejecutar migracion `0019_emaildeliverylogs_diagnostics.py` en PostgreSQL con credenciales correctas.
+- Ejecutar tests Gateway cuando exista acceso PostgreSQL de test para `gateway_user`.
+- Validar entrega SES real con dominio, DKIM, SPF, Return Path, region, credenciales, cuotas y sandbox deshabilitado.
+- Si se requiere reintento totalmente automatico, falta definir worker/cron/Celery operativo; esta corrida dejo metadata y clasificacion de errores para soportarlo.
+
+### Riesgos detectados
+
+- Si la migracion no se aplica antes de enviar correos, Auth intentara escribir columnas nuevas que no existen.
+- Sin credenciales SES reales, solo se valida flujo, logs y fallback; no entrega externa.
+- Si produccion activa `NEXT_PUBLIC_SHOW_TECHNICAL_ERRORS=true`, podria exponer diagnostico no deseado.
+
+### Agents completados, limpiados, parciales y bloqueados
+
+- Completados: `AGENTS-012.md`.
+- Limpiados: `AGENTS-012.md` ya estaba en 0 bytes y se conserva asi.
+- Parciales: ninguno para esta corrida.
+- Bloqueados: ninguno de documentacion; bloqueos runtime solo por credenciales PostgreSQL/SES.
+- Sin instrucciones: no aplica; se ejecuto el desarrollo pendiente derivado de AGENTS-012.
+
+---
+
+## Ejecucion 2026-06-25 - AGENTS-012 - Diagnostico global de correos Auth
+
+### Context Pack utilizado
+
+- `03_standards/auth`
+- `03_standards/operations`
+- `01_core_erp/apis`
+- `02_projects/refapart/security`
+
+### Agent ejecutado
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-012.md` | Completado y limpiado | Se documento el estandar global de envio, reenvio, trazabilidad, SES, reintentos, errores por ambiente y logs detallados para correos Auth. Se resolvieron bloqueos documentales y se vacio el contenido del agent conservando el archivo original. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-012.md`
+- `Docs/03_standards/auth/auth-email-notification-standard.md`
+- `Docs/03_standards/auth/auth-frontend-error-handling-standard.md`
+- `Docs/03_standards/auth/auth-feedback-standard.md`
+- `Docs/01_core_erp/apis/01_auth_api.md`
+- `Docs/01_core_erp/apis/14_notifications_api.md`
+- `Docs/03_standards/operations/observability.md`
+- `Docs/03_standards/security/secrets-management.md`
+- `Docs/02_projects/refapart/security/auth-ui-audit.md`
+- `Docs/02_projects/refapart/security/auth-migration.md`
+
+### Archivos modificados
+
+- `Docs/03_standards/auth/auth-email-delivery-diagnostics-standard.md`
+- `Docs/03_standards/auth/auth-email-notification-standard.md`
+- `Docs/03_standards/auth/auth-frontend-error-handling-standard.md`
+- `Docs/03_standards/auth/auth-feedback-standard.md`
+- `Docs/01_core_erp/apis/01_auth_api.md`
+- `Docs/01_core_erp/apis/14_notifications_api.md`
+- `Docs/02_projects/refapart/security/auth-ui-audit.md`
+- `Docs/02_projects/refapart/security/auth-migration.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-012.md`
+
+### APIs reutilizadas
+
+- Gateway General como frontera web.
+- Auth API como propietario de usuario, aplicacion, plantillas y logs.
+- Djoser/Auth `POST /api/users/resend_activation/` como ruta backend de reenvio.
+- Notifications API como capacidad compartida para entrega asincrona y reintentos cuando aplique.
+
+### APIs descartadas por duplicidad
+
+- No se creo API de correo por proyecto.
+- No se creo endpoint de reenvio especifico para REFAPART.
+- No se autorizo consumo directo `Web -> Auth`; la ruta publica debe pasar por Gateway.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Existencia de nuevo estandar `auth-email-delivery-diagnostics-standard.md` | OK |
+| Validacion de rutas documentales tocadas con `Test-Path` | OK |
+| Busqueda de enlaces/referencias al nuevo estandar | OK |
+| Busqueda de `AGENTS-012.md` despues de limpieza | OK: archivo conservado y contenido vacio. |
+| Lint/build/tests runtime | No aplica: cambio documental, sin codigo runtime. |
+| SQL o scripts | No ejecutado: esta corrida no requeria ejecucion de base de datos. |
+
+### Contradicciones detectadas
+
+- El agent pidio `POST /auth/email/resend-verification`, mientras la arquitectura canonica exige Gateway General como frontera. Decision: ruta publica canonica `POST /api/v1/auth/email/verification/resend/`, con alias compatible opcional `POST /auth/email/resend-verification`, mapeando a Auth/Djoser `POST /api/users/resend_activation/`.
+- El agent pidio diagnostico detallado de errores, pero produccion no debe mostrar datos tecnicos. Decision: detalle completo solo en desarrollo y logs internos sanitizados; produccion usa mensaje seguro con folio/correlation id.
+- El agent menciono actualizar `AGENTS-000` y `AGENTS-001`, pero la regla vigente prohibe usar agents como documentacion canonica. Decision: documentar en estandares y reporte, no modificar otros agents.
+
+### Decisiones tomadas
+
+- Se creo `auth-email-delivery-diagnostics-standard.md` como fuente canonica para errores de correo Auth.
+- Se definio matriz de errores para Gateway, CORS, Auth, templates, SES, rebotes, quejas, tokens, rate limit y reintentos.
+- Se establecio que produccion nunca muestra Docker, CORS, Gateway interno, Auth interno, SES, SMTP, variables, SQL, stack traces ni payloads.
+- Se establecio que desarrollo puede mostrar panel tecnico sanitizado con `error_code`, `correlation_id`, endpoint Gateway, estado HTTP, origin/header y pista de preflight.
+- Se definieron estados, campos minimos, reintentos `1m/5m/15m/1h` y panel administrativo de diagnostico.
+
+### Pendientes reales
+
+- No quedan bloqueos documentales para AGENTS-012.
+- PENDIENTE_DE_DEFINIR runtime: confirmar o implementar en Gateway la ruta publica `POST /api/v1/auth/email/verification/resend/`.
+- PENDIENTE_DE_DEFINIR runtime: validar en Auth/Gateway que `EmailDeliveryLogs` tenga todos los campos de trazabilidad fina definidos.
+- PENDIENTE_DE_DEFINIR runtime: validar SES real con dominio, DKIM, SPF, Return Path, region, credenciales, cuotas y sandbox deshabilitado.
+- PENDIENTE_DE_DEFINIR runtime: implementar o confirmar panel administrativo reutilizable de diagnostico.
+
+### Riesgos detectados
+
+- Exponer diagnosticos tecnicos en produccion puede revelar arquitectura, proveedores o configuracion.
+- Guardar payloads SES/SMTP sin sanitizar puede filtrar datos sensibles.
+- Crear soluciones de correo por proyecto puede duplicar comportamiento y romper trazabilidad global.
+- Confirmar visualmente "correo enviado" sin estado backend fino puede crear falsa certeza operativa.
+
+### Agents completados, limpiados, parciales y bloqueados
+
+- Completados: `AGENTS-012.md`.
+- Limpiados: `AGENTS-012.md`.
+- Parciales: ninguno en esta corrida.
+- Bloqueados: ninguno para AGENTS-012.
+- Sin instrucciones: no aplica; solo se ejecuto `AGENTS-012.md`.
+
+---
+
+## Ejecucion 2026-06-25 - AGENTS-012 - Scripts database Auth documentados
+
+### Context Pack utilizado
+
+- `03_standards/operations`
+- `03_standards/database`
+- `01_core_erp/auth`
+
+### Agent ejecutado
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-012.md` | Completado y limpiado | Se creo la estructura permanente de scripts database y se documentaron los SQL solicitados. No se ejecuto codigo ni SQL por instruccion explicita del usuario. Se vacio el contenido del agent y se conservo el archivo original. |
+
+### Archivos leidos
+
+- `Docs/agents/AGENTS-012.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-012.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/03_standards/database/postgresql-project-users-and-schemas.md`
+
+### Archivos modificados
+
+- `Docs/03_standards/operations/scripts/database/README.md`
+- `Docs/03_standards/operations/scripts/database/queries/auth/list-users-by-application.sql`
+- `Docs/03_standards/operations/scripts/database/queries/auth/delete-users-by-id.sql`
+- `Docs/03_standards/operations/scripts/database/reports/db-inventory.md`
+- `Docs/03_standards/operations/scripts/database/reports/last-check.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/03_standards/database/postgresql-project-users-and-schemas.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### APIs reutilizadas
+
+- No aplica. La tarea fue documental y operativa sobre SQL PostgreSQL.
+
+### APIs descartadas por duplicidad
+
+- No se creo API nueva.
+- No se creo endpoint administrativo nuevo; se conserva como pendiente si se
+  requiere consultar usuarios por aplicacion via Gateway.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Existencia de carpeta `Docs/03_standards/operations/scripts/database/` | OK, creada. |
+| Existencia de `queries/auth/list-users-by-application.sql` | OK. |
+| Existencia de `queries/auth/delete-users-by-id.sql` | OK. |
+| Ejecucion SQL | No ejecutado por instruccion explicita: "solo documentalo no ejecutes codigo". |
+
+### Contradicciones detectadas
+
+- La instruccion inicial decia "ejecuta", pero el mensaje final aclaro
+  "solo documentalo no ejecutes codigo". Prevalece la ultima instruccion del
+  usuario.
+
+### Decisiones tomadas
+
+- Los scripts permanentes se guardan en `03_standards/operations/scripts/database/`,
+  no en `Docs/agents`, porque agents es temporal.
+- El script `SELECT` se guardo separado de la plantilla destructiva.
+- El script `DELETE` queda como plantilla administrativa, con advertencia de
+  IDs placeholder y preferencia por comando Django seguro.
+
+### Pendientes reales
+
+- PENDIENTE_DE_DEFINIR: endpoint administrativo via Gateway para consultar
+  usuarios Auth por `ApplicationCode`.
+- PENDIENTE_DE_DEFINIR: politica productiva de borrado/retencion legal de
+  usuarios por proyecto.
+
+### Riesgos detectados
+
+- `delete-users-by-id.sql` borra datos si alguien reemplaza IDs y lo ejecuta;
+  requiere validacion manual previa.
+- El SQL manual no cubre todas las relaciones futuras si Auth agrega tablas
+  nuevas; por eso se recomienda comando Django para operacion normal.
+
+### Agents completados, limpiados, parciales y bloqueados
+
+- Completados: `AGENTS-012.md` como documentacion.
+- Limpiados: `AGENTS-012.md`.
+- Parciales: ninguno en esta corrida.
+- Bloqueados: ninguno.
+- Sin instrucciones: no aplica.
+
+---
+
+## Ejecucion 2026-06-25 - AGENTS-001 - Auth UI REFAPART
+
+### Context Pack utilizado
+
+- `02_projects/refapart`
+- `03_standards/auth`
+- `03_standards/frontend`
+
+### Agent ejecutado
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-001.md` | Parcial | Se implemento el sistema visual Auth REFAPART y documentacion asociada. No se limpia el agent porque siguen bloqueos reales de backend/Gateway para reenvio y estados finos de correo. |
+
+Nota: el reporte historico indicaba `AGENTS-001.md` cerrado/vacio, pero el
+archivo contiene instrucciones nuevas. Se ejecuto por contenido nuevo sin
+rehacer tareas cerradas.
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/02_projects/refapart/frontend.md`
+- `Docs/02_projects/refapart/visual-identity.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+- `Docs/03_standards/auth/web-auth-login-standard.md`
+- `Docs/03_standards/auth/auth-frontend-error-handling-standard.md`
+- `Docs/03_standards/auth/auth-email-notification-standard.md`
+
+### Archivos modificados
+
+- `Docs/03_standards/auth/auth-feedback-standard.md`
+- `Docs/03_standards/auth/auth-email-notification-standard.md`
+- `Docs/02_projects/refapart/security/auth-ui-audit.md`
+- `Docs/02_projects/refapart/frontend.md`
+- `Docs/02_projects/refapart/visual-identity.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/components/AuthUi.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/public/images/auth-road.svg`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/login/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/register/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/forgot-password/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/reset-password/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/change-password/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/verify-email/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/auth/success/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/auth/error/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/logout/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/403/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/services/auth-service.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/components/HeroSearch.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/resultados/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/publicar-busqueda/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/pieza/[id]/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/mis-pedidos/[id]/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/proveedor/page.tsx`
+
+### APIs reutilizadas
+
+- Gateway General para Auth.
+- Auth API existente mediante `features/auth/services/auth-service.ts`.
+- No se creo API duplicada.
+
+### APIs descartadas por duplicidad
+
+- No se creo API de reenvio en frontend.
+- `POST /api/auth/email/verification/resend/` queda pendiente de confirmar o
+  implementar en Auth/Gateway antes de activar el boton de reenvio.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.RefaPart` | OK, sin errores ESLint. |
+| `npm run build` en `WEB.NJ.NEXT.RefaPart` | OK, Next.js compilo 31 rutas incluyendo Auth nuevas. |
+| HTTP `GET` rutas Auth en `localhost:3008` | OK despues de recargar proceso web: `/login`, `/register`, `/forgot-password`, `/reset-password`, `/change-password`, `/verify-email`, `/auth/success`, `/auth/error`, `/logout`, `/403` devuelven `200`. |
+| Browser integrado | No ejecutado: el plugin local fallo al inicializar por ruta interna no encontrada. Se sustituyo por validacion HTTP y build. |
+| Busqueda de textos publicos prohibidos | OK en rutas publicas; quedan menciones de proveedor solo en rutas admin/operativas. |
+
+### Contradicciones detectadas
+
+- El reporte historico marcaba `AGENTS-001.md` como cerrado/vacio, pero el
+  archivo contiene instrucciones activas. Prevalece el contenido activo actual
+  del agent.
+
+### Decisiones tomadas
+
+- Se creo un sistema Auth UI reusable para REFAPART en lugar de estilos sueltos
+  por pantalla.
+- Registro muestra confirmacion visible y no redirige silenciosamente.
+- El boton de reenvio queda deshabilitado hasta existir endpoint Gateway real.
+- Los textos publicos ya no exponen proveedor ni operacion interna; el lenguaje
+  operativo se conserva en admin.
+- Se agrego `auth-road.svg` como asset versionado del proyecto web, no como
+  imagen temporal del agent.
+
+### Pendientes reales
+
+- PENDIENTE_DE_DEFINIR: confirmar o implementar
+  `POST /api/auth/email/verification/resend/` via Gateway.
+- PENDIENTE_DE_DEFINIR: Auth/Gateway debe devolver estados finos como
+  `USER_CREATED_EMAIL_SENT` y `USER_CREATED_EMAIL_FAILED`.
+- PENDIENTE_DE_DEFINIR: validar envio SES real con credenciales/region
+  productivas.
+- PENDIENTE_DE_DEFINIR: comparacion visual final contra maqueta fuente con
+  navegador integrado cuando el plugin local funcione.
+
+### Riesgos detectados
+
+- Si Auth solo devuelve `201` generico de Djoser, la web no puede afirmar con
+  certeza tecnica si el correo fue enviado o fallo.
+- Si el servidor `next dev --turbo` queda vivo antes de crear rutas nuevas,
+  puede requerir recarga del proceso web para publicar rutas recien agregadas.
+
+### Agents completados, limpiados, parciales y bloqueados
+
+- Completados: ninguno en esta ejecucion.
+- Limpiados: ninguno.
+- Parciales: `AGENTS-001.md`.
+- Bloqueados: `AGENTS-001.md` por reenvio Auth/Gateway y estados finos de
+  correo.
+- Sin instrucciones: no aplica; solo se ejecuto `AGENTS-001.md`.
+
+---
+
+## Ejecucion 2026-06-25 - AGENTS-000 - Auth por aplicacion y REFAPART
+
+### Context Pack utilizado
+
+- `03_standards/auth`
+- `03_standards/frontend`
+- `03_standards/database`
+- `02_projects/refapart`
+- `01_core_erp/auth`
+- `02_projects/_ecosystem/api-version-matrix.md`
+
+### Agent ejecutado
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Parcial | Se implemento la base operativa Auth por aplicacion, se corrigio Gateway/Auth/REFAPART, se aplicaron migraciones PostgreSQL y REFAPART quedo levantado por Docker con Gateway y web en HTTP 200. No se limpia el agent porque faltan pruebas E2E reales de correo y flujos completos por cada web. |
+
+### Identificacion de alcance
+
+| Campo | Resultado |
+|---|---|
+| Tipo de tarea | Auditoria, correccion y estandarizacion Auth |
+| Dominio afectado | Auth, Gateway, frontend web, PostgreSQL, documentacion canonica |
+| Proyecto afectado | REFAPART como caso obligatorio; configuracion base para DocuCore, Fiscora, Imagrafity, JobCron, LeadHunter, LexNova, MexIngSof y TecnoTelec |
+| APIs afectadas | `API.PY.DJANGO.Auth`, `API.PY.DJANGO.Gateway` |
+| Frontend afectado | `WEB.NJ.NEXT.RefaPart` y `.env.local.example` de webs Next.js |
+| Integracion afectada | Envio de correo Auth por configuracion backend; proveedor real pendiente de credenciales productivas |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/03_standards/auth/web-auth-login-standard.md`
+- `Docs/03_standards/auth/auth-versioning-standard.md`
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+- `Docs/03_standards/database/postgresql-project-users-and-schemas.md`
+- `Docs/01_core_erp/auth/README.md`
+- `Docs/01_core_erp/apis/01_auth_api.md`
+- `Docs/02_projects/refapart/README.md`
+- `Docs/02_projects/refapart/frontend.md`
+- `Docs/02_projects/refapart/architecture.md`
+- `Docs/02_projects/_ecosystem/api-version-matrix.md`
+- `Docs/00_audit/10_development_gap_analysis.md`
+- `Docs/03_standards/operations/scripts/docker/projects/start-refapart.ps1`
+- `Docs/03_standards/operations/scripts/docker/projects/Invoke-WorkspaceProjectDocker.ps1`
+
+### Archivos modificados
+
+- `Docs/03_standards/auth/web-auth-login-standard.md`
+- `Docs/03_standards/auth/auth-application-registration-standard.md`
+- `Docs/03_standards/auth/auth-email-notification-standard.md`
+- `Docs/03_standards/auth/auth-frontend-error-handling-standard.md`
+- `Docs/02_projects/refapart/security/auth-migration.md`
+- `Docs/02_projects/refapart/security/auth-email-branding.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docker.API.PY/API.PY.DJANGO.Auth/.env.local.example`
+- `Docker.API.PY/API.PY.DJANGO.Auth/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/access/migrations/0018_seed_web_applications_email_settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/clients/auth_client.py`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/routes/auth_urls.py`
+- `.env.local.example` de `WEB.NJ.NEXT.DocuCore`, `WEB.NJ.NEXT.Fiscora`, `WEB.NJ.NEXT.Imagrafity`, `WEB.NJ.NEXT.JobCron`, `WEB.NJ.NEXT.LeadHunter`, `WEB.NJ.NEXT.LexNova`, `WEB.NJ.NEXT.MexIngSof`, `WEB.NJ.NEXT.RefaPart`, `WEB.NJ.NEXT.TecnoTelec`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/lib/api/gateway-client.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/services/auth-service.ts`
+- paginas admin de `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/admin/refapart/**/page.tsx` que consumen datos dinamicos
+- `Docker.WEB.NJ/start.sh`
+
+### APIs reutilizadas
+
+- Gateway central para Auth: `Frontend -> API.PY.DJANGO.Gateway -> API.PY.DJANGO.Auth`
+- Auth existente para usuarios, sesiones, permisos, registro, reset y cambio de password
+
+### APIs descartadas por duplicidad
+
+- No se creo API Auth nueva por proyecto.
+- No se creo acceso directo `Frontend -> Auth`.
+- No se creo acceso directo a base de datos desde frontend.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Busqueda de SQLite en APIs (`rg sqlite... Docker.API.PY`) | OK: no se encontro uso SQLite |
+| `python manage.py check` en Auth con PostgreSQL `auth` | OK |
+| `python manage.py check` en Gateway | OK |
+| `python -m py_compile` en archivos Auth/Gateway modificados | OK |
+| `python manage.py migrate --plan` en Auth | OK |
+| `python manage.py migrate` en Auth | OK, se aplicaron migraciones y seed de aplicaciones |
+| Consulta PostgreSQL `"Auth"."Applications"` | OK: DocuCore, Fiscora, Imagrafity, JobCron, LeadHunter, LexNova, MexIngSof, REFAPART y TecnoTelec activos |
+| Consulta PostgreSQL `"Auth"."ApplicationEmailSettings"` | OK: apps con remitente operativo `cash.1dip1@gmail.com` |
+| `npm run lint` en `WEB.NJ.NEXT.RefaPart` | OK |
+| `npm run build` en `WEB.NJ.NEXT.RefaPart` | OK |
+| Gateway health `http://127.0.0.1:8025/health/` | OK HTTP 200 |
+| Gateway `POST /api/v1/auth/register/` con `X-Application-Code: REFAPART` | OK: responde error Auth normalizado 400 por campos requeridos, no `Failed to fetch` |
+| Gateway `POST /api/v1/auth/password/change/` con `X-Application-Code: REFAPART` sin token | OK: ruta viva, responde 401 esperado |
+| `start-refapart.ps1 -Build` | OK: reconstruyo imagenes versionadas y activo `WEB_PROJECTS=refapart`, `API_PROJECTS=auth gateway refapart address search` |
+| `Invoke-WorkspaceProjectDocker.ps1 -Project refapart -Action health` | OK: Gateway HTTP 200 y Web HTTP 200 |
+| Docker compose config con perfil REFAPART | OK |
+| Validacion de rutas documentales tocadas | OK |
+
+### Contradicciones detectadas
+
+- El contenedor web no reinstalaba dependencias si ya existia `node_modules/.bin/next`; esto rompia REFAPART al agregar Tailwind. Se corrigio `Docker.WEB.NJ/start.sh` para reinstalar cuando falten dependencias declaradas.
+- El contenedor Gateway activo no tenia inicialmente `password/change/`; se reconstruyo con el script documentado para cargar la ruta.
+
+### Decisiones tomadas
+
+- El remitente operativo local queda en backend/Auth y variables de entorno, no hardcodeado en componentes frontend.
+- Se permite usar el mismo correo de soporte/remitente en `.env.local.example` para todas las webs, cambiable en produccion.
+- Las paginas admin de REFAPART que consumen datos `no-store` se marcaron como dinamicas para evitar prerender estatico incorrecto.
+- Las aplicaciones Auth se siembran de forma idempotente por migracion, no por SQL manual.
+
+### Pendientes reales
+
+- Prueba E2E de registro exitoso con correo real por aplicacion.
+- Prueba E2E de recuperacion/reset de password con proveedor de correo real y dominio/remitente verificado.
+- Prueba de login/logout/refresh/me/permissions con usuarios reales y matriz de permisos por aplicacion.
+- Revisar si produccion usara `cash.1dip1@gmail.com` como remitente verificado o si se sustituira por dominios propios por proyecto.
+
+### Riesgos detectados
+
+- Sin credenciales de correo verificadas, la validacion de notificaciones solo puede quedar a nivel de configuracion y DB, no de entrega real.
+- Si se agregan nuevas dependencias web y no se reconstruye el contenedor, el runtime puede usar un `node_modules` viejo; `start.sh` quedo corregido para este caso.
+
+### Agents completados, limpiados, parciales y bloqueados
+
+- Completados: ninguno.
+- Limpiados: ninguno.
+- Parciales: `AGENTS-000.md`.
+- Bloqueados: ninguno tecnico; quedan pruebas E2E pendientes por datos/credenciales reales.
+- Sin instrucciones: no aplican en esta ejecucion.
+
+---
+
+## Ejecucion 2026-06-25 - AGENTS-000 - Tailwind Web Migration
+
+### Context Pack utilizado
+
+- `03_standards/frontend`
+- Webs Next.js en `Docker.WEB.NJ`
+- `02_projects/refapart`
+
+### Agent ejecutado
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se ejecuto la migracion controlada Tailwind del ecosistema web: documentacion canonica, auditoria de 9 webs Next.js, configuracion base Tailwind y validacion build/lint por web. |
+
+### Identificacion de alcance
+
+| Campo | Resultado |
+|---|---|
+| Tipo de tarea | Estandarizacion frontend transversal |
+| Dominio afectado | `03_standards/frontend`, `02_projects/refapart`, webs Next.js |
+| Proyecto afectado | Todas las webs Next.js bajo `Docker.WEB.NJ/WEB.NJ.NEXT.*` |
+| APIs afectadas | Ninguna API modificada |
+| Frontend afectado | DocuCore, Fiscora, Imagrafity, JobCron, LeadHunter, LexNova, MexIngSof, RefaPart, TecnoTelec |
+| Integracion afectada | Ninguna |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/03_standards/frontend/README.md`
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+- `Docs/03_standards/frontend/pre-development-checklist.md`
+- `Docs/03_standards/frontend/undocumented-modernization-standard.md`
+- `Docs/00_audit/10_development_gap_analysis.md`
+- `Docs/02_projects/refapart/frontend.md`
+- `Docs/02_projects/refapart/visual-identity.md`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/tailwind.config.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/postcss.config.js`
+- `package.json` de las 9 webs Next.js
+
+### Archivos modificados
+
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+- `Docs/02_projects/refapart/frontend.md`
+- `Docs/02_projects/refapart/visual-identity.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/package.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/package-lock.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/postcss.config.js`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore/tailwind.config.js`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Fiscora/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Fiscora/package.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Fiscora/package-lock.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Fiscora/postcss.config.js`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Fiscora/tailwind.config.js`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity/package.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity/package-lock.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity/postcss.config.js`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity/tailwind.config.js`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/package.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/package-lock.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/postcss.config.js`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/tailwind.config.js`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LeadHunter/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LeadHunter/package.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LeadHunter/package-lock.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LeadHunter/postcss.config.js`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LeadHunter/tailwind.config.js`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/package.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.LexNova/package-lock.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof/package.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof/package-lock.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof/postcss.config.js`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof/tailwind.config.js`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof/tsconfig.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof/next-env.d.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/package.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/package-lock.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/postcss.config.js`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/tailwind.config.js`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/package.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/package-lock.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/postcss.config.js`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/tailwind.config.js`
+
+### APIs reutilizadas
+
+- No se modificaron APIs.
+- Se mantiene la regla vigente: cada web consume Gateway General y no APIs internas directamente.
+
+### APIs descartadas por duplicidad
+
+- No se creo Gateway por proyecto.
+- No se creo Auth por proyecto.
+- No se creo API nueva para Tailwind ni para UI.
+
+### Auditoria de webs
+
+| Web | Estado Tailwind antes | Estado Tailwind final |
+|---|---|---|
+| DocuCore | No configurado | Configurado |
+| Fiscora | No configurado | Configurado |
+| Imagrafity | No configurado | Configurado |
+| JobCron | No configurado | Configurado |
+| LeadHunter | No configurado | Configurado |
+| LexNova | Configurado | Conservado y normalizado en dependencias |
+| MexIngSof | No configurado y versiones `latest` | Configurado y versiones Next/React fijadas |
+| RefaPart | No configurado | Configurado |
+| TecnoTelec | No configurado | Configurado |
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm install` en las 9 webs | OK: dependencias instaladas y locks actualizados. |
+| `npm run build` DocuCore | OK |
+| `npm run lint` DocuCore | OK |
+| `npm run build` Fiscora | OK |
+| `npm run lint` Fiscora | OK |
+| `npm run build` Imagrafity | OK |
+| `npm run lint` Imagrafity | OK |
+| `npm run build` JobCron | OK |
+| `npm run lint` JobCron | OK |
+| `npm run build` LeadHunter | OK |
+| `npm run lint` LeadHunter | OK |
+| `npm run build` LexNova | OK |
+| `npm run lint` LexNova | OK |
+| `npm run build` MexIngSof | OK; Next ajusto `tsconfig.json` con `jsx: preserve`. |
+| `npm run lint` MexIngSof | OK (`tsc --noEmit`). |
+| `npm run build` RefaPart | OK |
+| `npm run lint` RefaPart | OK |
+| `npm run build` TecnoTelec | OK con warnings existentes por uso de `<img>` en dos archivos. |
+| `npm run lint` TecnoTelec | OK con warnings existentes por uso de `<img>` en dos archivos. |
+
+### Contradicciones detectadas
+
+- El estandar previo permitia CSS propio por proyecto como stack principal; el agent trae informacion nueva y pide Tailwind como estandar recomendado. Se resolvio como evolucion tecnica: Tailwind es el estandar recomendado y CSS propio queda limitado a variables, base, resets y compatibilidad temporal.
+- El agent sugeria crear otro archivo agent con nombre no numerico. Prevalece la regla de ejecutar solo `AGENTS-000.md`; no se creo un agent adicional.
+
+### Decisiones tomadas
+
+- Se adopto Tailwind CSS `3.4.18` como base recomendada porque LexNova ya lo usaba y es el patron real mas estable del repositorio.
+- Se agrego configuracion comun `tailwind.config.js` y `postcss.config.js` a las webs que no la tenian.
+- Se agregaron directivas Tailwind a `app/globals.css` manteniendo CSS legacy debajo para no romper pantallas existentes.
+- MexIngSof dejo de usar `latest` en Next, React, React DOM, Lucide y tipos principales.
+- No se migraron todas las pantallas a clases Tailwind en esta corrida; queda habilitada la base para migracion por pantalla, que es la regla segura documentada.
+
+### Pendientes reales
+
+- Migrar pantallas internas por proyecto a componentes Tailwind extraidos, empezando por las rutas con mayor trafico.
+- Corregir warnings de TecnoTelec reemplazando `<img>` por `next/image` donde aplique.
+- Migrar scripts `next lint` antes de Next 16.
+- Revisar vulnerabilidades `npm audit` por proyecto sin usar `npm audit fix --force` hasta definir ventana de actualizacion segura.
+
+### Riesgos detectados
+
+- Algunas webs aun no usan clases Tailwind en componentes; Tailwind puede avisar `No utility classes were detected` hasta que se migren pantallas reales.
+- `npm audit` reporta vulnerabilidades heredadas en varias webs; no se corrigieron automaticamente para no romper dependencias.
+- La mezcla temporal Tailwind + CSS legacy es intencional, pero requiere disciplina para no dejar dos sistemas visuales permanentes.
+
+### Agents completados, limpiados, parciales, bloqueados o sin instrucciones
+
+- Completado: `AGENTS-000.md`.
+- Limpiado: `AGENTS-000.md` queda en 0 bytes conservando el archivo original.
+- Parciales: ninguno.
+- Bloqueados: ninguno.
+- Sin instrucciones: no aplica; por instruccion del usuario solo se ejecuto agent 0.
+
+---
+
+## Ejecucion 2026-06-25 - AGENTS-000 - Home REFAPART 2026
+
+### Context Pack utilizado
+
+- `02_projects/refapart`
+- Frontend REFAPART
+- Gateway/API reutilizables REFAPART
+
+### Agent ejecutado
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Completado | Se ejecuto la instruccion activa de Home REFAPART 2026 y se dejo implementada en la web Next.js de REFAPART. |
+
+### Identificacion de alcance
+
+| Campo | Resultado |
+|---|---|
+| Tipo de tarea | Desarrollo frontend REFAPART |
+| Dominio afectado | `02_projects/refapart` |
+| Proyecto afectado | `REFAPART` |
+| Frontend afectado | `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart` |
+| APIs afectadas | Reutiliza Gateway General y APIs REFAPART existentes |
+| Integracion afectada | Ninguna nueva |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/02_projects/refapart/README.md`
+- `Docs/02_projects/refapart/frontend.md`
+- `Docs/02_projects/refapart/visual-identity.md`
+- `Docs/02_projects/refapart/api-contracts.md`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/package.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/components/Header.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/lib/api.ts`
+
+### Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/components/Header.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/public/images/hero-car.svg`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/public/images/empty-catalog.svg`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/public/images/icons/body.svg`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/public/images/icons/brakes.svg`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/public/images/icons/electric.svg`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/public/images/icons/motor.svg`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/public/images/icons/suspension.svg`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/public/images/icons/transmission.svg`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+
+### APIs reutilizadas
+
+- Gateway General `API.PY.DJANGO.Gateway`
+- API de dominio `API.PY.DJANGO.RefaPart`
+- API Search para resultados reutilizables cuando exista catalogo disponible
+- API Address y Auth como dependencias documentadas del flujo REFAPART
+
+### APIs descartadas por duplicidad
+
+- No se creo ninguna API nueva.
+- No se duplico Auth, Search, Gateway ni API de proyecto porque la home solo consume el contrato existente mediante `refapartApi.products()`.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run build` en `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart` | OK: Next.js 15 compilo correctamente y genero 37 paginas estaticas. |
+| `npm run lint` en `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart` | OK: sin errores ni warnings de codigo; Next advierte que `next lint` queda deprecado en Next 16. |
+| Browser plugin in-app | No ejecutado por falla de herramienta local: `failed to write kernel assets: El sistema no puede encontrar la ruta especificada`. Se sustituyo por validacion HTTP directa. |
+| `Docs/03_standards/operations/scripts/docker/projects/start-refapart.ps1 -Build` | OK: reconstruyo y levanto REFAPART con dependencias documentadas. |
+| `curl http://127.0.0.1:3008/` | OK: HTTP 200 y HTML servido contiene `premium-hero`, `floating-search-panel`, `hero-car.svg`, busquedas populares y bloque de confianza REFAPART. |
+| `curl http://127.0.0.1:8025/health/` | OK: Gateway HTTP 200. |
+| `docker ps` | OK: `api-multiproyecto`, `web-frontend-node`, `nginx` y `db-postgresql` healthy, con imagenes versionadas exactas. |
+| `python scripts/build_master_index.py` en `Docs` | OK: regenero `_meta/generated/master-index.json` con 560 entradas sin dejar diff adicional. |
+| `python scripts/validate_frontmatter.py` en `Docs` | OK tecnico: 526 documentos historicos sin front matter, 0 incomplete, 0 malformed. |
+| `git diff --check` en `Docs` | OK: sin errores; solo advertencia LF/CRLF esperada en Windows para `agents/EXECUTION_REPORT.md`. |
+
+### Contradicciones detectadas
+
+- El agent menciona Tailwind CSS, pero la documentacion canonica de REFAPART y el codigo existente usan CSS propio del proyecto. Prevalece la documentacion canonica; no se agrego Tailwind.
+- El agent proponia assets con nombres nuevos bajo `public/images`; la documentacion canonica marca assets de marca activos en `public/brand`. Se reutilizo `public/brand/refapart-logo-dark.png` para identidad y solo se agregaron SVGs auxiliares de home/categorias.
+
+### Decisiones tomadas
+
+- Se rehizo la home REFAPART con hero oscuro, buscador premium, categorias, busquedas populares, bloque de confianza y vista de resultados/estado vacio.
+- El header conserva la integracion de sesion existente y se ajusta visualmente al estandar negro/blanco/rojo.
+- La home no expone proveedor ni datos internos; mantiene el mensaje de operacion controlada.
+- Se dejaron activos REFAPART y sus dependencias mediante el script documentado, no con comandos manuales proyecto por proyecto.
+
+### Pendientes reales
+
+- PENDIENTE_DE_DEFINIR: validacion visual en navegador in-app cuando la herramienta local de Browser pueda escribir sus assets.
+- PENDIENTE_DE_DEFINIR: catalogo real completo para que la seccion de resultados destacados no dependa del estado vacio si Search/API no devuelve datos.
+
+### Riesgos detectados
+
+- `next lint` esta deprecado para Next 16; conviene migrar el script de lint antes de subir version mayor.
+- La maqueta del agent es textual y no incluye archivo fuente visual versionado; cualquier ajuste pixel-perfect futuro requiere una referencia grafica formal.
+
+### Agents completados, limpiados, parciales, bloqueados o sin instrucciones
+
+- Completado: `AGENTS-000.md`.
+- Limpiado: `AGENTS-000.md` queda en 0 bytes conservando el archivo original.
+- Parciales: ninguno.
+- Bloqueados: ninguno.
+- Sin instrucciones: no aplica en esta ejecucion porque se ejecuto solo el agent 0 solicitado.
+
+---
+
 ## Alcance
 
 Se ejecuto `Docs/agents/AGENTS-000.md`, unico agent activo. Los archivos
