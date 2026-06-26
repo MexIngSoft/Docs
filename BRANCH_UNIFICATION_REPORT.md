@@ -19,6 +19,9 @@ integracion.
 - Conflictos: ninguno.
 - Ramas remotas eliminadas: ninguna.
 - Push force: no usado.
+- Publicacion remota: `dev` y `feature/general-integration-dev` publicados en
+  todos los repositorios con `origin` disponible, excepto `API.PY.DJANGO.Address`
+  por remoto inexistente. LeadHunter API/Web no tienen `origin`.
 - Ramas secundarias `feature/*`, `fix/*`, `hotfix/*`, `bugfix/*`, `docs/*`,
   `agent/*`, `codex/*` o equivalentes encontradas antes de la corrida: ninguna.
 - Cambios locales sin commit encontrados: respaldados en
@@ -150,6 +153,8 @@ Se ejecuto `python manage.py check` via `api-multiproyecto` para:
   debe asumir publicacion remota hasta corregir URL/permisos.
 - `API.PY.DJANGO.LeadHunter` no tiene remoto configurado.
 - `WEB.NJ.NEXT.LeadHunter` no tiene remoto configurado.
+- `Docker.SW.Nginx` publica contra `https://github.com/1CASH1/Docker.SW.Nginx`;
+  revisar si debe permanecer bajo ese owner o moverse a `MexIngSoft`.
 - `WEB.NJ.NEXT.TecnoTelec` mantiene warnings no bloqueantes de Next por uso de
   `<img>` en componentes existentes.
 
@@ -169,4 +174,6 @@ No se eliminan ramas automaticamente. Pueden revisarse despues:
 - Todos los repositorios analizados quedaron en rama `dev`.
 - Todos los repositorios quedaron sin cambios locales pendientes.
 - `feature/general-integration-dev` queda como rama local de integracion.
+- `dev` y `feature/general-integration-dev` quedaron publicados en los remotos
+  disponibles.
 - No se borraron ramas locales ni remotas.
