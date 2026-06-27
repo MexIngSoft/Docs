@@ -85,7 +85,6 @@ REFAPART
 IMAGRAFITY
 JOBCRON
 FISCORA
-LEADHUNTER
 MEXINGSOF
 ```
 
@@ -127,6 +126,16 @@ Todo proyecto con Auth debe definir o justificar la ausencia de:
 
 Si no existe registro publico, `/register` debe mostrar un estado controlado o
 redirigir segun configuracion.
+
+El alcance por ruta se define en:
+
+```text
+Docs/03_standards/auth/web-auth-route-scope-standard.md
+```
+
+No toda ruta debe exigir sesion. Las rutas publicas y opcionales deben tratar
+`401` de `/auth/me/` como usuario anonimo esperado, sin registrar errores falsos
+en consola.
 
 ## Modulo frontend sugerido
 

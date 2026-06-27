@@ -69,7 +69,6 @@ finales fuera de contrato.
 | REFAPART | `comercial` | `RefaPart` | `comercial_user` | Aplicacion | Django migrations existentes | ACTIVO |
 | TecnoTelec | `comercial` | `TecnoTelec`, `TecnoTelecGateway`, `Customization` | `comercial_user` | Aplicacion | Django migrations existentes | ACTIVO |
 | JobCron | `jobcron` | `JobCron` | `jobcron_user` | Aplicacion | Django migrations existentes | ACTIVO |
-| LeadHunter | `comercial` | `PENDIENTE_DE_DEFINIR` | `comercial_user` | Aplicacion | Django migrations existentes | PARCIAL |
 | LexNova | `lexnova` | Schemas LexNova detectados | `lexnova_user` | Aplicacion | Django migrations existentes | ACTIVO |
 | MexIngSof | `PENDIENTE_DE_DEFINIR` | `PENDIENTE_DE_DEFINIR` | `PENDIENTE_DE_DEFINIR` | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | BLOQUEADO POR CONTRATO |
 
@@ -135,9 +134,56 @@ Regla:
   Django documentado en
   `Docs/01_core_erp/auth/user-application-traceability.md`.
 
+## Limpieza de base temporal 2026-06-27
+
+Se detecto la base temporal no autorizada:
+
+```text
+test_comercial
+```
+
+Validaciones ejecutadas antes de retirarla:
+
+- listado de bases existentes;
+- listado de schemas y tablas dentro de `test_comercial`;
+- conteo de tablas de usuario;
+- conteo de filas por tabla;
+- comparacion de datos utiles RefaPart contra la base oficial `comercial`.
+
+Resultado:
+
+- `test_comercial` contenia tablas `public.RefaPart*` y tablas tecnicas Django;
+- solo tenia datos semilla en `RefaPartProduct` y `RefaPartSupplier`;
+- las tablas operativas de negocio (`RefaPartOrder`, `RefaPartQuote`,
+  `RefaPartPartRequest`, mensajes y ofertas) estaban vacias;
+- los nombres semilla de productos y proveedores ya existian en `comercial`;
+- no se detecto informacion unica que migrar.
+
+Decision:
+
+```text
+DROP DATABASE "test_comercial";
+```
+
+Estado final:
+
+```text
+auth
+comercial
+jobcron
+lexnova
+postgres
+```
+
+Regla:
+
+No recrear `test_comercial`. Las pruebas de REFAPART deben usar la base oficial
+`comercial` con el usuario de aplicacion correspondiente o una base temporal de
+test generada por Django durante ejecucion de pruebas, nunca una base persistente
+manual sin contrato.
+
 ## Pendientes
 
 - `PENDIENTE_DE_DEFINIR`: contrato final de DB/schema/usuario para MexIngSof.
 - `PENDIENTE_DE_DEFINIR`: confirmar si Address requiere schema propio o usa
   tablas en schema compartido.
-- `PENDIENTE_DE_DEFINIR`: confirmar schema operativo de LeadHunter.

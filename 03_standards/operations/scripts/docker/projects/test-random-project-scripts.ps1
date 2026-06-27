@@ -6,7 +6,6 @@ param(
         "docucore",
         "fiscora",
         "imagrafity",
-        "leadhunter",
         "refapart",
         "mexingsof"
     ),
@@ -31,7 +30,6 @@ $allowed = @(
     "docucore",
     "fiscora",
     "imagrafity",
-    "leadhunter",
     "refapart",
     "mexingsof"
 )

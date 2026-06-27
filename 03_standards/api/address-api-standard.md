@@ -12,6 +12,15 @@ Ningun proyecto debe crear catalogos propios de paises, estados, municipios,
 colonias, codigos postales o direcciones si la responsabilidad pertenece a
 Address API.
 
+Repositorio canonico:
+
+```text
+https://github.com/MexIngSoft/API.PY.DJANGO.Address.git
+```
+
+El consumo debe hacerse mediante Gateway General. Las webs no deben llamar
+directamente a Address API desde navegador.
+
 ## Consumidores previstos
 
 - REFAPART.

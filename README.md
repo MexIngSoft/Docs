@@ -117,6 +117,7 @@ Docs/03_standards/frontend/ui-ux-standard.md
 Docs/03_standards/frontend/undocumented-modernization-standard.md
 Docs/03_standards/architecture/api-gateway-standard.md
 Docs/03_standards/auth/web-auth-login-standard.md
+Docs/03_standards/auth/auth-email-template-source-standard.md
 Docs/03_standards/auth/auth-versioning-standard.md
 Docs/03_standards/product/product-strategy.md
 Docs/03_standards/product/module-catalog.md

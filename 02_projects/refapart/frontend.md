@@ -25,40 +25,40 @@ Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart
 
 ## Rutas MVP
 
-| Ruta | Uso |
-|---|---|
-| `/` | Home con buscador principal, categorias, resultados destacados y CTA de solicitud. |
-| `/resultados` | Resultados filtrables por busqueda, categoria, marca, condicion y orden. |
-| `/pieza/[id]` | Detalle de pieza con compatibilidad, precio, garantia y CTA. |
-| `/publicar-busqueda` | Formulario UI para solicitar una pieza no encontrada. |
-| `/favoritos` | Favoritos locales del navegador. |
-| `/cuenta` | Cuenta cliente protegida por Auth. |
-| `/proveedor` | Placeholder funcional para proveedor. |
-| `/login` | Login central Auth con marca REFAPART. |
-| `/register` | Registro de cliente. |
-| `/forgot-password` | Solicitud de recuperacion. |
-| `/reset-password` | Confirmacion de nueva contrasena. |
-| `/change-password` | Cambio de contrasena autenticado. |
-| `/verify-email` | Verificacion de correo con uid/token via Gateway. |
-| `/auth/success` | Resultado Auth exitoso. |
-| `/auth/error` | Resultado Auth con error recuperable. |
-| `/dashboard` | Resumen privado de actividad. |
-| `/profile` | Perfil de usuario autenticado. |
-| `/settings` | Preferencias privadas. |
-| `/403` | Acceso denegado. |
+| Ruta | Uso | Auth |
+|---|---|---|
+| `/` | Home con buscador principal, categorias, resultados destacados y CTA de solicitud. | Publico |
+| `/resultados` | Resultados filtrables por busqueda, categoria, marca, condicion y orden. | Publico |
+| `/pieza/[id]` | Detalle de pieza con compatibilidad, precio, garantia y CTA. | Publico |
+| `/publicar-busqueda` | Formulario UI para solicitar una pieza no encontrada. | Publico |
+| `/favoritos` | Favoritos locales del navegador. | Opcional |
+| `/cuenta` | Cuenta cliente protegida por Auth. | Protegido |
+| `/proveedor` | Placeholder funcional para proveedor. | Protegido |
+| `/login` | Login central Auth con marca REFAPART. | Publico |
+| `/register` | Registro de cliente. | Publico |
+| `/forgot-password` | Solicitud de recuperacion. | Publico |
+| `/reset-password` | Confirmacion de nueva contrasena. | Publico |
+| `/change-password` | Cambio de contrasena autenticado. | Protegido |
+| `/verify-email` | Verificacion de correo con uid/token via Gateway. | Publico |
+| `/auth/success` | Resultado Auth exitoso. | Publico |
+| `/auth/error` | Resultado Auth con error recuperable. | Publico |
+| `/dashboard` | Resumen privado de actividad. | Protegido |
+| `/profile` | Perfil de usuario autenticado. | Protegido |
+| `/settings` | Preferencias privadas. | Protegido |
+| `/403` | Acceso denegado. | Publico |
 
 ## Rutas cliente requeridas para cierre operativo
 
 | Ruta | Uso | Estado |
 |---|---|---|
-| `/mis-solicitudes` | Solicitudes de piezas del cliente. | EXISTE_EN_CODIGO |
-| `/mis-cotizaciones` | Cotizaciones recibidas y estado. | EXISTE_EN_CODIGO |
-| `/mis-pedidos` | Pedidos creados desde cotizaciones aceptadas. | EXISTE_EN_CODIGO |
-| `/checkout` | Confirmacion de cotizacion/pedido manual. | EXISTE_EN_CODIGO |
-| `/carrito` | Carrito local para piezas publicables. | EXISTE_EN_CODIGO |
-| `/cuenta/direcciones` | Direcciones usando Address API. | EXISTE_EN_CODIGO |
-| `/cuenta/facturacion` | Preparacion fiscal futura. | EXISTE_EN_CODIGO |
-| `/mis-pedidos/[id]` | Detalle de pedido y tracking visible. | EXISTE_EN_CODIGO |
+| `/mis-solicitudes` | Solicitudes de piezas del cliente. | EXISTE_EN_CODIGO / Protegido |
+| `/mis-cotizaciones` | Cotizaciones recibidas y estado. | EXISTE_EN_CODIGO / Protegido |
+| `/mis-pedidos` | Pedidos creados desde cotizaciones aceptadas. | EXISTE_EN_CODIGO / Protegido |
+| `/checkout` | Confirmacion de cotizacion/pedido manual. | EXISTE_EN_CODIGO / Protegido |
+| `/carrito` | Carrito local para piezas publicables. | EXISTE_EN_CODIGO / Opcional |
+| `/cuenta/direcciones` | Direcciones usando Address API. | EXISTE_EN_CODIGO / Protegido |
+| `/cuenta/facturacion` | Preparacion fiscal futura. | EXISTE_EN_CODIGO / Protegido |
+| `/mis-pedidos/[id]` | Detalle de pedido y tracking visible. | EXISTE_EN_CODIGO / Protegido |
 
 ## Rutas admin requeridas
 
@@ -146,12 +146,24 @@ Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/public/images/auth-road.svg
 Reglas:
 
 - Registro no redirige silenciosamente despues de crear cuenta.
-- Registro muestra confirmacion de cuenta creada y correo de verificacion.
+- Registro muestra cuenta recibida y evita afirmar entrega de correo hasta que
+  Auth/SES confirme el envio real en `"Auth"."EmailDeliveryLogs"`.
 - Errores de red/Auth usan mensajes accionables, no `Failed to fetch` crudo.
-- Reenvio de verificacion queda inactivo hasta existir endpoint Gateway.
+- Reenvio de verificacion se usa mediante Gateway General en
+  `/api/v1/auth/email/verification/resend/`.
 - Todas las llamadas Auth pasan por Gateway central.
 - Los textos publicos no exponen proveedor final, proveedor tecnico ni
   operacion interna.
+- Las rutas publicas y opcionales no registran `console.error` cuando
+  `/auth/me/` devuelve `401` por usuario anonimo.
+- Las rutas protegidas usan `ProtectedRoute` y redirigen a `/login` cuando no
+  existe sesion.
+- `middleware.ts` evita renderizar rutas privadas sin cookie `access` o
+  `refresh`.
+- Si el correo ya esta registrado, `/register` muestra login y reenvio de
+  verificacion solo como accion opcional para cuentas no verificadas.
+- Otras webs del ecosistema quedan pendientes de adoptar el estandar
+  `Docs/03_standards/auth/web-auth-route-scope-standard.md`.
 
 ## Backend
 

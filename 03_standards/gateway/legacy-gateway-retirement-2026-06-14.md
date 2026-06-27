@@ -9,6 +9,10 @@ last_reviewed: 2026-06-14
 
 # Retiro de Gateways legacy 2026-06-14
 
+Nota 2026-06-26: LeadHunter fue retirado como proyecto/API/Web activos. Las
+referencias a LeadHunter en este documento quedan como evidencia historica del
+retiro de su Gateway legacy, no como autorizacion para registrarlo o ejecutarlo.
+
 ## Decision
 
 La arquitectura vigente usa un unico `API.PY.DJANGO.Gateway` en el puerto
@@ -20,7 +24,7 @@ TecnoTelec, DocuCore, Fiscora, LexNova, Imagrafity, LeadHunter y RefaPart.
 - Los compose, Dockerfiles y `start.sh` dejan de montar o iniciar Gateways por
   proyecto.
 - Los frontends usan el Gateway central y su `application_code`.
-- Fiscora y LeadHunter se incorporan a `config/project_registry.yaml`.
+- Fiscora se incorpora a `config/project_registry.yaml`.
 - Los puertos `8008`, `8013`, `8014`, `8017`, `8018`, `8020` y `8023` quedan
   libres.
 - Los runbooks y scripts validan `API.PY.DJANGO.Gateway` en `8025`.

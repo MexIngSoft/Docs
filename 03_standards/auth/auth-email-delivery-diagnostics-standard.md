@@ -106,6 +106,23 @@ Todo correo transaccional debe tener estado operativo.
 | `CorrelationId` | Correlacion de request extremo a extremo. |
 | `RequestId` | Request id interno del Gateway/Auth. |
 
+`ProviderResponsePayload` debe incluir trazabilidad de plantilla:
+
+| Campo | Regla |
+|---|---|
+| `template_source` | `FILE`, `DB_FALLBACK` o `DJOSER_FALLBACK`. |
+| `resolved_template_path` | Ruta Django del archivo si `template_source=FILE`. |
+| `application_code` | Codigo de aplicacion resuelto para el envio. |
+| `action_code` | Accion transaccional enviada. |
+| `has_db_template` | `true` si existia plantilla en `"Auth"."TransactionalEmailTemplates"`. |
+| `has_file_template` | `true` si existia archivo versionado. |
+
+La prioridad de fuente queda definida en:
+
+```text
+Docs/03_standards/auth/auth-email-template-source-standard.md
+```
+
 ## Reintentos automaticos
 
 Los errores temporales deben reintentarse con esta politica:
@@ -141,12 +158,20 @@ registrar:
 - `ResponseCode`;
 - `ResponsePayload` sanitizado.
 
+Reglas de configuracion efectiva:
+
+- si `AWS_SES_RETURN_PATH` o la variable `<PROYECTO>_EMAIL_RETURN_PATH` esta vacia, Auth debe convertirla a `None` y no enviarla al proveedor;
+- nunca enviar `FeedbackForwardingEmailAddress` vacio a SES, porque SES lo rechaza como email invalido;
+- si el backend devuelve `None` pero SES agrega `status=200`, `request_id` o `message_id` en la respuesta, el envio se considera aceptado por proveedor y debe registrarse como `SENT`;
+- si el proveedor no devuelve destinatarios aceptados ni identificadores SES, debe registrarse `FAILED` con detalle sanitizado en `ProviderResponsePayload`.
+
 Checklist obligatorio de soporte:
 
 | Validacion | Error operativo si falla |
 |---|---|
 | Region configurada | `SES_REGION_MISSING` |
 | Credenciales activas | `SES_CREDENTIALS_INVALID` |
+| Permisos IAM suficientes | `SES_ACCESS_DENIED` |
 | Dominio verificado | `SES_DOMAIN_NOT_VERIFIED` |
 | DKIM activo | `SES_DKIM_NOT_CONFIGURED` |
 | SPF activo | `SES_SPF_NOT_CONFIGURED` |
@@ -236,6 +261,7 @@ Produccion nunca debe mencionar:
 | `EMAIL_PROVIDER_UNAVAILABLE` | Backend de correo no disponible. | Mostrar proveedor y error sanitizado. | No pudimos enviar el correo ahora. | provider, error_code, retry_count. |
 | `SES_REGION_MISSING` | Falta region SES. | Mostrar nombre de variable faltante. | Mensaje generico con folio. | provider=SES, missing_setting. |
 | `SES_CREDENTIALS_INVALID` | Credenciales SES invalidas. | Mostrar codigo proveedor sanitizado. | Mensaje generico con folio. | request_id, response_code. |
+| `SES_ACCESS_DENIED` | Usuario/rol IAM sin permisos SES requeridos. | Mostrar accion denegada, usuario IAM sanitizado y permiso faltante. | Mensaje generico con folio. | provider=SES, aws_error_code, denied_action. |
 | `SES_SANDBOX_ENABLED` | Cuenta SES en sandbox. | Mostrar destinatario/dominio afectado sin token. | No pudimos enviar el correo ahora. | provider_message_id, sandbox flag. |
 | `SES_DOMAIN_NOT_VERIFIED` | Dominio/remitente no verificado. | Mostrar dominio/remitente. | Mensaje generico con folio. | from_domain, response_code. |
 | `SES_QUOTA_EXCEEDED` | Cuota agotada. | Mostrar cuota/ventana si existe. | Reintento programado. | quota, retry_next_at. |
@@ -354,6 +380,9 @@ Para cerrar cambios de correo Auth:
 - validar que desarrollo muestra codigo, folio y pista accionable;
 - validar que `EmailDeliveryLogs` registra estado, error y reintentos;
 - validar que SES no se usa sin region y credenciales;
+- validar que el usuario/rol IAM usado por Auth tenga permisos SES requeridos
+  por el backend configurado; para `django-ses==3.5.0` se debe permitir, como
+  minimo, `ses:SendEmail`, `ses:SendRawEmail` y `ses:GetAccount`;
 - validar que Gateway expone el endpoint canonico o documenta
   `PENDIENTE_DE_DEFINIR`.
 

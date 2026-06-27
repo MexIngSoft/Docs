@@ -56,6 +56,10 @@ Si el proveedor de correo falla o no esta configurado, Auth debe:
 - no exponer trazas internas al frontend;
 - usar fallback local a `django.core.mail.backends.console.EmailBackend`;
 - usar modo estricto solo cuando `AUTH_EMAIL_DELIVERY_FAIL_OPEN=False`.
+- si el proveedor devuelve `AccessDeniedException` o `not authorized`, registrar
+  `SES_ACCESS_DENIED`; no mostrar al usuario que el correo fue enviado.
+- con `django-ses==3.5.0`, el usuario/rol IAM usado por Auth debe permitir,
+  como minimo, `ses:SendEmail`, `ses:SendRawEmail` y `ses:GetAccount`.
 
 Configuracion minima local:
 
@@ -91,6 +95,27 @@ por:
 Docs/03_standards/auth/auth-email-delivery-diagnostics-standard.md
 ```
 
+La estructura, ubicacion, nombres, variables permitidas y validacion de
+plantillas por aplicacion queda regida por:
+
+```text
+Docs/03_standards/auth/auth-email-template-standard.md
+```
+
+La prioridad de fuente de plantillas queda regida por:
+
+```text
+Docs/03_standards/auth/auth-email-template-source-standard.md
+```
+
+Regla obligatoria:
+
+```text
+FILE -> DB_FALLBACK -> DJOSER_FALLBACK
+```
+
+`"Auth"."TransactionalEmailTemplates"` no es fuente principal de HTML.
+
 Produccion nunca debe mostrar al usuario detalles como Docker, CORS, Gateway
 interno, Auth interno, SES, SMTP, variables de entorno, stack traces, SQL ni
 payloads de proveedor. Esos datos solo viven en logs internos sanitizados y, en
@@ -100,7 +125,7 @@ desarrollo, en panel tecnico controlado.
 
 ```text
 "Auth"."ApplicationEmailSettings"
-"Auth"."TransactionalEmailTemplates"
+"Auth"."TransactionalEmailTemplates"  # fallback administrativo, no fuente principal
 "Auth"."EmailDeliveryLogs"
 ```
 

@@ -55,7 +55,6 @@ Decision: antes de crear una API nueva se debe revisar `00_api_index.md`,
 | `Docs/02_projects/tecnotelec/tasks/01_required_apis.md` | APIs requeridas Tecno Telec. |
 | `Docs/02_projects/docucore/README.md` | Alcance documental DocuCore. |
 | `Docs/02_projects/lexnova/README.md` | Alcance LegalTech LexNova. |
-| `Docs/02_projects/leadhunter/README.md` | Alcance prospecting LeadHunter. |
 | `Docs/02_projects/fiscora/README.md` | Alcance fiscal Fiscora. |
 | `Docs/02_projects/mexingsof/README.md` | Alcance MexIngSof. |
 | `Docs/03_standards/product/module-catalog.md` | Catalogo de modulos. |
@@ -105,7 +104,6 @@ Decision: antes de crear una API nueva se debe revisar `00_api_index.md`,
 | LexNova | `API.PY.DJANGO.LexNova` | Parcial | Casos, participantes y dominio legal. |
 | DocuCore | `API.PY.DJANGO.DocuCore` | MVP | Producto documental, no Document API. |
 | Fiscora | `API.PY.DJANGO.Fiscora` | MVP | Producto SaaS fiscal, no Fiscal API. |
-| LeadHunter | `API.PY.DJANGO.LeadHunter` | Implementada | Prospecting interno operado desde JobCron. |
 | MexIngSof | `API.PY.DJANGO.MexIngSof` | PENDIENTE_DE_DEFINIR | No crear sin contrato canonico. |
 
 ## 6. APIs faltantes o pendientes de decision
@@ -162,7 +160,6 @@ Decision: antes de crear una API nueva se debe revisar `00_api_index.md`,
 | LexNova | Auth, Gateway, Document | LexNova | Notification, Billing opcional |
 | DocuCore | Auth, Gateway, Document | DocuCore | Credit/Subscription, Notification |
 | Fiscora | Auth, Gateway, Document, Fiscal | Fiscora | Billing, Subscription/Credit, Notification |
-| LeadHunter | Auth, Gateway | LeadHunter | CRM/Lead, Notification, Event |
 | MexIngSof | Auth, Gateway, JobCron, Search | PENDIENTE_DE_DEFINIR | Software Control contract si JobCron no cubre |
 | Innovation Engines Repair | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | Customer, Quote, Payment, Logistics |
 | Radar Empresarial | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | CRM/Lead, Search, Notification |

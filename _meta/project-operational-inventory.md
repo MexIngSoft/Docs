@@ -28,8 +28,7 @@ documentar cada proyecto activo sin inventar APIs, contratos, bases ni schemas.
 | DocuCore | LISTO PARA TRABAJAR | `WEB.NJ.NEXT.DocuCore` | `document`, `docucore` | Gateway General | `comercial/Document`, `comercial/DocuCore` | start/stop/status/health documentados | `Docs/02_projects/docucore` sin `local-runbook.md`; usa docs de proyecto | `3004` | Runbook minimo especifico pendiente. |
 | Fiscora | LISTO PARA TRABAJAR | `WEB.NJ.NEXT.Fiscora` | `document`, `fiscora`, `fiscal` | Gateway General | `comercial/Fiscora`, `comercial/Fiscal` | start/stop/status/health documentados | `Docs/02_projects/fiscora/local-runbook.md` | `3005` | Sin bloqueo operativo detectado. |
 | Imagrafity | LISTO PARA TRABAJAR | `WEB.NJ.NEXT.Imagrafity` | `imagrafity` | Gateway General | `comercial/Imagrafity` | start/stop/status/health documentados | `Docs/02_projects/imagrafity/local-runbook.md` | `3006` | Sin bloqueo operativo detectado. |
-| JobCron | LISTO PARA TRABAJAR | `WEB.NJ.NEXT.JobCron` | `jobcron`, `leadhunter`, `search` | Gateway General | `jobcron/JobCron` | start/stop/status/health documentados | `Docs/02_projects/jobcron/local-runbook.md` | `3000` | Sin bloqueo operativo detectado. |
-| LeadHunter | PARCIAL | `WEB.NJ.NEXT.LeadHunter` | `leadhunter` | Gateway General | `comercial/PENDIENTE_DE_DEFINIR` | start/stop/status/health documentados | `Docs/02_projects/leadhunter/local-runbook.md` | `3007` | Remoto Git y schema final `PENDIENTE_DE_DEFINIR`. |
+| JobCron | LISTO PARA TRABAJAR | `WEB.NJ.NEXT.JobCron` | `jobcron`, `search` | Gateway General | `jobcron/JobCron` | start/stop/status/health documentados | `Docs/02_projects/jobcron/local-runbook.md` | `3000` | Sin bloqueo operativo detectado. |
 | LexNova | LISTO PARA TRABAJAR | `WEB.NJ.NEXT.LexNova` | `lexnova`, `document` | Gateway General | `lexnova/*` | start/stop/status/health documentados | `Docs/02_projects/lexnova/local-dependency-runbook.md` | `3002` | Sin bloqueo operativo detectado. |
 | MexIngSof | PARCIAL | `WEB.NJ.NEXT.MexIngSof` | Usa `jobcron` y `search` para integracion futura | Gateway General | `PENDIENTE_DE_DEFINIR`; MVP actual conserva Prisma local | start/stop/status/health documentados | `Docs/02_projects/mexingsof/local-runbook.md` | `3009` | Contrato final de leads/CRM/Auth/DB pendiente. |
 | REFAPART | LISTO PARA TRABAJAR | `WEB.NJ.NEXT.RefaPart` | `refapart`, `address`, `search` | Gateway General | `comercial/RefaPart`, `Search`, Address `PENDIENTE_DE_DEFINIR` | start/stop/status/health documentados | `Docs/02_projects/refapart/local-runbook.md` | `3008` | Confirmar schema Address si aplica. |
@@ -53,7 +52,6 @@ documentar cada proyecto activo sin inventar APIs, contratos, bases ni schemas.
 | Fiscora | `start-fiscora.ps1` | `stop-fiscora.ps1` | Existe |
 | Imagrafity | `start-imagrafity.ps1` | `stop-imagrafity.ps1` | Existe |
 | JobCron | `start-jobcron.ps1` | `stop-jobcron.ps1` | Existe |
-| LeadHunter | `start-leadhunter.ps1` | `stop-leadhunter.ps1` | Existe |
 | LexNova | `start-lexnova.ps1` | `stop-lexnova.ps1` | Existe |
 | MexIngSof | `start-mexingsof.ps1` | `stop-mexingsof.ps1` | Existe |
 | REFAPART | `start-refapart.ps1` | `stop-refapart.ps1` | Existe |
@@ -64,7 +62,6 @@ documentar cada proyecto activo sin inventar APIs, contratos, bases ni schemas.
 | Proyecto | Bloqueo | Documento faltante | Impacto | Accion necesaria |
 |---|---|---|---|---|
 | DocuCore | No tiene `local-runbook.md` dedicado | Runbook operativo DocuCore | Menor: existe documentacion funcional, pero no runbook uniforme | Crear runbook minimo cuando se trabaje DocuCore. |
-| LeadHunter | Remoto Git y schema final no definidos | Repositorios/schema LeadHunter | Publicacion y DB final quedan parciales | Definir repositorio remoto y schema canonico. |
 | MexIngSof | Leads/CRM/Auth/DB final pendiente | Contrato leads/CRM/Auth/DB | No se debe implementar persistencia final | Crear contrato canonico antes de cambiar runtime. |
 | REFAPART | Schema Address no confirmado | Decision Address DB | Riesgo de asumir schema inexistente | Confirmar uso real de Address. |
 | TecnoTelec | APIs futuras sin contrato | Quote/Rules/Projects/ChannelAssortment | No se deben crear APIs nuevas | Cerrar contratos o marcar fuera de MVP. |
@@ -76,8 +73,7 @@ documentar cada proyecto activo sin inventar APIs, contratos, bases ni schemas.
 | DocuCore | `http://127.0.0.1:3004/` HTTP 200 | `http://127.0.0.1:8025/health/` HTTP 200 | `auth gateway document docucore` | OK |
 | Fiscora | `http://127.0.0.1:3005/` HTTP 200 | `http://127.0.0.1:8025/health/` HTTP 200 | `auth gateway document fiscora fiscal` | OK |
 | Imagrafity | `http://127.0.0.1:3006/` HTTP 200 | `http://127.0.0.1:8025/health/` HTTP 200 | `auth gateway imagrafity` | OK |
-| JobCron | `http://127.0.0.1:3000/` HTTP 200 | `http://127.0.0.1:8025/health/` HTTP 200 | `auth gateway jobcron leadhunter search` | OK |
-| LeadHunter | `http://127.0.0.1:3007/prospectos` HTTP 200 | `http://127.0.0.1:8025/health/` HTTP 200 | `auth gateway leadhunter` | OK operativo; contrato/schema/remoto parcial |
+| JobCron | `http://127.0.0.1:3000/` HTTP 200 | `http://127.0.0.1:8025/health/` HTTP 200 | `auth gateway jobcron search` | OK |
 | LexNova | `http://127.0.0.1:3002/auth/login` HTTP 200 | `http://127.0.0.1:8025/health/` HTTP 200 | `auth gateway lexnova document` | OK |
 | MexIngSof | `http://127.0.0.1:3009/` HTTP 200 | `http://127.0.0.1:8025/health/` HTTP 200 | `auth gateway jobcron search` | OK operativo; contrato leads/CRM/DB parcial |
 | REFAPART | `http://127.0.0.1:3008/` HTTP 200 | `http://127.0.0.1:8025/health/` HTTP 200 | `auth gateway refapart address search` | OK |

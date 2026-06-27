@@ -20,7 +20,6 @@ Mantener una vista unica de modulos core, compartidos, comerciales e internos.
 | LexNova Case Management | Independent Product Module | `02_projects/lexnova` | Activo |
 | Fiscora CFDI | Independent Product Module | `02_projects/fiscora` | Activo |
 | Imagrafity Customizer | Independent Product Module | `02_projects/imagrafity` | Pendiente |
-| LeadHunter Prospecting | Independent Product Module | `02_projects/leadhunter` | Activo |
 | Tecno Telec Catalog/Quote | Project Module | `02_projects/tecnotelec` | Activo |
 
 ## Regla de alta

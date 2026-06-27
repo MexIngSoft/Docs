@@ -648,6 +648,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "01_core_erp/auth/user-application-traceability.md",
+    "title": "Trazabilidad de usuario por aplicacion Auth",
+    "domain": "core",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "01_core_erp/database/00_database_overview.md",
     "title": "Panorama de base de datos",
     "domain": "core",
@@ -1840,54 +1848,6 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
-    "path": "02_projects/leadhunter/api-contracts.md",
-    "title": "LeadHunter API Contracts",
-    "domain": "business",
-    "status": "unknown",
-    "priority": "unknown",
-    "owner": "PENDIENTE_DE_DEFINIR"
-  },
-  {
-    "path": "02_projects/leadhunter/architecture.md",
-    "title": "LeadHunter Architecture",
-    "domain": "business",
-    "status": "unknown",
-    "priority": "unknown",
-    "owner": "PENDIENTE_DE_DEFINIR"
-  },
-  {
-    "path": "02_projects/leadhunter/database.md",
-    "title": "LeadHunter Database",
-    "domain": "business",
-    "status": "unknown",
-    "priority": "unknown",
-    "owner": "PENDIENTE_DE_DEFINIR"
-  },
-  {
-    "path": "02_projects/leadhunter/frontend.md",
-    "title": "LeadHunter Frontend",
-    "domain": "business",
-    "status": "unknown",
-    "priority": "unknown",
-    "owner": "PENDIENTE_DE_DEFINIR"
-  },
-  {
-    "path": "02_projects/leadhunter/local-runbook.md",
-    "title": "LeadHunter local runbook",
-    "domain": "business",
-    "status": "unknown",
-    "priority": "unknown",
-    "owner": "PENDIENTE_DE_DEFINIR"
-  },
-  {
-    "path": "02_projects/leadhunter/README.md",
-    "title": "LeadHunter",
-    "domain": "business",
-    "status": "unknown",
-    "priority": "unknown",
-    "owner": "PENDIENTE_DE_DEFINIR"
-  },
-  {
     "path": "02_projects/lexnova/access-control.md",
     "title": "LexNova access control",
     "domain": "business",
@@ -2320,12 +2280,28 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
-    "path": "02_projects/refapart/security/auth-migration.md",
-    "title": "Migracion Auth de REFAPART",
+    "path": "02_projects/refapart/security/auth-email-branding.md",
+    "title": "Branding de correos Auth REFAPART",
     "domain": "business",
-    "status": "active",
-    "priority": "p1",
-    "owner": "Equipo REFAPART"
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/security/auth-migration.md",
+    "title": "Migracion Auth REFAPART",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "02_projects/refapart/security/auth-ui-audit.md",
+    "title": "Auditoria UI Auth REFAPART",
+    "domain": "business",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
     "path": "02_projects/refapart/tasks/00_mvp_gap_report.md",
@@ -3016,6 +2992,46 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "03_standards/auth/auth-application-registration-standard.md",
+    "title": "Estandar de registro Auth por aplicacion",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/auth/auth-email-delivery-diagnostics-standard.md",
+    "title": "Estandar de diagnostico de correos Auth",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/auth/auth-email-notification-standard.md",
+    "title": "Estandar de correos Auth por aplicacion",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/auth/auth-feedback-standard.md",
+    "title": "Estandar de feedback Auth en webs",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/auth/auth-frontend-error-handling-standard.md",
+    "title": "Estandar de errores Auth en frontend",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "03_standards/auth/auth-versioning-standard.md",
     "title": "Estandar de versionado Auth",
     "domain": "standards",
@@ -3576,6 +3592,30 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "03_standards/operations/scripts/database/README.md",
+    "title": "Scripts operativos de base de datos",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/scripts/database/reports/db-inventory.md",
+    "title": "Inventario de scripts de base de datos",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "03_standards/operations/scripts/database/reports/last-check.md",
+    "title": "Ultima revision de scripts database",
+    "domain": "standards",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "03_standards/operations/search-implementation-standard.md",
     "title": "Estandar de implementacion Search",
     "domain": "standards",
@@ -4057,7 +4097,7 @@
   },
   {
     "path": "agents/AGENTS-000.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "AGENT — Auditoría y estandarización Auth por aplicación",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -4065,7 +4105,7 @@
   },
   {
     "path": "agents/AGENTS-001.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "AGENT — ESTANDARIZACIÓN COMPLETA DE AUTH, CORREOS Y UI REFAPART",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -4153,7 +4193,7 @@
   },
   {
     "path": "agents/AGENTS-012.md",
-    "title": "PENDIENTE_DE_DEFINIR",
+    "title": "AGENTE — AUDITORÍA Y NORMALIZACIÓN DE EMAIL AUTH / SES / DJOSER",
     "domain": "agents",
     "status": "unknown",
     "priority": "unknown",
@@ -4328,6 +4368,14 @@
     "owner": "PENDIENTE_DE_DEFINIR"
   },
   {
+    "path": "BRANCH_UNIFICATION_REPORT.md",
+    "title": "Branch Unification Report",
+    "domain": "other",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
     "path": "CHANGELOG.md",
     "title": "Changelog",
     "domain": "other",
@@ -4354,6 +4402,14 @@
   {
     "path": "README.md",
     "title": "Documentacion del proyecto",
+    "domain": "other",
+    "status": "unknown",
+    "priority": "unknown",
+    "owner": "PENDIENTE_DE_DEFINIR"
+  },
+  {
+    "path": "reports/auth-email-ses-djoser-audit.md",
+    "title": "Auditoria Auth Email SES Djoser",
     "domain": "other",
     "status": "unknown",
     "priority": "unknown",

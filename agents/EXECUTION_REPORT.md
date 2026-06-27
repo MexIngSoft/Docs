@@ -2,6 +2,586 @@
 
 ---
 
+## Ejecucion 2026-06-27 - AGENTS-015 y AGENTS-016 - Fuente de plantillas Auth y limpieza operativa Auth/DB
+
+### Context Pack utilizado
+
+- `03_standards/auth`
+- `03_standards/operations`
+- `03_standards/database`
+- `02_projects/refapart`
+- `Docker.API.PY/API.PY.DJANGO.Auth`
+
+### Agents ejecutados
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-015.md` | Completado | Auth ahora prioriza plantillas versionadas en `templates/auth_emails/<application_code>/<action>.html` sobre `"Auth"."TransactionalEmailTemplates"`. REFAPART `VERIFY_ACCOUNT` renderiza con `template_source=FILE`. |
+| `AGENTS-016.md` | Completado | La rama remota `feature/general-integration-dev` de Auth ya estaba integrada en `general` y fue eliminada. La base temporal `test_comercial` fue validada, no tenia datos unicos utiles y fue eliminada. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-015.md`
+- `Docs/agents/AGENTS-016.md`
+- `Docs/03_standards/auth/auth-email-template-standard.md`
+- `Docs/03_standards/auth/auth-email-notification-standard.md`
+- `Docs/03_standards/auth/auth-application-registration-standard.md`
+- `Docs/03_standards/auth/auth-email-delivery-diagnostics-standard.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docs/03_standards/database/postgresql-project-users-and-schemas.md`
+- `Docs/03_standards/operations/scripts/database/README.md`
+- `Docs/_meta/project-operational-inventory.md`
+- `Docker.API.PY/API.PY.DJANGO.Auth/auth/custom_email.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/access/models.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/auth/tests/test_refapart_email_templates.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/README.md`
+- `Docker.API.PY/API.PY.DJANGO.Auth/templates/auth_emails/refapart/verify_account.html`
+
+### Archivos modificados
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-015.md`
+- `Docs/agents/AGENTS-016.md`
+- `Docs/03_standards/auth/auth-email-template-source-standard.md`
+- `Docs/03_standards/auth/auth-email-template-standard.md`
+- `Docs/03_standards/auth/auth-email-notification-standard.md`
+- `Docs/03_standards/auth/auth-application-registration-standard.md`
+- `Docs/03_standards/auth/auth-email-delivery-diagnostics-standard.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docs/03_standards/database/postgresql-project-users-and-schemas.md`
+- `Docs/03_standards/operations/scripts/database/README.md`
+- `Docker.API.PY/API.PY.DJANGO.Auth/auth/custom_email.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/auth/tests/test_refapart_email_templates.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/README.md`
+
+### APIs reutilizadas
+
+- Auth API central.
+- Djoser como motor reutilizable de activacion y reset.
+- Gateway General como entrada de las webs.
+
+### APIs descartadas por duplicidad
+
+- No se crea API de correo por proyecto.
+- No se crean plantillas Auth dentro de RefaPart Web.
+- No se crea Gateway/BFF por web.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `python manage.py test auth.tests.test_refapart_email_templates --keepdb` con variables DB Auth | OK: 7 tests. |
+| `python manage.py check` en Auth | OK: sin issues. |
+| `python -m py_compile auth/custom_email.py auth/tests/test_refapart_email_templates.py user/serializers.py config/settings.py` | OK. |
+| Render local `ActivationEmail` REFAPART con `X-Application-Code=REFAPART` | OK: `template_source=FILE`, `resolved_template_path=auth_emails/refapart/verify_account.html`, subject `REFAPART - Verifica tu cuenta`, `body_len=707`, `html_len=12326`. |
+| `git fetch --all --prune` y verificacion de ramas Auth | OK: `origin/feature/general-integration-dev` era ancestro de `origin/general`. |
+| Eliminacion remota `feature/general-integration-dev` en Auth | OK. Ramas remotas finales: `origin/dev`, `origin/general`, `origin/main`, `origin/pro`. |
+| Listado de bases PostgreSQL | OK: se detecto `test_comercial` antes de limpieza. |
+| Revision de tablas y conteos de `test_comercial` | OK: solo datos semilla RefaPart duplicados en `comercial`; tablas operativas vacias. |
+| Eliminacion `DROP DATABASE "test_comercial"` | OK. Bases finales: `auth`, `comercial`, `jobcron`, `lexnova`, `postgres`. |
+
+### Contradicciones detectadas
+
+- Documentacion y README de Auth indicaban que `"Auth"."TransactionalEmailTemplates"` era fuente principal de plantillas. Prevalece el estandar vigente de plantillas versionadas por aplicacion en Auth.
+- `AGENTS-016.md` pedia fusionar `feature/general-integration-dev`; la rama ya estaba integrada, por lo que no se rehizo merge y se elimino la rama remota.
+
+### Decisiones tomadas
+
+- La prioridad oficial queda `FILE -> DB_FALLBACK -> DJOSER_FALLBACK`.
+- Si falta `X-Application-Code` y el usuario no permite resolver aplicacion por `idApp`, Auth no cae silenciosamente a `TECNOTELEC`; usa fallback generico y registra warning.
+- `"Auth"."TransactionalEmailTemplates"` se conserva como fallback administrativo sin migracion destructiva.
+- `test_comercial` se elimina porque no contenia datos unicos que migrar y no es base oficial.
+
+### Pendientes reales
+
+- Crear o validar carpetas de plantillas para otras aplicaciones cuando se ejecute su cierre Auth/correo.
+- Validar visualmente plantillas en clientes reales de correo antes de produccion.
+
+### Riesgos detectados
+
+- Si una web no envia `X-Application-Code`, puede caer en plantilla generica y no en marca propia.
+- Los IDs de semillas entre `test_comercial` y `comercial` eran distintos, por eso solo se retiro la base tras comprobar que no habia datos operativos con dependencias.
+
+### Agents completados, limpiados, parciales y bloqueados
+
+- Completados: `AGENTS-015.md`, `AGENTS-016.md`.
+- Limpiados: `AGENTS-015.md`, `AGENTS-016.md` conservan archivo y quedan sin contenido.
+- Parciales: ninguno.
+- Bloqueados: ninguno.
+- Sin instrucciones: ninguno en esta corrida.
+
+---
+
+## Ejecucion 2026-06-27 - AGENTS-015 - Plantillas de correo Auth REFAPART
+
+### Context Pack utilizado
+
+- `03_standards/auth`
+- `02_projects/refapart`
+- `Docker.API.PY/API.PY.DJANGO.Auth`
+
+### Agent ejecutado
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-015.md` | Completado para alcance local REFAPART | Se auditaron, ajustaron, documentaron y validaron las plantillas Auth de REFAPART. Se creo el estandar global para que futuras webs creen o validen sus plantillas con el mismo contrato. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-015.md`
+- `Docs/03_standards/auth/auth-email-delivery-diagnostics-standard.md`
+- `Docs/03_standards/auth/auth-email-notification-standard.md`
+- `Docs/02_projects/refapart/security/auth-migration.md`
+- `Docker.API.PY/API.PY.DJANGO.Auth/auth/custom_email.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/auth/tests/test_custom_email.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/auth/tests/test_email_settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/templates/auth_emails/refapart/*.html`
+- `Docker.API.PY/API.PY.DJANGO.Auth/templates/auth_emails/lexnova/*.html`
+- `Docker.API.PY/API.PY.DJANGO.Auth/templates/auth_emails/tecnotelec/*.html`
+
+### Archivos modificados
+
+- `Docs/03_standards/auth/auth-email-template-standard.md`
+- `Docs/03_standards/auth/auth-email-notification-standard.md`
+- `Docs/02_projects/refapart/security/auth-migration.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-015.md`
+- `Docker.API.PY/API.PY.DJANGO.Auth/templates/auth_emails/refapart/base.html`
+- `Docker.API.PY/API.PY.DJANGO.Auth/auth/tests/test_refapart_email_templates.py`
+
+### APIs reutilizadas
+
+- Gateway General.
+- Auth API central.
+- Djoser como motor reutilizable de activacion, reset y reenvio.
+
+### APIs descartadas por duplicidad
+
+- No se crea sistema de correo dentro de RefaPart Web.
+- No se crea API de correo propia de RefaPart.
+- No se crea endpoint de template por proyecto.
+
+### Justificacion de cambios
+
+| Cambio | Motivo | Beneficio | Impacto | Riesgo |
+|---|---|---|---|---|
+| Estandar global `auth-email-template-standard.md` | No existia contrato completo de rutas, nombres y validacion de templates por aplicacion. | Evita que cada web cree plantillas inconsistentes. | Documental global Auth. | Bajo. |
+| Ajuste `base.html` REFAPART | Se detectaron `linear-gradient` y `box-shadow`, degradables en clientes como Outlook. | Mayor compatibilidad email. | Solo plantillas REFAPART. | Bajo. |
+| Test `test_refapart_email_templates.py` | No habia validacion automatica de existencia/render/patrones prohibidos. | Cierre repetible antes de cambios futuros. | Solo Auth tests. | Bajo. |
+| Referencias en docs REFAPART/Auth | Hacer encontrable la ruta y el estandar desde Context Pack. | Evita carpetas faltantes en otras apps. | Documental. | Bajo. |
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `python manage.py test auth.tests.test_refapart_email_templates --keepdb` con variables DB Auth | OK: 3 tests. |
+| Render Django de `base`, `register`, `verify_account`, `password_reset`, `password_changed`, `email_reset`, `email_changed` | OK: todas renderizan con contexto REFAPART. |
+| `python manage.py check` en Auth | OK: sin issues. |
+| `python -m py_compile auth/custom_email.py user/serializers.py config/settings.py auth/tests/test_refapart_email_templates.py` | OK. |
+| Busqueda de patrones prohibidos en `templates/auth_emails/refapart` | OK: sin `display:flex`, CSS grid, `position: fixed`, `linear-gradient`, `box-shadow`, `<script` ni `<form`. |
+| Existencia de rutas documentales tocadas | OK. |
+
+### Contradicciones detectadas
+
+- `AGENTS-015.md` pide pruebas reales en clientes como Outlook, Gmail, Apple Mail y Thunderbird. Esas pruebas requieren clientes externos no disponibles desde este entorno local. Se documentan como requisito pre-produccion del estandar, no como bloqueo de la validacion local solicitada para REFAPART.
+
+### Decisiones tomadas
+
+- La carpeta canonica por aplicacion es `Docker.API.PY/API.PY.DJANGO.Auth/templates/auth_emails/<application_code>/`.
+- La carpeta REFAPART queda como primera implementacion validada del nuevo estandar.
+- Las otras aplicaciones quedan pendientes de crear/validar sus carpetas cuando se ejecute su flujo Auth/correo.
+- Variables futuras como `support_email`, `logo_cid`, `frontend_url`, `expiration_minutes` y publicidad deben ser opcionales y protegidas con `{% if %}`.
+- Publicidad queda desactivada por defecto.
+
+### Pendientes reales
+
+- Ninguno para el alcance local REFAPART.
+- Pre-produccion debe validar visualmente en clientes reales de correo antes de aprobar envios productivos.
+- Otras webs deben crear o validar sus carpetas bajo este estandar en corridas propias.
+
+### Riesgos detectados
+
+- Las pruebas automatizadas no sustituyen render real de Outlook/Gmail/Apple Mail.
+- Si una app no envia `X-Application-Code`, Auth puede caer a fallback y no usar la carpeta correcta.
+
+### Agents completados, limpiados, parciales y bloqueados
+
+- Completado: `AGENTS-015.md`.
+- Limpiado: `AGENTS-015.md` conserva el archivo y queda sin contenido.
+- Parciales: ninguno para alcance REFAPART.
+- Bloqueados: ninguno.
+- Sin instrucciones: ninguno.
+
+---
+
+## Ejecucion 2026-06-27 - AGENTS-015 - Auth por alcance de ruta en RefaPart
+
+### Context Pack utilizado
+
+- `03_standards/auth`
+- `03_standards/architecture`
+- `03_standards/frontend`
+- `02_projects/refapart`
+
+### Agent ejecutado
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-015.md` | Completado | Se implemento en RefaPart el estandar de autenticacion por alcance de ruta. Las rutas publicas y opcionales tratan el `401` anonimo de `/auth/me/` como estado esperado; las rutas protegidas redirigen a login sin renderizar area privada. El agent queda limpio al cierre. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-015.md`
+- `Docs/03_standards/architecture/api-gateway-standard.md`
+- `Docs/03_standards/frontend/ui-ux-standard.md`
+- `Docs/03_standards/auth/web-auth-login-standard.md`
+- `Docs/01_core_erp/apis/01_auth_api.md`
+- `Docs/02_projects/refapart/README.md`
+- `Docs/02_projects/refapart/architecture.md`
+- `Docs/02_projects/refapart/frontend.md`
+- `Docs/02_projects/refapart/security/auth-migration.md`
+- `Docker.WEB.NJ/start.sh`
+- `Docker.WEB.NJ/docker-compose.yml`
+- `Docker.WEB.NJ/docker-compose.refapart.web.yml`
+- `Docker.WEB.NJ/Dockerfile.web.base`
+- `Docker.WEB.NJ/Dockerfile`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/lib/api/gateway-client.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/services/auth-service.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/store/AuthProvider.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/components/AuthGuard.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/components/AuthUi.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/register/page.tsx`
+
+### Archivos modificados
+
+- `Docs/03_standards/auth/web-auth-route-scope-standard.md`
+- `Docs/03_standards/auth/web-auth-login-standard.md`
+- `Docs/02_projects/refapart/frontend.md`
+- `Docs/02_projects/refapart/security/auth-migration.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-015.md`
+- `Docker.WEB.NJ/docker-compose.yml`
+- `Docker.WEB.NJ/Dockerfile.web.base`
+- `Docker.WEB.NJ/Dockerfile`
+- `Docker.WEB.NJ/start.sh`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/types/auth.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/lib/api/gateway-client.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/services/auth-service.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/store/AuthProvider.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/components/AuthGuard.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/register/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/admin/refapart/layout.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/cuenta/layout.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/mis-solicitudes/layout.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/mis-cotizaciones/layout.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/mis-pedidos/layout.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/checkout/layout.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/proveedor/layout.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/change-password/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/middleware.ts`
+
+### APIs reutilizadas
+
+- Gateway General (`http://localhost:8025/api/v1`).
+- Auth API central (`/auth/me/`, `/auth/me/permissions/`, `/auth/register/`, `/auth/email/verification/resend/`).
+
+### APIs descartadas por duplicidad
+
+- No se crea Auth propio de RefaPart.
+- No se crea endpoint de reenvio especifico para RefaPart.
+- No se crea Gateway por web.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.RefaPart` | OK: sin errores ni warnings de ESLint. |
+| `npm run build` en `WEB.NJ.NEXT.RefaPart` | OK: build completo, middleware incluido. |
+| `docker compose -f Docker.WEB.NJ/docker-compose.yml -f Docker.WEB.NJ/docker-compose.refapart.web.yml config --quiet` | OK. |
+| Recarga de `web-frontend-node` con `WEB_PROJECTS=refapart` | OK: contenedor `healthy`, RefaPart activo en puerto `3008`. |
+| Ruta publica `/register` sin sesion | OK: `200`. |
+| Ruta protegida `/dashboard` sin sesion | OK: `307` a `/login?next=%2Fdashboard`. |
+| Gateway `/api/v1/auth/me/` sin cookie y con `X-Application-Code=REFAPART` | OK esperado: `401` anonimo sin credenciales. |
+| `python manage.py check` en Gateway | OK: sin issues. |
+| `python manage.py check` en Auth | OK: sin issues. |
+| Validacion de rutas documentales tocadas | OK: existen los documentos canonicos referenciados. |
+
+### Contradicciones detectadas
+
+- La documentacion previa de RefaPart aun trataba el reenvio como pendiente en algunos textos. Se actualizo para reflejar que RefaPart reutiliza Gateway/Auth `/auth/email/verification/resend/`.
+- La validacion inicial del contenedor mostro `/dashboard` con `200` porque el runtime web seguia sirviendo codigo anterior. Se recargo el servicio RefaPart y se corrigio el arranque robusto de `start.sh`.
+
+### Decisiones tomadas
+
+- `getSession({ mode: "public" | "optional" | "required" })` queda como forma oficial en RefaPart.
+- `401` en rutas publicas/opcionales no se registra como error tecnico; representa usuario anonimo.
+- Rutas privadas usan `ProtectedRoute` y middleware para redireccion temprana a login.
+- Registro con correo existente muestra panel controlado de cuenta existente y permite reenvio solo desde ese caso o desde cuenta recien creada.
+- Errores reales de red, Gateway, CORS o Auth siguen registrandose en desarrollo.
+- El arranque Docker web usa `sh /usr/src/web/start.sh` y `start.sh` queda con LF para evitar fallos en contenedor Linux.
+
+### Pendientes reales
+
+- Ninguno para RefaPart dentro de `AGENTS-015.md`.
+- Las demas webs quedan pendientes de adopcion del estandar por instruccion explicita del usuario.
+
+### Riesgos detectados
+
+- En Windows, Git puede volver a convertir `start.sh` a CRLF si no se respeta LF; el contenedor Linux requiere LF.
+- La entrega de correo depende de configuracion externa AWS SES/IAM y no forma parte del cierre funcional de este agent.
+
+### Agents completados, limpiados, parciales y bloqueados
+
+- Completado: `AGENTS-015.md`.
+- Limpiado: `AGENTS-015.md` conserva el archivo y queda sin contenido.
+- Parciales: ninguno.
+- Bloqueados: ninguno.
+- Sin instrucciones: ninguno en este alcance.
+
+---
+
+## Ejecucion 2026-06-26 - AGENTS-014 - Validacion detallada y semaforo AWS SES
+
+### Context Pack utilizado
+
+- `03_standards/operations`
+- `03_standards/docker`
+- `03_standards/api`
+- `03_standards/frontend`
+- `03_standards/auth`
+- `02_projects/jobcron`
+- `02_projects/refapart`
+
+### Agent ejecutado
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-014.md` | Parcial | Se valido el alcance real del agent: LeadHunter, Address API, Docker y ramas. Las ramas locales antiguas ya fueron eliminadas tras confirmar integracion. No se limpia porque queda la validacion real de SES despues de corregir permisos IAM. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-014.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docs/03_standards/operations/project-docker-dependency-map.md`
+- `Docs/03_standards/api/address-api-standard.md`
+- `Docs/03_standards/frontend/address-form-standard.md`
+- `Docs/02_projects/jobcron/README.md`
+- `Docs/02_projects/refapart/README.md`
+- `Docs/03_standards/auth/auth-email-delivery-diagnostics-standard.md`
+- `Docs/03_standards/auth/auth-email-notification-standard.md`
+
+### Archivos modificados
+
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### APIs reutilizadas
+
+- Gateway General.
+- Auth API central.
+- Address API como API reutilizable de direcciones.
+- RefaPart API como API de dominio existente.
+
+### APIs descartadas por duplicidad
+
+- No se crea API Address dentro de REFAPART.
+- No se crea Gateway por proyecto.
+- No se reactiva API/Web LeadHunter.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Busqueda local de LeadHunter activo fuera de `_archive` y `agents` | OK con notas: quedan referencias historicas/controladas de retiro, no referencias operativas activas. |
+| Address API con repo `https://github.com/MexIngSoft/API.PY.DJANGO.Address.git` | OK: documentado en estandar y mapa Git. |
+| REFAPART consume Address API via Gateway General | OK documental: registrado en `README.md` y estandar frontend. |
+| Docker master `config --quiet` | OK. |
+| Red Docker `jobcron_network` | OK: existe como `bridge`. |
+| Stack/red documentados | OK: `comercial_platform` y `jobcron_network`. |
+| Ramas activas actuales por repo | OK: todos los repos detectados estan en `general`. |
+| Ramas locales fuera de `main/pro/dev/general` | OK: ramas antiguas `feature/general-integration-dev` y `backup/uncommitted-before-general-integration-*` eliminadas localmente tras confirmar que estaban integradas. |
+| Auth/Gateway `manage.py check` | OK. |
+| Tests Auth email settings + clasificacion SES | OK: 4 tests. |
+| Resolucion runtime SES REFAPART | OK parcial: `EMAIL_BACKEND=django_ses.SESBackend`, `REFAPART_PROVIDER=ses`, `REFAPART_COMPLETE=True`. |
+| Log real de correo a `cash_dip@hotmail.com` | Fallido: `"Auth"."EmailDeliveryLogs"` registra `FAILED` por `AccessDeniedException` en `ses:GetAccount`; `SentAt` nulo. |
+| `git -C Docs diff --check` | OK; solo advertencias LF/CRLF esperadas en Windows. |
+
+### Contradicciones detectadas
+
+- `AGENTS-014.md` dice trabajar exclusivamente sobre `dev`; la instruccion vigente del usuario dejo todos los repos en `general` creada desde `dev`. Prevalece la rama activa `general`.
+- `AGENTS-014.md` habla de LeadHunter como modulo interno de JobCron si fue migrado; la documentacion canonica mas actual indica que LeadHunter fue retirado como proyecto y como modulo operativo activo. Prevalece el retiro documentado.
+- El usuario pidio validar AWS/SES dentro de una corrida de `AGENTS-014.md`, pero el contenido real de `AGENTS-014.md` no es de SES. Se registra la validacion SES como informacion nueva relacionada, sin cambiar el alcance original del agent.
+
+### Decisiones tomadas
+
+- Borrar ramas locales `feature/general-integration-dev` y `backup/*` solo despues de confirmar integracion en `general` o `dev`; en esta corrida ya fueron eliminadas localmente.
+- No marcar SES como correcto hasta que AWS permita la accion `ses:GetAccount` y un nuevo intento registre `SENT`/aceptacion real.
+- Mantener mensaje UI seguro: la web no debe afirmar que el correo fue enviado solo porque la cuenta fue creada.
+
+### Pendientes reales
+
+- Corregir permisos IAM del usuario/rol AWS usado por Auth para permitir al menos `ses:GetAccount`, `ses:SendEmail` y `ses:SendRawEmail`.
+- Confirmar si la cuenta SES sigue en sandbox; si esta en sandbox, verificar tambien el destinatario `cash_dip@hotmail.com` o sacar la cuenta de sandbox.
+- Confirmar que el remitente/dominio `AWS_SES_FROM_EMAIL` esta verificado en la misma region configurada.
+- Reiniciar/recrear `api-multiproyecto` despues de cualquier cambio de variables o permisos AWS y ejecutar una prueba nueva de registro/reenvio.
+
+### Riesgos detectados
+
+- Con `AUTH_EMAIL_DELIVERY_FAIL_OPEN=True`, Auth puede crear la cuenta aunque el correo falle; por eso la validacion real debe hacerse en `"Auth"."EmailDeliveryLogs"`.
+- Si se borran ramas `backup/*` antes de confirmar integracion, se puede perder trazabilidad de cambios locales anteriores.
+- Si SES queda en sandbox o sin dominio/remitente verificado, la entrega puede seguir fallando aunque los permisos IAM ya esten corregidos.
+
+### Agents completados, limpiados, parciales y bloqueados
+
+- Completados: ninguno en esta corrida.
+- Limpiados: ninguno.
+- Parciales: `AGENTS-014.md`.
+- Bloqueados: ninguno por codigo local; SES queda pendiente por configuracion externa AWS.
+- Sin instrucciones: ninguno.
+
+---
+
+## Ejecucion 2026-06-26 - AGENTS-000, 001, 013 y 014 - Normalizacion LeadHunter/Address/Docker/Git
+
+### Context Pack utilizado
+
+- `03_standards/operations`
+- `03_standards/api`
+- `03_standards/frontend`
+- `02_projects/jobcron`
+- `02_projects/refapart`
+- `Docs/agents`
+
+### Agents ejecutados
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Parcial | Se reviso el alcance Auth/Gateway/REFAPART previamente desarrollado. No se rehizo trabajo concluido. Conserva tareas amplias de validacion runtime/manual y por eso no se limpia. |
+| `AGENTS-001.md` | Parcial | Se reviso el alcance REFAPART Auth/UI/SES previamente desarrollado. No se limpia porque conserva validacion visual final y prueba real/controlada de correo SES. |
+| `AGENTS-013.md` | Bloqueado | El agent describe arquitectura Trading/MetaTrader5, pero no existe proyecto local, repositorio ni Context Pack canonico para implementarlo en este workspace. |
+| `AGENTS-014.md` | Completado | Se ejecuto la normalizacion documental y operativa: LeadHunter queda como modulo interno de JobCron, Address API queda como API reutilizable via Gateway General, Docker deja de tratar LeadHunter como proyecto activo y la politica Git queda en `main`, `pro`, `dev` y `general`. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-013.md`
+- `Docs/agents/AGENTS-014.md`
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docs/03_standards/operations/project-docker-dependency-map.md`
+- `Docs/03_standards/operations/project-script-behavior-matrix.md`
+- `Docs/03_standards/api/address-api-standard.md`
+- `Docs/03_standards/frontend/address-form-standard.md`
+- `Docs/02_projects/jobcron/README.md`
+- `Docs/02_projects/refapart/README.md`
+
+### Archivos modificados
+
+- `Docs/03_standards/operations/git-repository-map.md`
+- `Docs/03_standards/operations/project-docker-dependency-map.md`
+- `Docs/03_standards/operations/project-script-behavior-matrix.md`
+- `Docs/03_standards/operations/scripts/docker/projects/Invoke-WorkspaceProjectDocker.ps1`
+- `Docs/03_standards/operations/scripts/docker/projects/healthcheck-all.ps1`
+- `Docs/03_standards/operations/scripts/docker/projects/test-random-project-scripts.ps1`
+- `Docs/03_standards/operations/scripts/docker/projects/start-leadhunter.ps1`
+- `Docs/03_standards/operations/scripts/docker/projects/stop-leadhunter.ps1`
+- `Docs/03_standards/api/address-api-standard.md`
+- `Docs/03_standards/frontend/address-form-standard.md`
+- `Docs/02_projects/jobcron/README.md`
+- `Docs/02_projects/refapart/README.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-014.md`
+
+### APIs reutilizadas
+
+- Gateway General para consumo de Address API.
+- Address API como fuente reusable de direcciones para REFAPART y otras webs.
+- JobCron como contenedor funcional de LeadHunter.
+
+### APIs descartadas por duplicidad
+
+- No se crea API LeadHunter activa separada.
+- No se crea Web LeadHunter activa separada.
+- No se crea API de direcciones propia dentro de REFAPART.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Sintaxis PowerShell de scripts Docker tocados | OK. |
+| `test-random-project-scripts.ps1` sin `-Execute` | OK: modo documental, seleccion aleatoria sin LeadHunter independiente. |
+| Busqueda de referencias activas a LeadHunter independiente | OK: solo quedan referencias como modulo JobCron o alias de compatibilidad. |
+| Busqueda de Address API / Gateway General en estandares y REFAPART | OK. |
+| `git -C Docs diff --check` | OK; solo advertencias LF/CRLF esperadas en Windows. |
+
+### Contradicciones detectadas
+
+- Documentos historicos hablaban de ramas vivas `dev`, `pro`, `main` o de `feature/general-integration-dev`. Prevalece la decision actual: `main`, `pro`, `dev` y `general`.
+- Mapas y scripts trataban LeadHunter como proyecto Docker independiente. Prevalece la decision actual: LeadHunter es modulo interno de JobCron.
+
+### Decisiones tomadas
+
+- `general` reemplaza a `feature/general-integration-dev` como rama operativa diaria que extiende de `dev`.
+- Cambiar la rama default en GitHub queda fuera de terminal si no hay permisos administrativos; se registra como `PENDIENTE_DE_DEFINIR` cuando aplique.
+- `start-leadhunter.ps1` y `stop-leadhunter.ps1` se conservan como alias de compatibilidad hacia JobCron.
+- REFAPART debe consumir Address API por Gateway General y no duplicar catalogos geograficos.
+
+### Pendientes reales
+
+- `AGENTS-000.md`: validar manualmente el flujo Auth/Gateway/REFAPART completo en navegador y confirmar que no quedan escenarios runtime abiertos.
+- `AGENTS-001.md`: prueba real/controlada de SES y comparacion visual final contra la imagen aprobada.
+- `AGENTS-013.md`: entregar repositorio/proyecto Trading/MT5 o documentacion canonica aprobada para poder implementarlo.
+- GitHub: configurar `general` como rama default donde se requiera, si el owner confirma y tiene permisos administrativos.
+
+### Riesgos detectados
+
+- Si alguien ejecuta infraestructura antigua de LeadHunter fuera de estos scripts, podria volver a levantarlo como proyecto separado.
+- Si `general` no se crea/habilita en GitHub, la documentacion queda definida pero no aplicada como politica remota.
+- Address API remoto sigue dependiendo de que el repo `https://github.com/MexIngSoft/API.PY.DJANGO.Address.git` exista o tenga permisos correctos.
+
+### Agents completados, limpiados, parciales y bloqueados
+
+- Completados: `AGENTS-014.md`.
+- Limpiados: `AGENTS-014.md`.
+- Parciales: `AGENTS-000.md`, `AGENTS-001.md`.
+- Bloqueados: `AGENTS-013.md`.
+- Sin instrucciones: ninguno de los agentes solicitados.
+
+---
+
 ## Ejecucion 2026-06-26 - AGENTS-014 - Unificacion segura de ramas hacia dev
 
 ### Context Pack utilizado

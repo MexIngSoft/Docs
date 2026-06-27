@@ -170,12 +170,6 @@
 | Business | `02_projects/imagrafity/local-runbook.md` | Runbook local Imagrafity | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/imagrafity/personalization-editor.md` | Editor de personalizacion Imagrafity | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/imagrafity/prompt-preview-flow.md` | Flujo de prompts y preview Imagrafity | ACTIVE | P1 | Equipo documental |
-| Business | `02_projects/leadhunter/README.md` | LeadHunter | ACTIVE | P1 | Equipo documental |
-| Business | `02_projects/leadhunter/architecture.md` | Arquitectura LeadHunter | ACTIVE | P1 | Equipo documental |
-| Business | `02_projects/leadhunter/api-contracts.md` | Contratos API LeadHunter | ACTIVE | P1 | Equipo documental |
-| Business | `02_projects/leadhunter/database.md` | Base de datos LeadHunter | ACTIVE | P1 | Equipo documental |
-| Business | `02_projects/leadhunter/frontend.md` | Frontend LeadHunter | ACTIVE | P1 | Equipo documental |
-| Business | `02_projects/leadhunter/local-runbook.md` | Runbook local LeadHunter | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/imagrafity/repositories.md` | Repositorios Imagrafity | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/imagrafity/security.md` | Seguridad Imagrafity | ACTIVE | P1 | Equipo documental |
 | Business | `02_projects/innovation-engines-repair/README.md` | Innovation Engines Repair | FUTURE_OR_PENDING | P2 | Equipo documental |

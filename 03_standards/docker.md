@@ -236,7 +236,6 @@ http://localhost
 - `fiscora`
 - `imagrafity`
 - `jobcron`
-- `leadhunter`
 - `lexnova`
 - `pricing`
 - `procurement`
@@ -261,7 +260,6 @@ http://localhost
 - `fiscora`: `8015`
 - `fiscal`: `8016`
 - `imagrafity`: `8019`
-- `leadhunter`: `8021`
 - `jobcron`: `8022`
 - `gateway`: `8025`
 

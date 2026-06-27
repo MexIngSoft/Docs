@@ -36,7 +36,6 @@ ApplicationCode=<APPLICATION_CODE>
 | TecnoTelec | `TECNOTELEC` |
 | Imagrafity | `IMAGRAFITY` |
 | Fiscora | `FISCORA` |
-| LeadHunter | `LEADHUNTER` |
 | MexIngSof | `MEXINGSOF` |
 
 ## Configuracion requerida por aplicacion
@@ -69,7 +68,20 @@ En codigo actual, la configuracion vive principalmente en:
 ```text
 "Auth"."Applications"
 "Auth"."ApplicationEmailSettings"
-"Auth"."TransactionalEmailTemplates"
+templates/auth_emails/<application_code>/
+"Auth"."TransactionalEmailTemplates"  # fallback administrativo, no fuente principal
+```
+
+La fuente principal de plantillas HTML es el archivo versionado en Auth:
+
+```text
+Docker.API.PY/API.PY.DJANGO.Auth/templates/auth_emails/<application_code>/
+```
+
+La prioridad de seleccion queda definida en:
+
+```text
+Docs/03_standards/auth/auth-email-template-source-standard.md
 ```
 
 ## Variables web obligatorias

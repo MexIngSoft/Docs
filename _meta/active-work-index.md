@@ -48,7 +48,10 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | `Docs/03_standards/frontend/ui-ux-standard.md` | Mobile first, mockups aprobados, UX por dominio y cierre UI. |
 | `Docs/03_standards/architecture/api-gateway-standard.md` | Regla Frontend -> Gateway -> API -> Core/Shared. |
 | `Docs/03_standards/auth/web-auth-login-standard.md` | Login web via Gateway General y excepciones documentadas. |
+| `Docs/03_standards/auth/web-auth-route-scope-standard.md` | Alcance Auth por ruta publica, opcional o protegida. |
 | `Docs/03_standards/auth/auth-email-delivery-diagnostics-standard.md` | Correos Auth, reenvio, SES, errores dev/prod, logs y reintentos. |
+| `Docs/03_standards/auth/auth-email-template-standard.md` | Plantillas Auth por aplicacion, rutas, variables permitidas y validacion. |
+| `Docs/03_standards/auth/auth-email-template-source-standard.md` | Prioridad FILE -> DB_FALLBACK -> DJOSER_FALLBACK y trazabilidad de fuente. |
 | `Docs/03_standards/auth/auth-versioning-standard.md` | Versionado Auth y compatibilidad entre proyectos. |
 | `Docs/03_standards/gateway/central-gateway-standard.md` | Entrada unica versionada para frontends y registro de proyectos. |
 | `Docs/02_projects/_ecosystem/gateway-matrix.md` | Estado vigente y retiro de Gateways por proyecto. |
@@ -94,6 +97,8 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | Crear/modificar API core | `01_core_erp/apis/00_api_index.md` | Documento de API especifica, DB relacionada, arquitectura y testing. |
 | Crear/modificar proyecto | `02_projects/_ecosystem/04_process_convergence_and_conflicts.md` | README del proyecto, tasks, decisions y frontend/API propios. |
 | Crear/modificar Auth/login web | `03_standards/auth/web-auth-login-standard.md` | Matrices API/Gateway, Auth core, Gateway central y plan `auth-migration.md`. |
+| Corregir errores falsos Auth en web publica | `03_standards/auth/web-auth-route-scope-standard.md` | Proyecto afectado, frontend, Gateway/Auth y migracion Auth del proyecto. |
+| Crear/modificar plantillas de correo Auth | `03_standards/auth/auth-email-template-standard.md` | Diagnostico de correos, proyecto afectado y templates en Auth. |
 | Trabajar Fiscora | `02_projects/fiscora/README.md` | `architecture.md`, `api-contracts.md`, `tasks/*`, `database/cfdi-data-model.md`. |
 | Trabajar DocuCore | `02_projects/docucore/README.md` | `mvp-roadmap.md`, `api-contracts.md`, `document-intelligence.md`, `database.md`. |
 | Trabajar LexNova | `02_projects/lexnova/README.md` | `legal-process-data-model.md`, `document-intelligence.md`, `document-api-integration-review.md`. |

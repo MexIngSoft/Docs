@@ -46,13 +46,12 @@ Detener un proyecto significa quitar sus procesos activos de
 
 | Proyecto | Start | Stop | Web esperada | APIs esperadas | URL web |
 |---|---|---|---|---|---|
-| JobCron | `start-jobcron.ps1` | `stop-jobcron.ps1` | `jobcron` | `auth gateway jobcron leadhunter search` | `http://127.0.0.1:3000` |
+| JobCron | `start-jobcron.ps1` | `stop-jobcron.ps1` | `jobcron` | `auth gateway jobcron search` | `http://127.0.0.1:3000` |
 | TecnoTelec | `start-tecnotelec.ps1` | `stop-tecnotelec.ps1` | `tecnotelec` | `auth gateway catalog inventory pricing procurement sales supplier tecnotelec customization search` | `http://127.0.0.1:3001` |
 | LexNova | `start-lexnova.ps1` | `stop-lexnova.ps1` | `lexnova` | `auth gateway lexnova document` | `http://127.0.0.1:3002` |
 | DocuCore | `start-docucore.ps1` | `stop-docucore.ps1` | `docucore` | `auth gateway document docucore` | `http://127.0.0.1:3004` |
 | Fiscora | `start-fiscora.ps1` | `stop-fiscora.ps1` | `fiscora` | `auth gateway document fiscora fiscal` | `http://127.0.0.1:3005` |
 | Imagrafity | `start-imagrafity.ps1` | `stop-imagrafity.ps1` | `imagrafity` | `auth gateway imagrafity` | `http://127.0.0.1:3006` |
-| LeadHunter | `start-leadhunter.ps1` | `stop-leadhunter.ps1` | `leadhunter` | `auth gateway leadhunter` | `http://127.0.0.1:3007` |
 | REFAPART | `start-refapart.ps1` | `stop-refapart.ps1` | `refapart` | `auth gateway refapart address search` | `http://127.0.0.1:3008` |
 | MexIngSof | `start-mexingsof.ps1` | `stop-mexingsof.ps1` | `mexingsof` | `auth gateway jobcron search` | `http://127.0.0.1:3009` |
 
@@ -94,6 +93,5 @@ docker compose -p comercial_platform config --quiet
 
 - MexIngSof no tiene API ni DB auxiliar canonica separada. Mientras siga asi,
   su seleccion usa `auth gateway jobcron search`.
-- LeadHunter no tiene remoto Git completo registrado para API/Web.
 - Cualquier API o web faltante debe documentarse como `PENDIENTE_DE_DEFINIR`
   en su proyecto, no resolverse creando contenedores alternos.

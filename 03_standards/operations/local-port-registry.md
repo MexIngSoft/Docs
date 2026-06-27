@@ -48,7 +48,7 @@ Hasta entonces:
 | `3004` | DocuCore | `Docker.WEB.NJ/WEB.NJ.NEXT.DocuCore` | Activo |
 | `3005` | Fiscora | `Docker.WEB.NJ/WEB.NJ.NEXT.Fiscora` | Activo |
 | `3006` | Imagrafity | `Docker.WEB.NJ/WEB.NJ.NEXT.Imagrafity` | Activo |
-| `3007` | LeadHunter | `Docker.WEB.NJ/WEB.NJ.NEXT.LeadHunter` | Activo |
+| `3007` | Libre | LeadHunter retirado | Disponible |
 | `3008` | REFAPART | `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart` | Activo |
 | `3009` | MexIngSof | `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof` | Activo; web publicada en `dev` |
 | `3010-3050` | Futuras webs | PENDIENTE_DE_DEFINIR | Reservado |
@@ -78,7 +78,7 @@ Hasta entonces:
 | `8018` | Libre | Gateway Imagrafity retirado | Disponible |
 | `8019` | Imagrafity API | `Docker.API.PY/API.PY.DJANGO.Imagrafity` | Activo |
 | `8020` | Libre | Gateway LeadHunter retirado | Disponible |
-| `8021` | LeadHunter API | `Docker.API.PY/API.PY.DJANGO.LeadHunter` | Activo |
+| `8021` | Libre | LeadHunter API retirada | Disponible |
 | `8022` | JobCron API | `Docker.API.PY/API.PY.DJANGO.JobCron` | Activo |
 | `8023` | Libre | Gateway RefaPart retirado | Disponible |
 | `8024` | REFAPART API | `Docker.API.PY/API.PY.DJANGO.Refapart` | PENDIENTE_DE_DEFINIR |
@@ -205,7 +205,7 @@ Este es el punto recomendado para levantar el workspace completo. Arranca los
 compose en orden, espera estabilizacion, valida contenedores, verifica que las
 APIs Django esten escuchando en `8000-8022`, valida rutas HTTP conocidas y
 comprueba las webs publicadas en `3000`, `3001`, `3002`, `3004`, `3005`,
-`3006`, `3007`, `3008` y `3009`.
+`3006`, `3008` y `3009`.
 
 El tiempo de espera por defecto es de `150` segundos porque Fiscora construye
 su export estatico fuera de Docker y el contenedor necesita margen para que las

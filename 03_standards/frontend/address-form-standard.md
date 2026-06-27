@@ -40,3 +40,10 @@ Address API.
 - Hardcodear estados o municipios en el frontend.
 - Llamar Address API directamente desde navegador.
 - Marcar facturacion real si el modulo fiscal no esta activo.
+
+## REFAPART
+
+REFAPART debe usar este estandar para direcciones de envio, facturacion,
+recoleccion, proveedor y cliente. La web REFAPART consume Address API mediante
+Gateway General y solo conserva referencias operativas como `AddressId`,
+`CityLabel`, `StateLabel`, `PostalCode` y `ShortAddressText`.

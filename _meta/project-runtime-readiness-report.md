@@ -48,7 +48,6 @@ Dockerfile por proyecto: solo si hay dependencias o build realmente distintos.
 | DocuCore | `Docker.DB.PG/docker-compose.docucore.db.yml` | `Docker.API.PY/docker-compose.docucore.api.yml` | `Docker.WEB.NJ/docker-compose.docucore.web.yml` |
 | Fiscora | `Docker.DB.PG/docker-compose.fiscora.db.yml` | `Docker.API.PY/docker-compose.fiscora.api.yml` | `Docker.WEB.NJ/docker-compose.fiscora.web.yml` |
 | Imagrafity | `Docker.DB.PG/docker-compose.imagrafity.db.yml` | `Docker.API.PY/docker-compose.imagrafity.api.yml` | `Docker.WEB.NJ/docker-compose.imagrafity.web.yml` |
-| LeadHunter | `Docker.DB.PG/docker-compose.leadhunter.db.yml` | `Docker.API.PY/docker-compose.leadhunter.api.yml` | `Docker.WEB.NJ/docker-compose.leadhunter.web.yml` |
 
 ## Documentacion revisada
 
@@ -61,7 +60,7 @@ Dockerfile por proyecto: solo si hay dependencias o build realmente distintos.
 - `Docs/03_standards/docker/grouped-containers-isolated-config.md`
 - `Docs/03_standards/frontend/shared-docker-frontend-architecture.md`
 - Runbooks locales de JobCron, TecnoTelec, LexNova, DocuCore, Fiscora,
-  Imagrafity y LeadHunter.
+  Imagrafity.
 
 ## Decisiones
 

@@ -98,6 +98,21 @@ completa de proveedores al cliente.
 | Puerto API REFAPART | `8024` |
 | Puerto API Address | `8026` |
 
+## Address API
+
+REFAPART usa `API.PY.DJANGO.Address` como fuente reutilizable de direcciones,
+codigos postales, estados, municipios, asentamientos y normalizacion.
+
+Reglas:
+
+- La web REFAPART consume Address API mediante Gateway General.
+- No duplicar catalogos de paises, estados, municipios, colonias ni codigos
+  postales dentro de REFAPART.
+- Guardar solo referencias operativas como `AddressId`, `CityLabel`,
+  `StateLabel`, `PostalCode` y `ShortAddressText`.
+- Aplicar el estandar a direcciones de envio, facturacion, recoleccion,
+  proveedor y cliente.
+
 ## Pendientes
 
 - Definir permisos REFAPART mas alla del rol base `CUSTOMER`.

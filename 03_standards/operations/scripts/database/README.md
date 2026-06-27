@@ -36,6 +36,11 @@ lexnova
 postgres  # solo administracion local
 ```
 
+`test_comercial` fue retirada el 2026-06-27 tras validar que no contenia datos
+unicos fuera de `comercial`. No debe recrearse como base persistente; las
+pruebas deben usar bases temporales generadas por Django o la base oficial
+asignada al API/proyecto.
+
 ## Scripts Auth guardados
 
 | Script | Uso |

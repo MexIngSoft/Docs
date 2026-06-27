@@ -16,13 +16,12 @@ afectados.
 
 | Proyecto | Web | Gateway | API dominio | APIs core | Resultado | Errores | Pendientes | Fecha |
 |---|---|---|---|---|---|---|---|---|
-| JobCron | Build OK | Tests/check OK | Check OK | Auth/Prospecting | OK_CON_OBSERVACIONES | Sin error de build | Validar dentro del stack completo, no aislado | 2026-06-14 |
+| JobCron | Build OK | Tests/check OK | Check OK | Auth/Search | OK_CON_OBSERVACIONES | Sin error de build | Validar dentro del stack completo, no aislado | 2026-06-14 |
 | TecnoTelec | Build OK con warnings `img` | Check OK | Check OK | Catalog/Pricing/Inventory/Supplier | OK_CON_OBSERVACIONES | Warnings no bloqueantes | Validar dentro del stack completo, no aislado | 2026-06-14 |
 | LexNova | Build OK | Check OK | Check OK | Auth/Document | OK_CON_OBSERVACIONES | - | Validar dentro del stack completo, no aislado | 2026-06-14 |
 | DocuCore | Build OK | Check OK | Check OK | Auth/Document | OK_CON_OBSERVACIONES | - | Validar dentro del stack completo, no aislado | 2026-06-14 |
 | Fiscora | Build OK | Check OK | Check OK | Auth/Fiscal/Document | OK_CON_OBSERVACIONES | - | Validar dentro del stack completo, no aislado | 2026-06-14 |
 | Imagrafity | Build OK | Check OK | Check OK | Auth | OK_CON_OBSERVACIONES | - | Validar dentro del stack completo, no aislado | 2026-06-14 |
-| LeadHunter | Build OK | Check OK | Check OK | Auth | OK_CON_OBSERVACIONES | - | Sin remoto Git; validar dentro del stack completo si se publica | 2026-06-14 |
 | REFAPART | Build y HTTP OK | 15 tests OK | 2 tests y check OK | Auth/Address | OK | - | Pagos y logistica productiva pendientes | 2026-06-14 |
 
 La corrida global compilo las ocho webs y ejecuto `compileall` y

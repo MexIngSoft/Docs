@@ -49,6 +49,25 @@ o Pricing no pertenecen a una web especifica y no deben duplicarse por proyecto.
 La red oficial vigente para compose master, base y overlays es
 `jobcron_network`.
 
+## LeadHunter retirado
+
+LeadHunter fue retirado como proyecto y como modulo operativo activo de
+JobCron. Su documentacion fuente se conserva solo como referencia historica en:
+
+```txt
+Docs/_archive/projects/2026-06-26-leadhunter-retired
+```
+
+Reglas:
+
+- No crear repositorios activos separados para `API.PY.DJANGO.LeadHunter` ni
+  `WEB.NJ.NEXT.LeadHunter`.
+- No arrancar LeadHunter como proyecto Docker separado.
+- No registrar `LEADHUNTER` en Gateway General, Auth Applications ni matrices
+  activas salvo nueva decision canonica.
+- Si se requiere prospecting/CRM en el futuro, debe definirse como capacidad de
+  JobCron con contrato nuevo, sin reutilizar la API/Web retiradas.
+
 ## Pendientes
 
 - Definir marca visual.

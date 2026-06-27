@@ -40,7 +40,6 @@ no por una idea documental.
 | Fiscora | ACTIVA | Producto fiscal. |
 | Imagrafity | ACTIVA | Producto de personalizacion. |
 | RefaPart | ACTIVA | Busqueda, demanda, cotizacion, pedido y logistica de refacciones. |
-| LeadHunter | ACTIVA_INTERNA | Motor Prospecting operado desde JobCron. |
 
 ## Capacidades derivadas
 

@@ -5,7 +5,6 @@ param(
         "fiscora",
         "imagrafity",
         "jobcron",
-        "leadhunter",
         "lexnova",
         "refapart",
         "tecnotelec",
@@ -59,17 +58,9 @@ $projects = @{
     jobcron = @{
         Label = "JobCron"
         WebProjects = "jobcron"
-        ApiProjects = "auth gateway jobcron leadhunter search"
+        ApiProjects = "auth gateway jobcron search"
         Url = "http://127.0.0.1:3000/"
         Port = 3000
-        Gateway = "http://127.0.0.1:8025/health/"
-    }
-    leadhunter = @{
-        Label = "LeadHunter"
-        WebProjects = "leadhunter"
-        ApiProjects = "auth gateway leadhunter"
-        Url = "http://127.0.0.1:3007/prospectos"
-        Port = 3007
         Gateway = "http://127.0.0.1:8025/health/"
     }
     lexnova = @{
