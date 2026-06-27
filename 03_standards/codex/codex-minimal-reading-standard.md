@@ -16,6 +16,10 @@ historicos, duplicados o fuera de alcance.
 
 Usar el Context Pack documentado en `03_standards/operations/context-packs.md`.
 
+Para mapas de acciones de codigo, usar `CP-08 - Mapa de acciones de codigo` y
+leer el estandar `03_standards/code-actions/code-actions-map-standard.md`, el
+proyecto afectado y los contratos frontend/Gateway/API relacionados.
+
 ## Fuentes no activas
 
 No usar como fuente vigente:

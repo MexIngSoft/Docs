@@ -78,6 +78,7 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | `Docs/03_standards/codex/codex-anti-vices-checklist.md` | Checklist anti-vicios. |
 | `Docs/03_standards/codex/codex-skills-standard.md` | Estandar de skills reutilizables para flujos Codex repetibles. |
 | `Docs/03_standards/api/api-decision-record-standard.md` | Bloqueo formal para APIs nuevas o especializadas sin decision documentada. |
+| `Docs/03_standards/code-actions/code-actions-map-standard.md` | Mapa obligatorio de acciones de codigo por proyecto, frontend, Gateway, APIs, permisos y tablas. |
 | `Docs/03_standards/api/address-api-standard.md` | Uso reutilizable de Address API para direcciones y catalogos geograficos. |
 | `Docs/03_standards/frontend/address-form-standard.md` | Formularios de direccion via Gateway General y Address API. |
 | `Docs/03_standards/backend/reusable-api-consumption-standard.md` | Consumo backend de APIs reutilizables sin duplicar responsabilidades. |
@@ -103,6 +104,7 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | Trabajar DocuCore | `02_projects/docucore/README.md` | `mvp-roadmap.md`, `api-contracts.md`, `document-intelligence.md`, `database.md`. |
 | Trabajar LexNova | `02_projects/lexnova/README.md` | `legal-process-data-model.md`, `document-intelligence.md`, `document-api-integration-review.md`. |
 | Trabajar REFAPART | `02_projects/refapart/README.md` | `architecture.md`, `frontend.md`, `visual-identity.md`, `api-contracts.md`, `database.md`, `local-runbook.md`. |
+| Mapear acciones de codigo | `03_standards/code-actions/code-actions-map-standard.md` | Proyecto afectado y `technical/code-actions-map.md`, `frontend/code-actions-map.md`, `api/code-actions-map.md` si existen. |
 | Trabajar Tecno Telec | `02_projects/tecnotelec/AGENTE.md` | `tasks/*`, `backend/*`, `frontend/*`, `quotes/*`, `solutions/*`. |
 | Trabajar JobCron | `02_projects/jobcron/README.md` | `01_tecnotelec_admin_process.md`, `ui/*`, Core APIs relacionadas. |
 | Trabajar Imagrafity | `02_projects/imagrafity/README.md` | `architecture.md`, `api-contracts.md`, `database.md`, `frontend.md`, `security.md`. |

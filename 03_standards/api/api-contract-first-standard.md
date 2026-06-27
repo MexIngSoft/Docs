@@ -21,6 +21,7 @@ Todo contrato debe incluir:
 - pruebas minimas;
 - ruta Gateway;
 - consumo frontend permitido.
+- codigo de accion relacionado cuando exista consumo funcional desde web.
 
 ## Regla principal
 
@@ -37,3 +38,6 @@ Una API no queda lista para implementacion si no tiene:
 - modelo de datos;
 - estrategia de errores;
 - prueba minima o check equivalente.
+
+Si el endpoint sera consumido por una web, tambien debe aparecer en el
+`code-actions-map.md` del proyecto consumidor.

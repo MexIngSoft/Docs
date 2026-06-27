@@ -2,6 +2,213 @@
 
 ---
 
+## Ejecucion 2026-06-27 - AGENTS-019 - Orquestador Refapart y mapa de acciones
+
+### Context Pack utilizado
+
+- `CP-07 - Proyecto completo`
+- `CP-08 - Mapa de acciones de codigo`
+- `03_standards/auth`
+- `02_projects/refapart`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart`
+
+### Rama y repositorio
+
+| Campo | Valor |
+|---|---|
+| Repositorio | `Docs` |
+| Rama | `general` |
+| Relacion con `dev` | `dev` es ancestro de `HEAD` |
+| Executor | Codex |
+
+### Agent ejecutado
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-019.md` | Parcialmente completado | Se leyo el inventario completo `AGENTS-000` a `AGENTS-030`, se corrigio la contradiccion interna que marcaba `AGENTS-019` como vacio, se implemento el estandar de mapa de acciones de codigo y se creo el mapa inicial de acciones REFAPART. No se limpia porque siguen activos agents 000-018 con instrucciones propias. |
+
+### Inventario de agents
+
+| Agent | Estado | Proyecto afectado | API afectada | Frontend afectado | DB afectada | Impacto en Refapart | Si se ejecuta ahora | Motivo | Resultado |
+|---|---|---|---|---|---|---|---|---|---|
+| `AGENTS-000` | Activo con instrucciones | REFAPART/Auth | Gateway/Auth | RefaPart Web | Auth DB | Alto | No | Requiere ejecucion propia completa. | Pendiente. |
+| `AGENTS-001` | Activo con instrucciones | REFAPART/Auth/UI | Gateway/Auth | RefaPart Web | Auth DB | Alto | No | Requiere ejecucion propia completa. | Pendiente. |
+| `AGENTS-002` | Activo con instrucciones | Core/Payments/POS | Payments futura | Varios | PENDIENTE_DE_DEFINIR | Medio | No | Pagos futuros; no activar API sin contrato. | Pendiente. |
+| `AGENTS-003` | Activo con instrucciones | Document/Image | Document API | Varios | Document DB | Bajo/medio | No | Solo aplica si REFAPART requiere archivos/evidencias. | Pendiente. |
+| `AGENTS-004` | Activo con instrucciones | Inventario operativo | Varias | Varias | Varias | Medio | No | Requiere corrida propia. | Pendiente. |
+| `AGENTS-005` | Activo con instrucciones | Proyecto posterior | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | Bajo | No | Posterior a bloqueadores REFAPART. | Pendiente. |
+| `AGENTS-006` | Activo con instrucciones | Proyecto posterior | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | Bajo | No | Posterior a bloqueadores REFAPART. | Pendiente. |
+| `AGENTS-007` | Activo con instrucciones | Radar/framework | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | Bajo | No | Baja prioridad para REFAPART. | Pendiente. |
+| `AGENTS-008` | Activo con instrucciones | Proyecto posterior | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | Bajo | No | Posterior a bloqueadores REFAPART. | Pendiente. |
+| `AGENTS-009` | Activo con instrucciones | Proyecto posterior | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | Bajo | No | Posterior a bloqueadores REFAPART. | Pendiente. |
+| `AGENTS-010` | Activo con instrucciones | Proyecto posterior | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | Bajo | No | Posterior a bloqueadores REFAPART. | Pendiente. |
+| `AGENTS-011` | Activo con instrucciones | Proyecto posterior | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | Bajo | No | Posterior a bloqueadores REFAPART. | Pendiente. |
+| `AGENTS-012` | Activo con instrucciones | REFAPART/Auth/DB | Auth | RefaPart Web | Auth DB | Alto | No | Requiere ejecucion propia completa. | Pendiente. |
+| `AGENTS-013` | Activo con instrucciones | Framework/broker | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | Bajo | No | Baja prioridad para REFAPART. | Pendiente. |
+| `AGENTS-014` | Activo con instrucciones | Infra/Git/SES | Address/Auth | Varios | DB oficial | Medio | No | Tiene dependencias operativas propias. | Pendiente. |
+| `AGENTS-015` | Activo con instrucciones | REFAPART/Auth/templates | Auth | RefaPart Web | Auth DB | Alto | No | Ya tiene ejecuciones previas, pero el archivo vuelve a tener instrucciones activas. | Pendiente de corrida propia si aplica. |
+| `AGENTS-016` | Activo con instrucciones | Infra/DB/Git | Varias | N/A | DB oficial | Medio | No | Ya tuvo ejecucion previa, pero conserva instrucciones activas. | Pendiente de confirmar/limpiar en corrida propia. |
+| `AGENTS-017` | Activo con instrucciones | REFAPART/Auth | Auth/Gateway | RefaPart Web | Auth DB | Alto | No | Requiere ejecucion propia completa. | Pendiente. |
+| `AGENTS-018` | Activo con instrucciones | Estandar code-actions | Gateway/API refs | RefaPart Web | RefaPart DB | Alto | Si, por dependencia de `AGENTS-019` | `AGENTS-019` exige crear mapas de acciones para REFAPART. | Implementado parcialmente para REFAPART y estandar global. |
+| `AGENTS-019` | Orquestador ejecutado | REFAPART | Varias | RefaPart Web | Varias | Alto | Si | Solicitud directa del usuario. | Parcialmente completado. |
+| `AGENTS-020` | Sin instrucciones | N/A | N/A | N/A | N/A | N/A | No | Archivo vacio. | Registrado sin instrucciones. |
+| `AGENTS-021` | Sin instrucciones | N/A | N/A | N/A | N/A | N/A | No | Archivo vacio. | Registrado sin instrucciones. |
+| `AGENTS-022` | Sin instrucciones | N/A | N/A | N/A | N/A | N/A | No | Archivo vacio. | Registrado sin instrucciones. |
+| `AGENTS-023` | Sin instrucciones | N/A | N/A | N/A | N/A | N/A | No | Archivo vacio. | Registrado sin instrucciones. |
+| `AGENTS-024` | Sin instrucciones | N/A | N/A | N/A | N/A | N/A | No | Archivo vacio. | Registrado sin instrucciones. |
+| `AGENTS-025` | Sin instrucciones | N/A | N/A | N/A | N/A | N/A | No | Archivo vacio. | Registrado sin instrucciones. |
+| `AGENTS-026` | Sin instrucciones | N/A | N/A | N/A | N/A | N/A | No | Archivo vacio. | Registrado sin instrucciones. |
+| `AGENTS-027` | Sin instrucciones | N/A | N/A | N/A | N/A | N/A | No | Archivo vacio. | Registrado sin instrucciones. |
+| `AGENTS-028` | Sin instrucciones | N/A | N/A | N/A | N/A | N/A | No | Archivo vacio. | Registrado sin instrucciones. |
+| `AGENTS-029` | Sin instrucciones | N/A | N/A | N/A | N/A | N/A | No | Archivo vacio. | Registrado sin instrucciones. |
+| `AGENTS-030` | Sin instrucciones | N/A | N/A | N/A | N/A | N/A | No | Archivo vacio. | Registrado sin instrucciones. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md` a `Docs/agents/AGENTS-030.md`
+- `Docs/02_projects/refapart/README.md`
+- `Docs/02_projects/refapart/frontend.md`
+- `Docs/02_projects/refapart/architecture.md`
+- `Docs/02_projects/refapart/security/auth-migration.md`
+- `Docs/02_projects/refapart/api-contracts.md`
+- `Docs/02_projects/refapart/database.md`
+- `Docs/02_projects/refapart/integrations/00_address_api_usage.md`
+- `Docs/03_standards/operations/context-packs.md`
+- `Docs/03_standards/codex/codex-minimal-reading-standard.md`
+- `Docs/03_standards/codex/codex-documentation-diff-standard.md`
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+- `Docs/03_standards/api/api-contract-first-standard.md`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/services/auth-service.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/lib/api/gateway-client.ts`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart/marketplace/urls.py`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart/marketplace/views.py`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart/marketplace/models.py`
+
+### Archivos modificados
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/03_standards/operations/context-packs.md`
+- `Docs/03_standards/codex/codex-minimal-reading-standard.md`
+- `Docs/03_standards/codex/codex-documentation-diff-standard.md`
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+- `Docs/03_standards/api/api-contract-first-standard.md`
+- `Docs/03_standards/code-actions/code-actions-map-standard.md`
+- `Docs/templates/code-actions-map-template.md`
+- `Docs/02_projects/refapart/README.md`
+- `Docs/02_projects/refapart/technical/code-actions-map.md`
+- `Docs/02_projects/refapart/frontend/code-actions-map.md`
+- `Docs/02_projects/refapart/api/code-actions-map.md`
+- `Docs/agents/AGENTS-019.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### Codigo implementado
+
+- No se modifico codigo runtime por prohibicion explicita del `AGENTS-019.md`.
+- Se implemento documentacion tecnica que mapea codigo existente de REFAPART:
+  rutas Next.js, servicios Auth, Gateway, endpoints API, modelos y tablas.
+
+### Documentacion actualizada
+
+- Se creo el estandar global `Docs/03_standards/code-actions/code-actions-map-standard.md`.
+- Se creo la plantilla `Docs/templates/code-actions-map-template.md`.
+- Se crearon mapas iniciales para REFAPART:
+  - `Docs/02_projects/refapart/technical/code-actions-map.md`
+  - `Docs/02_projects/refapart/frontend/code-actions-map.md`
+  - `Docs/02_projects/refapart/api/code-actions-map.md`
+- Se conecto el estandar en README, active-work-index, Context Packs, Next.js,
+  API contract-first y reglas de diff documental.
+
+### APIs reutilizadas
+
+- Gateway General.
+- Auth API central.
+- REFAPART API de dominio.
+- Address API como API reutilizable pendiente de ruta Gateway exacta.
+
+### APIs descartadas por duplicidad
+
+- No se crea Auth por proyecto.
+- No se crea Gateway por proyecto.
+- No se crea Payments activo.
+- No se crea Address dentro de REFAPART.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Verificacion rama Docs | OK: rama `general`. |
+| Verificacion `dev` ancestro de `HEAD` | OK. |
+| Inventario `AGENTS-000` a `AGENTS-030` | OK. |
+| Existencia de rutas documentales creadas | OK. |
+| `git -C Docs diff --check` | OK: sin errores; solo warnings LF/CRLF. |
+
+### Validaciones omitidas
+
+| Validacion | Resultado |
+|---|---|
+| Docker | `NO_EJECUTADO_POR_INSTRUCCION_DEL_USUARIO`: `AGENTS-019.md` prohibe correr Docker. |
+| APIs/servicios | `NO_EJECUTADO_POR_INSTRUCCION_DEL_USUARIO`: `AGENTS-019.md` prohibe levantar o probar APIs/servicios. |
+| Tests automatizados | `NO_EJECUTADO_POR_INSTRUCCION_DEL_USUARIO`: `AGENTS-019.md` prohibe ejecutar pruebas por ahora. |
+| Build/lint web | Omitido por la misma prohibicion de pruebas/servicios del agent. |
+
+### Contradicciones detectadas
+
+- `AGENTS-019.md` se listaba a si mismo como vacio en Fase 9, aunque contiene
+  instrucciones. Se corrigio la contradiccion y se dejo nota interna.
+- Las instrucciones generales del prompt piden validaciones, pero el agent
+  especifico prohibe pruebas, Docker, APIs y servicios. Prevalece la regla
+  especifica del agent para esta corrida y se registran validaciones omitidas.
+
+### Decisiones tomadas
+
+- `AGENTS-019.md` no se limpia porque no se completaron ni limpiaron todos los
+  agents activos 000-018; limpiarlo ocultaria trabajo pendiente.
+- `AGENTS-018.md` se ejecuto solo en el alcance requerido por REFAPART y el
+  estandar global de mapas de acciones.
+- Acciones conceptuales como Payments y Address sin ruta Gateway exacta quedan
+  en estado `pendiente`, no `vigente`.
+
+### Pendientes Refapart derivados
+
+- Auth: datos reales de prueba y matriz final de permisos por rol.
+- Gateway: confirmar ruta Gateway Address exacta.
+- Djoser: validar flujos reales cuando se permita probar servicios.
+- SES: validar entrega real cuando se permita probar correo.
+- Address: conectar selector real y referencias `AddressId`.
+- Payments: definir contrato, API, proveedor y seguridad antes de activar.
+- DB: validar migraciones contra `database.md`.
+- Code actions: completar servicios frontend concretos de dominio si se separan
+  de las paginas.
+- Frontend: aplicar mapas a nuevas acciones durante futuros cambios.
+- Documentacion: crear mapas para otros proyectos en corridas propias.
+
+### Riesgos detectados
+
+- Los mapas documentan lo observado sin ejecutar pruebas por restriccion del
+  agent; pueden requerir ajuste despues de validacion runtime.
+- Hay agents activos con instrucciones largas; no deben limpiarse hasta cerrar
+  cada uno.
+
+### Agents completados, limpiados, parciales y bloqueados
+
+- Completados: ninguno limpiado en esta corrida.
+- Parciales: `AGENTS-019.md`.
+- Bloqueados: ninguno; hay pendientes deliberados por alcance.
+- Sin instrucciones: `AGENTS-020.md` a `AGENTS-030.md`.
+- Limpiados: ninguno.
+- Proximo agent recomendado: `AGENTS-000.md`, si se busca cerrar bloqueadores
+  Auth directos de REFAPART.
+
+---
+
 ## Ejecucion 2026-06-27 - AGENTS-015 y AGENTS-016 - Fuente de plantillas Auth y limpieza operativa Auth/DB
 
 ### Context Pack utilizado

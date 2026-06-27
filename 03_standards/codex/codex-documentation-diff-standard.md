@@ -44,5 +44,7 @@ Un cambio documental queda completo si:
 
 - no deja contradicciones activas;
 - actualiza indices si aplica;
+- actualiza el mapa `code-actions-map.md` si se agregan, cambian o eliminan
+  acciones funcionales;
 - actualiza `EXECUTION_REPORT.md` si viene de agent;
 - pasa `validate-docs-rules.sh` o registra por que no pudo ejecutarse.

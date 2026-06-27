@@ -72,6 +72,9 @@ completa de proveedores al cliente.
 - `repositories.md`
 - `tasks/00_mvp_gap_report.md`
 - `tasks/01_mvp_implementation_order.md`
+- `technical/code-actions-map.md`
+- `frontend/code-actions-map.md`
+- `api/code-actions-map.md`
 - `admin/00_admin_overview.md`
 - `flows/00_customer_search_flow.md`
 - `security/00_permissions_matrix.md`

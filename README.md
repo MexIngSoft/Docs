@@ -103,6 +103,7 @@ Docs/templates/api-contract-template.md
 Docs/templates/api-specialized-justification-template.md
 Docs/templates/frontend-module-template.md
 Docs/templates/etl-contract-template.md
+Docs/templates/code-actions-map-template.md
 ```
 
 Antes de ejecutar agents o iniciar una fase nueva, leer tambien:
@@ -144,6 +145,8 @@ Va en `01_core_erp` todo lo que pueda reutilizarse para varios negocios:
 - Flujos genericos.
 - APIs internas reutilizables.
 - Patron Gateway General unico + APIs compartidas por responsabilidad + APIs especializadas solo si aplica.
+- Mapa obligatorio de acciones de codigo para vincular rutas, servicios,
+  Gateway, APIs, permisos, tablas, errores y validaciones.
 
 Reglas de arquitectura vigentes:
 
@@ -191,6 +194,7 @@ Va en `03_standards` todo lo que define como se trabaja:
 - Estandar de proyectos Django API.
 - Estandar de proyectos Next.js.
 - Estandar de proyecto completo Web/API.
+- Estandar de mapa de acciones de codigo por proyecto.
 - Estandares de estructura, metadata y naming documental.
 - Arquitectura Docker frontend compartida.
 - Estandar de cierre.

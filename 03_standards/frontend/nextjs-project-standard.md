@@ -111,6 +111,19 @@ Frontend -> Pricing API
 Frontend -> Database
 ```
 
+## Mapa de acciones
+
+Cada frontend con flujos funcionales debe mantener sus acciones documentadas
+en:
+
+```text
+Docs/02_projects/<proyecto>/technical/code-actions-map.md
+Docs/02_projects/<proyecto>/frontend/code-actions-map.md
+```
+
+Cada accion que consuma datos debe indicar ruta visual, archivo, servicio,
+Gateway, API destino, permisos, estados UI y errores esperados.
+
 ## Rutas y layouts
 
 - Las rutas publicas deben separarse de rutas privadas.
@@ -208,6 +221,7 @@ Un frontend queda estandarizado cuando:
 - Tiene rutas y layouts documentados.
 - Tiene README con arranque local.
 - Tiene reglas de UI, auth, permisos y errores documentadas.
+- Tiene mapa de acciones de codigo inicial o una excepcion documentada.
 - Tiene Tailwind configurado o una excepcion documentada con causa real.
 - Si usa Auth, esta registrado en
   `Docs/02_projects/_ecosystem/api-version-matrix.md`.

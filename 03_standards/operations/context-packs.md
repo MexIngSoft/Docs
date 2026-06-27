@@ -138,3 +138,26 @@ No leer:
 - `_archive`;
 - documentos historicos;
 - proyectos no relacionados, salvo dependencia explicita.
+
+## CP-08 - Mapa de acciones de codigo
+
+Usar para:
+
+- crear o actualizar `technical/code-actions-map.md`;
+- vincular acciones frontend con Gateway, APIs, permisos y tablas;
+- registrar acciones nuevas o pendientes durante desarrollo.
+
+Leer:
+
+- `README.md`;
+- `03_standards/code-actions/code-actions-map-standard.md`;
+- `02_projects/<project>/README.md`;
+- frontend/API/documentos canonicos del proyecto afectado;
+- contratos Gateway/API relacionados.
+
+Reglas:
+
+- no inventar endpoints activos;
+- si falta informacion real, usar `PENDIENTE_DE_DEFINIR`;
+- no marcar como vigente una accion conceptual;
+- no duplicar acciones ya documentadas.
