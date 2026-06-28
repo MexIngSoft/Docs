@@ -75,61 +75,59 @@ No recomiendo estandarizar **Redis** como nueva base por el cambio de licenciami
 | MinIO vs SeaweedFS | MinIO es S3-compatible y de alto rendimiento; SeaweedFS está diseñado para billones de archivos y escalado horizontal muy agresivo. citeturn20search7turn21view30turn24view9 | **MinIO gana** para la mayoría de los casos del ecosistema; SeaweedFS solo si llegan a escala extrema de archivos pequeños. |
 | Nginx vs Caddy vs Traefik | Nginx sigue siendo el reverse proxy más sobrio y maduro; Caddy destaca por automatic HTTPS; Traefik destaca por autodiscovery y soporte nativo a orquestadores y Docker. citeturn31search1turn21view28turn32search16turn32search4 | **Nginx gana** para el MVP y el single-host inicial; **Traefik** solo cuando haya autodiscovery real o Kubernetes; **Caddy** no gana aquí porque ustedes ya tienen estándar documental en Nginx. |
 
-Roadmap de implementación por etapas
-Etapa inicial
+## Roadmap de implementación por etapas
+
+### Etapa inicial
+
 La etapa inicial debe incluir solo lo indispensable para arrancar y validar negocio real. Mi stack mínimo recomendado es este:
 
-Componente	Decisión	Por qué entra aquí
-Docker + Compose	Sí	La documentación del repo ya los define como base canónica del stack compartido y Compose soporta despliegues de producción en single-host. 
-Nginx compartido	Sí	Ya es el borde estándar del ecosistema y basta para routing, proxy y dominios locales/remotos iniciales. 
-Node.js compartido + Next.js	Sí	Todas las webs del ecosistema se apoyan en esta frontera. 
-Python compartido + Django + DRF	Sí	Son la base canónica de Gateway y APIs del dominio. 
-PostgreSQL compartido	Sí	Debe ser la única base principal al inicio. 
-Gateway General	Sí	Toda web nueva debe pasar por Gateway; el frontend no debe hablar ni con Auth ni con Core. 
-Auth	Sí	El estándar del ecosistema obliga que cualquier panel, cuenta, compra o ruta privada pase por Auth vía Gateway. 
-GitHub Actions	Sí	CI mínimo desde el día uno para lint, tests, build y smoke deploy. 
-Monitoreo mínimo	Sí, pero austero	stdout/stderr, logs estructurados JSON, healthchecks, rotación de logs, backups de Postgres y alertas sencillas. No hace falta levantar todavía toda la torre Prometheus/Grafana/Loki. Esa parte es una recomendación operativa basada en la comparación oficial entre herramientas. 
-Almacenamiento de archivos	No como servicio dedicado	En el MVP, usar volúmenes locales del host para archivos si realmente existen uploads. MinIO puede esperar mientras el sistema siga siendo single-host y sin gran volumen documental. 
+| Componente | Decisión | Por qué entra aquí |
+|---|---|---|
+| Docker + Compose | Sí | La documentación del repo ya los define como base canónica del stack compartido y Compose soporta despliegues de producción en single-host. citeturn44view7turn32search5turn32search11 |
+| Nginx compartido | Sí | Ya es el borde estándar del ecosistema y basta para routing, proxy y dominios locales/remotos iniciales. citeturn44view7turn31search1 |
+| Node.js compartido + Next.js | Sí | Todas las webs del ecosistema se apoyan en esta frontera. citeturn44view7turn18view4turn27view2 |
+| Python compartido + Django + DRF | Sí | Son la base canónica de Gateway y APIs del dominio. citeturn44view7turn18view8turn27view5 |
+| PostgreSQL compartido | Sí | Debe ser la única base principal al inicio. citeturn34search3turn44view7 |
+| Gateway General | Sí | Toda web nueva debe pasar por Gateway; el frontend no debe hablar ni con Auth ni con Core. citeturn44view8turn43view1turn44view1turn44view4 |
+| Auth | Sí | El estándar del ecosistema obliga que cualquier panel, cuenta, compra o ruta privada pase por Auth vía Gateway. citeturn44view8turn43view1 |
+| GitHub Actions | Sí | CI mínimo desde el día uno para lint, tests, build y smoke deploy. citeturn19view9turn14view30 |
+| Monitoreo mínimo | Sí, pero austero | `stdout`/`stderr`, logs estructurados JSON, healthchecks, rotación de logs, backups de Postgres y alertas sencillas. No hace falta levantar todavía toda la torre Prometheus/Grafana/Loki. Esa parte es una recomendación operativa basada en la comparación oficial entre herramientas. citeturn31search5turn34search0turn21view5turn21view6turn21view7 |
+| Almacenamiento de archivos | No como servicio dedicado | En el MVP, usar volúmenes locales del host para archivos si realmente existen uploads. MinIO puede esperar mientras el sistema siga siendo single-host y sin gran volumen documental. citeturn20search7 |
 
-Lo que no es indispensable desde el primer día es igualmente importante: no metería aún Valkey, Celery, MinIO, OCR, motores de búsqueda, IA, Qdrant, RabbitMQ, Prefect ni observabilidad completa, salvo que el primer proyecto público lo exija de inmediato. El principio rector aquí es una sola base, un solo gateway, un solo borde y el mínimo de servicios auxiliares. 
+**Lo que no es indispensable desde el primer día** es igualmente importante: no metería aún Valkey, Celery, MinIO, OCR, motores de búsqueda, IA, Qdrant, RabbitMQ, Prefect ni observabilidad completa, salvo que el primer proyecto público lo exija de inmediato. El principio rector aquí es **una sola base, un solo gateway, un solo borde y el mínimo de servicios auxiliares**. citeturn44view7turn44view8
 
-Etapa de valor operativo
-La segunda etapa debe empezar cuando el sistema ya procese trabajo real y el MVP genere fricción visible. Aquí sí recomiendo incorporar Valkey + Celery para tareas asíncronas; MinIO para archivos; el stack documental de Tika + Tesseract + LibreOffice Headless + python-docx + docxtpl para DocuCore, Fiscora y LexNova; Typesense para catálogos, refacciones y comercio; pgvector + LlamaIndex + OpenAI API para RAG y búsqueda semántica donde sí aporte valor; y n8n para automatizaciones de borde como CRM, mensajería, notificaciones y sincronizaciones con terceros. Todo esto tiene encaje documental y técnico claro, pero solo después de que existan procesos reales que justifiquen su operación. 
+### Etapa de valor operativo
 
-Etapa de crecimiento
-La tercera etapa es donde recomiendo meter Prometheus + Grafana + Loki para observabilidad completa; PostHog para producto/marketing analytics; Ollama y Open WebUI para pruebas o operaciones locales de IA; Prefect si aparecen pipelines transversales serios; GlitchTip como error tracking self-hosted o Sentry SaaS si prefieren menos operación; y, de manera selectiva, Qdrant o RabbitMQ si la carga semántica o de mensajería ya no cabe cómodamente en pgvector y Valkey/Celery. Ese es el momento donde cada servicio nuevo sí empieza a pagar su costo operativo. 
+La segunda etapa debe empezar cuando el sistema ya procese trabajo real y el MVP genere fricción visible. Aquí sí recomiendo incorporar **Valkey + Celery** para tareas asíncronas; **MinIO** para archivos; el stack documental de **Tika + Tesseract + LibreOffice Headless + python-docx + docxtpl** para DocuCore, Fiscora y LexNova; **Typesense** para catálogos, refacciones y comercio; **pgvector + LlamaIndex + OpenAI API** para RAG y búsqueda semántica donde sí aporte valor; y **n8n** para automatizaciones de borde como CRM, mensajería, notificaciones y sincronizaciones con terceros. Todo esto tiene encaje documental y técnico claro, pero solo después de que existan procesos reales que justifiquen su operación. citeturn22view0turn35search2turn20search7turn21view16turn23view6turn23view7turn23view8turn37search1turn18view10turn39search3turn40search8turn22view4
 
-Etapa empresarial
-La cuarta etapa debe existir solo cuando haya requerimientos reales de alta disponibilidad, múltiples servidores, escalado horizontal, colas robustas, vector search de gran escala o muchos equipos desplegando en paralelo. Recién ahí tiene sentido evaluar Traefik por autodiscovery con orquestadores, SeaweedFS para horizontabilidad extrema en archivos, clusters de Qdrant, clusters de RabbitMQ, y eventualmente una plataforma multi-host tipo Kubernetes. Antes de eso, introducir esta complejidad sería prematuro.
+### Etapa de crecimiento
 
-Arquitectura por proyecto
-Proyecto	Tecnologías obligatorias	Tecnologías opcionales	Tecnologías futuras	Servicios compartidos / propios	Recomendación concreta
-LexNova	Next.js, Gateway, Auth, API.PY.DJANGO.LexNova, PostgreSQL. 
-pgvector, DocuCore/Document, Valkey+Celery.	LlamaIndex, OpenAI API, MinIO, Ollama.	Compartidos: Gateway, Auth, PostgreSQL. Propio: API LexNova.	Mantener LexNova como dominio legal propio y consumir todo lo transversal por Gateway; análisis jurídico y RAG solo después de estabilizar casos, expedientes y permisos. 
-Refapart	Next.js, Gateway, Auth, API.PY.DJANGO.RefaPart, JobCron, PostgreSQL. 
-Typesense, Valkey+Celery, n8n, MinIO.	IA para normalización de piezas, recomendadores, matching proveedor-demanda.	Compartidos: Gateway, Auth, JobCron, Address. Propio: API comercial REFAPART.	Éste es uno de los proyectos donde Typesense entra antes que en otros, porque la propia doc habla de búsqueda rápida y búsqueda tolerante a errores. 
-JobCron	Django, DRF, PostgreSQL, Gateway, Auth, módulos core de catálogo, pricing, ventas, reglas. 
-Valkey+Celery, PostHog, Grafana stack.	RabbitMQ, Prefect, Qdrant si el ERP centraliza flujos avanzados.	Compartidos: prácticamente todos. Propio: ERP central.	Debe seguir siendo el núcleo compartido; no duplicar APIs core por proyecto. 
-DocuCore	Next.js, Gateway, API DocuCore, API Document, PostgreSQL. 
-Tika, Tesseract, python-docx, docxtpl, Valkey+Celery.	MinIO, pgvector, LlamaIndex, OpenAI API, Ollama.	Compartidos: Gateway, PostgreSQL. Propios: DocuCore + Document.	Es el proyecto que justifica antes el stack documental; aquí sí conviene consolidar OCR, parsing y jobs reutilizables. 
-Fiscora	Next.js, Gateway, API Fiscora, API Fiscal, API Document, PostgreSQL. 
-Valkey+Celery, Tika, Tesseract, MinIO.	pgvector, LlamaIndex, OpenAI API para explicaciones fiscales y búsquedas semánticas internas.	Compartidos: Gateway, Fiscal, Document. Propio: Fiscora.	Debe explotar al máximo capacidades compartidas de Fiscal y Document; no necesita stack extra hasta que haya cargas reales de CFDI/documentos. 
-Universal POS	No encontré un documento canónico propio en la rama revisada; por eso esta asignación es una inferencia a partir de JobCron, Pagora, Stockara y PhoneShop. 
-Next.js PWA, Gateway, Auth, APIs de Sales/Inventory/Payments/POS.	Kotlin para Android POS dedicado y Swift si el canal iOS realmente lo exige.	Compartidos: JobCron, Stockara, Pagora, Gateway, Auth. Propio: API POS delgada solo si el flujo lo pide.	Empezaría como web/PWA Next.js sobre JobCron; solo migraría a nativo cuando hardware, offline real o integración profunda lo exijan.
-TecnoTelec	Next.js, Gateway, PostgreSQL, catálogo/precios/cotización desde APIs compartidas. 
-Typesense, n8n, MinIO.	API propia de soluciones si el ensamblado dinámico se vuelve complejo.	Compartidos: Gateway, JobCron core. Propio: inicialmente solo web; API propia después.	La doc es clara: vender soluciones y proyectos, no simple marketplace; por eso conviene exprimir primero el core compartido y abrir API propia después. 
-Imagrafity	Next.js, Gateway, API Imagrafity, PostgreSQL. 
-MinIO, Valkey+Celery, Typesense si el catálogo crece.	Pipeline de render/archivos, integración con producción y logística, IA para asistencia creativa.	Compartidos: Gateway, PostgreSQL, luego Document/Storage y JobCron. Propio: API Imagrafity.	El MVP puede vivir con catálogo/editor/preview/cotización; uploads, producción física y pagos reales ya están documentados como fuera de alcance. 
-MexIngSoft	Next.js corporativo, PostgreSQL y, cuando exista panel privado, Gateway y Auth. 
-PostHog, n8n, GlitchTip/Sentry SaaS.	CRM/lead scoring, cotizaciones integradas con JobCron.	Compartidos: Gateway/Auth cuando exista admin real. Propio: web corporativa.	La web corporativa puede seguir ligera al principio; el backend propio entra cuando el sitio deje de ser solo marketing y capture operación. 
-PhoneShop	Next.js, Gateway, catálogo, pricing, inventory, sales, POS y PostgreSQL. 
-Typesense, n8n, Valkey+Celery, MinIO para imágenes/servicios.	API propia para reparaciones/soporte si crece el flujo de servicio técnico.	Compartidos: JobCron core, Stockara, Pagora, Gateway/Auth. Propio: web/canal y luego API de servicio.	Aquí sí tiene sentido que productos como teléfonos/accesorios sean el eje principal; comparte mucho con POS y con catálogo comercial. 
+La tercera etapa es donde recomiendo meter **Prometheus + Grafana + Loki** para observabilidad completa; **PostHog** para producto/marketing analytics; **Ollama** y **Open WebUI** para pruebas o operaciones locales de IA; **Prefect** si aparecen pipelines transversales serios; **GlitchTip** como error tracking self-hosted o **Sentry SaaS** si prefieren menos operación; y, de manera selectiva, **Qdrant** o **RabbitMQ** si la carga semántica o de mensajería ya no cabe cómodamente en pgvector y Valkey/Celery. Ese es el momento donde cada servicio nuevo sí empieza a pagar su costo operativo. citeturn21view5turn21view6turn21view7turn21view8turn23view4turn25view1turn21view3turn16search0turn36search10turn23view1turn41search5
 
-Arquitectura final del ecosistema, dependencias y prioridades
-La arquitectura lógica recomendada para todo MexIngSoft queda así: el usuario entra siempre por una web Next.js; Nginx hace de borde compartido; el frontend habla solo con el Gateway Django; el Gateway enruta a Auth, APIs compartidas del ERP o APIs especializadas por proyecto; todo persiste primero en PostgreSQL; y los servicios auxiliares se conectan lateralmente solo cuando son necesarios. Esa forma no es una invención nueva: es la síntesis más fiel entre la documentación del repositorio y la validación técnica del stack actual. 
+### Etapa empresarial
 
-text
-Copiar
+La cuarta etapa debe existir solo cuando haya requerimientos reales de **alta disponibilidad**, **múltiples servidores**, **escalado horizontal**, **colas robustas**, **vector search de gran escala** o **muchos equipos desplegando en paralelo**. Recién ahí tiene sentido evaluar **Traefik** por autodiscovery con orquestadores, **SeaweedFS** para horizontabilidad extrema en archivos, clusters de **Qdrant**, clusters de **RabbitMQ**, y eventualmente una plataforma multi-host tipo Kubernetes. Antes de eso, introducir esta complejidad sería prematuro. citeturn32search16turn21view30turn24view9turn41search5turn33search13
+
+## Arquitectura por proyecto
+
+| Proyecto | Tecnologías obligatorias | Tecnologías opcionales | Tecnologías futuras | Servicios compartidos / propios | Recomendación concreta |
+|---|---|---|---|---|---|
+| LexNova | Next.js, Gateway, Auth, API.PY.DJANGO.LexNova, PostgreSQL. citeturn43view1 | pgvector, DocuCore/Document, Valkey+Celery. | LlamaIndex, OpenAI API, MinIO, Ollama. | Compartidos: Gateway, Auth, PostgreSQL. Propio: API LexNova. | Mantener LexNova como dominio legal propio y consumir todo lo transversal por Gateway; análisis jurídico y RAG solo después de estabilizar casos, expedientes y permisos. citeturn43view1turn44view3 |
+| Refapart | Next.js, Gateway, Auth, API.PY.DJANGO.RefaPart, JobCron, PostgreSQL. citeturn44view0turn44view1 | Typesense, Valkey+Celery, n8n, MinIO. | IA para normalización de piezas, recomendadores, matching proveedor-demanda. | Compartidos: Gateway, Auth, JobCron, Address. Propio: API comercial REFAPART. | Éste es uno de los proyectos donde **Typesense** entra antes que en otros, porque la propia doc habla de búsqueda rápida y búsqueda tolerante a errores. citeturn44view0turn44view1turn37search18 |
+| JobCron | Django, DRF, PostgreSQL, Gateway, Auth, módulos core de catálogo, pricing, ventas, reglas. citeturn44view2 | Valkey+Celery, PostHog, Grafana stack. | RabbitMQ, Prefect, Qdrant si el ERP centraliza flujos avanzados. | Compartidos: prácticamente todos. Propio: ERP central. | Debe seguir siendo el **núcleo compartido**; no duplicar APIs core por proyecto. citeturn44view2turn44view7 |
+| DocuCore | Next.js, Gateway, API DocuCore, API Document, PostgreSQL. citeturn44view3turn44view4 | Tika, Tesseract, python-docx, docxtpl, Valkey+Celery. | MinIO, pgvector, LlamaIndex, OpenAI API, Ollama. | Compartidos: Gateway, PostgreSQL. Propios: DocuCore + Document. | Es el proyecto que justifica antes el stack documental; aquí sí conviene consolidar OCR, parsing y jobs reutilizables. citeturn44view3turn44view4turn23view5turn23view6 |
+| Fiscora | Next.js, Gateway, API Fiscora, API Fiscal, API Document, PostgreSQL. citeturn43view0 | Valkey+Celery, Tika, Tesseract, MinIO. | pgvector, LlamaIndex, OpenAI API para explicaciones fiscales y búsquedas semánticas internas. | Compartidos: Gateway, Fiscal, Document. Propio: Fiscora. | Debe explotar al máximo capacidades compartidas de Fiscal y Document; no necesita stack extra hasta que haya cargas reales de CFDI/documentos. citeturn43view0turn44view3 |
+| Universal POS | No encontré un documento canónico propio en la rama revisada; por eso esta asignación es una **inferencia** a partir de JobCron, Pagora, Stockara y PhoneShop. citeturn44view2turn44view5turn44view6turn43view5 | Next.js PWA, Gateway, Auth, APIs de Sales/Inventory/Payments/POS. | Kotlin para Android POS dedicado y Swift si el canal iOS realmente lo exige. | Compartidos: JobCron, Stockara, Pagora, Gateway, Auth. Propio: API POS delgada solo si el flujo lo pide. | Empezaría como **web/PWA Next.js** sobre JobCron; solo migraría a nativo cuando hardware, offline real o integración profunda lo exijan. |
+| TecnoTelec | Next.js, Gateway, PostgreSQL, catálogo/precios/cotización desde APIs compartidas. citeturn43view2 | Typesense, n8n, MinIO. | API propia de soluciones si el ensamblado dinámico se vuelve complejo. | Compartidos: Gateway, JobCron core. Propio: inicialmente solo web; API propia después. | La doc es clara: vender **soluciones y proyectos**, no simple marketplace; por eso conviene exprimir primero el core compartido y abrir API propia después. citeturn43view2 |
+| Imagrafity | Next.js, Gateway, API Imagrafity, PostgreSQL. citeturn43view3 | MinIO, Valkey+Celery, Typesense si el catálogo crece. | Pipeline de render/archivos, integración con producción y logística, IA para asistencia creativa. | Compartidos: Gateway, PostgreSQL, luego Document/Storage y JobCron. Propio: API Imagrafity. | El MVP puede vivir con catálogo/editor/preview/cotización; uploads, producción física y pagos reales ya están documentados como fuera de alcance. citeturn43view3 |
+| MexIngSoft | Next.js corporativo, PostgreSQL y, cuando exista panel privado, Gateway y Auth. citeturn43view4 | PostHog, n8n, GlitchTip/Sentry SaaS. | CRM/lead scoring, cotizaciones integradas con JobCron. | Compartidos: Gateway/Auth cuando exista admin real. Propio: web corporativa. | La web corporativa puede seguir ligera al principio; el backend propio entra cuando el sitio deje de ser solo marketing y capture operación. citeturn43view4 |
+| PhoneShop | Next.js, Gateway, catálogo, pricing, inventory, sales, POS y PostgreSQL. citeturn43view5 | Typesense, n8n, Valkey+Celery, MinIO para imágenes/servicios. | API propia para reparaciones/soporte si crece el flujo de servicio técnico. | Compartidos: JobCron core, Stockara, Pagora, Gateway/Auth. Propio: web/canal y luego API de servicio. | Aquí sí tiene sentido que productos como teléfonos/accesorios sean el eje principal; comparte mucho con POS y con catálogo comercial. citeturn43view5turn44view5turn44view6 |
+
+## Arquitectura final del ecosistema, dependencias y prioridades
+
+La arquitectura lógica recomendada para todo MexIngSoft queda así: el usuario entra siempre por una web Next.js; Nginx hace de borde compartido; el frontend habla solo con el Gateway Django; el Gateway enruta a Auth, APIs compartidas del ERP o APIs especializadas por proyecto; todo persiste primero en PostgreSQL; y los servicios auxiliares se conectan lateralmente solo cuando son necesarios. Esa forma no es una invención nueva: es la síntesis más fiel entre la documentación del repositorio y la validación técnica del stack actual. citeturn44view7turn44view8turn43view1turn44view1turn44view4
+
+```text
 Usuarios
    ↓
 Webs Next.js
@@ -161,52 +159,48 @@ Servicios laterales por etapa:
 - LlamaIndex + OpenAI API / Ollama → IA y RAG
 - n8n / Prefect → automatización y pipelines
 - Prometheus / Grafana / Loki / GlitchTip o Sentry → observabilidad
-Dependencias entre servicios
+```
 
+### Dependencias entre servicios
 
+| Servicio | Depende de | Usado por | Nota |
+|---|---|---|---|
+| Nginx compartido | Docker/Compose | Todas las webs y APIs expuestas | Debe seguir siendo el único borde al inicio. citeturn44view7turn31search1 |
+| Gateway General | Django, DRF, Auth, APIs de dominio | Todas las webs con cuenta/panel o UX privada | Es la frontera obligatoria del ecosistema. citeturn44view8turn43view1 |
+| Auth | PostgreSQL | Gateway y todos los proyectos con sesión | No debe exponerse directo al frontend. citeturn44view8turn43view1 |
+| PostgreSQL | Docker volume y backups | Todo el ecosistema | Una sola base principal en el MVP. citeturn34search3turn44view7 |
+| Valkey | Docker/Compose | Celery, caché de APIs, notificaciones | Entra cuando aparezcan jobs/caché reales. citeturn35search2turn22view0 |
+| Celery | Django + Valkey | DocuCore, Fiscora, Imagrafity, Jobs ERP | El propio repo ya lo anticipa para procesamiento pesado fuera del MVP. citeturn44view4turn18view12 |
+| MinIO | Docker/Compose | DocuCore, Fiscora, LexNova, Imagrafity | Para archivos y blobs, no para el día uno. citeturn20search7 |
+| Typesense | Docker/Compose | REFAPART, TecnoTelec, PhoneShop, Imagrafity | Motor estándar de búsqueda comercial. citeturn37search1turn37search18 |
+| Document stack | Tika, Tesseract, LibreOffice, python-docx, docxtpl | DocuCore primero; luego Fiscora y LexNova | Debe centralizarse, no duplicarse. citeturn44view3turn23view5turn23view6turn23view7turn23view8 |
+| IA stack | pgvector, LlamaIndex, OpenAI API, Ollama | LexNova, DocuCore, Fiscora y quizá REFAPART | Primero provider abstraction; luego casos de uso. citeturn18view10turn39search3turn40search8turn23view4 |
+| Observabilidad | Prometheus, Grafana, Loki, GlitchTip/Sentry | Todas las APIs y workers | No desde el día uno; sí desde crecimiento real. citeturn21view5turn21view6turn21view7turn16search0turn36search10 |
 
-Dependencias entre servicios
-Servicio	Depende de	Usado por	Nota
-Nginx compartido	Docker/Compose	Todas las webs y APIs expuestas	Debe seguir siendo el único borde al inicio. 
-Gateway General	Django, DRF, Auth, APIs de dominio	Todas las webs con cuenta/panel o UX privada	Es la frontera obligatoria del ecosistema. 
-Auth	PostgreSQL	Gateway y todos los proyectos con sesión	No debe exponerse directo al frontend. 
-PostgreSQL	Docker volume y backups	Todo el ecosistema	Una sola base principal en el MVP. 
-Valkey	Docker/Compose	Celery, caché de APIs, notificaciones	Entra cuando aparezcan jobs/caché reales. 
-Celery	Django + Valkey	DocuCore, Fiscora, Imagrafity, Jobs ERP	El propio repo ya lo anticipa para procesamiento pesado fuera del MVP. 
-MinIO	Docker/Compose	DocuCore, Fiscora, LexNova, Imagrafity	Para archivos y blobs, no para el día uno. 
-Typesense	Docker/Compose	REFAPART, TecnoTelec, PhoneShop, Imagrafity	Motor estándar de búsqueda comercial. 
-Document stack	Tika, Tesseract, LibreOffice, python-docx, docxtpl	DocuCore primero; luego Fiscora y LexNova	Debe centralizarse, no duplicarse. 
-IA stack	pgvector, LlamaIndex, OpenAI API, Ollama	LexNova, DocuCore, Fiscora y quizá REFAPART	Primero provider abstraction; luego casos de uso. 
-Observabilidad	Prometheus, Grafana, Loki, GlitchTip/Sentry	Todas las APIs y workers	No desde el día uno; sí desde crecimiento real. 
+### Riesgos técnicos
 
-Riesgos técnicos
-El riesgo más serio no es “elegir mal una tecnología nueva”; es romper la frontera del Gateway y permitir que los frontends hablen directo con Auth o Core. El repo es muy claro en que eso no debe pasar. El segundo riesgo es arrancar con runtimes atrasados: Node 20 ya está fuera de soporte y Python 3.10 ya va de salida. El tercero es sobrecargar PostgreSQL antes de introducir servicios auxiliares adecuados. El cuarto es meter lógica crítica en n8n en lugar de dejarla en APIs versionadas. El quinto es duplicar stacks —por ejemplo, Meilisearch y Typesense a la vez, o pgvector y Qdrant sin necesidad real—. 
+El riesgo más serio no es “elegir mal una tecnología nueva”; es **romper la frontera del Gateway** y permitir que los frontends hablen directo con Auth o Core. El repo es muy claro en que eso no debe pasar. El segundo riesgo es **arrancar con runtimes atrasados**: Node 20 ya está fuera de soporte y Python 3.10 ya va de salida. El tercero es **sobrecargar PostgreSQL** antes de introducir servicios auxiliares adecuados. El cuarto es **meter lógica crítica en n8n** en lugar de dejarla en APIs versionadas. El quinto es **duplicar stacks** —por ejemplo, Meilisearch y Typesense a la vez, o pgvector y Qdrant sin necesidad real—. citeturn44view8turn18view6turn30search7turn34search3turn22view4turn37search0turn37search1turn33search13
 
-Estrategia de escalabilidad a tres y cinco años
-La ruta razonable es esta. Primer tramo: single-host robusto con Docker Compose, Gateway único, PostgreSQL único, CI básico y backups fuertes. Segundo tramo: separar trabajo pesado a Celery/Valkey, mover archivos a MinIO y habilitar Typesense/pgvector donde sí paguen su costo. Tercer tramo: agregar observabilidad integral, pipelines selectivos, y operación híbrida de IA con OpenAI/Ollama. Cuarto tramo: solo si el tamaño del negocio lo exige, dividir almacenamiento, mensajería, vector search y despliegue multi-host con componentes clusterizables. Esa ruta reduce costo inicial sin cerrar la puerta al crecimiento. 
+### Estrategia de escalabilidad a tres y cinco años
 
-Recomendaciones finales priorizadas
-Prioridad	Recomendación	Impacto	Costo de implementación
-Alta	Congelar el estándar arquitectónico: frontend solo por Gateway; Auth nunca directo; Postgres como única base principal al inicio. 
-Muy alto	Bajo
-Alta	Actualizar runtimes base a Node 22 LTS, Python 3.12 y Nginx 1.30.x. 
-Muy alto	Bajo
-Alta	Arrancar el MVP solo con Docker, Compose, Nginx, Next.js, Django/DRF, PostgreSQL, Gateway, Auth y GitHub Actions. 
-Muy alto	Bajo
-Media alta	Estandarizar Valkey en lugar de Redis para caché y broker futuros. 
-Alto	Bajo
-Media alta	Introducir Celery + Valkey + MinIO cuando aparezcan jobs y archivos reales. 
-Alto	Medio
-Media	Elegir un solo motor de búsqueda: Typesense como estándar comercial. 
-Alto	Medio
-Media	Centralizar todo el stack documental en DocuCore/Document y reutilizarlo desde Fiscora y LexNova. 
-Alto	Medio
-Media	Diseñar una abstracción interna de IA para poder alternar OpenAI y Ollama sin reescribir producto. 
-Alto	Medio
-Baja por ahora	Diferir RabbitMQ, Qdrant, Airflow, Dagster, SeaweedFS, Traefik y Kubernetes hasta que exista necesidad demostrable. 
-Evita complejidad	Muy bajo
+La ruta razonable es esta. **Primer tramo**: single-host robusto con Docker Compose, Gateway único, PostgreSQL único, CI básico y backups fuertes. **Segundo tramo**: separar trabajo pesado a Celery/Valkey, mover archivos a MinIO y habilitar Typesense/pgvector donde sí paguen su costo. **Tercer tramo**: agregar observabilidad integral, pipelines selectivos, y operación híbrida de IA con OpenAI/Ollama. **Cuarto tramo**: solo si el tamaño del negocio lo exige, dividir almacenamiento, mensajería, vector search y despliegue multi-host con componentes clusterizables. Esa ruta reduce costo inicial sin cerrar la puerta al crecimiento. citeturn32search5turn35search2turn20search7turn37search1turn18view10turn21view5turn21view6turn21view7turn32search16turn24view9
 
-Preguntas abiertas y límites
-Hay un punto que sí debo marcar con transparencia: no encontré en la rama revisada un documento canónico específico para “Universal POS”. Por eso la arquitectura de ese proyecto la traté como una inferencia de alta probabilidad a partir de JobCron, Stockara, Pagora y PhoneShop. Si después aparece un documento oficial de POS dentro del repo, conviene alinear esa parte del roadmap con ese contrato canónico. 
+### Recomendaciones finales priorizadas
 
-Si reduzco todo el informe a una decisión única, sería esta: empiecen con un ecosistema shared-services muy disciplinado sobre Django + Next.js + PostgreSQL, fortalezcan Gateway/Auth, y hagan que cada servicio nuevo tenga que “ganarse” su lugar por necesidad operativa real. Esa es la ruta más barata, más mantenible y más coherente con la documentación actual de MexIngSoft. 
+| Prioridad | Recomendación | Impacto | Costo de implementación |
+|---|---|---|---|
+| Alta | **Congelar el estándar arquitectónico**: frontend solo por Gateway; Auth nunca directo; Postgres como única base principal al inicio. citeturn44view8turn43view1turn44view4 | Muy alto | Bajo |
+| Alta | **Actualizar runtimes base** a Node 22 LTS, Python 3.12 y Nginx 1.30.x. citeturn18view6turn30search7turn31search0 | Muy alto | Bajo |
+| Alta | **Arrancar el MVP solo con Docker, Compose, Nginx, Next.js, Django/DRF, PostgreSQL, Gateway, Auth y GitHub Actions**. citeturn44view7turn44view8turn19view9 | Muy alto | Bajo |
+| Media alta | **Estandarizar Valkey** en lugar de Redis para caché y broker futuros. citeturn23view2turn35search2turn35search0 | Alto | Bajo |
+| Media alta | **Introducir Celery + Valkey + MinIO** cuando aparezcan jobs y archivos reales. citeturn22view0turn20search7 | Alto | Medio |
+| Media | **Elegir un solo motor de búsqueda**: Typesense como estándar comercial. citeturn37search1turn37search18 | Alto | Medio |
+| Media | **Centralizar todo el stack documental en DocuCore/Document** y reutilizarlo desde Fiscora y LexNova. citeturn44view3turn44view4turn43view0turn43view1 | Alto | Medio |
+| Media | **Diseñar una abstracción interna de IA** para poder alternar OpenAI y Ollama sin reescribir producto. citeturn40search8turn23view4 | Alto | Medio |
+| Baja por ahora | **Diferir RabbitMQ, Qdrant, Airflow, Dagster, SeaweedFS, Traefik y Kubernetes** hasta que exista necesidad demostrable. citeturn41search5turn33search13turn21view25turn24view3turn24view9turn32search16 | Evita complejidad | Muy bajo |
+
+### Preguntas abiertas y límites
+
+Hay un punto que sí debo marcar con transparencia: **no encontré en la rama revisada un documento canónico específico para “Universal POS”**. Por eso la arquitectura de ese proyecto la traté como una **inferencia de alta probabilidad** a partir de JobCron, Stockara, Pagora y PhoneShop. Si después aparece un documento oficial de POS dentro del repo, conviene alinear esa parte del roadmap con ese contrato canónico. citeturn44view2turn44view5turn44view6turn43view5
+
+Si reduzco todo el informe a una decisión única, sería esta: **empiecen con un ecosistema shared-services muy disciplinado sobre Django + Next.js + PostgreSQL, fortalezcan Gateway/Auth, y hagan que cada servicio nuevo tenga que “ganarse” su lugar por necesidad operativa real**. Esa es la ruta más barata, más mantenible y más coherente con la documentación actual de MexIngSoft. citeturn44view7turn44view8turn44view2
