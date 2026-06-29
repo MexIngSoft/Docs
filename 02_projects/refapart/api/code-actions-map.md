@@ -31,25 +31,33 @@ marketplace/models.py
 | `REFAPART.ORDER.CREATE` | `/projects/REFAPART/admin/part-requests/{id}/order` | `marketplace.views.order_create` | POST | `RefaPartOrder`, `RefaPartLogisticsTask`, `RefaPartAuditLog` | vigente | Crea pedido operativo desde cotizacion. |
 | `REFAPART.ORDER.CHECKOUT` | `/projects/REFAPART/checkout` | `marketplace.views.checkout` | POST | `RefaPartPartRequest`, `RefaPartSupplierPartOffer`, `RefaPartQuote`, `RefaPartOrder`, `RefaPartLogisticsTask`, `RefaPartAuditLog` | vigente | Checkout manual MVP; Payments real pendiente. |
 | `REFAPART.ORDER.TRACKING` | `/projects/REFAPART/me/orders/{id}/tracking` | `marketplace.views.my_order_tracking` | GET | `RefaPartOrder`, `RefaPartLogisticsTask` | vigente | Tracking visible al cliente. |
-| `REFAPART.ADDRESS.SEARCH` | PENDIENTE_DE_DEFINIR | `API.PY.DJANGO.Address` | GET | Address API; snapshots permitidos en REFAPART | pendiente | No duplicar catalogos geograficos en REFAPART. |
-| `REFAPART.PAYMENT.REQUEST` | PENDIENTE_DE_DEFINIR | Payments API futura | POST | `RefaPartOrder`, futuro Payment | pendiente | No integrar Openpay/Mercado Pago/Stripe/BBVA directo en REFAPART. |
+| `REFAPART.ADDRESS.SEARCH` | `/core/address/api/address/suggest?postalCode=` | `API.PY.DJANGO.Address` | GET | Address API; snapshots permitidos en REFAPART | pendiente | Gateway y API existen; falta consumo UI real en REFAPART. |
+| `REFAPART.PAYMENT.REQUEST` | PENDIENTE_DE_DEFINIR | Payments API futura | POST | `RefaPartOrder`, futuro Payment | pendiente | No integrar Openpay/Mercado Pago/Stripe/BBVA directo en REFAPART sin contrato/owner/proveedor. |
 
 ## Permisos
 
-Permisos finales por rol operativo:
+Permisos operativos sembrados en Auth:
 
 ```text
-PENDIENTE_DE_DEFINIR
+Rol: REFAPART_ADMIN
+Permisos: CanViewPartRequests, CanAssignPartRequests, CanContactSuppliers,
+CanRegisterSupplierResponse, CanViewSupplierPrices, CanEditFinalPrice,
+CanGenerateQuote, CanSendCustomerQuote, CanConvertQuoteToOrder,
+CanManageSuppliers, CanManageProducts, CanViewSearchLogs,
+CanViewDemandDashboard, CanManageOrders, CanManageLogistics,
+CanClosePartRequest.
 ```
 
-Hasta cerrar matriz definitiva, las acciones admin deben tratarse como
-protegidas por Gateway/Auth y no como seguridad solo frontend.
+Los roles especializados `REFAPART_QUOTER`, `REFAPART_SUPPLIER_MANAGER`,
+`REFAPART_LOGISTICS`, `REFAPART_FINANCE` y `REFAPART_SUPPORT` permanecen
+documentados como matriz de negocio, pero no tienen seed productivo observado.
+Las acciones admin deben seguir protegidas por Gateway/Auth y no solo por UI.
 
 ## Pendientes
 
 - Definir permisos `REFAPART_ADMIN`, `REFAPART_OPERATOR`, `REFAPART_CUSTOMER`
   o equivalentes.
-- Confirmar rutas Gateway Address.
+- Conectar consumo real de Address en UI REFAPART.
 - Definir contrato Payments antes de activar pagos reales.
 - Validar migraciones contra `Docs/02_projects/refapart/database.md` en una
   corrida donde se permita ejecutar pruebas/API.

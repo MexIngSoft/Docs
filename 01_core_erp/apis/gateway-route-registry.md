@@ -27,7 +27,7 @@ Decision Record aprobado.
 | `WEB.NJ.NEXT.TecnoTelec` | `GET /api/v1/projects/TECNOTELEC/solutions` | TecnoTelec API | Publico | Filtros publicos | Soluciones publicadas | Parcial |
 | `WEB.NJ.NEXT.TecnoTelec` | `GET /api/v1/projects/TECNOTELEC/catalog` | Catalog/Pricing/Supplier | Publico | Filtros publicos | Productos publicables | Parcial |
 | `WEB.NJ.NEXT.TecnoTelec` | `POST /api/v1/projects/TECNOTELEC/quotes` | Sales API | Publico/Auth opcional | Solicitud consultiva | Cotizacion MVP | Parcial |
-| `WEB.NJ.NEXT.JobCron` | `GET /api/v1/projects/JOBCRON/admin/overview` | JobCron API | `jobcron.overview.read` | Filtros operativos | Resumen operativo | PENDIENTE_DE_IMPLEMENTAR |
+| `WEB.NJ.NEXT.JobCron` | `GET /api/v1/projects/JOBCRON/admin/overview` | JobCron API | `jobcron.overview.read` | Filtros operativos | Resumen operativo | IMPLEMENTADO_API; pendiente consumo UI dinamico |
 | `WEB.NJ.NEXT.JobCron` | `GET /api/v1/projects/JOBCRON/search` | Search API | `jobcron.search.read` | Query y filtros autorizados | Resultados autorizados | PENDIENTE_DE_IMPLEMENTAR |
 
 ## Validacion

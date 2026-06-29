@@ -10,7 +10,7 @@ VIGENTE_PARCIAL
 |---|---|---|---|---|---|---|
 | JOBCRON.FEATURE_AVAILABILITY.LIST | `GET /api/features/` | `Docker.API.PY/API.PY.DJANGO.JobCron/features/views.py` | GET | `Feature`, `FeatureAvailabilityAudit` | PENDIENTE_DE_DEFINIR | vigente_parcial |
 | JOBCRON.FEATURE_AVAILABILITY.UPDATE | `POST /api/features/operations/` | `Docker.API.PY/API.PY.DJANGO.JobCron/features/views.py` | POST | `Feature`, `FeatureAvailabilityAudit` | PENDIENTE_DE_DEFINIR | vigente_parcial |
-| JOBCRON.ADMIN.OVERVIEW.VIEW | PENDIENTE_DE_IMPLEMENTAR | PENDIENTE_DE_DEFINIR | GET | PENDIENTE_DE_DEFINIR | `jobcron.overview.read` | pendiente |
+| JOBCRON.ADMIN.OVERVIEW.VIEW | `GET /api/jobcron/admin/overview` | `Docker.API.PY/API.PY.DJANGO.JobCron/features/views.py -> admin_overview` | GET | `FeatureAvailability`, `OperationalRecord` | `jobcron.overview.read` | vigente_api; pendiente UI dinamica |
 | JOBCRON.SEARCH.PUBLIC | PENDIENTE_DE_IMPLEMENTAR | PENDIENTE_DE_DEFINIR | GET | Search API | `jobcron.search.read` | pendiente |
 
 ## APIs reutilizadas o descartadas

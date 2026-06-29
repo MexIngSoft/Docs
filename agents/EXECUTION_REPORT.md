@@ -2,6 +2,154 @@
 
 ---
 
+## Ejecucion 2026-06-29 - AGENTS-030 P0-P4 desde tarea directa
+
+Clasificacion principal: `02_projects/refapart`.
+
+Ubicaciones secundarias:
+
+- `01_core_erp/apis`: registro Gateway y POS Core.
+- `02_projects/jobcron`: PostgreSQL, `admin/overview` y JobCron Core.
+- `02_projects/mexingsof`: validacion web y rutas internas observadas.
+- `02_projects/tecnotelec`: validacion web/API disponible.
+- `03_standards`: aplicacion de Gateway General, Auth, Address y PostgreSQL.
+
+Context Pack utilizado:
+
+- REFAPART ACTIVE_MVP.
+- JobCron admin/Core.
+- Gateway General.
+- Auth por aplicacion.
+- Address API reutilizable.
+- PostgreSQL oficial.
+
+Documentacion leida:
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-030.md`
+- `Docs/03_standards/database/postgresql-project-users-and-schemas.md`
+- `Docs/03_standards/architecture/api-gateway-standard.md`
+- `Docs/03_standards/code-actions/code-actions-map-standard.md`
+- `Docs/03_standards/auth/web-auth-login-standard.md`
+- `Docs/03_standards/auth/auth-email-template-standard.md`
+- `Docs/03_standards/auth/auth-email-delivery-diagnostics-standard.md`
+- `Docs/03_standards/api/address-api-standard.md`
+- `Docs/03_standards/frontend/address-form-standard.md`
+- `Docs/00_audit/10_development_gap_analysis.md`
+- `Docs/02_projects/refapart/README.md`
+- `Docs/02_projects/refapart/architecture.md`
+- `Docs/02_projects/refapart/api-contracts.md`
+- `Docs/02_projects/refapart/database.md`
+- `Docs/02_projects/refapart/frontend.md`
+- `Docs/02_projects/refapart/technical/code-actions-map.md`
+- `Docs/02_projects/refapart/frontend/code-actions-map.md`
+- `Docs/02_projects/refapart/api/code-actions-map.md`
+- `Docs/02_projects/refapart/integrations/00_address_api_usage.md`
+- `Docs/02_projects/refapart/security/00_permissions_matrix.md`
+- `Docs/02_projects/jobcron/api/code-actions-map.md`
+- `Docs/02_projects/jobcron/frontend/code-actions-map.md`
+- `Docs/02_projects/jobcron/technical/code-actions-map.md`
+- `Docs/02_projects/jobcron/productive-operations-roadmap.md`
+- `Docs/01_core_erp/apis/gateway-route-registry.md`
+- `Docs/01_core_erp/apis/11_pos_api.md`
+- `Docs/01_core_erp/database/10_pos_model.md`
+- `Docs/01_core_erp/erp/08_pos_model.md`
+- `Docs/01_core_erp/flows/08_pos_flow.md`
+
+Archivos modificados:
+
+- `Docs/02_projects/refapart/technical/code-actions-map.md`
+- `Docs/02_projects/refapart/frontend/code-actions-map.md`
+- `Docs/02_projects/refapart/api/code-actions-map.md`
+- `Docs/02_projects/refapart/integrations/00_address_api_usage.md`
+- `Docs/02_projects/refapart/security/00_permissions_matrix.md`
+- `Docs/01_core_erp/apis/gateway-route-registry.md`
+- `Docs/02_projects/jobcron/api/code-actions-map.md`
+- `Docs/02_projects/jobcron/frontend/code-actions-map.md`
+- `Docs/02_projects/jobcron/technical/code-actions-map.md`
+- `Docs/02_projects/jobcron/productive-operations-roadmap.md`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/.env.local.example`
+- `Docker.API.PY/API.PY.DJANGO.JobCron/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.JobCron/config/urls.py`
+- `Docker.API.PY/API.PY.DJANGO.JobCron/features/views.py`
+- `Docker.API.PY/API.PY.DJANGO.JobCron/features/urls.py`
+- `Docker.API.PY/API.PY.DJANGO.JobCron/features/tests.py`
+
+APIs reutilizadas:
+
+- Gateway General.
+- Auth API.
+- Address API.
+- JobCron API.
+- REFAPART API.
+- Search como dependencia documentada, sin crear API nueva.
+
+APIs descartadas por duplicidad:
+
+- No se creo Gateway por proyecto.
+- No se creo Auth por proyecto.
+- No se creo Address dentro de REFAPART.
+- No se creo POS como proyecto aislado.
+- No se creo Payments sin contrato.
+
+Decisiones tomadas:
+
+- `AGENTS-030.md` fue corregido para eliminar cualquier uso/rastro versionado de SQLite en JobCron y exigir PostgreSQL.
+- Refapart usa `lib/api/refapart.ts` como servicio frontend real para busqueda, solicitudes, checkout y admin.
+- Address queda documentado via Gateway como `/api/v1/core/address/api/address/<endpoint>` hacia `API.PY.DJANGO.Address`.
+- `ADDRESS_API_BASE_URL` queda agregado al ejemplo local de Gateway.
+- JobCron ya no permite cambiar `ENGINE` por `DB_ENGINE`; queda fijo en `django.db.backends.postgresql`.
+- Se elimino el artefacto local `Docker.API.PY/API.PY.DJANGO.JobCron/db.sqlite3`; no estaba versionado.
+- Se implemento `GET /api/jobcron/admin/overview` en JobCron API para que Gateway sirva `GET /api/v1/projects/JOBCRON/admin/overview`.
+- `prospecting_proxy` queda como respuesta controlada `503 PROSPECTING_UPSTREAM_NOT_CONFIGURED` para que JobCron arranque sin proveedor externo configurado.
+- Universal POS permanece como capacidad Core, no como repo/proyecto independiente.
+
+Validaciones ejecutadas:
+
+| Validacion | Resultado |
+|---|---|
+| Docs `git diff --check` previo SQLite | OK |
+| REFAPART web `npm run lint` | OK |
+| REFAPART web `npm run build` | OK |
+| Gateway `python manage.py check` | OK |
+| REFAPART API `python manage.py check` | OK |
+| Address API `python manage.py check` | OK |
+| Auth `python manage.py check` sin env | Falla esperada: falta `DATABASE_URL` |
+| Auth `python manage.py check` con `DATABASE_URL` y sin `DEVELOPMENT_MODE` | Falla esperada: falta configuracion productiva de correo |
+| Auth `python manage.py check` con `DATABASE_URL` y `DEVELOPMENT_MODE=True` | OK |
+| Docker API `docker compose -f docker-compose.refapart.api.yml config --quiet` | OK |
+| Gateway tests `python manage.py test tests.test_refapart_contract tests.test_project_router` | Bloqueado por PostgreSQL local: conexion/credenciales |
+| REFAPART API tests `python manage.py test marketplace.tests` | Bloqueado por host Docker `db-postgresql` no resoluble fuera de contenedor |
+| JobCron `python manage.py check` | OK |
+| JobCron tests `python manage.py test features.tests.OperationalRecordTests` | Bloqueado por permisos PostgreSQL locales para crear test DB |
+| Busqueda SQLite JobCron | OK: sin uso activo; solo `.gitignore`; `db.sqlite3` ausente |
+| MexIngSof web `npm run lint` | OK |
+| MexIngSof web `npm run build` | OK con warning Tailwind sin clases detectadas |
+| TecnoTelec web `npm run lint` | OK con warnings `@next/next/no-img-element` |
+| TecnoTelec web `npm run build` | OK con warnings `@next/next/no-img-element` |
+| TecnoTelec API `python manage.py check` | No ejecutable: no existe `manage.py` en ese repo local |
+
+Pendientes reales:
+
+- REFAPART: conectar selector real de Address API en `/checkout` y `/cuenta/direcciones`.
+- REFAPART: sincronizar referencias `AddressId` en API REFAPART sin copiar catalogos.
+- REFAPART: Payments sigue congelado hasta contrato, owner, proveedor, conciliacion y reglas MVP.
+- Auth/SES: entrega real depende de credenciales, sandbox/dominio/IAM y validacion runtime con proveedor.
+- JobCron: conectar UI `/admin` a `GET /api/v1/projects/JOBCRON/admin/overview`; hoy existe endpoint API pero la UI aun usa datos estaticos.
+- JobCron: tests requieren usuario PostgreSQL local con permiso `CREATE DATABASE` o ejecucion dentro del contenedor oficial.
+- MexIngSof: documentar/migrar rutas internas `app/api/*` que siguen apareciendo en build como handlers Next.js; no se creo API exclusiva.
+- TecnoTelec: reemplazar `<img>` por `next/image` o justificar excepcion; no hay `manage.py` de API local para validar backend.
+- Universal POS: definir MVP antes de implementacion; debe vivir sobre Core/JobCron/Sales/Inventory/Pricing, no como ERP separado.
+
+Riesgos detectados:
+
+- Ejecutar tests Django fuera de Docker puede fallar por host/credenciales PostgreSQL aunque `check` pase.
+- Un endpoint de Address documentado no equivale a UI integrada; marcarlo como vigente sin formulario real seria falso positivo.
+- Mantener rutas internas Next.js en MexIngSof puede duplicar responsabilidades si no se migran a Gateway/JobCron/Catalog/Auth.
+- Payments/POS sin contrato puede inducir APIs duplicadas.
+
 ## Ejecucion 2026-06-29 - AGENTS-030 concentrador unico y limpieza de agents
 
 ### Context Pack utilizado

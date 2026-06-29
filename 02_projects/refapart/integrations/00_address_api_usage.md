@@ -11,6 +11,31 @@ REFAPART usa Address API para ciudad del cliente, direccion de entrega,
 direccion de recoleccion, ubicacion de proveedor, origen/destino logistico,
 perfil de cliente, checkout, pedido, tracking y direccion fiscal futura.
 
+El consumo debe pasar por Gateway General:
+
+```text
+WEB.NJ.NEXT.RefaPart
+-> API.PY.DJANGO.Gateway /api/v1/core/address/api/address/<endpoint>
+-> API.PY.DJANGO.Address /api/address/<endpoint>
+```
+
+Configuracion Gateway requerida:
+
+```text
+ADDRESS_API_BASE_URL=http://api-multiproyecto:8026
+```
+
+Rutas confirmadas:
+
+| Uso | Ruta Gateway | Ruta Address API |
+|---|---|---|
+| Paises | `/core/address/api/address/countries` | `/api/address/countries` |
+| Estados | `/core/address/api/address/states?countryId=` | `/api/address/states?countryId=` |
+| Municipios | `/core/address/api/address/municipalities?stateId=` | `/api/address/municipalities?stateId=` |
+| Sugerencia por CP | `/core/address/api/address/suggest?postalCode=` | `/api/address/suggest?postalCode=` |
+| Calles | `/core/address/api/address/streets?settlementId=&query=` | `/api/address/streets?settlementId=&query=` |
+| Alta direccion | `/core/address/api/address/addresses` | `/api/address/addresses` |
+
 ## Datos locales permitidos
 
 | Campo | Uso |
@@ -25,13 +50,13 @@ perfil de cliente, checkout, pedido, tracking y direccion fiscal futura.
 
 | Referencia | Uso | Estado |
 |---|---|---|
-| `CustomerAddressId` | Perfil cliente. | PENDIENTE_DE_DEFINIR |
-| `ShippingAddressId` | Entrega. | PENDIENTE_DE_DEFINIR |
-| `BillingAddressId` | Facturacion futura. | PENDIENTE_DE_DEFINIR |
-| `SupplierAddressId` | Proveedor. | PENDIENTE_DE_DEFINIR |
-| `PickupAddressId` | Recoleccion. | PENDIENTE_DE_DEFINIR |
-| `DeliveryAddressId` | Destino logistico. | PENDIENTE_DE_DEFINIR |
-| `FiscalAddressId` | Perfil fiscal futuro. | PENDIENTE_DE_DEFINIR |
+| `CustomerAddressId` | Perfil cliente. | PENDIENTE_UI_API_REFAPART |
+| `ShippingAddressId` | Entrega. | PENDIENTE_UI_API_REFAPART |
+| `BillingAddressId` | Facturacion futura. | PENDIENTE_MODULO_FISCAL |
+| `SupplierAddressId` | Proveedor. | PENDIENTE_UI_API_REFAPART |
+| `PickupAddressId` | Recoleccion. | PENDIENTE_UI_API_REFAPART |
+| `DeliveryAddressId` | Destino logistico. | PENDIENTE_UI_API_REFAPART |
+| `FiscalAddressId` | Perfil fiscal futuro. | PENDIENTE_MODULO_FISCAL |
 
 ## Rutas web relacionadas
 
@@ -43,6 +68,6 @@ perfil de cliente, checkout, pedido, tracking y direccion fiscal futura.
 
 ## Pendientes
 
-- PENDIENTE_DE_DEFINIR: conectar selector real de Address API en checkout.
-- PENDIENTE_DE_DEFINIR: sincronizar referencias de address en API REFAPART.
-- PENDIENTE_DE_DEFINIR: definir `BillingProfile` cuando el modulo fiscal este activo.
+- Conectar selector real de Address API en checkout y cuenta.
+- Sincronizar referencias `AddressId` en API REFAPART sin copiar catalogos.
+- Definir `BillingProfile` cuando el modulo fiscal este activo.

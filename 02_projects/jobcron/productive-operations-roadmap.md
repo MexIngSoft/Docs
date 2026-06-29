@@ -34,7 +34,7 @@ seguimiento. No reemplaza Gateway, Search ni las APIs de proyecto.
 
 | Ruta Gateway | Metodo | Destino | Proposito | Estado |
 |---|---|---|---|---|
-| `/api/v1/projects/JOBCRON/admin/overview` | GET | JobCron API | Salud operativa general. | PENDIENTE_DE_IMPLEMENTAR |
+| `/api/v1/projects/JOBCRON/admin/overview` | GET | JobCron API | Salud operativa general. | IMPLEMENTADO_API; pendiente consumo UI dinamico |
 | `/api/v1/projects/JOBCRON/admin/leads` | GET/PATCH | JobCron API/Sales | Operar leads MexIngSof. | PENDIENTE_DE_IMPLEMENTAR |
 | `/api/v1/projects/JOBCRON/admin/refapart/requests` | GET/PATCH | REFAPART API | Operar solicitudes REFAPART. | PENDIENTE_DE_IMPLEMENTAR |
 | `/api/v1/projects/JOBCRON/admin/tecnotelec/quotes` | GET/PATCH | Sales/TecnoTelec API | Operar cotizaciones Tecno Telec. | PENDIENTE_DE_IMPLEMENTAR |

@@ -44,5 +44,8 @@ Definir roles y permisos operativos para REFAPART mas alla del rol base
 
 ## Pendientes
 
-- PENDIENTE_DE_DEFINIR: sincronizacion exacta con Auth.
-- PENDIENTE_DE_DEFINIR: seed productivo de roles.
+- Seed observado en Auth: `REFAPART_ADMIN` con permisos operativos base
+  mediante `access/migrations/0017_seed_refapart_operational_permissions.py`.
+- Pendiente: seed productivo de roles especializados `REFAPART_QUOTER`,
+  `REFAPART_SUPPLIER_MANAGER`, `REFAPART_LOGISTICS`, `REFAPART_FINANCE` y
+  `REFAPART_SUPPORT`.
