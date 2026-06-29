@@ -106,6 +106,64 @@
 
 ---
 
+## Ejecucion 2026-06-29 - Correccion SQLite en AGENTS-030
+
+### Context Pack utilizado
+
+- `CP-00 - Preflight obligatorio`
+- `CP-07 - Desarrollo de APIs / Backend`
+- Motivo: tarea directa sin ejecutar agents, pero con modificacion explicita de
+  `Docs/agents/AGENTS-030.md`.
+
+### Clasificacion
+
+| Campo | Resultado |
+|---|---|
+| Ubicacion principal | `Docs/agents` |
+| Ubicaciones secundarias | `03_standards/database`, `02_projects/jobcron` |
+| Tipo de tarea | Correccion documental operativa |
+| Proyecto afectado | JobCron |
+| APIs afectadas | `API.PY.DJANGO.JobCron` |
+| Base de datos | PostgreSQL obligatorio; SQLite prohibido |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/AGENTS-030.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/03_standards/database/postgresql-project-users-and-schemas.md`
+- `Docs/00_audit/10_development_gap_analysis.md`
+
+### Archivos modificados
+
+- `Docs/agents/AGENTS-030.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### Decision tomada
+
+La instruccion de P1 JobCron ya no permite "confirmar" si SQLite es artefacto o
+configuracion activa. Se reemplazo por la regla obligatoria:
+
+```text
+Eliminar cualquier uso o rastro versionado de SQLite/db.sqlite3. JobCron debe
+usar unicamente PostgreSQL conforme al estandar.
+```
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Revision de estandar PostgreSQL | OK: `Docs/03_standards/database/postgresql-project-users-and-schemas.md` prohibe SQLite en configuracion activa. |
+
+### Pendientes
+
+- Ejecutar P1 JobCron sobre el repositorio runtime para eliminar `db.sqlite3`,
+  reforzar `.gitignore`, revisar `settings.py` y correr `python manage.py check`.
+
+---
+
 ## Ejecucion 2026-06-29 - AGENTS-019 orquestador comercial y mapas de acciones
 
 ### Context Pack utilizado

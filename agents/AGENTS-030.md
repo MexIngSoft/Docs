@@ -121,7 +121,8 @@ Prioridad mas alta.
 1. Ejecutar `python manage.py check` en `API.PY.DJANGO.JobCron` si el repo esta
    disponible.
 2. Ejecutar lint/build en `WEB.NJ.NEXT.JobCron` si aplica.
-3. Confirmar si `db.sqlite3` es artefacto local o si la configuracion lo usa.
+3. Eliminar cualquier uso o rastro versionado de SQLite/`db.sqlite3`. JobCron
+   debe usar unicamente PostgreSQL conforme al estandar.
 4. Documentar endpoint faltante `admin/overview`.
 5. Confirmar consumo via Gateway General.
 6. Mantener FeatureAvailability como dominio JobCron y no duplicarlo.
