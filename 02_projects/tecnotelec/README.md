@@ -54,6 +54,14 @@ tasks/07_pre_development_checklist.md
 tasks/08_productive_launch_plan.md
 ```
 
+Mapas de acciones de codigo:
+
+```txt
+technical/code-actions-map.md
+frontend/code-actions-map.md
+api/code-actions-map.md
+```
+
 ## Regla
 
 Tecno Telec no debe documentarse como marketplace generico. El foco es vender soluciones y proyectos, no solo productos.

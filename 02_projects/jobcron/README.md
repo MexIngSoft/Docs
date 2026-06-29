@@ -92,6 +92,9 @@ api-contracts.md
 database.md
 operational-admin-center.md
 productive-operations-roadmap.md
+technical/code-actions-map.md
+frontend/code-actions-map.md
+api/code-actions-map.md
 ```
 
 ## Regla de base de datos publicada

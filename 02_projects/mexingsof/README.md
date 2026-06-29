@@ -65,6 +65,9 @@ El remoto GitHub `MexIngSoft/WEB.NJ.NEXT.MexIngSof` existe y tiene publicado
 - `productive-launch.md`
 - `local-runbook.md`
 - `tasks/00_mvp_gap_report.md`
+- `technical/code-actions-map.md`
+- `frontend/code-actions-map.md`
+- `api/code-actions-map.md`
 
 ## Pendientes
 

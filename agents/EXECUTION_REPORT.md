@@ -2,6 +2,300 @@
 
 ---
 
+## Ejecucion 2026-06-29 - AGENTS-030 concentrador unico y limpieza de agents
+
+### Context Pack utilizado
+
+- `CP-00 - Preflight obligatorio`
+- Extension de tarea: `Agents`
+- Motivo: el usuario solicito ejecutar `AGENTS-030`, reagrupar todos los agents
+  pendientes en uno y eliminar de los archivos de agents lo que ya estaba
+  documentado, respetando la regla de conservar los archivos `AGENTS-*.md`.
+
+### Agent ejecutado
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-030.md` | Parcialmente completado | Queda como unico concentrador activo de pendientes. `AGENTS-000.md` a `AGENTS-029.md` fueron limpiados conservando archivos. No se limpia `AGENTS-030.md` porque contiene pendientes reales ejecutables y decisiones pendientes. |
+
+### Tabla de cierre y reagrupacion
+
+| Agent | Estado anterior | Accion aplicada | Nuevo estado | Proyecto | Validacion | Limpieza |
+|---|---|---|---|---|---|---|
+| `AGENTS-000.md` | Activo | Reagrupado en P0 REFAPART/Auth/Gateway | Limpio / absorbido por `AGENTS-030.md` | REFAPART/Auth/Gateway | Inventario documental | Si |
+| `AGENTS-001.md` | Absorbido | Confirmado como absorbido por `AGENTS-000.md` y reagrupado | Limpio / absorbido por `AGENTS-030.md` | REFAPART/Auth | Inventario documental | Si |
+| `AGENTS-002.md` | Futuro comercial | Reagrupado en P5 Payments/futuro | Limpio / pendiente en `AGENTS-030.md` | Payments/POS/Sales/Fiscal | Inventario documental | Si |
+| `AGENTS-003.md` | Futuro tecnico | Reagrupado en P5 Document/Image/DocuCore | Limpio / pendiente en `AGENTS-030.md` | Document/Image/DocuCore | Inventario documental | Si |
+| `AGENTS-004.md` | Activo | Reagrupado en P2 MexIngSof | Limpio / pendiente en `AGENTS-030.md` | MexIngSof | Inventario documental | Si |
+| `AGENTS-005.md` | Activo | Reagrupado en P1/P4 JobCron/POS | Limpio / pendiente en `AGENTS-030.md` | JobCron/POS | Inventario documental | Si |
+| `AGENTS-006.md` | Sin instrucciones | Confirmado como absorbido por `AGENTS-005.md` | Limpio / sin instrucciones | JobCron/POS | Archivo ya estaba vacio | Si |
+| `AGENTS-007.md` | Roadmap | Reagrupado como roadmap no prioritario | Limpio / roadmap en `AGENTS-030.md` | Innovation Engines Repair | Inventario documental | Si |
+| `AGENTS-008.md` | Roadmap compartido | Reagrupado como Search/operacion futura | Limpio / roadmap en `AGENTS-030.md` | Search/JobCron futuro | Inventario documental | Si |
+| `AGENTS-009.md` | Roadmap | Reagrupado como fuera de salida actual | Limpio / roadmap en `AGENTS-030.md` | Buildora | Inventario documental | Si |
+| `AGENTS-010.md` | Roadmap | Reagrupado como fuera de salida actual | Limpio / roadmap en `AGENTS-030.md` | Trading/Radar | Inventario documental | Si |
+| `AGENTS-011.md` | Roadmap | Reagrupado como fuera de salida actual | Limpio / roadmap en `AGENTS-030.md` | ContentHub | Inventario documental | Si |
+| `AGENTS-012.md` | Activo | Reagrupado en P0 REFAPART/Auth/SES | Limpio / pendiente en `AGENTS-030.md` | REFAPART/Auth/SES | Inventario documental | Si |
+| `AGENTS-013.md` | Soporte Docker | Reagrupado como soporte si se toca Docker/scripts | Limpio / condicional en `AGENTS-030.md` | Docker/scripts | Inventario documental | Si |
+| `AGENTS-014.md` | Parcial | Reagrupado en P0 REFAPART/Auth/SES | Limpio / pendiente en `AGENTS-030.md` | REFAPART/Auth/SES | Inventario documental | Si |
+| `AGENTS-015.md` | Completado previo REFAPART | Reagrupado solo como pendiente condicional si falla correo/template | Limpio / condicional en `AGENTS-030.md` | REFAPART/Auth/Templates | Inventario documental | Si |
+| `AGENTS-016.md` | Parcial/condicional | Reagrupado como correo REFAPART condicional | Limpio / condicional en `AGENTS-030.md` | REFAPART/Auth/Templates | Inventario documental | Si |
+| `AGENTS-017.md` | Activo | Reagrupado como paginas Auth por proyecto | Limpio / pendiente en `AGENTS-030.md` | Webs Next.js/Auth | Inventario documental | Si |
+| `AGENTS-018.md` | Estandar | Reagrupado como mantenimiento de mapas de acciones | Limpio / pendiente en `AGENTS-030.md` | Todos los proyectos | Inventario documental | Si |
+| `AGENTS-019.md` | Orquestador | Absorbido por `AGENTS-030.md` | Limpio / absorbido | REFAPART/MexIngSof/Tecno Telec/JobCron | Inventario documental | Si |
+| `AGENTS-020.md` | Referencia tecnica | Reagrupado como apoyo, no agent activo | Limpio / referencia en `AGENTS-030.md` | MexIngSoft stack | Inventario documental | Si |
+| `AGENTS-021.md` | Incidencia REFAPART | Absorbido en P0 REFAPART/Gateway/Auth | Limpio / absorbido | REFAPART/Gateway/Auth | Inventario documental | Si |
+| `AGENTS-022.md` | Roadmap | Reagrupado como fuera de salida actual | Limpio / roadmap en `AGENTS-030.md` | Innovation Engines Repair | Inventario documental | Si |
+| `AGENTS-023.md` | Roadmap | Reagrupado como fuera de salida actual | Limpio / roadmap en `AGENTS-030.md` | Marketplace Manager | Inventario documental | Si |
+| `AGENTS-024.md` | Roadmap | Reagrupado como fuera de salida actual | Limpio / roadmap en `AGENTS-030.md` | Comerzy | Inventario documental | Si |
+| `AGENTS-025.md` | Sin instrucciones | Sin cambios funcionales | Limpio / sin instrucciones | N/A | Archivo ya estaba vacio | Si |
+| `AGENTS-026.md` | Sin instrucciones | Sin cambios funcionales | Limpio / sin instrucciones | N/A | Archivo ya estaba vacio | Si |
+| `AGENTS-027.md` | Sin instrucciones | Sin cambios funcionales | Limpio / sin instrucciones | N/A | Archivo ya estaba vacio | Si |
+| `AGENTS-028.md` | Sin instrucciones | Sin cambios funcionales | Limpio / sin instrucciones | N/A | Archivo ya estaba vacio | Si |
+| `AGENTS-029.md` | Sin instrucciones | Sin cambios funcionales | Limpio / sin instrucciones | N/A | Archivo ya estaba vacio | Si |
+| `AGENTS-030.md` | Activo | Convertido en concentrador unico | Activo / parcial | Todos los pendientes priorizados | Inventario documental | No |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md` a `Docs/agents/AGENTS-030.md`
+
+### Archivos modificados
+
+- `Docs/agents/AGENTS-000.md` a `Docs/agents/AGENTS-029.md`
+- `Docs/agents/AGENTS-030.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### Decisiones tomadas
+
+- `AGENTS-030.md` queda como unico archivo activo con pendientes reales.
+- Todo contenido ya documentado o duplicado se limpio de los agents fuente.
+- Los archivos vaciados se conservan como placeholders para no perder numeracion.
+- Los pendientes se agruparon por prioridad:
+  - P0 REFAPART/Auth/Gateway;
+  - P1 JobCron/Auth/Gateway;
+  - P2 MexIngSof;
+  - P3 Tecno Telec;
+  - P4 Universal POS;
+  - P5 Payments, Document, Image y roadmap futuro.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Inventario de tamanos `AGENTS-*.md` | OK: `AGENTS-000.md` a `AGENTS-029.md` quedan en 0 bytes; `AGENTS-030.md` conserva contenido. |
+| Conservacion de archivos `AGENTS-*.md` | OK: no se borro, movio ni renombro ningun archivo. |
+| `git diff --check` | OK: sin errores de whitespace; solo avisos LF/CRLF normales de Git en Windows. |
+| Runtime/lint/build/Docker | No ejecutado: esta corrida solo reagrupo y limpio agents; no modifico codigo runtime ni infraestructura. |
+
+### Pendientes reales concentrados
+
+- Ver `Docs/agents/AGENTS-030.md`.
+- No ejecutar agents anteriores directamente; si se requiere algo de ellos,
+  partir del concentrador y de los documentos canonicos relacionados.
+
+### Riesgos detectados
+
+- Si alguien restaura contenido viejo de `AGENTS-000.md` a `AGENTS-029.md`, se
+  puede duplicar trabajo ya reagrupado.
+- `AGENTS-030.md` no debe limpiarse hasta cerrar o bloquear formalmente los
+  pendientes P0-P5.
+
+---
+
+## Ejecucion 2026-06-29 - AGENTS-019 orquestador comercial y mapas de acciones
+
+### Context Pack utilizado
+
+- `CP-00 - Preflight obligatorio`
+- `CP-07 - Desarrollo de APIs / Backend`
+- `CP-08 - Desarrollo Frontend`
+- Extension de tarea: `Agents`
+- Motivo: `AGENTS-019.md` exige clasificar todos los agents y desarrollar solo
+  lo que impacta a REFAPART, MexIngSof, Tecno Telec, JobCron o al estandar
+  reutilizable futuro.
+
+### Agent ejecutado
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-019.md` | Parcial ejecutable | Se clasificaron los agents activos y se desarrollaron mapas de acciones para MexIngSof, Tecno Telec y JobCron. REFAPART ya tenia mapas vigentes. No se limpio el agent porque conserva decisiones operativas y hay pendientes reales fuera del alcance de esta ejecucion. |
+
+### Clasificacion de agents
+
+| Agent | Clasificacion | Proyecto/dominio principal | Accion tomada |
+|---|---|---|---|
+| `AGENTS-000.md` | Prioridad REFAPART/Auth | REFAPART, Auth, Gateway, correo | Documentado como owner de tareas Auth/Refapart; no se reejecuto. |
+| `AGENTS-001.md` | Absorbido | REFAPART/Auth | Ya esta marcado como absorbido por `AGENTS-000.md`; no se duplico trabajo. |
+| `AGENTS-002.md` | Futuro comercial | Payments/POS/Sales/Fiscal | Documentado como futuro; no se desarrollo en esta ejecucion. |
+| `AGENTS-003.md` | Futuro tecnico | Image/Document/DocuCore | Documentado como futuro; no impacta directo al alcance comercial inmediato. |
+| `AGENTS-004.md` | Prioridad MexIngSof | MexIngSof web/control | Se desarrollo mapa de acciones MexIngSof. |
+| `AGENTS-005.md` | Prioridad JobCron | JobCron Core/POS | Se desarrollo mapa de acciones JobCron. |
+| `AGENTS-006.md` | Sin instrucciones | Absorbido por `AGENTS-005.md` | Archivo vacio; no ejecutable. |
+| `AGENTS-007.md` | Roadmap | Innovation Engines Repair | Documentado fuera de prioridad. |
+| `AGENTS-008.md` | Roadmap compartido | Integraciones/Search/operacion | Solo se considera si afecta JobCron/Search futuro; no se desarrollo runtime. |
+| `AGENTS-009.md` | Roadmap | Buildora | Fuera de alcance. |
+| `AGENTS-010.md` | Roadmap | Trading/Radar | Fuera de alcance. |
+| `AGENTS-011.md` | Roadmap | ContentHub/ContentFactory | Fuera de alcance. |
+| `AGENTS-012.md` | Prioridad REFAPART/Auth | Email Auth/SES/Djoser | Documentado como dependencia REFAPART; no se reejecuto. |
+| `AGENTS-013.md` | Soporte Docker/operacion | REFAPART y proyectos web | Documentado; no se modifico Docker en esta ejecucion. |
+| `AGENTS-014.md` | Prioridad Auth/correo | REFAPART/Auth/AWS SES | Documentado; no se reejecuto envio SES. |
+| `AGENTS-015.md` | Prioridad plantillas/correos | REFAPART/Auth | Documentado; no se reejecuto. |
+| `AGENTS-016.md` | Prioridad REFAPART/correos | REFAPART/Auth | Documentado; no se reejecuto. |
+| `AGENTS-017.md` | Prioridad paginas Auth | Webs Next.js | Documentado como propagacion; no se desarrollo web adicional. |
+| `AGENTS-018.md` | Estandar acciones de codigo | Todos los proyectos | Se aplico a MexIngSof, Tecno Telec y JobCron; REFAPART ya estaba cubierto. |
+| `AGENTS-019.md` | Orquestador | REFAPART, MexIngSof, Tecno Telec, JobCron | Ejecutado en esta entrada. |
+| `AGENTS-020.md` | Referencia tecnica | MexIngSoft stack/roadmap | Documentado como referencia; no se desarrollo runtime. |
+| `AGENTS-021.md` | Incidencia puntual | REFAPART/Gateway/Auth | Documentado como incidencia absorbible por `AGENTS-000.md`; no se duplico. |
+| `AGENTS-022.md` | Roadmap | Innovation Engines Repair | Fuera de alcance. |
+| `AGENTS-023.md` | Roadmap | Marketplace Manager | Fuera de alcance. |
+| `AGENTS-024.md` | Roadmap | Comerzy | Fuera de alcance. |
+| `AGENTS-025.md` | Sin instrucciones | N/A | Archivo vacio; no ejecutable. |
+| `AGENTS-026.md` | Sin instrucciones | N/A | Archivo vacio; no ejecutable. |
+| `AGENTS-027.md` | Sin instrucciones | N/A | Archivo vacio; no ejecutable. |
+| `AGENTS-028.md` | Sin instrucciones | N/A | Archivo vacio; no ejecutable. |
+| `AGENTS-029.md` | Sin instrucciones | N/A | Archivo vacio; no ejecutable. |
+| `AGENTS-030.md` | Sin instrucciones | N/A | Archivo vacio; no ejecutable. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md` a `Docs/agents/AGENTS-030.md`
+- `Docs/00_audit/10_development_gap_analysis.md`
+- `Docs/00_audit/codex-context-map.md`
+- `Docs/00_audit/reusable-api-map.md`
+- `Docs/00_audit/reusable-api-audit.md`
+- `Docs/01_core_erp/apis/reusable-api-contracts.md`
+- `Docs/01_core_erp/apis/api-decision-matrix.md`
+- `Docs/01_core_erp/apis/gateway-route-registry.md`
+- `Docs/01_core_erp/apis/endpoint-ui-consumption-matrix.md`
+- `Docs/03_standards/operations/context-packs.md`
+- `Docs/03_standards/code-actions/code-actions-map-standard.md`
+- `Docs/templates/code-actions-map-template.md`
+- `Docs/02_projects/refapart/README.md`
+- `Docs/02_projects/mexingsof/README.md`
+- `Docs/02_projects/tecnotelec/README.md`
+- `Docs/02_projects/tecnotelec/AGENTE.md`
+- `Docs/02_projects/jobcron/README.md`
+- Estructuras reales de codigo en `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof`,
+  `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec`,
+  `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron`,
+  `Docker.API.PY/API.PY.DJANGO.JobCron`,
+  `Docker.API.PY/API.PY.DJANGO.TecnoTelec` y
+  `Docker.API.PY/API.PY.DJANGO.Gateway`.
+
+### Archivos modificados
+
+- `Docs/02_projects/mexingsof/README.md`
+- `Docs/02_projects/mexingsof/technical/code-actions-map.md`
+- `Docs/02_projects/mexingsof/frontend/code-actions-map.md`
+- `Docs/02_projects/mexingsof/api/code-actions-map.md`
+- `Docs/02_projects/jobcron/README.md`
+- `Docs/02_projects/jobcron/technical/code-actions-map.md`
+- `Docs/02_projects/jobcron/frontend/code-actions-map.md`
+- `Docs/02_projects/jobcron/api/code-actions-map.md`
+- `Docs/02_projects/tecnotelec/README.md`
+- `Docs/02_projects/tecnotelec/technical/code-actions-map.md`
+- `Docs/02_projects/tecnotelec/frontend/code-actions-map.md`
+- `Docs/02_projects/tecnotelec/api/code-actions-map.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### APIs reutilizadas
+
+- Gateway General para rutas consumidas por frontends.
+- Auth para identidad, sesiones y paneles administrativos pendientes.
+- JobCron API para leads, CRM, FeatureAvailability y operacion central.
+- Catalog, Pricing, Supplier y Sales para Tecno Telec.
+- Search API para busqueda transversal futura.
+
+### APIs descartadas por duplicidad
+
+- API especializada MexIngSof: descartada por ahora; los casos actuales deben
+  pasar por JobCron, Catalog, Auth y Gateway.
+- API duplicada de FeatureAvailability: descartada; JobCron conserva el dominio.
+- API TecnoTelec para catalogo/precios/ventas compartidos: descartada si Catalog,
+  Pricing, Supplier o Sales cubren el caso.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Inventario `AGENTS-*.md` | OK: se leyeron y clasificaron `AGENTS-000.md` a `AGENTS-030.md`. |
+| Validacion de rutas documentales creadas | OK: existen mapas `technical`, `frontend` y `api` para REFAPART, MexIngSof, Tecno Telec y JobCron. |
+| Revision de estructura real de codigo | OK: se confirmaron carpetas web/API de MexIngSof, Tecno Telec, JobCron, REFAPART indirectamente por mapas existentes, Gateway y APIs relacionadas. |
+| Rama `general` basada en `dev` | OK: rama activa `general`; `dev` es ancestro de `general`. |
+| `git diff --check` | OK: sin errores de whitespace; solo avisos LF/CRLF normales de Git en Windows. |
+| Lint/build/runtime | No ejecutado: no se modifico codigo runtime; los cambios fueron documentales y de mapas de acciones. |
+| Docker | No ejecutado: no se modificaron `Dockerfile`, `compose` ni scripts Docker. |
+
+### Contradicciones detectadas
+
+- Entradas antiguas de `EXECUTION_REPORT.md` indican que varios `AGENTS-*.md`
+  estaban vacios o cerrados, pero el inventario actual muestra contenido activo
+  en `AGENTS-000.md` a `AGENTS-005.md`, `AGENTS-007.md` a `AGENTS-024.md`.
+  Prevalece el estado actual de archivos.
+- `AGENTS-019.md` pide clasificar todos los agents y tambien priorizar solo
+  salida comercial. Para no mezclar dominios, se documento todo y se desarrollo
+  solo MexIngSof, Tecno Telec y JobCron; REFAPART ya estaba cubierto con mapas.
+- Existen `db.sqlite3` locales en repositorios Django; se registra como riesgo
+  porque la base canonica productiva no debe depender de SQLite.
+
+### Decisiones tomadas
+
+- No se creo ningun API runtime nuevo.
+- Los mapas de MexIngSof marcan las rutas `app/api/*` como temporales hasta
+  migrarlas a Gateway/JobCron/Catalog/Auth.
+- Tecno Telec queda con mapa vigente parcial porque existe web y API, pero
+  faltan contratos reales para cerrar cotizacion, Auth y consumos compartidos.
+- JobCron queda como propietario de capacidades ERP compartidas y FeatureAvailability.
+- No se limpio `AGENTS-019.md` porque el archivo tenia cambios previos y aun
+  conserva tareas/politicas de orquestacion con pendientes reales.
+
+### Pendientes reales
+
+- REFAPART: mantener mapas existentes alineados con futuros cambios Auth,
+  correos, Gateway y Search.
+- MexIngSof: migrar leads/productos/admin desde Prisma local temporal a
+  Gateway/JobCron/Catalog/Auth.
+- Tecno Telec: crear o autorizar agent especifico de MVP si se requiere cerrar
+  desarrollo mas alla del mapa y contratos.
+- JobCron: definir Auth real del panel administrativo y confirmar base canonica
+  no SQLite.
+- General: ejecutar lint/build/test/runtime cuando se modifique codigo de
+  proyecto, no solo documentacion.
+
+### Riesgos detectados
+
+- Si se dejan rutas internas `app/api/*` como productivas en MexIngSof, se rompe
+  el estandar de Gateway General.
+- Si Tecno Telec implementa catalogo/precios/ventas en API propia sin descartar
+  Catalog/Pricing/Supplier/Sales, se duplican APIs.
+- Si JobCron mantiene SQLite como base operativa, contradice el estandar de base
+  de datos productiva.
+- Si se limpia `AGENTS-019.md` antes de cerrar pendientes reales, se pierde el
+  rastro del orquestador comercial.
+
+### Agents completados, limpiados, parciales, bloqueados o sin instrucciones
+
+- Completados en esta ejecucion: ninguno limpio, porque `AGENTS-019.md` conserva
+  pendientes reales.
+- Limpiados: ninguno.
+- Parciales: `AGENTS-019.md`.
+- Bloqueados: ninguno bloqueado por falta de informacion para documentar; los
+  bloqueos son pendientes de desarrollo futuro listados arriba.
+- Sin instrucciones: `AGENTS-006.md`, `AGENTS-025.md`, `AGENTS-026.md`,
+  `AGENTS-027.md`, `AGENTS-028.md`, `AGENTS-029.md`, `AGENTS-030.md`.
+
+---
+
 ## Ejecucion 2026-06-27 - AGENTS-019 - Orquestador Refapart y mapa de acciones
 
 ### Context Pack utilizado
