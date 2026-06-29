@@ -26,7 +26,7 @@ Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart
 | `REFAPART.AUTH.PERMISSIONS` | Rutas protegidas | `features/auth/store/AuthProvider.tsx` | `features/auth/services/auth-service.ts -> getSession` | `/auth/me/permissions/` | vigente | Permisos definitivos pendientes de matriz por rol. |
 | `REFAPART.QUOTE.SEARCH_PART` | `/`, `/resultados` | `app/page.tsx`, `app/resultados/page.tsx` | `lib/api/refapart.ts -> refapartApi.search` | `/projects/REFAPART/search` | vigente | Buscar piezas y registrar demanda si no hay resultados. |
 | `REFAPART.QUOTE.CREATE_REQUEST` | `/publicar-busqueda` | `app/publicar-busqueda/page.tsx` | `lib/api/refapart.ts -> refapartApi.createRequest` | `/projects/REFAPART/requests` | vigente | Solicitud publica de pieza. |
-| `REFAPART.ADDRESS.SEARCH` | `/cuenta/direcciones`, `/checkout` | `app/cuenta/direcciones/page.tsx`, `app/checkout/page.tsx` | PENDIENTE_DE_DEFINIR: selector Address no conectado en UI | `/core/address/api/address/suggest?postalCode=` | pendiente | Ruta Gateway confirmada; falta consumo real desde formulario. |
+| `REFAPART.ADDRESS.SEARCH` | `/cuenta/direcciones`, `/checkout` | `app/cuenta/direcciones/page.tsx`, `app/checkout/page.tsx`, `components/AddressForm.tsx` | `lib/api/address.ts -> suggest/create` | `/core/address/api/address/suggest?postalCode=`, `/core/address/api/address/addresses` | vigente | UI conectada por Gateway; crea Address en Address API y conserva `AddressId` para Refapart. |
 | `REFAPART.PAYMENT.REQUEST` | `/checkout` | `app/checkout/page.tsx` | PENDIENTE_DE_DEFINIR: contrato Payments no aprobado | PENDIENTE_DE_DEFINIR | pendiente | Payments futuro, no integrar proveedor directo. |
 
 ## Cliente Gateway
@@ -49,4 +49,6 @@ Reglas:
 - Separar servicios frontend de dominio para busqueda, solicitudes, checkout,
   direcciones y admin si hoy viven dentro de paginas.
 - Confirmar permisos finales para rutas admin.
-- Conectar selector real de Address en `/checkout` y `/cuenta/direcciones`.
+- Persistir libreta de direcciones del cliente en perfil cuando exista contrato
+  de API de cuenta; por ahora la UI crea direcciones en Address API y usa la
+  referencia en checkout.

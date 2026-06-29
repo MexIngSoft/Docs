@@ -19,7 +19,7 @@ NEXT_PUBLIC_GATEWAY_BASE_URL=http://localhost:8025/api/v1
 | `POST` | `/projects/REFAPART/search` | Buscar, normalizar errores y registrar demanda sin resultado. |
 | `GET` | `/projects/REFAPART/search/suggestions?q=` | Obtener sugerencias. |
 | `POST` | `/projects/REFAPART/requests` | Publicar solicitud de pieza. |
-| `POST` | `/projects/REFAPART/checkout` | Crear pedido manual desde pieza publicable. |
+| `POST` | `/projects/REFAPART/checkout` | Crear pedido manual desde pieza publicable; requiere `shippingAddressId` creado en Address API. |
 
 ## Endpoints operativos implementados
 

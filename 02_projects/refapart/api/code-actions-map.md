@@ -29,9 +29,9 @@ marketplace/models.py
 | `REFAPART.QUOTE.CREATE_QUOTE` | `/projects/REFAPART/admin/part-requests/{id}/quote` | `marketplace.views.quote_create` | POST | `RefaPartQuote`, `RefaPartSupplierPartOffer`, `RefaPartAuditLog` | vigente | Genera cotizacion interna publicable. |
 | `REFAPART.QUOTE.SEND_QUOTE` | `/projects/REFAPART/admin/part-requests/{id}/quote/send` | `marketplace.views.quote_send` | POST | `RefaPartQuote`, `RefaPartPartRequest`, `RefaPartAuditLog` | vigente | Prepara mensaje al cliente; no sustituye notificacion formal futura. |
 | `REFAPART.ORDER.CREATE` | `/projects/REFAPART/admin/part-requests/{id}/order` | `marketplace.views.order_create` | POST | `RefaPartOrder`, `RefaPartLogisticsTask`, `RefaPartAuditLog` | vigente | Crea pedido operativo desde cotizacion. |
-| `REFAPART.ORDER.CHECKOUT` | `/projects/REFAPART/checkout` | `marketplace.views.checkout` | POST | `RefaPartPartRequest`, `RefaPartSupplierPartOffer`, `RefaPartQuote`, `RefaPartOrder`, `RefaPartLogisticsTask`, `RefaPartAuditLog` | vigente | Checkout manual MVP; Payments real pendiente. |
+| `REFAPART.ORDER.CHECKOUT` | `/projects/REFAPART/checkout` | `marketplace.views.checkout` | POST | `RefaPartPartRequest`, `RefaPartSupplierPartOffer`, `RefaPartQuote`, `RefaPartOrder.ShippingAddressId`, `RefaPartLogisticsTask`, `RefaPartAuditLog` | vigente | Checkout manual MVP; requiere `shippingAddressId` creado en Address API. Payments real pendiente. |
 | `REFAPART.ORDER.TRACKING` | `/projects/REFAPART/me/orders/{id}/tracking` | `marketplace.views.my_order_tracking` | GET | `RefaPartOrder`, `RefaPartLogisticsTask` | vigente | Tracking visible al cliente. |
-| `REFAPART.ADDRESS.SEARCH` | `/core/address/api/address/suggest?postalCode=` | `API.PY.DJANGO.Address` | GET | Address API; snapshots permitidos en REFAPART | pendiente | Gateway y API existen; falta consumo UI real en REFAPART. |
+| `REFAPART.ADDRESS.SEARCH` | `/core/address/api/address/suggest?postalCode=`, `/core/address/api/address/addresses` | `API.PY.DJANGO.Address` | GET/POST | Address API; `RefaPartOrder.ShippingAddressId` como referencia | vigente | UI REFAPART consume Address via Gateway y no copia catalogos geograficos. |
 | `REFAPART.PAYMENT.REQUEST` | PENDIENTE_DE_DEFINIR | Payments API futura | POST | `RefaPartOrder`, futuro Payment | pendiente | No integrar Openpay/Mercado Pago/Stripe/BBVA directo en REFAPART sin contrato/owner/proveedor. |
 
 ## Permisos
@@ -57,7 +57,8 @@ Las acciones admin deben seguir protegidas por Gateway/Auth y no solo por UI.
 
 - Definir permisos `REFAPART_ADMIN`, `REFAPART_OPERATOR`, `REFAPART_CUSTOMER`
   o equivalentes.
-- Conectar consumo real de Address en UI REFAPART.
+- Definir contrato de libreta persistente de direcciones de cliente si el
+  perfil necesita listar direcciones guardadas entre sesiones.
 - Definir contrato Payments antes de activar pagos reales.
 - Validar migraciones contra `Docs/02_projects/refapart/database.md` en una
   corrida donde se permita ejecutar pruebas/API.

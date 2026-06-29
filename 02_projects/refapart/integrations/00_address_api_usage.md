@@ -51,7 +51,7 @@ Rutas confirmadas:
 | Referencia | Uso | Estado |
 |---|---|---|
 | `CustomerAddressId` | Perfil cliente. | PENDIENTE_UI_API_REFAPART |
-| `ShippingAddressId` | Entrega. | PENDIENTE_UI_API_REFAPART |
+| `ShippingAddressId` | Entrega. | IMPLEMENTADO_CHECKOUT_MANUAL |
 | `BillingAddressId` | Facturacion futura. | PENDIENTE_MODULO_FISCAL |
 | `SupplierAddressId` | Proveedor. | PENDIENTE_UI_API_REFAPART |
 | `PickupAddressId` | Recoleccion. | PENDIENTE_UI_API_REFAPART |
@@ -68,6 +68,37 @@ Rutas confirmadas:
 
 ## Pendientes
 
-- Conectar selector real de Address API en checkout y cuenta.
-- Sincronizar referencias `AddressId` en API REFAPART sin copiar catalogos.
+- Persistir libreta de direcciones de cliente cuando exista contrato de perfil
+  de cuenta; la creacion en Address API y uso de `ShippingAddressId` en checkout
+  ya quedan implementados.
 - Definir `BillingProfile` cuando el modulo fiscal este activo.
+
+## Contrato usado por REFAPART
+
+`GET /core/address/api/address/suggest?postalCode=` devuelve `postalCodeId`,
+`country`, `state`, `municipality` y `settlements`. REFAPART usa
+`postalCodeId` y `settlementId` para crear una direccion completa con:
+
+```text
+POST /core/address/api/address/addresses
+```
+
+El checkout manual REFAPART envia unicamente:
+
+```text
+shippingAddressId
+```
+
+La API REFAPART persiste esa referencia en `RefaPartOrder.ShippingAddressId`.
+
+## Datos de desarrollo
+
+Para pruebas locales controladas existe el comando Address:
+
+```text
+python manage.py seed_dev_address_catalog
+```
+
+Este seed crea un catalogo minimo de desarrollo para validar Refapart checkout
+sin usar SQLite ni copiar catalogos en REFAPART. No sustituye la carga oficial
+completa de catalogos geograficos.

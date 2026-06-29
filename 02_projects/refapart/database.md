@@ -65,8 +65,9 @@ migraciones antes de marcarlos como implementados:
   `PickupCost`, `ShippingCost`, `MarginAmount`, `MarginPercent`,
   `FinalPrice`, `WarrantyText`, `ExpirationDate`, `QuoteStatus`, `CreatedAt`,
   `UpdatedAt`.
-- `Order`: `Id`, `QuoteId`, `CustomerId`, `OrderStatus`, `PaymentStatus`,
-  `LogisticsStatus`, `FinalPrice`, `CreatedAt`, `UpdatedAt`.
+- `Order`: `Id`, `QuoteId`, `CustomerId`, `ShippingAddressId`,
+  `OrderStatus`, `PaymentStatus`, `LogisticsStatus`, `FinalPrice`,
+  `CreatedAt`, `UpdatedAt`.
 
 ## Datos operativos en JobCron
 
@@ -82,8 +83,9 @@ migraciones antes de marcarlos como implementados:
 ## Direcciones
 
 El catalogo geografico vive en `API.PY.DJANGO.Address` con pais, estado,
-municipio, codigo postal, asentamiento, calle y direccion. REFAPART conserva
-solo los campos operativos minimos mientras se integra la referencia formal.
+municipio, codigo postal, asentamiento, calle y direccion. REFAPART no copia
+catalogos geograficos. El checkout manual conserva `ShippingAddressId` en
+`RefaPartOrder` y usa esa referencia para el seguimiento logistico MVP.
 
 ## Migraciones
 
