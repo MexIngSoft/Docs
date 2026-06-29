@@ -242,6 +242,34 @@ No recrear `feature/general-integration-dev`. La rama operativa diaria es
 - PENDIENTE_DE_DEFINIR: confirmar si todos los repos tendran protecciones
   obligatorias de GitHub sobre `dev`, `pro` y `main`.
 
+## Revision de ramas 2026-06-29
+
+Tarea solicitada: publicar cambios pendientes en `general` y conservar solo las
+ramas persistentes oficiales:
+
+```text
+main
+pro
+dev
+general
+```
+
+Resultado:
+
+| Resultado | Detalle |
+|---|---|
+| Repos con cambios publicados | `Docs`, `Docker.API.PY`, `API.PY.DJANGO.Auth`, `API.PY.DJANGO.Gateway`, `API.PY.DJANGO.JobCron`, `Docker.DB.PG`, `Docker.WEB.NJ`, `WEB.NJ.NEXT.RefaPart`. |
+| Rama usada | `general`. |
+| Relacion `general` -> `dev` | OK en repos con cambios: `dev` es ancestro de `general`. |
+| Ramas remotas eliminadas | `feature/general-integration-dev` eliminada de los repos detectados que aun la tenian viva. |
+| Ramas remotas permitidas finales | `main`, `pro`, `dev`, `general`. |
+| Bloqueo restante | `WEB.NJ.NEXT.TecnoTelec` conserva `origin/master` porque GitHub rechazo la eliminacion: `refusing to delete the current branch: refs/heads/master`. |
+| Accion requerida | Cambiar la default branch de `MexIngSoft/WEB.NJ.NEXT.TecnoTelec` a `general`, `dev`, `pro` o `main` desde GitHub; despues ejecutar `git push origin --delete master`. |
+| Herramienta local | `gh` no esta instalado en el entorno, por eso no se pudo cambiar default branch desde terminal. |
+
+Mientras `master` siga siendo default branch en GitHub, no se puede eliminar
+por push aunque `general` ya exista publicado.
+
 ## Revision de repositorios 2026-06-19
 
 Revision ejecutada con `git ls-remote` sobre las carpetas canonicas de
