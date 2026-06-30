@@ -48,6 +48,7 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | `Docs/03_standards/frontend/ui-ux-standard.md` | Mobile first, mockups aprobados, UX por dominio y cierre UI. |
 | `Docs/03_standards/architecture/api-gateway-standard.md` | Regla Frontend -> Gateway -> API -> Core/Shared. |
 | `Docs/03_standards/auth/web-auth-login-standard.md` | Login web via Gateway General y excepciones documentadas. |
+| `Docs/03_standards/auth/web-auth-event-standard.md` | Eventos Auth web canonicos: login, registro, reenvio, activacion, reset y proveedores sociales. |
 | `Docs/03_standards/auth/web-auth-route-scope-standard.md` | Alcance Auth por ruta publica, opcional o protegida. |
 | `Docs/03_standards/auth/auth-email-delivery-diagnostics-standard.md` | Correos Auth, reenvio, SES, errores dev/prod, logs y reintentos. |
 | `Docs/03_standards/auth/auth-email-template-standard.md` | Plantillas Auth por aplicacion, rutas, variables permitidas y validacion. |
@@ -98,7 +99,9 @@ Para que los proyectos salgan con mejor base, toda fase nueva debe revisar:
 | Crear/modificar API core | `01_core_erp/apis/00_api_index.md` | Documento de API especifica, DB relacionada, arquitectura y testing. |
 | Crear/modificar proyecto | `02_projects/_ecosystem/04_process_convergence_and_conflicts.md` | README del proyecto, tasks, decisions y frontend/API propios. |
 | Crear/modificar Auth/login web | `03_standards/auth/web-auth-login-standard.md` | Matrices API/Gateway, Auth core, Gateway central y plan `auth-migration.md`. |
+| Crear/modificar eventos Auth web | `03_standards/auth/web-auth-event-standard.md` | `auth-feedback-standard.md`, `web-auth-route-scope-standard.md`, proyecto afectado y validacion `Docs/scripts/validate-web-auth-events.ps1`. |
 | Corregir errores falsos Auth en web publica | `03_standards/auth/web-auth-route-scope-standard.md` | Proyecto afectado, frontend, Gateway/Auth y migracion Auth del proyecto. |
+| Auditar adopcion de eventos Auth web | `00_audit/web-auth-event-adoption.md` | `03_standards/auth/web-auth-event-standard.md` y `Docs/scripts/validate-web-auth-events.ps1`. |
 | Crear/modificar plantillas de correo Auth | `03_standards/auth/auth-email-template-standard.md` | Diagnostico de correos, proyecto afectado y templates en Auth. |
 | Trabajar Fiscora | `02_projects/fiscora/README.md` | `architecture.md`, `api-contracts.md`, `tasks/*`, `database/cfdi-data-model.md`. |
 | Trabajar DocuCore | `02_projects/docucore/README.md` | `mvp-roadmap.md`, `api-contracts.md`, `document-intelligence.md`, `database.md`. |
