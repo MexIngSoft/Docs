@@ -46,6 +46,22 @@ estados y mensajes no deben omitirse.
 | `user_not_verified` | Cuenta pendiente de verificacion. |
 | `user_blocked` | Cuenta bloqueada o sin permiso. |
 
+## Matriz de mensajes por evento
+
+| Evento | Caso | Mensaje usuario | Accion visible | Console/overlay |
+|---|---|---|---|---|
+| Login | Correo o contrasena incorrectos, cuenta inexistente, cuenta inactiva ambigua o credenciales invalidas | Correo o contrasena incorrectos. | Mantener formulario, permitir reintento, mostrar enlace a recuperacion. | No mostrar `console.error` por `400`/`401` esperados. |
+| Login | Gateway/Auth no disponible | No pudimos completar la solicitud en este momento. | Mostrar reintento y soporte si hay folio. | Desarrollo puede registrar diagnostico sin secretos. |
+| Registro | Cuenta creada | Verifica tu correo electronico. | Mostrar correo destino, abrir proveedor, reenviar si endpoint existe, login. | No afirmar entrega final del proveedor. |
+| Registro | Correo ya registrado | Ese correo ya esta registrado. | Ofrecer login y reenvio solo si el flujo esta relacionado con verificacion. | No registrar como error tecnico esperado. |
+| Registro | Password invalido | La contrasena no cumple los requisitos. | Mantener formulario y reglas visibles. | No registrar como error tecnico esperado. |
+| Reenvio | Solicitud recibida | Solicitamos reenviar el correo. | Cooldown y abrir proveedor de correo. | Registrar detalle solo si falla proveedor/Gateway. |
+| Activacion | Token valido | Correo verificado correctamente. | CTA a login. | Sin error. |
+| Activacion | Token vencido/invalido | El enlace es invalido o expiro. | CTA a reenvio de verificacion. | Desarrollo puede registrar codigo sin token. |
+| Recuperacion password | Solicitud recibida | Si el correo existe, recibiras instrucciones. | CTA a login y abrir correo si aplica. | No revelar existencia de correo. |
+| Reset password | Token vencido/invalido | El enlace es invalido o expiro. | CTA a solicitar otro enlace. | Desarrollo puede registrar codigo sin token. |
+| Social login | Proveedor no configurado | Este proveedor no esta activo para esta aplicacion. | CTA a login con correo. | No mostrar boton social si no esta habilitado. |
+
 ## Registro de cuenta
 
 El registro nunca debe redirigir silenciosamente al login.

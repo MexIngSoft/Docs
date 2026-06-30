@@ -120,6 +120,33 @@ Docs/03_standards/auth/auth-frontend-error-handling-standard.md
 Docs/03_standards/auth/auth-email-delivery-diagnostics-standard.md
 ```
 
+## Matriz minima de acciones por evento
+
+Cada web debe mapear errores por evento, no solo por texto tecnico. El mismo
+texto `inactive` puede significar credenciales invalidas en login, aplicacion
+deshabilitada en registro o proveedor no habilitado en social login.
+
+| Evento | Estados esperados | Accion estandar |
+|---|---|---|
+| `/auth/login` | `invalid_credentials`, `inactive_ambiguous`, `network_error`, `rate_limited` | Mostrar error de formulario, no redirigir, no mostrar reenvio salvo que el usuario lo solicite desde ruta explicita. |
+| `/auth/register` | `created`, `email_used`, `password_invalid`, `network_error` | Mostrar pantalla de verificacion o mantener formulario con error accionable. |
+| `/auth/resend` | `sent_requested`, `rate_limited`, `email_unknown_or_hidden`, `network_error` | Mostrar cooldown, no confirmar entrega final y no revelar existencia de correo si Auth lo oculta. |
+| `/activation/[uid]/[token]` | `verified`, `token_invalid`, `token_expired`, `network_error` | Mostrar resultado y CTA a login o reenvio. |
+| `/auth/forgot-password` | `request_received`, `network_error` | Siempre usar mensaje neutral sobre existencia de correo. |
+| `/auth/reset/[uid]/[token]` | `password_changed`, `password_invalid`, `token_invalid`, `token_expired` | Mostrar exito o permitir capturar nueva contrasena con reglas claras. |
+| `/auth/google` y `/auth/facebook` | `provider_unavailable`, `provider_error`, `success` | No mostrar proveedor como opcion activa si no esta configurado para la aplicacion. |
+
+Para login, los textos tecnicos `No active account found with the given
+credentials`, `Unable to log in with provided credentials`, `inactive`,
+`credentials`, `invalid_credentials` o equivalentes se muestran siempre como:
+
+```text
+Correo o contrasena incorrectos.
+```
+
+Motivo: no revelar existencia, actividad o verificacion de cuentas desde login,
+y evitar que una contrasena mal escrita se interprete como cuenta inactiva.
+
 ## Reglas para social login
 
 `/auth/google` y `/auth/facebook` no son obligatorios como login activo. Son

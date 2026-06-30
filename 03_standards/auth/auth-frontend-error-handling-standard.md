@@ -30,6 +30,10 @@ Docs/03_standards/auth/auth-email-delivery-diagnostics-standard.md
 | Gateway no responde | No pudimos completar la solicitud. Intenta de nuevo o contacta soporte con el folio disponible. |
 | Auth no responde via Gateway | No pudimos completar la solicitud. Intenta de nuevo o contacta soporte con el folio disponible. |
 | `Failed to fetch` | No pudimos conectar con el servicio en este momento. |
+| Login con correo o password incorrecto | Correo o contrasena incorrectos. |
+| Login con payload `No active account found with the given credentials` | Correo o contrasena incorrectos. |
+| Login con payload `Unable to log in with provided credentials` | Correo o contrasena incorrectos. |
+| Login con payload `inactive` sin codigo explicito de verificacion pendiente | Correo o contrasena incorrectos. |
 | Correo duplicado | Ese correo ya esta registrado. |
 | Password invalido | La contrasena no cumple los requisitos. |
 | Token expirado | El enlace es invalido o expiro. |
@@ -57,6 +61,43 @@ Docs/03_standards/auth/auth-email-delivery-diagnostics-standard.md
   `x-device-type`, `x-device-os` y `x-device-browser`.
 - Registrar el error tecnico en consola solo en desarrollo o en observabilidad
   aprobada.
+
+## Login y seguridad de enumeracion
+
+El login es un evento especial. Cuando el usuario intenta iniciar sesion y Auth
+responde con errores ambiguos como:
+
+```text
+No active account found with the given credentials
+Unable to log in with provided credentials
+inactive
+credentials
+invalid_credentials
+```
+
+la web debe mostrar:
+
+```text
+Correo o contrasena incorrectos.
+```
+
+No debe mostrar:
+
+```text
+La cuenta no esta activa.
+El usuario no existe.
+El correo no esta verificado.
+```
+
+salvo que exista un flujo explicito y seguro posterior, por ejemplo una pantalla
+de verificacion iniciada desde registro o reenvio. En login, revelar si una
+cuenta existe, esta activa o esta verificada facilita enumeracion de usuarios y
+confunde a usuarios que solo escribieron mal la contrasena.
+
+El frontend puede registrar el detalle tecnico solo en desarrollo y sin mostrar
+payloads crudos al usuario. Los fallos esperados de login (`400`/`401`) no deben
+emitir `console.error` visual en el overlay de Next.js; deben manejarse como
+estado de formulario.
 
 ## Mensajes por ambiente
 

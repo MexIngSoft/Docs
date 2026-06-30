@@ -79,3 +79,19 @@ Las rutas historicas de REFAPART siguen vigentes como compatibilidad:
 2. TECNOTELEC: decidir MVP privado y permisos antes de registro/cotizador.
 3. MEXINGSOF: definir si tendra panel con usuarios o solo formularios publicos.
 4. LEXNOVA: migrar cliente Auth a Gateway General estandar y cerrar rutas faltantes.
+
+## Incidente login REFAPART 2026-06-29
+
+Se detecto que un intento de login con contrasena incorrecta podia mostrar un
+mensaje de cuenta no activa. Ese comportamiento queda prohibido para todas las
+webs.
+
+Decision:
+
+- En `/auth/login`, cualquier error ambiguo de credenciales, cuenta inactiva o
+  cuenta inexistente debe mostrarse como `Correo o contrasena incorrectos.`.
+- No se debe mostrar reenvio de verificacion desde un fallo ambiguo de login.
+- El reenvio vive en `/auth/resend`, registro recibido o pantalla explicita de
+  verificacion.
+- Los errores esperados de formulario (`400`/`401`) no deben disparar overlay de
+  `console.error` en desarrollo.
