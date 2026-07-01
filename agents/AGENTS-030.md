@@ -1,24 +1,23 @@
-# AGENTS-030 — Concentrador unico de pendientes activos
+# AGENTS-030 — Backlog activo concentrado
 
 ## Estado
 
-ACTIVO.
+BACKLOG_ACTIVO.
 
 ## Objetivo
 
-Este archivo concentra los pendientes reales que antes estaban distribuidos en
-`AGENTS-000.md` a `AGENTS-029.md`.
+Conservar los pendientes P0-P5 que no deben perderse mientras el orquestador
+`AGENTS-031.md` ejecuta el cierre preproduccion.
 
-Los agentes anteriores quedan limpios porque sus instrucciones ya fueron:
+Este archivo ya no debe usarse como guia operativa principal. Para clasificar y
+ejecutar nuevas tareas usar:
 
-1. ejecutadas;
-2. absorbidas;
-3. clasificadas;
-4. documentadas en `Docs/agents/EXECUTION_REPORT.md`;
-5. o movidas a este concentrador como pendiente activo.
-
-Regla obligatoria: ningun archivo `Docs/agents/AGENTS-*.md` se elimina, mueve o
-renombra. Limpiar significa vaciar su contenido y conservar el archivo.
+```text
+Docs/agents/_index.md
+Docs/agents/instructions/classifier.md
+Docs/agents/instructions/routing-matrix.md
+Docs/agents/AGENTS-031.md
+```
 
 ## Rama obligatoria
 
@@ -40,6 +39,7 @@ Docs/agents/RUN_AGENTS_INSTRUCTIONS.md
 Docs/agents/AGENT_GLOBAL_RULES.md
 Docs/agents/EXECUTION_REPORT.md
 Docs/00_audit/10_development_gap_analysis.md
+Docs/agents/_index.md
 ```
 
 Despues leer solo el Context Pack y la documentacion canonica del proyecto o API
@@ -205,6 +205,7 @@ Incluye:
 - No declarar productivo lo que siga en mock, temporal o `PENDIENTE_DE_DEFINIR`.
 - No limpiar este `AGENTS-030.md` hasta que todos los pendientes P0-P5 queden
   cerrados, bloqueados formalmente o convertidos en documentos canonicos.
+- El orden real de ejecucion vive en `AGENTS-031.md`.
 
 ## Criterio de cierre de este agent
 

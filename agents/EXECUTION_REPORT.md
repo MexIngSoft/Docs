@@ -17617,3 +17617,136 @@ agente de base de datos.
 - Sin instrucciones: `AGENTS-003.md` a `AGENTS-029.md` permanecen vacios.
 
 ---
+
+## Ejecucion 2026-07-01 - AGENTS-006 / Reestructuracion de agents y validacion multiproyecto
+
+### Context Pack utilizado
+
+- Principal: `Docs/agents` + `Docs/_meta/active-work-index.md`.
+- Secundarios justificados: `00_audit`, `02_projects/refapart`, `02_projects/jobcron`, Auth, Gateway, DB, Docker, Nginx y Web Next.js por impacto directo del agente.
+
+### Agent ejecutado
+
+- `Docs/agents/AGENTS-006.md`.
+
+### Estado final
+
+- Completado.
+- Se reorganizo el backlog de agents, se creo el orquestador vigente y se documentaron inventarios tecnicos para evitar repetir analisis manuales.
+- `AGENTS-006.md` queda listo para limpieza porque sus tareas fueron trasladadas a estructura canonica y reporte.
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-006.md`
+- `Docs/agents/AGENTS-030.md`
+- `Docs/00_audit/10_development_gap_analysis.md`
+- Mapas canonicos de RefaPart y JobCron relacionados con frontend, Auth/Gateway, administracion y permisos.
+
+### Archivos modificados
+
+Docs:
+
+- `Docs/agents/_index.md`
+- `Docs/agents/instructions/inbox.md`
+- `Docs/agents/instructions/classifier.md`
+- `Docs/agents/instructions/routing-matrix.md`
+- `Docs/agents/instructions/keyword-search-rules.md`
+- `Docs/agents/instructions/new-agent-template.md`
+- `Docs/agents/specialized/*.md`
+- `Docs/agents/AGENTS-030.md`
+- `Docs/agents/AGENTS-031.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/00_audit/codebase-inventory.md`
+- `Docs/00_audit/code-duplication-risk-matrix.md`
+- `Docs/00_audit/database-dictionary.md`
+- `Docs/00_audit/api-endpoint-inventory.md`
+- `Docs/00_audit/nginx-route-inventory.md`
+- `Docs/00_audit/docker-service-inventory.md`
+- `Docs/00_audit/codebase-bad-practices-report.md`
+- `Docs/02_projects/jobcron/frontend/code-actions-map.md`
+- `Docs/02_projects/jobcron/operational-admin-center.md`
+
+Desarrollo relacionado validado:
+
+- `API.PY.DJANGO.Auth`: roles con `DisplayName`, permisos especiales por usuario y endpoints administrativos reutilizables.
+- `API.PY.DJANGO.Gateway`: proxy de identidad administrativa, query params y rutas de permisos.
+- `WEB.NJ.NEXT.JobCron`: panel de usuarios, roles, permisos y UX de administracion.
+- `WEB.NJ.NEXT.RefaPart`: rutas de cuenta/dashboard/admin/proveedor/Auth y ajustes de Gateway/session.
+- `Docker.DB.PG`, `Docker.API.PY`, `Docker.WEB.NJ`: configuracion multiproyecto alineada a PostgreSQL y rama `general`.
+
+### APIs reutilizadas
+
+- Auth central para usuarios, sesiones, roles y permisos.
+- Gateway general para acceso frontend a Auth y APIs internas.
+- RefaPart API, Address, Catalog, Supplier, Sales, Pricing e Inventory segun dominio documentado.
+
+### APIs descartadas por duplicidad
+
+- No se creo Gateway por proyecto.
+- No se creo Auth por proyecto.
+- No se creo API nueva para JobCron/RefaPart cuando Auth/Gateway cubren usuarios, roles y permisos.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.RefaPart` | OK |
+| `npm run build` en `WEB.NJ.NEXT.RefaPart` | OK |
+| `npm run lint` en `WEB.NJ.NEXT.JobCron` | OK |
+| `npm run build` en `WEB.NJ.NEXT.JobCron` | OK |
+| `npm run lint` en `WEB.NJ.NEXT.MexIngSof` | OK |
+| `npm run build` en `WEB.NJ.NEXT.MexIngSof` | OK |
+| `npm run lint` en `WEB.NJ.NEXT.TecnoTelec` | OK con advertencias existentes de `<img>` |
+| `npm run build` en `WEB.NJ.NEXT.TecnoTelec` | OK con advertencias existentes de `<img>` |
+| `python manage.py check` en APIs activas dentro de `api-multiproyecto` | OK en Auth, Gateway, Address, RefaPart, JobCron, Catalog, Supplier, Sales, Pricing, Inventory y TecnoTelec |
+| `docker compose config --quiet` en DB/API/Web/Nginx | OK |
+| `docker exec nginx nginx -t` | OK |
+| Consulta Gateway admin identity de usuarios | OK; `all=29`, `REFAPART=13` |
+| Prueba controlada de asignar/remover rol y permiso en usuario inactivo | OK; cambio aplicado y limpiado |
+
+### Resultado de validaciones
+
+- Las validaciones de build/check/config no dejaron bloqueo tecnico para subir cambios.
+- TecnoTelec mantiene advertencias visuales por uso de `<img>`; no bloquean build pero deben corregirse al tocar su UI.
+- Auth/Gateway/JobCron validaron el flujo administrativo base para usuarios, roles y permisos.
+
+### Contradicciones detectadas
+
+- Algunas instrucciones pedian reestructurar/borrar agentes; prevalecio la regla canonica: los `AGENTS-*.md` no se eliminan ni renombran, solo se vacian si quedan completados.
+- `AGENTS-006.md` decia que `AGENTS-031.md` no existia; ya fue creado como orquestador vigente.
+- Se mantuvo `AGENTS-030.md` como backlog reducido en vez de eliminarlo, para no perder fuente activa ni romper historial documental.
+
+### Decisiones tomadas
+
+- Crear `AGENTS-031.md` como orquestador general y dejar `AGENTS-030.md` como backlog activo reducido.
+- Crear agentes especializados documentales en `Docs/agents/specialized/` para clasificar trabajo futuro sin mezclar Core ERP, proyectos, integraciones y estandares.
+- Documentar inventarios en `Docs/00_audit/` antes de nuevas reestructuraciones.
+- Mantener Auth/Gateway como reutilizables centrales y evitar APIs duplicadas.
+- Preparar commits separados por repositorio para conservar trazabilidad.
+
+### Pendientes reales
+
+- Corregir advertencias `<img>` en TecnoTelec cuando se ejecute su agente/UI.
+- Migrar o retirar referencias legacy de DocuCore a `/api/gateway` cuando se ejecute el agente correspondiente.
+- Confirmar con pruebas manuales completas los flujos end-to-end de cada web despues del push y reinicio de contenedores.
+
+### Riesgos detectados
+
+- Hay multiples repos con cambios acumulados de agentes previos; se suben por repositorio para evitar mezclar historiales.
+- Ejecutar merge de `dev` sobre `general` con arboles sucios era riesgoso; se prioriza commit/push de la rama activa `general` y luego se podra comparar contra `dev` sin perder trabajo.
+
+### Agents completados, limpiados, parciales, bloqueados o pendientes
+
+- Completados: `AGENTS-006.md`.
+- Limpiados: `AGENTS-006.md`.
+- Parciales: `AGENTS-030.md` queda como backlog reducido; `AGENTS-031.md` queda como orquestador activo.
+- Bloqueados: ninguno en el alcance de `AGENTS-006.md`.
+- Sin instrucciones: se mantienen sin ejecucion los agents vacios.
+
+---

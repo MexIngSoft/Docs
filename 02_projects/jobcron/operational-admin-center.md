@@ -69,15 +69,31 @@ operacion normal con la contrasena temporal.
 
 Flujo implementado:
 
-1. `WEB.NJ.NEXT.JobCron/app/login/page.tsx` muestra el login.
-2. `WEB.NJ.NEXT.JobCron/app/login/LoginForm.tsx` envia credenciales al Gateway.
-3. El Gateway llama Auth usando `X-Application-Code: JOBCRON`.
-4. Auth crea cookies de sesion.
-5. La web consulta `/auth/me/permissions/`.
-6. Solo permite entrada administrativa si encuentra `JOBCRON_SUPER_ADMIN`,
+1. `WEB.NJ.NEXT.JobCron/app/page.tsx` muestra el acceso rapido operativo.
+2. `WEB.NJ.NEXT.JobCron/components/quick-access-card.tsx` alterna entre
+   inicio de sesion y registro por admision/contacto.
+3. `WEB.NJ.NEXT.JobCron/app/login/page.tsx` conserva la ruta dedicada de login
+   como respaldo directo.
+4. Ambos accesos reutilizan `WEB.NJ.NEXT.JobCron/app/login/LoginForm.tsx`.
+5. `LoginForm` envia credenciales al Gateway.
+6. El Gateway llama Auth usando `X-Application-Code: JOBCRON`.
+7. Auth crea cookies de sesion.
+8. La web consulta `/auth/me/permissions/`.
+9. Solo permite entrada administrativa si encuentra `JOBCRON_SUPER_ADMIN`,
    `JOBCRON_PLATFORM_ADMIN` o permiso `jobcron.overview.read`.
-7. Si Auth responde `must_change_password=true`, la web muestra cambio
+10. Si Auth responde `must_change_password=true`, la web muestra cambio
    obligatorio y al confirmar Auth deja `MustChangePassword=False`.
+
+Configuracion local obligatoria:
+
+```text
+NEXT_PUBLIC_GATEWAY_BASE_URL=http://localhost:8025/api/v1
+NEXT_PUBLIC_APPLICATION_CODE=JOBCRON
+```
+
+No se debe usar `http://localhost/api/gateway` para JobCron web. Esa ruta
+provoca fallas de navegador tipo `Failed to fetch` porque no coincide con el
+Gateway General versionado ni con el CORS validado para `localhost:3000`.
 
 Este usuario es de desarrollo. En produccion debe crearse por flujo seguro de
 alta de super admin, rotacion y auditoria.
@@ -104,10 +120,19 @@ Responsabilidades:
 Reglas:
 
 - RefaPart no debe tener una pantalla propia para asignar permisos globales.
+- En endpoints administrativos de JobCron, `X-Application-Code=JOBCRON`
+  identifica la aplicacion operadora. No debe usarse como filtro de usuarios,
+  roles o permisos. El filtro operativo debe viajar como
+  `?application_code=REFAPART`, `?application_code=MEXINGSOF`, etc.
 - `REFAPART_ADMIN` puede operar RefaPart, pero la asignacion formal del rol
   debe resolverse por Auth mediante la consola JobCron.
 - `CanManageProducts` habilita alta, edicion, publicacion/ocultamiento y
   eliminacion de productos en RefaPart.
+- Los roles deben mostrar tres datos separados:
+  `Name` como codigo tecnico estable, `DisplayName` como nombre visible para
+  usuario y `Description` como explicacion funcional.
+- Los permisos especiales por usuario son excepciones auditables. Deben usarse
+  solo cuando el rol no cubra el caso y deben poder retirarse desde JobCron.
 - No se deben asignar roles fuera del `ApplicationCode` autorizado.
 - No se deben borrar usuarios productivos desde UI sin politica de retencion,
   doble confirmacion, auditoria y rollback.
@@ -119,6 +144,8 @@ GET    /api/v1/admin/identity/users/
 PATCH  /api/v1/admin/identity/users/{id}/
 POST   /api/v1/admin/identity/users/{id}/roles/
 DELETE /api/v1/admin/identity/users/{id}/roles/{roleId}/
+POST   /api/v1/admin/identity/users/{id}/permissions/
+DELETE /api/v1/admin/identity/users/{id}/permissions/{permissionId}/
 GET    /api/v1/admin/identity/roles/
 PATCH  /api/v1/admin/identity/roles/{id}/permissions/
 GET    /api/v1/admin/identity/permissions/
@@ -127,6 +154,8 @@ GET    /api/v1/admin/identity/permissions/
 Estado:
 
 - UI JobCron creada como consola inicial.
+- Sidebar administrativa con scroll propio; el area de trabajo tiene scroll
+  independiente.
 - Login JobCron conectado a Auth/Gateway para desarrollo.
 - Semilla Auth aplicada para `JOBCRON_SUPER_ADMIN` con correo real de
   desarrollo.
@@ -136,6 +165,9 @@ Estado:
   `/api/access/permissions/*`.
 - La UI consume usuarios, roles y permisos reales via Gateway, con filtro por
   `ApplicationCode`, busqueda de correo, asignacion y retiro de roles.
+- La UI permite editar `DisplayName` y `Description` del rol sin cambiar el
+  codigo tecnico `Name`.
+- La UI permite asignar y retirar permisos especiales por usuario.
 
 ## Pendientes
 
