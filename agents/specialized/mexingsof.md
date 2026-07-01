@@ -1,8 +1,8 @@
-# Agent especializado code-audit
+# Agent especializado mexingsof
 
 ## Alcance
 
-Inventarios de codigo, rutas, endpoints, duplicidad, malas practicas, riesgos y validaciones cruzadas.
+MexIngSof web corporativa: rutas internas temporales, leads, servicios, Auth admin futuro y migracion a Gateway/JobCron/Catalog/Auth.
 
 ## Cuando usarlo
 

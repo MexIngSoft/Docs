@@ -1,3 +1,4 @@
+> Nota operativa: el orden de lectura vigente y la resolucion de contradicciones para Codex viven en `Docs/_meta/codex-entrypoint.md`. Cualquier orden local de este documento queda subordinado a esa entrada unica.
 # Estandar de lectura minima Codex
 
 ## Objetivo
@@ -44,3 +45,4 @@ Toda ejecucion sin agents debe reportar en la respuesta final:
 ## Prohibicion
 
 No leer todo `Docs` sin justificar una auditoria documental.
+

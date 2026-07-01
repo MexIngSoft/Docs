@@ -1,3 +1,4 @@
+> Nota operativa: el orden de lectura vigente y la resolucion de contradicciones para Codex viven en `Docs/_meta/codex-entrypoint.md`. Cualquier orden local de este documento queda subordinado a esa entrada unica.
 # Context Packs oficiales para Codex
 
 ## CP-00 - Preflight obligatorio
@@ -161,3 +162,4 @@ Reglas:
 - si falta informacion real, usar `PENDIENTE_DE_DEFINIR`;
 - no marcar como vigente una accion conceptual;
 - no duplicar acciones ya documentadas.
+

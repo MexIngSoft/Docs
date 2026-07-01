@@ -1,8 +1,8 @@
-# Agent especializado code-audit
+# Agent especializado tecnotelec
 
 ## Alcance
 
-Inventarios de codigo, rutas, endpoints, duplicidad, malas practicas, riesgos y validaciones cruzadas.
+TecnoTelec: catalogo, soluciones, cotizador, MVP consultivo/cotizador/carrito/checkout, Catalog/Pricing/Inventory/Sales.
 
 ## Cuando usarlo
 

@@ -17750,3 +17750,139 @@ Desarrollo relacionado validado:
 - Sin instrucciones: se mantienen sin ejecucion los agents vacios.
 
 ---
+
+## Ejecucion 2026-07-01 - AGENTS-006 / Cierre estructura Codex-agents y validacion general
+
+### Context Pack utilizado
+
+- Principal: `Docs/_meta/codex-entrypoint.md`, `Docs/agents`, `Docs/00_audit`.
+- Secundarios: RefaPart, JobCron, Auth, Gateway, DB, Docker, Nginx, MexIngSof y TecnoTelec por validacion general de agentes activos.
+
+### Agent ejecutado
+
+- `Docs/agents/AGENTS-006.md`.
+- `Docs/agents/AGENTS-007.md` a `Docs/agents/AGENTS-029.md`: sin instrucciones.
+- `Docs/agents/AGENTS-030.md`: revisado como backlog concentrado; no se limpia porque contiene P0-P5 y decisiones/bloqueos futuros.
+- `Docs/agents/AGENTS-031.md`: revisado y ampliado como orquestador; no se limpia porque sigue activo.
+
+### Estado final
+
+- `AGENTS-006.md`: completado y limpiado.
+- `AGENTS-007.md` a `AGENTS-029.md`: sin instrucciones.
+- `AGENTS-030.md`: parcial / backlog activo.
+- `AGENTS-031.md`: parcial / orquestador activo.
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/_meta/master-index.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-006.md`
+- `Docs/agents/AGENTS-030.md`
+- `Docs/agents/AGENTS-031.md`
+
+### Archivos modificados
+
+- `Docs/_meta/codex-entrypoint.md`
+- `Docs/_meta/contradiction-resolution-log.md`
+- `Docs/00_audit/documentation-health-report.md`
+- `Docs/00_audit/agent-context-search-report.md`
+- `Docs/00_audit/agent-duplication-report.md`
+- `Docs/agents/instructions/classification-result.md`
+- `Docs/agents/_index.md`
+- `Docs/agents/AGENTS-006.md`
+- `Docs/agents/AGENTS-031.md`
+- `Docs/agents/specialized/*.md`
+- `Docs/scripts/agents/*.ps1`
+- `Docs/README.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/00_audit/codex-context-map.md`
+- `Docs/03_standards/codex/codex-minimal-reading-standard.md`
+- `Docs/03_standards/operations/context-packs.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+
+### APIs reutilizadas
+
+- Auth central.
+- Gateway General.
+- APIs compartidas existentes: Address, RefaPart, JobCron, Catalog, Supplier, Sales, Pricing, Inventory y TecnoTelec.
+
+### APIs descartadas por duplicidad
+
+- No se creo API nueva.
+- No se creo Gateway/Auth por proyecto.
+- No se creo `AGENTS-032.md` activo nuevo para no aumentar pendientes; el contenido del 6 se ejecuto y se absorbio en `codex-entrypoint.md`, agentes especializados y `AGENTS-031.md`.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `Docs/scripts/agents/build-agent-index.ps1` | OK |
+| `Docs/scripts/agents/detect-agent-duplicates.ps1` | OK |
+| `Docs/scripts/agents/check-documentation-health.ps1` | OK |
+| `Docs/scripts/agents/classify-agent-task.ps1` | OK |
+| `Docs/scripts/agents/search-agent-context.ps1` | OK |
+| `npm run lint` RefaPart | OK |
+| `npm run build` RefaPart | OK |
+| `npm run lint` JobCron | OK |
+| `npm run build` JobCron | OK |
+| `npm run lint` MexIngSof | OK |
+| `npm run build` MexIngSof | OK |
+| `npm run lint` TecnoTelec | OK con warnings `<img>` existentes |
+| `npm run build` TecnoTelec | OK con warnings `<img>` existentes |
+| `python manage.py check` en Auth/Gateway/Address/RefaPart/JobCron/Catalog/Supplier/Sales/Pricing/Inventory/TecnoTelec dentro de Docker | OK |
+| `docker compose config --quiet` DB/API/Web/Nginx | OK |
+| `docker exec nginx nginx -t` | OK |
+
+### Resultado de validaciones
+
+- Estructura documental Codex-agents creada y validada.
+- Cuatro webs base validan lint/build; TecnoTelec conserva warnings no bloqueantes por `<img>`.
+- APIs prioritarias pasan `manage.py check`.
+- Docker/Nginx pasan validacion de configuracion.
+
+### Contradicciones detectadas
+
+- `AGENTS-006.md` proponia crear un `AGENTS-032` pendiente; se decidio no crear un agent activo nuevo para no aumentar backlog. Se absorbio la ejecucion en documentos canonicos y `AGENTS-031.md`.
+- Instrucciones que piden borrar/archivar agents quedan subordinadas a `AGENT_GLOBAL_RULES.md`: limpiar significa vaciar, no eliminar.
+
+### Decisiones tomadas
+
+- `Docs/_meta/codex-entrypoint.md` queda como entrada unica.
+- `AGENTS-030.md` conserva backlog P0-P5 y no se limpia.
+- `AGENTS-031.md` queda como orquestador activo detallado y no se limpia.
+- Agentes especializados quedan completos y listos para uso por dominio.
+
+### Pendientes reales
+
+- `BLOQUEADO_POR_DECISION`: `AGENTS-030.md` mantiene P0-P5 que requieren decisiones de producto/contrato/proveedor para cerrarse totalmente.
+- `FUERA_DE_ALCANCE_PREPRODUCCION`: Payments, POS avanzado, Document/Image avanzado y roadmaps futuros siguen fuera sin owner/MVP/contrato.
+- `CERRABLE_POR_CODEX`: warnings `<img>` de TecnoTelec pueden corregirse cuando se ejecute su frente visual.
+
+### Riesgos detectados
+
+- Mantener `AGENTS-030.md` activo es correcto, pero puede confundirse con agent ejecutable si no se revisa `_index.md`.
+- Los reportes generados por scripts son heuristicas; no sustituyen revision humana cuando haya cambios de arquitectura o seguridad.
+
+### Agents completados, limpiados, parciales, bloqueados o pendientes
+
+- Completados: `AGENTS-006.md`.
+- Limpiados: `AGENTS-006.md`.
+- Sin instrucciones: `AGENTS-007.md` a `AGENTS-029.md`.
+- Parciales: `AGENTS-030.md`, `AGENTS-031.md`.
+- Bloqueados: ninguno por infraestructura en esta ejecucion; pendientes de `AGENTS-030.md` quedan clasificados por decision/alcance.
+
+---
+
+### Nota adicional de desarrollo local web
+
+Durante la validacion de las cuatro webs base se detectaron ajustes pendientes de origen permitido en desarrollo:
+
+- `WEB.NJ.NEXT.MexIngSof/next.config.ts`: agregado para `localhost:3009` y `127.0.0.1:3009`.
+- `WEB.NJ.NEXT.TecnoTelec/next.config.ts`: agregado `allowedDevOrigins` para `tecnotelec.localhost`, `localhost:3001` y `127.0.0.1:3001`.
+
+Estos cambios quedan separados de Docs y se suben por repo para mantener trazabilidad.

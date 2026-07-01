@@ -1,3 +1,4 @@
+> Nota operativa: el orden de lectura vigente y la resolucion de contradicciones para Codex viven en `Docs/_meta/codex-entrypoint.md`. Cualquier orden local de este documento queda subordinado a esa entrada unica.
 # Reglas globales para Agents
 
 ## Objetivo
@@ -138,3 +139,4 @@ Docs/03_standards/documentation-first-workflow.md
 
 En ese caso no es obligatorio actualizar `EXECUTION_REPORT.md`, salvo que la
 tarea afecte agents o el usuario lo pida.
+

@@ -1,3 +1,4 @@
+> Nota operativa: el orden de lectura vigente y la resolucion de contradicciones para Codex viven en `Docs/_meta/codex-entrypoint.md`. Cualquier orden local de este documento queda subordinado a esa entrada unica.
 # Indice operativo de trabajo activo
 
 ## Estado
@@ -159,3 +160,4 @@ Cada nueva tarea debe poder responder rapidamente:
 4. Que informacion falta?
 5. Que validacion aplica?
 6. Donde se reporta el resultado?
+

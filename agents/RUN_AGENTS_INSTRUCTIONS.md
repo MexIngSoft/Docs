@@ -1,3 +1,4 @@
+> Nota operativa: el orden de lectura vigente y la resolucion de contradicciones para Codex viven en `Docs/_meta/codex-entrypoint.md`. Cualquier orden local de este documento queda subordinado a esa entrada unica.
 # Instrucciones para correr agents
 
 ## Prompt recomendado
@@ -65,3 +66,4 @@ Al finalizar una corrida:
 
 La carpeta `Docs/agents` debe conservar siempre los placeholders
 `AGENTS-*.md` para evitar que futuras corridas pierdan numeracion o contexto.
+

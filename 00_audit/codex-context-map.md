@@ -1,3 +1,4 @@
+> Nota operativa: el orden de lectura vigente y la resolucion de contradicciones para Codex viven en `Docs/_meta/codex-entrypoint.md`. Cualquier orden local de este documento queda subordinado a esa entrada unica.
 # Mapa de contexto Codex
 
 ## Objetivo
@@ -73,3 +74,4 @@ Al cerrar una tarea, documentar:
 - Documento canonico que prevalece.
 - Validaciones ejecutadas.
 - Faltantes con `PENDIENTE_DE_DEFINIR`.
+
