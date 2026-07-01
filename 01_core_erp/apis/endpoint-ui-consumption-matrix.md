@@ -24,7 +24,11 @@ MOCK_TEMPORAL: motivo y API pendiente.
 
 | Proyecto | Modulo UI | Pantalla o ruta | Ruta Gateway | API reutilizable | Estado UI | Estado contrato |
 |---|---|---|---|---|---|---|
-| PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR |
+| REFAPART | Auth login | `/login` | `/auth/login/`, `/auth/me/`, `/auth/me/permissions/` | Auth API via Gateway General | Implementado | Vigente |
+| REFAPART | Cuenta cliente | `/cuenta`, `/dashboard` | `GET /api/v1/projects/REFAPART/customer/dashboard` | REFAPART API + Auth + Sales/Requests | Implementado con `MOCK_TEMPORAL`: resumen visual hasta cerrar endpoint dashboard | PENDIENTE_DE_IMPLEMENTAR |
+| REFAPART | Direcciones | `/cuenta/direcciones`, `/checkout` | `/core/address/api/address/suggest?postalCode=`, `/core/address/api/address/addresses` | Address API via Gateway General | Implementado | Vigente |
+| REFAPART | Busqueda de piezas | `/`, `/resultados` | `/projects/REFAPART/search` | REFAPART API/Search via Gateway General | Implementado | Vigente parcial |
+| REFAPART | Solicitud de pieza | `/publicar-busqueda` | `/projects/REFAPART/requests` | REFAPART API via Gateway General | Implementado | Vigente parcial |
 
 ## Validacion
 

@@ -33,7 +33,8 @@ NEXT_PUBLIC_GATEWAY_BASE_URL=http://localhost:8025/api/v1
 | `POST` | `/projects/REFAPART/admin/part-requests/{id}/order` | Crear pedido. |
 | `GET/POST` | `/projects/REFAPART/admin/suppliers` | Consultar o registrar proveedores. |
 | `GET` | `/projects/REFAPART/admin/dashboard` | Indicadores de demanda. |
-| `GET` | `/projects/REFAPART/admin/products` | Productos publicables. |
+| `GET/POST` | `/projects/REFAPART/admin/products` | Listar o crear productos publicables REFAPART. |
+| `GET/PATCH/DELETE` | `/projects/REFAPART/admin/products/{slug}` | Consultar, editar o eliminar producto REFAPART. |
 | `GET` | `/projects/REFAPART/admin/search-logs` | Logs de busqueda. |
 | `GET` | `/projects/REFAPART/admin/quotes` | Cotizaciones. |
 | `GET` | `/projects/REFAPART/admin/orders` | Pedidos. |

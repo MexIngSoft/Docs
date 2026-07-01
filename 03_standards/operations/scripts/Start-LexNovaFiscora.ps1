@@ -119,9 +119,9 @@ if ($RunChecks) {
         Push-Location (Join-Path $root "Docker.API.PY\API.PY.DJANGO.Document")
         Invoke-WithEnv @{
             DJANGO_SECRET_KEY = "local-document-secret"
-            POSTGRES_DB = "comercial"
-            POSTGRES_USER = "comercial_user"
-            POSTGRES_PASSWORD = "local-comercial-password"
+            POSTGRES_DB = "Document"
+            POSTGRES_USER = "document_user"
+            POSTGRES_PASSWORD = $env:DOCUMENT_DB_PASSWORD
             DB_SCHEMA = "Document"
             DEVELOPMENT_MODE = "True"
         } {
@@ -132,9 +132,9 @@ if ($RunChecks) {
         Push-Location (Join-Path $root "Docker.API.PY\API.PY.DJANGO.Fiscora")
         Invoke-WithEnv @{
             DJANGO_SECRET_KEY = "local-fiscora-secret"
-            POSTGRES_DB = "comercial"
-            POSTGRES_USER = "comercial_user"
-            POSTGRES_PASSWORD = "local-comercial-password"
+            POSTGRES_DB = "Fiscora"
+            POSTGRES_USER = "fiscora_user"
+            POSTGRES_PASSWORD = $env:FISCORA_DB_PASSWORD
             DB_SCHEMA = "Fiscora"
             DEVELOPMENT_MODE = "True"
         } {
@@ -145,9 +145,9 @@ if ($RunChecks) {
         Push-Location (Join-Path $root "Docker.API.PY\API.PY.DJANGO.Fiscal")
         Invoke-WithEnv @{
             DJANGO_SECRET_KEY = "local-fiscal-secret"
-            POSTGRES_DB = "comercial"
-            POSTGRES_USER = "comercial_user"
-            POSTGRES_PASSWORD = "local-comercial-password"
+            POSTGRES_DB = "Fiscal"
+            POSTGRES_USER = "fiscal_user"
+            POSTGRES_PASSWORD = $env:FISCAL_DB_PASSWORD
             DB_SCHEMA = "Fiscal"
             DEVELOPMENT_MODE = "True"
         } {

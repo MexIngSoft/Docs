@@ -7,183 +7,140 @@ ACTIVE
 ## Objetivo
 
 Definir el estado operativo permitido para bases, usuarios, schemas y
-migraciones PostgreSQL del ecosistema sin inventar usuarios, schemas ni bases
-finales fuera de contrato.
+migraciones PostgreSQL del workspace. Cada API debe operar sobre su propia base
+fisica y su propio usuario de aplicacion.
 
-## Reglas generales
+## Reglas obligatorias
 
 - PostgreSQL oficial se ejecuta en `db-postgresql`.
 - Imagen oficial: `postgres:16.13`.
 - Red oficial: `jobcron_network`.
-- Stack oficial: `comercial_platform`.
-- Las APIs no deben usar SQLite.
-- La base `postgres` queda reservada para administracion local.
-- El usuario `postgres` queda reservado para administracion local.
-- Las APIs deben usar usuarios de aplicacion con permisos minimos.
-- No crear bases, usuarios ni schemas definitivos sin contrato canonico.
-- No ejecutar `docker volume prune` ni borrar volumenes para validar.
+- Stack Docker actual: `comercial_platform`.
+- El nombre del stack no autoriza una base llamada `comercial`.
+- No usar SQLite ni `db.sqlite3`.
+- No usar `postgres` como base de negocio.
+- No usar `postgres` como usuario de aplicacion.
+- No usar bases con sufijo `_db`.
+- Las bases publicadas deben usar sintaxis tipo SQL Server/PascalCase.
+- Cada API debe tener `<API>_DB_NAME`, `<API>_DB_USER` y `<API>_DB_PASSWORD`.
+- Las bases no deben comunicarse directo entre si; la integracion ocurre via API
+  o Gateway.
+- `comercial` queda retirada como base operativa. Si se requiere rollback, usar
+  respaldo externo, no una base viva compartida.
 
-## Bases oficiales detectadas
+## Bases oficiales vigentes
 
-| Base | Uso esperado | Proyecto/API duena | Estado | Observacion |
-|---|---|---|---|---|
-| `auth` | Identidad, usuarios, roles, sesiones y permisos | Auth API | ACTIVA | Detectada en PostgreSQL. |
-| `comercial` | APIs core comerciales y proyectos compartidos | Catalog, Inventory, Pricing, Supplier, Procurement, Sales, Search, Address, REFAPART, TecnoTelec y proyectos relacionados | ACTIVA | Detectada en PostgreSQL. |
-| `jobcron` | Operacion JobCron y modulos administrativos | JobCron API | ACTIVA | Detectada en PostgreSQL. |
-| `lexnova` | Dominio legal LexNova | LexNova API | ACTIVA | Detectada en PostgreSQL. |
-| `postgres` | Administracion local | PostgreSQL | ADMINISTRACION | No usar para datos de negocio. |
-
-## Usuarios detectados
-
-| Usuario | Uso actual | Base permitida | Permisos | Estado | Observacion |
-|---|---|---|---|---|---|
-| `auth_user` | Usuario de aplicacion Auth | `auth` | Login sin superuser | ACTIVO | Detectado en PostgreSQL. |
-| `comercial_user` | Usuario de aplicacion comercial | `comercial` | Login sin superuser | ACTIVO | Detectado en PostgreSQL. |
-| `jobcron_user` | Usuario de aplicacion JobCron | `jobcron` | Login sin superuser | ACTIVO | Detectado en PostgreSQL. |
-| `lexnova_user` | Usuario de aplicacion LexNova | `lexnova` | Login sin superuser | ACTIVO | Detectado en PostgreSQL. |
-| `postgres` | Administracion local | Todas | Superuser | ADMINISTRACION | Prohibido como usuario de aplicacion. |
-
-## Schemas detectados
-
-| Base | Schemas funcionales detectados | Estado | Observacion |
+| Base | Usuario | Schema principal | API responsable |
 |---|---|---|---|
-| `auth` | `Auth` | ACTIVO | Schema Auth detectado. |
-| `comercial` | `Catalog`, `Customization`, `Inventory`, `Pricing`, `Procurement`, `RefaPart`, `Sales`, `Search`, `Supplier`, `TecnoTelec`, `TecnoTelecGateway` | ACTIVO | No se detecto schema `Address`; queda `PENDIENTE_DE_DEFINIR` si Address requiere schema propio. |
-| `jobcron` | `JobCron` | ACTIVO | Schema JobCron detectado. |
-| `lexnova` | `Amparo`, `Appeal`, `Case`, `Catalog`, `CausePenal`, `Document`, `Evidence`, `Inventory`, `InvestigationFolder`, `OralTrial`, `Person`, `Pricing`, `Procurement`, `Sales`, `Supplier` | ACTIVO | Schemas LexNova detectados. |
-| `postgres` | Solo schemas de sistema/public | ADMINISTRACION | No usar para negocio. |
+| `Address` | `address_user` | `Address`, `public` | Address API |
+| `Auth` | `auth_user` | `Auth` | Auth API |
+| `Catalog` | `catalog_user` | `Catalog`, `public` | Catalog API |
+| `Customization` | `customization_user` | `Customization`, `public` | Customization API |
+| `DocuCore` | `docucore_user` | `DocuCore`, `public` | DocuCore API |
+| `Document` | `document_user` | `Document`, `public` | Document API |
+| `Fiscal` | `fiscal_user` | `Fiscal`, `public` | Fiscal API |
+| `Fiscora` | `fiscora_user` | `Fiscora`, `public` | Fiscora API |
+| `Gateway` | `gateway_user` | `Gateway`, `public` | Gateway API |
+| `Imagrafity` | `imagrafity_user` | `Imagrafity`, `public` | Imagrafity API |
+| `Inventory` | `inventory_user` | `Inventory`, `public` | Inventory API |
+| `JobCron` | `jobcron_user` | `JobCron` | JobCron API |
+| `LexNova` | `lexnova_user` | LexNova schemas | LexNova API |
+| `Pricing` | `pricing_user` | `Pricing`, `public` | Pricing API |
+| `Procurement` | `procurement_user` | `Procurement`, `public` | Procurement API |
+| `RefaPart` | `refapart_user` | `RefaPart`, `public` | RefaPart API |
+| `Sales` | `sales_user` | `Sales`, `public` | Sales API |
+| `Search` | `search_user` | `Search`, `public` | Search API |
+| `Supplier` | `supplier_user` | `Supplier`, `public` | Supplier API |
+| `TecnoTelec` | `tecnotelec_user` | `TecnoTelec`, `TecnoTelecGateway`, `public` | TecnoTelec API |
 
-## Matriz proyecto/API
+`postgres` existe solo para administracion local.
 
-| Proyecto/API | Base | Schema | Usuario | Permisos | Migracion | Estado |
-|---|---|---|---|---|---|---|
-| Auth | `auth` | `Auth` | `auth_user` | Aplicacion | Django migrations existentes | ACTIVO |
-| Catalog | `comercial` | `Catalog` | `comercial_user` | Aplicacion | Django migrations existentes | ACTIVO |
-| Inventory | `comercial` | `Inventory` | `comercial_user` | Aplicacion | Django migrations existentes | ACTIVO |
-| Pricing | `comercial` | `Pricing` | `comercial_user` | Aplicacion | Django migrations existentes | ACTIVO |
-| Procurement | `comercial` | `Procurement` | `comercial_user` | Aplicacion | Django migrations existentes | ACTIVO |
-| Sales | `comercial` | `Sales` | `comercial_user` | Aplicacion | Django migrations existentes | ACTIVO |
-| Supplier | `comercial` | `Supplier` | `comercial_user` | Aplicacion | Django migrations existentes | ACTIVO |
-| Search | `comercial` | `Search` | `comercial_user` | Aplicacion | Django migrations existentes | ACTIVO |
-| Address | `comercial` | `PENDIENTE_DE_DEFINIR` | `comercial_user` | Aplicacion | Django migrations existentes | PARCIAL |
-| REFAPART | `comercial` | `RefaPart` | `comercial_user` | Aplicacion | Django migrations existentes | ACTIVO |
-| TecnoTelec | `comercial` | `TecnoTelec`, `TecnoTelecGateway`, `Customization` | `comercial_user` | Aplicacion | Django migrations existentes | ACTIVO |
-| JobCron | `jobcron` | `JobCron` | `jobcron_user` | Aplicacion | Django migrations existentes | ACTIVO |
-| LexNova | `lexnova` | Schemas LexNova detectados | `lexnova_user` | Aplicacion | Django migrations existentes | ACTIVO |
-| MexIngSof | `PENDIENTE_DE_DEFINIR` | `PENDIENTE_DE_DEFINIR` | `PENDIENTE_DE_DEFINIR` | PENDIENTE_DE_DEFINIR | PENDIENTE_DE_DEFINIR | BLOQUEADO POR CONTRATO |
+## Variables esperadas
 
-## Variables de entorno esperadas
+Cada API debe declarar sus variables propias. Ejemplos:
 
-| Variable | Uso |
-|---|---|
-| `POSTGRES_HOST` | Debe apuntar a `db-postgresql` dentro de Docker. |
-| `POSTGRES_PORT` | Debe ser `5432`. |
-| `<API>_DB_NAME` | Base de datos asignada al API. |
-| `<API>_DB_USER` | Usuario de aplicacion asignado. |
-| `<API>_DB_PASSWORD` | Password del usuario de aplicacion. |
-| `<API>_POSTGRES_OPTIONS` | Opciones como `search_path` cuando aplique. |
+```txt
+AUTH_DB_NAME=Auth
+AUTH_DB_USER=auth_user
+AUTH_DB_PASSWORD=...
 
-## Reglas de migracion
+REFAPART_DB_NAME=RefaPart
+REFAPART_DB_USER=refapart_user
+REFAPART_DB_PASSWORD=...
 
-- Migraciones Django deben vivir en cada API/app correspondiente.
-- No generar migraciones finales sin contrato de modelo.
-- Si una app tiene carpeta `migrations` sin migraciones, documentar como
-  pendiente y no inventar modelos.
-- Validar migraciones con comandos del API afectado cuando exista entorno
-  funcional.
+JOBCRON_DB_NAME=JobCron
+JOBCRON_DB_USER=jobcron_user
+JOBCRON_DB_PASSWORD=...
+```
 
-## Prohibiciones
+Variables prohibidas para configuracion activa:
 
-- Prohibido SQLite en configuracion activa.
-- Prohibido usar `postgres` como usuario de aplicacion.
-- Prohibido usar base `postgres` para negocio.
-- Prohibido `localhost` o `127.0.0.1` entre contenedores; usar nombres de
-  servicio como `db-postgresql`.
-- Prohibido borrar volumenes como parte de validacion.
+```txt
+COMERCIAL_DB_NAME
+COMERCIAL_DB_USER
+COMERCIAL_DB_PASSWORD
+```
 
-## Procedimiento seguro de validacion
+## Migracion y retiro de `comercial`
+
+El 2026-07-01 se valido que `comercial` aun tenia datos en tablas `Address*` y
+`RefaPart*`, y estructura `Search*`. Antes de retirarla se ejecuto:
+
+- respaldo binario local de `comercial`;
+- migracion de `Address*` hacia `Address`;
+- migracion de `RefaPart*` hacia `RefaPart`;
+- migracion de estructura/datos `Search*` hacia `Search`;
+- comparacion de conteos entre origen y destino;
+- renombrado de bases antiguas con `_db` a PascalCase;
+- eliminacion de la base `comercial`;
+- validacion `manage.py check` y `showmigrations --plan` de las APIs activas.
+
+Respaldo local previo al retiro:
+
+```txt
+C:\Users\cash1\AppData\Local\Temp\Workspace.Comercial\db-backups\pre-rename-20260701_034045
+```
+
+Ese respaldo es el unico objetivo vigente para conservar informacion historica
+de `comercial`. No debe recrearse una base viva `comercial` dentro del stack.
+
+## Validaciones obligatorias
+
+Despues de cambiar nombres, usuarios o passwords:
 
 ```powershell
-docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Networks}}"
-docker exec db-postgresql psql -U postgres -tAc "SELECT datname FROM pg_database WHERE datistemplate=false ORDER BY datname;"
-docker exec db-postgresql psql -U postgres -tAc "SELECT rolname, rolsuper, rolcreatedb, rolcanlogin FROM pg_roles ORDER BY rolname;"
-docker exec db-postgresql psql -U postgres -d comercial -tAc "SELECT schema_name FROM information_schema.schemata ORDER BY schema_name;"
-rg -n "sqlite|sqlite3|db.sqlite|SQLITE" Docker.API.PY -g "*.py" -g "*.env*" -g "*.yml" -g "*.yaml"
+docker compose -f Docker.DB.PG\docker-compose.yml --profile tools run --rm db-postgresql-apply
+docker compose -f Docker.API.PY\docker-compose.yml up -d --force-recreate api-multiproyecto
 ```
 
-## Scripts operativos documentados
+Validar bases antiguas:
 
-Los scripts reutilizables de consulta PostgreSQL viven en:
-
-```text
-Docs/03_standards/operations/scripts/database/
+```sql
+SELECT datname
+FROM pg_database
+WHERE datistemplate = false
+  AND (datname = 'comercial' OR datname LIKE '%_db')
+ORDER BY datname;
 ```
 
-Scripts Auth disponibles:
+El resultado esperado es cero filas.
 
-```text
-Docs/03_standards/operations/scripts/database/queries/auth/list-users-by-application.sql
-Docs/03_standards/operations/scripts/database/queries/auth/delete-users-by-id.sql
+Validar cada API:
+
+```powershell
+python manage.py check
+python manage.py showmigrations --plan
 ```
 
-Regla:
+## Criterio para borrar `comercial`
 
-- `list-users-by-application.sql` es solo lectura.
-- `delete-users-by-id.sql` es plantilla administrativa y no debe ejecutarse sin
-  reemplazar IDs placeholder, validar alcance y preferir antes el comando
-  Django documentado en
-  `Docs/01_core_erp/auth/user-application-traceability.md`.
+`comercial` solo podia borrarse cuando:
 
-## Limpieza de base temporal 2026-06-27
+- existiera respaldo binario externo;
+- no hubiera API activa apuntando a `COMERCIAL_DB_*`;
+- las tablas utiles estuvieran migradas a su base responsable;
+- los conteos origen/destino coincidieran;
+- las APIs validaran contra sus bases separadas;
+- `docker-postgresql-apply` no recreara `comercial`.
 
-Se detecto la base temporal no autorizada:
-
-```text
-test_comercial
-```
-
-Validaciones ejecutadas antes de retirarla:
-
-- listado de bases existentes;
-- listado de schemas y tablas dentro de `test_comercial`;
-- conteo de tablas de usuario;
-- conteo de filas por tabla;
-- comparacion de datos utiles RefaPart contra la base oficial `comercial`.
-
-Resultado:
-
-- `test_comercial` contenia tablas `public.RefaPart*` y tablas tecnicas Django;
-- solo tenia datos semilla en `RefaPartProduct` y `RefaPartSupplier`;
-- las tablas operativas de negocio (`RefaPartOrder`, `RefaPartQuote`,
-  `RefaPartPartRequest`, mensajes y ofertas) estaban vacias;
-- los nombres semilla de productos y proveedores ya existian en `comercial`;
-- no se detecto informacion unica que migrar.
-
-Decision:
-
-```text
-DROP DATABASE "test_comercial";
-```
-
-Estado final:
-
-```text
-auth
-comercial
-jobcron
-lexnova
-postgres
-```
-
-Regla:
-
-No recrear `test_comercial`. Las pruebas de REFAPART deben usar la base oficial
-`comercial` con el usuario de aplicacion correspondiente o una base temporal de
-test generada por Django durante ejecucion de pruebas, nunca una base persistente
-manual sin contrato.
-
-## Pendientes
-
-- `PENDIENTE_DE_DEFINIR`: contrato final de DB/schema/usuario para MexIngSof.
-- `PENDIENTE_DE_DEFINIR`: confirmar si Address requiere schema propio o usa
-  tablas en schema compartido.
+Ese criterio quedo cumplido el 2026-07-01.

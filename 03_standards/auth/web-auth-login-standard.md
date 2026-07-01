@@ -181,6 +181,63 @@ El frontend puede:
 
 No puede sustituir validacion backend.
 
+## Error de sesion no persistida despues de login
+
+Si `POST /auth/login/` responde correctamente pero la llamada inmediata a
+`GET /auth/me/` o `GET /auth/me/permissions/` devuelve `401` con mensajes como
+`Las credenciales de autenticacion no se proveyeron`, no se debe mostrar como
+contrasena incorrecta.
+
+Ese caso significa:
+
+- el navegador no conservo o no envio las cookies `access`/`refresh`;
+- Gateway no reexpuso correctamente `Set-Cookie`;
+- `CORS_ALLOW_CREDENTIALS` u origen permitido no coincide;
+- la web y el Gateway usan hosts distintos (`localhost` vs `127.0.0.1`) o
+  dominios incompatibles;
+- `AUTH_COOKIE_SAMESITE`/`AUTH_COOKIE_SECURE` no coincide con el ambiente.
+
+En desarrollo local, queda prohibido mezclar hosts loopback entre web y
+Gateway. Si el usuario abre la web en `http://127.0.0.1:<puerto>`, el cliente
+web debe llamar al Gateway como `http://127.0.0.1:<puerto-gateway>`. Si abre la
+web en `http://localhost:<puerto>`, debe llamar al Gateway como
+`http://localhost:<puerto-gateway>`.
+
+```text
+localhost web -> localhost gateway
+127.0.0.1 web -> 127.0.0.1 gateway
+```
+
+Los clientes web pueden normalizar automaticamente `localhost`/`127.0.0.1` solo
+cuando ambos hosts son loopback. No se permite hacer esta sustitucion con
+dominios productivos.
+
+Gateway debe reenviar las cookies emitidas por Auth con atributos completos:
+
+```text
+Set-Cookie access=<token>; Path=/; HttpOnly; SameSite=<ambiente>; Secure=<ambiente>; Max-Age=<access>
+Set-Cookie refresh=<token>; Path=/; HttpOnly; SameSite=<ambiente>; Secure=<ambiente>; Max-Age=<refresh>
+```
+
+Mensaje recomendado en desarrollo:
+
+```text
+El inicio de sesion fue aceptado, pero el navegador no conservo la sesion.
+Verifica cookies, CORS y que estes entrando a la web con el mismo host
+configurado para el Gateway.
+```
+
+Mensaje recomendado en produccion:
+
+```text
+No pudimos confirmar tu sesion. Intenta de nuevo o contacta soporte.
+```
+
+El cliente Gateway debe tratar `401` de `/auth/me/` como un estado esperado de
+sesion ausente y no debe registrar `console.error` falso. Solo debe registrar
+errores tecnicos cuando el endpoint falle con error real de red, `5xx` o payload
+inesperado.
+
 ## Migracion de proyectos existentes
 
 Antes de reemplazar login existente, crear:

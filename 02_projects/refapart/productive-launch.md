@@ -75,4 +75,6 @@ outbox para permitir reintentos y reconciliacion.
 - PENDIENTE_DE_IMPLEMENTAR: seed productivo de roles/permisos en Auth.
 - PENDIENTE_DE_IMPLEMENTAR: eventos JobCron/outbox para solicitudes,
   cotizaciones y ordenes.
-- PENDIENTE_DE_IMPLEMENTAR: panel admin operativo completo.
+- IMPLEMENTADO_UI_PARCIAL_API: paneles por perfil cliente, proveedor,
+  cotizador/admin y administrador REFAPART. Falta conectar todos los datos
+  productivos, permisos finales y eventos operativos.

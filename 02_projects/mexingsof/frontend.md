@@ -88,3 +88,26 @@ retiran de ubicaciones activas. No deben usarse como runtime web.
 
 - PENDIENTE_DE_DEFINIR: integrar Auth via Gateway General para rutas admin.
 - PENDIENTE_DE_DEFINIR: datos reales de telefono, direccion y horario.
+
+## Continuidad Auth y frontend local
+
+MexIngSof queda alineado al estandar:
+
+```text
+../../03_standards/frontend/account-continuity-standard.md
+```
+
+Impacto vigente:
+
+- `WEB.NJ.NEXT.MexIngSof/next.config.ts` declara `allowedDevOrigins` para
+  `localhost:3009` y `127.0.0.1:3009`.
+- `NEXT_PUBLIC_APPLICATION_CODE=MEXINGSOF` permanece como identificador de
+  aplicacion para Auth/Gateway.
+
+Pendientes reales:
+
+- Las rutas `/admin/products` y `/admin/leads` siguen `IMPLEMENTADO_SIN_AUTH`;
+  antes de copiar login/registro completo debe definirse si Auth admin vive en
+  JobCron CRM, Auth central o contrato Gateway especifico.
+- Las rutas internas `app/api/*` siguen siendo temporales hasta migrar a
+  Gateway/JobCron/Catalog conforme al mapa tecnico.

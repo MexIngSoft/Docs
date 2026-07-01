@@ -2,6 +2,464 @@
 
 ---
 
+## 2026-07-01 - Correccion final de bases separadas y retiro de `comercial`
+
+### Context Pack utilizado
+
+- `Docs/03_standards/database/postgresql-project-users-and-schemas.md`
+- `Docs/03_standards/docker/grouped-containers-isolated-config.md`
+- `Docker.DB.PG/README.md`
+
+### Estado final
+
+Completado.
+
+### Archivos leidos
+
+- `Docker.API.PY/.env`
+- `Docker.DB.PG/.env`
+- `Docker.DB.PG/.env.example`
+- `Docker.API.PY/start.sh`
+- `Docker.API.PY/API.PY.DJANGO.JobCron/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Address/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Search/config/settings.py`
+- `Docker.DB.PG/docker/postgres/01-users.sh`
+- `Docker.DB.PG/docker/postgres/02-databases.sh`
+- `Docker.DB.PG/docker/postgres/03_schemas.sql`
+- `Docker.DB.PG/docker/postgres/04-grants.sh`
+- `Docker.API.PY/architecture.md`
+- `Docs/03_standards/operations/scripts/Start-LexNovaFiscora.ps1`
+- `Docs/03_standards/operations/scripts/Start-DocuCore.ps1`
+
+### Archivos modificados
+
+- `Docker.API.PY/.env`
+- `Docker.API.PY/.env.example`
+- `Docker.API.PY/start.sh`
+- `Docker.API.PY/API.PY.DJANGO.JobCron/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Address/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Search/config/settings.py`
+- `Docker.API.PY/architecture.md`
+- `Docker.DB.PG/.env`
+- `Docker.DB.PG/.env.example`
+- `Docker.DB.PG/docker-compose.yml`
+- `Docker.DB.PG/docker/postgres/01-users.sh`
+- `Docker.DB.PG/docker/postgres/02-databases.sh`
+- `Docker.DB.PG/docker/postgres/03_schemas.sql`
+- `Docker.DB.PG/docker/postgres/04-grants.sh`
+- `Docker.DB.PG/README.md`
+- `Docs/03_standards/database/postgresql-project-users-and-schemas.md`
+- `Docs/03_standards/docker/grouped-containers-isolated-config.md`
+- `Docs/03_standards/operations/scripts/Start-LexNovaFiscora.ps1`
+- `Docs/03_standards/operations/scripts/Start-DocuCore.ps1`
+
+### Decisiones tomadas
+
+- Las bases activas ya no usan sufijo `_db`; usan nombres PascalCase tipo SQL
+  Server: `Auth`, `Gateway`, `RefaPart`, `JobCron`, `Catalog`, etc.
+- `comercial` no se conserva como base viva. Su unico objetivo permitido queda
+  cubierto por respaldo binario externo.
+- Cada API usa variables propias `<API>_DB_NAME`, `<API>_DB_USER` y
+  `<API>_DB_PASSWORD`.
+- Se elimina el uso activo de `COMERCIAL_DB_NAME`, `COMERCIAL_DB_USER` y
+  `COMERCIAL_DB_PASSWORD`.
+- Las bases no se comunican directo entre si; la integracion debe pasar por API
+  o Gateway.
+
+### Migracion ejecutada
+
+- Se detecto que `comercial.public.Address*` y `comercial.public.RefaPart*`
+  todavia tenian datos reales.
+- Se detecto estructura `comercial.public.Search*`.
+- Se creo respaldo binario local antes de cambios destructivos:
+  `C:\Users\cash1\AppData\Local\Temp\Workspace.Comercial\db-backups\pre-rename-20260701_034045`.
+- Se migro `Address*` hacia `Address`.
+- Se migro `RefaPart*` hacia `RefaPart`.
+- Se migro estructura/datos `Search*` hacia `Search`.
+- Se compararon conteos origen/destino antes de retirar `comercial`.
+- Se renombraron bases antiguas con `_db` a PascalCase.
+- Se elimino la base `comercial`.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Listado PostgreSQL de bases activas | OK: no existe `comercial`; no existen bases terminadas en `_db`. |
+| `docker compose -f Docker.DB.PG/docker-compose.yml --profile tools run --rm db-postgresql-apply` | OK: crea/confirma bases PascalCase, schemas y grants; no recrea `comercial`. |
+| `docker compose -f Docker.API.PY/docker-compose.yml up -d --force-recreate api-multiproyecto` | OK: `api-multiproyecto` quedo healthy. |
+| `python manage.py check` + `python manage.py showmigrations --plan` en 20 APIs | OK: Address, Auth, Catalog, Customization, DocuCore, Document, Fiscal, Fiscora, Gateway, Imagrafity, Inventory, JobCron, LexNova, Pricing, Procurement, RefaPart, Sales, Search, Supplier y TecnoTelec. |
+| Busqueda activa de `COMERCIAL_DB` y fallbacks `_db` en Docker/API | OK: sin coincidencias activas despues de corregir fallbacks Address/Gateway/RefaPart/Search y `.env.example`. |
+
+### Contradicciones detectadas
+
+- La documentacion anterior indicaba conservar `comercial` como respaldo legado,
+  pero el requerimiento vigente exige bases separadas y sin dependencia viva a
+  `comercial`.
+- Algunos scripts de validacion seguian usando `POSTGRES_DB=comercial`; fueron
+  actualizados a bases separadas.
+- JobCron tenia fallback local a `jobcron`; fue corregido a `JobCron`.
+- `JOBCRON_DB_PASSWORD` no coincidia entre stack DB y stack API; se alineo el
+  `.env` de APIs con la credencial del stack DB.
+
+### Pendientes reales
+
+Ninguno para el retiro operativo de `comercial` ni para nombres `_db`.
+
+### Riesgos detectados
+
+- Si se restaura un respaldo antiguo directamente sobre el contenedor, podria
+  reaparecer `comercial`; debe restaurarse en una base temporal externa o en el
+  destino responsable.
+- Las referencias historicas dentro de reportes anteriores pueden mencionar
+  `comercial`; no son estado vigente.
+
+### Agents completados, limpiados, parciales, bloqueados o pendientes
+
+- Base de datos: completado.
+- Bloqueos de base de datos: ninguno.
+- `comercial`: retirado como base activa.
+
+---
+
+## Ejecucion 2026-07-01 - split fisico de bases por API
+
+### Context Pack utilizado
+
+- Core ERP / Database / Django API / Docker local.
+
+### Agent ejecutado
+
+- Continuacion de cierre de base de datos agrupado en `AGENTS-030.md`.
+- Se mantuvo `AGENTS-002.md` limpio; no se reabrieron instrucciones vacias.
+
+### Estado final
+
+- Completado para procesos de base de datos.
+
+### Archivos leidos
+
+- `Docs/03_standards/database/postgresql-project-users-and-schemas.md`
+- `Docs/03_standards/operations/django-api-project-compliance.md`
+- `Docker.DB.PG/docker-compose.yml`
+- `Docker.DB.PG/docker/postgres/01-users.sh`
+- `Docker.DB.PG/docker/postgres/02-databases.sh`
+- `Docker.DB.PG/docker/postgres/03_schemas.sql`
+- Settings Django de APIs activas bajo `Docker.API.PY/API.PY.DJANGO.*`
+
+### Archivos modificados
+
+- `Docs/03_standards/database/postgresql-project-users-and-schemas.md`
+- `Docs/03_standards/operations/django-api-project-compliance.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docker.DB.PG/docker-compose.yml`
+- `Docker.DB.PG/docker/postgres/01-users.sh`
+- `Docker.DB.PG/docker/postgres/02-databases.sh`
+- `Docker.DB.PG/docker/postgres/03_schemas.sql`
+- `Docker.DB.PG/docker/postgres/04-grants.sh`
+- `Docker.API.PY/.env.example`
+- `Docker.API.PY/API.PY.DJANGO.Address/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Catalog/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Customization/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.DocuCore/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Document/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Fiscal/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Fiscora/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity/core/models.py`
+- `Docker.API.PY/API.PY.DJANGO.Inventory/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.LexNova/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Pricing/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Procurement/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Sales/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Search/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Supplier/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.TecnoTelec/config/settings.py`
+
+### APIs reutilizadas
+
+- Gateway General.
+- APIs Django existentes por dominio; no se creo API duplicada.
+
+### APIs descartadas por duplicidad
+
+- No aplica. La tarea fue de configuracion/migracion de bases por API.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| Backup `pg_dump -Fc` de `auth`, `comercial`, `jobcron`, `lexnova` | OK; respaldo en `C:\Users\cash1\AppData\Local\Temp\Workspace.Comercial\db-backups\pre-split-20260701_010516`. |
+| `docker compose -f Docker.DB.PG/docker-compose.yml config --quiet` | OK |
+| `docker compose -f Docker.DB.PG/docker-compose.yml --profile tools run --rm db-postgresql-apply` | OK |
+| Creacion/verificacion de bases separadas | OK: `address_db`, `catalog_db`, `customization_db`, `docucore_db`, `document_db`, `fiscal_db`, `fiscora_db`, `gateway_db`, `imagrafity_db`, `inventory_db`, `pricing_db`, `procurement_db`, `refapart_db`, `sales_db`, `search_db`, `supplier_db`, `tecnotelec_db`. |
+| Migracion de schemas desde `comercial` a bases separadas | OK para schemas existentes. `Address`, `Gateway` e `Imagrafity` se inicializaron como bases nuevas sin datos legacy. |
+| `python manage.py check` por API activa en `api-multiproyecto` | OK en Address, Auth, Catalog, Customization, DocuCore, Document, Fiscal, Fiscora, Gateway, Imagrafity, Inventory, JobCron, LexNova, Pricing, Procurement, RefaPart, Sales, Search, Supplier y TecnoTelec. |
+| `python manage.py showmigrations --plan` por API activa | OK; migraciones pendientes 0. |
+| Escaneo `COMERCIAL_DB_*` en settings Python | OK; sin referencias activas. Solo queda en `.env`/`.env.example` como legacy backup. |
+
+### Resultado de validaciones
+
+- `comercial` queda solo como respaldo legado/auditoria.
+- Las APIs activas usan bases y usuarios propios.
+- No queda dependencia activa a `COMERCIAL_DB_*` en settings Django.
+- Se agrego `04-grants.sh` para repetir permisos luego de restaurar dumps.
+- Se corrigio `Imagrafity` para no generar SQL invalido con schema embebido en
+  `db_table`.
+
+### Contradicciones detectadas
+
+- Documentacion previa decia que no se crearian bases definitivas fuera de
+  `comercial`; la instruccion actual exigio separar fisicamente las bases y
+  dejar `comercial` solo como respaldo. La documentacion canonica fue
+  actualizada para reflejar el nuevo estado vigente.
+
+### Decisiones tomadas
+
+- Mantener `comercial` sin borrarlo por ser respaldo.
+- Separar fisicamente bases por API y prohibir comunicacion SQL directa entre
+  dominios.
+- Validar migraciones por API contra el contenedor real `api-multiproyecto`.
+
+### Pendientes reales
+
+- `PENDIENTE_DE_DEFINIR`: MexIngSof solo requiere base si se formaliza una API
+  propia; mientras sea web corporativa, no se crea DB.
+
+### Riesgos detectados
+
+- Si alguien restaura datos con `postgres` y omite `04-grants.sh`, volveran los
+  errores `permission denied for table django_migrations`.
+- Si una API nueva usa `POSTGRES_DB` o `COMERCIAL_DB_*` como fallback, puede
+  reintroducir acoplamiento a la base legacy.
+
+### Agents completados, limpiados, parciales, bloqueados o pendientes
+
+- Completados: procesos de base de datos del agente agrupado.
+- Limpiados: `AGENTS-002.md` permanece limpio.
+- Parciales: `AGENTS-000.md`, `AGENTS-001.md`, `AGENTS-030.md` segun reporte
+  previo por temas no relacionados a base de datos.
+- Bloqueados por base de datos: ninguno.
+
+---
+
+## Ejecucion 2026-06-30 - Agents activos Refapart cuenta/login y estandarizacion
+
+### Context Pack utilizado
+
+- `REFAPART ACTIVE_MVP`
+- `CP-03 - Auth/Gateway`
+- `03_standards/frontend`
+- `01_core_erp/apis`
+- `00_audit/10_development_gap_analysis`
+
+### Agents ejecutados
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Parcial | Queda como concentrador historico/amplio de REFAPART/Auth/Gateway; no se limpia porque aun agrupa P0/P1/P2/P3/P4 con decisiones externas. |
+| `AGENTS-001.md` | Completado y limpiado | Estandar de continuidad de cuenta/Auth, dashboard `/cuenta` y retorno comercial implementados/documentados. |
+| `AGENTS-002.md` | Completado y limpiado | UX de login, bloqueo de doble envio, spinner/estado de validacion, rutas `/cuenta/perfil` y `/cuenta/configuracion`, mapas Gateway/UI actualizados. |
+| `AGENTS-003.md` a `AGENTS-029.md` | Sin instrucciones | Archivos vacios, no ejecutables. |
+| `AGENTS-030.md` | Parcial | Concentrador vigente; no se limpia hasta cerrar P0-P5. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-002.md`
+- `Docs/agents/AGENTS-030.md`
+- `Docs/00_audit/10_development_gap_analysis.md`
+- `Docs/03_standards/frontend/account-continuity-standard.md`
+- `Docs/01_core_erp/apis/gateway-route-registry.md`
+- `Docs/01_core_erp/apis/endpoint-ui-consumption-matrix.md`
+- `Docs/02_projects/refapart/frontend/code-actions-map.md`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/login/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/account/components/CustomerDashboard.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/components/AuthUi.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/lib/api/gateway-client.ts`
+
+### Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/login/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/account/components/CustomerDashboard.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/cuenta/perfil/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/cuenta/configuracion/page.tsx`
+- `Docs/01_core_erp/apis/gateway-route-registry.md`
+- `Docs/01_core_erp/apis/endpoint-ui-consumption-matrix.md`
+- `Docs/02_projects/refapart/frontend/code-actions-map.md`
+- `Docs/02_projects/refapart/frontend/20_role_dashboard_spec.md`
+- `Docs/03_standards/frontend/account-continuity-standard.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-002.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### APIs reutilizadas
+
+- Gateway General.
+- Auth API: `/auth/login/`, `/auth/me/`, `/auth/me/permissions/`.
+- Address API para `/cuenta/direcciones` y checkout.
+- REFAPART API/Search/Requests ya documentadas.
+
+### APIs descartadas por duplicidad
+
+- No se creo Auth por proyecto.
+- No se creo Gateway por proyecto.
+- No se creo API de cuenta nueva mientras el contrato `GET /api/v1/projects/REFAPART/customer/dashboard` siga pendiente.
+
+### Decisiones tomadas
+
+- `/cuenta` es el dashboard principal del cliente REFAPART y no una pantalla intermedia.
+- `/dashboard` queda como destino principal del cliente REFAPART.
+- `/cuenta` queda como alias de compatibilidad y normaliza el retorno de login hacia `/dashboard`.
+- `/cuenta/perfil` y `/cuenta/configuracion` existen como rutas secundarias protegidas y reutilizan las vistas actuales `/profile` y `/settings`.
+- Login bloquea campos durante envio, muestra spinner, evita doble submit y mantiene `next`/`returnTo`.
+- Credenciales invalidas se muestran como `Correo o contrasena incorrectos.`; no se debe mostrar "cuenta inactiva" cuando el fallo puede ser contraseña incorrecta.
+- El endpoint real `GET /api/v1/projects/REFAPART/customer/dashboard` queda registrado como contrato pendiente; la UI actual se declara `MOCK_TEMPORAL`.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.RefaPart` | OK, sin errores ni warnings ESLint. |
+| `npm run build` en `WEB.NJ.NEXT.RefaPart` | OK, compila y genera rutas `/cuenta`, `/cuenta/perfil`, `/cuenta/configuracion`, `/login`. |
+| `python manage.py check` en `API.PY.DJANGO.RefaPart` | OK. |
+| `python manage.py check` en `API.PY.DJANGO.Gateway` | OK. |
+| `python manage.py check` en `API.PY.DJANGO.JobCron` | OK. |
+| `python manage.py check` en `API.PY.DJANGO.TecnoTelec` | OK. |
+| `python manage.py check` en `API.PY.DJANGO.Auth` sin variables | OK esperado: falla segura indicando password faltante y que SQLite no esta permitido. |
+| `python manage.py check` en `API.PY.DJANGO.Auth` cargando `Docker.API.PY/.env` sin imprimir secretos | OK. |
+| `npm run lint` en `WEB.NJ.NEXT.JobCron` | OK, sin errores ni warnings. |
+| `npm run build` en `WEB.NJ.NEXT.JobCron` | OK. |
+| `npm run lint` en `WEB.NJ.NEXT.MexIngSof` | OK, `tsc --noEmit` sin errores. |
+| `npm run build` en `WEB.NJ.NEXT.MexIngSof` | OK. |
+| `npm run lint` en `WEB.NJ.NEXT.TecnoTelec` | OK con warnings existentes por uso de `<img>`. |
+| `npm run build` en `WEB.NJ.NEXT.TecnoTelec` | OK con warnings existentes por uso de `<img>`. |
+| `Invoke-WebRequest http://localhost:3008/login` | OK 200. |
+| `Invoke-WebRequest http://localhost:3008/cuenta` sin sesion | OK 307 esperado a login/ruta protegida. |
+| `Invoke-WebRequest http://localhost:3008/cuenta/perfil` sin sesion | OK 307 esperado. |
+| `Invoke-WebRequest http://localhost:3008/cuenta/configuracion` sin sesion | OK 307 esperado. |
+
+### Contradicciones detectadas
+
+- `AGENTS-030.md` marcaba `AGENTS-002.md` como P5 Payments/futuro, pero el contenido real de `AGENTS-002.md` era P0 REFAPART cuenta/login. Se ejecuto el contenido real del agent y queda registrada la contradiccion.
+- `AGENTS-030.md` indicaba que `AGENTS-001.md` estaba cerrado/limpio, pero el archivo contenia instrucciones activas. Se ejecuto, valido y limpio.
+
+### Pendientes reales
+
+- `AGENTS-000.md` y `AGENTS-030.md` no se limpian porque aun concentran pendientes de P0-P5.
+- REFAPART: implementar contrato real `GET /api/v1/projects/REFAPART/customer/dashboard` para reemplazar datos demo del dashboard cliente.
+- REFAPART: cerrar matriz final de permisos para administrador, cotizador/gestor, proveedor y cliente si Auth no permite inferirla de forma completa.
+- JobCron: decisiones de SaaS publico vs ERP interno y roles administrativos finales.
+- MexIngSof: decidir migracion de rutas internas `app/api/*` a Gateway/JobCron/Catalog/Auth.
+- TecnoTelec: definir MVP final antes de declarar cotizador/carrito/checkout como productivo.
+- Payments permanece congelado hasta contrato/proveedor aprobado.
+
+### Riesgos detectados
+
+- Si se declara productivo el dashboard de cuenta antes de tener endpoint real, quedarian datos demo en una pantalla autenticada.
+- Si las webs copian login sin el estandar de mensajes, volvera a aparecer el error de "cuenta inactiva" para credenciales invalidas.
+
+### Agents limpiados, bloqueados o pendientes
+
+- Limpiados: `AGENTS-001.md`, `AGENTS-002.md`.
+- Bloqueados/parciales: `AGENTS-000.md`, `AGENTS-030.md`.
+- Sin instrucciones: `AGENTS-003.md` a `AGENTS-029.md`.
+
+---
+
+## Ejecucion 2026-06-30 - Correccion validacion local Auth PostgreSQL
+
+### Context Pack utilizado
+
+- `CP-03 - Auth/Gateway`
+- `CP-Database/PostgreSQL`
+- `03_standards/operations`
+
+### Tarea ejecutada
+
+Corregir la causa por la que `API.PY.DJANGO.Auth` fallaba al ejecutar
+`python manage.py check` fuera de Docker cuando no existia `DATABASE_URL`.
+
+### Archivos leidos
+
+- `Docker.API.PY/API.PY.DJANGO.Auth/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/.env.local.example`
+- `Docker.API.PY/API.PY.DJANGO.Auth/README.md`
+- `Docker.API.PY/start.sh`
+- `Docker.API.PY/.env.example`
+- `Docker.API.PY/docker-compose.yml`
+- `Docs/03_standards/database/postgresql-project-users-and-schemas.md`
+- `Docs/03_standards/operations/django-api-project-compliance.md`
+
+### Archivos modificados
+
+- `Docker.API.PY/API.PY.DJANGO.Auth/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/.env.local.example`
+- `Docker.API.PY/API.PY.DJANGO.Auth/README.md`
+- `Docs/03_standards/database/postgresql-project-users-and-schemas.md`
+- `Docs/03_standards/operations/django-api-project-compliance.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### APIs reutilizadas
+
+- Auth API.
+- PostgreSQL oficial `auth` / `auth_user` / schema `Auth`.
+
+No se creo API nueva.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `python manage.py check` sin password local en `API.PY.DJANGO.Auth` | OK esperado: falla con mensaje explicito `Auth database password is not configured... SQLite is not allowed for Auth.` |
+| Validacion estatica de `config/settings.py` | OK: existe `build_postgres_database_config`, soporte `AUTH_DB_PASSWORD` y bloqueo explicito de SQLite. |
+| `python manage.py check` cargando variables locales desde `Docker.API.PY/.env` sin imprimir secretos | OK: `System check identified no issues (0 silenced).` |
+| `python -m py_compile config/settings.py` | OK. |
+
+### Contradicciones detectadas
+
+- El reporte anterior marcaba Auth como no ejecutable localmente por falta de
+  `DATABASE_URL`. Esa condicion queda corregida: Auth ya no depende
+  exclusivamente de `DATABASE_URL`; tambien acepta `AUTH_DB_*`,
+  `POSTGRES_*` o `DB_*`.
+
+### Decisiones tomadas
+
+- Auth mantiene PostgreSQL como unica base valida; no se agrega fallback SQLite.
+- `DATABASE_URL` sigue permitido si existe.
+- Para ejecucion local directa se aceptan variables canonicas:
+  `AUTH_DB_NAME`, `AUTH_DB_USER`, `AUTH_DB_PASSWORD`, `POSTGRES_HOST` y
+  `POSTGRES_PORT`.
+- Si falta password, el error ahora explica exactamente que variable falta y
+  que SQLite esta prohibido.
+
+### Pendientes reales
+
+- Ninguno para esta causa puntual.
+- Las credenciales reales deben seguir fuera de Git y vivir en `.env.local`,
+  `Docker.API.PY/.env` local o secretos del entorno.
+
+### Riesgos detectados
+
+- Si alguien ejecuta Auth sin copiar `.env.local.example` a `.env.local` o sin
+  cargar variables del orquestador, el check fallara. Esa falla ahora es
+  intencional, clara y segura.
+
+---
+
 ## Ejecucion 2026-06-29 - AGENTS-030 P0-P4 desde tarea directa
 
 Clasificacion principal: `02_projects/refapart`.
@@ -15851,6 +16309,89 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 
 ---
 
+## Ejecucion 2026-06-29 - AGENTS-001 solicitado
+
+### Context Pack utilizado
+
+- Agents / pre-flight documental.
+- No se selecciono Context Pack de proyecto porque `Docs/agents/AGENTS-001.md`
+  esta vacio y no define dominio, proyecto, API, frontend ni integracion.
+
+### Agent ejecutado
+
+| Agent | Estado final | Motivo |
+|---|---|---|
+| `AGENTS-001.md` | Sin instrucciones | El archivo existe, conserva su placeholder y tiene `0` bytes. No contiene tareas ejecutables ni referencias canonicas que permitan desarrollo seguro. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-001.md`
+
+### Archivos modificados
+
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### APIs reutilizadas
+
+- No aplica. El agent no contiene instrucciones para crear, modificar o
+  reutilizar APIs.
+
+### APIs descartadas por duplicidad
+
+- No aplica.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `Get-Item Docs\agents\AGENTS-001.md` | OK: archivo presente, `Length = 0`. |
+| `Get-Content Docs\agents\AGENTS-001.md -Raw` | OK: sin contenido. |
+| `git status --short --branch` en `Docs` | OK: rama `general`; existe cambio previo no relacionado en `agents/AGENTS-000.md`, no tocado en esta ejecucion. |
+| Lectura focalizada de pre-flight documental | OK: se leyeron los documentos obligatorios sin leer todo el repositorio. |
+
+### Contradicciones detectadas
+
+- El usuario pidio desarrollar el agent 1 por completo, pero el archivo real
+  `Docs/agents/AGENTS-001.md` no contiene instrucciones. Prevalece el estado
+  real del archivo y la regla de no inventar documentacion oficial.
+
+### Decisiones tomadas
+
+- No se implemento desarrollo de web/API porque no existe alcance ejecutable
+  en `AGENTS-001.md`.
+- No se limpio el agent porque ya esta vacio y el placeholder debe conservarse.
+- No se modifico `AGENTS-000.md` aunque aparece con cambios locales, porque no
+  forma parte del alcance solicitado y podria contener trabajo del usuario.
+
+### Pendientes reales
+
+- PENDIENTE_DE_DEFINIR: cargar instrucciones concretas en
+  `Docs/agents/AGENTS-001.md` o indicar el documento canonico/proyecto exacto
+  que debe ejecutarse si se espera desarrollo nuevo desde interfaz web.
+
+### Riesgos detectados
+
+- Si se desarrolla sin contenido en el agent, se reintroduce implementacion por
+  intuicion y se rompe la trazabilidad documental.
+- Existe un cambio local no relacionado en `Docs/agents/AGENTS-000.md`; debe
+  revisarse por separado antes de cualquier commit general de agents.
+
+### Agents completados, limpiados, parciales, bloqueados o sin instrucciones
+
+- Completados: ninguno.
+- Limpiados: ninguno; `AGENTS-001.md` ya estaba vacio.
+- Parciales: ninguno.
+- Bloqueados: ninguno.
+- Sin instrucciones: `AGENTS-001.md`.
+
+---
+
 ## Ejecucion 2026-06-19 - Agents activos 000, 001 y 002
 
 ### Context Pack utilizado
@@ -16620,5 +17161,459 @@ El owner indico que por el momento solo se debe subir a una rama: `dev`.
 - No se archivo, movio ni elimino ningun archivo `AGENTS-*.md`.
 - `AGENTS-000.md` y `AGENTS-001.md` quedan cerrados vaciando su contenido y conservando los placeholders.
 - `AGENTS-002.md` a `AGENTS-030.md` quedan vacios/sin instrucciones.
+
+---
+## Ejecucion 2026-06-30 - Agentes 000, 001 y 030 para Refapart y cuatro proyectos base
+
+### Context Pack utilizado
+
+- `CP-00 - Preflight obligatorio`
+- `CP-02 - Frontend Next.js`
+- `CP-03 - Auth/Gateway`
+- `CP-Refapart`
+- Extension transversal: JobCron, MexIngSof y TecnoTelec por impacto directo
+  del estandar frontend.
+
+### Agents ejecutados
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Parcial | Se ejecuto la parte que impacta panel cliente Refapart y preparacion transversal. Quedan roles/permisos finales, seeds/migraciones y contratos operativos por cerrar. |
+| `AGENTS-001.md` | Parcial | Se implemento continuidad de cuenta/Auth y `/cuenta` como dashboard real en Refapart. No se limpia porque el archivo aun contiene alcance documental amplio y debe consolidarse con el concentrador. |
+| `AGENTS-030.md` | Parcial | Se avanzo P0 Refapart y preparacion P1-P3 en configuracion/docs. P1/P2/P3 conservan decisiones reales pendientes. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-030.md`
+- `Docs/00_audit/10_development_gap_analysis.md`
+- `Docs/02_projects/refapart/README.md`
+- `Docs/02_projects/refapart/frontend.md`
+- `Docs/02_projects/refapart/frontend/code-actions-map.md`
+- `Docs/02_projects/jobcron/README.md`
+- `Docs/02_projects/jobcron/ui/03_dynamic_content_model.md`
+- `Docs/02_projects/mexingsof/frontend.md`
+- `Docs/02_projects/mexingsof/technical/code-actions-map.md`
+- `Docs/02_projects/tecnotelec/frontend/00_frontend_overview.md`
+- `Docs/02_projects/tecnotelec/technical/code-actions-map.md`
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+- `Docs/03_standards/auth/web-auth-login-standard.md`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/cuenta/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/dashboard/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/login/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/register/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/logout/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/components/AppShell.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/services/auth-service.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/store/AuthProvider.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/middleware.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/next.config.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof/package.json`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/next.config.ts`
+
+### Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/account/components/CustomerDashboard.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/cuenta/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/dashboard/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/login/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/register/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/app/logout/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/components/AppShell.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/return-to.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/middleware.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/next.config.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.MexIngSof/next.config.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.TecnoTelec/next.config.ts`
+- `Docs/03_standards/frontend/account-continuity-standard.md`
+- `Docs/03_standards/frontend/nextjs-project-standard.md`
+- `Docs/02_projects/refapart/frontend/22_account_dashboard_and_auth_continuity.md`
+- `Docs/02_projects/refapart/frontend.md`
+- `Docs/02_projects/refapart/frontend/code-actions-map.md`
+- `Docs/02_projects/jobcron/README.md`
+- `Docs/02_projects/mexingsof/frontend.md`
+- `Docs/02_projects/tecnotelec/frontend/00_frontend_overview.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### APIs reutilizadas
+
+- Gateway General.
+- Auth API por Gateway.
+- REFAPART API por Gateway.
+- Address API por Gateway.
+
+No se creo API nueva.
+
+### APIs descartadas por duplicidad
+
+- API propia de continuidad de cuenta: descartada porque corresponde a frontend
+  y Gateway/Auth existentes.
+- API propia MexIngSof para Auth: descartada hasta decidir contrato admin; debe
+  reutilizar Auth/Gateway.
+- API propia TecnoTelec para login: descartada hasta confirmar si el portal MVP
+  requiere Auth ahora.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.RefaPart` | OK, sin warnings. |
+| `npm run build` en `WEB.NJ.NEXT.RefaPart` | OK. |
+| `npm run lint` en `WEB.NJ.NEXT.JobCron` | OK, sin warnings. |
+| `npm run build` en `WEB.NJ.NEXT.JobCron` | OK. |
+| `npm run lint` en `WEB.NJ.NEXT.MexIngSof` | OK (`tsc --noEmit`). |
+| `npm run build` en `WEB.NJ.NEXT.MexIngSof` | OK; warning Tailwind por no detectar utilidades. |
+| `npm run lint` en `WEB.NJ.NEXT.TecnoTelec` | OK con warnings no bloqueantes por `<img>`. |
+| `npm run build` en `WEB.NJ.NEXT.TecnoTelec` | OK con los mismos warnings no bloqueantes por `<img>`. |
+| `python manage.py check` en `API.PY.DJANGO.Gateway` | OK. |
+| `python manage.py check` en `API.PY.DJANGO.Auth` | No ejecutable localmente: falta `DATABASE_URL` en entorno directo. |
+| `python manage.py check` en `API.PY.DJANGO.RefaPart` | OK. |
+| `python manage.py check` en `API.PY.DJANGO.JobCron` | OK. |
+| `python manage.py check` en `API.PY.DJANGO.TecnoTelec` | OK. |
+
+### Contradicciones detectadas
+
+- Reportes historicos indicaban que `AGENTS-000.md` y `AGENTS-001.md` estaban
+  vacios/cerrados, pero los archivos activos tienen contenido. Prevalece el
+  estado real del archivo y no se limpian en esta ejecucion.
+- `AGENTS-030.md` declara que `AGENTS-001.md` queda cerrado y limpio, pero el
+  archivo conserva instrucciones activas. Se registra como contradiccion hasta
+  que se consolide formalmente.
+
+### Decisiones tomadas
+
+- `/cuenta` en Refapart queda como dashboard principal del cliente.
+- `/dashboard` queda como alias que reutiliza el mismo componente para no romper
+  enlaces existentes.
+- La continuidad Auth se centraliza en `features/auth/return-to.ts`, con
+  sanitizacion para evitar redirects externos o rutas Auth como destino.
+- Logout conserva ultima ruta publica no sensible y no redirige a login.
+- Los cuatro proyectos quedan alineados con `allowedDevOrigins` segun puertos
+  Docker/locales documentados.
+- MexIngSof, TecnoTelec y JobCron no reciben copia completa del flujo Refapart
+  hasta cerrar sus decisiones de Auth/admin/portal.
+
+### Pendientes reales
+
+- Refapart: sustituir datos demo del dashboard cliente por endpoint real de
+  dashboard cuando el contrato quede disponible.
+- Refapart: cerrar matriz final de permisos/roles y seeds/migraciones.
+- Refapart: cerrar politica final de checkout invitado vs autenticado.
+- JobCron: decidir SaaS publico vs ERP interno y roles finales de admin.
+- MexIngSof: migrar rutas internas `app/api/*` a Gateway/JobCron/Catalog/Auth.
+- TecnoTelec: decidir MVP consultivo/cotizador/carrito/checkout y destino de
+  cotizaciones.
+- Auth API: ejecutar `python manage.py check` con `DATABASE_URL` cargado.
+
+### Riesgos detectados
+
+- Copiar el flujo Refapart a las otras webs sin cerrar su matriz de permisos
+  podria crear pantallas Auth funcionales pero sin contrato backend real.
+- Mantener datos demo en dashboard Refapart puede confundirse con datos reales
+  hasta conectar endpoint productivo.
+- Warnings `<img>` en TecnoTelec no bloquean build, pero conviene migrarlos a
+  `next/image` antes de optimizacion productiva.
+
+### Agents completados, limpiados, parciales, bloqueados o pendientes
+
+- Completados: ninguno limpiado en esta ejecucion.
+- Limpiados: ninguno.
+- Parciales: `AGENTS-000.md`, `AGENTS-001.md`, `AGENTS-030.md`.
+- Bloqueados: Auth API check local por falta de `DATABASE_URL`; decisiones de
+  negocio P1/P2/P3 indicadas arriba.
+- Sin instrucciones: `AGENTS-002.md` a `AGENTS-029.md` se mantienen segun estado
+  actual; no se modifican.
+
+---
+
+## Ejecucion 2026-06-30 - Identity & Access JobCron y roles REFAPART
+
+### Context Pack utilizado
+
+- `CP-00 - Preflight obligatorio`
+- `CP-03 - Auth/Gateway`
+- `CP-Refapart`
+- `CP-JobCron`
+
+### Agents ejecutados
+
+| Agent | Estado final | Resultado |
+|---|---|---|
+| `AGENTS-000.md` | Parcial | Se desarrollo la parte cerrable de perfiles/roles REFAPART y consola JobCron Identity & Access. No se limpia porque conserva alcance amplio de paneles, flujos y endpoints no cerrados. |
+| `AGENTS-001.md` | Parcial | Se avanzo la base de administracion de usuarios/roles/permisos y se dejo documentado el flujo seguro. No se limpia porque sigue pendiente la politica productiva completa de retencion/eliminacion y endpoints Gateway. |
+| `AGENTS-030.md` | Parcial | Se redujo P0/P1 cerrable: roles especializados REFAPART sembrados y UI JobCron creada. No se limpia porque P2/P3/P4/P5 conservan decisiones reales pendientes. |
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-000.md`
+- `Docs/agents/AGENTS-001.md`
+- `Docs/agents/AGENTS-030.md`
+- `Docs/01_core_erp/apis/01_auth_api.md`
+- `Docs/01_core_erp/apis/gateway-route-registry.md`
+- `Docs/02_projects/jobcron/README.md`
+- `Docs/02_projects/jobcron/operational-admin-center.md`
+- `Docs/02_projects/jobcron/api-contracts.md`
+- `Docs/02_projects/jobcron/frontend/code-actions-map.md`
+- `Docs/02_projects/refapart/security/00_permissions_matrix.md`
+- `Docs/02_projects/refapart/admin/00_admin_overview.md`
+- `Docs/00_audit/10_development_gap_analysis.md`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/app/admin/layout.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/app/admin/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/components/admin-header.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/lib/modules.ts`
+- `Docker.API.PY/API.PY.DJANGO.Auth/access/migrations/0017_seed_refapart_operational_permissions.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/access/models.py`
+- `Docker.API.PY/API.PY.DJANGO.Auth/roles/models.py`
+
+### Archivos modificados
+
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/lib/identity-access.ts`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/components/identity-access-panel.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/app/admin/usuarios/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/app/admin/roles/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/app/admin/permisos/page.tsx`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/app/globals.css`
+- `Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/lib/modules.ts`
+- `Docker.API.PY/API.PY.DJANGO.Auth/access/migrations/0020_seed_refapart_specialized_roles.py`
+- `Docs/02_projects/jobcron/operational-admin-center.md`
+- `Docs/02_projects/jobcron/frontend/code-actions-map.md`
+- `Docs/02_projects/jobcron/api-contracts.md`
+- `Docs/01_core_erp/apis/gateway-route-registry.md`
+- `Docs/02_projects/refapart/security/00_permissions_matrix.md`
+- `Docs/02_projects/refapart/admin/00_admin_overview.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+
+### APIs reutilizadas
+
+- Auth API como autoridad de usuarios, roles y permisos.
+- Gateway General como entrada obligatoria futura para `/api/v1/admin/identity/*`.
+- REFAPART API para productos; no se movio la responsabilidad de productos a Auth.
+
+### APIs descartadas por duplicidad
+
+- API nueva de permisos dentro de RefaPart: descartada porque duplicaria Auth.
+- Pantalla propia RefaPart para permisos globales: descartada porque la consola correcta es JobCron Identity & Access.
+- Auth dedicado por proyecto: descartado por estandar.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `npm run lint` en `WEB.NJ.NEXT.JobCron` | OK, sin errores. |
+| `npm run build` en `WEB.NJ.NEXT.JobCron` | OK; nuevas rutas `/admin/usuarios`, `/admin/roles` y `/admin/permisos` compiladas. |
+| `python -m py_compile ...0020_seed_refapart_specialized_roles.py` | OK. |
+| `docker exec api-multiproyecto ... /usr/src/api/auth && python manage.py check` | OK. |
+| `docker exec api-multiproyecto ... /usr/src/api/jobcron && python manage.py check` | OK. |
+| `docker exec api-multiproyecto ... python manage.py migrate access 0020` | OK; migracion aplicada en desarrollo. |
+| Verificacion de roles REFAPART en Django shell | OK: `REFAPART_ADMIN`, `REFAPART_FINANCE`, `REFAPART_LOGISTICS`, `REFAPART_QUOTER`, `REFAPART_SUPPLIER_MANAGER`, `REFAPART_SUPPORT`. |
+| Validacion de rutas documentales tocadas con `Test-Path` | OK. |
+
+### Contradicciones detectadas
+
+- `AGENTS-030.md` absorbe pendientes de agents anteriores, pero `AGENTS-000.md`
+  y `AGENTS-001.md` siguen con contenido activo. Prevalece el estado real de
+  archivo: no se limpian hasta cerrar o bloquear todo su alcance.
+- La documentacion previa decia que los roles especializados REFAPART estaban
+  pendientes de seed. Se corrigio con la migracion `0020`.
+
+### Decisiones tomadas
+
+- El area para asignar permisos a usuarios registrados queda en JobCron:
+  `/admin/usuarios`, `/admin/roles` y `/admin/permisos`.
+- Auth sigue siendo la fuente de verdad; JobCron solo opera/orquesta mediante
+  Gateway.
+- RefaPart no tendra una pantalla separada para asignar permisos globales.
+- `REFAPART_ADMIN` y `CanManageProducts` gobiernan el panel de productos
+  RefaPart.
+- Las rutas Gateway `/api/v1/admin/identity/*` quedan registradas como
+  `PENDIENTE_DE_IMPLEMENTAR` antes de habilitar cambios productivos desde UI.
+
+### Pendientes reales
+
+- Implementar adaptador Gateway `/api/v1/admin/identity/*` hacia Auth
+  `/api/access/*`.
+- Conectar la UI JobCron Identity & Access a datos reales y a auditoria.
+- Definir politica productiva completa de suspension, retencion, eliminacion,
+  restauracion y hard delete de usuarios.
+- Definir si JobCron sera SaaS publico o ERP interno para cerrar alcance de
+  `JOBCRON_SUPER_ADMIN`, `JOBCRON_PLATFORM_ADMIN`, `COMPANY_OWNER` y
+  `APPLICATION_ADMIN`.
+- Ejecutar pruebas funcionales end-to-end de asignacion de rol a usuario real
+  cuando el Gateway admin exista.
+
+### Riesgos detectados
+
+- Permitir asignaciones directas por SQL sin auditoria puede dejar usuarios con
+  acceso indebido.
+- Exponer botones productivos de asignacion antes del Gateway admin puede crear
+  una falsa sensacion de disponibilidad.
+- La politica de eliminacion de usuarios requiere decision legal/operativa antes
+  de habilitar hard delete.
+
+### Agents completados, limpiados, parciales, bloqueados o pendientes
+
+- Completados: ninguno.
+- Limpiados: ninguno.
+- Parciales: `AGENTS-000.md`, `AGENTS-001.md`, `AGENTS-030.md`.
+- Bloqueados formalmente:
+  - `AGENTS-001.md`: politica final de retencion/eliminacion y hard delete.
+  - `AGENTS-030.md`: decisiones P2/P3/P4/P5 y Gateway admin identity.
+- Sin instrucciones: `AGENTS-002.md` a `AGENTS-029.md` siguen vacios.
+
+---
+
+## Ejecucion 2026-07-01 - AGENTS-002 base de datos y migraciones
+
+### Context Pack utilizado
+
+- Core ERP / Database / Django API / Docker local.
+
+### Agent ejecutado
+
+- `Docs/agents/AGENTS-002.md`
+
+### Estado final
+
+- Completado y limpiado.
+
+### Archivos leidos
+
+- `Docs/README.md`
+- `Docs/agents/RUN_AGENTS_INSTRUCTIONS.md`
+- `Docs/agents/AGENT_GLOBAL_RULES.md`
+- `Docs/_meta/active-work-index.md`
+- `Docs/_meta/master-index.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/agents/AGENTS-002.md`
+- `Docs/03_standards/database/postgresql-project-users-and-schemas.md`
+- `Docs/03_standards/operations/django-api-project-compliance.md`
+- `Docs/00_audit/10_development_gap_analysis.md`
+- `Docker.API.PY/docker-compose.yml`
+- Settings Django de APIs activas bajo `Docker.API.PY/API.PY.DJANGO.*`
+- Migraciones DocuCore bajo `Docker.API.PY/API.PY.DJANGO.DocuCore/core/migrations/`
+
+### Archivos modificados
+
+- `Docs/agents/AGENTS-002.md`
+- `Docs/agents/EXECUTION_REPORT.md`
+- `Docs/03_standards/database/postgresql-project-users-and-schemas.md`
+- `Docs/03_standards/operations/django-api-project-compliance.md`
+- `Docker.API.PY/API.PY.DJANGO.DocuCore/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Document/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Fiscal/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Fiscora/config/settings.py`
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity/config/settings.py`
+
+### Archivos/artefactos retirados
+
+Se retiraron artefactos locales prohibidos `db.sqlite3`:
+
+- `Docker.API.PY/API.PY.DJANGO.Address/db.sqlite3`
+- `Docker.API.PY/API.PY.DJANGO.DocuCore/db.sqlite3`
+- `Docker.API.PY/API.PY.DJANGO.Document/db.sqlite3`
+- `Docker.API.PY/API.PY.DJANGO.Fiscal/db.sqlite3`
+- `Docker.API.PY/API.PY.DJANGO.Fiscora/db.sqlite3`
+- `Docker.API.PY/API.PY.DJANGO.Gateway/db.sqlite3`
+- `Docker.API.PY/API.PY.DJANGO.Imagrafity/db.sqlite3`
+- `Docker.API.PY/API.PY.DJANGO.RefaPart/db.sqlite3`
+- `Docker.API.PY/API.PY.DJANGO.Search/db.sqlite3`
+
+### APIs reutilizadas
+
+- Auth API mantiene identidad y permisos.
+- Gateway General se mantiene como entrada central.
+- Las APIs Django activas usan PostgreSQL oficial `db-postgresql`.
+
+### APIs descartadas por duplicidad
+
+- No se creo API nueva de base de datos.
+- No se creo base nueva por API porque el contrato canonico actual mantiene
+  bases oficiales `auth`, `comercial`, `jobcron` y `lexnova`.
+
+### Validaciones ejecutadas
+
+| Validacion | Resultado |
+|---|---|
+| `docker ps` | OK; `db-postgresql`, `api-multiproyecto`, `web-frontend-node` y `nginx` activos. |
+| Listado PostgreSQL de bases | OK: `auth`, `comercial`, `jobcron`, `lexnova`, `postgres`. |
+| Respaldo `pg_dump -Fc` | OK; respaldos en `C:\Users\cash1\AppData\Local\Temp\Workspace.Comercial\db-backups\20260701_001326`. |
+| Escaneo texto anti-SQLite en `Docker.API.PY` y `Docker.DB.PG` | OK; sin coincidencias activas. |
+| Escaneo fisico de `db.sqlite3`, `*.sqlite`, `*.sqlite3` | OK; sin archivos restantes. |
+| `python manage.py check` por API activa | OK en Address, Auth, Catalog, Customization, DocuCore, Document, Fiscal, Fiscora, Gateway, Imagrafity, Inventory, JobCron, LexNova, Pricing, Procurement, RefaPart, Sales, Search, Supplier y TecnoTelec. |
+| `python manage.py migrate --noinput` por API activa | OK; migraciones pendientes 0 en todas las APIs activas. |
+| LeadHunter | Omitido por retiro del proyecto/API viva. |
+
+Logs locales:
+
+- `C:\Users\cash1\AppData\Local\Temp\Workspace.Comercial\db-migration-logs\agents-db-migration-20260701_001402.log`
+- `C:\Users\cash1\AppData\Local\Temp\Workspace.Comercial\db-migration-logs\agents-db-migration-alias-20260701_002016.log`
+- `C:\Users\cash1\AppData\Local\Temp\Workspace.Comercial\db-migration-logs\agents-db-migration-final-20260701_002712.log`
+- `C:\Users\cash1\AppData\Local\Temp\Workspace.Comercial\db-migration-logs\agents-db-final-pending-20260701_003259.log`
+
+### Resultado de validaciones
+
+- PostgreSQL quedo como unico motor permitido y usado por las APIs activas.
+- No quedan archivos SQLite fisicos detectados en las rutas activas de API/DB.
+- No quedan migraciones Django pendientes en APIs activas.
+- Se corrigio el fallback SQLite en APIs que aun lo tenian.
+- Se corrigio DocuCore para que no lea migraciones `core` de otra API desde
+  `public.django_migrations`.
+
+### Contradicciones detectadas
+
+- `AGENTS-002.md` proponia separar fisicamente `comercial` en multiples bases
+  por API. La documentacion canonica vigente prohibe crear bases, usuarios o
+  schemas definitivos sin contrato y reconoce como activas `auth`, `comercial`,
+  `jobcron` y `lexnova`.
+
+### Decisiones tomadas
+
+- No se renombro, elimino ni reemplazo `comercial`.
+- No se crearon bases definitivas nuevas tipo `catalog_db`, `sales_db`,
+  `refapart_db`.
+- Se crearon solo schemas requeridos por documentacion y migraciones activas:
+  `DocuCore`, `Fiscal` y `Fiscora`.
+- Se conserva la separacion fisica por API como decision futura que requiere
+  ADR/contrato antes de ejecutarse.
+
+### Pendientes reales
+
+- `PENDIENTE_DE_DEFINIR`: contrato DB/schema/usuario para MexIngSof.
+- `PENDIENTE_DE_DEFINIR`: confirmar si Address requiere schema propio o se
+  mantiene sin schema dedicado.
+- `PENDIENTE_DE_DEFINIR`: ADR para separacion fisica por API si se decide
+  migrar fuera de `comercial`.
+
+Estos pendientes no bloquean las migraciones actuales ni mantienen activo el
+agente de base de datos.
+
+### Riesgos detectados
+
+- Compartir `public.django_migrations` entre APIs con app labels repetidos puede
+  producir falsos positivos de migracion aplicada.
+- Crear bases por API sin contrato romperia el stack actual y el estandar
+  vigente.
+
+### Agents completados, limpiados, parciales, bloqueados o pendientes
+
+- Completados: `AGENTS-002.md`.
+- Limpiados: `AGENTS-002.md`.
+- Parciales: `AGENTS-000.md`, `AGENTS-001.md`, `AGENTS-030.md`.
+- Bloqueados: ninguno por base de datos activa.
+- Sin instrucciones: `AGENTS-003.md` a `AGENTS-029.md` permanecen vacios.
 
 ---

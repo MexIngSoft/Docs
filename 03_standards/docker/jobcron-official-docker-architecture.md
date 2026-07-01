@@ -81,7 +81,7 @@ scripts de arranque, Gateway General, Auth, CORS, healthchecks o Nginx.
 
 | Proyecto web | Dependencias esperadas |
 |---|---|
-| TecnoTelec | Gateway General, Auth, Catalog, Supplier, Pricing, Inventory, Sales, TecnoTelec API, base comercial y base auth. |
+| TecnoTelec | Gateway General, Auth, Catalog, Supplier, Pricing, Inventory, Sales, TecnoTelec API, base `TecnoTelec` y base `Auth`. |
 | LexNova | Gateway General, Auth, LexNova API, Document API, base auth y base LexNova. |
 | JobCron | Gateway General, JobCron API, Auth, APIs administrativas necesarias, base auth y base JobCron si aplica. |
 
@@ -169,23 +169,31 @@ La base se gestiona desde `Docker.DB.PG`.
 Bases principales:
 
 ```text
-auth
-lexnova
-comercial
-jobcron, si aplica
+Auth
+LexNova
+JobCron
+Gateway
+Catalog
+Inventory
+Pricing
+Procurement
+Sales
+Supplier
+TecnoTelec
+RefaPart
+Address
+Search
 ```
 
-La base `comercial` puede dividirse por schemas:
+No se permite una base global `comercial` ni bases con sufijo `_db`.
+
+Cada API debe usar su base fisica propia y su usuario de aplicacion. Ejemplos:
 
 ```text
-catalog
-inventory
-pricing
-procurement
-sales
-supplier
-tecnotelec
-customization
+Catalog -> catalog_user
+Sales -> sales_user
+RefaPart -> refapart_user
+JobCron -> jobcron_user
 ```
 
 Los nombres publicados deben seguir el estandar PascalCase estilo SQL Server

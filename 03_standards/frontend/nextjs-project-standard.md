@@ -94,6 +94,10 @@ NEXT_PUBLIC_APPLICATION_CODE=
 el proyecto no requiere login, debe documentar `auth_required: false` en su
 documentacion canonica.
 
+Cada proyecto debe declarar `allowedDevOrigins` en `next.config.ts` para los
+hosts y puertos locales definidos en Docker. Esto evita errores de desarrollo
+entre navegador, Gateway y dev server al probar cookies, CORS y Auth.
+
 ## Comunicacion con APIs
 
 El frontend debe consumir solo el Gateway central.
@@ -163,6 +167,7 @@ Referencia canonica:
 
 ```text
 Docs/03_standards/auth/web-auth-login-standard.md
+Docs/03_standards/frontend/account-continuity-standard.md
 ```
 
 ## Errores, logs y auditoria

@@ -58,13 +58,13 @@ stop-<proyecto>.ps1
 
 | Proyecto | Puerto web | Web | APIs activadas | Base/schema | Start | Stop |
 |---|---:|---|---|---|---|---|
-| JobCron | `3000` | `WEB.NJ.NEXT.JobCron` | `auth gateway jobcron search` | `auth`, `jobcron` si aplica | `start-jobcron.ps1` | `stop-jobcron.ps1` |
-| TecnoTelec | `3001` | `WEB.NJ.NEXT.TecnoTelec` | `auth gateway catalog inventory pricing procurement sales supplier tecnotelec customization search` | `auth`, `comercial/TecnoTelec` | `start-tecnotelec.ps1` | `stop-tecnotelec.ps1` |
-| LexNova | `3002` | `WEB.NJ.NEXT.LexNova` | `auth gateway lexnova document` | `auth`, `lexnova` | `start-lexnova.ps1` | `stop-lexnova.ps1` |
-| DocuCore | `3004` | `WEB.NJ.NEXT.DocuCore` | `auth gateway document docucore` | `comercial/Document`, `comercial/DocuCore` | `start-docucore.ps1` | `stop-docucore.ps1` |
-| Fiscora | `3005` | `WEB.NJ.NEXT.Fiscora` | `auth gateway document fiscora fiscal` | `comercial/Fiscora`, `comercial/Fiscal` | `start-fiscora.ps1` | `stop-fiscora.ps1` |
-| Imagrafity | `3006` | `WEB.NJ.NEXT.Imagrafity` | `auth gateway imagrafity` | `comercial/Imagrafity` | `start-imagrafity.ps1` | `stop-imagrafity.ps1` |
-| REFAPART | `3008` | `WEB.NJ.NEXT.RefaPart` | `auth gateway refapart address search` | `comercial/RefaPart`, `comercial/Address`, `comercial/Search` | `start-refapart.ps1` | `stop-refapart.ps1` |
+| JobCron | `3000` | `WEB.NJ.NEXT.JobCron` | `auth gateway jobcron search` | `Auth`, `Gateway`, `JobCron`, `Search` | `start-jobcron.ps1` | `stop-jobcron.ps1` |
+| TecnoTelec | `3001` | `WEB.NJ.NEXT.TecnoTelec` | `auth gateway catalog inventory pricing procurement sales supplier tecnotelec customization search` | `Auth`, `Gateway`, `Catalog`, `Inventory`, `Pricing`, `Procurement`, `Sales`, `Supplier`, `TecnoTelec`, `Customization`, `Search` | `start-tecnotelec.ps1` | `stop-tecnotelec.ps1` |
+| LexNova | `3002` | `WEB.NJ.NEXT.LexNova` | `auth gateway lexnova document` | `Auth`, `Gateway`, `LexNova`, `Document` | `start-lexnova.ps1` | `stop-lexnova.ps1` |
+| DocuCore | `3004` | `WEB.NJ.NEXT.DocuCore` | `auth gateway document docucore` | `Auth`, `Gateway`, `Document`, `DocuCore` | `start-docucore.ps1` | `stop-docucore.ps1` |
+| Fiscora | `3005` | `WEB.NJ.NEXT.Fiscora` | `auth gateway document fiscora fiscal` | `Auth`, `Gateway`, `Document`, `Fiscora`, `Fiscal` | `start-fiscora.ps1` | `stop-fiscora.ps1` |
+| Imagrafity | `3006` | `WEB.NJ.NEXT.Imagrafity` | `auth gateway imagrafity` | `Auth`, `Gateway`, `Imagrafity` | `start-imagrafity.ps1` | `stop-imagrafity.ps1` |
+| REFAPART | `3008` | `WEB.NJ.NEXT.RefaPart` | `auth gateway refapart address search` | `Auth`, `Gateway`, `RefaPart`, `Address`, `Search` | `start-refapart.ps1` | `stop-refapart.ps1` |
 | MexIngSof | `3009` | `WEB.NJ.NEXT.MexIngSof` | `auth gateway jobcron search` | `PENDIENTE_DE_DEFINIR`; MVP actual usa Prisma local | `start-mexingsof.ps1` | `stop-mexingsof.ps1` |
 
 ## Overlays relacionados

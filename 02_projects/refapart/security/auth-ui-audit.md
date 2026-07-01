@@ -37,7 +37,7 @@ visual vigente y el estandar de feedback Auth.
 
 | Asset | Uso |
 |---|---|
-| `public/images/auth-road.svg` | Fondo Auth premium con carretera, luces y acento rojo REFAPART. |
+| `public/images/refapart-hero-bg.png` | Fondo Auth y Home premium con coche realista, humo y acento rojo REFAPART. |
 
 El asset es parte del proyecto web y no es temporal de agent.
 
@@ -104,6 +104,15 @@ REFAPART Auth usa un sistema visual propio alineado con la Home premium:
 - mensajes sin detalle interno;
 - consumo de Auth solo por Gateway.
 
+Las rutas Auth no deben montar el `Header` ni la navegacion movil del
+marketplace. Deben renderizarse como experiencia standalone para evitar carga
+visual rota, duplicidad de navegacion y mezcla entre UI publica y proceso de
+sesion.
+
+El fondo Auth aprobado es `public/images/refapart-hero-bg.png`; no se debe
+volver a usar `public/images/auth-road.svg` como fondo principal porque era un
+artefacto temporal de dibujo.
+
 La validacion runtime de reenvio ya cuenta con ruta Gateway y consumo REFAPART.
 La validacion SES productiva queda condicionada a credenciales, dominio,
 DKIM/SPF/Return Path, region, cuotas y sandbox deshabilitado.
@@ -121,6 +130,38 @@ indica que Next server intento conectar a `localhost` desde dentro del
 contenedor web. En Docker, `localhost` apunta al contenedor web y no al
 Gateway. La web debe resolver la URL interna solo cuando `typeof window ===
 "undefined"` y conservar la URL publica para el navegador.
+
+## Correccion login aceptado sin sesion persistida
+
+Si despues de enviar `/login` aparece:
+
+```text
+Las credenciales de autenticacion no se proveyeron.
+```
+
+en una llamada posterior a `/auth/me/` o `/auth/me/permissions/`, el problema
+no es necesariamente usuario o contrasena. El login pudo haber sido aceptado,
+pero el navegador no conservo o no envio las cookies `access` y `refresh`.
+
+REFAPART normaliza este caso con mensaje de sesion no persistida y evita
+`console.error` falso para `401` de verificacion de sesion. La revision tecnica
+debe concentrarse en:
+
+- `NEXT_PUBLIC_GATEWAY_BASE_URL`;
+- origen usado en navegador (`localhost` o `127.0.0.1`);
+- `CORS_ALLOWED_ORIGINS`;
+- `CORS_ALLOW_CREDENTIALS=True`;
+- `AUTH_COOKIE_SECURE`;
+- `AUTH_COOKIE_SAMESITE`;
+- reenvio de `Set-Cookie` desde Gateway.
+
+Correccion aplicada para REFAPART:
+
+- el cliente Gateway alinea automaticamente `localhost` y `127.0.0.1` en
+  desarrollo para que el host de la web y el host de Gateway coincidan;
+- Gateway reemite `access` y `refresh` con `Max-Age`, `Path=/`, `HttpOnly`,
+  `SameSite` y `Secure` segun ambiente;
+- futuras webs deben replicar esta regla antes de validar login.
 
 ## Decision AGENTS-012
 

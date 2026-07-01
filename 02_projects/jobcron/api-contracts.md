@@ -73,3 +73,51 @@ Gateway o middleware.
 
 Una feature visible en frontend no autoriza automaticamente la ejecucion en
 backend. Cada API sensible debe validar sus propias reglas antes de ejecutar.
+
+## Identity & Access administrativo
+
+JobCron expone la consola operativa, pero no duplica Auth. El backend fuente
+para usuarios, roles y permisos sigue siendo:
+
+```text
+API.PY.DJANGO.Auth
+```
+
+Endpoints Auth existentes:
+
+```http
+GET/POST/PATCH /api/access/roles/
+GET/POST/PATCH /api/access/permissions/
+GET/POST/PATCH /api/access/role-permissions/
+GET/POST/PATCH /api/access/user-permissions/
+GET/POST/PATCH /api/access/application-roles/
+GET/POST/PATCH /api/access/application-permissions/
+```
+
+Contratos Gateway vigentes para la consola JobCron:
+
+```http
+GET    /api/v1/admin/identity/users/
+PATCH  /api/v1/admin/identity/users/{id}/
+POST   /api/v1/admin/identity/users/{id}/roles/
+DELETE /api/v1/admin/identity/users/{id}/roles/{roleId}/
+GET    /api/v1/admin/identity/roles/
+PATCH  /api/v1/admin/identity/roles/{id}/permissions/
+GET    /api/v1/admin/identity/permissions/
+```
+
+Reglas:
+
+- Requiere Auth administrativo.
+- Requiere auditoria de cambio.
+- Requiere filtro por `ApplicationCode`.
+- No permite hard delete de usuarios productivos sin politica de retencion.
+- Para RefaPart, `REFAPART_ADMIN` y `CanManageProducts` controlan productos.
+
+Estado:
+
+- Implementado en Gateway como `/api/v1/admin/identity/*`.
+- Implementado en Auth sobre `/api/access/identity/users/*`,
+  `/api/access/roles/*` y `/api/access/permissions/*`.
+- Consumido por JobCron web en `/admin/usuarios`, `/admin/roles` y
+  `/admin/permisos`.

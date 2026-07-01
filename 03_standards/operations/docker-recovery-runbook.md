@@ -177,7 +177,7 @@ Variables requeridas:
 | `POSTGRES_PASSWORD` | Password del usuario administrador. |
 | `AUTH_DB_PASSWORD` | Password de `auth_user`. |
 | `LEXNOVA_DB_PASSWORD` | Password de `lexnova_user`. |
-| `COMERCIAL_DB_PASSWORD` | Password de `comercial_user`. |
+| `<API>_DB_PASSWORD` | Password del usuario de aplicacion de cada API. |
 
 ## Bases y schemas esperados
 
@@ -185,9 +185,22 @@ PostgreSQL crea:
 
 | Database | Owner |
 | --- | --- |
-| `auth` | `auth_user` |
-| `lexnova` | `lexnova_user` |
-| `comercial` | `comercial_user` |
+| `Auth` | `auth_user` |
+| `LexNova` | `lexnova_user` |
+| `JobCron` | `jobcron_user` |
+| `RefaPart` | `refapart_user` |
+| `Address` | `address_user` |
+| `Search` | `search_user` |
+| `Catalog` | `catalog_user` |
+| `Inventory` | `inventory_user` |
+| `Pricing` | `pricing_user` |
+| `Procurement` | `procurement_user` |
+| `Sales` | `sales_user` |
+| `Supplier` | `supplier_user` |
+
+No debe recrearse una base `comercial`; si aparece durante una restauracion, se
+debe tratar como respaldo temporal y migrar a las bases responsables antes de
+levantar APIs.
 
 Scripts fuente, ejecutados automaticamente cuando el volumen `postgres` esta vacio:
 

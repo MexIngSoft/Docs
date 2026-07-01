@@ -29,17 +29,33 @@ Docs/03_standards/operations/scripts/database/
 ## Bases oficiales actuales
 
 ```text
-auth
-comercial
-jobcron
-lexnova
+Address
+Auth
+Catalog
+Customization
+DocuCore
+Document
+Fiscal
+Fiscora
+Gateway
+Imagrafity
+Inventory
+JobCron
+LexNova
+Pricing
+Procurement
+RefaPart
+Sales
+Search
+Supplier
+TecnoTelec
 postgres  # solo administracion local
 ```
 
-`test_comercial` fue retirada el 2026-06-27 tras validar que no contenia datos
-unicos fuera de `comercial`. No debe recrearse como base persistente; las
-pruebas deben usar bases temporales generadas por Django o la base oficial
-asignada al API/proyecto.
+`comercial` fue retirada despues de respaldar y migrar sus datos utiles a las
+bases responsables. No debe recrearse como base persistente; las pruebas deben
+usar bases temporales generadas por Django o la base oficial asignada al
+API/proyecto.
 
 ## Scripts Auth guardados
 
@@ -53,7 +69,7 @@ asignada al API/proyecto.
 Consultar usuarios por aplicacion:
 
 ```powershell
-docker exec db-postgresql psql -U postgres -d auth -f /ruta/dentro/del/contenedor/list-users-by-application.sql
+docker exec db-postgresql psql -U postgres -d Auth -f /ruta/dentro/del/contenedor/list-users-by-application.sql
 ```
 
 En Windows, si el archivo no esta montado dentro del contenedor, abrir el SQL

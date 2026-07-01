@@ -74,6 +74,27 @@ Reglas:
 - Definir si JobCron sera producto SaaS publico o ERP interno.
 - Integrar Auth real al panel de `FeatureAvailability`.
 
+## Continuidad Auth y frontend local
+
+JobCron queda alineado al estandar:
+
+```txt
+../../03_standards/frontend/account-continuity-standard.md
+```
+
+Impacto vigente:
+
+- `WEB.NJ.NEXT.JobCron/next.config.ts` declara `allowedDevOrigins` para
+  `localhost`, `127.0.0.1` y puerto `3000`.
+- Las rutas admin deben mantener continuidad de sesion mediante Gateway General
+  cuando se cierre Auth real.
+- No se debe duplicar un flujo Auth propio fuera de Gateway/Auth.
+
+Pendientes reales:
+
+- Definir si el panel `/admin` pertenece a ERP interno o SaaS publico.
+- Definir matriz final de permisos del panel administrativo.
+
 ## FeatureAvailability
 
 Documento canonico:

@@ -140,12 +140,16 @@ Las rutas Auth usan un sistema visual compartido en:
 
 ```text
 Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/features/auth/components/AuthUi.tsx
-Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/public/images/auth-road.svg
+Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/components/AppShell.tsx
+Docker.WEB.NJ/WEB.NJ.NEXT.RefaPart/public/images/refapart-hero-bg.png
 ```
 
 Reglas:
 
 - Registro no redirige silenciosamente despues de crear cuenta.
+- Rutas Auth no montan header ni navegacion movil del marketplace.
+- Fondo Auth usa `refapart-hero-bg.png`; `auth-road.svg` no debe volver a ser
+  fondo principal porque fue un asset temporal.
 - Registro muestra cuenta recibida y evita afirmar entrega de correo hasta que
   Auth/SES confirme el envio real en `"Auth"."EmailDeliveryLogs"`.
 - Errores de red/Auth usan mensajes accionables, no `Failed to fetch` crudo.
@@ -160,6 +164,11 @@ Reglas:
   existe sesion.
 - `middleware.ts` evita renderizar rutas privadas sin cookie `access` o
   `refresh`.
+- `/cuenta` es el dashboard cliente principal y reutiliza el mismo panel que
+  `/dashboard`; no debe volver a ser pantalla intermedia de perfil/configuracion.
+- Login, registro y logout conservan continuidad comercial con `next` o
+  `returnTo` sanitizado conforme a
+  `Docs/03_standards/frontend/account-continuity-standard.md`.
 - Si el correo ya esta registrado, `/register` muestra login y reenvio de
   verificacion solo como accion opcional para cuentas no verificadas.
 - Otras webs del ecosistema quedan pendientes de adoptar el estandar

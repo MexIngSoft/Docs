@@ -47,3 +47,19 @@ Estandares generales:
 - `../../../03_standards/frontend/nextjs-project-standard.md`
 - `../../../03_standards/frontend/shared-docker-frontend-architecture.md`
 - `../../../03_standards/frontend/pre-development-checklist.md`
+- `../../../03_standards/frontend/account-continuity-standard.md`
+
+## Continuidad Auth y frontend local
+
+Impacto vigente:
+
+- `WEB.NJ.NEXT.TecnoTelec/next.config.ts` declara `allowedDevOrigins` para
+  `tecnotelec.localhost`, `localhost:3001` y `127.0.0.1:3001`.
+- `NEXT_PUBLIC_APPLICATION_CODE=TECNOTELEC` identifica la web ante
+  Gateway/Auth cuando se active el portal.
+
+Pendientes reales:
+
+- Confirmar si el MVP usa portal/login ahora o queda para fase posterior.
+- Confirmar si cotizaciones van por Sales API o TecnoTelec API antes de copiar
+  el flujo completo de cuenta y continuidad.

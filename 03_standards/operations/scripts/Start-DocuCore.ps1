@@ -82,9 +82,9 @@ if ($RunChecks) {
         Push-Location (Join-Path $root "Docker.API.PY\API.PY.DJANGO.Document")
         Invoke-WithEnv @{
             DJANGO_SECRET_KEY = "local-document-secret"
-            POSTGRES_DB = "comercial"
-            POSTGRES_USER = "comercial_user"
-            POSTGRES_PASSWORD = "local-comercial-password"
+            POSTGRES_DB = "Document"
+            POSTGRES_USER = "document_user"
+            POSTGRES_PASSWORD = $env:DOCUMENT_DB_PASSWORD
             DB_SCHEMA = "Document"
             DEVELOPMENT_MODE = "True"
         } {
@@ -95,9 +95,9 @@ if ($RunChecks) {
         Push-Location (Join-Path $root "Docker.API.PY\API.PY.DJANGO.DocuCore")
         Invoke-WithEnv @{
             DJANGO_SECRET_KEY = "local-docucore-secret"
-            POSTGRES_DB = "comercial"
-            POSTGRES_USER = "comercial_user"
-            POSTGRES_PASSWORD = "local-comercial-password"
+            POSTGRES_DB = "DocuCore"
+            POSTGRES_USER = "docucore_user"
+            POSTGRES_PASSWORD = $env:DOCUCORE_DB_PASSWORD
             DB_SCHEMA = "DocuCore"
             DEVELOPMENT_MODE = "True"
         } {

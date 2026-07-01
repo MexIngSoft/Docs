@@ -57,3 +57,107 @@ estandar `API.PY.DJANGO.NombreDominio`.
 ## Regla de compatibilidad
 
 La nomenclatura operativa soportada es `API.PY.DJANGO.*`. Las carpetas `API.PY.DJANGO.*` no deben usarse para Docker ni para nuevo desarrollo.
+
+## Validacion local PostgreSQL para Django
+
+Todas las APIs Django deben poder ejecutar:
+
+```powershell
+python manage.py check
+```
+
+sin depender de SQLite y sin exigir secretos versionados.
+
+Reglas:
+
+- `.env.local.example` debe contener variables PostgreSQL sin secretos reales.
+- `.env.local` puede existir solo en local y no debe subirse.
+- Si el API se ejecuta fuera del contenedor, debe aceptar `DATABASE_URL` o las
+  variables estandar `<API>_DB_NAME`, `<API>_DB_USER`, `<API>_DB_PASSWORD`,
+  `POSTGRES_HOST` y `POSTGRES_PORT`.
+- Si falta password de base de datos, el error debe explicar que falta la
+  variable y que SQLite esta prohibido.
+- No se debe usar `db.sqlite3`, SQLite ni fallback silencioso a archivos locales.
+- Si una API usa `DB_SCHEMA` y comparte base con otras APIs, debe evitar leer
+  `public.django_migrations` cuando su app label pueda repetirse. Para esos
+  casos se debe usar tabla `django_migrations` dentro del schema propio o un
+  app label unico.
+
+Para Auth:
+
+```text
+AUTH_DB_NAME=auth
+AUTH_DB_USER=auth_user
+AUTH_DB_PASSWORD=<solo local o secreto de entorno>
+AUTH_DB_SCHEMA=Auth
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+```
+
+## Regla de bases separadas por API
+
+Desde el split fisico del 2026-07-01, cada API Django activa debe leer su base
+mediante variables propias:
+
+```text
+<API>_DB_NAME
+<API>_DB_USER
+<API>_DB_PASSWORD
+<API>_DB_SCHEMA
+POSTGRES_HOST
+POSTGRES_PORT
+```
+
+No permitido en settings activos:
+
+- `COMERCIAL_DB_NAME`
+- `COMERCIAL_DB_USER`
+- `COMERCIAL_DB_PASSWORD`
+- fallback a `POSTGRES_DB` para APIs que ya tienen base propia
+- fallback a SQLite o `db.sqlite3`
+
+`COMERCIAL_DB_*` no debe existir en configuracion viva de APIs. Si una
+restauracion externa trae datos de `comercial`, se deben migrar a la base
+responsable antes de arrancar servicios.
+
+Validacion obligatoria para cada API:
+
+```powershell
+python manage.py check
+python manage.py showmigrations --plan
+```
+
+Resultado esperado:
+
+```text
+check OK
+migraciones pendientes 0
+```
+
+Si se restaura informacion con usuario `postgres`, se debe ejecutar el script
+operativo `Docker.DB.PG/docker/postgres/04-grants.sh` mediante
+`db-postgresql-apply` para que las tablas y secuencias queden accesibles al
+usuario de aplicacion correspondiente.
+
+## Validacion aplicada 2026-07-01
+
+Se ejecuto validacion y migracion PostgreSQL en el contenedor
+`api-multiproyecto` contra `db-postgresql`.
+
+Resultado:
+
+- APIs activas con `manage.py`: `check` correcto y migraciones pendientes 0.
+- LeadHunter: omitido por retiro del proyecto/API viva.
+- Artefactos `db.sqlite3`: retirados del workspace.
+- Fallback SQLite retirado de `DocuCore`, `Document`, `Fiscal`, `Fiscora` e
+  `Imagrafity`.
+- DocuCore: se corrigio colision de migraciones `core` creando
+  `DocuCore.django_migrations`, porque `public.django_migrations` ya tenia
+  registros `core` de otra API.
+
+Regla derivada:
+
+Cuando varias APIs usan apps Django con el mismo label (`core`, `portal`,
+etc.), no deben compartir una misma base ni una misma tabla
+`public.django_migrations`; deben usar su base responsable y app labels unicos
+cuando aplique.

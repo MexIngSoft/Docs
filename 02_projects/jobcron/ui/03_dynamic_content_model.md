@@ -22,6 +22,47 @@ Contenido:
 - `screenSpecs`: plantilla por ruta/modulo.
 - `healthSignals`: senales de salud del sistema.
 
+## Fuente dinamica implementada
+
+El dashboard admin global intenta leer datos reales desde JobCron API antes de
+usar mock data:
+
+```text
+Docker.WEB.NJ/WEB.NJ.NEXT.JobCron/app/admin/page.tsx
+```
+
+Variable esperada:
+
+```text
+JOBCRON_API_BASE_URL
+```
+
+Fallback permitido:
+
+```text
+NEXT_PUBLIC_JOBCRON_API_BASE_URL
+```
+
+Endpoint consultado:
+
+```text
+GET /api/jobcron/admin/overview
+```
+
+Si la variable no existe, el endpoint no responde o devuelve error, la UI usa
+fallback controlado para mantener navegacion y validacion visual sin afirmar
+que los datos son productivos.
+
+## Panel administrador global implementado
+
+| Zona | Estado | Detalle |
+|---|---|---|
+| Metricas superiores | IMPLEMENTADO_PARCIAL_API | Usa `features`, `modules` y fallback cuando no hay API. |
+| Sistemas/proyectos | IMPLEMENTADO_PARCIAL_API | Lista modulos desde `overview.modules`; fallback incluye REFAPART, MexIngSof, TecnoTelec y JobCron. |
+| Actividad del sistema | IMPLEMENTADO_PARCIAL_API | Usa `overview.recent` si existe; fallback documentado para desarrollo. |
+| Jobs y sincronizaciones criticas | IMPLEMENTADO_UI | Conserva `executionRows` hasta tener contrato de procesos reales. |
+| Uso de recursos | IMPLEMENTADO_UI | Indicadores visuales de desarrollo; no son metricas productivas. |
+
 ## Contrato futuro por pantalla
 
 Cada pantalla debe poder recibir:
@@ -77,3 +118,14 @@ Un placeholder se puede reemplazar cuando exista:
 - Estado de error.
 - Permisos por accion.
 - Prueba visual basica en desktop y mobile.
+
+## Pendientes reales
+
+- PENDIENTE_DE_IMPLEMENTAR: Gateway General debe exponer el contrato estable
+  para `GET /api/v1/projects/JOBCRON/admin/overview` si la web no consume la API
+  interna directamente.
+- PENDIENTE_DE_IMPLEMENTAR: datos reales de usuarios globales desde Auth.
+- PENDIENTE_DE_IMPLEMENTAR: procesos/jobs reales con filtros y detalle.
+- PENDIENTE_DE_IMPLEMENTAR: incidentes, auditoria y recursos desde servicios
+  observables reales.
+- PENDIENTE_DE_DEFINIR: permisos finales del administrador global por accion.
